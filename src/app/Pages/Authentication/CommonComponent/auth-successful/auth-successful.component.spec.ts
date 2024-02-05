@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CommonComponent } from './common.component';
+import { AuthSuccessfulComponent } from './auth-successful.component';
 
-describe('CommonComponent', () => {
-  let component: CommonComponent;
-  let fixture: ComponentFixture<CommonComponent>;
+describe('AuthSuccessfulComponent', () => {
+  let component: AuthSuccessfulComponent;
+  let fixture: ComponentFixture<AuthSuccessfulComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CommonComponent]
+      imports: [AuthSuccessfulComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(CommonComponent);
+    fixture = TestBed.createComponent(AuthSuccessfulComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
