@@ -1,0 +1,109 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@500;600&family=Nunito+Sans:opsz,wght@6..12,600&family=Poppins:wght@600;900&family=Roboto:wght@500&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@500;600&family=Nunito+Sans:opsz,wght@6..12,600&family=Poppins:wght@600;900&family=Roboto:wght@500&display=swap");
+
+.container-fluid {
+    padding: 0;
+  margin: 0;
+
+  .frame {
+    width: 100%;
+    height: 100vh;
+    background: #ffffff;
+    display: flex;
+    flex-direction: row;
+
+    .frame-1 {
+      width: 50%;
+      height: 100vh;
+
+      img {
+        width: 100%;
+        height: 100vh;
+        object-fit: cover;
+        object-position: bottom;
+      }
+    }
+
+    .frame-2 {
+      width: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .frame-2-sub-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0px;
+        gap: 32px;
+        width: 448px;
+        height: 212px;
+        flex: none;
+        order: 0;
+        flex-grow: 0;
+
+        .title {
+          width: 130px;
+          height: 36px;
+          font-family: "Poppins";
+          font-style: normal;
+          font-weight: 900;
+          font-size: 24px;
+          line-height: 36px;
+          text-align: center;
+          color: #0085ff;
+          flex: none;
+          order: 0;
+          flex-grow: 0;
+        }
+
+        .text-heading {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          padding: 0px;
+          gap: 8px;
+          width: 448px;
+          height: 152px;
+          flex: none;
+          order: 1;
+          flex-grow: 0;
+
+          .reset-password {
+            width: 385px;
+            height: 60px;
+            text-align: center;
+            font-family: "Inter";
+            font-style: normal;
+            font-weight: 600;
+            font-size: 48px;
+            line-height: 60px;
+            letter-spacing: -1.75px;
+            color: #1c222b;
+            flex: none;
+            order: 0;
+            flex-grow: 0;
+          }
+
+          .text {
+            width: 448px;
+            height: 84px;
+            font-family: "Inter";
+            font-style: normal;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 28px;
+            text-align: center;
+            letter-spacing: -0.3px;
+            color: #3d4a5c;
+            flex: none;
+            order: 1;
+            flex-grow: 0;
+          }
+        }
+      }
+    }
+  }
+}
