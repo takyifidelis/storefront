@@ -15,7 +15,12 @@
               <p class="line">
                 Create new account by providing your details below.
               </p>
-              <p class="line">Create <a href="#">Business Account</a></p>
+              <p class="line">
+                Create
+                <a href="#" [routerLink]="['/Sign-up-customer']"
+                  >Customer Account</a
+                >
+              </p>
             </div>
           </div>
           <div class="login-input">
@@ -381,7 +386,10 @@
             </div>
 
             <div class="forgotten-password">
-              <p>Already a member? <a href="#">Sign in</a></p>
+              <p>
+                Already a member?
+                <a href="#" [routerLink]="['/login']">Sign in</a>
+              </p>
             </div>
           </div>
         </div>
