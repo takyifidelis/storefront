@@ -1,73 +1,91 @@
 <div class="limiter">
-    <div class="container-login">
-      <div class="login100-more">
-        <img src="../../assets/images/Frame 446.svg" alt="" />
-      </div>
-      <div class="form-wrapper">
-        <form class="login100-form">
-          <div class="login-form">
-            <div class="title">Storefront</div>
-            <div class="welcome">
-              <div class="welcome-title">
-                <h1>Hi, Welcome back to Storefront</h1>
-              </div>
-              <div class="welcome-text">
-                <p>
-                  Log in to your existing storefront dashboard by entering the
-                  details associated with your account below.
-                </p>
-              </div>
+  <div class="container-login">
+    <div class="login100-more">
+      <img src="../../assets/images/Frame 446.svg" alt="" />
+    </div>
+    <div class="form-wrapper">
+      <form class="login100-form">
+        <div class="login-form">
+          <div class="title">Storefront</div>
+          <div class="welcome">
+            <div class="welcome-title">
+              <h1>Hi, Welcome back to Storefront</h1>
             </div>
-            <div class="login-input">
-              <div class="email-wrapper">
-                <div class="email">
-                  <label for="email">Email</label>
-                </div>
-                <div class="email-input">
-                  <fa-icon [icon]="mailIcon"></fa-icon>
-                  <input type="text" id="email" />
-                </div>
-              </div>
-              <div class="password-wrapper">
-                <div class="password">
-                  <label for="password">Password</label>
-                </div>
-  
-                <div class="password-input">
-                  <div><svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M10.4995 13V14.875M10.4995 13C11.3625 13 12.062 12.3004 12.062 11.4375C12.062 10.5746 11.3625 9.875 10.4995 9.875C9.63657 9.875 8.93701 10.5746 8.93701 11.4375C8.93701 12.3004 9.63657 13 10.4995 13ZM7.68701 7.375V4.5625C7.68701 3.81658 7.98333 3.10121 8.51077 2.57376C9.03822 2.04632 9.75359 1.75 10.4995 1.75C11.2454 1.75 11.9608 2.04632 12.4882 2.57376C13.0157 3.10121 13.312 3.81658 13.312 4.5625V7.375M4.24951 7.375H16.7495C17.0947 7.375 17.3745 7.65482 17.3745 8V16.75C17.3745 17.0952 17.0947 17.375 16.7495 17.375H4.24951C3.90433 17.375 3.62451 17.0952 3.62451 16.75V8C3.62451 7.65482 3.90433 7.375 4.24951 7.375Z" stroke="#5E718D" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                    </div>
-                  <input type="text" id="email" />
-                  <fa-icon [icon]="eyeIcon"></fa-icon>
-                </div>
-              </div>
-            </div>
-  
-            <div class="forgotten-password">
-              <p><a href="#">Forgotten Password?</a> </p>
+            <div class="welcome-text">
+              <p>
+                Log in to your existing storefront dashboard by entering the
+                details associated with your account below.
+              </p>
             </div>
           </div>
-        </form>
-        <div class="button">
-          <button class="btn btn-primary">Continue</button>
-        </div>
-        <div class="optional-input">
-          <p>OR</p>
-          <div class="optional-login">Log In</div>
-          <div class="social-icon">
-            <fa-icon [icon]="googleIcon" class="google-icon"></fa-icon>
-            <div>Google</div>
+          <div class="login-input">
+            <div class="email-wrapper">
+              <div class="email">
+                <label for="email">Email</label>
+              </div>
+              <div class="email-input">
+                <!-- <fa-icon [icon]="mailIcon"></fa-icon> -->
+                <input type="text" id="email" />
+              </div>
+            </div>
+            <div class="password-wrapper">
+              <div class="password">
+                <label for="password">Password</label>
+              </div>
+
+              <div class="password-input">
+                <div>
+                  <svg
+                    width="21"
+                    height="21"
+                    viewBox="0 0 21 21"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M10.4995 13V14.875M10.4995 13C11.3625 13 12.062 12.3004 12.062 11.4375C12.062 10.5746 11.3625 9.875 10.4995 9.875C9.63657 9.875 8.93701 10.5746 8.93701 11.4375C8.93701 12.3004 9.63657 13 10.4995 13ZM7.68701 7.375V4.5625C7.68701 3.81658 7.98333 3.10121 8.51077 2.57376C9.03822 2.04632 9.75359 1.75 10.4995 1.75C11.2454 1.75 11.9608 2.04632 12.4882 2.57376C13.0157 3.10121 13.312 3.81658 13.312 4.5625V7.375M4.24951 7.375H16.7495C17.0947 7.375 17.3745 7.65482 17.3745 8V16.75C17.3745 17.0952 17.0947 17.375 16.7495 17.375H4.24951C3.90433 17.375 3.62451 17.0952 3.62451 16.75V8C3.62451 7.65482 3.90433 7.375 4.24951 7.375Z"
+                      stroke="#5E718D"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </div>
+                <input type="text" id="email" />
+                <!-- <fa-icon [icon]="eyeIcon"></fa-icon> -->
+              </div>
+            </div>
           </div>
-          <div class="social-icon">
-            <fa-icon [icon]="facebookIcon" style="color: dodgerblue"></fa-icon>
-            <div>Facebook</div>
-          </div>
+
           <div class="forgotten-password">
-            <p>Don't have an account? <a href="#">Sign up</a> </p>
+            <p>
+              <a href="#" [routerLink]="['/forget-password']"
+                >Forgotten Password?</a
+              >
+            </p>
           </div>
+        </div>
+      </form>
+      <div class="button">
+        <button class="btn btn-primary">Continue</button>
+      </div>
+      <div class="optional-input">
+        <p>OR</p>
+        <div class="optional-login">Log In</div>
+        <div class="social-icon">
+          <!-- <fa-icon [icon]="googleIcon" class="google-icon"></fa-icon> -->
+          <div>Google</div>
+        </div>
+        <div class="social-icon">
+          <!-- <fa-icon [icon]="facebookIcon" style="color: dodgerblue"></fa-icon> -->
+          <div>Facebook</div>
+        </div>
+        <div class="forgotten-password">
+          <p>
+            Don't have an account?
+            <a href="#" [routerLink]="['/Sign-up-merchant']">Sign up</a>
+          </p>
         </div>
       </div>
     </div>
   </div>
-  
+</div>

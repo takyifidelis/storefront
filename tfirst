@@ -1,0 +1,36 @@
+[33mcommit a1e09e3f59f91cabf5ee4898b52b643de4590f14[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mdevelop[m[33m, [m[1;32mfeature-ux-design[m[33m)[m
+Author: amt-fidelis-mensah <fidelis.mensah@amalitech.org>
+Date:   Mon Feb 5 12:05:45 2024 +0000
+
+    feat: Add structured folder for improved project organization
+
+[33mcommit 9c10cee7c39b3f4d00f22a6082a432e441603be2[m
+Author: amt-fidelis-mensah <fidelis.mensah@amalitech.org>
+Date:   Mon Feb 5 11:50:12 2024 +0000
+
+    feat: Add structured folder for improved project organization
+
+[33mcommit fb3a52e003b00b21b95fba7bdcd1ed5f53d69a53[m
+Merge: b140a3c 1c15c74
+Author: amt-fidelis-mensah <fidelis.mensah@amalitech.org>
+Date:   Mon Feb 5 08:57:32 2024 +0000
+
+    Merge branch 'develop' of https://github.com/AmaliTech-Training-Academy/storefront-front-end-feb into develop
+
+[33mcommit b140a3c523985da553f2205b098d9cf675a9fb15[m
+Author: amt-fidelis-mensah <fidelis.mensah@amalitech.org>
+Date:   Mon Feb 5 08:53:06 2024 +0000
+
+    init: Initial project commit
+
+[33mcommit b1bf3e77fc65cc5c7c2f3c2e30a8c2dafcd9b91c[m
+Author: amt-fidelis-mensah <fidelis.mensah@amalitech.org>
+Date:   Sat Feb 3 15:54:33 2024 +0000
+
+    initial commit
+
+[33mcommit 1c15c74d7ac4518ea307e81708d040163e0773f0[m[33m ([m[1;31morigin/staging[m[33m, [m[1;31morigin/main[m[33m, [m[1;32mmain[m[33m)[m
+Author: Faustin NIYONIZEYE <faustin.niyonizeye@amalitech.com>
+Date:   Fri Feb 2 16:24:48 2024 +0200
+
+    first commit
