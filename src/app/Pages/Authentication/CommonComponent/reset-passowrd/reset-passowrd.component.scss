@@ -1,0 +1,282 @@
+.container-fluid {
+  margin: 0;
+  padding: 0;
+
+.frame{
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  background: #ffffff;
+  flex-direction: row;
+
+  .frame-1 {
+    width: 50%;
+    height: 100vh;
+
+    img {
+      width: 100%;
+      height: 100vh;
+      object-fit: cover;
+      object-position: bottom;
+    }
+  }
+
+  .frame-2 {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    padding-top: 98px;
+    
+    .frame-2-sub-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0px;
+      gap: 16px;
+      width: 448px;
+      height: 148px;
+      flex: none;
+      order: 0;
+      flex-grow: 0;
+
+      .title {
+        width: 130px;
+        height: 36px;
+        font-family: "Poppins", sans-serif;
+        font-style: normal;
+        font-weight: 900;
+        font-size: 24px;
+        line-height: 36px;
+        text-align: center;
+        color: #0085ff;
+        flex: none;
+        order: 0;
+        flex-grow: 0;
+      }
+
+      .text-heading{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        .reset-password {
+          height: 60px;
+          font-family: "Inter", sans-serif;
+          font-style: normal;
+          text-align: center;
+          font-weight: 600;
+          font-size: 48px;
+          line-height: 60px;
+          letter-spacing: -1.75px;
+          color: #1c222b;
+        }
+  
+        .text {
+          width: 448px;
+          height: 28px;
+          font-family: "Inter", sans-serif;
+          font-style: normal;
+          font-weight: 400;
+          font-size: 16px;
+          line-height: 28px;
+          text-align: center;
+          letter-spacing: -0.3px;
+          color: #3d4a5c;
+          flex: none;
+          order: 1;
+          flex-grow: 0;
+        }      }
+
+      
+
+      .password-wrapper {
+        width: 448px;
+        height: 76px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0px;
+        gap: 6px;
+
+        label {
+          font-family: "Inter", sans-serif;
+          font-style: normal;
+          font-weight: 500;
+          font-size: 14px;
+          line-height: 24px;
+          letter-spacing: -0.2px;
+          color: #3d4a5c;
+        }
+
+        .password-input {
+          box-sizing: border-box;
+          width: 448px;
+          height: 46px;
+          background: #ffffff;
+          border-bottom: 1px solid #0f3cd9;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          padding: 0px;
+          gap: 8px;
+          flex: none;
+          order: 1;
+          align-self: stretch;
+          flex-grow: 0;
+
+          input {
+            border: none;
+            width: 384px;
+          }
+          input:focus{
+            outline: none;
+          }
+        }
+      }
+
+      .checks {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0px;
+        gap: 12px;
+        width: 412px;
+        height: 52px;
+
+        .checks-wrapper-1 {
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          align-items: flex-start;
+          padding: 0px;
+          gap: 32px;
+          width: 340px;
+          height: 20px;
+
+          .length-checker {
+            display: flex;
+            flex-direction: row;
+            gap: 6px;
+
+            .icon {
+              display: flex;
+              align-items: center;
+              height: 23px;
+            }
+          }
+
+          .length-checker p{
+            font-family: "Inter",sans-serif;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 12px;
+            line-height: 20px;
+            letter-spacing: -0.2px;
+            color: #3d4a5c;
+          }
+
+          .least-checker {
+            display: flex;
+            flex-direction: row;
+            gap: 6px;
+
+            .icon {
+              display: flex;
+              align-items: center;
+              height: 23px;
+            }
+          }
+
+          .least-checker p{
+            font-family: "Inter", sans-serif;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 12px;
+            line-height: 20px;
+            letter-spacing: -0.2px;
+            color: #3d4a5c;
+          }
+        }
+
+        .checks-wrapper-2 {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: center;
+          padding: 0px;
+          gap: 32px;
+          height: 20px;
+
+          .lowercase-checker {
+            display: flex;
+            flex-direction: row;
+            gap: 6px;
+
+            .icon {
+              display: flex;
+              align-items: center;
+              height: 23px;
+            }
+          }
+
+          .lowercase-checker p {
+            font-family: "Inter",sans-serif;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 12px;
+            line-height: 20px;
+            letter-spacing: -0.2px;
+            color: #3d4a5c;
+          }
+
+          .uppercase-checker {
+            display: flex;
+            flex-direction: row;
+            gap: 6px;
+
+            .icon {
+              display: flex;
+              align-items: center;
+              height: 23px;
+            }
+          }
+
+          .uppercase-checker p {
+            font-family: "Inter",sans-serif;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 12px;
+            line-height: 20px;
+            letter-spacing: -0.2px;
+            color: #3d4a5c;
+          }
+        }
+      }
+
+      button {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 13px 20px;
+        gap: 10px;
+        width: 448px;
+        height: 56px;
+        background: #0f3cd9;
+        border-radius: 6px;
+        flex: none;
+        order: 2;
+        flex-grow: 0;
+        font-family: "Inter", sans-serif;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 30px;
+        letter-spacing: -0.3px;
+        color: #ffffff;
+      }
+    }
+  }
+}
+  
+}

@@ -5,6 +5,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SignupComponent } from './Pages/Authentication/Customer/signup/signup.component';
 import { ForgottenPasswordComponent } from './Pages/Authentication/CommonComponent/forgotten-password/forgotten-password.component';
 import { TokenAuthComponent } from './Pages/Authentication/CommonComponent/token-auth/token-auth.component';
+import { ResetPassowrdComponent } from './Pages/Authentication/CommonComponent/reset-passowrd/reset-passowrd.component';
+import { AuthSuccessfulComponent } from './Pages/Authentication/CommonComponent/auth-successful/auth-successful.component';
 
 @Component({
   selector: 'app-root',
@@ -16,6 +18,8 @@ import { TokenAuthComponent } from './Pages/Authentication/CommonComponent/token
     SignupComponent,
     ForgottenPasswordComponent,
     TokenAuthComponent,
+    ResetPassowrdComponent,
+    AuthSuccessfulComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
