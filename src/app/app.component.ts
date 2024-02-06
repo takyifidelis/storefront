@@ -19,7 +19,8 @@ import { AuthSuccessfulComponent } from './Pages/Authentication/CommonComponent/
     ForgottenPasswordComponent,
     TokenAuthComponent,
     ResetPassowrdComponent,
-    AuthSuccessfulComponent
+    AuthSuccessfulComponent,
+    FontAwesomeModule
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
