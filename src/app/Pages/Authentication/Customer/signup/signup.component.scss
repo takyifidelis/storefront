@@ -16,6 +16,7 @@
     .frame-1 {
       width: 50%;
       height: 100vh;
+      overflow-y: hidden;
 
       img {
         width: 100%;
@@ -30,6 +31,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      overflow-y: scroll;
 
       .frame-2-container {
         height: 1010px;
