@@ -4,7 +4,7 @@
       <img src="../../assets/images/Frame 446.svg" alt="" />
     </div>
     <div class="frame-2">
-      <form class="form">
+      <div class="form">
         <div class="frame-2-container">
           <div class="title"><p>Storefront</p></div>
           <div class="welcome">
@@ -120,7 +120,12 @@
                     stroke-linejoin="round"
                   />
                 </svg>
-                <input type="text" id="password" />
+                <input
+                  type="text"
+                  id="password"
+                  [(ngModel)]="password"
+                  (keyup)="validatePassword()"
+                />
                 <fa-icon class="icon" [icon]="eyeIcon"></fa-icon>
               </div>
             </div>
@@ -154,6 +159,7 @@
             <div class="checks-wrapper-1">
               <div class="length-checker">
                 <div class="checker">
+                  @if(isMinTenChar){
                   <svg
                     width="17"
                     height="17"
@@ -169,12 +175,14 @@
                       stroke-linejoin="round"
                     />
                   </svg>
-                  <fa-icon [icon]="ol" class="dot"></fa-icon>
+                  } @if(!isMinTenChar){
+                  <fa-icon [icon]="ol" class="dot"></fa-icon>}
                 </div>
                 <p>A minimum of 10 characters</p>
               </div>
               <div class="least-checker">
                 <div class="checker">
+                  @if(isMinOneNum){
                   <svg
                     width="17"
                     height="17"
@@ -190,7 +198,9 @@
                       stroke-linejoin="round"
                     />
                   </svg>
+                  } @if(!isMinOneNum){
                   <fa-icon [icon]="ol" class="dot"></fa-icon>
+                  }
                 </div>
                 <p>At least 1 number</p>
               </div>
@@ -198,6 +208,7 @@
             <div class="checks-wrapper-2">
               <div class="lowercase-checker">
                 <div class="checker">
+                  @if(isMinOneLowercase){
                   <svg
                     width="17"
                     height="17"
@@ -213,12 +224,15 @@
                       stroke-linejoin="round"
                     />
                   </svg>
+                  } @if(!isMinOneLowercase){
                   <fa-icon [icon]="ol" class="dot"></fa-icon>
+                  }
                 </div>
                 <p>At least 1 lowercase letter</p>
               </div>
               <div class="uppercase-checker">
                 <div class="checker">
+                  @if(isMinOneUppercase){
                   <svg
                     width="17"
                     height="17"
@@ -234,7 +248,9 @@
                       stroke-linejoin="round"
                     />
                   </svg>
+                  } @if(!isMinOneLowercase){
                   <fa-icon [icon]="ol" class="dot"></fa-icon>
+                  }
                 </div>
                 <p>At least 1 uppercase letter</p>
               </div>
@@ -393,7 +409,7 @@
             </div>
           </div>
         </div>
-      </form>
+      </div>
     </div>
   </div>
 </div>
