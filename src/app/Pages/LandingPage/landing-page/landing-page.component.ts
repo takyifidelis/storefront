@@ -12,10 +12,5 @@ import { ActivatedRoute } from '@angular/router';
 export class LandingPageComponent implements OnInit {
   constructor(private route: ActivatedRoute) {}
 
-  ngOnInit() {
-    this.route.fragment.subscribe((fragment: string | null) => {
-      const element = document.querySelector(`#${fragment}`);
-      if (element) element.scrollIntoView({ behavior: 'smooth' });
-    });
-  }
+  ngOnInit() { }
 }
