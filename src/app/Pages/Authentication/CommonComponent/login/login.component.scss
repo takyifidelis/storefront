@@ -1,10 +1,6 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@500;600&family=Nunito+Sans:opsz,wght@6..12,600&family=Poppins:wght@600;900&family=Roboto:wght@500&display=swap");
-
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@500;600&family=Nunito+Sans:opsz,wght@6..12,600&family=Poppins:wght@600;900&family=Roboto:wght@500&display=swap");
-
-.limiter {
-  width: 100%;
-  margin: 0 auto;
+.container-fluid {
+  padding: 0;
+  margin: 0;
 
   .container-login {
     width: 100%;
@@ -12,12 +8,26 @@
     display: flex;
     flex-direction: row;
 
-    .form-wrapper {
+    .frame-1 {
       width: 50%;
-      min-width: 100vh;
+      height: 100vh;
+      overflow-y: hidden;
+
+      img {
+        width: 100%;
+        height: 100vh;
+        object-fit: cover;
+        object-position: bottom;
+      }
+    }
+
+    .frame-2 {
+      width: 50%;
+      height: 100vh;
       padding-right: 95px;
       padding-left: 96px;
       padding-top: 50px;
+      overflow-y: scroll;
 
       .login-form {
         display: flex;
@@ -115,6 +125,7 @@
               input {
                 border: none;
                 width: 384px;
+                outline: none;
               }
             }
           }
@@ -157,20 +168,21 @@
               input {
                 border: none;
                 width: 384px;
+                outline: none;
               }
             }
           }
         }
 
         .forgotten-password {
-          width: 118px;
-          height: 20px;
+          display: flex;
+          justify-content: end;
+          width: 82%;
           font-family: "Inter", sans-serif;
           font-style: normal;
           font-weight: 500;
           font-size: 12px;
           line-height: 20px;
-          text-align: right;
           letter-spacing: -0.2px;
           color: #0f3cd9;
         }
@@ -241,25 +253,13 @@
             color: #455468;
           }
         }
+
+        // #g_id_onload{
+
+        // }
       }
     }
 
-    .login100-more {
-      background-image: url("../../../../../assets/images/frameOriginal.jpg");
-      width: 50%;
-      height: 100vh;
-      background-size: cover; /* Scale the background image to cover the entire container */
-      background-position: center;
-      // display: flex;
-
-      // .bg-image {
-      //   width: 100%;
-      //   // height: 100%;
-      //   // width: 100%;
-      //   height: 100vh;
-      //   // object-fit: cover;
-      //   // object-position: bottom;
-      // }
-    }
+    
   }
 }
