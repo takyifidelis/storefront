@@ -22,18 +22,14 @@
             class="nav-link active nav-text"
             aria-current="page"
             href="#"
-            routerLink="/home"
+            [routerLink]="['/']"
             fragment="home"
-            >Home</a
-          >
+            >Home
+          </a>
         </li>
 
         <li class="nav-item">
-          <a
-            class="nav-link nav-text"
-            href="#"
-            routerLink="/home"
-            fragment="about"
+          <a class="nav-link nav-text" href="#" routerLink="/" fragment="about"
             >About</a
           >
         </li>
@@ -41,7 +37,7 @@
           <a
             class="nav-link nav-text"
             href="#"
-            routerLink="/home"
+            [routerLink]="['/']"
             fragment="testimonials"
             >Testimonials</a
           >
@@ -50,7 +46,7 @@
           <a
             class="nav-link nav-text"
             href="#"
-            routerLink="/home"
+            [routerLink]="['/']"
             fragment="teams"
             >Teams</a
           >
@@ -64,7 +60,13 @@
           >Log In</a
         >
 
-        <button class="btn get-started-btn" type="submit">Get Started</button>
+        <button
+          class="btn get-started-btn"
+          type="submit"
+          [routerLink]="['/Sign-up-merchant']"
+        >
+          Get Started
+        </button>
       </div>
     </div>
   </div>
@@ -224,11 +226,12 @@
     </div>
   </div>
 </section>
-<section id="" class="">
+<section id="teams" class="">
   <div class="team-container">
     <h2 class="team-heading h2">Meet Our Talented Team</h2>
-    <div class="teams-div">
-      <div class="">
+
+    <div class="teams-div row">
+      <div class="col-3">
         <img
           src="../../../../assets/images/team-image1.svg"
           alt=""
@@ -238,7 +241,7 @@
         <p class="team-role">CEO</p>
       </div>
 
-      <div class="">
+      <div class="col-3">
         <img
           src="../../../../assets/images/team-image2.svg"
           alt=""
@@ -248,7 +251,7 @@
         <p class="team-role">Head of HR</p>
       </div>
 
-      <div class="">
+      <div class="col-3">
         <img
           src="../../../../assets/images/team-image3.svg"
           alt=""
@@ -258,7 +261,7 @@
         <p class="team-role">PR Manager</p>
       </div>
 
-      <div class="">
+      <div class="col-3">
         <img
           src="../../../../assets/images/team-image4.svg"
           alt=""

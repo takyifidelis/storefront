@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { LoginComponent } from '../../Authentication/CommonComponent/login/login.component';
-
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-landing-page',
   standalone: true,
@@ -9,4 +9,13 @@ import { LoginComponent } from '../../Authentication/CommonComponent/login/login
   templateUrl: './landing-page.component.html',
   styleUrl: './landing-page.component.scss',
 })
-export class LandingPageComponent {}
+export class LandingPageComponent implements OnInit {
+  constructor(private route: ActivatedRoute) {}
+
+  ngOnInit() {
+    this.route.fragment.subscribe((fragment: string | null) => {
+      const element = document.querySelector(`#${fragment}`);
+      if (element) element.scrollIntoView({ behavior: 'smooth' });
+    });
+  }
+}
