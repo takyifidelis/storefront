@@ -3,6 +3,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { EmailNotificationComponent } from './email-notification/email-notification.component';
 import { TokenAuthComponent } from '../token-auth/token-auth.component';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-forgotten-password',
@@ -11,7 +12,8 @@ import { FormsModule } from '@angular/forms';
     FontAwesomeModule, 
     EmailNotificationComponent, 
     TokenAuthComponent,
-    FormsModule
+    FormsModule,
+    RouterModule
   ],
   templateUrl: './forgotten-password.component.html',
   styleUrl: './forgotten-password.component.scss'
@@ -22,7 +24,7 @@ email={
   isValid: false
 }
   validateEmail(){
-    this.email.isValid =/[\w]+@[a-z]+.[a-z]{2,}.[a-z]{2,}/.test(this.email.value.toLocaleLowerCase())
+    this.email.isValid =/[\w]+@[a-z]+\.[a-z]{2,}/.test(this.email.value.toLocaleLowerCase())
   }
 
   requestPasswordReset(){

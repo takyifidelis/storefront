@@ -4,12 +4,16 @@ import { LoginComponent } from './Pages/Authentication/CommonComponent/login/log
 import { ForgottenPasswordComponent } from './Pages/Authentication/CommonComponent/forgotten-password/forgotten-password.component';
 import { SignupMerchantComponent } from './Pages/Authentication/Merchant/signup/signup.component';
 import { SignupCustomerComponent } from './Pages/Authentication/Customer/signup/signup.component';
+import { ResetPassowrdComponent } from './Pages/Authentication/CommonComponent/reset-passowrd/reset-passowrd.component';
+import { TokenAuthComponent } from './Pages/Authentication/CommonComponent/token-auth/token-auth.component';
 
 export const routes: Routes = [
-  { path: '', component: ForgottenPasswordComponent },
+  { path: '', component: LandingPageComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'forget-password', component: LandingPageComponent },
+  { path: 'forget-password', component: ForgottenPasswordComponent },
   { path: 'Sign-up-customer', component: SignupCustomerComponent },
-  { path: 'Sign-up-merchant', component: SignupMerchantComponent },
+  { path: 'Sign-up-customer', component: SignupCustomerComponent },
+  { path: 'email-token-verification', component: TokenAuthComponent },
+  { path: 'reset-password', component: ResetPassowrdComponent },
   { path: '**', component: LandingPageComponent },
 ];
