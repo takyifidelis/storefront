@@ -6,6 +6,8 @@ import { SignupMerchantComponent } from './Pages/Authentication/Merchant/signup/
 import { SignupCustomerComponent } from './Pages/Authentication/Customer/signup/signup.component';
 import { ResetPassowrdComponent } from './Pages/Authentication/CommonComponent/reset-passowrd/reset-passowrd.component';
 import { TokenAuthComponent } from './Pages/Authentication/CommonComponent/token-auth/token-auth.component';
+import { MerchantDashboardComponent } from './Pages/Dashboard/Merchant/merchant-dashboard/merchant-dashboard.component';
+import { HomeComponent } from './Pages/Dashboard/Merchant/home/home.component';
 
 export const routes: Routes = [
   { path: '', component: LandingPageComponent },
@@ -15,5 +17,10 @@ export const routes: Routes = [
   { path: 'Sign-up-customer', component: SignupCustomerComponent },
   { path: 'email-token-verification', component: TokenAuthComponent },
   { path: 'reset-password', component: ResetPassowrdComponent },
+  { path: 'merchant', component: MerchantDashboardComponent,
+    children:[
+      {path: '', component:HomeComponent}
+    ]
+  },
   { path: '**', component: LandingPageComponent },
 ];
