@@ -6,9 +6,9 @@ import { SignupMerchantComponent } from './Pages/Authentication/Merchant/signup/
 import { SignupCustomerComponent } from './Pages/Authentication/Customer/signup/signup.component';
 
 export const routes: Routes = [
-  { path: '', component: LandingPageComponent },
+  { path: '', component: ForgottenPasswordComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'forget-password', component: ForgottenPasswordComponent },
+  { path: 'forget-password', component: LandingPageComponent },
   { path: 'Sign-up-customer', component: SignupCustomerComponent },
   { path: 'Sign-up-merchant', component: SignupMerchantComponent },
   { path: '**', component: LandingPageComponent },
