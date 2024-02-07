@@ -74,7 +74,15 @@
               </div>
               <div class="email-input">
                 <fa-icon [icon]="mailIcon"></fa-icon>
-                <input type="text" id="email" />
+                <input
+                  type="email"
+                  id="email"
+                  minlength="2"
+                  maxlength="128"
+                  required
+                  (keyup)="validateEmail()"
+                  [(ngModel)]="email"
+                />
               </div>
             </div>
             <div class="email-wrapper">
@@ -149,7 +157,12 @@
                     stroke-linejoin="round"
                   />
                 </svg>
-                <input type="text" id="confirm-password" />
+                <input
+                  type="text"
+                  id="confirm-password"
+                  [(ngModel)]="confirmPassword"
+                  (keyup)="validatePassword()"
+                />
                 <fa-icon class="icon" [icon]="eyeIcon"></fa-icon>
               </div>
             </div>
@@ -248,7 +261,7 @@
                       stroke-linejoin="round"
                     />
                   </svg>
-                  } @if(!isMinOneLowercase){
+                  } @if(!isMinOneUppercase){
                   <fa-icon [icon]="ol" class="dot"></fa-icon>
                   }
                 </div>
@@ -257,7 +270,12 @@
             </div>
           </div>
           <div class="button">
-            <button class="btn btn-primary">Continue</button>
+            <button
+              class="btn btn-primary"
+              [disabled]="!passwordIsValid || !emailIsValid"
+            >
+              Continue
+            </button>
           </div>
           <div class="optional-input">
             <div class="txt">

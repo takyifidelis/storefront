@@ -19,20 +19,26 @@ export class SignupMerchantComponent {
   googleIcon = faGoogle;
   facebookIcon = faFacebook;
   ol = faCircle;
-
+  email: string = '';
   password: string = '';
   confirmPassword: string = '';
   isValid: boolean = false;
   isMinTenChar: boolean = false;
   isMinOneNum: boolean = false;
+  emailIsValid: boolean = false;
+  isEmailValid: boolean = false;
+  passwordIsValid: boolean = false;
   isMinOneUppercase: boolean = false;
   isMinOneLowercase: boolean = false;
+
+  validateUser() {}
 
   validatePassword() {
     this.isMinTenChar = /[\w]{10,}/.test(this.password);
     this.isMinOneNum = /[\d]/.test(this.password);
     this.isMinOneUppercase = /[A-Z]/.test(this.password);
     this.isMinOneLowercase = /[a-z]/.test(this.password);
+
     if (
       this.isMinTenChar &&
       this.isMinOneLowercase &&
@@ -40,8 +46,23 @@ export class SignupMerchantComponent {
       this.isMinOneUppercase
     ) {
       if (this.password === this.confirmPassword) {
-        this.isValid = true;
+        this.passwordIsValid = true;
+      } else {
+        this.passwordIsValid = false; // Set to false when passwords don't match
       }
+    } else {
+      this.passwordIsValid = false; // Set to false when any condition fails
+    }
+  }
+
+  validateEmail() {
+    this.isEmailValid =
+      /^[a-z0-9]+(?:\.[a-z0-9]+)*@[a-z0-9]+(?:\.[a-z0-9]+)+$/.test(this.email);
+    if (this.isEmailValid) {
+      this.emailIsValid = true;
+      console.log('EMail works');
+    } else {
+      this.emailIsValid = false;
     }
   }
 }
