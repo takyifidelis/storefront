@@ -15,4 +15,6 @@ import { ForgottenPasswordComponent } from './Pages/Authentication/CommonCompone
 })
 export class AppComponent {
   title = 'store-front';
+
+  
 }

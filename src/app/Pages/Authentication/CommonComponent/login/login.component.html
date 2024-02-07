@@ -1,3 +1,4 @@
+<script src="https://accounts.google.com/gsi/client" async></script>
 <div class="limiter">
   <div class="container-login">
     <div class="login100-more">
@@ -72,11 +73,31 @@
         <p>OR</p>
         <div class="optional-login">Log In</div>
         <div class="social-icon">
-          <!-- <fa-icon [icon]="googleIcon" class="google-icon"></fa-icon> -->
+          <!-- <div
+            id="g_id_onload"
+            data-client_id="932862129622-gmqui5g4165kkvn8g92mbqa51rgfhe15.apps.googleusercontent.com"
+            data-context="signin"
+            data-ux_mode="popup"
+            data-login_uri="http://localhost:3000"
+            data-itp_support="true"
+          ></div>
+
+          <div
+            class="g_id_signin"
+            data-type="standard"
+            data-shape="rectangular"
+            data-theme="outline"
+            data-text=""
+            data-size="large"
+            data-logo_alignment="center"
+            data-width="448"
+          ></div> -->
+          <asl-google-signin-button text="" type="standard" size="medium">
+          </asl-google-signin-button>
           <div>Google</div>
         </div>
         <div class="social-icon">
-          <!-- <fa-icon [icon]="facebookIcon" style="color: dodgerblue"></fa-icon> -->
+          <fa-icon [icon]="facebookIcon" style="color: dodgerblue"></fa-icon>
           <div>Facebook</div>
         </div>
         <div class="forgotten-password">
