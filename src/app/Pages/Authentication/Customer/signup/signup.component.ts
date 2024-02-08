@@ -40,16 +40,56 @@ export class SignupCustomerComponent {
 
   password: string = '';
   confirmPassword: string = '';
+  email: string = '';
+  firstName: string = '';
   isValid: boolean = false;
   isMinTenChar: boolean = false;
   isMinOneNum: boolean = false;
   isMinOneUppercase: boolean = false;
   isMinOneLowercase: boolean = false;
+  passwordIsValid: boolean = false;
+  emailIsValid: boolean = false;
+  isEmailValid: boolean = false;
+  isFirstNameValid: boolean = false;
+  validCustomer: boolean = false;
+
+  validateCustomer() {
+    this.isFirstNameValid = /^.{3,}$/.test(this.firstName);
+    if (this.isFirstNameValid) {
+      this.validCustomer = true;
+    } else {
+      this.validCustomer = false;
+    }
+  }
 
   validatePassword() {
     this.isMinTenChar = /[\w]{10,}/.test(this.password);
     this.isMinOneNum = /[\d]/.test(this.password);
     this.isMinOneUppercase = /[A-Z]/.test(this.password);
     this.isMinOneLowercase = /[a-z]/.test(this.password);
+
+    if (
+      this.isMinTenChar &&
+      this.isMinOneLowercase &&
+      this.isMinOneNum &&
+      this.isMinOneUppercase
+    ) {
+      if (this.password === this.confirmPassword) {
+        this.passwordIsValid = true;
+      } else {
+        this.passwordIsValid = false;
+      }
+    } else {
+      this.passwordIsValid = false;
+    }
+  }
+  validateEmail() {
+    this.isEmailValid =
+      /^[a-z0-9]+(?:\.[a-z0-9]+)*@[a-z0-9]+(?:\.[a-z0-9]+)+$/.test(this.email);
+    if (this.isEmailValid) {
+      this.emailIsValid = true;
+    } else {
+      this.emailIsValid = false;
+    }
   }
 }

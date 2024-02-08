@@ -43,7 +43,12 @@
                     />
                   </svg>
 
-                  <input type="text" id="first-name" />
+                  <input
+                    type="text"
+                    id="first-name"
+                    [(ngModel)]="firstName"
+                    (keyup)="validateCustomer()"
+                  />
                 </div>
               </div>
               <div class="last-name">
@@ -74,7 +79,12 @@
               </div>
               <div class="email-input">
                 <fa-icon [icon]="mailIcon"></fa-icon>
-                <input type="text" id="email" />
+                <input
+                  type="text"
+                  id="email"
+                  (keyup)="validateEmail()"
+                  [(ngModel)]="email"
+                />
               </div>
             </div>
             <div class="email-wrapper">
@@ -149,7 +159,12 @@
                     stroke-linejoin="round"
                   />
                 </svg>
-                <input type="text" id="confirm-password" />
+                <input
+                  type="text"
+                  id="confirm-password"
+                  [(ngModel)]="confirmPassword"
+                  (keyup)="validatePassword()"
+                />
                 <fa-icon class="icon" [icon]="eyeIcon"></fa-icon>
               </div>
             </div>
@@ -257,7 +272,12 @@
             </div>
           </div>
           <div class="button">
-            <button class="btn btn-primary">Continue</button>
+            <button
+              class="btn btn-primary"
+              [disabled]="!passwordIsValid || !emailIsValid || !validCustomer"
+            >
+              Continue
+            </button>
           </div>
           <div class="optional-input">
             <div class="txt">
