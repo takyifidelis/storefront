@@ -43,7 +43,12 @@
                     />
                   </svg>
 
-                  <input type="text" id="first-name" />
+                  <input
+                    type="text"
+                    id="first-name"
+                    [(ngModel)]="firstName"
+                    (keyup)="validateMerchant()"
+                  />
                 </div>
               </div>
               <div class="last-name">
@@ -105,7 +110,12 @@
                   />
                 </svg>
 
-                <input type="text" id="business" />
+                <input
+                  type="text"
+                  id="business"
+                  [(ngModel)]="businessName"
+                  (keyup)="validateMerchant()"
+                />
               </div>
             </div>
             <div class="password-wrapper">
@@ -272,7 +282,7 @@
           <div class="button">
             <button
               class="btn btn-primary"
-              [disabled]="!passwordIsValid || !emailIsValid"
+              [disabled]="!validMerchant || !passwordIsValid || !emailIsValid"
             >
               Continue
             </button>

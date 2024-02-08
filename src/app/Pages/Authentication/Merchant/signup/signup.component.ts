@@ -19,8 +19,12 @@ export class SignupMerchantComponent {
   googleIcon = faGoogle;
   facebookIcon = faFacebook;
   ol = faCircle;
+  // input fields
   email: string = '';
   password: string = '';
+  firstName: string = '';
+  businessName: string = '';
+
   confirmPassword: string = '';
   isValid: boolean = false;
   isMinTenChar: boolean = false;
@@ -30,8 +34,21 @@ export class SignupMerchantComponent {
   passwordIsValid: boolean = false;
   isMinOneUppercase: boolean = false;
   isMinOneLowercase: boolean = false;
+  isBusinessNameValid: boolean = false;
+  isFirstNameValid: boolean = false;
+  validMerchant: boolean = false;
 
-  validateUser() {}
+  validateBusiness() {}
+
+  validateMerchant() {
+    this.isFirstNameValid = /^.{3,}$/.test(this.firstName);
+    this.isBusinessNameValid = /^.{3,}$/.test(this.businessName);
+    if (this.isBusinessNameValid && this.isFirstNameValid) {
+      this.validMerchant = true;
+    } else {
+      this.validMerchant = false;
+    }
+  }
 
   validatePassword() {
     this.isMinTenChar = /[\w]{10,}/.test(this.password);
@@ -48,10 +65,10 @@ export class SignupMerchantComponent {
       if (this.password === this.confirmPassword) {
         this.passwordIsValid = true;
       } else {
-        this.passwordIsValid = false; // Set to false when passwords don't match
+        this.passwordIsValid = false;
       }
     } else {
-      this.passwordIsValid = false; // Set to false when any condition fails
+      this.passwordIsValid = false;
     }
   }
 
