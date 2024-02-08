@@ -83,35 +83,44 @@
   </div>
 </section>
 <section id="about" class="row">
-  <div class="about-images col-6">
-    <!-- <img
-        src="../../../../assets/images/plus-signs-about-image.svg"
-        alt=""
-      
-      /> -->
+  <div class="about-container d-flex justify-content-between">
+    <div class="about-images col-6">
+      <!-- <img
+          src="../../../../assets/images/plus-signs-about-image.svg"
+          alt=""
+        
+        /> -->
 
-    <img src="../../../../assets/images/about-image.svg" alt="" />
+      <img src="../../../../assets/images/about-image.svg" alt="" />
+    </div>
+    <article class="about-article col-6">
+      <h3 class="article-header">
+        Empowering small business with powerful website solutions
+      </h3>
+      <p class="article-paragraph">
+        Storefront is the website builder that simplifies your online presence.
+        With our easy-to-use templates, you can create a stunning website and
+        take control of your finances, all form one place
+      </p>
+    </article>
   </div>
-
-  <article class="about-article col-6">
-    <h3 class="article-header">
-      Empowering small business with powerful website solutions
-    </h3>
-    <p class="article-paragraph">
-      Storefront is the website builder that simplifies your online presence.
-      With our easy-to-use templates, you can create a stunning website and take
-      control of your finances, all form one place
-    </p>
-  </article>
+</section>
+<section id="agencies">
+  <img
+    src="../../../../assets/images/agencies-section.PNG"
+    alt=""
+    class="agencies-image"
+  />
 </section>
 <section id="testimonials" class="clientsSaying">
   <h1 class="testimonials-header">What Clients Are Saying About Us</h1>
   <div class="card-container row">
     <div class="col">
-      <button class="left-arrow">
-        <img src="../../../../assets/icons/arrow-left.svg" alt="left arrow" />
+      <button class="arrow-right arrow" mat-icon-button>
+        <mat-icon>arrow_back_ios_new</mat-icon>
       </button>
     </div>
+    <!-- first testimonial -->
     <div class="card col-3">
       <div class="cards">
         <div class="row card-inner">
@@ -119,53 +128,13 @@
             <img
               src="../../../../assets/images/testimonials-image.png"
               alt="evelyn-image"
-              class="col-4"
+              class="col-6 evelyn-image"
             />
-            <div class="card-evelyn col-6">
-              <h5>Evelyn Kay</h5>
-              <p>CEO Sportify</p>
-              <div class="starRating">
-                <img
-                  src="../../../../assets/icons/star-ratings.svg"
-                  alt="star"
-                />
-                <img
-                  src="../../../../assets/icons/star-ratings.svg"
-                  alt="star"
-                />
-                <img
-                  src="../../../../assets/icons/star-ratings.svg"
-                  alt="star"
-                />
-                <img
-                  src="../../../../assets/icons/star-ratings.svg"
-                  alt="star"
-                />
-                <img
-                  src="../../../../assets/icons/star-ratings.svg"
-                  alt="star"
-                />
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <p class="" col>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s
-            </p>
-          </div>
-          <div class="row card-inner">
-            <div class="testimonials-info row">
-              <img
-                src="../../../../assets/images/testimonials-image.png"
-                alt="evelyn-image"
-                class="col-4"
-              />
-              <div class="card-evelyn col-6">
-                <h5>Evelyn Kay</h5>
-                <p>CEO Sportify</p>
-                <div class="starRating">
+            <div class="card-evelyn col">
+              <h5 class="evelyn-name">Evelyn Kay</h5>
+              <p class="evelyn-position">CEO Spotify</p>
+              <div class="starRating row">
+                <div class="col d-flex">
                   <img
                     src="../../../../assets/icons/star-ratings.svg"
                     alt="star"
@@ -189,20 +158,118 @@
                 </div>
               </div>
             </div>
-            <div class="row">
-              <p class="" col>
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industry's standard dummy
-                text ever since the 1500s
-              </p>
+          </div>
+          <div class="row">
+            <p class="col testimonials-paragraph">
+              Lorem Ipsum is simply dummy text of the printing and typesetting
+              industry. Lorem Ipsum has been the industry's standard dummy text
+              ever since the 1500s
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- second testimonial -->
+    <div class="card col-3">
+      <div class="cards">
+        <div class="row card-inner">
+          <div class="testimonials-info row">
+            <img
+              src="../../../../assets/images/testimonials-image.png"
+              alt="evelyn-image"
+              class="col-6 evelyn-image"
+            />
+            <div class="card-evelyn col">
+              <h5 class="evelyn-name">Evelyn Kay</h5>
+              <p class="evelyn-position">CEO Spotify</p>
+              <div class="starRating row">
+                <div class="col d-flex">
+                  <img
+                    src="../../../../assets/icons/star-ratings.svg"
+                    alt="star"
+                  />
+                  <img
+                    src="../../../../assets/icons/star-ratings.svg"
+                    alt="star"
+                  />
+                  <img
+                    src="../../../../assets/icons/star-ratings.svg"
+                    alt="star"
+                  />
+                  <img
+                    src="../../../../assets/icons/star-ratings.svg"
+                    alt="star"
+                  />
+                  <img
+                    src="../../../../assets/icons/star-ratings.svg"
+                    alt="star"
+                  />
+                </div>
+              </div>
             </div>
+          </div>
+          <div class="row">
+            <p class="col testimonials-paragraph">
+              Lorem Ipsum is simply dummy text of the printing and typesetting
+              industry. Lorem Ipsum has been the industry's standard dummy text
+              ever since the 1500s
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- first testimonial -->
+    <div class="card col-3">
+      <div class="cards">
+        <div class="row card-inner">
+          <div class="testimonials-info row">
+            <img
+              src="../../../../assets/images/testimonials-image.png"
+              alt="evelyn-image"
+              class="col-6 evelyn-image"
+            />
+            <div class="card-evelyn col">
+              <h5 class="evelyn-name">Evelyn Kay</h5>
+              <p class="evelyn-position">CEO Spotify</p>
+              <div class="starRating row">
+                <div class="col d-flex">
+                  <img
+                    src="../../../../assets/icons/star-ratings.svg"
+                    alt="star"
+                  />
+                  <img
+                    src="../../../../assets/icons/star-ratings.svg"
+                    alt="star"
+                  />
+                  <img
+                    src="../../../../assets/icons/star-ratings.svg"
+                    alt="star"
+                  />
+                  <img
+                    src="../../../../assets/icons/star-ratings.svg"
+                    alt="star"
+                  />
+                  <img
+                    src="../../../../assets/icons/star-ratings.svg"
+                    alt="star"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <p class="col testimonials-paragraph">
+              Lorem Ipsum is simply dummy text of the printing and typesetting
+              industry. Lorem Ipsum has been the industry's standard dummy text
+              ever since the 1500s
+            </p>
           </div>
         </div>
       </div>
     </div>
     <div class="col">
-      <button class="arrow-right">
-        <img src="../../../../assets/icons/arrow-right.svg" alt="arrow right" />
+      <button class="arrow-right arrow" mat-icon-button>
+        <mat-icon>arrow_forward_ios_new</mat-icon>
       </button>
     </div>
   </div>
