@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col bg w-100"></div>
     <div class="frame-2 col">
-      <form class="form">
+      <div class="form">
         <div class="frame-2-container">
           <div class="title"><p>Storefront</p></div>
           <div class="welcome">
@@ -42,6 +42,12 @@
                   </svg>
 
                   <input type="text" id="first-name" placeholder="Bob Maxy" />
+                  <input
+                    type="text"
+                    id="first-name"
+                    [(ngModel)]="firstName"
+                    (keyup)="validateCustomer()"
+                  />
                 </div>
               </div>
               <div class="last-name col">
@@ -72,7 +78,13 @@
               </div>
               <div class="email-input">
                 <fa-icon [icon]="mailIcon"></fa-icon>
-                <input type="text" id="email" placeholder="example@email.com" />
+                <input
+                  type="text"
+                  id="email"
+                  placeholder="example@email.com"
+                  (keyup)="validateEmail()"
+                  [(ngModel)]="email"
+                />
               </div>
             </div>
             <div class="password-wrapper">
@@ -96,6 +108,12 @@
                   />
                 </svg>
                 <input type="text" id="password" placeholder="Password" />
+                <input
+                  type="text"
+                  id="password"
+                  [(ngModel)]="password"
+                  (keyup)="validatePassword()"
+                />
                 <fa-icon class="icon" [icon]="eyeIcon"></fa-icon>
               </div>
             </div>
@@ -123,6 +141,8 @@
                   type="text"
                   id="confirm-password"
                   placeholder="Password"
+                  [(ngModel)]="confirmPassword"
+                  (keyup)="validatePassword()"
                 />
                 <fa-icon class="icon" [icon]="eyeIcon"></fa-icon>
               </div>
@@ -133,27 +153,31 @@
             <div class="checks-wrapper-1">
               <div class="length-checker">
                 <div class="checker">
-                  <svg
-                    width="17"
-                    height="17"
-                    viewBox="0 0 17 17"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M13.8333 4.5L6.49996 11.8333L3.16663 8.5"
-                      stroke="#048746"
-                      stroke-width="1.6666"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                  </svg>
-                  <fa-icon [icon]="ol" class="dot"></fa-icon>
+                  @if(isMinTenChar){
+                  <span>
+                    <svg
+                      width="17"
+                      height="17"
+                      viewBox="0 0 17 17"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M13.8333 4.5L6.49996 11.8333L3.16663 8.5"
+                        stroke="#048746"
+                        stroke-width="1.6666"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg> </span
+                  >} @if(!isMinTenChar){
+                  <fa-icon [icon]="ol" class="dot"></fa-icon>}
                 </div>
                 <p>A minimum of 10 characters</p>
               </div>
               <div class="least-checker">
                 <div class="checker">
+                  @if(isMinOneNum){
                   <svg
                     width="17"
                     height="17"
@@ -169,7 +193,8 @@
                       stroke-linejoin="round"
                     />
                   </svg>
-                  <fa-icon [icon]="ol" class="dot"></fa-icon>
+                  } @if(!isMinOneNum){<fa-icon [icon]="ol" class="dot"></fa-icon
+                  >}
                 </div>
                 <p>At least 1 number</p>
               </div>
@@ -177,6 +202,7 @@
             <div class="checks-wrapper-2">
               <div class="lowercase-checker">
                 <div class="checker">
+                  @if(isMinOneLowercase){
                   <svg
                     width="17"
                     height="17"
@@ -192,12 +218,15 @@
                       stroke-linejoin="round"
                     />
                   </svg>
+                  } @if(!isMinOneLowercase){
                   <fa-icon [icon]="ol" class="dot"></fa-icon>
+                  }
                 </div>
                 <p>At least 1 lowercase letter</p>
               </div>
               <div class="uppercase-checker">
                 <div class="checker">
+                  @if(isMinOneUppercase){
                   <svg
                     width="17"
                     height="17"
@@ -213,14 +242,21 @@
                       stroke-linejoin="round"
                     />
                   </svg>
+                  } @if(!isMinOneUppercase){
                   <fa-icon [icon]="ol" class="dot"></fa-icon>
+                  }
                 </div>
                 <p>At least 1 uppercase letter</p>
               </div>
             </div>
           </div>
           <div class="button">
-            <button class="btn btn-primary">Continue</button>
+            <button
+              class="btn btn-primary"
+              [disabled]="!passwordIsValid || !emailIsValid || !validCustomer"
+            >
+              Continue
+            </button>
           </div>
           <div class="optional-input">
             <div class="txt">
@@ -372,7 +408,7 @@
             </div>
           </div>
         </div>
-      </form>
+      </div>
     </div>
   </div>
 </div>

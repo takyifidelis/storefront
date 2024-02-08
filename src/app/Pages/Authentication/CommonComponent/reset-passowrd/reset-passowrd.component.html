@@ -38,7 +38,12 @@
                 />
               </svg>
             </div>
-            <input [(ngModel)]="password" (keyup)="validatePassword()" type="text" id="email" />
+            <input
+              [(ngModel)]="password"
+              (keyup)="validatePassword()"
+              type="text"
+              id="email"
+            />
             <fa-icon [icon]="eyeIcon" style="color: #5e718d"></fa-icon>
           </div>
         </div>
@@ -64,7 +69,12 @@
                 />
               </svg>
             </div>
-            <input [(ngModel)]="confirmPassword" (keyup)="validatePassword()" type="text" id="email" />
+            <input
+              [(ngModel)]="confirmPassword"
+              (keyup)="validatePassword()"
+              type="text"
+              id="email"
+            />
             <fa-icon [icon]="eyeIcon" style="color: #5e718d"></fa-icon>
           </div>
         </div>
@@ -72,51 +82,57 @@
           <div class="checks-wrapper-1">
             <div class="length-checker">
               @if(isMinTenChar){
-                <div class="icon">
-                  <svg
-                    width="14"
-                    height="10"
-                    viewBox="0 0 14 10"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M12.3337 1L5.00033 8.33333L1.66699 5"
-                      stroke="#048746"
-                      stroke-width="1.6666"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                  </svg>
-                </div>
-              }
-              @if(!isMinTenChar){
-                <fa-icon class="unvalidated" [icon]="ol" style="color: #5e718d"></fa-icon>
+              <div class="icon">
+                <svg
+                  width="14"
+                  height="10"
+                  viewBox="0 0 14 10"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M12.3337 1L5.00033 8.33333L1.66699 5"
+                    stroke="#048746"
+                    stroke-width="1.6666"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </div>
+              } @if(!isMinTenChar){
+              <fa-icon
+                class="unvalidated"
+                [icon]="ol"
+                style="color: #5e718d"
+              ></fa-icon>
               }
               <p>A minimum of 10 characters</p>
             </div>
             <div class="least-checker">
               @if(isMinOneNum){
-                <div class="icon">
-                  <svg
-                    width="14"
-                    height="10"
-                    viewBox="0 0 14 10"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M12.3337 1L5.00033 8.33333L1.66699 5"
-                      stroke="#048746"
-                      stroke-width="1.6666"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                  </svg>
-                </div>
-              }
-              @if(!isMinOneNum){
-                <fa-icon class="unvalidated" [icon]="ol" style="color: #5e718d"></fa-icon>
+              <div class="icon">
+                <svg
+                  width="14"
+                  height="10"
+                  viewBox="0 0 14 10"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M12.3337 1L5.00033 8.33333L1.66699 5"
+                    stroke="#048746"
+                    stroke-width="1.6666"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </div>
+              } @if(!isMinOneNum){
+              <fa-icon
+                class="unvalidated"
+                [icon]="ol"
+                style="color: #5e718d"
+              ></fa-icon>
               }
               <p>At least 1 number</p>
             </div>
@@ -124,58 +140,70 @@
           <div class="checks-wrapper-2">
             <div class="lowercase-checker">
               @if(isMinOneLowercase){
-                <div class="icon">
-                  <svg
-                    width="14"
-                    height="10"
-                    viewBox="0 0 14 10"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M12.3337 1L5.00033 8.33333L1.66699 5"
-                      stroke="#048746"
-                      stroke-width="1.6666"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                  </svg>
-                </div>
-              }
-              @if(!isMinOneLowercase){
-                <fa-icon class="unvalidated" [icon]="ol" style="color: #5e718d"></fa-icon>
+              <div class="icon">
+                <svg
+                  width="14"
+                  height="10"
+                  viewBox="0 0 14 10"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M12.3337 1L5.00033 8.33333L1.66699 5"
+                    stroke="#048746"
+                    stroke-width="1.6666"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </div>
+              } @if(!isMinOneLowercase){
+              <fa-icon
+                class="unvalidated"
+                [icon]="ol"
+                style="color: #5e718d"
+              ></fa-icon>
               }
               <p>At least 1 lowercase letter</p>
             </div>
             <div class="uppercase-checker">
               @if(isMinOneUppercase){
-                <div class="icon">
-                  <svg
-                    width="14"
-                    height="10"
-                    viewBox="0 0 14 10"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M12.3337 1L5.00033 8.33333L1.66699 5"
-                      stroke="#048746"
-                      stroke-width="1.6666"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                  </svg>
-                </div>
-              }
-              @if(!isMinOneUppercase){
-                <fa-icon class="unvalidated" [icon]="ol" style="color: #5e718d"></fa-icon>
+              <div class="icon">
+                <svg
+                  width="14"
+                  height="10"
+                  viewBox="0 0 14 10"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M12.3337 1L5.00033 8.33333L1.66699 5"
+                    stroke="#048746"
+                    stroke-width="1.6666"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </div>
+              } @if(!isMinOneUppercase){
+              <fa-icon
+                class="unvalidated"
+                [icon]="ol"
+                style="color: #5e718d"
+              ></fa-icon>
               }
               <p>At least 1 uppercase letter</p>
             </div>
           </div>
         </div>
         <div class="button">
-          <button routerLink="/email-token-verification" [disabled]="!isValid" class="btn btn-primary">Continue</button>
+          <button
+            routerLink="/email-token-verification"
+            [disabled]="!isValid"
+            class="btn btn-primary"
+          >
+            Continue
+          </button>
         </div>
       </div>
     </div>
