@@ -68,61 +68,6 @@ form::-webkit-scrollbar{
       letter-spacing: -0.3px;
     }
 
-    .first-name {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 6px;
-
-      .input-first-name {
-        display: flex;
-        align-items: center;
-        border-bottom: 1px solid #0f3cd9;
-        align-self: stretch;
-        padding: 11px 9px 11px 3px;
-
-        input {
-          border: none;
-          outline: none;
-          color: #2d3643;
-          font-family: "Inter", sans-serif;
-          font-size: 14px;
-          font-style: normal;
-          font-weight: 500;
-          line-height: 24px;
-          letter-spacing: -0.2px;
-          padding-left: 11px;
-        }
-      }
-    }
-    .last-name {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 6px;
-
-      .input-last-name {
-        display: flex;
-        align-items: center;
-        border-bottom: 1px solid #0f3cd9;
-        align-self: stretch;
-        padding: 11px 9px 11px 3px;
-
-        input {
-          border: none;
-          outline: none;
-          color: #2d3643;
-          font-family: "Inter", sans-serif;
-          font-size: 14px;
-          font-style: normal;
-          font-weight: 500;
-          line-height: 24px;
-          letter-spacing: -0.2px;
-          padding-left: 11px;
-        }
-      }
-    }
-
     .email-input {
       display: flex;
       padding: 11px 39px 11px 3px;
@@ -147,7 +92,6 @@ form::-webkit-scrollbar{
 
     .password-wrapper {
       display: flex;
-      // width: 448px;
       flex-direction: column;
       align-items: flex-start;
       gap: 6px;
@@ -182,6 +126,7 @@ form::-webkit-scrollbar{
           font-weight: 500;
           line-height: 24px;
           letter-spacing: -0.2px;
+          margin-left: 8px;
         }
       }
     }
