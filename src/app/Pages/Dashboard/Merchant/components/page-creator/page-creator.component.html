@@ -54,7 +54,10 @@
                         <mat-icon>upload_2</mat-icon>
                     </button>
                 </li>
-                
+            </ul>
+        </mat-drawer>
+        <mat-drawer #drawer2 position="end" mode="side" [opened]="true" class="side-nav mat-elevated-z4">
+            <ul>
                 <li [routerLink]="['home']">
                     <button mat-fab style="background-color: white;"
                         aria-label="Example icon button with a bookmark icon">
@@ -79,7 +82,6 @@
                 </li>
             </ul>
         </mat-drawer>
-        
         <mat-drawer-content class="conatainer">
             <router-outlet />
         </mat-drawer-content>
