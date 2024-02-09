@@ -12,6 +12,24 @@
   .frame-1 {
     width: 50%;
     height: 100vh;
+    position: relative;
+
+    p {
+      position: absolute;
+      color: #fff;
+      z-index: 77;
+      left: 3.375rem;
+      right: 5.4375rem;
+      bottom: 4rem;
+      color: #fff;
+      text-align: center;
+      font-family: Inter;
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 36px;
+      letter-spacing: -0.4px;
+    }
 
     img {
       width: 100%;
