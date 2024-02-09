@@ -113,6 +113,7 @@ nav {
 #about {
   padding: 5rem;
   padding-left: 0;
+  margin-left: 7%;
   article {
     margin: auto;
     padding: 4rem;
@@ -140,25 +141,86 @@ nav {
   }
 }
 #testimonials {
-  .card-inner {
-    padding: 2rem;
-    margin-bottom: 1rem;
-  }
-  .card {
-    border-radius: 16px;
-    background: #fff;
-    border-style: none;
+  text-align: center;
+  margin: 5rem 0;
 
-    /* Shadow/2xl */
-    box-shadow: 0px 32px 64px -12px rgba(45, 54, 67, 0.14);
+  .testimonials-header {
+    color: #101828;
+
+    /* Headline: 3/Bold */
+    font-family: Inter;
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 60px; /* 125% */
+    letter-spacing: -1.75px;
+    margin-bottom: 3rem;
   }
-  .testimonials-info {
-    margin-bottom: 1.2rem;
-  }
-  .cards {
+  .card-container {
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    .arrow {
+      color: #d9d9d9;
+      height: 4rem;
+    }
+    .card-inner {
+      padding: 2rem;
+      margin-bottom: 1rem;
+      text-align: left;
+    }
+    .card {
+      border-radius: 1rem;
+      background: #fff;
+      border-style: none;
+      box-shadow: 0px 32px 64px -12px rgba(45, 54, 67, 0.14);
+    }
+    .testimonials-info {
+      margin-bottom: 1.2rem;
+
+      .card-evelyn {
+        .evelyn-name {
+          color: #101828;
+          font-family: Inter;
+          font-size: 1rem;
+          font-style: normal;
+          font-weight: 900;
+          line-height: 24px;
+        }
+        .starRating {
+          width: 100%;
+          object-fit: contain;
+          img {
+            width: 1.2rem;
+            height: 1.2rem;
+          }
+        }
+      }
+      .evelyn-position {
+        color: #101828;
+        font-family: Inter;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 24px;
+      }
+    }
+    .cards {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .testimonials-paragraph {
+        color: #667085;
+        text-align: center;
+        font-family: Inter;
+        font-size: 1rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 28px;
+        letter-spacing: -0.3px;
+      }
+    }
   }
 }
 #teams {
@@ -167,14 +229,19 @@ nav {
       /* Top right corner color */ linear-gradient(
       to bottom left,
       #e8edff 50%,
-      transparent 50%
+      transparent 40%
     ),
     /* Bottom right radial gradient */
       radial-gradient(
-        50% 50% at 100% 100%,
+        70% 70% at 100% 100%,
         rgba(255, 210, 210, 0.65) 0%,
         rgba(255, 244, 229, 0) 100%
       ),
+    radial-gradient(
+      0% 0% at 50% 50%,
+      rgba(122, 198, 211, 0.836) 0%,
+      rgba(255, 244, 229, 0) 100%
+    ),
     /* Top left radial gradient */
       radial-gradient(
         50% 50% at 0% 0%,
@@ -253,5 +320,18 @@ footer {
         text-decoration: none;
       }
     }
+  }
+}
+#agencies {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+
+  .agencies-image {
+    width: 100%;
+    height: 100%;
+    object-fit: inherit;
+    display: block;
   }
 }

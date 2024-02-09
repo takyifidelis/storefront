@@ -1,10 +1,8 @@
-<div class="container-fluid">
-  <div class="frame-wrapper">
-    <div class="frame-1">
-      <img src="../../assets/images/Frame 446.svg" alt="" />
-    </div>
-    <div class="frame-2">
-      <form class="form">
+<div class="sec">
+  <div class="row">
+    <div class="col bg w-100"></div>
+    <div class="frame-2 col">
+      <div class="form">
         <div class="frame-2-container">
           <div class="title"><p>Storefront</p></div>
           <div class="welcome">
@@ -17,15 +15,15 @@
               </p>
               <p class="line">
                 Create
-                <a href="#" [routerLink]="['/Sign-up-merchant']"
+                <a href="#" [routerLink]="['/Sign-up-customer']"
                   >Business Account</a
                 >
               </p>
             </div>
           </div>
           <div class="login-input">
-            <div class="input-credentials">
-              <div class="first-name">
+            <div class="input-credentials row">
+              <div class="first-name col">
                 <div class="label">
                   <label for="first-name">First Name</label>
                 </div>
@@ -43,10 +41,16 @@
                     />
                   </svg>
 
-                  <input type="text" id="first-name" />
+                  <input type="text" id="first-name" placeholder="Bob Maxy" />
+                  <input
+                    type="text"
+                    id="first-name"
+                    [(ngModel)]="firstName"
+                    (keyup)="validateCustomer()"
+                  />
                 </div>
               </div>
-              <div class="last-name">
+              <div class="last-name col">
                 <div class="label">
                   <label for="last-name">Last Name</label>
                 </div>
@@ -64,7 +68,7 @@
                     />
                   </svg>
 
-                  <input type="text" id="last-name" />
+                  <input type="text" id="last-name" placeholder="Bob Maxy" />
                 </div>
               </div>
             </div>
@@ -74,30 +78,13 @@
               </div>
               <div class="email-input">
                 <fa-icon [icon]="mailIcon"></fa-icon>
-                <input type="text" id="email" />
-              </div>
-            </div>
-            <div class="email-wrapper">
-              <div class="email">
-                <label for="business">Business Name</label>
-              </div>
-              <div class="email-input">
-                <svg
-                  width="17"
-                  height="15"
-                  viewBox="0 0 17 15"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M10.375 8.75H13.5M3.27412 10.625C3.41283 10.0883 3.72591 9.61295 4.16415 9.27356C4.60239 8.93418 5.14097 8.75001 5.69526 8.75M5.69526 8.75C6.24955 8.74998 6.78814 8.93411 7.22641 9.27346C7.66467 9.61281 7.97778 10.0881 8.11653 10.6248M5.69526 8.75C6.73079 8.75 7.57035 7.91053 7.57035 6.875C7.57035 5.83946 6.73088 5 5.69535 5C4.65981 5 3.82035 5.83946 3.82035 6.875C3.82035 7.91053 4.65973 8.75 5.69526 8.75ZM10.375 6.25H13.5M1.625 1.25H15.375C15.7202 1.25 16 1.52982 16 1.875V13.125C16 13.4702 15.7202 13.75 15.375 13.75H1.625C1.27982 13.75 1 13.4702 1 13.125V1.875C1 1.52982 1.27982 1.25 1.625 1.25Z"
-                    stroke="#5E718D"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-
-                <input type="text" id="business" />
+                <input
+                  type="text"
+                  id="email"
+                  placeholder="example@email.com"
+                  (keyup)="validateEmail()"
+                  [(ngModel)]="email"
+                />
               </div>
             </div>
             <div class="password-wrapper">
@@ -120,7 +107,13 @@
                     stroke-linejoin="round"
                   />
                 </svg>
-                <input type="text" id="password" />
+                <input type="text" id="password" placeholder="Password" />
+                <input
+                  type="text"
+                  id="password"
+                  [(ngModel)]="password"
+                  (keyup)="validatePassword()"
+                />
                 <fa-icon class="icon" [icon]="eyeIcon"></fa-icon>
               </div>
             </div>
@@ -144,7 +137,13 @@
                     stroke-linejoin="round"
                   />
                 </svg>
-                <input type="text" id="confirm-password" />
+                <input
+                  type="text"
+                  id="confirm-password"
+                  placeholder="Password"
+                  [(ngModel)]="confirmPassword"
+                  (keyup)="validatePassword()"
+                />
                 <fa-icon class="icon" [icon]="eyeIcon"></fa-icon>
               </div>
             </div>
@@ -154,27 +153,31 @@
             <div class="checks-wrapper-1">
               <div class="length-checker">
                 <div class="checker">
-                  <svg
-                    width="17"
-                    height="17"
-                    viewBox="0 0 17 17"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M13.8333 4.5L6.49996 11.8333L3.16663 8.5"
-                      stroke="#048746"
-                      stroke-width="1.6666"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                  </svg>
-                  <fa-icon [icon]="ol" class="dot"></fa-icon>
+                  @if(isMinTenChar){
+                  <span>
+                    <svg
+                      width="17"
+                      height="17"
+                      viewBox="0 0 17 17"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M13.8333 4.5L6.49996 11.8333L3.16663 8.5"
+                        stroke="#048746"
+                        stroke-width="1.6666"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg> </span
+                  >} @if(!isMinTenChar){
+                  <fa-icon [icon]="ol" class="dot"></fa-icon>}
                 </div>
                 <p>A minimum of 10 characters</p>
               </div>
               <div class="least-checker">
                 <div class="checker">
+                  @if(isMinOneNum){
                   <svg
                     width="17"
                     height="17"
@@ -190,7 +193,8 @@
                       stroke-linejoin="round"
                     />
                   </svg>
-                  <fa-icon [icon]="ol" class="dot"></fa-icon>
+                  } @if(!isMinOneNum){<fa-icon [icon]="ol" class="dot"></fa-icon
+                  >}
                 </div>
                 <p>At least 1 number</p>
               </div>
@@ -198,6 +202,7 @@
             <div class="checks-wrapper-2">
               <div class="lowercase-checker">
                 <div class="checker">
+                  @if(isMinOneLowercase){
                   <svg
                     width="17"
                     height="17"
@@ -213,12 +218,15 @@
                       stroke-linejoin="round"
                     />
                   </svg>
+                  } @if(!isMinOneLowercase){
                   <fa-icon [icon]="ol" class="dot"></fa-icon>
+                  }
                 </div>
                 <p>At least 1 lowercase letter</p>
               </div>
               <div class="uppercase-checker">
                 <div class="checker">
+                  @if(isMinOneUppercase){
                   <svg
                     width="17"
                     height="17"
@@ -234,14 +242,21 @@
                       stroke-linejoin="round"
                     />
                   </svg>
+                  } @if(!isMinOneUppercase){
                   <fa-icon [icon]="ol" class="dot"></fa-icon>
+                  }
                 </div>
                 <p>At least 1 uppercase letter</p>
               </div>
             </div>
           </div>
           <div class="button">
-            <button class="btn btn-primary">Continue</button>
+            <button
+              class="btn btn-primary"
+              [disabled]="!passwordIsValid || !emailIsValid || !validCustomer"
+            >
+              Continue
+            </button>
           </div>
           <div class="optional-input">
             <div class="txt">
@@ -393,7 +408,7 @@
             </div>
           </div>
         </div>
-      </form>
+      </div>
     </div>
   </div>
 </div>
