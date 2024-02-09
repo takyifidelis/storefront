@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit {
   constructor(public dataService: DataService) {}
 
   ngOnInit() {
-    this.dataService.merchantDashboardNoProjects = true
+    this.dataService.merchantDashboardNoProjects = false
     console.log('heeeii')
   }
 }

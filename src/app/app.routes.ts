@@ -15,6 +15,7 @@ import { MerchantReviewsComponent } from './Pages/Dashboard/Merchant/components/
 import { MerchantOrdersComponent } from './Pages/Dashboard/Merchant/components/merchant-orders/merchant-orders.component';
 import { MerchantCustomersComponent } from './Pages/Dashboard/Merchant/components/merchant-customers/merchant-customers.component';
 import { MerchantAnalyticsComponent } from './Pages/Dashboard/Merchant/components/merchant-analytics/merchant-analytics.component';
+import { PageCreatorComponent } from './Pages/Dashboard/Merchant/components/page-creator/page-creator.component';
 
 export const routes: Routes = [
   { path: '', component: LandingPageComponent },
@@ -25,6 +26,7 @@ export const routes: Routes = [
   { path: 'email-token-verification', component: TokenAuthComponent },
   { path: 'reset-password', component: ResetPassowrdComponent },
   { path: 'template-editor', component: TemplateEditorComponent },
+  { path: 'page-creator', component: PageCreatorComponent },
   { path: 'merchant', component: MerchantDashboardComponent,
     children:[
       {path: '', component:HomeComponent},
