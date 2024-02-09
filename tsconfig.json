@@ -2,7 +2,11 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "types": ["node"],
+    "types": ["node", "jasmine"],
+    "typeRoots": [
+      "node_modules/@types",
+      "../../node_modules/@types"
+    ],
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
