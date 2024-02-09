@@ -2,7 +2,12 @@
   <div class="row">
     <div class="col bg w-100"></div>
     <div class="frame-2 col">
-      <form class="form" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+      <!-- <form
+        class="form"
+        #authForm="ngForm"
+        [formGroup]="signupForm"
+        (ngSubmit)="onSubmit(authForm)"
+      >
         <div class="frame-2-container">
           <div class="title"><p>Storefront</p></div>
           <div class="welcome">
@@ -46,7 +51,7 @@
                   type="text"
                   id="business"
                   placeholder="Anokye Enterprise"
-                  formControlName="businessName"
+                  name="businessName"
                 />
               </div>
             </div>
@@ -61,6 +66,7 @@
                   id="email"
                   placeholder="example@gmail.com"
                   formControlName="email"
+                  name="email"
                 />
               </div>
               <span
@@ -94,12 +100,12 @@
                     stroke-linejoin="round"
                   />
                 </svg>
-                <!-- PASSWORD INPUT -->
                 <input
                   type="text"
                   id="password"
                   placeholder="Password"
                   formControlName="password"
+                  name="password"
                 />
                 <fa-icon class="icon" [icon]="eyeIcon"></fa-icon>
               </div>
@@ -124,12 +130,10 @@
                     stroke-linejoin="round"
                   />
                 </svg>
-                <!-- CORMFIRM PASSWORD INPUT -->
                 <input
                   type="text"
                   id="confirm-password"
                   placeholder="Password"
-                  formControlName="password"
                 />
                 <fa-icon class="icon" [icon]="eyeIcon"></fa-icon>
               </div>
@@ -140,7 +144,6 @@
             <div class="checks-wrapper-1">
               <div class="length-checker">
                 <div class="checker">
-                  <!-- @if(isMinTenChar){ -->
                   <svg
                     width="17"
                     height="17"
@@ -156,15 +159,12 @@
                       stroke-linejoin="round"
                     />
                   </svg>
-                  <!-- } @if(!isMinTenChar){ -->
                   <fa-icon [icon]="ol" class="dot"></fa-icon>
-                  <!-- } -->
                 </div>
                 <p>A minimum of 10 characters</p>
               </div>
               <div class="least-checker">
                 <div class="checker">
-                  <!-- @if(isMinOneNum){ -->
                   <svg
                     width="17"
                     height="17"
@@ -180,9 +180,7 @@
                       stroke-linejoin="round"
                     />
                   </svg>
-                  <!-- } @if(!isMinOneNum){ -->
                   <fa-icon [icon]="ol" class="dot"></fa-icon>
-                  <!-- } -->
                 </div>
                 <p>At least 1 number</p>
               </div>
@@ -190,7 +188,6 @@
             <div class="checks-wrapper-2">
               <div class="lowercase-checker">
                 <div class="checker">
-                  <!-- @if(isMinOneLowercase){ -->
                   <svg
                     width="17"
                     height="17"
@@ -206,15 +203,12 @@
                       stroke-linejoin="round"
                     />
                   </svg>
-                  <!-- } @if(!isMinOneLowercase){ -->
                   <fa-icon [icon]="ol" class="dot"></fa-icon>
-                  <!-- } -->
                 </div>
                 <p>At least 1 lowercase letter</p>
               </div>
               <div class="uppercase-checker">
                 <div class="checker">
-                  <!-- @if(isMinOneUppercase){ -->
                   <svg
                     width="17"
                     height="17"
@@ -230,16 +224,16 @@
                       stroke-linejoin="round"
                     />
                   </svg>
-                  <!-- } @if(!isMinOneUppercase){ -->
                   <fa-icon [icon]="ol" class="dot"></fa-icon>
-                  <!-- } -->
                 </div>
                 <p>At least 1 uppercase letter</p>
               </div>
             </div>
           </div>
           <div class="button">
-            <button class="btn btn-primary" [disabled]="">Continue</button>
+            <button class="btn btn-primary" [disabled]="!authForm.valid">
+              Continue
+            </button>
           </div>
           <div class="optional-input">
             <div class="txt">
@@ -253,7 +247,6 @@
               </div>
 
               <div class="social-icon">
-                <!-- <fa-icon [icon]="googleIcon" class="google-icon"></fa-icon> -->
                 <svg
                   width="24"
                   height="24.558"
@@ -386,7 +379,7 @@
             </div>
           </div>
         </div>
-      </form>
+      </form> -->
     </div>
   </div>
 </div>

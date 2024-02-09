@@ -5,13 +5,21 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faFacebook, faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { faEnvelope, faEyeSlash } from '@fortawesome/free-regular-svg-icons';
 import { faCircle } from '@fortawesome/free-solid-svg-icons';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, FormGroupDirective } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../Auth/auth.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-signup-merchant',
   standalone: true,
-  imports: [FontAwesomeModule, RouterModule, ReactiveFormsModule, CommonModule],
+  imports: [
+    HttpClientModule,
+    FontAwesomeModule,
+    RouterModule,
+    ReactiveFormsModule,
+    CommonModule,
+  ],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.scss',
 })
@@ -21,28 +29,10 @@ export class SignupMerchantComponent {
   googleIcon = faGoogle;
   facebookIcon = faFacebook;
   ol = faCircle;
-  // input fields
-  // email: string = '';
-  // password: string = '';
-  // confirmPassword: string = '';
 
-  // businessName: string = '';
-
-  // confirmPassword: string = '';
-  // isValid: boolean = false;
-  // isMinTenChar: boolean = false;
-  // isMinOneNum: boolean = false;
-  // emailIsValid: boolean = false;
-  // isEmailValid: boolean = false;
-  // passwordIsValid: boolean = false;
-  // isMinOneUppercase: boolean = false;
-  // isMinOneLowercase: boolean = false;
-  // isBusinessNameValid: boolean = false;
-  // isFirstNameValid: boolean = false;
-  // validMerchant: boolean = false;
   signupForm: FormGroup;
 
-  constructor() {
+  constructor(private authService: AuthService) {
     this.signupForm = new FormGroup({
       email: new FormControl('', [
         Validators.required,
@@ -52,12 +42,29 @@ export class SignupMerchantComponent {
         ),
       ]),
       password: new FormControl('', Validators.required),
-      confirmPassword: new FormControl('', Validators.required),
-      businessName: new FormControl('', Validators.required),
+    });
+
+    this.authService.signup().subscribe((resData) => {
+      console.log(resData);
     });
   }
 
-  onSubmit() {
-    console.log(this.signupForm);
-  }
+  // onSubmit(form: FormGroupDirective) {
+  //   if (!form.valid) {
+  //     return;
+  //   }
+  //   const email = form.value.email;
+  //   const password = form.value.password;
+
+  //   this.authService.signup().subscribe(
+  //     (resData) => {
+  //       console.log(resData);
+  //     },
+  //     (error) => {
+  //       console.log(error);
+  //     }
+  //   );
+
+  //   form.reset();
+  // }
 }
