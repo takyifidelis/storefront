@@ -8,6 +8,13 @@ import { ResetPassowrdComponent } from './Pages/Authentication/CommonComponent/r
 import { TokenAuthComponent } from './Pages/Authentication/CommonComponent/token-auth/token-auth.component';
 import { MerchantDashboardComponent } from './Pages/Dashboard/Merchant/merchant-dashboard/merchant-dashboard.component';
 import { HomeComponent } from './Pages/Dashboard/Merchant/home/home.component';
+import { TemplateEditorComponent } from './Pages/Dashboard/Merchant/components/template-editor/template-editor.component';
+import { MerchantProductsComponent } from './Pages/Dashboard/Merchant/components/merchant-products/merchant-products.component';
+import { MerchantDiscountComponent } from './Pages/Dashboard/Merchant/components/merchant-discount/merchant-discount.component';
+import { MerchantReviewsComponent } from './Pages/Dashboard/Merchant/components/merchant-reviews/merchant-reviews.component';
+import { MerchantOrdersComponent } from './Pages/Dashboard/Merchant/components/merchant-orders/merchant-orders.component';
+import { MerchantCustomersComponent } from './Pages/Dashboard/Merchant/components/merchant-customers/merchant-customers.component';
+import { MerchantAnalyticsComponent } from './Pages/Dashboard/Merchant/components/merchant-analytics/merchant-analytics.component';
 
 export const routes: Routes = [
   { path: '', component: LandingPageComponent },
@@ -17,9 +24,17 @@ export const routes: Routes = [
   { path: 'Sign-up-customer', component: SignupCustomerComponent },
   { path: 'email-token-verification', component: TokenAuthComponent },
   { path: 'reset-password', component: ResetPassowrdComponent },
+  { path: 'template-editor', component: TemplateEditorComponent },
   { path: 'merchant', component: MerchantDashboardComponent,
     children:[
-      {path: '', component:HomeComponent}
+      {path: '', component:HomeComponent},
+      {path: 'home', component:HomeComponent},
+      {path: 'product', component:MerchantProductsComponent},
+      {path: 'discount', component:MerchantDiscountComponent},
+      {path: 'reviews', component:MerchantReviewsComponent},
+      {path: 'order', component:MerchantOrdersComponent},
+      {path: 'customers', component:MerchantCustomersComponent},
+      {path: 'analytics', component:MerchantAnalyticsComponent},
     ]
   },
   { path: '**', component: LandingPageComponent },
