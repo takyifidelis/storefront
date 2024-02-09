@@ -15,6 +15,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faFacebook, faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { faEnvelope, faEyeSlash } from '@fortawesome/free-regular-svg-icons';
 import { faCircle, faLock } from '@fortawesome/free-solid-svg-icons';
+import { GoogleLoginProvider, GoogleSigninButtonDirective, SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
 
 @Component({
   selector: 'app-signup-customer',
@@ -30,10 +31,11 @@ export class SignupCustomerComponent {
   ol = faCircle;
   googleIcon = faGoogle;
   facebookIcon = faFacebook;
+  user: SocialUser | undefined;
 
   // Email and Password Validation Below
 
-  constructor() {}
+  constructor(private authService: SocialAuthService) {}
 
   // Email Validation
   // Password Validation
@@ -92,4 +94,5 @@ export class SignupCustomerComponent {
       this.emailIsValid = false;
     }
   }
+
 }
