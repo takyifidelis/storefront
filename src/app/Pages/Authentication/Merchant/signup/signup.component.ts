@@ -7,11 +7,15 @@ import { faEnvelope, faEyeSlash } from '@fortawesome/free-regular-svg-icons';
 import { faCircle } from '@fortawesome/free-solid-svg-icons';
 import { FormGroup, FormControl, FormGroupDirective } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../Auth/auth.service';
+import { provideHttpClient } from '@angular/common/http';
+import { withFetch } from '@angular/common/http';
 
 @Component({
   selector: 'app-signup-merchant',
   standalone: true,
   imports: [FontAwesomeModule, RouterModule, ReactiveFormsModule, CommonModule],
+
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.scss',
 })
@@ -23,8 +27,9 @@ export class SignupMerchantComponent {
   ol = faCircle;
 
   signupForm: FormGroup;
+  error: string | any = null;
 
-  constructor() {
+  constructor(private authService: AuthService) {
     this.signupForm = new FormGroup({
       email: new FormControl('', [
         Validators.required,
@@ -37,8 +42,21 @@ export class SignupMerchantComponent {
     });
   }
 
-  onSubmit() {
-    console.log(this.signupForm);
-    // form.reset();
+  onSubmit(form: FormGroupDirective) {
+    if (!form.valid) {
+      return;
+    }
+    const email = form.value.email;
+    const password = form.value.password;
+
+    this.authService.signup(email, password).subscribe(
+      (resData) => {
+        console.log(resData);
+      },
+      (errorMessage) => {
+        console.log(errorMessage);
+        this.error = errorMessage;
+      }
+    );
   }
 }
