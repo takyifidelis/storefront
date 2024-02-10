@@ -6,9 +6,10 @@ import { SignupMerchantComponent } from './Pages/Authentication/Merchant/signup/
 import { SignupCustomerComponent } from './Pages/Authentication/Customer/signup/signup.component';
 import { ResetPassowrdComponent } from './Pages/Authentication/CommonComponent/reset-passowrd/reset-passowrd.component';
 import { TokenAuthComponent } from './Pages/Authentication/CommonComponent/token-auth/token-auth.component';
+import { AuthComponent } from './Pages/Authentication/Auth/auth.component';
 
 export const routes: Routes = [
-  { path: '', component: LandingPageComponent },
+  { path: '', component: AuthComponent },
   { path: 'login', component: LoginComponent },
   { path: 'forget-password', component: ForgottenPasswordComponent },
   { path: 'Sign-up-merchant', component: SignupMerchantComponent },
