@@ -9,7 +9,7 @@ import { TokenAuthComponent } from './Pages/Authentication/CommonComponent/token
 import { AuthComponent } from './Pages/Authentication/Auth/auth.component';
 
 export const routes: Routes = [
-  { path: '', component: LoginComponent },
+  { path: '', component: SignupMerchantComponent },
   { path: 'login', component: LoginComponent },
   { path: 'forget-password', component: ForgottenPasswordComponent },
   { path: 'Sign-up-merchant', component: SignupMerchantComponent },

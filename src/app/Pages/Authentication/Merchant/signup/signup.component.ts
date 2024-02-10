@@ -39,6 +39,8 @@ export class SignupMerchantComponent {
         ),
       ]),
       password: new FormControl('', Validators.required),
+      confirmPassword: new FormControl('', Validators.required),
+      businessName: new FormControl('', Validators.required),
     });
   }
 

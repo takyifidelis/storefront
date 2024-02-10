@@ -52,8 +52,18 @@
                   id="business"
                   placeholder="Anokye Enterprise"
                   name="businessName"
+                  formControlName="businessName"
                 />
               </div>
+              <span
+                class="help-block"
+                *ngIf="
+                  signupForm.get('businessName')?.touched &&
+                  signupForm.get('businessName')?.pristine
+                "
+              >
+                *This field is required
+              </span>
             </div>
             <div class="email-wrapper">
               <div class="email">
@@ -69,14 +79,15 @@
                   name="email"
                 />
               </div>
+
               <span
                 class="help-block"
                 *ngIf="
-                  !signupForm.get('email')?.valid &&
-                  signupForm.get('email')?.touched
+                  signupForm.get('email')?.touched &&
+                  signupForm.get('email')?.pristine
                 "
               >
-                *Please enter a valid email
+                *This field is required
               </span>
             </div>
 
@@ -110,6 +121,15 @@
                 <fa-icon class="icon" [icon]="eyeIcon"></fa-icon>
               </div>
             </div>
+            <span
+              class="help-block"
+              *ngIf="
+                signupForm.get('password')?.touched &&
+                signupForm.get('password')?.pristine
+              "
+            >
+              *This field is required
+            </span>
             <div class="password-wrapper">
               <div class="password">
                 <label for="confirm-password">Confirm Password</label>
@@ -134,10 +154,21 @@
                   type="text"
                   id="confirm-password"
                   placeholder="Password"
+                  name="confirm-password"
+                  formControlName="confirmPassword"
                 />
                 <fa-icon class="icon" [icon]="eyeIcon"></fa-icon>
               </div>
             </div>
+            <span
+              class="help-block"
+              *ngIf="
+                signupForm.get('confirmPassword')?.touched &&
+                signupForm.get('confirmPassword')?.pristine
+              "
+            >
+              *This field is required
+            </span>
           </div>
 
           <div class="checks">
