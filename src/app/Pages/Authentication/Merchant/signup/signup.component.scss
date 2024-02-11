@@ -1,4 +1,4 @@
-.sec{
+.sec {
   overflow: hidden;
 }
 .bg {
@@ -26,8 +26,11 @@
   }
 
 }
+.help-block {
+  color: red;
+}
 
-form::-webkit-scrollbar{
+form::-webkit-scrollbar {
   display: none;
 }
 
@@ -336,4 +339,3 @@ form::-webkit-scrollbar{
     }
   }
 }
-

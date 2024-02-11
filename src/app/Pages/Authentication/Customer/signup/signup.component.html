@@ -1,14 +1,20 @@
 <div class="sec">
   <div class="row">
-    <div class="col-6 bg">
+    <div class="col bg w-100">
       <p>
         Welcome to our Storefront App! Get ready to <br />showcase, sell, and
         succeed. Customize, manage, <br />engage. We're here for you. Let's
         thrive together!
       </p>
     </div>
-    <div class="frame-2 col-6">
-      <div class="form">
+    <div class="frame-2 col">
+      <form
+        class="form"
+        class="form"
+        #authCustomerForm="ngForm"
+        [formGroup]="signupForm"
+        (ngSubmit)="onSubmit(authCustomerForm)"
+      >
         <div class="frame-2-container">
           <div class="title"><p>Storefront</p></div>
           <div class="welcome">
@@ -21,7 +27,7 @@
               </p>
               <p class="line">
                 Create
-                <a href="#" [routerLink]="['/Sign-up-customer']"
+                <a href="#" [routerLink]="['/Sign-up-merchant']"
                   >Business Account</a
                 >
               </p>
@@ -46,14 +52,24 @@
                       fill="#5E718D"
                     />
                   </svg>
+
                   <input
                     type="text"
                     id="first-name"
-                    [(ngModel)]="firstName"
-                    (keyup)="validateCustomer()"
                     placeholder="Bob Maxy"
+                    name="firstName"
+                    formControlName="firstName"
                   />
                 </div>
+                <span
+                  class="help-block"
+                  *ngIf="
+                    signupForm.get('firstName')?.touched &&
+                    signupForm.get('firstName')?.pristine
+                  "
+                >
+                  *This field is required
+                </span>
               </div>
               <div class="last-name col-6">
                 <div class="label">
@@ -87,10 +103,19 @@
                   type="text"
                   id="email"
                   placeholder="example@email.com"
-                  (keyup)="validateEmail()"
-                  [(ngModel)]="email"
+                  formControlName="email"
+                  name="email"
                 />
               </div>
+              <span
+                class="help-block"
+                *ngIf="
+                  signupForm.get('email')?.touched &&
+                  signupForm.get('email')?.pristine
+                "
+              >
+                *This field is required
+              </span>
             </div>
             <div class="password-wrapper">
               <div class="password">
@@ -112,16 +137,26 @@
                     stroke-linejoin="round"
                   />
                 </svg>
-                <input type="text" id="password" placeholder="Password" />
+
                 <input
                   type="text"
                   id="password"
-                  [(ngModel)]="password"
-                  (keyup)="validatePassword()"
+                  placeholder="Password"
+                  formControlName="password"
+                  name="password"
                 />
                 <fa-icon class="icon" [icon]="eyeIcon"></fa-icon>
               </div>
             </div>
+            <span
+              class="help-block"
+              *ngIf="
+                signupForm.get('password')?.touched &&
+                signupForm.get('password')?.pristine
+              "
+            >
+              *This field is required
+            </span>
             <div class="password-wrapper">
               <div class="password">
                 <label for="confirm-password">Confirm Password</label>
@@ -146,19 +181,36 @@
                   type="text"
                   id="confirm-password"
                   placeholder="Password"
-                  [(ngModel)]="confirmPassword"
-                  (keyup)="validatePassword()"
+                  name="confirm-password"
+                  formControlName="confirmPassword"
                 />
                 <fa-icon class="icon-2" [icon]="eyeIcon"></fa-icon>
               </div>
+              <span
+                class="help-block"
+                *ngIf="
+                  signupForm.hasError('passwordsNotMatching') &&
+                  signupForm.get('confirmPassword')?.touched &&
+                  signupForm.get('confirmPassword')?.dirty
+                "
+                >Password doesn't match</span
+              >
             </div>
+            <span
+              class="help-block"
+              *ngIf="
+                signupForm.get('confirmPassword')?.touched &&
+                signupForm.get('confirmPassword')?.pristine
+              "
+            >
+              *This field is required
+            </span>
           </div>
 
           <div class="checks">
             <div class="checks-wrapper-1">
               <div class="length-checker">
                 <div class="checker">
-                  @if(isMinTenChar){
                   <span>
                     <svg
                       width="17"
@@ -166,6 +218,7 @@
                       viewBox="0 0 17 17"
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
+                      *ngIf="containsMinTenChar()"
                     >
                       <path
                         d="M13.8333 4.5L6.49996 11.8333L3.16663 8.5"
@@ -174,21 +227,25 @@
                         stroke-linecap="round"
                         stroke-linejoin="round"
                       />
-                    </svg> </span
-                  >} @if(!isMinTenChar){
-                  <fa-icon [icon]="ol" class="dot"></fa-icon>}
+                    </svg>
+                  </span>
+                  <fa-icon
+                    [icon]="ol"
+                    class="dot"
+                    *ngIf="!containsMinTenChar()"
+                  ></fa-icon>
                 </div>
                 <p>A minimum of 10 characters</p>
               </div>
               <div class="least-checker">
                 <div class="checker">
-                  @if(isMinOneNum){
                   <svg
                     width="17"
                     height="17"
                     viewBox="0 0 17 17"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
+                    *ngIf="containsNumeric()"
                   >
                     <path
                       d="M13.8333 4.5L6.49996 11.8333L3.16663 8.5"
@@ -198,8 +255,11 @@
                       stroke-linejoin="round"
                     />
                   </svg>
-                  } @if(!isMinOneNum){<fa-icon [icon]="ol" class="dot"></fa-icon
-                  >}
+                  <fa-icon
+                    [icon]="ol"
+                    class="dot"
+                    *ngIf="!containsNumeric()"
+                  ></fa-icon>
                 </div>
                 <p>At least 1 number</p>
               </div>
@@ -207,13 +267,13 @@
             <div class="checks-wrapper-2">
               <div class="lowercase-checker">
                 <div class="checker">
-                  @if(isMinOneLowercase){
                   <svg
                     width="17"
                     height="17"
                     viewBox="0 0 17 17"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
+                    *ngIf="containsLowerCase()"
                   >
                     <path
                       d="M13.8333 4.5L6.49996 11.8333L3.16663 8.5"
@@ -223,21 +283,24 @@
                       stroke-linejoin="round"
                     />
                   </svg>
-                  } @if(!isMinOneLowercase){
-                  <fa-icon [icon]="ol" class="dot"></fa-icon>
-                  }
+
+                  <fa-icon
+                    [icon]="ol"
+                    class="dot"
+                    *ngIf="!containsLowerCase()"
+                  ></fa-icon>
                 </div>
                 <p>At least 1 lowercase letter</p>
               </div>
               <div class="uppercase-checker">
                 <div class="checker">
-                  @if(isMinOneUppercase){
                   <svg
                     width="17"
                     height="17"
                     viewBox="0 0 17 17"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
+                    *ngIf="containsUpperCase()"
                   >
                     <path
                       d="M13.8333 4.5L6.49996 11.8333L3.16663 8.5"
@@ -247,9 +310,12 @@
                       stroke-linejoin="round"
                     />
                   </svg>
-                  } @if(!isMinOneUppercase){
-                  <fa-icon [icon]="ol" class="dot"></fa-icon>
-                  }
+
+                  <fa-icon
+                    [icon]="ol"
+                    class="dot"
+                    *ngIf="!containsUpperCase()"
+                  ></fa-icon>
                 </div>
                 <p>At least 1 uppercase letter</p>
               </div>
@@ -258,7 +324,7 @@
           <div class="button">
             <button
               class="btn btn-primary"
-              [disabled]="!passwordIsValid || !emailIsValid || !validCustomer"
+              [disabled]="!authCustomerForm.valid"
             >
               Continue
             </button>
@@ -413,7 +479,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </form>
     </div>
   </div>
 </div>

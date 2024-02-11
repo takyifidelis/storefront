@@ -14,7 +14,12 @@
     </div>
     <div class="col-6">
       <div class="frame-2">
-        <form class="login100-form">
+        <form
+          class="login100-form"
+          #loginUserForm="ngForm"
+          [formGroup]="loginForm"
+          (ngSubmit)="onSubmit(loginUserForm)"
+        >
           <div class="login-form">
             <div class="title">Storefront</div>
             <div class="welcome">
@@ -46,9 +51,20 @@
                     type="text"
                     id="email"
                     placeholder="felix.hagan@amalitech.com"
+                    formControlName="email"
+                    name="email"
                   />
                 </div>
               </div>
+              <span
+                class="help-block"
+                *ngIf="
+                  !loginForm.get('email')?.valid &&
+                  loginForm.get('email')?.touched
+                "
+              >
+                *This field is required
+              </span>
               <div class="password-wrapper">
                 <div class="password">
                   <label for="password">Password</label>
@@ -71,10 +87,24 @@
                       />
                     </svg>
                   </div>
-                  <input type="text" id="email" />
+                  <input
+                    type="text"
+                    id="password"
+                    formControlName="password"
+                    name="password"
+                  />
                 </div>
               </div>
             </div>
+            <span
+              class="help-block"
+              *ngIf="
+                !loginForm.get('password')?.valid &&
+                loginForm.get('password')?.touched
+              "
+            >
+              *This field is required
+            </span>
 
             <div class="forgotten-password">
               <p>
@@ -84,10 +114,15 @@
               </p>
             </div>
           </div>
+
+          <div class="button">
+            <span class="help-block" *ngIf="error">{{ error }}</span>
+
+            <button class="btn btn-primary" [disabled]="!loginUserForm.valid">
+              Continue
+            </button>
+          </div>
         </form>
-        <div class="button">
-          <button class="btn btn-primary">Continue</button>
-        </div>
         <div class="optional-input">
           <div class="row">
             <div class="col-5 horizontal-line"><hr /></div>
