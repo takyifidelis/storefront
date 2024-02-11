@@ -7,35 +7,51 @@
       id="navbarNavAltMarkup"
     >
       <div class="navbar-nav">
-        <a class="nav-link active" aria-current="page" href="#">Home</a>
+        <a class="nav-link" aria-current="page" href="#">Home</a>
         <a class="nav-link" href="#">About Us</a>
         <a class="nav-link" href="#">Contact Us</a>
-        <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">Shop</a>
+        <a class="nav-link" href="#">Shop</a>
+        <form class="d-flex justify-content-center align-items-center">
+          <fa-icon [icon]="searchIcon" style="color: #fff"></fa-icon>
+          <input
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+            class="search"
+          />
+        </form>
+        <button class="menu" mat-icon-button>
+          <mat-icon style="color: #fff">menu</mat-icon>
+        </button>
       </div>
-      <form class="d-flex">
-        <fa-icon [icon]="searchIcon" style="color: #fff"></fa-icon>
-        <input type="search" placeholder="Search" aria-label="Search" />
-      </form>
+      <div class="navbar-nav dropdown-content" id="dropdownMenu">
+        <a class="nav-link" href="#">Home</a>
+        <a class="nav-link" href="#">About Us</a>
+        <a class="nav-link" href="#">Contact Us</a>
+        <a class="nav-link" href="#">Shop</a>
+        <form class="d-flex justify-content-center align-items-center">
+          <fa-icon [icon]="searchIcon" style="color: #fff"></fa-icon>
+          <input
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+            class="search"
+          />
+        </form>
+      </div>
     </div>
-    <span class="navbar-text">
-      <div class="row">
-        <div class="col">
-          <fa-icon
-            [icon]="heartIcon"
-            style="font-size: 25px; color: #fff"
-          ></fa-icon>
-        </div>
-        <div class="col">
-          <img src="assets/icons/user.svg" alt="" />
-        </div>
-        <div class="col">
-          <img src="assets/icons/shoppin-cart.svg" alt="" />
-        </div>
-      </div>
-    </span>
+    <div class="navbar-icons d-flex justify-content-between align-items-center">
+      <fa-icon
+        [icon]="heartIcon"
+        class="nav-icons"
+        style="font-size: 25px; color: #fff"
+      ></fa-icon>
+      <img src="assets/icons/user.svg" alt="" class="nav-icons" />
+      <img src="assets/icons/shoppin-cart.svg" alt="" class="nav-icons" />
+    </div>
   </div>
 </nav>
-<app-home-ecommerce></app-home-ecommerce>
+<!-- <app-home-ecommerce></app-home-ecommerce>
 <footer class="add-bg">
   <div class="container">
     <div class="row">
@@ -88,4 +104,4 @@
       </div>
     </div>
   </div>
-</footer>
+</footer> -->
