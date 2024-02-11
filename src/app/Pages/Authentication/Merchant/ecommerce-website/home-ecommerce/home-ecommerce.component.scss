@@ -1,0 +1,176 @@
+.bg-image {
+  background: linear-gradient(
+      148deg,
+      rgba(255, 255, 255, 0.5) 54.97%,
+      rgba(255, 255, 255, 0) 109.02%
+    ),
+    url("/assets/images/shopping-image.jpeg"), lightgray 50% / cover no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 50rem;
+}
+
+h1 {
+  color: #1c222b;
+  -webkit-text-stroke-width: 2;
+  -webkit-text-stroke-color: #000;
+  font-family: Inter;
+  font-size: 72px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 90px;
+  letter-spacing: -2.3px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+p {
+  color: #1c222b;
+  text-align: center;
+  font-family: Inter;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 30px;
+  letter-spacing: -0.3px;
+}
+
+.frame-2 {
+  margin-bottom: 64px;
+
+  .image-container-1 {
+    width: 553px;
+    height: 500px;
+    flex-shrink: 0;
+  }
+
+  .image-container-2 {
+    width: 329px;
+    height: 500px;
+    flex-shrink: 0;
+  }
+  .image-container-3 {
+    width: 438px;
+    height: 242px;
+    flex-shrink: 0;
+
+    .image-3 {
+      width: 438px;
+      object-fit: contain;
+    }
+  }
+}
+
+.text {
+  flex-shrink: 0;
+  position: relative;
+
+  // .text-wrapper {
+  //   position: absolute;
+  //   bottom: 0;
+  //   background: rgba(255, 255, 255, 0.3);
+  //   backdrop-filter: blur(2px);
+  //   height: 63px;
+
+  //   p {
+  //     color: #1c222b;
+  //     text-align: center;
+  //     font-size: 18px;
+  //     font-style: normal;
+  //     font-weight: 700;
+  //     line-height: 30px;
+  //     letter-spacing: -0.3px;
+  //   }
+  // }
+}
+
+.promo {
+  background: #f2f2f2;
+  margin: 0;
+
+  .discount {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    h3 {
+      color: #1c222b;
+      text-align: center;
+      font-family: Inter;
+      font-size: 48px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 60px;
+      letter-spacing: -1.75px;
+    }
+
+    .sub-text p {
+      color: #1c222b;
+      text-align: center;
+      font-family: Inter;
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 32px;
+      letter-spacing: -0.3px;
+    }
+    .notice {
+      width: 175px;
+      height: 56px;
+      border: 3px solid black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      p {
+        color: #1c222b;
+        text-align: center;
+        font-family: Inter;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 30px;
+        letter-spacing: -0.3px;
+      }
+    }
+  }
+}
+
+.adjust {
+  width: 324px;
+}
+
+.checker {
+  display: flex;
+  gap: 0.2rem;
+  justify-content: center;
+  // border: 1px solid red;
+}
+
+.add-bg-color {
+  background: gray;
+  height: 100%;
+  padding-top: 20px;
+  padding-bottom: 20px;
+
+  h3 {
+    color: #fff;
+    font-family: Inter;
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 60px;
+    letter-spacing: -1.75px;
+  }
+
+  p {
+    color: #fff;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 28px;
+    letter-spacing: -0.3px;
+  }
+}
