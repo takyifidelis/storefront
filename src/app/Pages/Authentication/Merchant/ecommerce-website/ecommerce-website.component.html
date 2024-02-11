@@ -1,0 +1,91 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">SHOPNEST</a>
+
+    <div
+      class="collapse navbar-collapse d-flex justify-content-center"
+      id="navbarNavAltMarkup"
+    >
+      <div class="navbar-nav">
+        <a class="nav-link active" aria-current="page" href="#">Home</a>
+        <a class="nav-link" href="#">About us</a>
+        <a class="nav-link" href="#">Contact us</a>
+        <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">Shop</a>
+      </div>
+      <form class="d-flex">
+        <fa-icon [icon]="searchIcon" style="color: #fff"></fa-icon>
+        <input type="search" placeholder="Search" aria-label="Search" />
+      </form>
+    </div>
+    <span class="navbar-text">
+      <div class="row">
+        <div class="col">
+          <fa-icon
+            [icon]="heartIcon"
+            style="font-size: 25px; color: #fff"
+          ></fa-icon>
+        </div>
+        <div class="col">
+          <img src="assets/icons/user.svg" alt="" />
+        </div>
+        <div class="col">
+          <img src="assets/icons/shoppin-cart.svg" alt="" />
+        </div>
+      </div>
+    </span>
+  </div>
+</nav>
+<app-home-ecommerce></app-home-ecommerce>
+<footer class="add-bg">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <div class="title">
+          <p>SHOPNEST</p>
+        </div>
+      </div>
+      <div class="col">
+        <div class="title">
+          <p>FEATURES</p>
+        </div>
+        <div class="routes">
+          <a href="#">Men</a>
+          <a href="#">Women</a>
+          <a href="#">Shoes</a>
+          <a href="#">Accessories</a>
+        </div>
+      </div>
+      <div class="col">
+        <div class="title">
+          <p>MENU</p>
+        </div>
+        <div class="routes">
+          <a href="#">About us</a>
+          <a href="#">Contact us</a>
+          <a href="#">My Account</a>
+          <a href="#">Order History</a>
+          <a href="#">My wishlist</a>
+        </div>
+      </div>
+      <div class="col">
+        <div class="title">
+          <p>HELP</p>
+        </div>
+        <div class="routes">
+          <a href="#">Customer Service</a>
+          <a href="#">Size Guide</a>
+          <a href="#">Contact us</a>
+        </div>
+      </div>
+      <div class="col-auto">
+        <div class="title">
+          <p>PAYMENT & DELIVERY</p>
+        </div>
+        <div class="routes">
+          <a href="#">Purchase Items</a>
+          <a href="#">Guarantee</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

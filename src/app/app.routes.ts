@@ -15,11 +15,13 @@ import { MerchantReviewsComponent } from './Pages/Dashboard/Merchant/components/
 import { MerchantOrdersComponent } from './Pages/Dashboard/Merchant/components/merchant-orders/merchant-orders.component';
 import { MerchantCustomersComponent } from './Pages/Dashboard/Merchant/components/merchant-customers/merchant-customers.component';
 import { MerchantAnalyticsComponent } from './Pages/Dashboard/Merchant/components/merchant-analytics/merchant-analytics.component';
+import { EcommerceWebsiteComponent } from './Pages/Authentication/Merchant/ecommerce-website/ecommerce-website.component';
 import { PageCreatorComponent } from './Pages/Dashboard/Merchant/components/page-creator/page-creator.component';
 import { AuthComponent } from './Pages/Authentication/Auth/auth.component';
 
 export const routes: Routes = [
-  { path: '', component: LandingPageComponent },
+  // { path: '', component: LandingPageComponent },
+  {path: '', component: EcommerceWebsiteComponent},
   { path: 'login', component: LoginComponent },
   { path: 'forget-password', component: ForgottenPasswordComponent },
   { path: 'Sign-up-merchant', component: SignupMerchantComponent },
