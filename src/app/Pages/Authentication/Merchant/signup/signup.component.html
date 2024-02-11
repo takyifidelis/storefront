@@ -159,6 +159,15 @@
                 />
                 <fa-icon class="icon" [icon]="eyeIcon"></fa-icon>
               </div>
+              <span
+                class="help-block"
+                *ngIf="
+                  signupForm.hasError('passwordsNotMatching') &&
+                  signupForm.get('confirmPassword')?.touched &&
+                  signupForm.get('confirmPassword')?.dirty
+                "
+                >Password doesn't match</span
+              >
             </div>
             <span
               class="help-block"
@@ -181,6 +190,7 @@
                     viewBox="0 0 17 17"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
+                    *ngIf="containsMinTenChar()"
                   >
                     <path
                       d="M13.8333 4.5L6.49996 11.8333L3.16663 8.5"
@@ -190,7 +200,11 @@
                       stroke-linejoin="round"
                     />
                   </svg>
-                  <fa-icon [icon]="ol" class="dot"></fa-icon>
+                  <fa-icon
+                    [icon]="ol"
+                    class="dot"
+                    *ngIf="!containsMinTenChar()"
+                  ></fa-icon>
                 </div>
                 <p>A minimum of 10 characters</p>
               </div>
@@ -202,6 +216,7 @@
                     viewBox="0 0 17 17"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
+                    *ngIf="containsNumeric()"
                   >
                     <path
                       d="M13.8333 4.5L6.49996 11.8333L3.16663 8.5"
@@ -211,7 +226,11 @@
                       stroke-linejoin="round"
                     />
                   </svg>
-                  <fa-icon [icon]="ol" class="dot"></fa-icon>
+                  <fa-icon
+                    [icon]="ol"
+                    class="dot"
+                    *ngIf="!containsNumeric()"
+                  ></fa-icon>
                 </div>
                 <p>At least 1 number</p>
               </div>
@@ -225,6 +244,7 @@
                     viewBox="0 0 17 17"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
+                    *ngIf="containsLowerCase()"
                   >
                     <path
                       d="M13.8333 4.5L6.49996 11.8333L3.16663 8.5"
@@ -234,7 +254,11 @@
                       stroke-linejoin="round"
                     />
                   </svg>
-                  <fa-icon [icon]="ol" class="dot"></fa-icon>
+                  <fa-icon
+                    [icon]="ol"
+                    class="dot"
+                    *ngIf="!containsLowerCase()"
+                  ></fa-icon>
                 </div>
                 <p>At least 1 lowercase letter</p>
               </div>
@@ -246,6 +270,7 @@
                     viewBox="0 0 17 17"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
+                    *ngIf="containsUpperCase()"
                   >
                     <path
                       d="M13.8333 4.5L6.49996 11.8333L3.16663 8.5"
@@ -255,7 +280,11 @@
                       stroke-linejoin="round"
                     />
                   </svg>
-                  <fa-icon [icon]="ol" class="dot"></fa-icon>
+                  <fa-icon
+                    [icon]="ol"
+                    class="dot"
+                    *ngIf="!containsUpperCase()"
+                  ></fa-icon>
                 </div>
                 <p>At least 1 uppercase letter</p>
               </div>
