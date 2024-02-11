@@ -1,61 +1,63 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">SHOPNEST</a>
-
-    <div
-      class="collapse navbar-collapse d-flex justify-content-center"
-      id="navbarNavAltMarkup"
-    >
-      <div class="navbar-nav">
-        <a class="nav-link" aria-current="page" href="#">Home</a>
-        <a class="nav-link" href="#">About Us</a>
-        <a class="nav-link" href="#">Contact Us</a>
-        <a class="nav-link" href="#">Shop</a>
-        <form class="d-flex justify-content-center align-items-center">
-          <fa-icon [icon]="searchIcon" style="color: #fff"></fa-icon>
-          <input
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
-            class="search"
-          />
-        </form>
-      </div>
-      <button class="menu-btn" color="primary" mat-icon-button>
+<div class="main">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">SHOPNEST</a>
+      <button
+        class="menu-btn toggle-btn"
+        color="primary"
+        mat-icon-button
+        (click)="toggleBtnFunction()"
+      >
         <mat-icon>menu</mat-icon>
       </button>
-      <div class="navbar-nav dropdown-content" id="dropdownMenu">
-        <a class="nav-link" href="#">Home</a>
-        <a class="nav-link" href="#">About Us</a>
-        <a class="nav-link" href="#">Contact Us</a>
-        <a class="nav-link" href="#">Shop</a>
-        <form class="d-flex justify-content-center align-items-center">
-          <button class="search" color="primary" mat-icon-button>
-            <mat-icon>search</mat-icon>
-          </button>
-          <input
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
-            class="search"
-          />
-        </form>
+
+      <div
+        class="collapse navbar-collapse d-flex justify-content-center"
+        id="navbarNavAltMarkup"
+      >
+        <div class="navbar-nav nav-content">
+          <a class="nav-link" aria-current="page" href="#">Home</a>
+          <a class="nav-link" href="#">About Us</a>
+          <a class="nav-link" href="#">Contact Us</a>
+          <a class="nav-link" href="#">Shop</a>
+          <form class="d-flex justify-content-center align-items-center">
+            <fa-icon [icon]="searchIcon" style="color: #fff"></fa-icon>
+            <input
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+              class="search"
+            />
+          </form>
+        </div>
+
+        <div class="navbar-nav dropdown-content open" id="dropdownMenu">
+          <a class="nav-link" href="#">Home</a>
+          <a class="nav-link" href="#">About Us</a>
+          <a class="nav-link" href="#">Contact Us</a>
+          <a class="nav-link" href="#">Shop</a>
+          <a class="nav-link" href="#"
+            ><fa-icon [icon]="searchIcon" style="color: #fff"></fa-icon
+            >Search</a
+          >
+        </div>
+      </div>
+      <div
+        class="navbar-icons d-flex justify-content-between align-items-center"
+      >
+        <button class="heart nav-icons" color="primary" mat-icon-button>
+          <mat-icon>favorite_border</mat-icon>
+        </button>
+        <button class="person nav-icons" color="primary" mat-icon-button>
+          <mat-icon>person</mat-icon>
+        </button>
+        <button class="cart nav-icons" color="primary" mat-icon-button>
+          <mat-icon>shopping_cart</mat-icon>
+        </button>
       </div>
     </div>
-    <div class="navbar-icons d-flex justify-content-between align-items-center">
-      <button class="heart nav-icons" color="primary" mat-icon-button>
-        <mat-icon>favorite_border</mat-icon>
-      </button>
-      <button class="person nav-icons" color="primary" mat-icon-button>
-        <mat-icon>person</mat-icon>
-      </button>
-      <button class="cart nav-icons" color="primary" mat-icon-button>
-        <mat-icon>shopping_cart</mat-icon>
-      </button>
-    </div>
-  </div>
-</nav>
-<!-- <app-home-ecommerce></app-home-ecommerce>
+  </nav>
+  <!-- <app-home-ecommerce></app-home-ecommerce>
 <footer class="add-bg">
   <div class="container">
     <div class="row">
@@ -109,3 +111,4 @@
     </div>
   </div>
 </footer> -->
+</div>

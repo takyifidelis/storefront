@@ -22,4 +22,13 @@ export class EcommerceWebsiteComponent {
   heartIcon = faHeart;
   shoppingCartIcon = faShoppingCart;
   searchIcon = faSearch;
+
+  dropDownMenu: HTMLElement | null = null;
+
+  toggleBtnFunction() {
+    this.dropDownMenu = document.querySelector('#dropdownMenu');
+    if (this.dropDownMenu) {
+      this.dropDownMenu.classList.toggle('open');
+    }
+  }
 }
