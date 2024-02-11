@@ -20,17 +20,19 @@
             class="search"
           />
         </form>
-        <button class="menu" mat-icon-button>
-          <mat-icon style="color: #fff">menu</mat-icon>
-        </button>
       </div>
+      <button class="menu-btn" color="primary" mat-icon-button>
+        <mat-icon>menu</mat-icon>
+      </button>
       <div class="navbar-nav dropdown-content" id="dropdownMenu">
         <a class="nav-link" href="#">Home</a>
         <a class="nav-link" href="#">About Us</a>
         <a class="nav-link" href="#">Contact Us</a>
         <a class="nav-link" href="#">Shop</a>
         <form class="d-flex justify-content-center align-items-center">
-          <fa-icon [icon]="searchIcon" style="color: #fff"></fa-icon>
+          <button class="search" color="primary" mat-icon-button>
+            <mat-icon>search</mat-icon>
+          </button>
           <input
             type="search"
             placeholder="Search"
@@ -41,13 +43,15 @@
       </div>
     </div>
     <div class="navbar-icons d-flex justify-content-between align-items-center">
-      <fa-icon
-        [icon]="heartIcon"
-        class="nav-icons"
-        style="font-size: 25px; color: #fff"
-      ></fa-icon>
-      <img src="assets/icons/user.svg" alt="" class="nav-icons" />
-      <img src="assets/icons/shoppin-cart.svg" alt="" class="nav-icons" />
+      <button class="heart nav-icons" color="primary" mat-icon-button>
+        <mat-icon>favorite_border</mat-icon>
+      </button>
+      <button class="person nav-icons" color="primary" mat-icon-button>
+        <mat-icon>person</mat-icon>
+      </button>
+      <button class="cart nav-icons" color="primary" mat-icon-button>
+        <mat-icon>shopping_cart</mat-icon>
+      </button>
     </div>
   </div>
 </nav>

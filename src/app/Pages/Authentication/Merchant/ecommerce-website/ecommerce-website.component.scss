@@ -2,7 +2,7 @@ nav {
   padding-top: 2rem;
   padding-bottom: 2rem;
   .nav-icons {
-    margin-left: 2rem;
+    margin-left: 0.5rem;
   }
   .nav-link,
   input.search::placeholder {
@@ -15,7 +15,8 @@ nav {
     letter-spacing: -0.2px;
     margin: 0 0.5rem;
   }
-  .dropdown-content {
+  .dropdown-content,
+  .menu-btn {
     display: none;
   }
 }
@@ -84,3 +85,6 @@ form {
 //     width: 100%;
 //   }
 // }
+.mat-mdc-icon-button.mat-primary ::ng-deep {
+  --mdc-icon-button-icon-color: #fff;
+}
