@@ -1,4 +1,4 @@
-.sec{
+.sec {
   overflow: hidden;
 }
 .bg {
@@ -10,8 +10,11 @@
   overflow: hidden;
 }
 
-form::-webkit-scrollbar{
+form::-webkit-scrollbar {
   display: none;
+}
+.help-block {
+  color: red;
 }
 
 .frame-2 {
@@ -24,7 +27,7 @@ form::-webkit-scrollbar{
   overflow: hidden;
   height: 100vh;
 
-  .form{
+  .form {
     overflow-y: scroll;
   }
 
@@ -93,11 +96,10 @@ form::-webkit-scrollbar{
           letter-spacing: -0.2px;
           padding-left: 11px;
 
-          ::placeholder{
-            color:  #8897AE;
+          ::placeholder {
+            color: #8897ae;
           }
         }
-
       }
     }
     .last-name {
@@ -381,4 +383,3 @@ form::-webkit-scrollbar{
     }
   }
 }
-

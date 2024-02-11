@@ -1,15 +1,26 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faFacebook, faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { faEnvelope, faEyeSlash } from '@fortawesome/free-regular-svg-icons';
 import { faCircle } from '@fortawesome/free-solid-svg-icons';
+import {
+  FormGroup,
+  FormControl,
+  FormGroupDirective,
+  ReactiveFormsModule,
+  Validators,
+  ValidationErrors,
+  AbstractControl,
+} from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { AuthService } from '../../Auth/auth.service';
 
 @Component({
   selector: 'app-signup-merchant',
   standalone: true,
-  imports: [FontAwesomeModule, RouterModule, FormsModule],
+  imports: [FontAwesomeModule, RouterModule, ReactiveFormsModule, CommonModule],
+
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.scss',
 })
@@ -19,67 +30,96 @@ export class SignupMerchantComponent {
   googleIcon = faGoogle;
   facebookIcon = faFacebook;
   ol = faCircle;
-  // input fields
-  email: string = '';
-  password: string = '';
-  firstName: string = '';
-  businessName: string = '';
 
-  confirmPassword: string = '';
-  isValid: boolean = false;
-  isMinTenChar: boolean = false;
-  isMinOneNum: boolean = false;
-  emailIsValid: boolean = false;
-  isEmailValid: boolean = false;
-  passwordIsValid: boolean = false;
-  isMinOneUppercase: boolean = false;
-  isMinOneLowercase: boolean = false;
-  isBusinessNameValid: boolean = false;
-  isFirstNameValid: boolean = false;
-  validMerchant: boolean = false;
+  signupForm: FormGroup;
+  error: string | any = null;
 
-  validateBusiness() {}
-
-  validateMerchant() {
-    this.isFirstNameValid = /^.{3,}$/.test(this.firstName);
-    this.isBusinessNameValid = /^.{3,}$/.test(this.businessName);
-    if (this.isBusinessNameValid && this.isFirstNameValid) {
-      this.validMerchant = true;
-    } else {
-      this.validMerchant = false;
-    }
+  constructor(private authService: AuthService) {
+    this.signupForm = new FormGroup(
+      {
+        email: new FormControl('', [
+          Validators.required,
+          Validators.maxLength(128),
+          Validators.pattern(
+            /^[a-z0-9]+(?:\.[a-z0-9]+)*@[a-z0-9]+(?:\.[a-z0-9]+)+$/
+          ),
+        ]),
+        password: new FormControl('', [
+          Validators.required,
+          this.passwordValidator,
+        ]),
+        confirmPassword: new FormControl('', Validators.required),
+        businessName: new FormControl('', Validators.required),
+      },
+      { validators: this.confirmPasswordValidator }
+    );
   }
 
-  validatePassword() {
-    this.isMinTenChar = /[\w]{10,}/.test(this.password);
-    this.isMinOneNum = /[\d]/.test(this.password);
-    this.isMinOneUppercase = /[A-Z]/.test(this.password);
-    this.isMinOneLowercase = /[a-z]/.test(this.password);
+  onSubmit(form: FormGroupDirective) {
+    if (!form.valid) {
+      return;
+    }
+    const email = form.value.email;
+    const password = form.value.password;
 
-    if (
-      this.isMinTenChar &&
-      this.isMinOneLowercase &&
-      this.isMinOneNum &&
-      this.isMinOneUppercase
-    ) {
-      if (this.password === this.confirmPassword) {
-        this.passwordIsValid = true;
-      } else {
-        this.passwordIsValid = false;
+    this.authService.signup(email, password).subscribe(
+      (resData) => {
+        console.log(resData);
+      },
+      (errorMessage) => {
+        console.log(errorMessage);
+        this.error = errorMessage;
       }
-    } else {
-      this.passwordIsValid = false;
+    );
+    form.reset();
+  }
+  // Custom validator function for password strength and matching
+  passwordValidator(control: AbstractControl): ValidationErrors | null {
+    const value: string = control.value || '';
+    if (!value) {
+      return null; // Don't validate empty value
     }
+    const hasUpperCase = /[A-Z]+/.test(value);
+    const hasLowerCase = /[a-z]+/.test(value);
+    const hasNumeric = /\d+/.test(value);
+    const hasMinLength = value.length >= 10;
+    const valid = hasUpperCase && hasLowerCase && hasNumeric && hasMinLength;
+    return !valid ? { passwordStrength: true } : null;
+  }
+  // Custom validator function for matching passwords
+  confirmPasswordValidator(control: AbstractControl): ValidationErrors | null {
+    const password = control.get('password')?.value;
+    const confirmPassword = control.get('confirmPassword')?.value;
+    if (password !== confirmPassword) {
+      return { passwordsNotMatching: true };
+    }
+    return null;
   }
 
-  validateEmail() {
-    this.isEmailValid =
-      /^[a-z0-9]+(?:\.[a-z0-9]+)*@[a-z0-9]+(?:\.[a-z0-9]+)+$/.test(this.email);
-    if (this.isEmailValid) {
-      this.emailIsValid = true;
-      console.log('EMail works');
-    } else {
-      this.emailIsValid = false;
+  // Function to check various conditions of password
+  checkPasswordCondition(condition: RegExp): boolean {
+    const passwordControl = this.signupForm.get('password');
+    if (!passwordControl) {
+      return false;
     }
+    const password = passwordControl.value || '';
+    return condition.test(password);
+  }
+
+  // Usage
+  containsLowerCase(): boolean {
+    return this.checkPasswordCondition(/[a-z]+/);
+  }
+
+  containsUpperCase(): boolean {
+    return this.checkPasswordCondition(/[A-Z]+/);
+  }
+
+  containsNumeric(): boolean {
+    return this.checkPasswordCondition(/\d+/);
+  }
+
+  containsMinTenChar(): boolean {
+    return this.checkPasswordCondition(/^.{10,}$/);
   }
 }

@@ -16,6 +16,7 @@ import { MerchantOrdersComponent } from './Pages/Dashboard/Merchant/components/m
 import { MerchantCustomersComponent } from './Pages/Dashboard/Merchant/components/merchant-customers/merchant-customers.component';
 import { MerchantAnalyticsComponent } from './Pages/Dashboard/Merchant/components/merchant-analytics/merchant-analytics.component';
 import { PageCreatorComponent } from './Pages/Dashboard/Merchant/components/page-creator/page-creator.component';
+import { AuthComponent } from './Pages/Authentication/Auth/auth.component';
 
 export const routes: Routes = [
   { path: '', component: LandingPageComponent },
@@ -27,17 +28,19 @@ export const routes: Routes = [
   { path: 'reset-password', component: ResetPassowrdComponent },
   { path: 'template-editor', component: TemplateEditorComponent },
   { path: 'page-creator', component: PageCreatorComponent },
-  { path: 'merchant', component: MerchantDashboardComponent,
-    children:[
-      {path: '', component:HomeComponent},
-      {path: 'home', component:HomeComponent},
-      {path: 'product', component:MerchantProductsComponent},
-      {path: 'discount', component:MerchantDiscountComponent},
-      {path: 'reviews', component:MerchantReviewsComponent},
-      {path: 'order', component:MerchantOrdersComponent},
-      {path: 'customers', component:MerchantCustomersComponent},
-      {path: 'analytics', component:MerchantAnalyticsComponent},
-    ]
+  {
+    path: 'merchant',
+    component: MerchantDashboardComponent,
+    children: [
+      { path: '', component: HomeComponent },
+      { path: 'home', component: HomeComponent },
+      { path: 'product', component: MerchantProductsComponent },
+      { path: 'discount', component: MerchantDiscountComponent },
+      { path: 'reviews', component: MerchantReviewsComponent },
+      { path: 'order', component: MerchantOrdersComponent },
+      { path: 'customers', component: MerchantCustomersComponent },
+      { path: 'analytics', component: MerchantAnalyticsComponent },
+    ],
   },
   { path: '**', component: LandingPageComponent },
 ];
