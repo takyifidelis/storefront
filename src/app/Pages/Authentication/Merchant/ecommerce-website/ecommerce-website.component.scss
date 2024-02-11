@@ -1,14 +1,18 @@
-form{
+nav {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+form {
   gap: 4px;
-  
-    input{
-      font-size: 14px;
-      border: none;
-      outline: none;
-      background: #212529;
-      color: #fff;
-      }
+
+  input {
+    font-size: 14px;
+    border: none;
+    outline: none;
+    background: #212529;
+    color: #fff;
   }
+}
 
 .add-bg {
   background: #000;
@@ -45,8 +49,7 @@ form{
   }
 }
 
-
-@media only screen and (max-width: 390px) {
+@media only screen and (max-width: 990px) {
   h1 {
     color: #1c222b;
     text-align: center;
@@ -64,4 +67,3 @@ form{
     width: 100%;
   }
 }
-

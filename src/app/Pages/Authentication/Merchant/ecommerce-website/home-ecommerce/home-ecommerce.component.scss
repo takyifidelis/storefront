@@ -1,13 +1,45 @@
-.bg-image {
-  background: linear-gradient(
-      148deg,
-      rgba(255, 255, 255, 0.5) 54.97%,
-      rgba(255, 255, 255, 0) 109.02%
-    ),
-    url("/assets/images/shopping-image.jpeg"), lightgray 50% / cover no-repeat;
-  background-size: cover;
-  width: 100%;
-  height: 50rem;
+section.level-up {
+  text-align: center;
+
+  button {
+    font-family: Inter;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 30px; /* 166.667% */
+    letter-spacing: -0.3px;
+    color: #1c222b;
+
+    background-color: transparent; /* Transparent background */
+    border: 1px solid #1c222b;
+    border-radius: 0;
+  }
+  .bg-image {
+    background: linear-gradient(
+        148deg,
+        rgba(255, 255, 255, 0.5) 54.97%,
+        rgba(255, 255, 255, 0) 109.02%
+      ),
+      url("/assets/images/shopping-image.jpeg"), lightgray 50% / cover no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 50rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    h1.home-header {
+      color: #1c222b;
+      font-family: Inter;
+      font-size: 72px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 90px;
+      letter-spacing: -2.3px;
+      text-transform: uppercase;
+      width: 80%;
+    }
+  }
 }
 
 h1 {
@@ -64,24 +96,6 @@ p {
 .text {
   flex-shrink: 0;
   position: relative;
-
-  // .text-wrapper {
-  //   position: absolute;
-  //   bottom: 0;
-  //   background: rgba(255, 255, 255, 0.3);
-  //   backdrop-filter: blur(2px);
-  //   height: 63px;
-
-  //   p {
-  //     color: #1c222b;
-  //     text-align: center;
-  //     font-size: 18px;
-  //     font-style: normal;
-  //     font-weight: 700;
-  //     line-height: 30px;
-  //     letter-spacing: -0.3px;
-  //   }
-  // }
 }
 
 .promo {
