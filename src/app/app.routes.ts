@@ -28,8 +28,12 @@ export const routes: Routes = [
   { path: 'Sign-up-customer', component: SignupCustomerComponent },
   { path: 'email-token-verification', component: TokenAuthComponent },
   { path: 'reset-password', component: ResetPassowrdComponent },
-  { path: 'template-editor', component: TemplateEditorComponent },
   { path: 'page-creator', component: PageCreatorComponent },
+  { path: 'template-editor', component: TemplateEditorComponent, children: [
+    { path: '', component: EcommerceWebsiteComponent },
+  ]
+
+  },
   {
     path: 'merchant',
     component: MerchantDashboardComponent,
