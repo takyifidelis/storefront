@@ -88,7 +88,6 @@ form {
       display: block;
     }
     .dropdown-content {
-      display: block;
       position: absolute;
       right: 0rem;
       top: 4rem;
@@ -97,6 +96,7 @@ form {
       visibility: hidden;
     }
     .dropdown-content.open {
+      display: block;
       visibility: visible;
       transition: height 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
