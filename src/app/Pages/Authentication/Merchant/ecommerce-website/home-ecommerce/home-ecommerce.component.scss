@@ -115,22 +115,88 @@ section.categories {
     }
   }
 }
-
 section.featured-items {
-  div.duties-taxes-div {
-    padding: 2rem 5rem;
-    background-color: #f9fafb;
-
-    p.duties-taxes-paragraph {
-      color: #000;
+  margin: 5rem 0;
+  text-align: center;
+  .featured-items-header {
+    color: #000;
+    font-family: Inter;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 36px;
+    letter-spacing: -0.5px;
+  }
+  .card {
+    text-align: left;
+    margin-top: 2rem;
+  }
+  div.card {
+    border: 0;
+    .card-body {
+      padding: 0;
+    }
+    .card-title {
+      color: #1c222b;
+      font-family: Inter;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 28px;
+      letter-spacing: -0.3px;
+      margin: 0;
+    }
+    .blossom-bag-paragraph {
+      color: #1c222b;
       font-family: Inter;
       font-size: 14px;
       font-style: normal;
       font-weight: 400;
       line-height: 24px;
       letter-spacing: -0.2px;
-      span.check {
-        margin-right: 1rem;
+    }
+
+    .product-price {
+      color: #1c222b;
+      font-family: Inter;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 28px;
+      letter-spacing: -0.3px;
+      margin-bottom: 1rem;
+    }
+    div.ratings {
+      margin-bottom: 1rem;
+      .ratings-43 {
+        color: #1c222b;
+        font-family: Inter;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 24px;
+        letter-spacing: -0.2px;
+        margin-left: 2.5rem;
+      }
+    }
+    div.product-color-div {
+      div.product-color {
+        width: 17px;
+        height: 17px;
+        margin-right: 0.5rem;
+        margin-bottom: 1rem;
+      }
+      .blue {
+        background-color: #1b4dff;
+      }
+      div.yellow {
+        background-color: #ffd027;
+      }
+      div.voilet {
+        background-color: #8f0ea2;
+      }
+      div.red {
+        background-color: #e92215;
       }
     }
   }
@@ -169,10 +235,8 @@ section.featured-items {
       }
     }
   }
-  section div.duties-taxes-div {
-    flex-direction: column;
-    p.duties-taxes-paragraph {
-      margin-bottom: 4rem;
-    }
+  .card {
+    display: block;
+    margin: 0 auto;
   }
 }
