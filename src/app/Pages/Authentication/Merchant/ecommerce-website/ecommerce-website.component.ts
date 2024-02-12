@@ -5,6 +5,7 @@ import { faSearch, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { HomeEcommerceComponent } from './home-ecommerce/home-ecommerce.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { AboutUsComponent } from './about-us/about-us.component';
 
 @Component({
   selector: 'app-ecommerce-website',
@@ -14,6 +15,7 @@ import { MatButtonModule } from '@angular/material/button';
     FontAwesomeModule,
     HomeEcommerceComponent,
     MatIconModule,
+    AboutUsComponent,
   ],
   templateUrl: './ecommerce-website.component.html',
   styleUrl: './ecommerce-website.component.scss',
