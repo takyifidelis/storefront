@@ -1,0 +1,141 @@
+<section class="h-100">
+  <mat-drawer-container class="example-container h-100">
+    <mat-drawer mode="side" opened="true">
+      <div>
+        <img src="/assets/images/sidebar-red-shoe-1.png" alt="" />
+      </div>
+      <div>
+        <img src="/assets/images/sidebar-red-shoe-2.png" alt="" />
+      </div>
+      <div>
+        <img src="/assets/images/sidebar-red-shoe-3.png" alt="" />
+      </div>
+      <div>
+        <img src="/assets/images/sidebar-red-shoe-4.png" alt="" />
+      </div>
+    </mat-drawer>
+    <mat-drawer-content>
+      <div class="row">
+        <div class="col img-item-preview">
+          <img src="/assets/images/main-red-shoe-image.png" alt="" />
+        </div>
+        <div class="col" style="margin-top: -15px">
+          <div class="container">
+            <div class="row top">
+              <div class="col">
+                <p class="txt">Home / Women’s Shoe / All Stars</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <h4 class="item-name">Converse All Stars</h4>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col d-inline-flex">
+                <div class="item-rating d-flex">
+                  <div class="starIcon">
+                    <img
+                      src="/assets/icons/green-star.svg"
+                      alt=""
+                      style="width: 24px; height: 24px"
+                    />
+                    <img
+                      src="/assets/icons/green-star.svg"
+                      alt=""
+                      style="width: 24px; height: 24px"
+                    />
+                    <img
+                      src="/assets/icons/green-star.svg"
+                      alt=""
+                      style="width: 24px; height: 24px"
+                    />
+                    <img
+                      src="/assets/icons/green-star.svg"
+                      alt=""
+                      style="width: 24px; height: 24px"
+                    />
+                    <img
+                      src="/assets/icons/star.svg"
+                      alt=""
+                      style="width: 24px; height: 24px"
+                    />
+                  </div>
+                  <p class="txt-2 m-0">4.0 Ratings</p>
+                </div>
+                <div class="items-available d-flex align-items-center">
+                  <p class="txt-2 m-0">10 Available</p>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col d-flex">
+                <div class="select-color">
+                  <p>SELECT COLOR</p>
+                </div>
+                <div class="color d-flex gap">
+                  <div class="box" style="background-color: #1b4dff"></div>
+                  <div class="box" style="background-color: #ffd027"></div>
+                  <div class="box" style="background-color: #8f0ea2"></div>
+                  <div class="box" style="background-color: #e92215"></div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col d-flex">
+                <div class="select-size">
+                  <p>SELECT SIZE</p>
+                </div>
+                <div class="size-guide txt-2">
+                  <a href="#">size guide</a>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col d-flex">
+                <div class="size one">XS</div>
+                <div class="size">S</div>
+                <div class="size">L</div>
+                <div class="size">XL</div>
+                <div class="size">XXL</div>
+                <div class="size">XXXL</div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <div class="row">
+                  <div class="col-2 select-color">
+                    <p for="quantity">QUANTITY</p>
+                  </div>
+                  <div class="col-10 select-color">
+                    <label for="price">PRICE</label>
+                  </div>
+                </div>
+                <div class="row margin">
+                  <div class="col-auto wrapper">
+                    <div class="minus" (click)="decreaseQuantity()">-</div>
+                    <div class="num">{{ quantity }}</div>
+                    <div class="plus" (click)="increaseQuantity()">+</div>
+                  </div>
+                  <div class="col-8">
+                    <h3 class="amount">90,00 EUR</h3>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row" style="width: 582px">
+              <div class="col-5">
+                <button class="button bg-add-to-buy">Add to buy</button>
+              </div>
+              <div class="col-7">
+                <button class="button bg-save">
+                  <fa-icon [icon]="heartIcon"></fa-icon>Save
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-drawer-content>
+  </mat-drawer-container>
+</section>
