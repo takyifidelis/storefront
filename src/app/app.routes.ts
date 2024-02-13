@@ -21,9 +21,10 @@ import { AuthComponent } from './Pages/Authentication/Auth/auth.component';
 import { HomeEcommerceComponent } from './Pages/Authentication/Merchant/ecommerce-website/home-ecommerce/home-ecommerce.component';
 import { AboutUsComponent } from './Pages/Authentication/Merchant/ecommerce-website/about-us/about-us.component';
 import { ContactUsComponent } from './Pages/Authentication/Merchant/ecommerce-website/contact-us/contact-us.component';
+import { ReviewComponent } from './Pages/Authentication/Merchant/ecommerce-website/review/review.component';
 
 export const routes: Routes = [
-  { path: '', component: LandingPageComponent },
+  { path: '', component: ReviewComponent },
   // { path: '', component: EcommerceWebsiteComponent },
   { path: 'login', component: LoginComponent },
   { path: 'forget-password', component: ForgottenPasswordComponent },

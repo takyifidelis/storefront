@@ -8,29 +8,37 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faHeart, faStar } from '@fortawesome/free-solid-svg-icons';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @Component({
   selector: 'app-review',
   standalone: true,
-  imports: [RouterModule,
-    MatProgressBarModule, MatCardModule, MatButtonModule,
-    MatIconModule, MatSidenavModule,MatMenuModule, FontAwesomeModule],
+  imports: [
+    RouterModule,
+    MatProgressBarModule,
+    MatCardModule,
+    MatButtonModule,
+    MatIconModule,
+    MatSidenavModule,
+    MatMenuModule,
+    FontAwesomeModule,
+    MatTabsModule,
+  ],
   templateUrl: './review.component.html',
-  styleUrl: './review.component.scss'
+  styleUrl: './review.component.scss',
 })
 export class ReviewComponent {
   heartIcon = faHeart;
   starIcon = faStar;
-    quantity = 1;
-  
-  
-    increaseQuantity(): void {
-      this.quantity++;
+  quantity = 1;
+
+  increaseQuantity(): void {
+    this.quantity++;
+  }
+
+  decreaseQuantity(): void {
+    if (this.quantity > 1) {
+      this.quantity--;
     }
-  
-    decreaseQuantity(): void{
-      if (this.quantity > 1) {
-        this.quantity--;
-      }
-    }
+  }
 }
