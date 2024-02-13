@@ -1,400 +1,402 @@
-<nav class="navbar navbar-expand-lg">
-  <div class="container-fluid">
-    <a class="navbar-brand storefront-logo" href="#">Storefront</a>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarScroll"
-      aria-controls="navbarScroll"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarScroll">
-      <ul
-        class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll"
-        style="--bs-scroll-height: 100px"
+<div class="container-fluid">
+  <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+      <a class="navbar-brand storefront-logo" href="#">Storefront</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarScroll"
+        aria-controls="navbarScroll"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
       >
-        <li class="nav-item">
-          <a class="nav-link active nav-text" aria-current="page" href="#"
-            >Home
-          </a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link nav-text" href="#about">About</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link nav-text" href="#testimonials">Testimonials</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link nav-text" href="#teams">Teams</a>
-        </li>
-      </ul>
-      <div class="d-flex">
-        <a
-          class="nav-link nav-text btn log-in-btn"
-          href="#"
-          [routerLink]="['/login']"
-          >Log In</a
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarScroll">
+        <ul
+          class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll"
+          style="--bs-scroll-height: 100px"
         >
+          <li class="nav-item">
+            <a class="nav-link active nav-text" aria-current="page" href="#"
+              >Home
+            </a>
+          </li>
 
-        <button
-          class="btn get-started-btn"
-          type="submit"
-          [routerLink]="['/Sign-up-merchant']"
-        >
-          Get Started
-        </button>
+          <li class="nav-item">
+            <a class="nav-link nav-text" href="#about">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-text" href="#testimonials">Testimonials</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-text" href="#teams">Teams</a>
+          </li>
+        </ul>
+        <div class="d-flex">
+          <a
+            class="nav-link nav-text btn log-in-btn"
+            href="#"
+            [routerLink]="['/login']"
+            >Log In</a
+          >
+
+          <button
+            class="btn get-started-btn"
+            type="submit"
+            [routerLink]="['/Sign-up-merchant']"
+          >
+            Get Started
+          </button>
+        </div>
       </div>
     </div>
-  </div>
-</nav>
-<section id="home" class="hero-container row">
-  <article class="col-6">
-    <div class="hero-description">
-      <h2 class="home-header">Create Your Website Simply and Stylishly</h2>
-      <p class="home-paragraph">
-        Storefront is the website builder that simplifies your online presence.
-        With our easy-to-use templates, you can create a stunning website and
-        take control of your finances, all form one place
-      </p>
-      <div class="home-btns">
-        <button class="btn start-your-store">Start your new store</button>
-        <button class="btn customize-and-extend">
-          Customize and Extend
-          <img
-            src="../../../../assets/icons/extend-arrow.svg"
-            alt=""
-            class="customize-arrow"
-          />
-        </button>
+  </nav>
+  <section id="home" class="hero-container row">
+    <article class="col-6">
+      <div class="hero-description">
+        <h2 class="home-header">Create Your Website Simply and Stylishly</h2>
+        <p class="home-paragraph">
+          Storefront is the website builder that simplifies your online
+          presence. With our easy-to-use templates, you can create a stunning
+          website and take control of your finances, all form one place
+        </p>
+        <div class="home-btns">
+          <button class="btn start-your-store">Start your new store</button>
+          <button class="btn customize-and-extend">
+            Customize and Extend
+            <img
+              src="../../../../assets/icons/extend-arrow.svg"
+              alt=""
+              class="customize-arrow"
+            />
+          </button>
+        </div>
       </div>
+    </article>
+    <div class="home-image-div col-6">
+      <img
+        src="../../../../assets/images/hero-image.png"
+        alt="home-image"
+        class="home-image"
+      />
     </div>
-  </article>
-  <div class="home-image-div col-6">
-    <img
-      src="../../../../assets/images/hero-image.png"
-      alt="home-image"
-      class="home-image"
-    />
-  </div>
-</section>
-<section id="about" class="row">
-  <div class="about-container d-flex justify-content-between">
-    <div class="about-images col-6">
-      <!-- <img
+  </section>
+  <section id="about" class="row">
+    <div class="about-container d-flex justify-content-between">
+      <div class="about-images col-6">
+        <!-- <img
           src="../../../../assets/images/plus-signs-about-image.svg"
           alt=""
         
         /> -->
 
-      <img src="../../../../assets/images/about-image.svg" alt="" />
+        <img src="../../../../assets/images/about-image.svg" alt="" />
+      </div>
+      <article class="about-article col-6">
+        <h3 class="article-header">
+          Empowering small business with powerful website solutions
+        </h3>
+        <p class="article-paragraph">
+          Storefront is the website builder that simplifies your online
+          presence. With our easy-to-use templates, you can create a stunning
+          website and take control of your finances, all form one place
+        </p>
+      </article>
     </div>
-    <article class="about-article col-6">
-      <h3 class="article-header">
-        Empowering small business with powerful website solutions
-      </h3>
-      <p class="article-paragraph">
-        Storefront is the website builder that simplifies your online presence.
-        With our easy-to-use templates, you can create a stunning website and
-        take control of your finances, all form one place
-      </p>
-    </article>
-  </div>
-</section>
-<section id="agencies">
-  <img
-    src="../../../../assets/images/agencies-section.PNG"
-    alt=""
-    class="agencies-image"
-  />
-</section>
-<section id="testimonials" class="clientsSaying">
-  <h1 class="testimonials-header">What Clients Are Saying About Us</h1>
-  <div class="card-container row">
-    <div class="col">
-      <button class="arrow-right arrow" mat-icon-button>
-        <mat-icon>arrow_back_ios_new</mat-icon>
-      </button>
-    </div>
-    <!-- first testimonial -->
-    <div class="card col-3">
-      <div class="cards">
-        <div class="row card-inner">
-          <div class="testimonials-info row">
-            <img
-              src="../../../../assets/images/testimonials-image.png"
-              alt="evelyn-image"
-              class="col-6 evelyn-image"
-            />
-            <div class="card-evelyn col">
-              <h5 class="evelyn-name">Evelyn Kay</h5>
-              <p class="evelyn-position">CEO Spotify</p>
-              <div class="starRating row">
-                <div class="col d-flex">
-                  <img
-                    src="../../../../assets/icons/star-ratings.svg"
-                    alt="star"
-                  />
-                  <img
-                    src="../../../../assets/icons/star-ratings.svg"
-                    alt="star"
-                  />
-                  <img
-                    src="../../../../assets/icons/star-ratings.svg"
-                    alt="star"
-                  />
-                  <img
-                    src="../../../../assets/icons/star-ratings.svg"
-                    alt="star"
-                  />
-                  <img
-                    src="../../../../assets/icons/star-ratings.svg"
-                    alt="star"
-                  />
+  </section>
+  <section id="agencies">
+    <img
+      src="../../../../assets/images/agencies-section.PNG"
+      alt=""
+      class="agencies-image"
+    />
+  </section>
+  <section id="testimonials" class="clientsSaying">
+    <h1 class="testimonials-header">What Clients Are Saying About Us</h1>
+    <div class="card-container row">
+      <div class="col">
+        <button class="arrow-right arrow" mat-icon-button>
+          <mat-icon>arrow_back_ios_new</mat-icon>
+        </button>
+      </div>
+      <!-- first testimonial -->
+      <div class="card col-3">
+        <div class="cards">
+          <div class="row card-inner">
+            <div class="testimonials-info row">
+              <img
+                src="../../../../assets/images/testimonials-image.png"
+                alt="evelyn-image"
+                class="col-6 evelyn-image"
+              />
+              <div class="card-evelyn col">
+                <h5 class="evelyn-name">Evelyn Kay</h5>
+                <p class="evelyn-position">CEO Spotify</p>
+                <div class="starRating row">
+                  <div class="col d-flex">
+                    <img
+                      src="../../../../assets/icons/star-ratings.svg"
+                      alt="star"
+                    />
+                    <img
+                      src="../../../../assets/icons/star-ratings.svg"
+                      alt="star"
+                    />
+                    <img
+                      src="../../../../assets/icons/star-ratings.svg"
+                      alt="star"
+                    />
+                    <img
+                      src="../../../../assets/icons/star-ratings.svg"
+                      alt="star"
+                    />
+                    <img
+                      src="../../../../assets/icons/star-ratings.svg"
+                      alt="star"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="row">
-            <p class="col testimonials-paragraph">
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s
-            </p>
+            <div class="row">
+              <p class="col testimonials-paragraph">
+                Lorem Ipsum is simply dummy text of the printing and typesetting
+                industry. Lorem Ipsum has been the industry's standard dummy
+                text ever since the 1500s
+              </p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <!-- second testimonial -->
-    <div class="card col-3">
-      <div class="cards">
-        <div class="row card-inner">
-          <div class="testimonials-info row">
-            <img
-              src="../../../../assets/images/testimonials-image.png"
-              alt="evelyn-image"
-              class="col-6 evelyn-image"
-            />
-            <div class="card-evelyn col">
-              <h5 class="evelyn-name">Evelyn Kay</h5>
-              <p class="evelyn-position">CEO Spotify</p>
-              <div class="starRating row">
-                <div class="col d-flex">
-                  <img
-                    src="../../../../assets/icons/star-ratings.svg"
-                    alt="star"
-                  />
-                  <img
-                    src="../../../../assets/icons/star-ratings.svg"
-                    alt="star"
-                  />
-                  <img
-                    src="../../../../assets/icons/star-ratings.svg"
-                    alt="star"
-                  />
-                  <img
-                    src="../../../../assets/icons/star-ratings.svg"
-                    alt="star"
-                  />
-                  <img
-                    src="../../../../assets/icons/star-ratings.svg"
-                    alt="star"
-                  />
+      <!-- second testimonial -->
+      <div class="card col-3">
+        <div class="cards">
+          <div class="row card-inner">
+            <div class="testimonials-info row">
+              <img
+                src="../../../../assets/images/testimonials-image.png"
+                alt="evelyn-image"
+                class="col-6 evelyn-image"
+              />
+              <div class="card-evelyn col">
+                <h5 class="evelyn-name">Evelyn Kay</h5>
+                <p class="evelyn-position">CEO Spotify</p>
+                <div class="starRating row">
+                  <div class="col d-flex">
+                    <img
+                      src="../../../../assets/icons/star-ratings.svg"
+                      alt="star"
+                    />
+                    <img
+                      src="../../../../assets/icons/star-ratings.svg"
+                      alt="star"
+                    />
+                    <img
+                      src="../../../../assets/icons/star-ratings.svg"
+                      alt="star"
+                    />
+                    <img
+                      src="../../../../assets/icons/star-ratings.svg"
+                      alt="star"
+                    />
+                    <img
+                      src="../../../../assets/icons/star-ratings.svg"
+                      alt="star"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="row">
-            <p class="col testimonials-paragraph">
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s
-            </p>
+            <div class="row">
+              <p class="col testimonials-paragraph">
+                Lorem Ipsum is simply dummy text of the printing and typesetting
+                industry. Lorem Ipsum has been the industry's standard dummy
+                text ever since the 1500s
+              </p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <!-- first testimonial -->
-    <div class="card col-3">
-      <div class="cards">
-        <div class="row card-inner">
-          <div class="testimonials-info row">
-            <img
-              src="../../../../assets/images/testimonials-image.png"
-              alt="evelyn-image"
-              class="col-6 evelyn-image"
-            />
-            <div class="card-evelyn col">
-              <h5 class="evelyn-name">Evelyn Kay</h5>
-              <p class="evelyn-position">CEO Spotify</p>
-              <div class="starRating row">
-                <div class="col d-flex">
-                  <img
-                    src="../../../../assets/icons/star-ratings.svg"
-                    alt="star"
-                  />
-                  <img
-                    src="../../../../assets/icons/star-ratings.svg"
-                    alt="star"
-                  />
-                  <img
-                    src="../../../../assets/icons/star-ratings.svg"
-                    alt="star"
-                  />
-                  <img
-                    src="../../../../assets/icons/star-ratings.svg"
-                    alt="star"
-                  />
-                  <img
-                    src="../../../../assets/icons/star-ratings.svg"
-                    alt="star"
-                  />
+      <!-- first testimonial -->
+      <div class="card col-3">
+        <div class="cards">
+          <div class="row card-inner">
+            <div class="testimonials-info row">
+              <img
+                src="../../../../assets/images/testimonials-image.png"
+                alt="evelyn-image"
+                class="col-6 evelyn-image"
+              />
+              <div class="card-evelyn col">
+                <h5 class="evelyn-name">Evelyn Kay</h5>
+                <p class="evelyn-position">CEO Spotify</p>
+                <div class="starRating row">
+                  <div class="col d-flex">
+                    <img
+                      src="../../../../assets/icons/star-ratings.svg"
+                      alt="star"
+                    />
+                    <img
+                      src="../../../../assets/icons/star-ratings.svg"
+                      alt="star"
+                    />
+                    <img
+                      src="../../../../assets/icons/star-ratings.svg"
+                      alt="star"
+                    />
+                    <img
+                      src="../../../../assets/icons/star-ratings.svg"
+                      alt="star"
+                    />
+                    <img
+                      src="../../../../assets/icons/star-ratings.svg"
+                      alt="star"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="row">
-            <p class="col testimonials-paragraph">
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s
-            </p>
+            <div class="row">
+              <p class="col testimonials-paragraph">
+                Lorem Ipsum is simply dummy text of the printing and typesetting
+                industry. Lorem Ipsum has been the industry's standard dummy
+                text ever since the 1500s
+              </p>
+            </div>
           </div>
         </div>
       </div>
+      <div class="col">
+        <button class="arrow-right arrow" mat-icon-button>
+          <mat-icon>arrow_forward_ios_new</mat-icon>
+        </button>
+      </div>
     </div>
-    <div class="col">
-      <button class="arrow-right arrow" mat-icon-button>
-        <mat-icon>arrow_forward_ios_new</mat-icon>
-      </button>
-    </div>
-  </div>
-</section>
-<section id="teams" class="">
-  <div class="team-container">
-    <h2 class="team-heading h2">Meet Our Talented Team</h2>
+  </section>
+  <section id="teams" class="">
+    <div class="team-container">
+      <h2 class="team-heading h2">Meet Our Talented Team</h2>
 
-    <div class="teams-div row">
+      <div class="teams-div row">
+        <div class="col-3">
+          <img
+            src="../../../../assets/images/team-image1.svg"
+            alt=""
+            class="team-image"
+          />
+          <p class="team-name">Steve Evans</p>
+          <p class="team-role">CEO</p>
+        </div>
+
+        <div class="col-3">
+          <img
+            src="../../../../assets/images/team-image2.svg"
+            alt=""
+            class="team-image"
+          />
+          <p class="team-name">Padma Patil</p>
+          <p class="team-role">Head of HR</p>
+        </div>
+
+        <div class="col-3">
+          <img
+            src="../../../../assets/images/team-image3.svg"
+            alt=""
+            class="team-image"
+          />
+          <p class="team-name">Alisia Spinnet</p>
+          <p class="team-role">PR Manager</p>
+        </div>
+
+        <div class="col-3">
+          <img
+            src="../../../../assets/images/team-image4.svg"
+            alt=""
+            class="team-image"
+          />
+          <p class="team-name">Dean Thomas</p>
+          <p class="team-role">Java Developer</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer starts from the below -->
+  <footer>
+    <div class="row footer-container">
       <div class="col-3">
-        <img
-          src="../../../../assets/images/team-image1.svg"
-          alt=""
-          class="team-image"
-        />
-        <p class="team-name">Steve Evans</p>
-        <p class="team-role">CEO</p>
+        <h4 class="footer-heading">Get In Touch</h4>
+        <div class="media">
+          <img
+            src="../../../../assets/icons/facebook.svg"
+            alt="facebook"
+            class="social-media"
+          />
+          <img
+            src="../../../../assets/icons/instagram.svg"
+            alt="instagram"
+            class="social-media"
+          />
+          <img
+            src="../../../../assets/icons/twitter.svg"
+            alt="twitter"
+            class="social-media"
+          />
+        </div>
       </div>
-
       <div class="col-3">
-        <img
-          src="../../../../assets/images/team-image2.svg"
-          alt=""
-          class="team-image"
-        />
-        <p class="team-name">Padma Patil</p>
-        <p class="team-role">Head of HR</p>
+        <h4 class="">Company Info</h4>
+        <ul>
+          <li>
+            <a href="#">About us</a>
+          </li>
+          <li>
+            <a href="#">Carrier</a>
+          </li>
+          <li>
+            <a href="#">We are hiring</a>
+          </li>
+          <li>
+            <a href="#">Blog</a>
+          </li>
+        </ul>
       </div>
-
       <div class="col-3">
-        <img
-          src="../../../../assets/images/team-image3.svg"
-          alt=""
-          class="team-image"
-        />
-        <p class="team-name">Alisia Spinnet</p>
-        <p class="team-role">PR Manager</p>
+        <h4 class="">Features</h4>
+        <ul>
+          <li>
+            <a href="#">Business Marketing</a>
+          </li>
+          <li>
+            <a href="#">User Analytic</a>
+          </li>
+          <li>
+            <a href="#">Live Chat</a>
+          </li>
+          <li>
+            <a href="#">Unlimited Support</a>
+          </li>
+        </ul>
       </div>
-
       <div class="col-3">
-        <img
-          src="../../../../assets/images/team-image4.svg"
-          alt=""
-          class="team-image"
-        />
-        <p class="team-name">Dean Thomas</p>
-        <p class="team-role">Java Developer</p>
+        <h4 class="">Resources</h4>
+        <ul>
+          <li>
+            <a href="#">IOS & Android</a>
+          </li>
+          <li>
+            <a href="#">Watch a Demo</a>
+          </li>
+          <li>
+            <a href="#">Customers</a>
+          </li>
+          <li>
+            <a href="#">API</a>
+          </li>
+        </ul>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- Footer starts from the below -->
-<footer>
-  <div class="row footer-container">
-    <div class="col-3">
-      <h4 class="footer-heading">Get In Touch</h4>
-      <div class="media">
-        <img
-          src="../../../../assets/icons/facebook.svg"
-          alt="facebook"
-          class="social-media"
-        />
-        <img
-          src="../../../../assets/icons/instagram.svg"
-          alt="instagram"
-          class="social-media"
-        />
-        <img
-          src="../../../../assets/icons/twitter.svg"
-          alt="twitter"
-          class="social-media"
-        />
-      </div>
-    </div>
-    <div class="col-3">
-      <h4 class="">Company Info</h4>
-      <ul>
-        <li>
-          <a href="#">About us</a>
-        </li>
-        <li>
-          <a href="#">Carrier</a>
-        </li>
-        <li>
-          <a href="#">We are hiring</a>
-        </li>
-        <li>
-          <a href="#">Blog</a>
-        </li>
-      </ul>
-    </div>
-    <div class="col-3">
-      <h4 class="">Features</h4>
-      <ul>
-        <li>
-          <a href="#">Business Marketing</a>
-        </li>
-        <li>
-          <a href="#">User Analytic</a>
-        </li>
-        <li>
-          <a href="#">Live Chat</a>
-        </li>
-        <li>
-          <a href="#">Unlimited Support</a>
-        </li>
-      </ul>
-    </div>
-    <div class="col-3">
-      <h4 class="">Resources</h4>
-      <ul>
-        <li>
-          <a href="#">IOS & Android</a>
-        </li>
-        <li>
-          <a href="#">Watch a Demo</a>
-        </li>
-        <li>
-          <a href="#">Customers</a>
-        </li>
-        <li>
-          <a href="#">API</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</footer>
+  </footer>
+</div>
