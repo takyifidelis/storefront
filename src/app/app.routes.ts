@@ -20,8 +20,8 @@ import { PageCreatorComponent } from './Pages/Dashboard/Merchant/components/page
 import { AuthComponent } from './Pages/Authentication/Auth/auth.component';
 
 export const routes: Routes = [
-  // { path: '', component: LandingPageComponent },
-  { path: '', component: EcommerceWebsiteComponent },
+  { path: '', component: LandingPageComponent },
+  // { path: '', component: EcommerceWebsiteComponent },
   { path: 'login', component: LoginComponent },
   { path: 'forget-password', component: ForgottenPasswordComponent },
   { path: 'Sign-up-merchant', component: SignupMerchantComponent },
