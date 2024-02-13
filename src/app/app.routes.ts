@@ -19,6 +19,9 @@ import { EcommerceWebsiteComponent } from './Pages/Authentication/Merchant/ecomm
 import { PageCreatorComponent } from './Pages/Dashboard/Merchant/components/page-creator/page-creator.component';
 import { AuthComponent } from './Pages/Authentication/Auth/auth.component';
 import { CustomerDashboardComponent } from './Pages/Dashboard/Customer/customer-dashboard/customer-dashboard.component';
+import { HomeEcommerceComponent } from './Pages/Authentication/Merchant/ecommerce-website/home-ecommerce/home-ecommerce.component';
+import { AboutUsComponent } from './Pages/Authentication/Merchant/ecommerce-website/about-us/about-us.component';
+import { ContactUsComponent } from './Pages/Authentication/Merchant/ecommerce-website/contact-us/contact-us.component';
 
 export const routes: Routes = [
   { path: '', component: LandingPageComponent },
@@ -53,5 +56,15 @@ export const routes: Routes = [
       { path: 'analytics', component: MerchantAnalyticsComponent },
     ],
   },
+  {
+    path: 'ecommerce',
+    component: EcommerceWebsiteComponent,
+    children: [
+      { path: '', component: HomeEcommerceComponent },
+      { path: 'about-us', component: AboutUsComponent },
+      { path: 'contact-us', component: ContactUsComponent },
+    ],
+  },
+
   { path: '**', component: LandingPageComponent },
 ];

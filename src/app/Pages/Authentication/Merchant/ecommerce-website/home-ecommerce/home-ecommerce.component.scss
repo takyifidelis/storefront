@@ -41,103 +41,63 @@ section.level-up {
     }
   }
 }
-
-h1 {
-  color: #1c222b;
-  -webkit-text-stroke-width: 2;
-  -webkit-text-stroke-color: #000;
-  font-family: Inter;
-  font-size: 72px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 90px;
-  letter-spacing: -2.3px;
+section.categories {
   text-align: center;
-  text-transform: uppercase;
-}
 
-p {
-  color: #1c222b;
-  text-align: center;
-  font-family: Inter;
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 30px;
-  letter-spacing: -0.3px;
-}
-
-.frame-2 {
-  margin-bottom: 64px;
-
-  .image-container-1 {
-    width: 553px;
-    height: 500px;
-    flex-shrink: 0;
+  .section-header {
+    color: #1c222b;
+    font-family: Inter;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 36px;
+    letter-spacing: -0.5px;
+    margin: 3rem 0;
   }
-
-  .image-container-2 {
-    width: 329px;
-    height: 500px;
-    flex-shrink: 0;
-  }
-  .image-container-3 {
-    width: 438px;
-    height: 242px;
-    flex-shrink: 0;
-
-    .image-3 {
-      width: 438px;
-      object-fit: contain;
+  .category-selections {
+    object-fit: contain;
+    gap: 1.2rem;
+    .accessories-shoe {
+      overflow: hidden;
+    }
+    div.accessories-shoe img.accessories {
+      margin-bottom: 1rem;
     }
   }
-}
-
-.text {
-  flex-shrink: 0;
-  position: relative;
-}
-
-.promo {
-  background: #f2f2f2;
-  margin: 0;
-
-  .discount {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-    h3 {
-      color: #1c222b;
-      text-align: center;
-      font-family: Inter;
-      font-size: 48px;
-      font-style: normal;
-      font-weight: 600;
-      line-height: 60px;
-      letter-spacing: -1.75px;
+  .second-row-percent {
+    margin: 3rem 0;
+    .percent-image-div {
+      .two-ladies {
+        object-fit: inherit;
+      }
     }
 
-    .sub-text p {
-      color: #1c222b;
-      text-align: center;
-      font-family: Inter;
-      font-size: 20px;
-      font-style: normal;
-      font-weight: 400;
-      line-height: 32px;
-      letter-spacing: -0.3px;
-    }
-    .notice {
-      width: 175px;
-      height: 56px;
-      border: 3px solid black;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    .percent-block {
+      background-color: #f2f2f2;
 
-      p {
+      h2.upto-40-percent {
+        color: #1c222b;
+        text-align: center;
+        font-family: Inter;
+        font-size: 48px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 60px;
+        letter-spacing: -1.75px;
+        margin-bottom: 2rem;
+      }
+      p.special-offers {
+        color: #1c222b;
+        text-align: center;
+        margin-bottom: 2rem;
+        font-family: Inter;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 32px;
+        letter-spacing: -0.3px;
+      }
+      button.shop-now {
         color: #1c222b;
         text-align: center;
         font-family: Inter;
@@ -146,45 +106,137 @@ p {
         font-weight: 700;
         line-height: 30px;
         letter-spacing: -0.3px;
+        background-color: transparent;
+        border: 1px solid #1c222b;
+        border-radius: 0;
+        padding: 1rem 3rem;
+        margin-bottom: 4rem;
+      }
+    }
+  }
+}
+section.featured-items {
+  margin: 5rem 0;
+  text-align: center;
+  .featured-items-header {
+    color: #000;
+    font-family: Inter;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 36px;
+    letter-spacing: -0.5px;
+  }
+  .card {
+    text-align: left;
+    margin-top: 2rem;
+  }
+  div.card {
+    border: 0;
+    .card-body {
+      padding: 0;
+    }
+    .card-title {
+      color: #1c222b;
+      font-family: Inter;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 28px;
+      letter-spacing: -0.3px;
+      margin: 0;
+    }
+    .blossom-bag-paragraph {
+      color: #1c222b;
+      font-family: Inter;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 24px;
+      letter-spacing: -0.2px;
+    }
+
+    .product-price {
+      color: #1c222b;
+      font-family: Inter;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 28px;
+      letter-spacing: -0.3px;
+      margin-bottom: 1rem;
+    }
+    div.ratings {
+      margin-bottom: 1rem;
+      .ratings-43 {
+        color: #1c222b;
+        font-family: Inter;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 24px;
+        letter-spacing: -0.2px;
+        margin-left: 2.5rem;
+      }
+    }
+    div.product-color-div {
+      div.product-color {
+        width: 17px;
+        height: 17px;
+        margin-right: 0.5rem;
+        margin-bottom: 1rem;
+      }
+      .blue {
+        background-color: #1b4dff;
+      }
+      div.yellow {
+        background-color: #ffd027;
+      }
+      div.voilet {
+        background-color: #8f0ea2;
+      }
+      div.red {
+        background-color: #e92215;
       }
     }
   }
 }
 
-.adjust {
-  width: 324px;
-}
-
-.checker {
-  display: flex;
-  gap: 0.2rem;
-  justify-content: center;
-  // border: 1px solid red;
-}
-
-.add-bg-color {
-  background: gray;
-  height: 100%;
-  padding-top: 20px;
-  padding-bottom: 20px;
-
-  h3 {
-    color: #fff;
-    font-family: Inter;
-    font-size: 48px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 60px;
-    letter-spacing: -1.75px;
+@media (max-width: 992px) {
+  section.categories {
+    // display: none;
+    .category-selections {
+      flex-direction: column;
+      .accessories-shoe {
+        overflow: hidden;
+      }
+    }
   }
-
-  p {
-    color: #fff;
+  section.level-up .bg-image h1.h1.home-header {
+    color: #1c222b;
+    text-align: center;
     font-family: Inter;
-    font-size: 16px;
+    font-size: 32px;
     font-style: normal;
-    font-weight: 400;
-    line-height: 28px;
-    letter-spacing: -0.3px;
+    font-weight: 700;
+    line-height: 44px;
+    letter-spacing: -0.5px;
+  }
+  .container-fluid {
+    margin: 0;
+    padding: 0;
+    --bs-gutter-x: 0;
+    .second-row-percent {
+      display: flex;
+      flex-direction: column;
+      img.two-ladies {
+        max-width: 100%;
+        height: auto;
+      }
+    }
+  }
+  .card {
+    display: block;
+    margin: 0 auto;
   }
 }
