@@ -269,11 +269,27 @@ section.decription-review {
       letter-spacing: -0.2px;
       text-decoration-line: underline;
       text-align: center;
+      cursor: pointer;
     }
   }
   form {
     text-align: center;
     padding: 5rem;
+    .how-will-you-div {
+      background-color: #f9fafb;
+      padding: 1rem;
+      border-radius: 5px;
+      margin-bottom: 2rem;
+      .how-will-you {
+        color: #4b5563;
+        font-family: Inter;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 135%;
+        margin-bottom: 0;
+      }
+    }
     textarea#message.form-control {
       margin-bottom: 2rem;
     }
@@ -281,7 +297,6 @@ section.decription-review {
       padding: 16px 24px;
       background-color: #000;
       color: #fff;
-
       font-family: Inter;
       font-size: 14px;
       font-style: normal;
@@ -289,5 +304,46 @@ section.decription-review {
       line-height: 14px;
       border-radius: 0;
     }
+  }
+  .feedbacks-block {
+    margin-left: 4rem;
+    margin-right: 10rem;
+    .feedback-image {
+      margin-right: 1rem;
+      margin-top: 1rem;
+    }
+    .feedback-name {
+      color: #455468;
+      font-family: Inter;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 28px;
+      letter-spacing: -0.3px;
+    }
+    .ratings {
+      margin-bottom: 0.4rem;
+    }
+    .feedback-date {
+      color: #455468;
+      font-family: Inter;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 20px;
+      letter-spacing: -0.2px;
+    }
+    .feeback-message {
+      color: #1d1f22;
+      font-family: Inter;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 28px;
+      letter-spacing: -0.3px;
+    }
+  }
+  hr {
+    width: 90%;
   }
 }
