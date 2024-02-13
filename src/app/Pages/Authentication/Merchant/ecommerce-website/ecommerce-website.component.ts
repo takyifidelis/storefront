@@ -6,6 +6,7 @@ import { HomeEcommerceComponent } from './home-ecommerce/home-ecommerce.componen
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { AboutUsComponent } from './about-us/about-us.component';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-ecommerce-website',
@@ -16,6 +17,7 @@ import { AboutUsComponent } from './about-us/about-us.component';
     HomeEcommerceComponent,
     MatIconModule,
     AboutUsComponent,
+    RouterModule,
   ],
   templateUrl: './ecommerce-website.component.html',
   styleUrl: './ecommerce-website.component.scss',

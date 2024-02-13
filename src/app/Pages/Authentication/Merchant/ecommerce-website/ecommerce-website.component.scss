@@ -8,6 +8,9 @@ nav {
   .nav-icons {
     margin-left: 0.5rem;
   }
+  .nav-link.router-link-active {
+    border-bottom: 2px solid green;
+  }
   .nav-link,
   input.search::placeholder {
     color: #fff;

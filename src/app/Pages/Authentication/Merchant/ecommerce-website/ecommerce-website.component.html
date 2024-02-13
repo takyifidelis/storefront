@@ -15,9 +15,24 @@
       id="navbarNavAltMarkup"
     >
       <div class="navbar-nav nav-content">
-        <a class="nav-link" aria-current="page" href="#">Home</a>
-        <a class="nav-link" href="#">About Us</a>
-        <a class="nav-link" href="#">Contact Us</a>
+        <a
+          class="nav-link"
+          [routerLink]="['']"
+          routerLinkActive="router-link-active"
+          >Home</a
+        >
+        <a
+          class="nav-link"
+          [routerLink]="['about-us']"
+          routerLinkActive="router-link-active"
+          >About Us</a
+        >
+        <a
+          class="nav-link"
+          [routerLink]="['contact-us']"
+          routerLinkActive="router-link-active"
+          >Contact Us</a
+        >
         <a class="nav-link" href="#">Shop</a>
         <form class="d-flex justify-content-center align-items-center">
           <fa-icon [icon]="searchIcon" style="color: #fff"></fa-icon>
@@ -53,7 +68,7 @@
     </div>
   </div>
 </nav>
-<app-about-us></app-about-us>
+<router-outlet></router-outlet>
 <section class="duties-taxes">
   <div class="duties-taxes-div d-flex justify-content-between container-fluid">
     <p class="duties-taxes-paragraph">
