@@ -10,32 +10,39 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { AboutUsComponent } from './about-us/about-us.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-ecommerce-website',
   standalone: true,
-  imports: [FontAwesomeModule, HomeEcommerceComponent, ReviewComponent, RouterModule,
-    MatProgressBarModule, MatCardModule, MatButtonModule,
-    MatIconModule, MatSidenavModule,MatMenuModule],
+  imports: [
+    FontAwesomeModule,
+    HomeEcommerceComponent,
+    ReviewComponent,
+    RouterModule,
+    MatProgressBarModule,
+    MatCardModule,
+    MatButtonModule,
+    AboutUsComponent,
+    MatIconModule,
+    MatSidenavModule,
+    MatMenuModule,
+  ],
   templateUrl: './ecommerce-website.component.html',
-  styleUrl: './ecommerce-website.component.scss'
+  styleUrl: './ecommerce-website.component.scss',
 })
 export class EcommerceWebsiteComponent {
   heartIcon = faHeart;
   shoppingCartIcon = faShoppingCart;
   searchIcon = faSearch;
-  starIcon = faStar;
-  quantity = 1;
 
+  dropDownMenu: HTMLElement | null = null;
 
-  increaseQuantity(): void {
-    this.quantity++;
-  }
-
-  decreaseQuantity(): void{
-    if (this.quantity > 1) {
-      this.quantity--;
+  toggleBtnFunction() {
+    this.dropDownMenu = document.querySelector('#dropdownMenu');
+    if (this.dropDownMenu) {
+      this.dropDownMenu.classList.toggle('open');
     }
   }
 }
