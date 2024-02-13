@@ -78,12 +78,17 @@
                 color: #3D4A5C;
             }
             svg{
-                fill: #0F3CD9;
                 margin-right: 12.37%;
             }
+            &:hover{
+                cursor: pointer;
+            }
           }
-        li:hover{
-            background: #F2F5FF;
+        .active-link{
+        background: #F2F5FF;
+            path{
+                fill: #0F3CD9;
+            }
         }
       }
   }

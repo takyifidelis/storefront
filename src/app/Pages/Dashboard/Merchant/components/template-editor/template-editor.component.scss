@@ -8,6 +8,11 @@
     width: (100%-(($cols-1)*$mgn)/$cols);
 }
 
+.editor_controls{
+display: none;
+}
+
+
 .container-wrapper-div{
     display: flex;
     height: 100%;

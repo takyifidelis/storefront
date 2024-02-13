@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatMenuModule} from '@angular/material/menu';
+import { style } from '@angular/animations';
 
 @Component({
   selector: 'app-template-editor',
@@ -21,10 +22,37 @@ import {MatMenuModule} from '@angular/material/menu';
 export class TemplateEditorComponent {
   screenWidth:number = 800
   constructor(private elementRef: ElementRef<HTMLElement>){
-    elementRef.nativeElement.addEventListener("dblclick", (event) =>{
+  //   elementRef.nativeElement.addEventListener("click", (event) =>{
+  //     let target = event.target as HTMLElement
+  //     if (target.hasAttribute('contenteditable')) {
+  //         target.querySelector('.editor_controls')?.setAttribute('style','display:block')
+  //     } else {
+          
+  //         target.querySelector('.editor_controls')?.setAttribute('style','display:block')
+  //     }
+  // });
+    elementRef.nativeElement.addEventListener("mouseover", (event) =>{
       let target = event.target as HTMLElement
-      (event.target as HTMLElement).contentEditable = 'true'
-      console.log(target.classList)
+      console.log(elementRef.nativeElement.getElementsByTagName('app-'));
+      // if (target.childNodes.length > 0 && this.containsTextNodes(target)) {
+      //   target.contentEditable = 'true';
+      //   console.log("Contenteditable attribute added to:", target);
+      // }
+      // if (target.getElementsByTagName("img").length) {
+      //   let images = target.getElementsByTagName("img");
+      //   Array.from(images).forEach((image: HTMLElement) => {
+      //     console.log("Image found:", image);
+      //   });
+      // }
     })
-      }
   }
+
+  containsTextNodes(element: HTMLElement): boolean {
+    for (let i = 0; i < element.childNodes.length; i++) {
+      if (element.childNodes[i].nodeType === Node.TEXT_NODE) {
+        return true;
+      }
+    }
+    return false;
+  }
+}
