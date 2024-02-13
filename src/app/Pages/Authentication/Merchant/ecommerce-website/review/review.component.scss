@@ -9,7 +9,7 @@
       object-fit: cover;
     }
   }
-  
+
 .container {
     display: flex;
     flex-direction: column;
@@ -153,6 +153,20 @@
         letter-spacing: -0.5px;
       }
     }
+
+    .one {
+        margin-left: 0 !important;
+      }
+      
+      .size {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 46px;
+        height: 46px;
+        border: 2px solid #d7dfe9;
+        margin-left: 8px;
+      }
   
     .button {
       display: flex;
@@ -185,4 +199,9 @@
       letter-spacing: -0.2px;
       gap: 5px;
     }
+  }
+
+  .container-fluid{
+    // width: 70.75rem;
+    margin: 0;
   }
