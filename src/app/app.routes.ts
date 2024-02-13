@@ -18,10 +18,13 @@ import { MerchantAnalyticsComponent } from './Pages/Dashboard/Merchant/component
 import { EcommerceWebsiteComponent } from './Pages/Authentication/Merchant/ecommerce-website/ecommerce-website.component';
 import { PageCreatorComponent } from './Pages/Dashboard/Merchant/components/page-creator/page-creator.component';
 import { AuthComponent } from './Pages/Authentication/Auth/auth.component';
+import { HomeEcommerceComponent } from './Pages/Authentication/Merchant/ecommerce-website/home-ecommerce/home-ecommerce.component';
+import { AboutUsComponent } from './Pages/Authentication/Merchant/ecommerce-website/about-us/about-us.component';
+import { ContactUsComponent } from './Pages/Authentication/Merchant/ecommerce-website/contact-us/contact-us.component';
 
 export const routes: Routes = [
-  // { path: '', component: LandingPageComponent },
-  { path: '', component: EcommerceWebsiteComponent },
+  { path: '', component: LandingPageComponent },
+  // { path: '', component: EcommerceWebsiteComponent },
   { path: 'login', component: LoginComponent },
   { path: 'forget-password', component: ForgottenPasswordComponent },
   { path: 'Sign-up-merchant', component: SignupMerchantComponent },
@@ -44,5 +47,15 @@ export const routes: Routes = [
       { path: 'analytics', component: MerchantAnalyticsComponent },
     ],
   },
+  {
+    path: 'ecommerce',
+    component: EcommerceWebsiteComponent,
+    children: [
+      { path: '', component: HomeEcommerceComponent },
+      { path: 'about-us', component: AboutUsComponent },
+      { path: 'contact-us', component: ContactUsComponent },
+    ],
+  },
+
   { path: '**', component: LandingPageComponent },
 ];
