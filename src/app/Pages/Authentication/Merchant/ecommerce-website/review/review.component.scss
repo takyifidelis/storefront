@@ -203,8 +203,91 @@
 .container-fluid {
   margin: 0;
 }
-section.description-review {
-  .mat-tab-group {
-    margin-bottom: 48px;
+section.decription-review {
+  margin-left: 5rem;
+  margin-right: 8rem;
+  .details {
+    margin-top: 1.5rem;
+  }
+  h3.product-header {
+    color: #1c222b;
+    font-family: Inter;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 36px;
+    letter-spacing: -0.4px;
+  }
+  p.product-paragraph,
+  li.paragraph {
+    color: #1c222b;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 28px;
+    letter-spacing: -0.3px;
+    margin-left: 0rem;
+  }
+  ul {
+    list-style-image: url("../../../../../../assets/icons/product-check.svg");
+
+    li {
+      padding-left: 1.5rem;
+      margin-bottom: 1rem;
+    }
+  }
+  .reviews-head {
+    h4.review-header {
+      color: #1c222b;
+      font-family: Inter;
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 36px;
+      letter-spacing: -0.5px;
+    }
+    div.rating {
+      margin-left: 1rem;
+    }
+    div.ratings span.ratings-5 {
+      color: #1b4b66;
+      font-family: inter;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 18px;
+      margin-left: 1rem;
+    }
+    p.leave-a-review {
+      color: #5ece7b;
+      font-family: Inter;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 24px;
+      letter-spacing: -0.2px;
+      text-decoration-line: underline;
+      text-align: center;
+    }
+  }
+  form {
+    text-align: center;
+    padding: 5rem;
+    textarea#message.form-control {
+      margin-bottom: 2rem;
+    }
+    button.btn {
+      padding: 16px 24px;
+      background-color: #000;
+      color: #fff;
+
+      font-family: Inter;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 14px;
+      border-radius: 0;
+    }
   }
 }
