@@ -30,15 +30,18 @@ import { MatTabsModule } from '@angular/material/tabs';
 export class ReviewComponent {
   heartIcon = faHeart;
   starIcon = faStar;
-  quantity = 1;
+  quantity: number = 1;
+  amount: number = this.quantity * 90;
 
   increaseQuantity(): void {
     this.quantity++;
+    this.amount = this.quantity * 90;
   }
 
   decreaseQuantity(): void {
     if (this.quantity > 1) {
       this.quantity--;
+      this.amount = this.quantity * 90;
     }
   }
 }

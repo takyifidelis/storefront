@@ -8,6 +8,9 @@
     object-fit: cover;
   }
 }
+.mat-drawer-content {
+  overflow: hidden;
+}
 
 .container {
   display: flex;
