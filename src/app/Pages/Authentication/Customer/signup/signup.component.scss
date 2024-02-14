@@ -364,6 +364,7 @@ form::-webkit-scrollbar {
         .social-icon {
           display: flex;
           width: 448px;
+          height: 40px;
           padding: 10px 20px;
           justify-content: center;
           align-items: center;
@@ -385,6 +386,11 @@ form::-webkit-scrollbar {
           }
         }
       }
+
+      .social-icon img{
+        width: 20px;
+      }
+
 
       .forgotten-password {
         text-align: center;

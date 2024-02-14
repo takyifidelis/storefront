@@ -302,7 +302,8 @@ form::-webkit-scrollbar {
 
         .social-icon {
           display: flex;
-          width: 448px;
+          width: 404px;
+          height: 33px;
           padding: 10px 20px;
           justify-content: center;
           align-items: center;
@@ -310,6 +311,8 @@ form::-webkit-scrollbar {
           border-radius: 6px;
           border: 1px solid #d7dfe9;
           background: #fff;
+
+        
 
           p {
             color: #3d4a5c;
@@ -323,6 +326,10 @@ form::-webkit-scrollbar {
             margin-bottom: 2px;
           }
         }
+      }
+
+      .social-icon img{
+        width: 20px;
       }
 
       .forgotten-password {
