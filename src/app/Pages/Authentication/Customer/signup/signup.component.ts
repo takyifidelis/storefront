@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../Auth/auth.service';
@@ -17,7 +17,7 @@ import {
 } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faFacebook, faGoogle } from '@fortawesome/free-brands-svg-icons';
-import { faEnvelope, faEyeSlash } from '@fortawesome/free-regular-svg-icons';
+import { faEnvelope, faEye, faEyeSlash } from '@fortawesome/free-regular-svg-icons';
 import { faCircle, faLock } from '@fortawesome/free-solid-svg-icons';
 import { GoogleLoginProvider, GoogleSigninButtonDirective, SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
 
@@ -28,14 +28,18 @@ import { GoogleLoginProvider, GoogleSigninButtonDirective, SocialAuthService, So
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.scss',
 })
-export class SignupCustomerComponent {
+export class SignupCustomerComponent implements OnInit{
   mailIcon = faEnvelope;
   passwordLock = faLock;
-  eyeIcon = faEyeSlash;
   ol = faCircle;
   googleIcon = faGoogle;
   facebookIcon = faFacebook;
   user: SocialUser | undefined;
+  isHidden: boolean | undefined;
+  validator: string | undefined;
+  validator2: string | undefined; 
+  eyeIcon: any;
+  eyeIcon2: any;
 
   // Email and Password Validation Below
   signupForm: FormGroup;
@@ -126,6 +130,27 @@ export class SignupCustomerComponent {
 
   containsMinTenChar(): boolean {
     return this.checkPasswordCondition(/^.{10,}$/);
+  }
+
+  ngOnInit(): void {
+    this.isHidden = true;
+    this.validator = 'password';
+    this.validator2 = 'password';
+    this.eyeIcon = faEye;
+    this.eyeIcon2 = faEye;
+  }
+
+  hidePassword() {
+    this.isHidden = false;
+    this.validator = 'text';
+    this.eyeIcon = faEyeSlash;
+  }
+
+  hideConfirmPassword(){
+    this.isHidden = false;
+    this.validator2 ='text'
+    this.eyeIcon2 = faEyeSlash;
+
   }
 
 }
