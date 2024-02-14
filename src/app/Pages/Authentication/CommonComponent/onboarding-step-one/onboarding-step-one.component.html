@@ -1,0 +1,38 @@
+<div class="container-fluid main-container">
+    <header class="d-flex" style="flex-wrap: wrap;">
+        <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
+            <div class="d-flex w-100" style="margin-top: 25px;">
+                <span class="d-flex home-header-span">
+                    <span class="app-name">StoreFront</span>
+                    <span class="d-flex text-center align-items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M12.1667 5.83333L11.1667 5L6.66667 10L11.1667 15L12.1667 14.1667L8.33333 10L12.1667 5.83333Z" fill="#3D4A5C"/>
+                        </svg>
+                        Back
+                    </span>
+                </span>
+            </div>
+    </header>
+    <main>
+        <span class="body-txt-header">Which type of business establishment do you have</span>
+        <p class="body-txt-p">Let as know your ecommerce journey so that we can tailor your storefront experience for you</p>
+        <div class="row bdt row-cols-2">
+            <span class="p-2 pt-3">
+                <span class="span-option-container col-xs-2" >
+                    <mat-radio-button color="primary" value="">I’m just starting my business</mat-radio-button>
+                </span>
+            </span>
+            <span class="p-2 pt-3">
+                <span class="span-option-container col-xs-2">
+                    <mat-radio-button value="">I’m already selling but not online</mat-radio-button>
+                </span>
+            </span>
+            <span class="p-2 pt-3">
+                <span class="span-option-container col-xs-2">
+                    <mat-radio-button value="">I'm already selling online</mat-radio-button>
+                </span>
+            </span>
+        </div>
+        <button [routerLink]="['/merchant-onboarding-2']" class="body-btn" style="font-size: 18px; padding: 13px 20px;">continue</button>
+    </main>
+</div>

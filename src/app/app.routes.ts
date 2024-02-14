@@ -22,6 +22,9 @@ import { CustomerDashboardComponent } from './Pages/Dashboard/Customer/customer-
 import { HomeEcommerceComponent } from './Pages/Authentication/Merchant/ecommerce-website/home-ecommerce/home-ecommerce.component';
 import { AboutUsComponent } from './Pages/Authentication/Merchant/ecommerce-website/about-us/about-us.component';
 import { ContactUsComponent } from './Pages/Authentication/Merchant/ecommerce-website/contact-us/contact-us.component';
+import { OnboardingStepOneComponent } from './Pages/Authentication/CommonComponent/onboarding-step-one/onboarding-step-one.component';
+import { OnboardingStepTwoComponent } from './Pages/Authentication/CommonComponent/onboarding-step-two/onboarding-step-two.component';
+import { OnboardingStepThreeComponent } from './Pages/Authentication/CommonComponent/onboarding-step-three/onboarding-step-three.component';
 
 export const routes: Routes = [
   { path: '', component: LandingPageComponent },
@@ -33,9 +36,19 @@ export const routes: Routes = [
   { path: 'email-token-verification', component: TokenAuthComponent },
   { path: 'reset-password', component: ResetPassowrdComponent },
   { path: 'page-creator', component: PageCreatorComponent },
+  { path: 'merchant-onboarding-1', component: OnboardingStepOneComponent },
+  { path: 'merchant-onboarding-2', component: OnboardingStepTwoComponent },
+  { path: 'merchant-onboarding-3', component: OnboardingStepThreeComponent },
   { path: 'template-editor', component: TemplateEditorComponent, 
   children: [
-    { path: '', component: EcommerceWebsiteComponent },
+    { path: '', component: EcommerceWebsiteComponent ,
+    children: [
+      { path: 'home', component: HomeEcommerceComponent },
+      { path: 'about-us', component: AboutUsComponent },
+      { path: 'contact-us', component: ContactUsComponent },
+      {path: '', redirectTo:'home', pathMatch:'full'}
+    ]
+    }
   ]
 
   },
@@ -60,7 +73,7 @@ export const routes: Routes = [
     path: 'ecommerce',
     component: EcommerceWebsiteComponent,
     children: [
-      { path: '', component: HomeEcommerceComponent },
+      { path: 'home', component: HomeEcommerceComponent },
       { path: 'about-us', component: AboutUsComponent },
       { path: 'contact-us', component: ContactUsComponent },
     ],

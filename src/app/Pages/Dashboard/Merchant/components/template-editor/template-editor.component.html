@@ -82,11 +82,19 @@
         
         <mat-drawer-content class="conatainer">
             <router-outlet />
+            <div class="buttonContainer">
+                <button mat-icon-button data-element="justifyFull">
+                    <mat-icon>format_align_justify</mat-icon>
+                </button>
+                <button mat-icon-button data-element="insertImage">
+                    <mat-icon>add_photo_alternate</mat-icon>
+                </button>
+            </div>
         </mat-drawer-content>
     </mat-drawer-container>
 </div>
 
-<div class="editor_controls">
+<!-- <div class="editor_controls">
     <button mat-icon-button data-element="bold">
         <mat-icon>format_bold</mat-icon>
       </button>
@@ -126,4 +134,7 @@
     <button mat-icon-button data-element="fontSize">
         <mat-icon>format_bold</mat-icon>
     </button>
-</div>
+</div> -->
+
+
+
