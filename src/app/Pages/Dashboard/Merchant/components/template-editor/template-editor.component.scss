@@ -8,8 +8,12 @@
     width: (100%-(($cols-1)*$mgn)/$cols);
 }
 
-.editor_controls{
-display: none;
+.buttonContainer{
+display: block;
+position:absolute;
+z-index:3;
+// height: 300px;
+// width: 300px;
 }
 
 

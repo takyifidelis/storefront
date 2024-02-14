@@ -31,20 +31,59 @@ export class TemplateEditorComponent {
   //         target.querySelector('.editor_controls')?.setAttribute('style','display:block')
   //     }
   // });
+    // elementRef.nativeElement.addEventListener("mouseover", (event) =>{
+    //   let target = event.target as HTMLElement
+    //   console.log(elementRef.nativeElement.getElementsByTagName('app-ecommerce-website'));
+    //   if (target.childNodes.length > 0 && this.containsTextNodes(target)) {
+    //     target.contentEditable = 'true';
+    //     console.log("Contenteditable attribute added to:", target);
+    //   }
+    //   if (target.getElementsByTagName("img").length) {
+    //     let images = target.getElementsByTagName("img");
+    //     Array.from(images).forEach((image: HTMLElement) => {
+    //       console.log("Image found:", image);
+    //     });
+    //   }
+    // })
+
+
+
+
     elementRef.nativeElement.addEventListener("mouseover", (event) =>{
-      let target = event.target as HTMLElement
-      console.log(elementRef.nativeElement.getElementsByTagName('app-'));
-      // if (target.childNodes.length > 0 && this.containsTextNodes(target)) {
-      //   target.contentEditable = 'true';
-      //   console.log("Contenteditable attribute added to:", target);
-      // }
-      // if (target.getElementsByTagName("img").length) {
-      //   let images = target.getElementsByTagName("img");
-      //   Array.from(images).forEach((image: HTMLElement) => {
-      //     console.log("Image found:", image);
-      //   });
-      // }
+      //// let target = event.target as HTMLElement
+      elementRef.nativeElement.getElementsByTagName('app-ecommerce-website')[0].addEventListener("mouseover",(element)=>{
+        let el = element.target as HTMLElement
+        let button = document.createElement('button');
+        button.textContent = 'Click me';
+        button.classList.add('overlay-button');
+
+        button.style.position = 'absolute';
+        button.style.top = event.clientY + 'px';
+        button.style.left = event.clientX + 'px';
+
+    // Add the button to the button container
+    
+
+    
+        if (el.getElementsByTagName("img").length) {
+          let images = el.getElementsByTagName("img");
+          Array.from(images).forEach((image: HTMLElement) => {
+            console.log("Image found:", image);
+            let buttonContainer = elementRef.nativeElement.getElementsByClassName('buttonContainer')[0];
+            buttonContainer.innerHTML = '';
+            buttonContainer.appendChild(button);
+          });
+        }
+
+        if (el.childNodes.length > 0 && this.containsTextNodes(el)) {
+          el.contentEditable = 'true';
+          console.log("Contenteditable attribute added to:", el);
+        }
+      })
+      
+
     })
+
   }
 
   containsTextNodes(element: HTMLElement): boolean {
