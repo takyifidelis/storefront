@@ -24,7 +24,7 @@ import { ContactUsComponent } from './Pages/Authentication/Merchant/ecommerce-we
 import { ReviewComponent } from './Pages/Authentication/Merchant/ecommerce-website/review/review.component';
 
 export const routes: Routes = [
-  { path: '', component: ReviewComponent },
+  { path: '', component: LandingPageComponent },
   // { path: '', component: EcommerceWebsiteComponent },
   { path: 'login', component: LoginComponent },
   { path: 'forget-password', component: ForgottenPasswordComponent },
