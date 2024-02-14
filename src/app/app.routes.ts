@@ -26,10 +26,12 @@ import { OnboardingStepOneComponent } from './Pages/Authentication/CommonCompone
 import { OnboardingStepTwoComponent } from './Pages/Authentication/CommonComponent/onboarding-step-two/onboarding-step-two.component';
 import { OnboardingStepThreeComponent } from './Pages/Authentication/CommonComponent/onboarding-step-three/onboarding-step-three.component';
 import { ReviewComponent } from './Pages/Authentication/Merchant/ecommerce-website/review/review.component';
+import { TestComponent } from './Pages/test/test.component';
 
 export const routes: Routes = [
-  { path: '', component: LandingPageComponent },
+  // { path: '', component: LandingPageComponent },
   // { path: '', component: EcommerceWebsiteComponent },
+  { path: '', component: TestComponent },
   { path: 'login', component: LoginComponent },
   { path: 'forget-password', component: ForgottenPasswordComponent },
   { path: 'Sign-up-merchant', component: SignupMerchantComponent },
