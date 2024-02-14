@@ -1,0 +1,473 @@
+<div class="container-fluid">
+  <section class="">
+    <mat-drawer-container class="example-container">
+      <mat-drawer mode="side" opened="true">
+        <div>
+          <img src="/assets/images/sidebar-red-shoe-1.png" alt="" />
+        </div>
+        <div>
+          <img src="/assets/images/sidebar-red-shoe-2.png" alt="" />
+        </div>
+        <div>
+          <img src="/assets/images/sidebar-red-shoe-3.png" alt="" />
+        </div>
+        <div>
+          <img src="/assets/images/sidebar-red-shoe-4.png" alt="" />
+        </div>
+      </mat-drawer>
+      <mat-drawer-content>
+        <div class="row">
+          <div class="col img-item-preview">
+            <img src="/assets/images/main-red-shoe-image.png" alt="" />
+          </div>
+          <div class="col" style="margin-top: -15px">
+            <div class="container">
+              <div class="row top">
+                <div class="col">
+                  <p class="txt">Home / Women’s Shoe / All Stars</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <h4 class="item-name">Converse All Stars</h4>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col d-inline-flex">
+                  <div class="item-rating d-flex">
+                    <div class="starIcon">
+                      <img
+                        src="/assets/icons/green-star.svg"
+                        alt=""
+                        style="width: 24px; height: 24px"
+                      />
+                      <img
+                        src="/assets/icons/green-star.svg"
+                        alt=""
+                        style="width: 24px; height: 24px"
+                      />
+                      <img
+                        src="/assets/icons/green-star.svg"
+                        alt=""
+                        style="width: 24px; height: 24px"
+                      />
+                      <img
+                        src="/assets/icons/green-star.svg"
+                        alt=""
+                        style="width: 24px; height: 24px"
+                      />
+                      <img
+                        src="/assets/icons/star.svg"
+                        alt=""
+                        style="width: 24px; height: 24px"
+                      />
+                    </div>
+                    <p class="txt-2 m-0">4.0 Ratings</p>
+                  </div>
+                  <div class="items-available d-flex align-items-center">
+                    <p class="txt-2 m-0">10 Available</p>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col d-flex">
+                  <div class="select-color">
+                    <p>SELECT COLOR</p>
+                  </div>
+                  <div class="color d-flex gap">
+                    <div class="box" style="background-color: #1b4dff"></div>
+                    <div class="box" style="background-color: #ffd027"></div>
+                    <div class="box" style="background-color: #8f0ea2"></div>
+                    <div class="box" style="background-color: #e92215"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col d-flex">
+                  <div class="select-size">
+                    <p>SELECT SIZE</p>
+                  </div>
+                  <div class="size-guide txt-2">
+                    <a href="#">size guide</a>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col d-flex">
+                  <div class="size one">XS</div>
+                  <div class="size">S</div>
+                  <div class="size">L</div>
+                  <div class="size">XL</div>
+                  <div class="size">XXL</div>
+                  <div class="size">XXXL</div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <div class="row">
+                    <div class="col-2 select-color">
+                      <p for="quantity">QUANTITY</p>
+                    </div>
+                    <div class="col-10 select-color">
+                      <label for="price">PRICE</label>
+                    </div>
+                  </div>
+                  <div class="row margin">
+                    <div class="col-auto wrapper">
+                      <button
+                        class="minus border-0"
+                        (click)="decreaseQuantity()"
+                      >
+                        -
+                      </button>
+                      <div class="num">{{ quantity }}</div>
+                      <button
+                        class="plus border-0"
+                        (click)="increaseQuantity()"
+                      >
+                        +
+                      </button>
+                    </div>
+                    <div class="col-8">
+                      <h3 class="amount">{{ amount + ".00" }} <span></span></h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row" style="width: 582px">
+                <div class="col-5">
+                  <button class="button bg-add-to-buy">Add to buy</button>
+                </div>
+                <div class="col-7">
+                  <button class="button bg-save">
+                    <fa-icon [icon]="heartIcon"></fa-icon>Save
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-drawer-content>
+    </mat-drawer-container>
+  </section>
+  <section class="decription-review">
+    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+      <mat-tab label="DESCRIPTION">
+        <div class="product-benefit details">
+          <h3 class="product-header">Product Description</h3>
+          <p class="product-paragraph w-80">
+            When it's colder than the far side of the moon and spitting rain
+            too, you've still got to look good. From water-repellent leather to
+            a rugged outsole, the Lunar Force 1 adapts AF-1 style, so you can
+            keep your flame burning when the weather hits. Metal lace hardware
+            and extended tongue bring mountain boot toughness, while the
+            star-studded toe design gives your look the edge
+          </p>
+        </div>
+        <div class="product-benefit details">
+          <h3 class="product-header">Benefits</h3>
+          <div class="product-paragraph">
+            <ul>
+              <li class="paragraph">
+                Durable leather is easily cleanable so you can keep your look
+                fresh.
+              </li>
+              <li class="paragraph">
+                Water-repellent finish and internal membrane help keep your feet
+                dry.
+              </li>
+              <li class="paragraph">
+                Toe piece with star pattern adds durability.
+              </li>
+              <li class="paragraph">
+                Synthetic insulation helps keep you warm.
+              </li>
+              <li class="paragraph">
+                Originally designed for performance hoops, the Air unit delivers
+                lightweight cushioning.
+              </li>
+              <li class="paragraph">
+                Plush tongue wraps over the ankle to help keep out the moisture
+                and cold.
+              </li>
+              <li class="paragraph">
+                Rubber outsole with aggressive traction pattern adds durable
+                grip.
+              </li>
+              <li class="paragraph">
+                Durable leather is easily cleanable so you can keep your look
+                fresh.
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="product-details details">
+          <h3 class="product-header">Product Details</h3>
+          <div class="product-paragraph">
+            <ul>
+              <li class="paragraph">
+                Not intended for use as Personal Protective Equipment (PPE)
+              </li>
+              <li class="paragraph">
+                Water-repellent finish and internal membrane help keep your feet
+                dry.
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="product-more-details details">
+          <h3 class="product-header">More Details</h3>
+          <div class="product-paragraph">
+            <ul>
+              <li class="paragraph">
+                Lunarlon midsole delivers ultra-plush responsiveness
+              </li>
+              <li class="paragraph">
+                Encapsulated Air-Sole heel unit for lightweight cushioning
+              </li>
+              <li class="paragraph">
+                Colour Shown: Ale Brown/Black/Goldtone/Ale Brown
+              </li>
+              <li class="paragraph">Style: 805899-202</li>
+            </ul>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab label="REVIEWS">
+        <div
+          class="reviews-head d-flex justify-content-between align-items-center"
+        >
+          <h4 class="review-header">3 Reviews</h4>
+          <div class="review-ratings">
+            <div class="ratings">
+              <span class="rating-stars"
+                ><img src="/assets/icons/star.svg" alt=""
+              /></span>
+              <span class="rating-stars"
+                ><img src="/assets/icons/star.svg" alt=""
+              /></span>
+              <span class="rating-stars"
+                ><img src="/assets/icons/star.svg" alt=""
+              /></span>
+              <span class="rating-stars"
+                ><img src="/assets/icons/star.svg" alt=""
+              /></span>
+              <span class="rating-stars"
+                ><img src="/assets/icons/star.svg" alt=""
+              /></span>
+              <span class="ratings-5">5 Ratings</span>
+            </div>
+            <p class="leave-a-review">Leave my review</p>
+          </div>
+        </div>
+
+        <form action="#" method="post">
+          <div
+            class="how-will-you-div d-flex justify-content-between align-items-center"
+          >
+            <p class="how-will-you">How will you rate this product?</p>
+            <div class="star-form-ratings">
+              <img src="assets\icons\green-star.svg" alt="" />
+              <img src="assets\icons\green-star.svg" alt="" />
+              <img src="assets\icons\green-star.svg" alt="" />
+              <img src="assets\icons\green-star.svg" alt="" />
+              <img src="assets\icons\green-star.svg" alt="" />
+            </div>
+          </div>
+          <div class="form-group">
+            <textarea
+              id="message"
+              name="message"
+              rows="1"
+              class="form-control"
+              placeholder="Title....."
+            ></textarea>
+          </div>
+          <div class="form-group">
+            <textarea
+              id="message"
+              name="message"
+              rows="4"
+              class="form-control"
+              placeholder="Any feedback you would like to give your account manager..."
+            ></textarea>
+          </div>
+
+          <button class="btn btn" type="submit">Submit Feedback</button>
+        </form>
+        <div class="feedbacks-block d-flex">
+          <div class="comment">
+            <div class="feedback-image">
+              <img src="assets\images\feedback-image.svg" alt="" />
+            </div>
+          </div>
+
+          <div class="feedback-content">
+            <p class="feedback-name">Leslie Alexander</p>
+            <div class="ratings">
+              <img src="assets\icons\green-star.svg" alt="" /><img
+                src="assets\icons\green-star.svg"
+                alt=""
+              /><img src="assets\icons\green-star.svg" alt="" /><img
+                src="assets\icons\green-star.svg"
+                alt=""
+              />
+              <img src="/assets/icons/star.svg" alt="" />
+            </div>
+            <p class="feedback-date">2nd September, 2023</p>
+            <p class="feedback-messgae">
+              I was looking for a bright light for the kitchen but wanted some
+              item more modern than a strip light. this one is perfect, very
+              bright and looks great. I can't comment on interlation as I had an
+              electrition instal it. Would recommend...
+            </p>
+          </div>
+        </div>
+        <hr />
+        <div class="feedbacks-block d-flex">
+          <div class="comment">
+            <div class="feedback-image">
+              <img src="assets\images\feedback-image.svg" alt="" />
+            </div>
+          </div>
+
+          <div class="feedback-content">
+            <p class="feedback-name">Leslie Alexander</p>
+            <div class="ratings">
+              <img src="assets\icons\green-star.svg" alt="" /><img
+                src="assets\icons\green-star.svg"
+                alt=""
+              /><img src="assets\icons\green-star.svg" alt="" /><img
+                src="assets\icons\green-star.svg"
+                alt=""
+              />
+              <img src="/assets/icons/star.svg" alt="" />
+            </div>
+            <p class="feedback-date">2nd September, 2023</p>
+            <p class="feedback-messgae">
+              I was looking for a bright light for the kitchen but wanted some
+              item more modern than a strip light. this one is perfect, very
+              bright and looks great. I can't comment on interlation as I had an
+              electrition instal it. Would recommend...
+            </p>
+          </div>
+        </div>
+        <hr />
+        <div class="feedbacks-block d-flex">
+          <div class="comment">
+            <div class="feedback-image">
+              <img src="assets\images\feedback-image.svg" alt="" />
+            </div>
+          </div>
+
+          <div class="feedback-content">
+            <p class="feedback-name">Leslie Alexander</p>
+            <div class="ratings">
+              <img src="assets\icons\green-star.svg" alt="" /><img
+                src="assets\icons\green-star.svg"
+                alt=""
+              /><img src="assets\icons\green-star.svg" alt="" /><img
+                src="assets\icons\green-star.svg"
+                alt=""
+              />
+              <img src="/assets/icons/star.svg" alt="" />
+            </div>
+            <p class="feedback-date">2nd September, 2023</p>
+            <p class="feedback-messgae">
+              I was looking for a bright light for the kitchen but wanted some
+              item more modern than a strip light. this one is perfect, very
+              bright and looks great. I can't comment on interlation as I had an
+              electrition instal it. Would recommend...
+            </p>
+          </div>
+        </div>
+        <hr />
+        <!-- Do the numbering here -->
+        <hr />
+      </mat-tab>
+    </mat-tab-group>
+  </section>
+  <section class="similar-products">
+    <div class="first-row d-flex justify-content-between align-items-center">
+      <div class="card" style="width: 18rem">
+        <img
+          src="assets\images\featured-accesories-rings.svg"
+          class="card-img-top"
+          alt="..."
+        />
+        <div class="card-body">
+          <div
+            class="product-name d-flex justify-content-between align-items-center"
+          >
+            <h5 class="card-title">ACCESORIES</h5>
+            <div class="product-btn">
+              <button class="heart nav-icons" color="primary" mat-icon-button>
+                <mat-icon>favorite_border</mat-icon>
+              </button>
+              <button class="cart nav-icons" color="primary" mat-icon-button>
+                <mat-icon>shopping_cart</mat-icon>
+              </button>
+            </div>
+          </div>
+          <p class="blossom-bag-paragraph">Blossom Bag</p>
+          <div class="ratings">
+            <img src="assets\images\star-rating.svg" alt="ratings" />
+            <img src="assets\images\star-rating.svg" alt="ratings" />
+            <img src="assets\images\star-rating.svg" alt="ratings" />
+            <img src="assets\images\star-rating.svg" alt="ratings" />
+            <img src="assets\images\star-rating-unfilled.svg" alt="" />
+            <span class="ratings-43">43 Ratings </span>
+          </div>
+          <div class="product-price">$39.49</div>
+          <div class="product-color-div d-flex">
+            <div class="blue product-color"></div>
+            <div class="yellow product-color"></div>
+            <div class="voilet product-color"></div>
+            <div class="red product-color"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="second-row">
+      <div class="card" style="width: 18rem">
+        <img
+          src="assets\images\featured-accesories-rings.svg"
+          class="card-img-top"
+          alt="..."
+        />
+        <div class="card-body">
+          <div
+            class="product-name d-flex justify-content-between align-items-center"
+          >
+            <h5 class="card-title">ACCESORIES</h5>
+            <div class="product-btn">
+              <button class="heart nav-icons" color="primary" mat-icon-button>
+                <mat-icon>favorite_border</mat-icon>
+              </button>
+              <button class="cart nav-icons" color="primary" mat-icon-button>
+                <mat-icon>shopping_cart</mat-icon>
+              </button>
+            </div>
+          </div>
+          <p class="blossom-bag-paragraph">Blossom Bag</p>
+          <div class="ratings">
+            <img src="assets\images\star-rating.svg" alt="ratings" />
+            <img src="assets\images\star-rating.svg" alt="ratings" />
+            <img src="assets\images\star-rating.svg" alt="ratings" />
+            <img src="assets\images\star-rating.svg" alt="ratings" />
+            <img src="assets\images\star-rating-unfilled.svg" alt="" />
+            <span class="ratings-43">43 Ratings </span>
+          </div>
+          <div class="product-price">$39.49</div>
+          <div class="product-color-div d-flex">
+            <div class="blue product-color"></div>
+            <div class="yellow product-color"></div>
+            <div class="voilet product-color"></div>
+            <div class="red product-color"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr />
+  </section>
+</div>

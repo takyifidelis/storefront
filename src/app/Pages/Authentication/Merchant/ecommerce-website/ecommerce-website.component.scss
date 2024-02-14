@@ -1,0 +1,210 @@
+.main {
+  background-color: yellow;
+}
+nav {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+
+  .nav-icons {
+    margin-left: 0.5rem;
+  }
+  .nav-link.router-link-active {
+    border-bottom: 2px solid green;
+  }
+  .nav-link,
+  input.search::placeholder {
+    color: #fff;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 24px; /* 171.429% */
+    letter-spacing: -0.2px;
+    margin: 0 0.5rem;
+  }
+  .dropdown-content,
+  .menu-btn {
+    display: none;
+  }
+}
+form {
+  gap: 4px;
+
+  input {
+    font-size: 14px;
+    border: none;
+    outline: none;
+    background: #212529;
+    color: #fff;
+  }
+}
+section.subscribe-to-newsletters {
+  background-color: #72757e;
+  padding: 2rem 3rem;
+  h2.subscribe-header {
+    color: #fff;
+    font-family: Inter;
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 60px; /* 125% */
+    letter-spacing: -1.75px;
+  }
+  p.subscribe-paragraph {
+    color: #fff;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 28px; /* 175% */
+    letter-spacing: -0.3px;
+  }
+  .subscribe-btn-div {
+    align-items: center;
+    justify-content: flex-end;
+
+    .subscribe-btn {
+      height: 3rem;
+      color: #1c222b;
+      text-align: center;
+      font-family: Inter;
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 30px;
+      letter-spacing: -0.3px;
+      background-color: transparent;
+      border: 1px solid #1c222b;
+      border-radius: 0;
+    }
+  }
+}
+
+footer {
+  background: #000;
+  padding: 0 0 2rem;
+
+  padding-top: 33px;
+  .footer-contents {
+    margin: 4rem 0;
+
+    .footer-header {
+      color: #fff;
+      font-family: Inter;
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 32px;
+      letter-spacing: -0.3px;
+    }
+
+    .footer-links {
+      margin-bottom: 4rem;
+      h5.links-header {
+        color: #fff;
+        font-family: Inter;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 32px;
+        letter-spacing: -0.3px;
+      }
+      ul {
+        padding-left: 0;
+        li {
+          list-style-type: none;
+
+          a {
+            color: #fff;
+            font-family: Inter;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 24px;
+            letter-spacing: -0.2px;
+            text-decoration: none;
+          }
+        }
+      }
+    }
+  }
+}
+section.duties-taxes {
+  div.duties-taxes-div {
+    padding: 2rem 5rem;
+    background-color: #f9fafb;
+    width: 100%;
+    --bs-gutter-x: 0;
+
+    p.duties-taxes-paragraph {
+      color: #000;
+      font-family: Inter;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 24px;
+      letter-spacing: -0.2px;
+      span.check {
+        margin-right: 1rem;
+      }
+    }
+  }
+}
+
+.mat-mdc-icon-button.mat-primary ::ng-deep {
+  --mdc-icon-button-icon-color: #fff;
+}
+// RESPONSIVE DESIGN
+@media (max-width: 992px) {
+  nav {
+    .nav-content {
+      display: none;
+    }
+    div.navbar-icons {
+      display: none !important;
+    }
+
+    .menu-btn {
+      display: block;
+    }
+    .dropdown-content {
+      position: absolute;
+      right: 0rem;
+      top: 4rem;
+      background-color: #212529;
+      color: #fff;
+      visibility: hidden;
+    }
+    .dropdown-content.open {
+      display: block;
+      visibility: visible;
+      transition: height 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+  }
+  section.subscribe-to-newsletters {
+    text-align: center;
+    .subscribe-btn {
+      display: block;
+      margin: 0 auto;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+  footer {
+    .footer-contents {
+      display: flex;
+      flex-direction: column;
+      margin: 0;
+      .footer-links,
+      .footer-header {
+        margin-bottom: 4rem;
+      }
+    }
+  }
+  section div.duties-taxes-div {
+    flex-direction: column;
+    p.duties-taxes-paragraph {
+      margin-bottom: 4rem;
+    }
+  }
+}

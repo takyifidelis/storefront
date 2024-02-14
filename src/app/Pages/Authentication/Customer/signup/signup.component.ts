@@ -1,22 +1,156 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { AuthService } from '../../Auth/auth.service';
+// import { Subscription } from 'rxjs';
+// import { NgModule } from '@angular/core';
+// import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
+import {
+  FormGroup,
+  FormControl,
+  FormGroupDirective,
+  ReactiveFormsModule,
+  Validators,
+  ValidationErrors,
+  AbstractControl,
+} from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faFacebook, faGoogle } from '@fortawesome/free-brands-svg-icons';
-import { faEnvelope, faEyeSlash } from '@fortawesome/free-regular-svg-icons';
+import { faEnvelope, faEye, faEyeSlash } from '@fortawesome/free-regular-svg-icons';
 import { faCircle, faLock } from '@fortawesome/free-solid-svg-icons';
+import { GoogleLoginProvider, GoogleSigninButtonDirective, SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
 
 @Component({
   selector: 'app-signup-customer',
   standalone: true,
-  imports: [FontAwesomeModule, RouterModule],
+  imports: [FontAwesomeModule, RouterModule, ReactiveFormsModule, CommonModule],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.scss',
 })
-export class SignupCustomerComponent {
+export class SignupCustomerComponent implements OnInit{
   mailIcon = faEnvelope;
   passwordLock = faLock;
-  eyeIcon = faEyeSlash;
   ol = faCircle;
   googleIcon = faGoogle;
   facebookIcon = faFacebook;
+  user: SocialUser | undefined;
+  isHidden: boolean | undefined;
+  validator: string | undefined;
+  validator2: string | undefined; 
+  eyeIcon: any;
+  eyeIcon2: any;
+
+  // Email and Password Validation Below
+  signupForm: FormGroup;
+  error: string | any = null;
+
+  constructor(private authService: AuthService) {
+    this.signupForm = new FormGroup(
+      {
+        email: new FormControl('', [
+          Validators.required,
+          Validators.maxLength(128),
+          Validators.pattern(
+            /^[a-z0-9]+(?:\.[a-z0-9]+)*@[a-z0-9]+(?:\.[a-z0-9]+)+$/
+          ),
+        ]),
+        password: new FormControl('', [
+          Validators.required,
+          this.passwordValidator,
+        ]),
+        confirmPassword: new FormControl('', Validators.required),
+        firstName: new FormControl('', Validators.required),
+      },
+      { validators: this.confirmPasswordValidator }
+    );
+  }
+  onSubmit(form: FormGroupDirective) {
+    if (!form.valid) {
+      return;
+    }
+    const email = form.value.email;
+    const password = form.value.password;
+
+    this.authService.signup(email, password).subscribe(
+      (resData) => {
+        console.log(resData);
+      },
+      (errorMessage) => {
+        console.log(errorMessage);
+        this.error = errorMessage;
+      }
+    );
+    form.reset();
+  }
+  // Custom validator function for password strength and matching
+  passwordValidator(control: AbstractControl): ValidationErrors | null {
+    const value: string = control.value || '';
+    if (!value) {
+      return null; // Don't validate empty value
+    }
+    const hasUpperCase = /[A-Z]+/.test(value);
+    const hasLowerCase = /[a-z]+/.test(value);
+    const hasNumeric = /\d+/.test(value);
+    const hasMinLength = value.length >= 10;
+    const valid = hasUpperCase && hasLowerCase && hasNumeric && hasMinLength;
+    return !valid ? { passwordStrength: true } : null;
+  }
+  // Custom validator function for matching passwords
+  confirmPasswordValidator(control: AbstractControl): ValidationErrors | null {
+    const password = control.get('password')?.value;
+    const confirmPassword = control.get('confirmPassword')?.value;
+    if (password !== confirmPassword) {
+      return { passwordsNotMatching: true };
+    }
+    return null;
+  }
+
+  // Function to check various conditions of password
+  checkPasswordCondition(condition: RegExp): boolean {
+    const passwordControl = this.signupForm.get('password');
+    if (!passwordControl) {
+      return false;
+    }
+    const password = passwordControl.value || '';
+    return condition.test(password);
+  }
+  // Usage
+  containsLowerCase(): boolean {
+    return this.checkPasswordCondition(/[a-z]+/);
+  }
+
+  containsUpperCase(): boolean {
+    return this.checkPasswordCondition(/[A-Z]+/);
+  }
+
+  containsNumeric(): boolean {
+    return this.checkPasswordCondition(/\d+/);
+  }
+
+  containsMinTenChar(): boolean {
+    return this.checkPasswordCondition(/^.{10,}$/);
+  }
+
+  ngOnInit(): void {
+    this.isHidden = true;
+    this.validator = 'password';
+    this.validator2 = 'password';
+    this.eyeIcon = faEye;
+    this.eyeIcon2 = faEye;
+  }
+
+  hidePassword() {
+    this.isHidden = false;
+    this.validator = 'text';
+    this.eyeIcon = faEyeSlash;
+  }
+
+  hideConfirmPassword(){
+    this.isHidden = false;
+    this.validator2 ='text'
+    this.eyeIcon2 = faEyeSlash;
+
+  }
+
 }

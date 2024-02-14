@@ -1,0 +1,242 @@
+section.level-up {
+  text-align: center;
+
+  button {
+    font-family: Inter;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 30px; /* 166.667% */
+    letter-spacing: -0.3px;
+    color: #1c222b;
+
+    background-color: transparent; /* Transparent background */
+    border: 1px solid #1c222b;
+    border-radius: 0;
+  }
+  .bg-image {
+    background: linear-gradient(
+        148deg,
+        rgba(255, 255, 255, 0.5) 54.97%,
+        rgba(255, 255, 255, 0) 109.02%
+      ),
+      url("/assets/images/shopping-image.jpeg"), lightgray 50% / cover no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 50rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    h1.home-header {
+      color: #1c222b;
+      font-family: Inter;
+      font-size: 72px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 90px;
+      letter-spacing: -2.3px;
+      text-transform: uppercase;
+      width: 80%;
+    }
+  }
+}
+section.categories {
+  text-align: center;
+
+  .section-header {
+    color: #1c222b;
+    font-family: Inter;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 36px;
+    letter-spacing: -0.5px;
+    margin: 3rem 0;
+  }
+  .category-selections {
+    object-fit: contain;
+    gap: 1.2rem;
+    .accessories-shoe {
+      overflow: hidden;
+    }
+    div.accessories-shoe img.accessories {
+      margin-bottom: 1rem;
+    }
+  }
+  .second-row-percent {
+    margin: 3rem 0;
+    .percent-image-div {
+      .two-ladies {
+        object-fit: inherit;
+      }
+    }
+
+    .percent-block {
+      background-color: #f2f2f2;
+
+      h2.upto-40-percent {
+        color: #1c222b;
+        text-align: center;
+        font-family: Inter;
+        font-size: 48px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 60px;
+        letter-spacing: -1.75px;
+        margin-bottom: 2rem;
+      }
+      p.special-offers {
+        color: #1c222b;
+        text-align: center;
+        margin-bottom: 2rem;
+        font-family: Inter;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 32px;
+        letter-spacing: -0.3px;
+      }
+      button.shop-now {
+        color: #1c222b;
+        text-align: center;
+        font-family: Inter;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 30px;
+        letter-spacing: -0.3px;
+        background-color: transparent;
+        border: 1px solid #1c222b;
+        border-radius: 0;
+        padding: 1rem 3rem;
+        margin-bottom: 4rem;
+      }
+    }
+  }
+}
+section.featured-items {
+  margin: 5rem 0;
+  text-align: center;
+  .featured-items-header {
+    color: #000;
+    font-family: Inter;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 36px;
+    letter-spacing: -0.5px;
+  }
+  .card {
+    text-align: left;
+    margin-top: 2rem;
+  }
+  div.card {
+    border: 0;
+    .card-body {
+      padding: 0;
+    }
+    .card-title {
+      color: #1c222b;
+      font-family: Inter;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 28px;
+      letter-spacing: -0.3px;
+      margin: 0;
+    }
+    .blossom-bag-paragraph {
+      color: #1c222b;
+      font-family: Inter;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 24px;
+      letter-spacing: -0.2px;
+    }
+
+    .product-price {
+      color: #1c222b;
+      font-family: Inter;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 28px;
+      letter-spacing: -0.3px;
+      margin-bottom: 1rem;
+    }
+    div.ratings {
+      margin-bottom: 1rem;
+      .ratings-43 {
+        color: #1c222b;
+        font-family: Inter;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 24px;
+        letter-spacing: -0.2px;
+        margin-left: 2.5rem;
+      }
+    }
+    div.product-color-div {
+      div.product-color {
+        width: 17px;
+        height: 17px;
+        margin-right: 0.5rem;
+        margin-bottom: 1rem;
+      }
+      .blue {
+        background-color: #1b4dff;
+      }
+      div.yellow {
+        background-color: #ffd027;
+      }
+      div.voilet {
+        background-color: #8f0ea2;
+      }
+      div.red {
+        background-color: #e92215;
+      }
+    }
+  }
+}
+
+@media (max-width: 992px) {
+  section.categories {
+    // display: none;
+    .category-selections {
+      flex-direction: column;
+      .accessories-shoe {
+        overflow: hidden;
+      }
+    }
+  }
+  section.level-up .bg-image h1.h1.home-header {
+    color: #1c222b;
+    text-align: center;
+    font-family: Inter;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 44px;
+    letter-spacing: -0.5px;
+  }
+  .container-fluid {
+    margin: 0;
+    padding: 0;
+    --bs-gutter-x: 0;
+    .second-row-percent {
+      display: flex;
+      flex-direction: column;
+      img.two-ladies {
+        max-width: 100%;
+        height: auto;
+      }
+    }
+  }
+  .card {
+    display: block;
+    margin: 0 auto;
+  }
+}
