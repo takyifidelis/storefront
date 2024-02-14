@@ -35,7 +35,14 @@ export const routes: Routes = [
   { path: 'page-creator', component: PageCreatorComponent },
   { path: 'template-editor', component: TemplateEditorComponent, 
   children: [
-    { path: '', component: EcommerceWebsiteComponent },
+    { path: '', component: EcommerceWebsiteComponent ,
+    children: [
+      { path: 'home', component: HomeEcommerceComponent },
+      { path: 'about-us', component: AboutUsComponent },
+      { path: 'contact-us', component: ContactUsComponent },
+      {path: '', redirectTo:'home', pathMatch:'full'}
+    ]
+    }
   ]
 
   },
@@ -60,7 +67,7 @@ export const routes: Routes = [
     path: 'ecommerce',
     component: EcommerceWebsiteComponent,
     children: [
-      { path: '', component: HomeEcommerceComponent },
+      { path: 'home', component: HomeEcommerceComponent },
       { path: 'about-us', component: AboutUsComponent },
       { path: 'contact-us', component: ContactUsComponent },
     ],
