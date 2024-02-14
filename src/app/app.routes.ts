@@ -29,7 +29,6 @@ import { ReviewComponent } from './Pages/Authentication/Merchant/ecommerce-websi
 
 export const routes: Routes = [
   { path: '', component: LandingPageComponent },
-  // { path: '', component: EcommerceWebsiteComponent },
   { path: 'login', component: LoginComponent },
   { path: 'forget-password', component: ForgottenPasswordComponent },
   { path: 'Sign-up-merchant', component: SignupMerchantComponent },
@@ -40,22 +39,27 @@ export const routes: Routes = [
   { path: 'merchant-onboarding-1', component: OnboardingStepOneComponent },
   { path: 'merchant-onboarding-2', component: OnboardingStepTwoComponent },
   { path: 'merchant-onboarding-3', component: OnboardingStepThreeComponent },
-  { path: 'template-editor', component: TemplateEditorComponent, 
-  children: [
-    { path: '', component: EcommerceWebsiteComponent ,
+  {
+    path: 'template-editor',
+    component: TemplateEditorComponent,
     children: [
-      { path: 'home', component: HomeEcommerceComponent },
-      { path: 'about-us', component: AboutUsComponent },
-      { path: 'contact-us', component: ContactUsComponent },
-      {path: '', redirectTo:'home', pathMatch:'full'}
-    ]
-    }
-  ]
-
+      {
+        path: '',
+        component: EcommerceWebsiteComponent,
+        children: [
+          { path: 'home', component: HomeEcommerceComponent },
+          { path: 'about-us', component: AboutUsComponent },
+          { path: 'contact-us', component: ContactUsComponent },
+          { path: 'shop', component: ReviewComponent },
+          { path: '', redirectTo: 'home', pathMatch: 'full' },
+        ],
+      },
+    ],
   },
   {
     path: 'customer',
-    component: CustomerDashboardComponent  },
+    component: CustomerDashboardComponent,
+  },
   {
     path: 'merchant',
     component: MerchantDashboardComponent,
@@ -74,9 +78,11 @@ export const routes: Routes = [
     path: 'ecommerce',
     component: EcommerceWebsiteComponent,
     children: [
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: HomeEcommerceComponent },
       { path: 'about-us', component: AboutUsComponent },
       { path: 'contact-us', component: ContactUsComponent },
+      { path: 'shop', component: ReviewComponent },
     ],
   },
 
