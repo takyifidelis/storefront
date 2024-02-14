@@ -140,15 +140,16 @@
                   </svg>
 
                   <input
+                    [type]="!showPassword ? 'password' : 'text'"
                     id="password"
                     placeholder="Password"
                     formControlName="password"
                     name="password"
                   />
                 </div>
-                <div (click)="hidePassword()">
+                <button (click)="onShowPassword()" class="eye-icon">
                   <fa-icon class="icon" [icon]="eyeIcon"></fa-icon>
-                </div>
+                </button>
               </div>
             </div>
             <span
@@ -182,7 +183,7 @@
                     />
                   </svg>
                   <input
-                    type="{{ validator2 }}"
+                    [type]="!showConfirmedPassword ? 'password' : 'text'"
                     id="confirm-password"
                     placeholder="Password"
                     name="confirm-password"
@@ -190,9 +191,9 @@
                   />
                 </div>
 
-                <div (click)="hideConfirmPassword()">
-                  <fa-icon class="icon-2" [icon]="eyeIcon2"></fa-icon>
-                </div>
+                <button (click)="onShowConfirmedPassword()" class="eye-icon">
+                  <fa-icon class="icon" [icon]="eyeIcon2"></fa-icon>
+                </button>
               </div>
               <span
                 class="help-block"

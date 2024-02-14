@@ -152,9 +152,14 @@ form::-webkit-scrollbar {
           }
         }
 
-        // .icon-2 {
-        //   margin-left: 12.6875rem;
-        // }
+        .eye-icon {
+          border: none;
+          width: 24px;
+          height: 20px;
+          border-radius: 50%;
+          background-color: #fff;
+          color: gray;
+        }
       }
     }
     .checks {
@@ -241,9 +246,10 @@ form::-webkit-scrollbar {
       }
     }
 
-    button {
+    .button button {
       display: flex;
-      width: 448px;
+      width: 28rem;
+      height: 56px;
       padding: 13px 20px;
       justify-content: center;
       align-items: center;

@@ -121,7 +121,7 @@ form::-webkit-scrollbar {
         }
       }
     }
-    
+
     .last-name {
       display: flex;
       flex-direction: column;
@@ -214,10 +214,14 @@ form::-webkit-scrollbar {
           letter-spacing: -0.2px;
           padding-left: 12px;
         }
-
-        // .icon-2 {
-        //   margin-left: 12.4375rem;
-        // }
+        .eye-icon {
+          border: none;
+          width: 24px;
+          height: 20px;
+          border-radius: 50%;
+          color: gray;
+          background-color: #fff;
+        }
       }
     }
     .checks {
@@ -304,7 +308,7 @@ form::-webkit-scrollbar {
       }
     }
 
-    button {
+    .button button {
       display: flex;
       width: 448px;
       padding: 13px 20px;
