@@ -7,7 +7,6 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [FormsModule, CommonModule],
   templateUrl: './auth.component.html',
-  styleUrl: './auth.component.scss',
 })
 export class AuthComponent {
   isLoginMode = true;
