@@ -18,9 +18,11 @@ import { MerchantAnalyticsComponent } from './Pages/Dashboard/Merchant/component
 import { EcommerceWebsiteComponent } from './Pages/Authentication/Merchant/ecommerce-website/ecommerce-website.component';
 import { PageCreatorComponent } from './Pages/Dashboard/Merchant/components/page-creator/page-creator.component';
 import { AuthComponent } from './Pages/Authentication/Auth/auth.component';
+import { CustomerDashboardComponent } from './Pages/Dashboard/Customer/customer-dashboard/customer-dashboard.component';
 import { HomeEcommerceComponent } from './Pages/Authentication/Merchant/ecommerce-website/home-ecommerce/home-ecommerce.component';
 import { AboutUsComponent } from './Pages/Authentication/Merchant/ecommerce-website/about-us/about-us.component';
 import { ContactUsComponent } from './Pages/Authentication/Merchant/ecommerce-website/contact-us/contact-us.component';
+import { ReviewComponent } from './Pages/Authentication/Merchant/ecommerce-website/review/review.component';
 
 export const routes: Routes = [
   { path: '', component: LandingPageComponent },
@@ -31,8 +33,16 @@ export const routes: Routes = [
   { path: 'Sign-up-customer', component: SignupCustomerComponent },
   { path: 'email-token-verification', component: TokenAuthComponent },
   { path: 'reset-password', component: ResetPassowrdComponent },
-  { path: 'template-editor', component: TemplateEditorComponent },
   { path: 'page-creator', component: PageCreatorComponent },
+  { path: 'template-editor', component: TemplateEditorComponent, 
+  children: [
+    { path: '', component: EcommerceWebsiteComponent },
+  ]
+
+  },
+  {
+    path: 'customer',
+    component: CustomerDashboardComponent  },
   {
     path: 'merchant',
     component: MerchantDashboardComponent,

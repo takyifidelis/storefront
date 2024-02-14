@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { DataService } from '../../../../../Services/data.service';
 
 @Component({
   selector: 'app-merchant-customers',
@@ -8,5 +9,5 @@ import { Component } from '@angular/core';
   styleUrl: './merchant-customers.component.scss'
 })
 export class MerchantCustomersComponent {
-
+  constructor(public dataService: DataService) {}
 }
