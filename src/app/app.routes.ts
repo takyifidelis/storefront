@@ -25,6 +25,7 @@ import { ContactUsComponent } from './Pages/Authentication/Merchant/ecommerce-we
 import { OnboardingStepOneComponent } from './Pages/Authentication/CommonComponent/onboarding-step-one/onboarding-step-one.component';
 import { OnboardingStepTwoComponent } from './Pages/Authentication/CommonComponent/onboarding-step-two/onboarding-step-two.component';
 import { OnboardingStepThreeComponent } from './Pages/Authentication/CommonComponent/onboarding-step-three/onboarding-step-three.component';
+import { ReviewComponent } from './Pages/Authentication/Merchant/ecommerce-website/review/review.component';
 
 export const routes: Routes = [
   { path: '', component: LandingPageComponent },
