@@ -34,6 +34,7 @@ import {
   faLock,
 } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from '../../Auth/auth.service';
+import { faEye } from '@fortawesome/free-regular-svg-icons';
 
 @Component({
   selector: 'app-login',
@@ -59,6 +60,7 @@ export class LoginComponent implements OnInit {
   googleIcon = faGoogle;
   facebookIcon = faFacebook;
   eyeIcon = faEyeSlash;
+  showPassword = false;
 
   @ViewChild('search') search!: ElementRef;
 
@@ -106,4 +108,9 @@ export class LoginComponent implements OnInit {
     );
     form.reset();
   }
+
+  onShowPassword() {
+    this.showPassword = !this.showPassword;
+    this.eyeIcon = faEye;
+    }
 }

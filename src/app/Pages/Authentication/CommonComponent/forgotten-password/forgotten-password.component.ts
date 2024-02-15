@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { EmailNotificationComponent } from './email-notification/email-notification.component';
 import { TokenAuthComponent } from '../token-auth/token-auth.component';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
@@ -10,7 +9,6 @@ import { Router, RouterModule } from '@angular/router';
   standalone: true,
   imports: [
     FontAwesomeModule, 
-    EmailNotificationComponent, 
     TokenAuthComponent,
     FormsModule,
     RouterModule
