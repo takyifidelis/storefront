@@ -1,6 +1,7 @@
 .main {
   background-color: yellow;
 }
+
 nav {
   padding-top: 2rem;
   padding-bottom: 2rem;
@@ -27,6 +28,32 @@ nav {
     display: none;
   }
 }
+.edit-btn-block {
+  display: none;
+  .edit-btn {
+    border-radius: 50%;
+    background-color: red;
+    margin-right: 2rem;
+    box-shadow: 0px 2px 8px -2px rgba(0, 0, 0, 0.25);
+  }
+}
+.input-link-div {
+  margin-top: 1rem;
+
+  .input-link {
+    padding: 0.5rem 6rem 0.5rem 0.5rem;
+    color: #aaa;
+    font-family: Roboto;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    outline: none;
+    border: none;
+    border-color: transparent;
+  }
+}
+
 form {
   gap: 4px;
 

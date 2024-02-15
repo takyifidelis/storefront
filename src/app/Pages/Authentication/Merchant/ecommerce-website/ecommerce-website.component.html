@@ -10,7 +10,7 @@
       >
         <mat-icon>menu</mat-icon>
       </button>
-  
+
       <div
         class="collapse navbar-collapse d-flex justify-content-center"
         id="navbarNavAltMarkup"
@@ -45,18 +45,21 @@
             />
           </form>
         </div>
-  
+
         <div class="navbar-nav dropdown-content" id="dropdownMenu">
           <a class="nav-link" href="#">Home</a>
           <a class="nav-link" href="#">About Us</a>
           <a class="nav-link" href="#">Contact Us</a>
           <a class="nav-link" href="#">Shop</a>
           <a class="nav-link" href="#"
-            ><fa-icon [icon]="searchIcon" style="color: #fff"></fa-icon>Search</a
+            ><fa-icon [icon]="searchIcon" style="color: #fff"></fa-icon
+            >Search</a
           >
         </div>
       </div>
-      <div class="navbar-icons d-flex justify-content-between align-items-center">
+      <div
+        class="navbar-icons d-flex justify-content-between align-items-center"
+      >
         <button class="heart nav-icons" color="primary" mat-icon-button>
           <mat-icon>favorite_border</mat-icon>
         </button>
@@ -69,9 +72,32 @@
       </div>
     </div>
   </nav>
+  <div class="edit-btn-block">
+    <button class="edit-btn" mat-icon-button (click)="openFileInput()">
+      <mat-icon>edit</mat-icon>
+    </button>
+    <input type="file" name="" #fileInput style="display: none" />
+    <button class="edit-btn" mat-icon-button>
+      <mat-icon>link</mat-icon>
+    </button>
+    <button class="edit-btn" mat-icon-button>
+      <mat-icon>delete</mat-icon>
+    </button>
+    <div class="input-link-div">
+      <input
+        type="text"
+        class="input-link"
+        name="input-link"
+        id=""
+        placeholder="Input Link here"
+      />
+    </div>
+  </div>
   <router-outlet></router-outlet>
   <section class="duties-taxes">
-    <div class="duties-taxes-div d-flex justify-content-between container-fluid">
+    <div
+      class="duties-taxes-div d-flex justify-content-between container-fluid"
+    >
       <p class="duties-taxes-paragraph">
         <span class="check">✔</span> Duties and Taxes Guaranteed
       </p>
@@ -89,16 +115,17 @@
       </p>
     </div>
   </section>
-  
+
   <section class="subscribe-to-newsletters">
     <div class="row">
       <div class="col">
         <h2 class="subscribe-header">Subscribe to Newsletters</h2>
         <p class="subscribe-paragraph">
-          Be aware of upcoming sales and events. Receive gifts and special offers!
+          Be aware of upcoming sales and events. Receive gifts and special
+          offers!
         </p>
       </div>
-  
+
       <div class="col col-sm subscribe-btn-div d-flex">
         <button class="btn btn-primary subscribe-btn">SUBSCRIBE NOW</button>
       </div>
@@ -110,7 +137,7 @@
         <div class="col">
           <h4 class="footer-header">SHOPNEST</h4>
         </div>
-  
+
         <div class="col footer-links">
           <h5 class="links-header">FEATURES</h5>
           <ul>
@@ -139,7 +166,7 @@
             <li><a href="#">Contact us</a></li>
           </ul>
         </div>
-  
+
         <div class="col footer-links">
           <h5 class="links-header">PAYMENT & DELIVERY</h5>
           <ul>

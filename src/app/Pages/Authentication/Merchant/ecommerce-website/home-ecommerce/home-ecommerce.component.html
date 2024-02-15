@@ -1,4 +1,32 @@
 <div class="container-fluid">
+  <div class="edit-btn-block">
+    <button class="edit-btn" mat-icon-button (click)="openFileInput()">
+      <mat-icon>edit</mat-icon>
+    </button>
+    <input
+      type="file"
+      name=""
+      #fileInput
+      style="display: none"
+      (change)="onselectFile($event)"
+    />
+    <button class="edit-btn" mat-icon-button (click)="showLink()">
+      <mat-icon>link</mat-icon>
+    </button>
+    <button class="edit-btn" mat-icon-button>
+      <mat-icon>delete</mat-icon>
+    </button>
+    <div class="input-link-div" *ngIf="showInputLink">
+      <input
+        type="text"
+        class="input-link"
+        name="inputlink"
+        id="input-link"
+        placeholder="Input Link here"
+      />
+    </div>
+  </div>
+
   <section class="container-fluid d-flex level-up">
     <div class="bg-image">
       <h1 class="h1 home-header">
@@ -10,7 +38,7 @@
   <section class="categories container-fluid">
     <div class="section-header">CATEGORIES</div>
     <div class="d-flex category-selections justify-content-between">
-      <img class="" src="assets\images\ecommerce-home-dresses.svg" alt="" />
+      <img class="" [src]="url" alt="" />
       <img class="" src="assets\images\ecommerce-home-tops.svg" alt="" />
       <div class="d-flex flex-column accessories-shoe">
         <div class="">
