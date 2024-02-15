@@ -1,5 +1,6 @@
 .edit-btn-block {
-  width: 20%;
+  width: 25%;
+
   .edit-btn {
     border-radius: 50%;
     background-color: #fff;
@@ -16,7 +17,7 @@
 .overlay {
   position: absolute;
   top: 70%; /* Adjust as needed */
-  left: 70%; /* Adjust as needed */
+  left: 50%; /* Adjust as needed */
   transform: translate(-50%, -50%);
   padding: 20px;
 }
@@ -94,8 +95,8 @@ section.categories {
     margin: 3rem 0;
   }
   .category-selections {
-    object-fit: contain;
-    gap: 1.2rem;
+    object-fit: fill;
+    gap: 1rem;
     .accessories-shoe {
       overflow: hidden;
     }
@@ -107,7 +108,8 @@ section.categories {
     margin: 3rem 0;
     .percent-image-div {
       .two-ladies {
-        object-fit: inherit;
+        object-fit: cover;
+        width: 100%;
       }
     }
 
