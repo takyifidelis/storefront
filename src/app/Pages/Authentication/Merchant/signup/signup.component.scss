@@ -361,3 +361,39 @@ form::-webkit-scrollbar {
     }
   }
 }
+
+@media only screen and (max-width: 900px) {
+  .bg {
+    display: none;
+  }
+
+  .frame-2{
+
+    .frame-2-container{
+      width: 338px;
+      .login-input{
+        width: 328px;
+      }
+
+      .mobile-view{
+        width: 245px;
+      }
+
+      .checks{
+        display: none;
+      }
+      .button button {
+        width: 338px;
+      }
+
+      // .txt{
+      //   width: 338px;
+      //   // display: flex;
+      // }
+    }
+    
+  }
+
+  
+}
+
