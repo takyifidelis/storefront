@@ -50,7 +50,7 @@ export const routes: Routes = [
           { path: 'home', component: HomeEcommerceComponent },
           { path: 'about-us', component: AboutUsComponent },
           { path: 'contact-us', component: ContactUsComponent },
-          { path: 'shop', component: ReviewComponent },
+
           { path: '', redirectTo: 'home', pathMatch: 'full' },
         ],
       },
