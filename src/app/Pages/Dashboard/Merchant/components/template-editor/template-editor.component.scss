@@ -80,7 +80,7 @@ z-index:3;
   mat-drawer-content {
     margin-left: 248px;
     justify-content: center;
-    display: flex;
+    // display: flex;
     flex-wrap: wrap;
     padding-top: 40px;
   }
@@ -155,7 +155,80 @@ nav{
 }
 
 
+.template{
+    justify-content: space-evenly; 
+    align-items: center;
+    z-index: 109; 
+    position: absolute; 
+    background: rgba(246, 246, 246, 0.70); 
+    left: 5rem; 
+    top: 14%; 
+    // display: none; 
+    // max-height: 60%; 
+    overflow-y:auto; 
+    h3{
+        font-size: 18px;
+    }
+    
+}
 
+.color-palette-extension{
+    z-index: 109; 
+    position: absolute; 
+    background: rgba(246, 246, 246, 0.70); 
+    left: 20.5rem; 
+    top: 33%; 
+    // display: none; 
+    // max-height: 60%; 
+    padding: 1.5rem 2rem;
+    width: fit-content;
+    height: fit-content;
+}
 
+.shapes{
+    background: rgba(255, 255, 255, 0.70);
+    z-index: 109; 
+    position: absolute; 
+    background: rgba(246, 246, 246, 0.70); 
+    left: 5rem; 
+    top: 22.5%; 
+    width: fit-content;
+}
 
+.pages{
+    background: rgba(255, 255, 255, 0.70);
+    z-index: 109; 
+    position: absolute; 
+    left: 5rem; 
+    top: 40%; 
+    width: fit-content;
+    padding: 18px 32px 200px;
+}
 
+#layers{
+    background: rgba(255, 255, 255, 0.70);
+    z-index: 109; 
+    position: absolute; 
+    left: 5rem; 
+    top: 48%; 
+    width: fit-content;
+    max-width: 12rem;
+    span{
+    text-align: justify;
+    } 
+}
+
+.upload-modal{
+    input, button{
+        border-radius: 0;
+    }
+    .save{
+        width: 206px;
+        height: 40px;
+    }
+    .mybtn{
+        background-color: #00284C;
+        color: white;
+        font-size: 20px;
+    }
+}

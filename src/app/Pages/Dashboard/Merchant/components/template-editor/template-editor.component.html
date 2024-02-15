@@ -30,127 +30,337 @@
                 </span>
             </nav>
         </header>
-        <div class="template row p-3 ms-2" style="z-index: 109; position: absolute; background: rgba(246, 246, 246, 0.70); left: 5rem; top: 22%">
+        <div class="template row ms-2" [style.display]="isTemplateVisible ? 'block' : 'none'">
             <section>
                 <h1>H1 Heading 64px</h1>
                 <h2>H2 Heading 48px</h2>
                 <h3>H3 Heading 24px</h3>
                 <h4>H4 Heading 16px</h4>
                 <hr>
-                <div class="d-flex flex-column"  style="gap: 8px;">
-                    <span class="row g-1" style="justify-content: center;">
-                        <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
-                            <svg width="25" height="25" >
-                                <rect width="25" height="25" fill="#15616B" />
-                            </svg>
-                        </div>
-                        <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
-                            <svg width="25" height="25">
-                                <rect width="25" height="25" fill="#219BAB" />
-                            </svg>
-                        </div>
-                        <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
-                            <svg width="25" height="25">
-                                <rect width="25" height="25" fill="#54CEDE" />
-                            </svg>
-                        </div>
-                        <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
-                            <svg width="25" height="25">
-                                <rect width="25" height="25" fill="#AAE6EE" />
-                            </svg>
-                        </div>
-                        <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
-                            <svg width="25" height="25">
-                                <rect width="25" height="25" fill="#FFFFFF" />
-                            </svg>
-                        </div>
-                    </span>
-                    <span class="row g-1" style="justify-content: center;">
-                        <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
-                            <svg width="25" height="25">
-                                <rect width="25" height="25" fill="#15616B" />
-                            </svg>
-                        </div>
-                        <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
-                            <svg width="25" height="25">
-                                <rect width="25" height="25" fill="#114D55" />
-                            </svg>
-                        </div>
-                        <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
-                            <svg width="25" height="25">
-                                <rect width="25" height="25" fill="#0E4248" />
-                            </svg>
-                        </div>
-                        <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
-                            <svg width="25" height="25">
-                                <rect width="25" height="25" fill="#0D3A40" />
-                            </svg>
-                        </div>
-                        <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
-                            <svg width="25" height="25">
-                                <rect width="25" height="25" fill="Black" />
-                            </svg>
-                        </div>
-                    </span>
-                    <span class="row g-1" style="justify-content: center;">
-                        <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
-                            <svg width="25" height="25">
-                                <rect width="25" height="25" fill="#FFFFFF" />
-                            </svg>
-                        </div>
-                        <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
-                            <svg width="25" height="25">
-                                <rect width="25" height="25" fill="#D4D4D4" />
-                            </svg>
-                        </div>
-                        <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
-                            <svg width="25" height="25">
-                                <rect width="25" height="25" fill="#808080" />
-                            </svg>
-                        </div>
-                        <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
-                            <svg width="25" height="25">
-                                <rect width="25" height="25" fill="#4D4D4D" />
-                            </svg>
-                        </div>
-                        <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
-                            <svg width="25" height="25">
-                                <rect width="25" height="25" fill="#4D4D4D" />
-                            </svg>
-                        </div>
-                    </span>
+                <div class="d-flex"  style="gap: 0.5rem; align-items: center;justify-content: space-evenly;">
+                    <div class="d-flex flex-column" style="gap: 0.5rem; ">
+                        <span class="row g-1" style="justify-content: center;">
+                            <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
+                                <svg width="31.4" height="33.5" >
+                                    <rect width="31.4" height="33.5" fill="#15616B" />
+                                </svg>
+                            </div>
+                            <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
+                                <svg width="31.4" height="33.5">
+                                    <rect width="31.4" height="33.5" fill="#219BAB" />
+                                </svg>
+                            </div>
+                            <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
+                                <svg width="31.4" height="33.5">
+                                    <rect width="31.4" height="33.5" fill="#54CEDE" />
+                                </svg>
+                            </div>
+                            <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
+                                <svg width="31.4" height="33.5">
+                                    <rect width="31.4" height="33.5" fill="#AAE6EE" />
+                                </svg>
+                            </div>
+                            <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
+                                <svg width="31.4" height="33.5">
+                                    <rect width="31.4" height="33.5" fill="#FFFFFF" />
+                                </svg>
+                            </div>
+                        </span>
+                        <span class="row g-1" style="justify-content: center;">
+                            <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
+                                <svg width="31.4" height="33.5">
+                                    <rect width="31.4" height="33.5" fill="#15616B" />
+                                </svg>
+                            </div>
+                            <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
+                                <svg width="31.4" height="33.5">
+                                    <rect width="31.4" height="33.5" fill="#114D55" />
+                                </svg>
+                            </div>
+                            <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
+                                <svg width="31.4" height="33.5">
+                                    <rect width="31.4" height="33.5" fill="#0E4248" />
+                                </svg>
+                            </div>
+                            <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
+                                <svg width="31.4" height="33.5">
+                                    <rect width="31.4" height="33.5" fill="#0D3A40" />
+                                </svg>
+                            </div>
+                            <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
+                                <svg width="31.4" height="33.5">
+                                    <rect width="31.4" height="33.5" fill="Black" />
+                                </svg>
+                            </div>
+                        </span>
+                        <span class="row g-1" style="justify-content: center;">
+                            <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
+                                <svg width="31.4" height="33.5">
+                                    <rect width="31.4" height="33.5" fill="#FFFFFF" />
+                                </svg>
+                            </div>
+                            <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
+                                <svg width="31.4" height="33.5">
+                                    <rect width="31.4" height="33.5" fill="#D4D4D4" />
+                                </svg>
+                            </div>
+                            <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
+                                <svg width="31.4" height="33.5">
+                                    <rect width="31.4" height="33.5" fill="#808080" />
+                                </svg>
+                            </div>
+                            <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
+                                <svg width="31.4" height="33.5">
+                                    <rect width="31.4" height="33.5" fill="#4D4D4D" />
+                                </svg>
+                            </div>
+                            <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
+                                <svg width="31.4" height="33.5">
+                                    <rect width="31.4" height="33.5" fill="#4D4D4D" />
+                                </svg>
+                            </div>
+                        </span>
+                    </div>
+                    <svg (click)="showHideDiv('isColorVisible')" xmlns="http://www.w3.org/2000/svg" width="12" height="29" viewBox="0 0 12 29" fill="none">
+                        <path d="M12 14.5L0.750001 28.7894L0.750002 0.21058L12 14.5Z" fill="#222222"/>
+                      </svg>
+                </div>
+                <hr>
+                <div class="d-flex" style="justify-content: space-evenly; align-items: center;">
+                    <img src="/assets/images/editor-small-card.svg" alt="" srcset="">
+                    <img src="/assets/images/editor-small-card.svg" alt="" srcset="">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="29" viewBox="0 0 12 29" fill="none">
+                        <path d="M12 14.5L0.750001 28.7894L0.750002 0.21058L12 14.5Z" fill="#222222"/>
+                      </svg>
+                </div>
+                <hr>
+                <div class="d-flex" style="justify-content: space-evenly; align-items: center;">
+                    <img src="/assets/images/editor-small-card-2.svg" alt="" srcset="">
+                    <img src="/assets/images/editor-small-card-2.svg" alt="" srcset="">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="29" viewBox="0 0 12 29" fill="none">
+                        <path d="M12 14.5L0.750001 28.7894L0.750002 0.21058L12 14.5Z" fill="#222222"/>
+                      </svg>
+                </div>
+                <hr>
+                <div style="display: flex; flex-direction: column; gap: 0.55rem;">
+                    <button style="
+                        color: var(--white, #FFF);
+text-align: center;
+font-family: Roboto;
+font-size: 16.019px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+width: 100%; 
+height: 2rem; 
+background-color: #15616B; 
+border: none;">Button</button>
+                    <button style="border-radius:  0.5rem;width: 100%; height: 2rem; background-color: #15616B; border: none;">Button</button>
                 </div>
             </section>
             <section>
             </section>
          </div>
+         <div class="color-palette-extension row" [style.display]="isColorVisible ? 'block' : 'none'">
+            <section class="d-flex flex-column" style="gap: 0.5rem; ">
+                <span class="row g-1" style="justify-content: center;">
+                    <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
+                        <svg width="31.4" height="33.5" >
+                            <rect width="31.4" height="33.5" fill="#E91E63" />
+                        </svg>
+                    </div>
+                    <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
+                        <svg width="31.4" height="33.5">
+                            <rect width="31.4" height="33.5" fill="#9C27B0" />
+                        </svg>
+                    </div>
+                    <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
+                        <svg width="31.4" height="33.5">
+                            <rect width="31.4" height="33.5" fill="#3F51B5" />
+                        </svg>
+                    </div>
+                    <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
+                        <svg width="31.4" height="33.5">
+                            <rect width="31.4" height="33.5" fill="#2196F3" />
+                        </svg>
+                    </div>
+                    <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
+                        <svg width="31.4" height="33.5">
+                            <rect width="31.4" height="33.5" fill="#03A9F4" />
+                        </svg>
+                    </div>
+                    <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
+                        <svg width="31.4" height="33.5">
+                            <rect width="31.4" height="33.5" fill="#00BCD4" />
+                        </svg>
+                    </div>
+                </span>
+                <span class="row g-1" style="justify-content: center;">
+                    <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
+                        <svg width="31.4" height="33.5">
+                            <rect width="31.4" height="33.5" fill="#CDDC39" />
+                        </svg>
+                    </div>
+                    <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
+                        <svg width="31.4" height="33.5">
+                            <rect width="31.4" height="33.5" fill="#FFEB3B" />
+                        </svg>
+                    </div>
+                    <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
+                        <svg width="31.4" height="33.5">
+                            <rect width="31.4" height="33.5" fill="#FFC107" />
+                        </svg>
+                    </div>
+                    <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
+                        <svg width="31.4" height="33.5">
+                            <rect width="31.4" height="33.5" fill="#FF9800" />
+                        </svg>
+                    </div>
+                    <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
+                        <svg width="31.4" height="33.5">
+                            <rect width="31.4" height="33.5" fill="#E04C1E" />
+                        </svg>
+                    </div>
+                    <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
+                        <svg width="31.4" height="33.5">
+                            <rect width="31.4" height="33.5" fill="#F44336" />
+                        </svg>
+                    </div>
+                </span>
+                <span class="row g-1" style="justify-content: center;">
+                    <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
+                        <svg width="31.4" height="33.5">
+                            <rect width="31.4" height="33.5" fill="#795548" />
+                        </svg>
+                    </div>
+                    <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
+                        <svg width="31.4" height="33.5">
+                            <rect width="31.4" height="33.5" fill="#9A9A9A" />
+                        </svg>
+                    </div>
+                    <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
+                        <svg width="31.4" height="33.5">
+                            <rect width="31.4" height="33.5" fill="#607D8B" />
+                        </svg>
+                    </div>
+                    <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
+                        <svg width="31.4" height="33.5">
+                            <rect width="31.4" height="33.5" fill="#009688" />
+                        </svg>
+                    </div>
+                    <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
+                        <svg width="31.4" height="33.5">
+                            <rect width="31.4" height="33.5" fill="#4BAB4F" />
+                        </svg>
+                    </div>
+                    <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
+                        <svg width="31.4" height="33.5">
+                            <rect width="31.4" height="33.5" fill="#8BC34A" />
+                        </svg>
+                    </div>
+                    <!-- <input type="color" name="red" id=""> -->
+                </span>
+            </section>
+        </div>
+        <div class="shapes collapse" id="shapes">
+            <section style="display: flex;">
+                <button mat-icon-button>
+                    <mat-icon>circle</mat-icon>
+                </button>
+                <button mat-icon-button>
+                    <mat-icon style="align-items: center; display: flex;"><img src="/assets/images/triangle.svg" alt="" srcset=""></mat-icon>
+                </button>
+                <button mat-icon-button style="padding-bottom: 15px;">
+                    <span style="align-items: center;justify-content: center; display: flex; font-weight:900; text-align: center;">|</span>
+                </button>
+            </section>
+        </div>
+        <div class="pages collapse" id="pages">
+            <button style="display: flex; border: none;background-color: transparent; justify-content: center;align-items: center;"><img src="/assets/icons/plus.svg" alt="" srcset=""> <h3 style="margin: 0;">Add Pages</h3></button>
+            <hr>
+            <div>
+                
+            <button style="display: flex; border: none;background-color: transparent; justify-content: center;align-items: center; margin-bottom: 1.6rem;"><img src="/assets/icons/black_sqr.svg" style="margin: 0 24px 0 0;">Landing page</button>
+            <button style="display: flex; border: none;background-color: transparent; align-items: center;"><img src="/assets/icons/black_sqr.svg" style="margin: 0 24px 0 0;">Contact us</button>
+            </div>
+        </div>
+        
+        <div id="layers" class="collapse row"> 
+            <span class="btn" data-bs-toggle="collapse" data-bs-target="#section1">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="0.5" y="0.5" width="11" height="11" stroke="#00284C"/>
+                    </svg>
+                    header 
+                <svg xmlns="http://www.w3.org/2000/svg" width="6" height="10" viewBox="0 0 6 10" fill="none">
+                    <path d="M5.5 5L0.5 10L0.5 0L5.5 5Z" fill="#00284C"/>
+                </svg>
+                <div id="section1" class="collapse row ms-2">
+                    <span>
+                        <svg width="12" height="5" viewBox="0 0 12 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="12" height="5" fill="#00284C"/>
+                            </svg>
+                            Rectangle</span>
+                    <span>
+                        <svg width="10" height="12" viewBox="0 0 10 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4.256 12V1.216H5.76V12H4.256ZM0.48 2.272V0.896H9.52V2.272H0.48Z" fill="#222222"/>
+                            </svg>
+                            Search</span>
+                </div>
+            </span>
+            <span class="btn" ><svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="0.5" y="0.5" width="11" height="11" stroke="#00284C"/>
+                </svg>
+                Splash image</span>
+            <span class="btn" >
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="0.5" y="0.5" width="11" height="11" stroke="#00284C"/>
+                    </svg>
+                    Section 1 
+                <svg xmlns="http://www.w3.org/2000/svg" width="6" height="10" viewBox="0 0 6 10" fill="none">
+                    <path d="M5.5 5L0.5 10L0.5 0L5.5 5Z" fill="#00284C"/>
+                </svg>
+            </span>
+            <span class="btn" >
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="0.5" y="0.5" width="11" height="11" stroke="#00284C"/>
+                    </svg>
+                    Section 2</span>
+            <span class="btn" >
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="0.5" y="0.5" width="11" height="11" stroke="#00284C"/>
+                    </svg>
+                    Section 3</span>
+            <span class="btn" >
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="0.5" y="0.5" width="11" height="11" stroke="#00284C"/>
+                    </svg>
+                    Footer 
+                <svg xmlns="http://www.w3.org/2000/svg" width="6" height="10" viewBox="0 0 6 10" fill="none">
+                    <path d="M5.5 5L0.5 10L0.5 0L5.5 5Z" fill="#00284C"/>
+                </svg>
+            </span>
+        </div>
     </div>
     <mat-drawer-container class="container-fluid p-0 test" style="position: relative;">
         <mat-drawer #drawer mode="side" [opened]="true" class="side-nav mat-elevated-z4">
             <ul>
-                <li [routerLink]="['home']">
+                <li (click)="showHideDiv('isTemplateVisible')">
                     <button mat-fab style="background-color: white; color: #0085FF;"
                         aria-label="Example icon button with a bookmark icon">
                         <mat-icon>add</mat-icon>
                     </button>
-                    
                 </li>
-                <li [routerLink]="['fav-product']">
+                <li data-bs-toggle="collapse" data-bs-target="#shapes">
                     <button mat-fab style="background-color: white; color: black;">
-                        <mat-icon style="background-color: bla;" fontIcon="crop_square"></mat-icon>
-                        
-                         <!-- <span class="material-symbols-outlined">
-                            crop_square
-                            </span> -->
+                        <mat-icon style="background-color: black;" fontIcon="crop_square"></mat-icon>
                     </button>
                 </li>
-                <li [routerLink]="['history']">
-                    <button  style="background-color: white; color: #0085FF;" mat-fab color="accent" aria-label="Example icon button with a bookmark icon">
+                <li>
+                    <button data-bs-toggle="modal" data-bs-target="#exampleModal"  style="background-color: white; color: #0085FF;" mat-fab color="accent" aria-label="Example icon button with a bookmark icon">
                         <mat-icon>upload_2</mat-icon>
                     </button>
                 </li>
-                
-                <li [routerLink]="['home']">
+                <li data-bs-toggle="collapse" data-bs-target="#pages">
                     <button mat-fab style="background-color: white;"
                         aria-label="Example icon button with a bookmark icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="27" viewBox="0 0 28 30" fill="none">
@@ -166,7 +376,7 @@
                         </svg>
                     </button>
                 </li>
-                <li [routerLink]="['fav-product']">
+                <li data-bs-toggle="collapse" data-bs-target="#layers">
                     <button mat-fab style="background-color: white; color:#FF8A00;"
                         aria-label="Example icon button with a bookmark icon">
                         <mat-icon style="font-size: 28px;">layers</mat-icon>
@@ -176,17 +386,30 @@
         </mat-drawer>
         <mat-drawer-content class="conatainer" style="position: relative;">
             <router-outlet />
-            
-           
-
         </mat-drawer-content>
     </mat-drawer-container>
 </div>
+<div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        
+        <div class="modal-body upload-modal"style="margin:43px">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" >
+                <button class="btn mybtn btn-outline-secondary" type="button" id="button-addon2">Browse</button>
+              </div>
+              <div class="d-flex justify-content-end" style="margin-top:54px">
+                <button class="mybtn save" style="border: none;">save</button>
+              </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
 
 
-
-<!-- <div style="z-index: 99; position: absolute; background-color: red; left: 20%; top: auto"> -->
-    <!-- <div class="editor_controls">
+<!-- <div style="z-index: 99; position: absolute; left: 20%; top: auto">
+    <div class="editor_controls">
     <button mat-icon-button data-element="bold">
         <mat-icon>format_bold</mat-icon>
       </button>
