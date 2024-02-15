@@ -111,6 +111,6 @@ export class LoginComponent implements OnInit {
 
   onShowPassword() {
     this.showPassword = !this.showPassword;
-    this.eyeIcon = faEye;
+    this.eyeIcon = this.showPassword? faEye : faEyeSlash;
     }
 }
