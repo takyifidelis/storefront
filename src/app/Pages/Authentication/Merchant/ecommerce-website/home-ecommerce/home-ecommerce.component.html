@@ -1,38 +1,37 @@
 <div class="container-fluid">
-  <div class="edit-btn-block">
-    <button class="edit-btn" mat-icon-button (click)="openFileInput()">
-      <mat-icon>edit</mat-icon>
-    </button>
-    <input
-      type="file"
-      name=""
-      #fileInput
-      style="display: none"
-      (change)="onselectFile($event)"
-    />
-    <button class="edit-btn" mat-icon-button (click)="showLink()">
-      <mat-icon>link</mat-icon>
-    </button>
-    <button class="edit-btn" mat-icon-button>
-      <mat-icon>delete</mat-icon>
-    </button>
-    <div class="input-link-div" *ngIf="showInputLink">
-      <input
-        type="text"
-        class="input-link"
-        name="inputlink"
-        id="input-link"
-        placeholder="Input Link here"
-      />
-    </div>
-  </div>
-
-  <section class="container-fluid d-flex level-up">
+  <section class="container-fluid d-flex level-up main-comp">
     <div class="bg-image">
       <h1 class="h1 home-header">
         level up your style with our summer collections
       </h1>
       <button class="btn">SHOP NOW</button>
+    </div>
+    <div class="overlay edit-btn-block">
+      <button class="edit-btn" mat-icon-button (click)="openFileInput()">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <input
+        type="file"
+        name=""
+        #fileInput
+        style="display: none"
+        (change)="onselectFile($event)"
+      />
+      <button class="edit-btn" mat-icon-button (click)="showLink()">
+        <mat-icon>link</mat-icon>
+      </button>
+      <button class="edit-btn" mat-icon-button>
+        <mat-icon>delete</mat-icon>
+      </button>
+      <div class="input-link-div" *ngIf="showInputLink">
+        <input
+          type="text"
+          class="input-link"
+          name="inputlink"
+          id="input-link"
+          placeholder="Input Link here"
+        />
+      </div>
     </div>
   </section>
   <section class="categories container-fluid">
@@ -41,30 +40,111 @@
       <img class="" [src]="url" alt="" />
       <img class="" src="assets\images\ecommerce-home-tops.svg" alt="" />
       <div class="d-flex flex-column accessories-shoe">
-        <div class="">
+        <div class="main-comp">
           <img
             class="accessories"
             src="assets\images\ecommerce-home-accesories.svg"
             alt=""
           />
+          <div class="edit-btn-block overlay">
+            <button class="edit-btn" mat-icon-button (click)="openFileInput()">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <input
+              type="file"
+              name=""
+              #fileInput
+              style="display: none"
+              (change)="onselectFile($event)"
+            />
+            <button class="edit-btn" mat-icon-button (click)="showLink()">
+              <mat-icon>link</mat-icon>
+            </button>
+            <button class="edit-btn" mat-icon-button>
+              <mat-icon>delete</mat-icon>
+            </button>
+            <div class="input-link-div" *ngIf="showInputLink">
+              <input
+                type="text"
+                class="input-link"
+                name="inputlink"
+                id="input-link"
+                placeholder="Input Link here"
+              />
+            </div>
+          </div>
         </div>
-        <div class="">
+        <div class="main-comp">
           <img
             class=""
             src="assets\images\ecommerce-home-sneakers.svg"
             alt=""
           />
+          <div class="edit-btn-block overlay">
+            <button class="edit-btn" mat-icon-button (click)="openFileInput()">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <input
+              type="file"
+              name=""
+              #fileInput
+              style="display: none"
+              (change)="onselectFile($event)"
+            />
+            <button class="edit-btn" mat-icon-button (click)="showLink()">
+              <mat-icon>link</mat-icon>
+            </button>
+            <button class="edit-btn" mat-icon-button>
+              <mat-icon>delete</mat-icon>
+            </button>
+            <div class="input-link-div" *ngIf="showInputLink">
+              <input
+                type="text"
+                class="input-link"
+                name="inputlink"
+                id="input-link"
+                placeholder="Input Link here"
+              />
+            </div>
+          </div>
         </div>
       </div>
     </div>
 
     <div class="row second-row-percent">
-      <div class="col percent-image-div">
+      <div class="col percent-image-div main-comp">
         <img
           src="assets\images\ecommerce-home-two-ladies.svg"
           alt="two ladies in red"
           class="two-ladies"
         />
+        <div class="edit-btn-block overlay">
+          <button class="edit-btn" mat-icon-button (click)="openFileInput()">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <input
+            type="file"
+            name=""
+            #fileInput
+            style="display: none"
+            (change)="onselectFile($event)"
+          />
+          <button class="edit-btn" mat-icon-button (click)="showLink()">
+            <mat-icon>link</mat-icon>
+          </button>
+          <button class="edit-btn" mat-icon-button>
+            <mat-icon>delete</mat-icon>
+          </button>
+          <div class="input-link-div" *ngIf="showInputLink">
+            <input
+              type="text"
+              class="input-link"
+              name="inputlink"
+              id="input-link"
+              placeholder="Input Link here"
+            />
+          </div>
+        </div>
       </div>
       <div
         class="col percent-block d-flex flex-column align-items-center justify-content-center"
