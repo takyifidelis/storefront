@@ -152,9 +152,14 @@ form::-webkit-scrollbar {
           }
         }
 
-        // .icon-2 {
-        //   margin-left: 12.6875rem;
-        // }
+        .eye-icon {
+          border: none;
+          width: 24px;
+          height: 20px;
+          border-radius: 50%;
+          background-color: #fff;
+          color: gray;
+        }
       }
     }
     .checks {
@@ -241,9 +246,10 @@ form::-webkit-scrollbar {
       }
     }
 
-    button {
+    .button button {
       display: flex;
-      width: 448px;
+      width: 28rem;
+      height: 56px;
       padding: 13px 20px;
       justify-content: center;
       align-items: center;
@@ -296,7 +302,8 @@ form::-webkit-scrollbar {
 
         .social-icon {
           display: flex;
-          width: 448px;
+          width: 404px;
+          height: 33px;
           padding: 10px 20px;
           justify-content: center;
           align-items: center;
@@ -304,6 +311,8 @@ form::-webkit-scrollbar {
           border-radius: 6px;
           border: 1px solid #d7dfe9;
           background: #fff;
+
+        
 
           p {
             color: #3d4a5c;
@@ -317,6 +326,10 @@ form::-webkit-scrollbar {
             margin-bottom: 2px;
           }
         }
+      }
+
+      .social-icon img{
+        width: 20px;
       }
 
       .forgotten-password {
@@ -348,3 +361,34 @@ form::-webkit-scrollbar {
     }
   }
 }
+
+@media only screen and (max-width: 900px) {
+  .bg {
+    display: none;
+  }
+
+  .frame-2{
+
+    .frame-2-container{
+      width: 338px;
+      .login-input{
+        width: 328px;
+      }
+
+      .mobile-view{
+        width: 245px;
+      }
+
+      .checks{
+        display: none;
+      }
+      .button button {
+        width: 338px;
+      }
+    }
+    
+  }
+
+  
+}
+
