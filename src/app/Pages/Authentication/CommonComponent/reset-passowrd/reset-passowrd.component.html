@@ -27,7 +27,7 @@
           </div>
 
           <div class="password-input">
-            <div>
+            <div class="d-flex" style="gap: 6px">
               <svg
                 width="21"
                 height="21"
@@ -48,6 +48,7 @@
                 (keyup)="validatePassword()"
                 [type]="!showPassword ? 'password' : 'text'"
                 id="email"
+                placeholder="●●●●●"
               />
             </div>
             <div>
@@ -83,6 +84,7 @@
                 (keyup)="validatePassword()"
                 [type]="!showConfirmedPassword ? 'password' : 'text'"
                 id="email"
+                placeholder="●●●●●"
               />
             </div>
             <div>
