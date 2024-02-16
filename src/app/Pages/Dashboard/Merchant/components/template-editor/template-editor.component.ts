@@ -28,15 +28,14 @@ export class TemplateEditorComponent  implements AfterViewInit{
   isColorVisible: boolean = false;
   isShapesVisible: boolean = false;
   isPagesVisible:boolean = false;
-  isEditable: boolean = false;
   fontType: string[]=["Arial", "Helvetica", "Times New Roman", "Verdana"]
   fontSize:number = 0
   fontName:string = ""
   fontColor:string = ""
   constructor(private elementRef: ElementRef<HTMLElement>, public dataservice: DataService){ }
   @HostListener ('window:keydown.control.b', ['$event']) makeEditableUi(){
-    this.isEditable  = !this.isEditable
-    if (this.isEditable) {
+    this.dataservice.isEditable  = !this.dataservice.isEditable
+    if (this.dataservice.isEditable) {
       document.querySelectorAll('button').forEach((btn)=>{
         btn.addEventListener('click', ()=>{
           // btn.dataset['element']

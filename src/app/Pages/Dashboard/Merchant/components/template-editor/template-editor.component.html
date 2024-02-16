@@ -386,7 +386,7 @@ border: none;">Button</button>
             </ul>
         </mat-drawer>
         <mat-drawer-content class="conatainer" style="position: relative;" >
-            <div *ngIf="!dataservice.isMobileBool" [ngClass]="!isEditable ? 'my-typograpy-hide' : 'my-typography'">
+            <div *ngIf="!dataservice.isMobileBool" [ngClass]="!dataservice.isEditable ? 'my-typograpy-hide' : 'my-typography'">
                 <input [(ngModel)]="fontColor" (change)="changeFontColor()" type="color" value="#fff" />
                 <select [(ngModel)]="fontName" data-element="fontSize" (click)="changeFontType()" name="cars" id="cars">
                     @for (font of fontType; track font) {

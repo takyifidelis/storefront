@@ -7,5 +7,6 @@ export class DataService {
   merchantDashboardNoProjects: boolean = false;
   doesNotExist = {exist: false, term:''}
   isMobileBool: boolean = false;
+  isEditable: boolean = false;
   constructor() { }
 }

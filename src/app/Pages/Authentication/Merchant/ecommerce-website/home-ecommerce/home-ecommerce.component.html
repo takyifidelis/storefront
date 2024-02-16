@@ -6,7 +6,7 @@
       </h1>
       <button class="btn">SHOP NOW</button>
     </div>
-    <div class="overlay edit-btn-block">
+    <!-- <div [ngClass]="!dataservice.isEditable ? 'd-none' : 'overlay edit-btn-block'" >
       <button class="edit-btn" mat-icon-button>
         <mat-icon>edit</mat-icon>
       </button>
@@ -26,53 +26,88 @@
           placeholder="Input Link here"
         />
       </div>
-    </div>
+    </div> -->
   </section>
   <section class="categories container-fluid">
     <div class="section-header">CATEGORIES</div>
     <div class="d-flex category-selections justify-content-between main-comp">
-      <img
+      <div>
+        <img
         class=""
         src="assets/images/ecommerce-home-dresses.svg"
         alt="Image 3"
-      />
-      <img class="" [src]="urls[3]" alt="Image 3" />
-      <div class="edit-btn-block overlay">
-        <button
-          class="edit-btn"
-          mat-icon-button
-          (click)="openFileInput(fileInput3, 3)"
-        >
-          <mat-icon>edit</mat-icon>
-        </button>
-        <input
-          type="file"
-          name=""
-          #fileInput3
-          style="display: none"
-          (change)="onSelectFile($event, 3)"
         />
-        <button class="edit-btn" mat-icon-button (click)="showLink()">
-          <mat-icon>link</mat-icon>
-        </button>
-        <button class="edit-btn" mat-icon-button>
-          <mat-icon>delete</mat-icon>
-        </button>
-        <div class="input-link-div" *ngIf="inputLinkVisibility[2]">
+        <div [ngClass]="!dataservice.isEditable ? 'd-none' : 'overlay edit-btn-block'" >
+          <button
+            class="edit-btn"
+            mat-icon-button
+            (click)="openFileInput(fileInput3, 3)"
+          >
+            <mat-icon>edit</mat-icon>
+          </button>
           <input
-            type="text"
-            class="input-link"
-            name="inputlink"
-            id="input-link"
-            placeholder="Input Link here"
+            type="file"
+            name=""
+            #fileInput3
+            style="display: none"
+            (change)="onSelectFile($event, 3)"
           />
+          <button class="edit-btn" mat-icon-button (click)="showLink()">
+            <mat-icon>link</mat-icon>
+          </button>
+          <button class="edit-btn" mat-icon-button>
+            <mat-icon>delete</mat-icon>
+          </button>
+          <div class="input-link-div" *ngIf="inputLinkVisibility[2]">
+            <input
+              type="text"
+              class="input-link"
+              name="inputlink"
+              id="input-link"
+              placeholder="Input Link here"
+            />
+          </div>
+        </div>
+      </div>
+      <div>
+        <img class="" [src]="urls[3]" alt="Image 3" />
+        <div [ngClass]="!dataservice.isEditable ? 'd-none' : 'overlay edit-btn-block'" >
+          <button
+            class="edit-btn"
+            mat-icon-button
+            (click)="openFileInput(fileInput3, 3)"
+          >
+            <mat-icon>edit</mat-icon>
+          </button>
+          <input
+            type="file"
+            name=""
+            #fileInput3
+            style="display: none"
+            (change)="onSelectFile($event, 3)"
+          />
+          <button class="edit-btn" mat-icon-button (click)="showLink()">
+            <mat-icon>link</mat-icon>
+          </button>
+          <button class="edit-btn" mat-icon-button>
+            <mat-icon>delete</mat-icon>
+          </button>
+          <div class="input-link-div" *ngIf="inputLinkVisibility[2]">
+            <input
+              type="text"
+              class="input-link"
+              name="inputlink"
+              id="input-link"
+              placeholder="Input Link here"
+            />
+          </div>
         </div>
       </div>
 
       <div class="d-flex flex-column accessories-shoe">
         <div class="main-comp">
           <img class="accessories" [src]="urls[4]" alt="Image 4" />
-          <div class="edit-btn-block overlay">
+          <div [ngClass]="!dataservice.isEditable ? 'd-none' : 'overlay edit-btn-block'" >
             <button
               class="edit-btn"
               mat-icon-button
@@ -106,7 +141,7 @@
         </div>
         <div class="main-comp">
           <img class="" [src]="urls[5]" alt="Image 5" />
-          <div class="edit-btn-block overlay">
+          <div [ngClass]="!dataservice.isEditable ? 'd-none' : 'overlay edit-btn-block'" >
             <button
               class="edit-btn"
               mat-icon-button
@@ -144,7 +179,7 @@
     <div class="row second-row-percent">
       <div class="col percent-image-div main-comp">
         <img [src]="urls[6]" alt="two ladies in red" class="two-ladies" />
-        <div class="edit-btn-block overlay">
+        <div [ngClass]="!dataservice.isEditable ? 'd-none' : 'overlay edit-btn-block'" >
           <button
             class="edit-btn"
             mat-icon-button
