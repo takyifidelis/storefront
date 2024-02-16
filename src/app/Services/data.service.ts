@@ -6,5 +6,6 @@ import { Injectable } from '@angular/core';
 export class DataService {
   merchantDashboardNoProjects:boolean = false;
   doesNotExist = {exist:false, term:''}
+  isMobileBool:boolean = false;
   constructor() { }
 }

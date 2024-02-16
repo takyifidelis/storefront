@@ -34,7 +34,7 @@
             routerLinkActive="router-link-active"
             >Contact Us</a
           >
-          <a class="nav-link" href="#">Shop</a>
+          <a class="nav-link">Shop</a>
           <form class="d-flex justify-content-center align-items-center">
             <fa-icon [icon]="searchIcon" style="color: #fff"></fa-icon>
             <input
@@ -47,13 +47,14 @@
         </div>
 
         <div class="navbar-nav dropdown-content" id="dropdownMenu">
-          <a class="nav-link" href="#">Home</a>
-          <a class="nav-link" href="#">About Us</a>
-          <a class="nav-link" href="#">Contact Us</a>
-          <a class="nav-link" href="#">Shop</a>
-          <a class="nav-link" href="#"
-            ><fa-icon [icon]="searchIcon" style="color: #fff"></fa-icon
-            >Search</a
+
+          <a class="nav-link" [routerLink]="['home']">Home</a>
+          <a class="nav-link" [routerLink]="['about-us']">About Us</a>
+          <a class="nav-link" [routerLink]="['contact-us']">Contact Us</a>
+          <a class="nav-link" [routerLink]="['home']">Shop</a>
+          <a class="nav-link" 
+            ><fa-icon [icon]="searchIcon" style="color: #fff"></fa-icon>Search</a
+
           >
         </div>
       </div>
