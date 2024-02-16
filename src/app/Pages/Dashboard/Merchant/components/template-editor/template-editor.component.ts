@@ -9,6 +9,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import { CommonModule } from '@angular/common';
 import { DataService } from '../../../../../Services/data.service';
 import { FormsModule } from '@angular/forms';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-template-editor',
@@ -16,7 +17,7 @@ import { FormsModule } from '@angular/forms';
   imports: [
     RouterModule,CommonModule,FormsModule,
     MatProgressBarModule, MatCardModule, MatButtonModule,
-    MatIconModule, MatSidenavModule,MatMenuModule, 
+    MatIconModule, MatSidenavModule,MatMenuModule, MatTooltipModule
   ],
   templateUrl: './template-editor.component.html',
   styleUrl: './template-editor.component.scss'

@@ -345,24 +345,24 @@ border: none;">Button</button>
     <mat-drawer-container class="container-fluid p-0 test">
         <mat-drawer #drawer mode="side" [opened]="true" class="side-nav mat-elevated-z4">
             <ul>
-                <li (click)="showHideDiv('isTemplateVisible')">
+                <li matTooltip="Add Templates" (click)="showHideDiv('isTemplateVisible')">
                     <button mat-fab style="background-color: white; color: #0085FF;"
                         aria-label="Example icon button with a bookmark icon">
                         <mat-icon>add</mat-icon>
                     </button>
                 </li>
-                <li data-bs-toggle="collapse" data-bs-target="#shapes">
+                <li matTooltip="Add Shapes" data-bs-toggle="collapse" data-bs-target="#shapes">
                     <button mat-fab style="background-color: white; color: black;">
                         <mat-icon style="background-color: black;" fontIcon="crop_square"></mat-icon>
                     </button>
                 </li>
                 <li>
-                    <button data-bs-toggle="modal" data-bs-target="#exampleModal"  style="background-color: white; color: #0085FF;" mat-fab color="accent" aria-label="Example icon button with a bookmark icon">
+                    <button matTooltip="Upload file" data-bs-toggle="modal" data-bs-target="#exampleModal"  style="background-color: white; color: #0085FF;" mat-fab color="accent" aria-label="Example icon button with a bookmark icon">
                         <mat-icon>upload_2</mat-icon>
                     </button>
                 </li>
                 <li data-bs-toggle="collapse" data-bs-target="#pages">
-                    <button mat-fab style="background-color: white;"
+                    <button matTooltip="Add Pages" mat-fab style="background-color: white;"
                         aria-label="Example icon button with a bookmark icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="27" viewBox="0 0 28 30" fill="none">
                             <path
@@ -378,7 +378,7 @@ border: none;">Button</button>
                     </button>
                 </li>
                 <li data-bs-toggle="collapse" data-bs-target="#layers">
-                    <button mat-fab style="background-color: white; color:#FF8A00;"
+                    <button matTooltip="Add Layers" mat-fab style="background-color: white; color:#FF8A00;"
                         aria-label="Example icon button with a bookmark icon">
                         <mat-icon style="font-size: 28px;">layers</mat-icon>
                     </button>

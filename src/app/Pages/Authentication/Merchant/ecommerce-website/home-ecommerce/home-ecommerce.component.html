@@ -31,44 +31,11 @@
   <section class="categories container-fluid">
     <div class="section-header">CATEGORIES</div>
     <div class="d-flex category-selections justify-content-between main-comp">
-      <div>
         <img
         class=""
         src="assets/images/ecommerce-home-dresses.svg"
         alt="Image 3"
         />
-        <div [ngClass]="!dataservice.isEditable ? 'd-none' : 'overlay edit-btn-block'" >
-          <button
-            class="edit-btn"
-            mat-icon-button
-            (click)="openFileInput(fileInput3, 3)"
-          >
-            <mat-icon>edit</mat-icon>
-          </button>
-          <input
-            type="file"
-            name=""
-            #fileInput3
-            style="display: none"
-            (change)="onSelectFile($event, 3)"
-          />
-          <button class="edit-btn" mat-icon-button (click)="showLink()">
-            <mat-icon>link</mat-icon>
-          </button>
-          <button class="edit-btn" mat-icon-button>
-            <mat-icon>delete</mat-icon>
-          </button>
-          <div class="input-link-div" *ngIf="inputLinkVisibility[2]">
-            <input
-              type="text"
-              class="input-link"
-              name="inputlink"
-              id="input-link"
-              placeholder="Input Link here"
-            />
-          </div>
-        </div>
-      </div>
       <div>
         <img class="" [src]="urls[3]" alt="Image 3" />
         <div [ngClass]="!dataservice.isEditable ? 'd-none' : 'overlay edit-btn-block'" >
@@ -177,7 +144,7 @@
     </div>
 
     <div class="row second-row-percent">
-      <div class="col percent-image-div main-comp">
+      <div class="col percent-image-div main-comp p-0">
         <img [src]="urls[6]" alt="two ladies in red" class="two-ladies" />
         <div [ngClass]="!dataservice.isEditable ? 'd-none' : 'overlay edit-btn-block'" >
           <button
@@ -212,7 +179,7 @@
         </div>
       </div>
       <div
-        class="col percent-block d-flex flex-column align-items-center justify-content-center"
+        class="col percent-block d-flex flex-column align-items-center justify-content-center p-0"
       >
         <h2 class="upto-40-percent">UPTO 40% OFF</h2>
         <p class="special-offers">Special offers and great deals</p>
@@ -225,7 +192,7 @@
     <div class="featured-items-header">Featured Items</div>
 
     <div
-      class="card-container d-flex justify-content-between align-items-center"
+      class="card-container container-list-1 d-flex justify-content-between align-items-center"
     >
       <div *ngFor="let num of [0, 1, 2, 3]">
         <!-- Starts from 0 and goes up to 3, inclusive, which is 4 iterations -->
@@ -270,7 +237,7 @@
       </div>
     </div>
     <div
-      class="card-container product-gap d-flex justify-content-between align-items-center"
+      class="card-container container-list-2  product-gap d-flex justify-content-between align-items-center"
     >
       <div *ngFor="let num of [0, 1, 2, 3]">
         <!-- Starts from 0 and goes up to 3, inclusive, which is 4 iterations -->
