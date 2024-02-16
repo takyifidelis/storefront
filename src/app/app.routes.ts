@@ -27,12 +27,14 @@ import { OnboardingStepTwoComponent } from './Pages/Authentication/CommonCompone
 import { OnboardingStepThreeComponent } from './Pages/Authentication/CommonComponent/onboarding-step-three/onboarding-step-three.component';
 import { ReviewComponent } from './Pages/Authentication/Merchant/ecommerce-website/review/review.component';
 import { EmailNotificationComponent } from './Pages/Authentication/CommonComponent/forgotten-password/email-notification/email-notification.component';
+import { AuthTokenComponent } from './Pages/Authentication/CommonComponent/auth-token/auth-token.component';
 
 export const routes: Routes = [
   { path: '', component: LandingPageComponent },
   { path: 'login', component: LoginComponent },
   { path: 'forget-password', component: ForgottenPasswordComponent },
   { path: 'email-notification', component: EmailNotificationComponent },
+  { path: 'auth-token', component: AuthTokenComponent },
   { path: 'Sign-up-merchant', component: SignupMerchantComponent },
   { path: 'Sign-up-customer', component: SignupCustomerComponent },
   { path: 'email-token-verification', component: TokenAuthComponent },
