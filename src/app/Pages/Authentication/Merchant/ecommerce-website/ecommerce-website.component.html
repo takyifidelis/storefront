@@ -34,12 +34,16 @@
             routerLinkActive="router-link-active"
             >Contact Us</a
           >
+
+          <a class="nav-link">Shop</a>
+
           <a
             class="nav-link"
             [routerLink]="['shop']"
             routerLinkActive="router-link-active"
             >Shop</a
           >
+
           <form class="d-flex justify-content-center align-items-center">
             <fa-icon [icon]="searchIcon" style="color: #fff"></fa-icon>
             <input
@@ -52,6 +56,7 @@
         </div>
 
         <div class="navbar-nav dropdown-content" id="dropdownMenu">
+
           <a class="nav-link" [routerLink]="['home']">Home</a>
           <a class="nav-link" [routerLink]="['about-us']">About Us</a>
           <a class="nav-link" [routerLink]="['contact-us']">Contact Us</a>
@@ -59,6 +64,7 @@
           <a class="nav-link"
             ><fa-icon [icon]="searchIcon" style="color: #fff"></fa-icon
             >Search</a
+
           >
         </div>
       </div>
@@ -77,6 +83,27 @@
       </div>
     </div>
   </nav>
+  <div class="edit-btn-block">
+    <button class="edit-btn" mat-icon-button (click)="openFileInput()">
+      <mat-icon>edit</mat-icon>
+    </button>
+    <input type="file" name="" #fileInput style="display: none" />
+    <button class="edit-btn" mat-icon-button>
+      <mat-icon>link</mat-icon>
+    </button>
+    <button class="edit-btn" mat-icon-button>
+      <mat-icon>delete</mat-icon>
+    </button>
+    <div class="input-link-div">
+      <input
+        type="text"
+        class="input-link"
+        name="input-link"
+        id=""
+        placeholder="Input Link here"
+      />
+    </div>
+  </div>
   <router-outlet></router-outlet>
   <section class="duties-taxes">
     <div

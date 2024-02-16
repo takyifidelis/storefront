@@ -1,3 +1,46 @@
+.edit-btn-block {
+  width: 25%;
+
+  .edit-btn {
+    border-radius: 50%;
+    background-color: #fff;
+    margin-right: 0.5rem;
+    width: 1.9rem;
+    height: 1.7rem;
+    padding: 0;
+    box-shadow: 0px 2px 8px -2px rgba(0, 0, 0, 0.25);
+  }
+}
+.card-container {
+  margin-top: 3rem;
+}
+.main-comp {
+  position: relative;
+}
+.overlay {
+  position: absolute;
+  top: 70%; /* Adjust as needed */
+  left: 50%; /* Adjust as needed */
+  transform: translate(-50%, -50%);
+  padding: 20px;
+}
+
+.input-link-div {
+  margin-top: 0;
+
+  .input-link {
+    padding: 0.5rem 1rem 0.5rem 0.5rem;
+    color: #aaa;
+    font-family: Roboto;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    outline: none;
+    border: none;
+    border-color: transparent;
+  }
+}
 section.level-up {
   text-align: center;
 
@@ -55,8 +98,8 @@ section.categories {
     margin: 3rem 0;
   }
   .category-selections {
-    object-fit: contain;
-    gap: 1.2rem;
+    object-fit: fill;
+    gap: 1rem;
     .accessories-shoe {
       overflow: hidden;
     }
@@ -68,7 +111,9 @@ section.categories {
     margin: 3rem 0;
     .percent-image-div {
       .two-ladies {
-        object-fit: fill;
+
+        object-fit: cover;
+
         width: 100%;
       }
     }
