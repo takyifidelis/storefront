@@ -9,7 +9,7 @@ import { RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faHeart, faStar } from '@fortawesome/free-solid-svg-icons';
 import { MatTabsModule } from '@angular/material/tabs';
-
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-review',
   standalone: true,
@@ -23,11 +23,14 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatMenuModule,
     FontAwesomeModule,
     MatTabsModule,
+    CommonModule,
   ],
   templateUrl: './review.component.html',
   styleUrl: './review.component.scss',
 })
 export class ReviewComponent {
+  isFormDisplayed: boolean = false;
+  selectedImage: string = 'assets/images/ecommerce-sneaker-back-image.svg';
   heartIcon = faHeart;
   starIcon = faStar;
   quantity: number = 1;
@@ -43,5 +46,18 @@ export class ReviewComponent {
       this.quantity--;
       this.amount = this.quantity * 90;
     }
+  }
+  showForm(): void {
+    this.isFormDisplayed = true;
+  }
+  hideForm(): void {
+    this.isFormDisplayed = false;
+  }
+  onSubmit(): void {
+    this.hideForm();
+  }
+
+  switchImage(imageName: string) {
+    this.selectedImage = imageName;
   }
 }

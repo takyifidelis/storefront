@@ -2,7 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faFacebook, faGoogle } from '@fortawesome/free-brands-svg-icons';
-import { faEnvelope, faEyeSlash } from '@fortawesome/free-regular-svg-icons';
+import {
+  faEnvelope,
+  faEyeSlash,
+  faEye,
+} from '@fortawesome/free-regular-svg-icons';
 import { faCircle } from '@fortawesome/free-solid-svg-icons';
 import {
   FormGroup,
@@ -26,10 +30,14 @@ import { AuthService } from '../../Auth/auth.service';
 })
 export class SignupMerchantComponent {
   mailIcon = faEnvelope;
-  eyeIcon = faEyeSlash;
-  googleIcon = faGoogle;
   facebookIcon = faFacebook;
+  googleIcon = faGoogle;
   ol = faCircle;
+  eyeIcon = faEyeSlash;
+  eyeIcon2 = faEyeSlash;
+  showConfirmedPassword: boolean | undefined;
+  showPassword: boolean | undefined;
+
 
   signupForm: FormGroup;
   error: string | any = null;
@@ -121,5 +129,15 @@ export class SignupMerchantComponent {
 
   containsMinTenChar(): boolean {
     return this.checkPasswordCondition(/^.{10,}$/);
+  }
+
+  onShowPassword(){
+    this.showPassword = !this.showPassword;
+    this.eyeIcon = this.showPassword? faEye : faEyeSlash;
+  }
+
+  onShowConfirmedPassword() {
+    this.showConfirmedPassword = !this.showConfirmedPassword;
+    this.eyeIcon2 = this.showConfirmedPassword? faEye : faEyeSlash;
   }
 }

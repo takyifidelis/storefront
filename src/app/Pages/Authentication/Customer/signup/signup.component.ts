@@ -2,10 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../Auth/auth.service';
-// import { Subscription } from 'rxjs';
-// import { NgModule } from '@angular/core';
-// import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
 import {
   FormGroup,
   FormControl,
@@ -28,18 +24,17 @@ import { GoogleLoginProvider, GoogleSigninButtonDirective, SocialAuthService, So
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.scss',
 })
-export class SignupCustomerComponent implements OnInit{
+export class SignupCustomerComponent{
   mailIcon = faEnvelope;
   passwordLock = faLock;
   ol = faCircle;
   googleIcon = faGoogle;
   facebookIcon = faFacebook;
   user: SocialUser | undefined;
-  isHidden: boolean | undefined;
-  validator: string | undefined;
-  validator2: string | undefined; 
-  eyeIcon: any;
-  eyeIcon2: any;
+  showPassword: boolean | undefined;
+  showConfirmedPassword: boolean | undefined;
+  eyeIcon = faEyeSlash;
+  eyeIcon2 = faEyeSlash;
 
   // Email and Password Validation Below
   signupForm: FormGroup;
@@ -132,24 +127,16 @@ export class SignupCustomerComponent implements OnInit{
     return this.checkPasswordCondition(/^.{10,}$/);
   }
 
-  ngOnInit(): void {
-    this.isHidden = true;
-    this.validator = 'password';
-    this.validator2 = 'password';
-    this.eyeIcon = faEye;
-    this.eyeIcon2 = faEye;
+  
+
+  onShowPassword() {
+    this.showPassword = !this.showPassword;
+    this.eyeIcon = this.showPassword? faEye : faEyeSlash;
   }
 
-  hidePassword() {
-    this.isHidden = false;
-    this.validator = 'text';
-    this.eyeIcon = faEyeSlash;
-  }
-
-  hideConfirmPassword(){
-    this.isHidden = false;
-    this.validator2 ='text'
-    this.eyeIcon2 = faEyeSlash;
+  onShowConfirmedPassword(){
+    this.showConfirmedPassword = !this.showConfirmedPassword;
+    this.eyeIcon2 = this.showConfirmedPassword? faEye : faEyeSlash;
 
   }
 
