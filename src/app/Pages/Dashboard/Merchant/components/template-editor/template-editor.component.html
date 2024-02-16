@@ -13,11 +13,11 @@
                 </div>
                 <span class="hire-professional">Hire a professional</span>
                 <div class="d-flex">
-                    <button mat-icon-button>
+                    <button mat-icon-button (click)="isMobile('false')" [ngStyle]="{'color': dataservice.isMobileBool ? '#AAAAAA' : ''}">
                         <mat-icon>desktop_windows</mat-icon>
                     </button>
                     <div class="vertical-line"></div>
-                    <button mat-icon-button style="color: #AAAAAA;">
+                    <button mat-icon-button  (click)="isMobile('true')" [ngStyle]="{'color': dataservice.isMobileBool ? '' : '#AAAAAA'}">
                         <mat-icon>smartphone</mat-icon>
                     </button>
                 </div>
@@ -342,7 +342,7 @@ border: none;">Button</button>
             </span>
         </div>
     </div>
-    <mat-drawer-container class="container-fluid p-0 test" style="position: relative;">
+    <mat-drawer-container class="container-fluid p-0 test">
         <mat-drawer #drawer mode="side" [opened]="true" class="side-nav mat-elevated-z4">
             <ul>
                 <li (click)="showHideDiv('isTemplateVisible')">
@@ -385,8 +385,44 @@ border: none;">Button</button>
                 </li>
             </ul>
         </mat-drawer>
-        <mat-drawer-content class="conatainer" style="position: relative;">
-            <router-outlet />
+        <mat-drawer-content class="conatainer" >
+            <div *ngIf="!dataservice.isMobileBool" [ngClass]="!isEditable ? 'my-typograpy-hide' : 'my-typograpy'">
+                <button mat-icon-button data-element="bold">
+                    <mat-icon>format_bold</mat-icon>
+                  </button>
+                <button mat-icon-button data-element="italic">
+                    <mat-icon>format_italic</mat-icon>
+                  </button>
+                <button mat-icon-button data-element="underline">
+                    <mat-icon>format_underline</mat-icon>
+                </button>
+                <button mat-icon-button data-element="insertUnorderedList">
+                    <mat-icon>toc</mat-icon>
+                </button>
+                <button mat-icon-button data-element="insertOrderedList">
+                    <mat-icon>format_list_numbered_rtl</mat-icon>
+                </button>
+                <button mat-icon-button data-element="justifyLeft">
+                    <mat-icon>format_align_left</mat-icon>
+                </button>
+                <button mat-icon-button data-element="justifyCenter">
+                    <mat-icon>format_align_center</mat-icon>
+                </button>
+                <button mat-icon-button data-element="justifyRight">
+                    <mat-icon>format_align_right</mat-icon>
+                </button>
+                <button mat-icon-button data-element="justifyFull">
+                    <mat-icon>format_align_justify</mat-icon>
+                </button>
+                <button mat-icon-button data-element="createLink">
+                    <mat-icon>link</mat-icon>
+                </button>
+            </div>
+            <div *ngIf="dataservice.isMobileBool" style="display: flex; width: 100%; height: 100%;justify-content: center; ">
+                <iframe title="mobile checker" [ngClass]="dataservice.isMobileBool ? 'mobile1' : 'desktop1'" src="/ecommerce/home"></iframe> 
+            </div>
+            <!-- <div  style="display: flex; width: 100%;"></div> -->
+            <router-outlet *ngIf="!dataservice.isMobileBool"/>
         </mat-drawer-content>
     </mat-drawer-container>
 </div>
@@ -409,46 +445,6 @@ border: none;">Button</button>
   </div>
 
 
-<!-- <div style="z-index: 99; position: absolute; left: 20%; top: auto">
-    <div class="editor_controls">
-    <button mat-icon-button data-element="bold">
-        <mat-icon>format_bold</mat-icon>
-      </button>
-    <button mat-icon-button data-element="italic">
-        <mat-icon>format_italic</mat-icon>
-      </button>
-    <button mat-icon-button data-element="underline">
-        <mat-icon>format_underline</mat-icon>
-    </button>
-    <button mat-icon-button data-element="insertUnorderedList">
-        <mat-icon>toc</mat-icon>
-    </button>
-    <button mat-icon-button data-element="insertOrderedList">
-        <mat-icon>format_list_numbered_rtl</mat-icon>
-    </button>
-    <button mat-icon-button data-element="createLink">
-        <mat-icon>link</mat-icon>
-    </button>
-    <button mat-icon-button data-element="justifyLeft">
-        <mat-icon>format_align_left</mat-icon>
-    </button>
-    <button mat-icon-button data-element="justifyCenter">
-        <mat-icon>format_align_center</mat-icon>
-    </button>
-    <button mat-icon-button data-element="justifyRight">
-        <mat-icon>format_align_right</mat-icon>
-    </button>
-    <button mat-icon-button data-element="justifyFull">
-        <mat-icon>format_align_justify</mat-icon>
-    </button>
-    <button mat-icon-button data-element="insertImage">
-        <mat-icon>add_photo_alternate</mat-icon>
-    </button>
-    <button mat-icon-button data-element="fontName">
-        <mat-icon>format_bold</mat-icon>
-      </button>
-    <button mat-icon-button data-element="fontSize">
-        <mat-icon>format_bold</mat-icon>
-    </button>
-</div> -->
-
+<div style="z-index: 99; position: relative;">
+  
+</div> 

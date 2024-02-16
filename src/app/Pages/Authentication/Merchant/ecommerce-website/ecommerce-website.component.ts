@@ -12,11 +12,14 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { CommonModule } from '@angular/common';
+import { DataService } from '../../../../Services/data.service';
 
 @Component({
   selector: 'app-ecommerce-website',
   standalone: true,
   imports: [
+    CommonModule,
     FontAwesomeModule,
     HomeEcommerceComponent,
     ReviewComponent,
@@ -38,7 +41,7 @@ export class EcommerceWebsiteComponent {
   searchIcon = faSearch;
 
   dropDownMenu: HTMLElement | null = null;
-
+  constructor(public dataservice:DataService){}
   toggleBtnFunction() {
     this.dropDownMenu = document.querySelector('#dropdownMenu');
     if (this.dropDownMenu) {

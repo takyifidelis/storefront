@@ -208,3 +208,34 @@ section.duties-taxes {
     }
   }
 }
+
+
+.mobile1{
+  flex-wrap: nowrap; 
+  width: 100%; 
+  display: flex; 
+  align-items: center; 
+  justify-content: space-between;
+  margin: auto 32px;
+  button{
+    display: flex;
+  }
+  
+}
+
+.desktop1{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.mobile-menu-list{
+  display: none;
+}
+.mobile-menu-icon{
+  display: none;
+}
+.mobile-icons{
+  display: none;
+}

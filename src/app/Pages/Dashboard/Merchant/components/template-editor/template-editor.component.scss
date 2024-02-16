@@ -232,3 +232,25 @@ nav{
         font-size: 20px;
     }
 }
+
+.mobile1{
+    width: 375px;
+    height: 100%;
+}
+
+.desktop1{
+    width: 100%;
+}
+
+.my-typography{
+    display :contents;
+    width: fit-content; 
+    position: absolute; 
+    top: 20%; 
+    background: var(--Background, #F6F6F6); 
+    z-index: 100;
+}
+
+.my-typograpy-hide{
+    display: none;
+}
