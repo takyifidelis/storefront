@@ -27,6 +27,7 @@ export class HomeEcommerceComponent {
     3: false,
     4: false,
     5: false,
+    6: false,
   };
 
   @ViewChild('fileInput') fileInput!: ElementRef;
