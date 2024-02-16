@@ -8,12 +8,13 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatMenuModule} from '@angular/material/menu';
 import { CommonModule } from '@angular/common';
 import { DataService } from '../../../../../Services/data.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-template-editor',
   standalone: true,
   imports: [
-    RouterModule,CommonModule,
+    RouterModule,CommonModule,FormsModule,
     MatProgressBarModule, MatCardModule, MatButtonModule,
     MatIconModule, MatSidenavModule,MatMenuModule, 
   ],
@@ -28,6 +29,10 @@ export class TemplateEditorComponent  implements AfterViewInit{
   isShapesVisible: boolean = false;
   isPagesVisible:boolean = false;
   isEditable: boolean = false;
+  fontType: string[]=["Arial", "Helvetica", "Times New Roman", "Verdana"]
+  fontSize:number = 0
+  fontName:string = ""
+  fontColor:string = ""
   constructor(private elementRef: ElementRef<HTMLElement>, public dataservice: DataService){ }
   @HostListener ('window:keydown.control.b', ['$event']) makeEditableUi(){
     this.isEditable  = !this.isEditable
@@ -50,15 +55,15 @@ export class TemplateEditorComponent  implements AfterViewInit{
         });
       this.elementRef.nativeElement.addEventListener("mouseover", (event) =>{
         let target = event.target as HTMLElement
-        console.log(this.elementRef.nativeElement.getElementsByTagName('app-ecommerce-website'));
+        // console.log(this.elementRef.nativeElement.getElementsByTagName('app-ecommerce-website'));
         if (target.childNodes.length > 0 && this.containsTextNodes(target)) {
           target.contentEditable = 'true';
-          console.log("Contenteditable attribute added to:", target);
+          // console.log("Contenteditable attribute added to:", target);
         }
         if (target.getElementsByTagName("img").length) {
           let images = target.getElementsByTagName("img");
           Array.from(images).forEach((image: HTMLElement) => {
-            console.log("Image found:", image);
+            // console.log("Image found:", image);
           });
         }
       })
@@ -71,13 +76,13 @@ export class TemplateEditorComponent  implements AfterViewInit{
           if (el.getElementsByTagName("img").length) {
             let images = el.getElementsByTagName("img");
             Array.from(images).forEach((image: HTMLElement) => {
-              console.log("Image found:", image);
+              // console.log("Image found:", image);
             });
           }
   
           if (el.childNodes.length > 0 && this.containsTextNodes(el)) {
             el.contentEditable = 'true';
-            console.log("Contenteditable attribute added to:", el);
+            // console.log("Contenteditable attribute added to:", el);
           }
         })
         
@@ -143,6 +148,20 @@ export class TemplateEditorComponent  implements AfterViewInit{
       default:
         break;
     }
+  }
+  changeFontSize(){
+    console.log(this.fontSize);
+    document.execCommand(`fontSize`,false, `${this.fontSize}`)
+  }
+
+  changeFontType(){
+    console.log(this.fontName);
+    document.execCommand(`fontName`,false, `${this.fontName}`)
+  }
+
+  changeFontColor(){
+    console.log(this.fontColor);
+    document.execCommand(`foreColor`,false, `${this.fontColor}`)
   }
   ngAfterViewInit() {
     // document.querySelectorAll('button').forEach((btn)=>{

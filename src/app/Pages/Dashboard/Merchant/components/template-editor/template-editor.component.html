@@ -385,23 +385,23 @@ border: none;">Button</button>
                 </li>
             </ul>
         </mat-drawer>
-        <mat-drawer-content class="conatainer" >
-            <div *ngIf="!dataservice.isMobileBool" [ngClass]="!isEditable ? 'my-typograpy-hide' : 'my-typograpy'">
-                <button mat-icon-button data-element="bold">
-                    <mat-icon>format_bold</mat-icon>
-                  </button>
-                <button mat-icon-button data-element="italic">
-                    <mat-icon>format_italic</mat-icon>
-                  </button>
-                <button mat-icon-button data-element="underline">
-                    <mat-icon>format_underline</mat-icon>
-                </button>
-                <button mat-icon-button data-element="insertUnorderedList">
-                    <mat-icon>toc</mat-icon>
-                </button>
-                <button mat-icon-button data-element="insertOrderedList">
-                    <mat-icon>format_list_numbered_rtl</mat-icon>
-                </button>
+        <mat-drawer-content class="conatainer" style="position: relative;" >
+            <div *ngIf="!dataservice.isMobileBool" [ngClass]="!isEditable ? 'my-typograpy-hide' : 'my-typography'">
+                <input [(ngModel)]="fontColor" (change)="changeFontColor()" type="color" value="#fff" />
+                <select [(ngModel)]="fontName" data-element="fontSize" (click)="changeFontType()" name="cars" id="cars">
+                    @for (font of fontType; track font) {
+                        <option [value]="font">{{font}}</option>
+                      }
+                </select>
+                <select [(ngModel)]="fontSize" data-element="fontSize" (click)="changeFontSize()" name="cars" id="cars">
+                    <option default value=1>16</option>
+                    <option value=2>12</option>
+                    <option value=3>24</option>
+                    <option value=4>36</option>
+                    <option value=5>48</option>
+                    <option value=6>64</option>
+                    <option value=7>72</option>
+                </select>
                 <button mat-icon-button data-element="justifyLeft">
                     <mat-icon>format_align_left</mat-icon>
                 </button>
