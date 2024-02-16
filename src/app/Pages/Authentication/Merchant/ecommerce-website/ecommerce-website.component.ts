@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faHeart, faStar } from '@fortawesome/free-regular-svg-icons';
 import { faSearch, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
@@ -41,11 +41,20 @@ export class EcommerceWebsiteComponent {
   searchIcon = faSearch;
 
   dropDownMenu: HTMLElement | null = null;
+
+  @ViewChild('fileInput') fileInput!: ElementRef;
+
+
   constructor(public dataservice:DataService){}
+
   toggleBtnFunction() {
     this.dropDownMenu = document.querySelector('#dropdownMenu');
     if (this.dropDownMenu) {
       this.dropDownMenu.classList.toggle('open');
     }
+  }
+
+  openFileInput() {
+    this.fileInput.nativeElement.click();
   }
 }
