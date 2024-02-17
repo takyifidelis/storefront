@@ -47,3 +47,63 @@
         margin-top:32px;
     }
 }
+
+.store-setup-container{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
+    h1{
+        font-family: Inter;
+        font-size: 1.9rem;
+        font-weight: 700;
+        line-height: 2.6rem;
+        letter-spacing: -0.5px;
+    }
+    .setup-steps-counter{
+        display: flex;
+        width: 578px;
+        flex-direction: column;
+        gap: 12px;
+        h2{
+            font-family:Inter;
+            font-size: 24px;
+            font-weight: 700;
+            line-height: 36px;
+            letter-spacing: -0.5px;
+        }
+        span{
+            font-family: Inter;
+            font-size: 12px;
+            font-weight: 400;
+            line-height: 20px;
+            letter-spacing: -0.2px;
+            color: var(--Colors-Primary-Slate-700,#3D4A5C);
+        }
+        .my-progress-bar{
+            height: 8px;
+            border-radius: 4px;
+            .progress-bar{
+                background: var(--Primary-600, #0408E7);;
+            }
+        }
+        .accordion1 {
+            --bs-accordion-btn-icon-transform: rotate(-180deg);
+            --bs-accordion-btn-icon-transition: transform 0.2s ease-in-out;
+        }
+        .step-number{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            margin-right: 1rem;
+            background-color: #F2F5FF;
+        }
+    }
+}
+
+::-webkit-scrollbar {
+    display: none;
+  }
