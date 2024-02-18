@@ -26,6 +26,9 @@ import { OnboardingStepOneComponent } from './Pages/Authentication/CommonCompone
 import { OnboardingStepTwoComponent } from './Pages/Authentication/CommonComponent/onboarding-step-two/onboarding-step-two.component';
 import { OnboardingStepThreeComponent } from './Pages/Authentication/CommonComponent/onboarding-step-three/onboarding-step-three.component';
 import { ReviewComponent } from './Pages/Authentication/Merchant/ecommerce-website/review/review.component';
+import { ShopComponent } from './Pages/Dashboard/Customer/components/shop/shop.component';
+import { FavoriteProductComponent } from './Pages/Dashboard/Customer/components/favorite-product/favorite-product.component';
+import { HistoryComponent } from './Pages/Dashboard/Customer/components/history/history.component';
 
 export const routes: Routes = [
   { path: '', component: LandingPageComponent },
@@ -59,6 +62,13 @@ export const routes: Routes = [
   {
     path: 'customer',
     component: CustomerDashboardComponent,
+    children:[
+      {path: 'shop', component: ShopComponent},
+      {path: 'fav-product', component: FavoriteProductComponent},
+      {path: 'history', component: HistoryComponent},
+      {path: 'payment-opt', component: ShopComponent},
+      {path: 'orders', component: ShopComponent},
+    ]
   },
   {
     path: 'merchant',
