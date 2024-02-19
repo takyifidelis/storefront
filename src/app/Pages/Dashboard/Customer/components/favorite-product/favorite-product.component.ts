@@ -178,7 +178,8 @@ export class FavoriteProductComponent {
   moreVert(e:dummyUserInterface) {
     this.dialog.open(PurchaseDetailComponent, {
       data: {
-        animal: 'panda',
+        itemName: 'hat',
+        itemPrice: 'hat',
       }, 
         width: '479px', 
         position: {right:'50px', top: '10%'} 
