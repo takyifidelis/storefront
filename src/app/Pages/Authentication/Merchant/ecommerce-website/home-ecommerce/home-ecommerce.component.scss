@@ -285,4 +285,10 @@ section.featured-items {
     display: block;
     margin: 0 auto;
   }
+  .container-list-1{
+    display: none !important;
+  }
+  .container-list-2{
+    flex-direction: column;
+  }
 }

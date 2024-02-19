@@ -28,6 +28,10 @@ import { OnboardingStepThreeComponent } from './Pages/Authentication/CommonCompo
 import { ReviewComponent } from './Pages/Authentication/Merchant/ecommerce-website/review/review.component';
 import { EmailNotificationComponent } from './Pages/Authentication/CommonComponent/forgotten-password/email-notification/email-notification.component';
 import { AuthTokenComponent } from './Pages/Authentication/CommonComponent/auth-token/auth-token.component';
+import { ShopComponent } from './Pages/Dashboard/Customer/components/shop/shop.component';
+import { FavoriteProductComponent } from './Pages/Dashboard/Customer/components/favorite-product/favorite-product.component';
+import { HistoryComponent } from './Pages/Dashboard/Customer/components/history/history.component';
+
 
 export const routes: Routes = [
   { path: '', component: LandingPageComponent },
@@ -63,6 +67,13 @@ export const routes: Routes = [
   {
     path: 'customer',
     component: CustomerDashboardComponent,
+    children:[
+      {path: 'shop', component: ShopComponent},
+      {path: 'fav-product', component: FavoriteProductComponent},
+      {path: 'history', component: HistoryComponent},
+      {path: 'payment-opt', component: ShopComponent},
+      {path: 'orders', component: ShopComponent},
+    ]
   },
   {
     path: 'merchant',

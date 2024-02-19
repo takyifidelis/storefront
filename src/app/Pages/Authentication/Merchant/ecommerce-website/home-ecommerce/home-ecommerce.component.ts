@@ -2,6 +2,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
+import { DataService } from '../../../../../Services/data.service';
 
 @Component({
   selector: 'app-home-ecommerce',
@@ -31,7 +32,7 @@ export class HomeEcommerceComponent {
   };
 
   @ViewChild('fileInput') fileInput!: ElementRef;
-
+constructor(public dataservice:DataService){}
   openFileInput(fileInput: HTMLInputElement, index: number) {
     fileInput.click();
     // Set the visibility of the input link div associated with the clicked button to true
