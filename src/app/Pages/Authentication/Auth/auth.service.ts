@@ -2,35 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
-
-interface SignupResponseData {
-  code: string;
-  message: string;
-  type: string;
-  data?: {
-    id: string;
-    businessName: string;
-    email: string;
-    type: string;
-    verified: boolean;
-    isActive: boolean;
-    mustChangePassword: boolean;
-    canResetPassword: boolean;
-    createdAt: string;
-    updatedAt: string;
-  };
-  error?: {
-    validation: string;
-    message: string;
-    path: string[];
-  }[];
-}
+import { SignupResponseData } from '../Auth/api.model';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   constructor(private http: HttpClient) {}
 
-  signup(
+  signupMerchant(
     businessName: string,
     email: string,
     type: string,
@@ -50,6 +28,28 @@ export class AuthService {
       )
       .pipe(catchError(this.handleError));
   }
+  signupCustomer(
+    firstName: string,
+    lastName: string,
+    email: string,
+    type: string,
+    password: string,
+    confirmPassword: string
+  ) {
+    return this.http
+      .post<SignupResponseData>(
+        'https://storefront-backend-jan-dev-api.vercel.app/api/account/register/local',
+        {
+          firstName,
+          lastName,
+          email,
+          type,
+          password,
+          confirmPassword,
+        }
+      )
+      .pipe(catchError(this.handleError));
+  }
   login(email: string, password: string) {
     return this.http
       .post<SignupResponseData>(
@@ -61,6 +61,19 @@ export class AuthService {
       )
       .pipe(catchError(this.handleError));
   }
+
+  // Verify account
+  verifyAccount(code: string) {
+    return this.http
+      .post<SignupResponseData>(
+        'https://storefront-backend-jan-dev-api.vercel.app/api/account/verify',
+        {
+          code,
+        }
+      )
+      .pipe(catchError(this.handleError));
+  }
+
   private handleError(errorRes: HttpErrorResponse) {
     console.error('Error Response:', errorRes);
     let errorMessage = 'An unknown error occurred!';
@@ -76,6 +89,9 @@ export class AuthService {
         break;
       case 'INVALID_PASSWORD':
         errorMessage = 'Incorrect email or password';
+        break;
+      case 'NOT_FOUND':
+        errorMessage = 'Incorrect token';
         break;
     }
     return throwError(errorMessage);

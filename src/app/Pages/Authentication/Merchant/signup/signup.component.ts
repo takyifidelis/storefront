@@ -73,7 +73,7 @@ export class SignupMerchantComponent {
     const type = 'Business';
 
     this.authService
-      .signup(businessName, email, type, password, confirmPassword)
+      .signupMerchant(businessName, email, type, password, confirmPassword)
       .subscribe(
         (resData) => {
           console.log(resData);

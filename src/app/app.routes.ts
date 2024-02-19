@@ -27,6 +27,7 @@ import { OnboardingStepTwoComponent } from './Pages/Authentication/CommonCompone
 import { OnboardingStepThreeComponent } from './Pages/Authentication/CommonComponent/onboarding-step-three/onboarding-step-three.component';
 import { ReviewComponent } from './Pages/Authentication/Merchant/ecommerce-website/review/review.component';
 import { AuthTokenComponent } from './Pages/Authentication/CommonComponent/auth-token/auth-token.component';
+import { AuthSuccessfulComponent } from './Pages/Authentication/CommonComponent/auth-successful/auth-successful.component';
 
 export const routes: Routes = [
   { path: '', component: LandingPageComponent },
@@ -41,6 +42,7 @@ export const routes: Routes = [
   { path: 'merchant-onboarding-2', component: OnboardingStepTwoComponent },
   { path: 'merchant-onboarding-3', component: OnboardingStepThreeComponent },
   { path: 'Authentication', component: AuthTokenComponent },
+  { path: 'authSuccess', component: AuthSuccessfulComponent },
   {
     path: 'template-editor',
     component: TemplateEditorComponent,

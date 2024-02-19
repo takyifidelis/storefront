@@ -11,38 +11,95 @@
         <h1>Authentication</h1>
         <p>Please kindly enter the code sent to your email</p>
       </div>
-      <div class="auth">
-        <div class="rectangle-wrapper">
-          <div class="rectangle">
-            <label for="auth"></label>
-            <input type="text" id="auth" name="auth" />
+      <form
+        class="form"
+        #authenticate="ngForm"
+        [formGroup]="AuthCode"
+        (ngSubmit)="onSubmit(authenticate)"
+      >
+        <div class="auth">
+          <div class="rectangle-wrapper">
+            <div class="rectangle">
+              <label for="auth"></label>
+              <input
+                type="text"
+                id="auth"
+                name="auth"
+                pattern="\d"
+                maxlength="1"
+                formControlName="keyOne"
+                name="keyOne"
+              />
+            </div>
+            <div class="rectangle">
+              <label for="auth"></label>
+              <input
+                type="text"
+                id="auth"
+                name="auth"
+                pattern="\d"
+                maxlength="1"
+                formControlName="keyTwo"
+                name="keyTwo"
+              />
+            </div>
+            <div class="rectangle">
+              <label for="auth"></label>
+              <input
+                type="text"
+                id="auth"
+                name="auth"
+                pattern="\d"
+                maxlength="1"
+                formControlName="keyThree"
+                name="keyThree"
+              />
+            </div>
+            <div class="rectangle">
+              <label for="auth"></label>
+              <input
+                type="text"
+                id="auth"
+                name="auth"
+                pattern="\d"
+                maxlength="1"
+                formControlName="keyFour"
+                name="keyFour"
+              />
+            </div>
+            <div class="rectangle">
+              <label for="auth"></label>
+              <input
+                type="text"
+                id="auth"
+                name="auth"
+                pattern="\d"
+                maxlength="1"
+                formControlName="keyFive"
+                name="keyFive"
+              />
+            </div>
+            <div class="rectangle">
+              <label for="auth"></label>
+              <input
+                type="text"
+                id="auth"
+                name="auth"
+                pattern="\d"
+                maxlength="1"
+                formControlName="keySix"
+                name="keySix"
+              />
+            </div>
           </div>
-          <div class="rectangle">
-            <label for="auth"></label>
-            <input type="text" id="auth" name="auth" />
+          <div class="text">
+            <p>Didn’t get, <a href="#">Resend</a></p>
           </div>
-          <div class="rectangle">
-            <label for="auth"></label>
-            <input type="text" id="auth" name="auth" />
-          </div>
-          <div class="rectangle">
-            <label for="auth"></label>
-            <input type="text" id="auth" name="auth" />
-          </div>
-          <div class="rectangle">
-            <label for="auth"></label>
-            <input type="text" id="auth" name="auth" />
-          </div>
-          <div class="rectangle">
-            <label for="auth"></label>
-            <input type="text" id="auth" name="auth" />
-          </div>
+          <button class="btn btn-primary" [disabled]="!authenticate.valid">
+            Continue
+          </button>
         </div>
-        <div class="text">
-          <p>Didn’t get, <a href="#">Resend</a></p>
-        </div>
-        <button class="btn btn-primary">Continue</button>
-      </div>
+      </form>
     </div>
   </div>
 </div>

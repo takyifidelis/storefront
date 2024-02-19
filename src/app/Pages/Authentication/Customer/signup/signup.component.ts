@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../Auth/auth.service';
 import {
@@ -49,7 +49,7 @@ export class SignupCustomerComponent {
   signupForm: FormGroup;
   error: string | any = null;
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, private router: Router) {
     this.signupForm = new FormGroup(
       {
         email: new FormControl('', [
@@ -82,10 +82,18 @@ export class SignupCustomerComponent {
     const type = 'Customer';
 
     this.authService
-      .signup(firstName, email, type, password, confirmPassword)
+      .signupCustomer(
+        firstName,
+        lastName,
+        email,
+        type,
+        password,
+        confirmPassword
+      )
       .subscribe(
         (resData) => {
           console.log(resData);
+          this.router.navigate(['Authentication']);
         },
         (errorMessage) => {
           console.log(errorMessage);
