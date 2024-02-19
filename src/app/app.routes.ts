@@ -31,6 +31,7 @@ import { AuthTokenComponent } from './Pages/Authentication/CommonComponent/auth-
 import { ShopComponent } from './Pages/Dashboard/Customer/components/shop/shop.component';
 import { FavoriteProductComponent } from './Pages/Dashboard/Customer/components/favorite-product/favorite-product.component';
 import { HistoryComponent } from './Pages/Dashboard/Customer/components/history/history.component';
+import { PaymentOptionComponent } from './Pages/Dashboard/Customer/components/payment-option/payment-option.component';
 
 
 export const routes: Routes = [
@@ -71,7 +72,7 @@ export const routes: Routes = [
       {path: 'shop', component: ShopComponent},
       {path: 'fav-product', component: FavoriteProductComponent},
       {path: 'history', component: HistoryComponent},
-      {path: 'payment-opt', component: ShopComponent},
+      {path: 'payment-opt', component: PaymentOptionComponent},
       {path: 'orders', component: ShopComponent},
     ]
   },

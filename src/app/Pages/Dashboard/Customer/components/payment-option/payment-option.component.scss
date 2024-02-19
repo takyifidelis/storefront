@@ -1,0 +1,122 @@
+.col h4 {
+  color: #455468;
+  font-family: Inter;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 35px; /* 159.091% */
+  letter-spacing: -0.3px;
+}
+
+.button {
+  border-radius: 6px;
+  border: 1px solid #4a72ff;
+  background: #fff;
+  padding: 6px 12px;
+  align-items: center;
+  gap: 10px;
+
+  p {
+    color: #1b4dff;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: -0.2px;
+    margin: 0;
+  }
+}
+
+.search {
+  width: 253px;
+  padding: 6px 12px;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  border-radius: 6px;
+  background: #f2f5ff;
+
+  input {
+    outline: none;
+    border: none;
+    background: #f2f5ff;
+    color: #1b4dff;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: -0.2px;
+  }
+
+  input::placeholder {
+    color: #1b4dff;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: -0.2px;
+  }
+}
+
+.new-payment {
+  display: flex;
+  padding: 6px 12px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px;
+  background: #0f3cd9;
+  border: none;
+
+  p {
+    color: #fff;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: -0.2px;
+    margin: 0;
+  }
+}
+
+.payment-card-selected {
+  border-radius: 8px;
+  border: 1px solid #0408e7;
+  background: #f5f5ff;
+  padding: 16px;
+
+  .check {
+    border-radius: 8px;
+    border: 1px solid #0408e7;
+    background: #0408e7;
+    display: flex;
+    width: 16px;
+    height: 16px;
+    padding: 3px;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+  }
+}
+
+.payment-card {
+  border-radius: 8px;
+  border: 1px solid #eaecf0;
+  background: #fff;
+  padding: 16px;
+  .selected {
+    border-radius: 8px;
+    border: 1px solid #d0d5dd;
+    background: #fff;
+    display: flex;
+    width: 16px;
+    height: 16px;
+    padding: 3px;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+  }
+}
