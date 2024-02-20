@@ -82,6 +82,20 @@ export class AuthService {
       )
       .pipe(catchError(this.handleError));
   }
+  // Password Verification
+  verifyPassword(code: string) {
+    return this.http
+      .post<SignupResponseData>(
+        'https://storefront-backend-jan-dev-api.vercel.app/api/account/password/resetCode/verify',
+        {
+          code,
+        },
+        {
+          withCredentials: true,
+        }
+      )
+      .pipe(catchError(this.handleError));
+  }
   // Password Reset
   passwordReset(email: string) {
     return this.http

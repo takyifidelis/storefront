@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterModule, Router } from '@angular/router';
+import { RouterModule, Router, ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import {
   FormGroup,
@@ -27,6 +27,7 @@ export class AuthTokenComponent {
   constructor(
     private authService: AuthService,
     private router: Router,
+    private route: ActivatedRoute,
     private formBuilder: FormBuilder
   ) {
     this.AuthCode = new FormGroup({
@@ -38,6 +39,7 @@ export class AuthTokenComponent {
       keySix: new FormControl('', Validators.required),
     });
   }
+
   submitCode(form: FormGroupDirective) {
     if (!form.valid) {
       return;
@@ -64,7 +66,7 @@ export class AuthTokenComponent {
         this.error = errorMessage;
       }
     );
-
+    //
     form.reset();
   }
 }

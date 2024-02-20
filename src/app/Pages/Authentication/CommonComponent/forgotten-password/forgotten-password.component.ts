@@ -60,7 +60,7 @@ export class ForgottenPasswordComponent {
         this.router.navigate(['Email-notification']);
         // Set a timeout to navigate to another component after 3 seconds
         setTimeout(() => {
-          this.router.navigate(['Authentication']);
+          this.router.navigate(['Password-Authentication']);
         }, 3000);
       },
       (errorMessage) => {

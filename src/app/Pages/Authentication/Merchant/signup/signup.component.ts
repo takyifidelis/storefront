@@ -77,7 +77,9 @@ export class SignupMerchantComponent {
       .subscribe(
         (resData) => {
           console.log(resData);
-          this.router.navigate(['Authentication']);
+          this.router.navigate(['Authentication'], {
+            queryParams: { action: 'signup' },
+          });
         },
         (errorMessage) => {
           console.log(errorMessage);

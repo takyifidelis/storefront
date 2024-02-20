@@ -43,8 +43,11 @@ export const routes: Routes = [
   { path: 'merchant-onboarding-2', component: OnboardingStepTwoComponent },
   { path: 'merchant-onboarding-3', component: OnboardingStepThreeComponent },
   { path: 'Authentication', component: AuthTokenComponent },
+  { path: 'Password-Authentication', component: TokenAuthComponent },
+
   { path: 'authSuccess', component: AuthSuccessfulComponent },
   { path: 'Email-notification', component: EmailNotificationComponent },
+  { path: 'reset-password', component: ResetPassowrdComponent },
   {
     path: 'template-editor',
     component: TemplateEditorComponent,
