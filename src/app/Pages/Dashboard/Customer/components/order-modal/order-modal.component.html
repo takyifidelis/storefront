@@ -1,0 +1,57 @@
+<h2 mat-dialog-title>Order Details</h2>
+<mat-dialog-content>
+  <div class="container-fluid">
+    <span class="d-flex flex-column">
+      <div class="d-flex justify-content-between">
+        <div class="detail-type">
+          <button style="background: #fff; border: none" (click)="isActive(1)">
+            Purchased Items
+          </button>
+        </div>
+        <div class="detail-type">
+          <button style="background: #fff; border: none" (click)="isActive(2)">
+            Shipping Address
+          </button>
+        </div>
+        <div class="detail-type">
+          <button style="background: #fff; border: none" (click)="isActive(3)">
+            Payment Method
+          </button>
+        </div>
+      </div>
+    </span>
+    <div *ngIf="active">
+      <div class="purchase-item">
+        <img src="/assets/images/chanel-big-hat.svg" alt="" />
+        <span class="d-flex flex-column">
+          <span class="d-flex" style="align-items: end">
+            <span class="item-name" style="width: 187px">Channel</span>
+            <span class="item-collection-type">$100</span>
+          </span>
+          <span class="item-collection-type">Hat</span>
+        </span>
+      </div>
+      <hr />
+      <div class="total-price">
+        <span class="price-tag detail-type">Total Price</span>
+        <span class="price">$200</span>
+      </div>
+    </div>
+    <div *ngIf="active1" class="text">
+      <p>Ghana</p>
+      <p>Anaji Ssnit</p>
+      <p>C.K Mann Road 19</p>
+      <p style="color: #667085 !important">+233502456097</p>
+    </div>
+    <div *ngIf="active2" style="margin-top: 6px; gap: 15px; display: flex">
+      <div>
+        <img src="/assets/icons/master-card.svg" alt="" />
+      </div>
+      <div>
+        <p style="color: #455468">Dean Andrew</p>
+        <p style="color: #455468">0038347668173</p>
+        <p style="color: #667085 !important">Expiry 06/2024</p>
+      </div>
+    </div>
+  </div>
+</mat-dialog-content>
