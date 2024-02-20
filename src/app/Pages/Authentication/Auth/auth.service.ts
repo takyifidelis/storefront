@@ -2,7 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
-import { ForgetPasswordResponse, SignupResponseData } from '../Auth/api.model';
+import {
+  ForgetPasswordResponse,
+  ResetPasswordResponse,
+  SignupResponseData,
+} from '../Auth/api.model';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -63,6 +67,9 @@ export class AuthService {
         {
           email: email,
           password: password,
+        },
+        {
+          withCredentials: true,
         }
       )
       .pipe(catchError(this.handleError));
@@ -103,6 +110,20 @@ export class AuthService {
         'https://storefront-backend-jan-dev-api.vercel.app/api/account/request/password/reset',
         {
           email,
+        },
+        {
+          withCredentials: true,
+        }
+      )
+      .pipe(catchError(this.handleError));
+  }
+  newPasswordReset(password: string, confirmPassword: string) {
+    return this.http
+      .put<ResetPasswordResponse>(
+        'https://storefront-backend-jan-dev-api.vercel.app/api/account/password/reset',
+        {
+          password,
+          confirmPassword,
         },
         {
           withCredentials: true,

@@ -6,223 +6,231 @@
         succeed. Customize, manage, <br />engage. We're here for you. Let's
         thrive together!
       </p>
-      <img src="/assets/images/reset-frame.jpg" alt="" srcset="" />
+      <img src="/assets/images/reset-frame.jpg" alt="" />
     </div>
-    <div class="frame-2" style="height: 100vh">
-      <div class="frame-2-sub-container">
-        <div class="title">
-          <p>Storefront</p>
-        </div>
-        <div class="text-heading">
-          <div class="reset-password">
-            <h1>Reset Password</h1>
+    <form
+      class="form"
+      #ResetPasswordForm="ngForm"
+      [formGroup]="ResetPassword"
+      (ngSubmit)="onSubmit(ResetPasswordForm)"
+    >
+      <div class="frame-2" style="height: 100vh">
+        <div class="frame-2-sub-container">
+          <div class="title">
+            <p>Storefront</p>
           </div>
-          <div class="text">
-            <p>Don't Remember password? No Problem. Reset and Restore</p>
+          <div class="text-heading">
+            <div class="reset-password">
+              <h1>Reset Password</h1>
+            </div>
+            <div class="text">
+              <p>Don't Remember password? No Problem. Reset and Restore</p>
+            </div>
           </div>
-        </div>
-        <div class="password-wrapper">
-          <div class="password">
-            <label for="password">Password</label>
-          </div>
+          <div class="password-wrapper">
+            <div class="password">
+              <label for="password">Password</label>
+            </div>
 
-          <div class="password-input">
-            <div class="d-flex" style="gap: 6px">
-              <svg
-                width="21"
-                height="21"
-                viewBox="0 0 21 21"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M10.4995 13V14.875M10.4995 13C11.3625 13 12.062 12.3004 12.062 11.4375C12.062 10.5746 11.3625 9.875 10.4995 9.875C9.63657 9.875 8.93701 10.5746 8.93701 11.4375C8.93701 12.3004 9.63657 13 10.4995 13ZM7.68701 7.375V4.5625C7.68701 3.81658 7.98333 3.10121 8.51077 2.57376C9.03822 2.04632 9.75359 1.75 10.4995 1.75C11.2454 1.75 11.9608 2.04632 12.4882 2.57376C13.0157 3.10121 13.312 3.81658 13.312 4.5625V7.375M4.24951 7.375H16.7495C17.0947 7.375 17.3745 7.65482 17.3745 8V16.75C17.3745 17.0952 17.0947 17.375 16.7495 17.375H4.24951C3.90433 17.375 3.62451 17.0952 3.62451 16.75V8C3.62451 7.65482 3.90433 7.375 4.24951 7.375Z"
-                  stroke="#5E718D"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+            <div class="password-input">
+              <div class="d-flex" style="gap: 6px">
+                <svg
+                  width="21"
+                  height="21"
+                  viewBox="0 0 21 21"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M10.4995 13V14.875M10.4995 13C11.3625 13 12.062 12.3004 12.062 11.4375C12.062 10.5746 11.3625 9.875 10.4995 9.875C9.63657 9.875 8.93701 10.5746 8.93701 11.4375C8.93701 12.3004 9.63657 13 10.4995 13ZM7.68701 7.375V4.5625C7.68701 3.81658 7.98333 3.10121 8.51077 2.57376C9.03822 2.04632 9.75359 1.75 10.4995 1.75C11.2454 1.75 11.9608 2.04632 12.4882 2.57376C13.0157 3.10121 13.312 3.81658 13.312 4.5625V7.375M4.24951 7.375H16.7495C17.0947 7.375 17.3745 7.65482 17.3745 8V16.75C17.3745 17.0952 17.0947 17.375 16.7495 17.375H4.24951C3.90433 17.375 3.62451 17.0952 3.62451 16.75V8C3.62451 7.65482 3.90433 7.375 4.24951 7.375Z"
+                    stroke="#5E718D"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+
+                <input
+                  name="password"
+                  formControlName="password"
+                  [type]="!showPassword ? 'password' : 'text'"
+                  placeholder="●●●●●●●●●●"
                 />
-              </svg>
-
-              <input
-                [(ngModel)]="password"
-                (keyup)="validatePassword()"
-                [type]="!showPassword ? 'password' : 'text'"
-                id=""
-                placeholder="●●●●●●●●●●"
-              />
-            </div>
-            <div>
-              <button (click)="onShowPassword()" class="eye-icon">
-                <fa-icon class="icon" [icon]="eyeIcon"></fa-icon>
-              </button>
+              </div>
+              <div>
+                <button (click)="onShowPassword()" class="eye-icon">
+                  <fa-icon class="icon" [icon]="eyeIcon"></fa-icon>
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="password-wrapper">
-          <div class="password">
-            <label for="password">Confirmed Password</label>
-          </div>
+          <div class="password-wrapper">
+            <div class="password">
+              <label for="password">Confirmed Password</label>
+            </div>
 
-          <div class="password-input">
-            <div class="margin">
-              <svg
-                width="21"
-                height="21"
-                viewBox="0 0 21 21"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M10.4995 13V14.875M10.4995 13C11.3625 13 12.062 12.3004 12.062 11.4375C12.062 10.5746 11.3625 9.875 10.4995 9.875C9.63657 9.875 8.93701 10.5746 8.93701 11.4375C8.93701 12.3004 9.63657 13 10.4995 13ZM7.68701 7.375V4.5625C7.68701 3.81658 7.98333 3.10121 8.51077 2.57376C9.03822 2.04632 9.75359 1.75 10.4995 1.75C11.2454 1.75 11.9608 2.04632 12.4882 2.57376C13.0157 3.10121 13.312 3.81658 13.312 4.5625V7.375M4.24951 7.375H16.7495C17.0947 7.375 17.3745 7.65482 17.3745 8V16.75C17.3745 17.0952 17.0947 17.375 16.7495 17.375H4.24951C3.90433 17.375 3.62451 17.0952 3.62451 16.75V8C3.62451 7.65482 3.90433 7.375 4.24951 7.375Z"
-                  stroke="#5E718D"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+            <div class="password-input">
+              <div class="margin">
+                <svg
+                  width="21"
+                  height="21"
+                  viewBox="0 0 21 21"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M10.4995 13V14.875M10.4995 13C11.3625 13 12.062 12.3004 12.062 11.4375C12.062 10.5746 11.3625 9.875 10.4995 9.875C9.63657 9.875 8.93701 10.5746 8.93701 11.4375C8.93701 12.3004 9.63657 13 10.4995 13ZM7.68701 7.375V4.5625C7.68701 3.81658 7.98333 3.10121 8.51077 2.57376C9.03822 2.04632 9.75359 1.75 10.4995 1.75C11.2454 1.75 11.9608 2.04632 12.4882 2.57376C13.0157 3.10121 13.312 3.81658 13.312 4.5625V7.375M4.24951 7.375H16.7495C17.0947 7.375 17.3745 7.65482 17.3745 8V16.75C17.3745 17.0952 17.0947 17.375 16.7495 17.375H4.24951C3.90433 17.375 3.62451 17.0952 3.62451 16.75V8C3.62451 7.65482 3.90433 7.375 4.24951 7.375Z"
+                    stroke="#5E718D"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                <input
+                  formControlName="confirmPassword"
+                  name="confirmPassword"
+                  [type]="!showConfirmedPassword ? 'password' : 'text'"
+                  placeholder="●●●●●●●●●●"
                 />
-              </svg>
-              <input
-                [(ngModel)]="confirmPassword"
-                (keyup)="validatePassword()"
-                [type]="!showConfirmedPassword ? 'password' : 'text'"
-                id=""
-                placeholder="●●●●●●●●●●"
-              />
-            </div>
-            <div>
-              <button (click)="onShowConfirmedPassword()" class="eye-icon">
-                <fa-icon class="icon" [icon]="eyeIcon2"></fa-icon>
-              </button>
+              </div>
+              <div>
+                <button (click)="onShowConfirmedPassword()" class="eye-icon">
+                  <fa-icon class="icon" [icon]="eyeIcon2"></fa-icon>
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="checks">
-          <div class="checks-wrapper-1">
-            <div class="length-checker">
-              @if(isMinTenChar){
-              <div class="icon">
-                <svg
-                  width="14"
-                  height="10"
-                  viewBox="0 0 14 10"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M12.3337 1L5.00033 8.33333L1.66699 5"
-                    stroke="#048746"
-                    stroke-width="1.6666"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
+          <div class="checks">
+            <div class="checks-wrapper-1">
+              <div class="length-checker">
+                <div class="icon">
+                  <svg
+                    width="14"
+                    height="10"
+                    viewBox="0 0 14 10"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    *ngIf="containsMinTenChar()"
+                  >
+                    <path
+                      d="M12.3337 1L5.00033 8.33333L1.66699 5"
+                      stroke="#048746"
+                      stroke-width="1.6666"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </div>
+
+                <fa-icon
+                  class="unvalidated"
+                  [icon]="ol"
+                  style="color: #5e718d"
+                  *ngIf="!containsMinTenChar()"
+                ></fa-icon>
+
+                <p>A minimum of 10 characters</p>
               </div>
-              } @if(!isMinTenChar){
-              <fa-icon
-                class="unvalidated"
-                [icon]="ol"
-                style="color: #5e718d"
-              ></fa-icon>
-              }
-              <p>A minimum of 10 characters</p>
+              <div class="least-checker">
+                <div class="icon">
+                  <svg
+                    width="14"
+                    height="10"
+                    viewBox="0 0 14 10"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    *ngIf="containsNumeric()"
+                  >
+                    <path
+                      d="M12.3337 1L5.00033 8.33333L1.66699 5"
+                      stroke="#048746"
+                      stroke-width="1.6666"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </div>
+
+                <fa-icon
+                  class="unvalidated"
+                  [icon]="ol"
+                  style="color: #5e718d"
+                  *ngIf="!containsNumeric()"
+                ></fa-icon>
+
+                <p>At least 1 number</p>
+              </div>
             </div>
-            <div class="least-checker">
-              @if(isMinOneNum){
-              <div class="icon">
-                <svg
-                  width="14"
-                  height="10"
-                  viewBox="0 0 14 10"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M12.3337 1L5.00033 8.33333L1.66699 5"
-                    stroke="#048746"
-                    stroke-width="1.6666"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
+            <div class="checks-wrapper-2">
+              <div class="lowercase-checker">
+                <div class="icon">
+                  <svg
+                    width="14"
+                    height="10"
+                    viewBox="0 0 14 10"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    *ngIf="containsLowerCase()"
+                  >
+                    <path
+                      d="M12.3337 1L5.00033 8.33333L1.66699 5"
+                      stroke="#048746"
+                      stroke-width="1.6666"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </div>
+
+                <fa-icon
+                  class="unvalidated"
+                  [icon]="ol"
+                  style="color: #5e718d"
+                  *ngIf="!containsLowerCase()"
+                ></fa-icon>
+
+                <p>At least 1 lowercase letter</p>
               </div>
-              } @if(!isMinOneNum){
-              <fa-icon
-                class="unvalidated"
-                [icon]="ol"
-                style="color: #5e718d"
-              ></fa-icon>
-              }
-              <p>At least 1 number</p>
+              <div class="uppercase-checker">
+                <div class="icon">
+                  <svg
+                    width="14"
+                    height="10"
+                    viewBox="0 0 14 10"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    *ngIf="containsUpperCase()"
+                  >
+                    <path
+                      d="M12.3337 1L5.00033 8.33333L1.66699 5"
+                      stroke="#048746"
+                      stroke-width="1.6666"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </div>
+
+                <fa-icon
+                  class="unvalidated"
+                  [icon]="ol"
+                  style="color: #5e718d"
+                  *ngIf="!containsUpperCase()"
+                ></fa-icon>
+
+                <p>At least 1 uppercase letter</p>
+              </div>
             </div>
           </div>
-          <div class="checks-wrapper-2">
-            <div class="lowercase-checker">
-              @if(isMinOneLowercase){
-              <div class="icon">
-                <svg
-                  width="14"
-                  height="10"
-                  viewBox="0 0 14 10"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M12.3337 1L5.00033 8.33333L1.66699 5"
-                    stroke="#048746"
-                    stroke-width="1.6666"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-              </div>
-              } @if(!isMinOneLowercase){
-              <fa-icon
-                class="unvalidated"
-                [icon]="ol"
-                style="color: #5e718d"
-              ></fa-icon>
-              }
-              <p>At least 1 lowercase letter</p>
-            </div>
-            <div class="uppercase-checker">
-              @if(isMinOneUppercase){
-              <div class="icon">
-                <svg
-                  width="14"
-                  height="10"
-                  viewBox="0 0 14 10"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M12.3337 1L5.00033 8.33333L1.66699 5"
-                    stroke="#048746"
-                    stroke-width="1.6666"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-              </div>
-              } @if(!isMinOneUppercase){
-              <fa-icon
-                class="unvalidated"
-                [icon]="ol"
-                style="color: #5e718d"
-              ></fa-icon>
-              }
-              <p>At least 1 uppercase letter</p>
-            </div>
+          <div class="button">
+            <button
+              [disabled]="!ResetPasswordForm.valid"
+              class="btn btn-primary"
+            >
+              Continue
+            </button>
           </div>
-        </div>
-        <div class="button">
-          <button
-            routerLink="/email-token-verification"
-            [disabled]="!isValid"
-            class="btn btn-primary"
-          >
-            Continue
-          </button>
         </div>
       </div>
-    </div>
+    </form>
   </div>
 </div>
 <!--  <app-auth-page></app-auth-page> -->

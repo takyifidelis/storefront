@@ -36,7 +36,6 @@ export const routes: Routes = [
   { path: 'forget-password', component: ForgottenPasswordComponent },
   { path: 'Sign-up-merchant', component: SignupMerchantComponent },
   { path: 'Sign-up-customer', component: SignupCustomerComponent },
-  { path: 'email-token-verification', component: TokenAuthComponent },
   { path: 'reset-password', component: ResetPassowrdComponent },
   { path: 'page-creator', component: PageCreatorComponent },
   { path: 'merchant-onboarding-1', component: OnboardingStepOneComponent },

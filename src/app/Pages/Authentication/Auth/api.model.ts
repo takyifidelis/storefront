@@ -21,6 +21,17 @@ export interface SignupResponseData {
   }[];
 }
 
+export interface ResetPasswordResponse {
+  code: string;
+  message: string;
+  type: string;
+  error?: {
+    validation: string;
+    message: string;
+    path: string[];
+  }[];
+}
+
 export interface AccountVerified {
   code: string;
   message: string;
