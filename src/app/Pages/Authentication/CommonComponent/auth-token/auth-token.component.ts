@@ -9,6 +9,7 @@ import {
   Validators,
   ValidationErrors,
   AbstractControl,
+  FormBuilder,
 } from '@angular/forms';
 import { AuthService } from '../../Auth/auth.service';
 
@@ -21,8 +22,13 @@ import { AuthService } from '../../Auth/auth.service';
 })
 export class AuthTokenComponent {
   AuthCode: FormGroup;
+  error: string | any = null;
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private formBuilder: FormBuilder
+  ) {
     this.AuthCode = new FormGroup({
       keyOne: new FormControl('', Validators.required),
       keyTwo: new FormControl('', Validators.required),
@@ -32,21 +38,33 @@ export class AuthTokenComponent {
       keySix: new FormControl('', Validators.required),
     });
   }
-  onSubmit(form: FormGroupDirective) {
+  submitCode(form: FormGroupDirective) {
     if (!form.valid) {
       return;
     }
-    const code = form.value;
-    this.authService.verifyAccount(code).subscribe(
+
+    const formValue = this.AuthCode.value;
+    const authCode = [
+      formValue.keyOne,
+      formValue.keyTwo,
+      formValue.keyThree,
+      formValue.keyFour,
+      formValue.keyFive,
+      formValue.keySix,
+    ].join('');
+    console.log({ code: authCode });
+
+    this.authService.verifyAccount(authCode).subscribe(
       (resData) => {
         console.log(resData);
         this.router.navigate(['authSuccess']);
       },
       (errorMessage) => {
         console.log(errorMessage);
-        // this.error = errorMessage;
+        this.error = errorMessage;
       }
     );
+
     form.reset();
   }
 }

@@ -28,6 +28,7 @@ import { OnboardingStepThreeComponent } from './Pages/Authentication/CommonCompo
 import { ReviewComponent } from './Pages/Authentication/Merchant/ecommerce-website/review/review.component';
 import { AuthTokenComponent } from './Pages/Authentication/CommonComponent/auth-token/auth-token.component';
 import { AuthSuccessfulComponent } from './Pages/Authentication/CommonComponent/auth-successful/auth-successful.component';
+import { EmailNotificationComponent } from './Pages/Authentication/CommonComponent/forgotten-password/email-notification/email-notification.component';
 
 export const routes: Routes = [
   { path: '', component: LandingPageComponent },
@@ -43,6 +44,7 @@ export const routes: Routes = [
   { path: 'merchant-onboarding-3', component: OnboardingStepThreeComponent },
   { path: 'Authentication', component: AuthTokenComponent },
   { path: 'authSuccess', component: AuthSuccessfulComponent },
+  { path: 'Email-notification', component: EmailNotificationComponent },
   {
     path: 'template-editor',
     component: TemplateEditorComponent,

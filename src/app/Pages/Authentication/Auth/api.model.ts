@@ -27,6 +27,14 @@ export interface AccountVerified {
   type: string;
   data: Data;
 }
+
+export interface ForgetPasswordResponse {
+  code: string;
+  message: string;
+  type: string;
+  data: Data;
+}
+
 export interface Data {
   id: string;
   businessName: string;

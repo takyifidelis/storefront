@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
-import { SignupResponseData } from '../Auth/api.model';
+import { ForgetPasswordResponse, SignupResponseData } from '../Auth/api.model';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -24,6 +24,9 @@ export class AuthService {
           type,
           password,
           confirmPassword,
+        },
+        {
+          withCredentials: true,
         }
       )
       .pipe(catchError(this.handleError));
@@ -46,6 +49,9 @@ export class AuthService {
           type,
           password,
           confirmPassword,
+        },
+        {
+          withCredentials: true,
         }
       )
       .pipe(catchError(this.handleError));
@@ -69,6 +75,23 @@ export class AuthService {
         'https://storefront-backend-jan-dev-api.vercel.app/api/account/verify',
         {
           code,
+        },
+        {
+          withCredentials: true,
+        }
+      )
+      .pipe(catchError(this.handleError));
+  }
+  // Password Reset
+  passwordReset(email: string) {
+    return this.http
+      .post<ForgetPasswordResponse>(
+        'https://storefront-backend-jan-dev-api.vercel.app/api/account/request/password/reset',
+        {
+          email,
+        },
+        {
+          withCredentials: true,
         }
       )
       .pipe(catchError(this.handleError));
@@ -92,6 +115,9 @@ export class AuthService {
         break;
       case 'NOT_FOUND':
         errorMessage = 'Incorrect token';
+        break;
+      case 'ACCOUNT_NOT_FOUND':
+        errorMessage = 'Incorrect email';
         break;
     }
     return throwError(errorMessage);
