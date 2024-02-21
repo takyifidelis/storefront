@@ -26,13 +26,16 @@ import { OnboardingStepOneComponent } from './Pages/Authentication/CommonCompone
 import { OnboardingStepTwoComponent } from './Pages/Authentication/CommonComponent/onboarding-step-two/onboarding-step-two.component';
 import { OnboardingStepThreeComponent } from './Pages/Authentication/CommonComponent/onboarding-step-three/onboarding-step-three.component';
 import { ReviewComponent } from './Pages/Authentication/Merchant/ecommerce-website/review/review.component';
+
 import { EmailNotificationComponent } from './Pages/Authentication/CommonComponent/forgotten-password/email-notification/email-notification.component';
 import { AuthTokenComponent } from './Pages/Authentication/CommonComponent/auth-token/auth-token.component';
 import { ShopComponent } from './Pages/Dashboard/Customer/components/shop/shop.component';
 import { FavoriteProductComponent } from './Pages/Dashboard/Customer/components/favorite-product/favorite-product.component';
 import { HistoryComponent } from './Pages/Dashboard/Customer/components/history/history.component';
+
 import { PaymentOptionComponent } from './Pages/Dashboard/Customer/components/payment-option/payment-option.component';
 import { NewPaymentOptionComponent } from './Pages/Dashboard/Customer/components/new-payment-option/new-payment-option.component';
+
 
 
 export const routes: Routes = [
@@ -43,12 +46,17 @@ export const routes: Routes = [
   { path: 'auth-token', component: AuthTokenComponent },
   { path: 'Sign-up-merchant', component: SignupMerchantComponent },
   { path: 'Sign-up-customer', component: SignupCustomerComponent },
-  { path: 'email-token-verification', component: TokenAuthComponent },
   { path: 'reset-password', component: ResetPassowrdComponent },
   { path: 'page-creator', component: PageCreatorComponent },
   { path: 'merchant-onboarding-1', component: OnboardingStepOneComponent },
   { path: 'merchant-onboarding-2', component: OnboardingStepTwoComponent },
   { path: 'merchant-onboarding-3', component: OnboardingStepThreeComponent },
+  { path: 'Authentication', component: AuthTokenComponent },
+  { path: 'Password-Authentication', component: TokenAuthComponent },
+
+  { path: 'authSuccess', component: AuthSuccessfulComponent },
+  { path: 'Email-notification', component: EmailNotificationComponent },
+  { path: 'reset-password', component: ResetPassowrdComponent },
   {
     path: 'template-editor',
     component: TemplateEditorComponent,
