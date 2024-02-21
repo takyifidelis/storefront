@@ -7,6 +7,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatMenuModule } from '@angular/material/menu';
 import { DataService } from '../../../../Services/data.service';
+import { MerchantAddProductComponent } from '../components/merchant-add-product/merchant-add-product.component';
+// import { MerchantAddProductComponent } from '../components/merchant-add-product';
 
 @Component({
   selector: 'app-merchant-dashboard',
@@ -19,6 +21,7 @@ import { DataService } from '../../../../Services/data.service';
     MatIconModule,
     MatSidenavModule,
     MatMenuModule,
+    MerchantAddProductComponent,
   ],
   templateUrl: './merchant-dashboard.component.html',
   styleUrl: './merchant-dashboard.component.scss',

@@ -31,7 +31,7 @@ import { AuthTokenComponent } from './Pages/Authentication/CommonComponent/auth-
 import { ShopComponent } from './Pages/Dashboard/Customer/components/shop/shop.component';
 import { FavoriteProductComponent } from './Pages/Dashboard/Customer/components/favorite-product/favorite-product.component';
 import { HistoryComponent } from './Pages/Dashboard/Customer/components/history/history.component';
-
+import { MerchantAddProductComponent } from './Pages/Dashboard/Merchant/components/merchant-add-product/merchant-add-product.component';
 
 export const routes: Routes = [
   { path: '', component: LandingPageComponent },
@@ -67,13 +67,13 @@ export const routes: Routes = [
   {
     path: 'customer',
     component: CustomerDashboardComponent,
-    children:[
-      {path: 'shop', component: ShopComponent},
-      {path: 'fav-product', component: FavoriteProductComponent},
-      {path: 'history', component: HistoryComponent},
-      {path: 'payment-opt', component: ShopComponent},
-      {path: 'orders', component: ShopComponent},
-    ]
+    children: [
+      { path: 'shop', component: ShopComponent },
+      { path: 'fav-product', component: FavoriteProductComponent },
+      { path: 'history', component: HistoryComponent },
+      { path: 'payment-opt', component: ShopComponent },
+      { path: 'orders', component: ShopComponent },
+    ],
   },
   {
     path: 'merchant',
