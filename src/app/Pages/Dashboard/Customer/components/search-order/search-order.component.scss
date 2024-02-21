@@ -1,0 +1,42 @@
+.label{
+    font-family: 'Inter';
+font-style: normal;
+font-weight: 500;
+font-size: 20px;
+line-height: 20px;
+letter-spacing: -0.2px;
+color: #191f28;
+}
+
+.input-wrapper{
+    border: 1px solid black;
+    padding: 8px;
+    border-radius: 8px;
+    margin-top: 20px;
+
+    input {
+        border: none;
+        outline: none;
+        font-size: 14px;
+        width: 362px;
+    }
+}
+
+.button-wrapper{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: flex-end;
+    gap: 1.4rem;
+
+    .btn-light{
+        width: 126px;
+        border: 2px solid blue;
+        color: blue;
+    }
+    .btn-primary{
+        width: 126px;
+        padding: 7px;
+        
+    }
+}

@@ -76,7 +76,6 @@ export class OrderComponent {
         width: '479px', 
         position: {right:'50px', top: '10%'} 
     });
-    // console.log(e);
   }
 
   isAllSelected() {

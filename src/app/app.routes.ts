@@ -32,6 +32,7 @@ import { ShopComponent } from './Pages/Dashboard/Customer/components/shop/shop.c
 import { FavoriteProductComponent } from './Pages/Dashboard/Customer/components/favorite-product/favorite-product.component';
 import { HistoryComponent } from './Pages/Dashboard/Customer/components/history/history.component';
 import { OrderComponent } from './Pages/Dashboard/Customer/components/order/order.component';
+import { SearchOrderComponent } from './Pages/Dashboard/Customer/components/search-order/search-order.component';
 
 export const routes: Routes = [
   { path: '', component: LandingPageComponent },
@@ -75,6 +76,7 @@ export const routes: Routes = [
       { path: 'orders', component: OrderComponent },
     ],
   },
+  {path: 'search-order', component: SearchOrderComponent},
   {
     path: 'merchant',
     component: MerchantDashboardComponent,
