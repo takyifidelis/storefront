@@ -1,10 +1,20 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import {
+  FormGroup,
+  FormControl,
+  FormGroupDirective,
+  ReactiveFormsModule,
+  Validators,
+  ValidationErrors,
+  AbstractControl,
+} from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-merchant-add-product',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule, ReactiveFormsModule],
   templateUrl: './merchant-add-product.component.html',
   styleUrl: './merchant-add-product.component.scss',
 })
