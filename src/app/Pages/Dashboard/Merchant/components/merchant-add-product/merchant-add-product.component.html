@@ -1,6 +1,6 @@
 <div class="main-container">
   <section class="add-product">
-    <form action="#" method="post">
+    <form class="form">
       <div
         class="product-save d-flex align-items-center justify-content-between"
       >
@@ -35,6 +35,7 @@
               class="form-control"
               placeholder="Enter product name"
               maxlength="50"
+              formControlName="productName"
             />
             <p class="product-paragraph">
               Do not exceed 50 characters when entering product name
@@ -131,7 +132,27 @@
             </p>
           </div>
           <div class="media-input-div">
-            <div class="drag-and-drop text-center">
+            <div>
+              <div class="image-container">
+                <!-- Use ngFor to iterate over images and use ngIf to check the index for top/bottom row -->
+                <ng-container
+                  *ngFor="let image of images; let i = index"
+                  class="d-flex"
+                >
+                  <img
+                    *ngIf="i < 2"
+                    [src]="image"
+                    class="uploaded-image top-image"
+                  />
+                  <img
+                    *ngIf="i >= 2"
+                    [src]="image"
+                    class="uploaded-image bottom-image"
+                  />
+                </ng-container>
+              </div>
+            </div>
+            <div class="drag-and-drop text-center" *ngIf="showDragAndDrop()">
               <div class="cloud">
                 <img src="assets\icons\cloud.svg" alt="" />
               </div>
@@ -141,7 +162,14 @@
               </p>
               <p class="add-file" (click)="fileInput.click()">
                 <img src="assets\icons\product-plus-sign.svg" alt="" /> Add file
-                <input type="file" #fileInput style="display: none" />
+                <input
+                  type="file"
+                  #fileInput
+                  (change)="onFileSelected($event)"
+                  style="display: none"
+                  accept="image/*"
+                  multiple
+                />
               </p>
               <p class="only-png">
                 Only PNG, JPG format allowed. <br />
