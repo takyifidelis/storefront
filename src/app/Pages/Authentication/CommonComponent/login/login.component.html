@@ -121,11 +121,7 @@
           <div class="button">
             <span class="help-block" *ngIf="error">{{ error }}</span>
 
-            <button
-              class="btn btn-primary"
-              [disabled]="!loginUserForm.valid"
-              [routerLink]="['/merchant']"
-            >
+            <button class="btn btn-primary" [disabled]="!loginUserForm.valid">
               Continue
             </button>
           </div>

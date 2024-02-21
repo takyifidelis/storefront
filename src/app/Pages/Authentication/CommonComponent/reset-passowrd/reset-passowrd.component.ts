@@ -1,50 +1,138 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import {
+  AbstractControl,
+  FormControl,
+  FormGroup,
+  FormGroupDirective,
+  FormsModule,
+  ReactiveFormsModule,
+  ValidationErrors,
+  Validators,
+} from '@angular/forms';
+import { Router, RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faEyeSlash } from '@fortawesome/free-regular-svg-icons';
 import { faCircle, faEye } from '@fortawesome/free-solid-svg-icons';
+import { AuthService } from '../../Auth/auth.service';
 
 @Component({
   selector: 'app-reset-passowrd',
   standalone: true,
-  imports: [FontAwesomeModule, FormsModule, RouterModule],
+  imports: [
+    FontAwesomeModule,
+    FormsModule,
+    RouterModule,
+    RouterModule,
+    ReactiveFormsModule,
+    CommonModule,
+  ],
   templateUrl: './reset-passowrd.component.html',
   styleUrl: './reset-passowrd.component.scss',
 })
 export class ResetPassowrdComponent {
   ol = faCircle;
-  password:string ='';
-  confirmPassword:string ='';
-  isValid:boolean = false;
-  isMinTenChar:boolean = false;
-  isMinOneNum:boolean = false;
-  isMinOneUppercase:boolean = false;
-  isMinOneLowercase:boolean = false;
   eyeIcon = faEyeSlash;
   eyeIcon2 = faEyeSlash;
   showConfirmedPassword: boolean | undefined;
   showPassword: boolean | undefined;
 
-  validatePassword(){
-    this.isMinTenChar = /[\w]{10,}/.test(this.password)
-    this.isMinOneNum = /[\d]/.test(this.password)
-    this.isMinOneUppercase = /[A-Z]/.test(this.password)
-    this.isMinOneLowercase = /[a-z]/.test(this.password)
-    if (this.isMinTenChar && this.isMinOneLowercase&& this.isMinOneNum && this.isMinOneUppercase) {
-      if (this.password === this.confirmPassword) {
-        this.isValid = true;
-      }
+  ResetPassword: FormGroup;
+  error: string | any = null;
+
+  constructor(private authService: AuthService, private router: Router) {
+    this.ResetPassword = new FormGroup(
+      {
+        password: new FormControl('', [
+          Validators.required,
+          this.passwordValidator,
+        ]),
+        confirmPassword: new FormControl('', Validators.required),
+      },
+      { validators: this.confirmPasswordValidator }
+    );
+  }
+  //
+  onSubmit(form: FormGroupDirective) {
+    if (!form.valid) {
+      return;
     }
+
+    const password = form.value.password;
+    const confirmPassword = form.value.confirmPassword;
+
+    this.authService.newPasswordReset(password, confirmPassword).subscribe(
+      (resData) => {
+        console.log(resData);
+        this.router.navigate(['login']);
+      },
+      (errorMessage) => {
+        console.log(errorMessage);
+        this.error = errorMessage;
+      }
+    );
+    form.reset();
   }
 
-  onShowPassword(){
+  //
+  // Custom validator function for password strength and matching
+  passwordValidator(control: AbstractControl): ValidationErrors | null {
+    const value: string = control.value || '';
+    if (!value) {
+      return null; // Don't validate empty value
+    }
+    const hasUpperCase = /[A-Z]+/.test(value);
+    const hasLowerCase = /[a-z]+/.test(value);
+    const hasNumeric = /\d+/.test(value);
+    const hasMinLength = value.length >= 10;
+    const valid = hasUpperCase && hasLowerCase && hasNumeric && hasMinLength;
+    return !valid ? { passwordStrength: true } : null;
+  }
+  // Custom validator function for matching passwords
+  confirmPasswordValidator(control: AbstractControl): ValidationErrors | null {
+    const password = control.get('password')?.value;
+    const confirmPassword = control.get('confirmPassword')?.value;
+    if (password !== confirmPassword) {
+      return { passwordsNotMatching: true };
+    }
+    return null;
+  }
+
+  // Function to check various conditions of password
+  checkPasswordCondition(condition: RegExp): boolean {
+    const passwordControl = this.ResetPassword.get('password');
+    if (!passwordControl) {
+      return false;
+    }
+    const password = passwordControl.value || '';
+    return condition.test(password);
+  }
+
+  // Usage
+  containsLowerCase(): boolean {
+    return this.checkPasswordCondition(/[a-z]+/);
+  }
+
+  containsUpperCase(): boolean {
+    return this.checkPasswordCondition(/[A-Z]+/);
+  }
+
+  containsNumeric(): boolean {
+    return this.checkPasswordCondition(/\d+/);
+  }
+
+  containsMinTenChar(): boolean {
+    return this.checkPasswordCondition(/^.{10,}$/);
+  }
+  //
+
+  onShowPassword() {
     this.showPassword = !this.showPassword;
-    this.eyeIcon = this.showPassword? faEye : faEyeSlash;
+    this.eyeIcon = this.showPassword ? faEye : faEyeSlash;
   }
 
   onShowConfirmedPassword() {
     this.showConfirmedPassword = !this.showConfirmedPassword;
-    this.eyeIcon2 = this.showConfirmedPassword? faEye : faEyeSlash;
+    this.eyeIcon2 = this.showConfirmedPassword ? faEye : faEyeSlash;
   }
 }
