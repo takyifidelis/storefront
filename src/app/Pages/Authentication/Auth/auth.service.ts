@@ -2,60 +2,157 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
-
-interface AuthResponseData {
-  kind: string;
-  idToken: string;
-  email: string;
-  refreshToken: string;
-  expiresIn: string;
-  localId: string;
-  registered?: boolean;
-}
+import {
+  ForgetPasswordResponse,
+  ResetPasswordResponse,
+  SignupResponseData,
+} from '../Auth/api.model';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   constructor(private http: HttpClient) {}
 
-  signup(email: string, password: string) {
+  signupMerchant(
+    businessName: string,
+    email: string,
+    type: string,
+    password: string,
+    confirmPassword: string
+  ) {
     return this.http
-      .post<AuthResponseData>(
-        'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBa-3jhZr9_Lo-kszeB5p-g0jKMLAadJTs',
+      .post<SignupResponseData>(
+        'https://storefront-backend-jan-dev-api.vercel.app/api/account/register/local',
         {
-          email: email,
-          password: password,
-          returnSecureToken: true,
+          businessName,
+          email,
+          type,
+          password,
+          confirmPassword,
+        },
+        {
+          withCredentials: true,
+        }
+      )
+      .pipe(catchError(this.handleError));
+  }
+  signupCustomer(
+    firstName: string,
+    lastName: string,
+    email: string,
+    type: string,
+    password: string,
+    confirmPassword: string
+  ) {
+    return this.http
+      .post<SignupResponseData>(
+        'https://storefront-backend-jan-dev-api.vercel.app/api/account/register/local',
+        {
+          firstName,
+          lastName,
+          email,
+          type,
+          password,
+          confirmPassword,
+        },
+        {
+          withCredentials: true,
         }
       )
       .pipe(catchError(this.handleError));
   }
   login(email: string, password: string) {
     return this.http
-      .post<AuthResponseData>(
-        'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBa-3jhZr9_Lo-kszeB5p-g0jKMLAadJTs',
+      .post<SignupResponseData>(
+        'https://storefront-backend-jan-dev-api.vercel.app/api/account/login/local',
         {
           email: email,
           password: password,
-          returnSecureToken: true,
+        },
+        {
+          withCredentials: true,
         }
       )
       .pipe(catchError(this.handleError));
   }
+
+  // Verify account
+  verifyAccount(code: string) {
+    return this.http
+      .post<SignupResponseData>(
+        'https://storefront-backend-jan-dev-api.vercel.app/api/account/verify',
+        {
+          code,
+        },
+        {
+          withCredentials: true,
+        }
+      )
+      .pipe(catchError(this.handleError));
+  }
+  // Password Verification
+  verifyPassword(code: string) {
+    return this.http
+      .post<SignupResponseData>(
+        'https://storefront-backend-jan-dev-api.vercel.app/api/account/password/resetCode/verify',
+        {
+          code,
+        },
+        {
+          withCredentials: true,
+        }
+      )
+      .pipe(catchError(this.handleError));
+  }
+  // Password Reset
+  passwordReset(email: string) {
+    return this.http
+      .post<ForgetPasswordResponse>(
+        'https://storefront-backend-jan-dev-api.vercel.app/api/account/request/password/reset',
+        {
+          email,
+        },
+        {
+          withCredentials: true,
+        }
+      )
+      .pipe(catchError(this.handleError));
+  }
+  newPasswordReset(password: string, confirmPassword: string) {
+    return this.http
+      .put<ResetPasswordResponse>(
+        'https://storefront-backend-jan-dev-api.vercel.app/api/account/password/reset',
+        {
+          password,
+          confirmPassword,
+        },
+        {
+          withCredentials: true,
+        }
+      )
+      .pipe(catchError(this.handleError));
+  }
+
   private handleError(errorRes: HttpErrorResponse) {
     console.error('Error Response:', errorRes);
     let errorMessage = 'An unknown error occurred!';
-    if (!errorRes.error || !errorRes.error.error) {
+    if (!errorRes.error || !errorRes.error.code) {
       return throwError(errorMessage);
     }
-    switch (errorRes.error.error.message) {
-      case 'EMAIL_EXISTS':
-        errorMessage = 'This email exists already';
+    switch (errorRes.error.code) {
+      case 'EMAIL_ALREADY_IN_USE':
+        errorMessage = 'This email already exists';
         break;
       case 'INVALID_LOGIN_CREDENTIALS':
         errorMessage = 'Incorrect email or password';
         break;
       case 'INVALID_PASSWORD':
         errorMessage = 'Incorrect email or password';
+        break;
+      case 'NOT_FOUND':
+        errorMessage = 'Incorrect token';
+        break;
+      case 'ACCOUNT_NOT_FOUND':
+        errorMessage = 'Incorrect email';
         break;
     }
     return throwError(errorMessage);
