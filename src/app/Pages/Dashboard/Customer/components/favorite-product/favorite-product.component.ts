@@ -178,8 +178,11 @@ export class FavoriteProductComponent {
   moreVert(e:dummyUserInterface) {
     this.dialog.open(PurchaseDetailComponent, {
       data: {
-        animal: 'panda',
-      },
+        itemName: 'hat',
+        itemPrice: 'hat',
+      }, 
+        width: '479px', 
+        position: {right:'50px', top: '10%'} 
     });
     // console.log(e);
   }
@@ -233,14 +236,15 @@ showSelection(e:any) {
 @Component({
   selector: 'purchase-detail',
   templateUrl: 'purchase-detail.component.html',
+  styleUrl: './purchase-detail.component.scss',
   standalone: true,
   imports: [MatDialogTitle, MatDialogContent],
 })
 export class PurchaseDetailComponent {
-  // constructor(@Inject(MAT_DIALOG_DATA) public data: dummyUserInterface) {
-  //   console.log('kji');
+  constructor(@Inject(MAT_DIALOG_DATA) public data: dummyUserInterface) {
+    console.log('kji');
     
-  // }
+  }
   
 }
 
