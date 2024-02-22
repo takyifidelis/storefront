@@ -2,92 +2,32 @@
   <section class="container-fluid d-flex level-up main-comp">
     <div class="bg-image">
       <h1 class="h1 home-header">
-        level up your style with our summer collections
+        {{storeTemplateData.sectionOne.h1Title}}
       </h1>
-      <button class="btn">SHOP NOW</button>
+      <button class="btn">{{storeTemplateData.sectionOne.btnText}}</button>
     </div>
-    <!-- <div [ngClass]="!dataservice.isEditable ? 'd-none' : 'overlay edit-btn-block'" >
-      <button class="edit-btn" mat-icon-button>
-        <mat-icon>edit</mat-icon>
-      </button>
-      <input type="file" name="" style="display: none" />
-      <button class="edit-btn" mat-icon-button (click)="showLink()">
-        <mat-icon>link</mat-icon>
-      </button>
-      <button class="edit-btn" mat-icon-button>
-        <mat-icon>delete</mat-icon>
-      </button>
-      <div class="input-link-div" *ngIf="inputLinkVisibility[1]">
-        <input
-          type="text"
-          class="input-link"
-          name="inputlink"
-          id="input-link"
-          placeholder="Input Link here"
-        />
-      </div>
-    </div> -->
   </section>
   <section class="categories container-fluid">
-    <div class="section-header">CATEGORIES</div>
-    <div class="d-flex category-selections justify-content-between main-comp">
-        <img
-        class=""
-        src="assets/images/ecommerce-home-dresses.svg"
-        alt="Image 3"
-        />
-      <div>
-        <img class="" [src]="urls[3]" alt="Image 3" />
-        <div [ngClass]="!dataservice.isEditable ? 'd-none' : 'overlay edit-btn-block'" >
-          <button
-            class="edit-btn"
-            mat-icon-button
-            (click)="openFileInput(fileInput3, 3)"
-          >
-            <mat-icon>edit</mat-icon>
-          </button>
-          <input
-            type="file"
-            name=""
-            #fileInput3
-            style="display: none"
-            (change)="onSelectFile($event, 3)"
-          />
-          <button class="edit-btn" mat-icon-button (click)="showLink()">
-            <mat-icon>link</mat-icon>
-          </button>
-          <button class="edit-btn" mat-icon-button>
-            <mat-icon>delete</mat-icon>
-          </button>
-          <div class="input-link-div" *ngIf="inputLinkVisibility[2]">
-            <input
-              type="text"
-              class="input-link"
-              name="inputlink"
-              id="input-link"
-              placeholder="Input Link here"
-            />
-          </div>
-        </div>
-      </div>
-
-      <div class="d-flex flex-column accessories-shoe">
-        <div class="main-comp">
-          <img class="accessories" [src]="urls[4]" alt="Image 4" />
+    <div class="section-header">{{storeTemplateData.sectionTwo.name}}</div>
+    <div class="row row-cols-3">
+      @for(item of storeTemplateData.sectionTwo.categories; track item){
+        <div style="position: relative;" class="col gy-3">
+          <img class="w-100" [src]="item.image" alt="" />
+          <span class="overlay" style="position: absolute; z-index: 10;">Hello</span>
           <div [ngClass]="!dataservice.isEditable ? 'd-none' : 'overlay edit-btn-block'" >
             <button
               class="edit-btn"
               mat-icon-button
-              (click)="openFileInput(fileInput4, 4)"
+              (click)="openFileInput(fileInput3, 3)"
             >
               <mat-icon>edit</mat-icon>
             </button>
             <input
               type="file"
               name=""
-              #fileInput4
+              #fileInput3
               style="display: none"
-              (change)="onSelectFile($event, 4)"
+              (change)="onSelectFile($event, 3)"
             />
             <button class="edit-btn" mat-icon-button (click)="showLink()">
               <mat-icon>link</mat-icon>
@@ -95,7 +35,7 @@
             <button class="edit-btn" mat-icon-button>
               <mat-icon>delete</mat-icon>
             </button>
-            <div class="input-link-div" *ngIf="inputLinkVisibility[3]">
+            <div class="input-link-div" *ngIf="dataservice.inputLinkVisibility[2]">
               <input
                 type="text"
                 class="input-link"
@@ -106,180 +46,70 @@
             </div>
           </div>
         </div>
-        <div class="main-comp">
-          <img class="" [src]="urls[5]" alt="Image 5" />
-          <div [ngClass]="!dataservice.isEditable ? 'd-none' : 'overlay edit-btn-block'" >
-            <button
-              class="edit-btn"
-              mat-icon-button
-              (click)="openFileInput(fileInput5, 5)"
-            >
-              <mat-icon>edit</mat-icon>
-            </button>
-            <input
-              type="file"
-              name=""
-              #fileInput5
-              style="display: none"
-              (change)="onSelectFile($event, 5)"
-            />
-            <button class="edit-btn" mat-icon-button (click)="showLink()">
-              <mat-icon>link</mat-icon>
-            </button>
-            <button class="edit-btn" mat-icon-button>
-              <mat-icon>delete</mat-icon>
-            </button>
-            <div class="input-link-div" *ngIf="inputLinkVisibility[4]">
-              <input
-                type="text"
-                class="input-link"
-                name="inputlink"
-                id="input-link"
-                placeholder="Input Link here"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
+      }
     </div>
 
     <div class="row second-row-percent">
       <div class="col percent-image-div main-comp p-0">
-        <img [src]="urls[6]" alt="two ladies in red" class="two-ladies" />
-        <div [ngClass]="!dataservice.isEditable ? 'd-none' : 'overlay edit-btn-block'" >
-          <button
-            class="edit-btn"
-            mat-icon-button
-            (click)="openFileInput(fileInput4, 4)"
-          >
-            <mat-icon>edit</mat-icon>
-          </button>
-          <input
-            type="file"
-            name=""
-            style="display: none"
-            #fileInput6
-            (change)="onSelectFile($event, 6)"
-          />
-          <button class="edit-btn" mat-icon-button (click)="showLink()">
-            <mat-icon>link</mat-icon>
-          </button>
-          <button class="edit-btn" mat-icon-button>
-            <mat-icon>delete</mat-icon>
-          </button>
-          <div class="input-link-div" *ngIf="inputLinkVisibility[5]">
-            <input
-              type="text"
-              class="input-link"
-              name="inputlink"
-              id="input-link"
-              placeholder="Input Link here"
-            />
-          </div>
-        </div>
+        <img [src]="storeTemplateData.sectionTwo.twoSection.image" alt="two ladies in red" class="two-ladies" />
       </div>
       <div
         class="col percent-block d-flex flex-column align-items-center justify-content-center p-0"
       >
-        <h2 class="upto-40-percent">UPTO 40% OFF</h2>
-        <p class="special-offers">Special offers and great deals</p>
+        <h2 class="upto-40-percent">{{storeTemplateData.sectionTwo.twoSection.text.discount}}</h2>
+        <p class="special-offers">{{storeTemplateData.sectionTwo.twoSection.text.otherText}}</p>
         <button class="btn shop-now">SHOP NOW</button>
       </div>
     </div>
   </section>
 
   <section class="featured-items container-fluid">
-    <div class="featured-items-header">Featured Items</div>
-
+    <div class="featured-items-header">{{storeTemplateData.sectionThree.name}}</div>
     <div
-      class="card-container container-list-1 d-flex justify-content-between align-items-center"
+      class="row justify-content-between row-cols-4 w-100"
     >
-      <div *ngFor="let num of [0, 1, 2, 3]">
-        <!-- Starts from 0 and goes up to 3, inclusive, which is 4 iterations -->
-        <div class="card" style="width: 22rem">
-          <img
-            src="assets/images/featured-accesories-rings.svg"
-            class="card-img-top"
-            alt="..."
-          />
-          <div class="card-body">
-            <div
-              class="product-name d-flex justify-content-between align-items-center"
-            >
-              <h5 class="card-title">ACCESSORIES</h5>
-              <div class="product-btn">
-                <button class="heart nav-icons" color="primary" mat-icon-button>
-                  <mat-icon>favorite_border</mat-icon>
-                </button>
-                <button class="cart nav-icons" color="primary" mat-icon-button>
-                  <mat-icon>shopping_cart</mat-icon>
-                </button>
+    @for(product of dataservice.products; track product){
+        <div [routerLink]="['/ecommerce/shop',product.id]" (click)="goToProduct()">
+          <div class="card" style="width: 22rem">
+            <img
+              [src]="product.images[0].url"
+              class="card-img-top"
+              alt="..."
+            />
+            <div class="card-body">
+              <div
+                class="product-name d-flex justify-content-between align-items-center"
+              >
+                <h5 class="card-title">{{product.category}}</h5>
+                <div class="product-btn">
+                  <button class="heart nav-icons" color="primary" mat-icon-button>
+                    <mat-icon>favorite_border</mat-icon>
+                  </button>
+                  <button class="cart nav-icons" color="primary" mat-icon-button>
+                    <mat-icon>shopping_cart</mat-icon>
+                  </button>
+                </div>
               </div>
-            </div>
-            <p class="blossom-bag-paragraph">Blossom Bag</p>
-            <div class="ratings">
-              <img src="assets/images/star-rating.svg" alt="ratings" />
-              <img src="assets/images/star-rating.svg" alt="ratings" />
-              <img src="assets/images/star-rating.svg" alt="ratings" />
-              <img src="assets/images/star-rating.svg" alt="ratings" />
-              <img src="assets/images/star-rating-unfilled.svg" alt="" />
-              <span class="ratings-43">43 Ratings </span>
-            </div>
-            <div class="product-price">$39.49</div>
-            <div class="product-color-div d-flex">
-              <div class="blue product-color"></div>
-              <div class="yellow product-color"></div>
-              <div class="voilet product-color"></div>
-              <div class="red product-color"></div>
+              <p class="blossom-bag-paragraph">{{product.name}}</p>
+              <div class="ratings">
+                <img src="assets/images/star-rating.svg" alt="ratings" />
+                <img src="assets/images/star-rating.svg" alt="ratings" />
+                <img src="assets/images/star-rating.svg" alt="ratings" />
+                <img src="assets/images/star-rating.svg" alt="ratings" />
+                <img src="assets/images/star-rating-unfilled.svg" alt="" />
+                <span class="ratings-43">43 Ratings </span>
+              </div>
+              <div class="product-price">${{product.price}}</div>
+              <div class="product-color-div d-flex">
+                <div class="blue product-color"></div>
+                <div class="yellow product-color"></div>
+                <div class="voilet product-color"></div>
+                <div class="red product-color"></div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-    <div
-      class="card-container container-list-2  product-gap d-flex justify-content-between align-items-center"
-    >
-      <div *ngFor="let num of [0, 1, 2, 3]">
-        <!-- Starts from 0 and goes up to 3, inclusive, which is 4 iterations -->
-        <div class="card" style="width: 22rem">
-          <img
-            src="assets/images/featured-accesories-rings.svg"
-            class="card-img-top"
-            alt="..."
-          />
-          <div class="card-body">
-            <div
-              class="product-name d-flex justify-content-between align-items-center"
-            >
-              <h5 class="card-title">ACCESSORIES</h5>
-              <div class="product-btn">
-                <button class="heart nav-icons" color="primary" mat-icon-button>
-                  <mat-icon>favorite_border</mat-icon>
-                </button>
-                <button class="cart nav-icons" color="primary" mat-icon-button>
-                  <mat-icon>shopping_cart</mat-icon>
-                </button>
-              </div>
-            </div>
-            <p class="blossom-bag-paragraph">Blossom Bag</p>
-            <div class="ratings">
-              <img src="assets/images/star-rating.svg" alt="ratings" />
-              <img src="assets/images/star-rating.svg" alt="ratings" />
-              <img src="assets/images/star-rating.svg" alt="ratings" />
-              <img src="assets/images/star-rating.svg" alt="ratings" />
-              <img src="assets/images/star-rating-unfilled.svg" alt="" />
-              <span class="ratings-43">43 Ratings </span>
-            </div>
-            <div class="product-price">$39.49</div>
-            <div class="product-color-div d-flex">
-              <div class="blue product-color"></div>
-              <div class="yellow product-color"></div>
-              <div class="voilet product-color"></div>
-              <div class="red product-color"></div>
-            </div>
-          </div>
-        </div>
-      </div>
+      }
     </div>
   </section>
 </div>

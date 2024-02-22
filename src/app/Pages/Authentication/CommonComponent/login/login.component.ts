@@ -25,7 +25,7 @@ import {
   ReactiveFormsModule,
   NgForm,
 } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faFacebook, faGoogle } from '@fortawesome/free-brands-svg-icons';
 import {
@@ -35,6 +35,8 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from '../../Auth/auth.service';
 import { faEye } from '@fortawesome/free-regular-svg-icons';
+import { APIService } from '../../../../Services/api.service';
+import { DataService } from '../../../../Services/data.service';
 
 @Component({
   selector: 'app-login',
@@ -67,7 +69,10 @@ export class LoginComponent implements OnInit {
   constructor(
     private authService: SocialAuthService,
     @Inject(DOCUMENT) private document: Document,
-    private loginService: AuthService
+    private loginService: AuthService,
+    private apiService: APIService,
+    public dataService: DataService,
+    private router: Router
   ) {
     this.loginForm = new FormGroup({
       email: new FormControl('', Validators.required),
@@ -112,5 +117,15 @@ export class LoginComponent implements OnInit {
   onShowPassword() {
     this.showPassword = !this.showPassword;
     this.eyeIcon = this.showPassword? faEye : faEyeSlash;
+    }
+
+
+    newLogin(ata:any) {
+      this.apiService.authenticateUser(this.dataService.loginCredentials)
+      .subscribe((resData:any)=>{
+        console.log(resData.data.id);
+        this.dataService.businessId=resData.data.id
+        this.router.navigate(['/customer']);
+      })
     }
 }
