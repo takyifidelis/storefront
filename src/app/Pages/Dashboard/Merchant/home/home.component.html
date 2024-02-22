@@ -33,7 +33,7 @@
               <h2 class="accordion-header" id="headingOne">
                 <button (click)="toggleOpenClose(1)" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
                   <div class="d-flex w-100 align-items-center">
-                    <span class="step-number">1</span>
+                    <span class="step-number mat-elevation-z2"  [class.active]="oneOpened">1</span>
                       Customize store
                     <span style="margin-left: auto;">
                       <mat-icon [ngClass]="oneOpened  ? 'd-none' : ''">expand_more</mat-icon>
@@ -42,8 +42,12 @@
                 </button>
               </h2>
               <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-                  <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                <div class="accordion-body d-flex">
+                  <div style="display: flex; flex-direction: column; gap: 1rem;">
+                    <span>Add pages, descriptions and customize your website how you want it</span>
+                    <button class="btn btn-primary" style="width: fit-content; background-color: #0F3CD9;">Customize store</button>
+                  </div>
+                  <span><img src="/assets/images/customize-store.svg" alt="" srcset=""></span>
                 </div>
               </div>
             </div>
@@ -51,7 +55,7 @@
               <h2 class="accordion-header" id="headingTwo">
                 <button (click)="toggleOpenClose(2)" id="" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                   <div class="d-flex w-100 align-items-center">
-                    <span class="step-number">2</span>
+                    <span class="step-number mat-elevation-z2" [class.active]="twoOpened">2</span>
                     Add product
                     <span style="margin-left: auto;">
                       <mat-icon [ngClass]="twoOpened  ? 'd-none' : ''">expand_more</mat-icon>
@@ -61,8 +65,12 @@
                 </button>
               </h2>
               <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-                  <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                <div class="accordion-body d-flex">
+                  <div style="display: flex; flex-direction: column; gap: 1rem;">
+                    <span>Add pages, descriptions and customize your website how you want it</span>
+                    <button class="btn btn-primary" style="width: fit-content; background-color: #0F3CD9;">Customize store</button>
+                  </div>
+                  <span><img src="/assets/images/add-product.svg" alt="" srcset=""></span>
                 </div>
               </div>
             </div>
@@ -70,7 +78,7 @@
               <h2 class="accordion-header" id="headingThree">
                 <button (click)="toggleOpenClose(3)" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                   <div class="d-flex w-100 align-items-center">
-                    <span class="step-number">3</span>
+                    <span class="step-number mat-elevation-z2"  [class.active]="threeOpened">3</span>
                     Set up shipping
                     <span style="margin-left: auto;">
                       <mat-icon [ngClass]="threeOpened  ? 'd-none' : ''">expand_more</mat-icon>
@@ -80,8 +88,12 @@
                 </button>
               </h2>
               <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-                  <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                <div class="accordion-body d-flex">
+                  <div style="display: flex; flex-direction: column; gap: 1rem;">
+                    <span>Add pages, descriptions and customize your website how you want it</span>
+                    <button class="btn btn-primary" style="width: fit-content; background-color: #0F3CD9;">Customize store</button>
+                  </div>
+                  <span><img src="/assets/images/set-payment.svg" alt="" srcset=""></span>
                 </div>
               </div>
             </div>
@@ -89,7 +101,7 @@
               <h2 class="accordion-header" id="headingThree">
                 <button (click)="toggleOpenClose(4)" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
                   <div class="d-flex w-100 align-items-center">
-                    <span class="step-number">4</span>
+                    <span class="step-number mat-elevation-z2"  [class.active]="fourOpened">4</span>
                     Add domain
                     <span style="margin-left: auto;">
                       <mat-icon [ngClass]="fourOpened  ? 'd-none' : ''">expand_more</mat-icon>
@@ -99,8 +111,12 @@
                 </button>
               </h2>
               <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-                  <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                <div class="accordion-body d-flex">
+                  <div style="display: flex; flex-direction: column; gap: 1rem;">
+                    <span>Add pages, descriptions and customize your website how you want it</span>
+                    <button class="btn btn-primary" style="width: fit-content; background-color: #0F3CD9;">Customize store</button>
+                  </div>
+                  <span><img src="/assets/images/shipping.svg" alt="" srcset=""></span>
                 </div>
               </div>
             </div>

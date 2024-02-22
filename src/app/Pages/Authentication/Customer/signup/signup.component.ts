@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../Auth/auth.service';
 import {
@@ -13,9 +13,18 @@ import {
 } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faFacebook, faGoogle } from '@fortawesome/free-brands-svg-icons';
-import { faEnvelope, faEye, faEyeSlash } from '@fortawesome/free-regular-svg-icons';
+import {
+  faEnvelope,
+  faEye,
+  faEyeSlash,
+} from '@fortawesome/free-regular-svg-icons';
 import { faCircle, faLock } from '@fortawesome/free-solid-svg-icons';
-import { GoogleLoginProvider, GoogleSigninButtonDirective, SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
+import {
+  GoogleLoginProvider,
+  GoogleSigninButtonDirective,
+  SocialAuthService,
+  SocialUser,
+} from '@abacritt/angularx-social-login';
 
 @Component({
   selector: 'app-signup-customer',
@@ -24,7 +33,7 @@ import { GoogleLoginProvider, GoogleSigninButtonDirective, SocialAuthService, So
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.scss',
 })
-export class SignupCustomerComponent{
+export class SignupCustomerComponent {
   mailIcon = faEnvelope;
   passwordLock = faLock;
   ol = faCircle;
@@ -40,7 +49,7 @@ export class SignupCustomerComponent{
   signupForm: FormGroup;
   error: string | any = null;
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, private router: Router) {
     this.signupForm = new FormGroup(
       {
         email: new FormControl('', [
@@ -56,6 +65,7 @@ export class SignupCustomerComponent{
         ]),
         confirmPassword: new FormControl('', Validators.required),
         firstName: new FormControl('', Validators.required),
+        lastName: new FormControl('', Validators.required),
       },
       { validators: this.confirmPasswordValidator }
     );
@@ -66,16 +76,30 @@ export class SignupCustomerComponent{
     }
     const email = form.value.email;
     const password = form.value.password;
+    const confirmPassword = form.value.confirmPassword;
+    const firstName = form.value.firstName;
+    const lastName = form.value.lastName;
+    const type = 'Customer';
 
-    this.authService.signup(email, password).subscribe(
-      (resData) => {
-        console.log(resData);
-      },
-      (errorMessage) => {
-        console.log(errorMessage);
-        this.error = errorMessage;
-      }
-    );
+    this.authService
+      .signupCustomer(
+        firstName,
+        lastName,
+        email,
+        type,
+        password,
+        confirmPassword
+      )
+      .subscribe(
+        (resData) => {
+          console.log(resData);
+          this.router.navigate(['Authentication']);
+        },
+        (errorMessage) => {
+          console.log(errorMessage);
+          this.error = errorMessage;
+        }
+      );
     form.reset();
   }
   // Custom validator function for password strength and matching
@@ -127,17 +151,13 @@ export class SignupCustomerComponent{
     return this.checkPasswordCondition(/^.{10,}$/);
   }
 
-  
-
   onShowPassword() {
     this.showPassword = !this.showPassword;
-    this.eyeIcon = this.showPassword? faEye : faEyeSlash;
+    this.eyeIcon = this.showPassword ? faEye : faEyeSlash;
   }
 
-  onShowConfirmedPassword(){
+  onShowConfirmedPassword() {
     this.showConfirmedPassword = !this.showConfirmedPassword;
-    this.eyeIcon2 = this.showConfirmedPassword? faEye : faEyeSlash;
-
+    this.eyeIcon2 = this.showConfirmedPassword ? faEye : faEyeSlash;
   }
-
 }

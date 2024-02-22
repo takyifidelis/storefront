@@ -1,0 +1,112 @@
+<h2 mat-dialog-title>Payment</h2>
+<mat-dialog-content>
+  <div class="d-flex" style="gap: 20px">
+    <button (click)="isActive()" class="button">
+      <p>Card</p>
+    </button>
+    <button (click)="isActive()" class="button">
+      <p>Paypal</p>
+    </button>
+  </div>
+
+  <div *ngIf="!active">
+    <div
+      class="d-flex justify-content-center payment-card"
+      style="gap: 20px; margin-bottom: 10px"
+    >
+      <div>
+        <fa-icon [icon]="paypal" style="font-size: 40px"></fa-icon>
+      </div>
+      <div class="d-flex justify-content-between w-100">
+        <div>
+          <div>
+            <p>Mastercard ending in 1234</p>
+          </div>
+        </div>
+        <button class="not-selected"></button>
+      </div>
+    </div>
+    <form>
+      <div>
+        <label for="name">Name</label>
+      </div>
+      <div class="input-wrapper">
+        <input type="text" placeholder="Fidelis" id="name" />
+      </div>
+      <div>
+        <label for="card-number">Card Number</label>
+      </div>
+      <div class="input-wrapper">
+        <input type="text" placeholder="34563437859" id="card-number" />
+      </div>
+      <div>
+        <label for="cvv">CVV</label>
+      </div>
+      <div class="input-wrapper">
+        <input type="text" placeholder="123" id="cvv" />
+      </div>
+    </form>
+  </div>
+
+  <div *ngIf="active">
+    <div
+      class="d-flex justify-content-center payment-card-selected"
+      style="gap: 20px; margin-bottom: 10px"
+    >
+      <div>
+        <fa-icon [icon]="visa" style="font-size: 40px"></fa-icon>
+      </div>
+      <div class="d-flex justify-content-between w-100">
+        <div>
+          <div>
+            <p>Visa ending in 1234</p>
+          </div>
+        </div>
+        <button class="selected">
+          <fa-icon [icon]="check"></fa-icon>
+        </button>
+      </div>
+    </div>
+    <div
+      class="d-flex justify-content-center payment-card"
+      style="gap: 20px; margin-bottom: 10px"
+    >
+      <div>
+        <fa-icon [icon]="masterCard" style="font-size: 40px"></fa-icon>
+      </div>
+      <div class="d-flex justify-content-between w-100">
+        <div>
+          <div>
+            <p>Mastercard ending in 1234</p>
+          </div>
+        </div>
+        <button class="not-selected"></button>
+      </div>
+    </div>
+    <form>
+      <div>
+        <label for="name">Name</label>
+      </div>
+      <div class="input-wrapper">
+        <input type="text" placeholder="Fidelis" id="name" />
+      </div>
+      <div>
+        <label for="card-number">Card Number</label>
+      </div>
+      <div class="input-wrapper">
+        <input type="text" placeholder="34563437859" id="card-number" />
+      </div>
+      <div>
+        <label for="cvv">CVV</label>
+      </div>
+      <div class="input-wrapper">
+        <input type="text" placeholder="123" id="cvv" />
+      </div>
+    </form>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button class="cancel" mat-button mat-dialog-close>Cancel</button>
+  <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
+  <button class="save" mat-button [mat-dialog-close]="true">Save</button>
+</mat-dialog-actions>

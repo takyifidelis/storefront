@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faFacebook, faGoogle } from '@fortawesome/free-brands-svg-icons';
 import {
@@ -38,11 +38,10 @@ export class SignupMerchantComponent {
   showConfirmedPassword: boolean | undefined;
   showPassword: boolean | undefined;
 
-
   signupForm: FormGroup;
   error: string | any = null;
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, private router: Router) {
     this.signupForm = new FormGroup(
       {
         email: new FormControl('', [
@@ -69,16 +68,24 @@ export class SignupMerchantComponent {
     }
     const email = form.value.email;
     const password = form.value.password;
+    const confirmPassword = form.value.confirmPassword;
+    const businessName = form.value.businessName;
+    const type = 'Business';
 
-    this.authService.signup(email, password).subscribe(
-      (resData) => {
-        console.log(resData);
-      },
-      (errorMessage) => {
-        console.log(errorMessage);
-        this.error = errorMessage;
-      }
-    );
+    this.authService
+      .signupMerchant(businessName, email, type, password, confirmPassword)
+      .subscribe(
+        (resData) => {
+          console.log(resData);
+          this.router.navigate(['Authentication'], {
+            queryParams: { action: 'signup' },
+          });
+        },
+        (errorMessage) => {
+          console.log(errorMessage);
+          this.error = errorMessage;
+        }
+      );
     form.reset();
   }
   // Custom validator function for password strength and matching
@@ -131,13 +138,13 @@ export class SignupMerchantComponent {
     return this.checkPasswordCondition(/^.{10,}$/);
   }
 
-  onShowPassword(){
+  onShowPassword() {
     this.showPassword = !this.showPassword;
-    this.eyeIcon = this.showPassword? faEye : faEyeSlash;
+    this.eyeIcon = this.showPassword ? faEye : faEyeSlash;
   }
 
   onShowConfirmedPassword() {
     this.showConfirmedPassword = !this.showConfirmedPassword;
-    this.eyeIcon2 = this.showConfirmedPassword? faEye : faEyeSlash;
+    this.eyeIcon2 = this.showConfirmedPassword ? faEye : faEyeSlash;
   }
 }

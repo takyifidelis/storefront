@@ -90,7 +90,13 @@
                     />
                   </svg>
 
-                  <input type="text" id="last-name" placeholder="Bob Maxy" />
+                  <input
+                    type="text"
+                    id="last-name"
+                    placeholder="Bob Maxy"
+                    name="lastName"
+                    formControlName="lastName"
+                  />
                 </div>
               </div>
             </div>
@@ -216,6 +222,9 @@
               *This field is required
             </span>
           </div>
+          <span class="help-block" *ngIf="error">
+            {{ error }}
+          </span>
 
           <div class="checks">
             <div class="checks-wrapper-1">

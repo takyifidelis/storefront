@@ -29,20 +29,41 @@ export class HomeComponent implements OnInit {
   twoOpened: boolean = false;
   threeOpened: boolean = false;
   fourOpened: boolean = false;
+  isActive:boolean = false
   constructor(public dataService: DataService) {}
   toggleOpenClose(key: number): void {
     switch (key) {
       case 1:
         this.oneOpened = !this.oneOpened;
+        if (this.oneOpened) {
+          this.twoOpened = false;
+          this.threeOpened = false;
+          this.fourOpened = false;
+        }
         break;
       case 2:
         this.twoOpened = !this.twoOpened;
+        if (this.twoOpened) {
+          this.oneOpened = false;
+          this.threeOpened = false;
+          this.fourOpened = false;
+        }
         break;
       case 3:
         this.threeOpened = !this.threeOpened;
+        if (this.threeOpened) {
+          this.twoOpened = false;
+          this.oneOpened = false;
+          this.fourOpened = false;
+        }
         break;
       case 4:
         this.fourOpened = !this.fourOpened;
+        if (this.fourOpened) {
+          this.twoOpened = false;
+          this.threeOpened = false;
+          this.oneOpened = false;
+        }
         break;
       
         
