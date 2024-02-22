@@ -75,6 +75,15 @@ export class AuthService {
       .pipe(catchError(this.handleError));
   }
 
+  logout() {
+    return this.http
+      .get<SignupResponseData>(
+        'https://storefront-backend-jan-dev-api.vercel.app/api/account/logout',
+        { withCredentials: true }
+      )
+      .pipe(catchError(this.handleError));
+  }
+
   // Verify account
   verifyAccount(code: string) {
     return this.http
