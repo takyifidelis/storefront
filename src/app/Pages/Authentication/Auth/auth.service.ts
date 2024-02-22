@@ -179,40 +179,24 @@ export class AuthService {
   getStores() {
     return this.http
       .get<BusinessStores>(
-        'https://storefront-backend-jan-dev-api.vercel.app//api/business/get-stores/${business_id}',
-        {}
+        'https://storefront-backend-jan-dev-api.vercel.app/api/business/get-stores/599719d7-d5e3-48db-955a-b56ad261dd89',
+        { withCredentials: true }
       )
       .pipe(catchError(this.handleError));
   }
 
-  postProduct(
-    name: string,
-    price: number,
-    quantity: number,
-    description: string,
-    isActive: boolean,
-    category: string,
-    images: string
-  ): Observable<ProductResponse> {
-    return this.getStores().pipe(
-      switchMap((storesResponse) => {
-        // Assuming storesResponse contains an array of stores
-        const store_Id = storesResponse.data?.id; // Change this to the correct path to the id in your response object
-        // Construct the URL with the retrieved storeId
-        const postUrl =
-          'https://storefront-backend-jan-dev-api.vercel.app/api/product/add/${store_id}';
-        return this.http.post<ProductResponse>(postUrl, {
-          name,
-          price,
-          quantity,
-          description,
-          isActive,
-          category,
-          images,
-        });
-      }),
-      catchError(this.handleError) // Handle errors from both getStores and postProduct
-    );
+  postProduct(formData: FormData) {
+    return this.http
+      .post<ProductResponse>(
+        'https://storefront-backend-jan-dev-api.vercel.app/api/product/add/f9586428-62e3-4455-bb1d-61262a407d1a',
+
+        formData,
+
+        {
+          withCredentials: true,
+        }
+      )
+      .pipe(catchError(this.handleError));
   }
 
   private handleError(errorRes: HttpErrorResponse) {

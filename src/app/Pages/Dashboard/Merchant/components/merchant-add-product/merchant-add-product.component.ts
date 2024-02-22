@@ -9,7 +9,8 @@ import {
   ValidationErrors,
   AbstractControl,
 } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import { AuthService } from '../../../../Authentication/Auth/auth.service';
 
 @Component({
   selector: 'app-merchant-add-product',
@@ -20,6 +21,8 @@ import { RouterModule } from '@angular/router';
 })
 export class MerchantAddProductComponent {
   images: string[] = []; // Assuming we don't need topImages and bottomImages arrays separately anymore
+  productForm: FormGroup;
+  error: string | any = null;
 
   onFileSelected(event: any) {
     const files: FileList = event.target.files;
@@ -41,5 +44,60 @@ export class MerchantAddProductComponent {
 
   showDragAndDrop(): boolean {
     return this.images.length < 4;
+  }
+
+  constructor(private authService: AuthService, private router: Router) {
+    this.productForm = new FormGroup({
+      productName: new FormControl('', Validators.required),
+      productPrice: new FormControl('', Validators.required),
+      productStock: new FormControl('', Validators.required),
+      productDescription: new FormControl('', Validators.required),
+      category: new FormControl(''),
+      productImages: new FormControl(''),
+    });
+  }
+
+  onSubmit(form: FormGroupDirective) {
+    if (!form.valid) {
+      console.log('Form is invalid');
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('name', form.value.productName);
+    formData.append('price', form.value.productPrice);
+    formData.append('quantity', form.value.productStock);
+    formData.append('description', form.value.productDescription);
+    formData.append('category', form.value.category);
+    formData.append('isActive', 'true');
+    formData.append('variations', '[{"type": "color", "value":"1"}]');
+    console.log(formData);
+    // Add each image to formData
+    const images = form.value.productImages;
+
+    if (Array.isArray(images) && images.length) {
+      for (let i = 0; i < images.length; i++) {
+        if (!(images[i] instanceof Blob)) {
+          // Including File since File is a subtype of Blob
+          console.error(`Item at index ${i} is not a Blob:`, images[i]);
+          continue; // Skip this iteration if not a Blob or File.
+        }
+        formData.append('images', images[i], images[i].name);
+      }
+    }
+    this.authService.postProduct(formData).subscribe(
+      (resData) => {
+        console.log(resData);
+      },
+      (errorMessage) => {
+        console.log(errorMessage);
+        this.error = errorMessage;
+      }
+    );
+
+    form.reset();
+  }
+  resetProductForm(form: FormGroupDirective) {
+    form.reset();
   }
 }
