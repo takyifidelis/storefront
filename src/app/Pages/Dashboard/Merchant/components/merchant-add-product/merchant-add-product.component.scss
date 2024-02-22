@@ -1,0 +1,264 @@
+section.add-product {
+  margin: 2rem;
+  div.product-save {
+    padding: 1rem 3rem;
+    margin-bottom: 1rem;
+    h4.product-header {
+      color: #455468;
+      font-family: Inter;
+      font-size: 22px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 35px;
+      letter-spacing: -0.3px;
+    }
+    div span.product-name {
+      color: #b2b9c0;
+      font-family: Inter;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 20px;
+      letter-spacing: -0.2px;
+    }
+    div span.product-name.bold {
+      color: #000;
+    }
+    button.cancel-btn {
+      color: #1b4dff;
+      background-color: #f2f5ff;
+      outline: none;
+      margin-right: 2rem;
+    }
+  }
+  .details-media {
+    .product-details {
+      .product-header {
+        color: #3d4a5c;
+        font-family: Inter;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 30px;
+        letter-spacing: -0.3px;
+      }
+      .product-details-paragraph,
+      .product-paragraph {
+        color: #666771;
+
+        font-family: Inter;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 24px;
+        letter-spacing: -0.2px;
+      }
+      .label-name {
+        color: #3d4a5c;
+        margin-bottom: 0.5rem;
+
+        font-family: Inter;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 24px;
+        letter-spacing: -0.2px;
+      }
+      .form-control {
+        color: #8897ae;
+
+        font-family: Inter;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 24px;
+        letter-spacing: -0.2px;
+      }
+      textarea,
+      .radio-btn {
+        margin-bottom: 1.5rem;
+      }
+      .price-stock {
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
+      }
+      .price-input-tag {
+        margin-right: 1rem;
+      }
+      .status {
+        color: #4a72ff;
+        background-color: #f2f5ff;
+        padding: 2px 6px;
+        border-radius: 6px;
+        font-family: Inter;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 20px;
+        letter-spacing: -0.2px;
+      }
+      .add-category {
+        color: #0f3cd9;
+        font-family: Inter;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 24px;
+        letter-spacing: -0.2px;
+      }
+    }
+    .add-media {
+      margin-right: 5rem;
+      h4.media-header {
+        color: #3d4a5c;
+        font-family: Inter;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 30px;
+        letter-spacing: -0.3px;
+      }
+      p.media-paragraph {
+        color: #666771;
+        font-family: Inter;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 24px;
+        letter-spacing: -0.2px;
+      }
+      .media-input-div {
+        padding: 3.5rem 2rem;
+        border-radius: 8px;
+        border: 1px dashed #d0d5dd;
+        background-color: #fff;
+        .drag-and-drop {
+          border-radius: 8px;
+          border: 1px solid #e9eff6;
+          padding: 2.5rem 1.5rem;
+          p.drag-drop-images {
+            color: #3d4a5c;
+            font-family: Inter;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 24px;
+            letter-spacing: -0.2px;
+          }
+          .add-file {
+            color: #00f;
+            font-family: Inter;
+            font-size: 12px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 16px;
+            letter-spacing: 0.24px;
+            cursor: pointer;
+          }
+          .only-png {
+            color: #8897ae;
+            font-family: Inter;
+            font-size: 12px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 20px;
+            letter-spacing: -0.2px;
+          }
+        }
+        div.image-container {
+          display: grid;
+          grid-template-columns: repeat(
+            2,
+            1fr
+          ); /* Two columns of equal width */
+          grid-gap: 10px; /* Adjust the space between images if needed */
+
+          .uploaded-image {
+            width: 10rem;
+            height: 10rem;
+            padding: 0.5rem;
+            border-radius: 8px;
+            border: 1px solid #d0d5dd;
+            background: #fff;
+            margin: 0.5rem;
+
+            box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+          }
+        }
+      }
+      .media-sizes {
+        margin-top: 3rem;
+        .size-header {
+          color: #3d4a5c;
+
+          font-family: Inter;
+          font-size: 18px;
+          font-style: normal;
+          font-weight: 700;
+          line-height: 30px;
+          letter-spacing: -0.3px;
+        }
+        p.add-size {
+          color: #0f3cd9;
+          font-family: Inter;
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 24px;
+          letter-spacing: -0.2px;
+        }
+        .media-size {
+          padding: 0.5rem 1rem;
+          border-radius: 0.5rem;
+          border: 1px solid #afbaca;
+          margin-right: 0.5rem;
+        }
+      }
+      .media-colours {
+        margin-top: 3rem;
+        h4.colour-header {
+          color: #3d4a5c;
+
+          font-family: Inter;
+          font-size: 18px;
+          font-style: normal;
+          font-weight: 700;
+          line-height: 30px;
+          letter-spacing: -0.3px;
+        }
+        p.add-colour {
+          color: #0f3cd9;
+
+          font-family: Inter;
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 24px;
+          letter-spacing: -0.2px;
+        }
+        span.media-colour {
+          padding: 0.5rem 1rem;
+          border-radius: 50%;
+          border: 1px solid #afbaca;
+          margin-right: 0.5rem;
+          cursor: pointer;
+        }
+        .red {
+          background-color: #e92215;
+        }
+        .blue {
+          background-color: #1b4dff;
+        }
+        .yellow {
+          background-color: #ffd027;
+        }
+        .black {
+          background-color: #000;
+        }
+        .green {
+          background-color: #0a9952;
+        }
+      }
+    }
+  }
+}

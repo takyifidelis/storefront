@@ -33,8 +33,10 @@ import { ShopComponent } from './Pages/Dashboard/Customer/components/shop/shop.c
 import { FavoriteProductComponent } from './Pages/Dashboard/Customer/components/favorite-product/favorite-product.component';
 import { HistoryComponent } from './Pages/Dashboard/Customer/components/history/history.component';
 
+
 import { PaymentOptionComponent } from './Pages/Dashboard/Customer/components/payment-option/payment-option.component';
 import { NewPaymentOptionComponent } from './Pages/Dashboard/Customer/components/new-payment-option/new-payment-option.component';
+import { MerchantAddProductComponent } from './Pages/Dashboard/Merchant/components/merchant-add-product/merchant-add-product.component';
 
 
 
@@ -77,6 +79,7 @@ export const routes: Routes = [
   {
     path: 'customer',
     component: CustomerDashboardComponent,
+
     children:[
       {path: 'shop', component: ShopComponent},
       {path: 'fav-product', component: FavoriteProductComponent},
@@ -85,6 +88,7 @@ export const routes: Routes = [
       {path: 'payment-opt', component: PaymentOptionComponent},
       {path: 'orders', component: ShopComponent},
     ]
+
   },
   {
     path: 'merchant',
