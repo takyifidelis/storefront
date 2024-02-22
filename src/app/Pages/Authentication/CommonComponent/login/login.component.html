@@ -134,29 +134,15 @@
           </div>
 
           <div class="optional-login text-center mb-2">Log In</div>
-          <div>
-            <div
-              id="g_id_onload"
-              data-client_id="932862129622-6j28d7d0pgqokis6ok0jtl4os1cnur4u.apps.googleusercontent.com"
-              data-context="signin"
-              data-ux_mode="popup"
-              data-login_uri="http://localhost:3000/dashboard"
-              data-itp_support="true"
-            ></div>
-
-            <div
-              class="g_id_signin"
-              data-type="standard"
-              data-shape="rectangular"
-              data-theme="outline"
-              data-text="signin_with"
-              data-size="large"
-              data-logo_alignment="center"
-              data-width="400"
-            ></div>
-          </div>
+          <a
+            href="https://storefront-backend-jan-dev-api.vercel.app/api/account/google/auth"
+            ><span class="social-icon">
+              <img src="/assets/icons/google-icon.svg" alt="" />
+              <p class="mb-0">Google</p>
+            </span>
+          </a>
           <div class="social-icon mt-2">
-            <fa-icon [icon]="facebookIcon" style="color: dodgerblue"></fa-icon>
+            <img src="/assets/icons/facebook-icon.svg" alt="" />
             <div>Facebook</div>
           </div>
           <div class="text-center mt-3">
@@ -169,6 +155,4 @@
       </div>
     </div>
   </div>
-
-  <!-- </div> -->
 </div>

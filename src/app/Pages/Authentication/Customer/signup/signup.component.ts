@@ -160,4 +160,8 @@ export class SignupCustomerComponent {
     this.showConfirmedPassword = !this.showConfirmedPassword;
     this.eyeIcon2 = this.showConfirmedPassword ? faEye : faEyeSlash;
   }
+
+  onSignUp(): void{
+    
+  }
 }
