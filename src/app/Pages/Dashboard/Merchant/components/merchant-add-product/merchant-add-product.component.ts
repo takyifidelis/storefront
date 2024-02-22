@@ -73,18 +73,21 @@ export class MerchantAddProductComponent {
     formData.append('variations', '[{"type": "color", "value":"1"}]');
     console.log(formData);
     // Add each image to formData
-    const images = form.value.productImages;
+    const images: File[] = form.value.productImages;
 
-    if (Array.isArray(images) && images.length) {
+    console.log(images);
+
+    if (images && images.length) {
       for (let i = 0; i < images.length; i++) {
-        if (!(images[i] instanceof Blob)) {
-          // Including File since File is a subtype of Blob
-          console.error(`Item at index ${i} is not a Blob:`, images[i]);
-          continue; // Skip this iteration if not a Blob or File.
+        if (!(images[i] instanceof File)) {
+          console.error('Item is not a File', images[i]);
+          continue;
         }
+
         formData.append('images', images[i], images[i].name);
       }
     }
+
     this.authService.postProduct(formData).subscribe(
       (resData) => {
         console.log(resData);
