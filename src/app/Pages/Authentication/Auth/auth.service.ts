@@ -216,6 +216,7 @@ getStores() {
       }),
       catchError(this.handleError) // Handle errors from both getStores and postProduct
     );
+  }
 
   private handleError(errorRes: HttpErrorResponse) {
     console.error('Error Response:', errorRes);
@@ -242,4 +243,4 @@ getStores() {
     }
     return throwError(errorMessage);
   }
-}
+  }

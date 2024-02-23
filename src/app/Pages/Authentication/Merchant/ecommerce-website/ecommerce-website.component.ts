@@ -14,6 +14,8 @@ import { AboutUsComponent } from './about-us/about-us.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { CommonModule } from '@angular/common';
 import { DataService } from '../../../../Services/data.service';
+import {MatBadgeModule} from '@angular/material/badge';
+
 
 @Component({
   selector: 'app-ecommerce-website',
@@ -31,6 +33,7 @@ import { DataService } from '../../../../Services/data.service';
     MatIconModule,
     MatSidenavModule,
     MatMenuModule,
+    MatBadgeModule
   ],
   templateUrl: './ecommerce-website.component.html',
   styleUrl: './ecommerce-website.component.scss',

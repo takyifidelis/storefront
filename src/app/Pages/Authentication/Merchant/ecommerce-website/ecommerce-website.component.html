@@ -53,7 +53,6 @@
         </div>
 
         <div class="navbar-nav dropdown-content" id="dropdownMenu">
-
           <a class="nav-link" [routerLink]="['home']">Home</a>
           <a class="nav-link" [routerLink]="['about-us']">About Us</a>
           <a class="nav-link" [routerLink]="['contact-us']">Contact Us</a>
@@ -61,7 +60,6 @@
           <a class="nav-link"
             ><fa-icon [icon]="searchIcon" style="color: #fff"></fa-icon
             >Search</a
-
           >
         </div>
       </div>
@@ -74,7 +72,13 @@
         <button class="person nav-icons" color="primary" mat-icon-button>
           <mat-icon>person</mat-icon>
         </button>
-        <button class="cart nav-icons" color="primary" mat-icon-button>
+        <button
+          mat-raised-button
+          color="primary"
+          matBadge="8"
+          matBadgePosition="before"
+          matBadgeColor="accent"
+        >
           <mat-icon>shopping_cart</mat-icon>
         </button>
       </div>
