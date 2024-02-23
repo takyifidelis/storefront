@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import {MatRadioModule} from '@angular/material/radio';
 import {
   FormGroup,
   FormControl,
@@ -8,6 +9,7 @@ import {
   Validators,
   ValidationErrors,
   AbstractControl,
+  FormsModule,
 } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../../../Authentication/Auth/auth.service';
@@ -15,7 +17,7 @@ import { AuthService } from '../../../../Authentication/Auth/auth.service';
 @Component({
   selector: 'app-merchant-add-product',
   standalone: true,
-  imports: [CommonModule, RouterModule, ReactiveFormsModule],
+  imports: [MatRadioModule,FormsModule,CommonModule, RouterModule, ReactiveFormsModule],
   templateUrl: './merchant-add-product.component.html',
   styleUrl: './merchant-add-product.component.scss',
 })
@@ -23,22 +25,20 @@ export class MerchantAddProductComponent {
   images: string[] = []; // Assuming we don't need topImages and bottomImages arrays separately anymore
   productForm: FormGroup;
   error: string | any = null;
-
+  files:any
+  data = new FormData();
+  categories: string[] = ['Dresses', 'Tops', 'Sneakers', 'Accessories'];
+  productDetails = {
+    name: '',
+    price: '',
+    quantity: '',
+    description:'',
+    isActive: 'true',
+    category: '',
+  }
   onFileSelected(event: any) {
-    const files: FileList = event.target.files;
-    if (files) {
-      const remainingSlots = 4 - this.images.length;
-      const filesToAdd = Math.min(files.length, remainingSlots);
-      for (let i = 0; i < filesToAdd; i++) {
-        const file = files.item(i);
-        if (file) {
-          const reader = new FileReader();
-          reader.onload = (e: any) => {
-            this.images.push(e.target.result);
-          };
-          reader.readAsDataURL(file);
-        }
-      }
+    for(const file of event.target.files){
+        this.data.append("images", file);
     }
   }
 
@@ -57,38 +57,16 @@ export class MerchantAddProductComponent {
     });
   }
 
-  onSubmit(form: FormGroupDirective) {
-    if (!form.valid) {
-      console.log('Form is invalid');
-      return;
-    }
+  onSubmit() {
+    this.data.append("name", this.productDetails.name);
+    this.data.append("price", this.productDetails.price);
+    this.data.append("quantity", this.productDetails.quantity);
+    this.data.append("description", this.productDetails.description);
+    this.data.append("isActive", "true");
+    this.data.append("category", this.productDetails.category);
+    console.log(this.data)
 
-    const formData = new FormData();
-    formData.append('name', form.value.productName);
-    formData.append('price', form.value.productPrice);
-    formData.append('quantity', form.value.productStock);
-    formData.append('description', form.value.productDescription);
-    formData.append('category', form.value.category);
-    formData.append('isActive', 'true');
-    formData.append('variations', '[{"type": "color", "value":"1"}]');
-    console.log(formData);
-    // Add each image to formData
-    const images: File[] = form.value.productImages;
-
-    console.log(images);
-
-    if (images && images.length) {
-      for (let i = 0; i < images.length; i++) {
-        if (!(images[i] instanceof File)) {
-          console.error('Item is not a File', images[i]);
-          continue;
-        }
-
-        formData.append('images', images[i], images[i].name);
-      }
-    }
-
-    this.authService.postProduct(formData).subscribe(
+    this.authService.postProduct(this.data).subscribe(
       (resData) => {
         console.log(resData);
       },
@@ -97,8 +75,6 @@ export class MerchantAddProductComponent {
         this.error = errorMessage;
       }
     );
-
-    form.reset();
   }
   resetProductForm(form: FormGroupDirective) {
     form.reset();
