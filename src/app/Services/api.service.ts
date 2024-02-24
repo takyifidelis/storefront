@@ -32,7 +32,7 @@ initializePayment(customerId:string, cart:any): Observable<Response> {
 }
 
 addShipping(customerId: string, user: any) {
-  return this.http.post(`${environment.baseApiUrl}/customer/add-shipping-address/f739a921-7267-4e02-8222-ceb2b4c352cf`, user)
+  return this.http.post(`${environment.baseApiUrl}/customer/add-shipping-address/${customerId}`, user)
 }
 }
 
