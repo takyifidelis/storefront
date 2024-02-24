@@ -8,11 +8,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { faCircleInfo } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-ckeckout-page',
   standalone: true,
-  imports: [NgxPayPalModule, FontAwesomeModule],
+  imports: [NgxPayPalModule, FontAwesomeModule, ReactiveFormsModule],
   templateUrl: './ckeckout-page.component.html',
   styleUrl: './ckeckout-page.component.scss',
 })
@@ -23,12 +24,14 @@ export class CkeckoutPageComponent implements OnInit {
   cart: any;
   storeId: string | undefined;
   info = faCircleInfo;
+  user!: FormGroup;
+  shippingId: string = ''
 
   constructor(
     public apiService: APIService,
     public dataService: DataService,
     private snackBar: MatSnackBar,
-    private router: Router
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -43,6 +46,15 @@ export class CkeckoutPageComponent implements OnInit {
       if(this.storeId)
       {this.storeId = response.data.id;}
     });
+
+    this.user = new FormGroup({
+      'first-name': new FormControl(null),
+      'streetAddress': new FormControl(null),
+      'telephone': new FormControl(null),
+      'countryCode':  new FormControl(null),
+      'city':  new FormControl(null),
+      'appartmentNumber':  new FormControl(null)
+    })
   }
 
   async createOrder() {
@@ -127,6 +139,19 @@ export class CkeckoutPageComponent implements OnInit {
         console.log('onClick', data, actions);
       },
     };
+  }
+
+  onSubmit() {
+    if(this.user.valid){
+      this.apiService.addShipping(this.dataService.customerId, this.user.value).subscribe((response: any) => {
+        console.log('response:', response);
+        this.shippingId = response.data.id;
+      }, (error) => {
+        console.log("Error", error)
+      });
+      
+      this.user.reset();
+    }
   }
 }
 
