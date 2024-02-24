@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { catchError,  switchMap } from 'rxjs/operators';
+import { catchError,  map,  switchMap } from 'rxjs/operators';
 import { throwError, Observable } from 'rxjs';
 import {
   ForgetPasswordResponse,
@@ -118,7 +118,9 @@ export class AuthService {
           withCredentials: true,
         }
       )
-      .pipe(catchError(this.handleError));
+      .pipe(map((response: any) => {
+        return response.data.customer;
+      }));
   }
 
 
@@ -216,6 +218,8 @@ getStores() {
       }),
       catchError(this.handleError) // Handle errors from both getStores and postProduct
     );
+
+  }
 
   private handleError(errorRes: HttpErrorResponse) {
     console.error('Error Response:', errorRes);

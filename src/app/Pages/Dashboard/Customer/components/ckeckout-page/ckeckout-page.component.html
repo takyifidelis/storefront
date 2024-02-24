@@ -1,0 +1,69 @@
+<div class="container-fluid">
+  <div>
+    <p>CarbonOffsets</p>
+  </div>
+  <div class="row">
+    <div class="col-7">
+      <section>
+        <div>
+          <p>PAYMENT METHOD</p>
+        </div>
+        <div>
+          <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+        </div>
+        <div>payments may take up to 72 hours to process.</div>
+      </section>
+      <section class="shipping-details">
+        <div>
+          <p>SHIPPING DETAILS</p>
+        </div>
+        <form>
+          <div class="row">
+            <div class="col">
+              <div class="label">
+                <label for="first-name"> First Name </label>
+              </div>
+              <div class="input-wrapper">
+                <input type="text" id="first-name" />
+              </div>
+            </div>
+            <div class="col">
+              <div class="label">
+                <label for="first-name"> Last Name </label>
+              </div>
+              <div class="input-wrapper">
+                <input type="text" id="last-name" />
+              </div>
+            </div>
+          </div>
+          <div class="address">
+            <div class="label">
+              <label for="address">Address</label>
+            </div>
+            <div class="input">
+              <input type="text" name="" id="address" />
+            </div>
+          </div>
+          <div class="country">
+            <div class="select">
+              <select for="address">
+                Address
+                <option value="ghana">Ghana</option>
+                <option value="United-state-of-America">USA</option>
+              </select>
+            </div>
+            <div class="phone-number">
+              <div class="label">
+                <label for="telephone">Address</label>
+              </div>
+              <div class="input">
+                <input type="text" name="" id="telephone" />
+              </div>
+            </div>
+          </div>
+        </form>
+      </section>
+    </div>
+    <div class="col-5"></div>
+  </div>
+</div>

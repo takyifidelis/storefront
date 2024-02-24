@@ -39,6 +39,7 @@ import { NewPaymentOptionComponent } from './Pages/Dashboard/Customer/components
 
 import { AuthSuccessfulComponent } from './Pages/Authentication/CommonComponent/auth-successful/auth-successful.component';
 import { MerchantAddProductComponent } from './Pages/Dashboard/Merchant/components/merchant-add-product/merchant-add-product.component';
+import { CkeckoutPageComponent } from './Pages/Dashboard/Customer/components/ckeckout-page/ckeckout-page.component';
 
 
 
@@ -93,6 +94,7 @@ export const routes: Routes = [
     ]
 
   },
+  {path: 'checkout-page', component: CkeckoutPageComponent},
   {
     path: 'merchant',
     component: MerchantDashboardComponent,
