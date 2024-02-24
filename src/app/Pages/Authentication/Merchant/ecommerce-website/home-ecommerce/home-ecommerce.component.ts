@@ -15,94 +15,45 @@ import {RouterModule } from '@angular/router';
   styleUrl: './home-ecommerce.component.scss',
 })
 export class HomeEcommerceComponent implements OnInit {
- storeTemplateData ={
-  sectionOne:{
-    h1Title: "level up your style with our summer collections",
-    btnText: "SHOP NOW"
-  },
-  sectionTwo:{
-    name:"CATEGORIES",
-    categories:[
-      {image:"assets/images/ecommerce-home-dresses.svg",catText:""},
-      {image:"assets/images/ecommerce-home-dresses.svg",catText:""},
-      {image:"assets/images/ecommerce-home-dresses.svg",catText:""},
-      {image:"assets/images/ecommerce-home-dresses.svg",catText:""},
-      {image:"assets/images/ecommerce-home-dresses.svg",catText:""}
-    ],
-    twoSection:{
-      image:"assets/images/ecommerce-home-two-ladies.svg",text:{discount:"UPTO 40% OFF",otherText:"Special offers and great deals"}
-    }
-  },
-  sectionThree:{
-    name:"Featured Items",
-    products:[
-      {id: "string",name: "ACCESSORIES",images: [{id: "string",url: "assets/images/featured-accesories-rings.svg",key: "string"}],description: "string",isActive: true,quantity: 0,reStockLevel: 0,category: "string",price: 39,discount: 0,promotion: "string"},
-      // {image:"assets/images/featured-accesories-rings.svg",card:{title:"ACCESSORIES"}},
-      // {image:"assets/images/ecommerce-home-dresses.svg",card:{title:"ACCESSORIES"}},
-      // {image:"assets/images/ecommerce-home-dresses.svg",card:{title:"ACCESSORIES"}},
-      // {image:"assets/images/ecommerce-home-dresses.svg",card:{title:"ACCESSORIES"}},
-      // {image:"assets/images/ecommerce-home-dresses.svg",card:{title:"ACCESSORIES"}}
-    ],
-    twoSection:{
-      image:"assets/images/ecommerce-home-two-ladies.svg",text:{discount:"UPTO 40% OFF",otherText:"Special offers and great deals"}
-    }
-  }
 
- }
-//  products= [
-//   {
-//       id: "a58c5939-a33e-43df-89d9-86d5c67ef798",
-//       name: "Beach Shirt",
-//       description: " Fashion Trend,Massage,Breathable,Anti-Slippery,Hard-Wearing,Height Increasing",
-//       isActive: true,
-//       quantity: 4,
-//       reStockLevel: 0,
-//       category: "tops",
-//       price: 300,
-//       discount: 0,
-//       promotion: null,
-//       deleted: false,
-//       createdAt: "2024-02-21T15:39:23.237Z",
-//       updatedAt: "2024-02-21T15:39:23.237Z",
-//       store: "f9586428-62e3-4455-bb1d-61262a407d1a",
-//       variations: [
-//           {
-//               type: "Muticoloured",
-//               values: [
-//                   "XL",
-//                   "X",
-//                   "XS"
-//               ]
-//           }
-//       ],
-//       images: [
-//           {
-//               url: "https://storefront-gh-media.s3.eu-west-1.amazonaws.com/STRFRNTSMES-1708529962775-1.jpg",
-//               id: "cb3cfe8f-553c-4c9f-a582-52918d5012bf"
-//           }
-//       ],
-//       reviews: [],
-//       promotionProduct: null,
-//       rating: 0
-//   }
-// ]
+
+ 
+
   @ViewChild('fileInput') fileInput!: ElementRef;
 constructor(public dataservice:DataService, private apiService: APIService){}
-  openFileInput(fileInput: HTMLInputElement, index: number) {
+  openFileInput(fileInput: HTMLInputElement) {
     fileInput.click();
-    this.dataservice.inputLinkVisibility[index] = true;
+    // this.dataservice.inputLinkVisibility[index] = true;
   }
 
   showLink() {
     this.dataservice.showInputLink = !this.dataservice.showInputLink;
   }
-  onSelectFile(event: any, imageNumber: number) {
+  onSelectFile(event: any, target:string) {
     if (event.target.files && event.target.files.length > 0) {
       const reader = new FileReader();
       reader.readAsDataURL(event.target.files[0]);
       reader.onload = (e: any) => {
-        // Use the image number to update the corresponding URL in the `urls` object.
-        this.dataservice.urls[imageNumber] = e.target.result;
+        switch (target) {
+          case 'hero':
+            console.log(event.target.files[0])
+            this.dataservice.template.headings.heroHeading.bgImage.background = `linear-gradient(148deg,rgba(255, 255, 255, 0.5) 54.97%,rgba(255, 255, 255, 0) 109.02%),url(${e.target.result}), lightgray 50% / cover no-repeat`;
+            // console.log( `linear-gradient(148deg,rgba(255, 255, 255, 0.5) 54.97%,rgba(255, 255, 255, 0) 109.02%),url(${e.target.result}), lightgray 50% / cover no-repeat`)
+            
+            break;
+        
+          case 'tSection':
+            this.dataservice.template.sectionTwo.twoSection.image = e.target.result;
+            break;
+
+          case 'twoSection':
+            this.dataservice.template.sectionTwo.twoSection.image = e.target.result;
+            break;
+          
+            
+            default:
+            break;
+        }
       };
     }
   }
@@ -110,11 +61,18 @@ constructor(public dataservice:DataService, private apiService: APIService){}
 
   }
 ngOnInit(){
-  // this.apiService.getStore(this.dataservice.businessId).subscribe((res:any) =>{
-  //   this.dataservice.storeId = res.data?.['id'];
-  //   this.apiService.getStoreProducts(this.dataservice.storeId).subscribe((res:any) =>{
-  //     this.dataservice.products = res.data?.['products'];
-  //   })
-  // })
+  // this.apiService.getStore(this.dataservice.businessId).subscribe((storeResData:any) =>{
+  this.apiService.getStore("61f757fe-17f8-4ad7-a91d-32bda3965702").subscribe((storeResData:any) =>{
+    console.log({storeId: storeResData});
+    this.dataservice.storeId = storeResData.data[0].id
+    this.apiService.getStoreProducts(this.dataservice.storeId).subscribe((productResData:any)=>{
+      this.dataservice.products = productResData.data
+      for (const product of this.dataservice.products) {
+        this.dataservice.productCategory.push({name: product.category, image:""})
+      }
+      this.dataservice.productCategory = [...this.dataservice.productCategory]
+      console.log(this.dataservice.productCategory)
+    })
+  })
 }
 }

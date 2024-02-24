@@ -30,17 +30,24 @@ export class DataService {
     6: 'assets/images/ecommerce-home-two-ladies.svg',
   };
   products:any = []
-
-
+  productCategory:any = []
+  templateImages = {
+    heroImage: "/assets/images/shopping-image.jpeg",
+    promoImage: "assets/images/ecommerce-home-two-ladies.svg",
+    aboutHeroImage: "https://gitinspired.s3.amazonaws.com/aboutUsHero.jpg",
+    aboutFooterImage: "https://gitinspired.s3.amazonaws.com/aboutFooterImage.jpg",
+    ContactImage: "https://gitinspired.s3.amazonaws.com/contactUsImage.png"
+}
   template ={
     id: "template-1",
-    screenshot: "https://gitinspired.s3.amazonaws.com/shopNest.png",
+    screenshot: "/assets/images/Text.svg",
     text: "ShopNest",
     fontFamily: "Inter",
+    fontArray: ["Inter","Roboto", "Anta", "Helvetica", "sans-serif","Kode Mono", "monospace"],
     fontSize: "16px",
     lineHeight: "1.5",
     fontWeight: 400,
-    primaryColor: "#121212",
+    primaryColor: "red",
     secondaryColor: "#b1b",
     primaryBackground: "#f5f5f5",
     secondaryBackground: "#0c0404",
@@ -48,13 +55,28 @@ export class DataService {
     secondaryAccentBackground: "#000000",
     primaryAccentColor: "#000000",
     secondaryAccentColor: "#00000017",
+    textAlign:"center",
     headings: {
         heroHeading: {
+            btnText: "SHOP NOW",
             text: "level up your style with our summer collections",
-            color: "#1C222B",
-            fontSize: "72px",
-            lineHeight: "90px",
-            fontWeight: 700
+            styles:{
+                color: "yellow",
+                fontSize: "72px",
+                lineHeight: "90px",
+                fontWeight: 700
+            },
+            bgImage:{
+                background: `linear-gradient(148deg,rgba(255, 255, 255, 0.5) 54.97%,rgba(255, 255, 255, 0) 109.02%),url(${this.templateImages.heroImage}), lightgray 50% / cover no-repeat`,
+                backgroundSize: "cover",
+                width: "100%",
+                height: "50rem",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                flexDirection: "column",
+            }
+
         },
         aboutHeading: {
             text: "level up your style with our summer collections",
@@ -70,25 +92,43 @@ export class DataService {
             fontSize: "72px",
             lineHeight: "90px",
             fontWeight: 700
+        },
+        
+    },
+    sectionTwo:{
+        twoSection:{
+          image:"assets/images/ecommerce-home-two-ladies.svg",text:{discount:"UPTO 40% OFF",otherText:"Special offers and great deals"}
         }
+      },
+    sectionThree:{
+    name:"Featured Items",
+    // products:[
+    //     {id: "string",name: "ACCESSORIES",images: [{id: "string",url: "assets/images/featured-accesories-rings.svg",key: "string"}],description: "string",isActive: true,quantity: 0,reStockLevel: 0,category: "string",price: 39,discount: 0,promotion: "string"},
+    //     {id: "string",name: "ACCESSORIES",images: [{id: "string",url: "assets/images/featured-accesories-rings.svg",key: "string"}],description: "string",isActive: true,quantity: 0,reStockLevel: 0,category: "string",price: 39,discount: 0,promotion: "string"},
+    //     {id: "string",name: "ACCESSORIES",images: [{id: "string",url: "assets/images/featured-accesories-rings.svg",key: "string"}],description: "string",isActive: true,quantity: 0,reStockLevel: 0,category: "string",price: 39,discount: 0,promotion: "string"},
+    //     {id: "string",name: "ACCESSORIES",images: [{id: "string",url: "assets/images/featured-accesories-rings.svg",key: "string"}],description: "string",isActive: true,quantity: 0,reStockLevel: 0,category: "string",price: 39,discount: 0,promotion: "string"},
+    //     {id: "string",name: "ACCESSORIES",images: [{id: "string",url: "assets/images/featured-accesories-rings.svg",key: "string"}],description: "string",isActive: true,quantity: 0,reStockLevel: 0,category: "string",price: 39,discount: 0,promotion: "string"},
+    //     {id: "string",name: "ACCESSORIES",images: [{id: "string",url: "assets/images/featured-accesories-rings.svg",key: "string"}],description: "string",isActive: true,quantity: 0,reStockLevel: 0,category: "string",price: 39,discount: 0,promotion: "string"},
+    //     {id: "string",name: "ACCESSORIES",images: [{id: "string",url: "assets/images/featured-accesories-rings.svg",key: "string"}],description: "string",isActive: true,quantity: 0,reStockLevel: 0,category: "string",price: 39,discount: 0,promotion: "string"},
+    //     {id: "string",name: "ACCESSORIES",images: [{id: "string",url: "assets/images/featured-accesories-rings.svg",key: "string"}],description: "string",isActive: true,quantity: 0,reStockLevel: 0,category: "string",price: 39,discount: 0,promotion: "string"},
+    //     {id: "string",name: "ACCESSORIES",images: [{id: "string",url: "assets/images/featured-accesories-rings.svg",key: "string"}],description: "string",isActive: true,quantity: 0,reStockLevel: 0,category: "string",price: 39,discount: 0,promotion: "string"},
+    // ],
+    twoSection:{
+        image:"assets/images/ecommerce-home-two-ladies.svg",text:{discount:"UPTO 40% OFF",otherText:"Special offers and great deals"}
+    }
     },
     includePage: {
         about: false,
         contact: false
     },
     buttons: {
-        borderColor: "#000000",
+        borderColor: "red",
         borderRadius: "1px",
-        color: "#FFFFFF",
-        backgroundColor: "#000000"
+        color: "blue",
+        backgroundColor: "pink",
+        padding:"1rem 3rem"
     },
-    images: {
-        heroImage: "https://storefront-gh-media.s3.eu-west-1.amazonaws.com/STRFRNTSMES-1708683639373-step_3.png",
-        promoImage: "https://gitinspired.s3.amazonaws.com/promoImage.png",
-        aboutHeroImage: "https://gitinspired.s3.amazonaws.com/aboutUsHero.jpg",
-        aboutFooterImage: "https://gitinspired.s3.amazonaws.com/aboutFooterImage.jpg",
-        ContactImage: "https://gitinspired.s3.amazonaws.com/contactUsImage.png"
-    },
+    
     aboutUs: {
         ourStory: "ShopNest was born from a vision to redefine the way you shop online. With years of experience in the eCommerce industry, we set out to create a one-stop destination where you can discover high-quality products, connect with trusted sellers, and enjoy seamless shopping from the comfort of your own nest",
         whyShopWithUs: [

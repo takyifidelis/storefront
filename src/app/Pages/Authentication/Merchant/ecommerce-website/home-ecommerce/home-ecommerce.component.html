@@ -1,70 +1,108 @@
-<div class="container-fluid">
+<div class="container-fluid" 
+  [style.background]="dataservice.template.primaryBackground"
+  [style.fontFamily]="dataservice.template.fontFamily"
+  [style.textAlign]="dataservice.template.textAlign"
+  [style.color]="dataservice.template.primaryColor">
   <section class="container-fluid d-flex level-up main-comp">
-    <div class="bg-image">
-      <h1 class="h1 home-header">
-        {{storeTemplateData.sectionOne.h1Title}}
+    <div [style]="dataservice.template.headings.heroHeading.bgImage">
+      <h1 [innerText]="dataservice.template.headings.heroHeading.text" [style]="dataservice.template.headings.heroHeading.styles">
       </h1>
-      <button class="btn">{{storeTemplateData.sectionOne.btnText}}</button>
+      <button [style]="dataservice.template.buttons">{{dataservice.template.headings.heroHeading.btnText}}</button>
+    </div>
+    <div [ngClass]="!dataservice.isEditable ? 'd-none' : 'overlay edit-btn-block'" >
+      <button
+        class="edit-btn"
+        mat-icon-button
+        (click)="openFileInput(fileInput3)"
+      >
+        <mat-icon>edit</mat-icon>
+      </button>
+      <input
+        type="file"
+        name=""
+        #fileInput3
+        style="display: none"
+        (change)="onSelectFile($event, 'hero')"
+      />
+      <button class="edit-btn" mat-icon-button (click)="showLink()">
+        <mat-icon>link</mat-icon>
+      </button>
+      <button class="edit-btn" mat-icon-button>
+        <mat-icon>delete</mat-icon>
+      </button>
+      <div class="input-link-div" *ngIf="dataservice.inputLinkVisibility[2]">
+        <input
+          type="text"
+          class="input-link"
+          name="inputlink"
+          id="input-link"
+          placeholder="Input Link here"
+        />
+      </div>
     </div>
   </section>
-  <section class="categories container-fluid">
-    <div class="section-header">{{storeTemplateData.sectionTwo.name}}</div>
-    <div class="row row-cols-3">
-      @for(item of storeTemplateData.sectionTwo.categories; track item){
-        <div style="position: relative;" class="col gy-3">
-          <img class="w-100" [src]="item.image" alt="" />
-          <span class="overlay" style="position: absolute; z-index: 10;">Hello</span>
-          <div [ngClass]="!dataservice.isEditable ? 'd-none' : 'overlay edit-btn-block'" >
-            <button
-              class="edit-btn"
-              mat-icon-button
-              (click)="openFileInput(fileInput3, 3)"
-            >
-              <mat-icon>edit</mat-icon>
-            </button>
-            <input
-              type="file"
-              name=""
-              #fileInput3
-              style="display: none"
-              (change)="onSelectFile($event, 3)"
-            />
-            <button class="edit-btn" mat-icon-button (click)="showLink()">
-              <mat-icon>link</mat-icon>
-            </button>
-            <button class="edit-btn" mat-icon-button>
-              <mat-icon>delete</mat-icon>
-            </button>
-            <div class="input-link-div" *ngIf="dataservice.inputLinkVisibility[2]">
-              <input
-                type="text"
-                class="input-link"
-                name="inputlink"
-                id="input-link"
-                placeholder="Input Link here"
-              />
-            </div>
+  <section class="container-fluid categories-container">
+    <div class="section-header">Categories</div>
+    <div class="categories">
+      @for(category of dataservice.productCategory; track category){
+        <div style="position: relative;" class="cat">
+          <img class="w-100" src="assets/images/ecommerce-home-dresses.svg" alt="" />
+          <div class="overlay">
+            <span >{{category.name}}</span>
           </div>
+          
         </div>
       }
     </div>
 
     <div class="row second-row-percent">
-      <div class="col percent-image-div main-comp p-0">
-        <img [src]="storeTemplateData.sectionTwo.twoSection.image" alt="two ladies in red" class="two-ladies" />
+      <div class="col percent-image-div main-comp p-0" style="position: relative;">
+        <img [src]="dataservice.template.sectionTwo.twoSection.image" alt="two ladies in red" class="two-ladies" />
+        
+        <div [ngClass]="!dataservice.isEditable ? 'd-none' : 'overlay edit-btn-block'" >
+          <button
+            class="edit-btn"
+            mat-icon-button
+            (click)="openFileInput(fileInput3)"
+          >
+            <mat-icon>edit</mat-icon>
+          </button>
+          <input
+            type="file"
+            name=""
+            #fileInput3
+            style="display: none"
+            (change)="onSelectFile($event, 'twoSection')"
+          />
+          <button class="edit-btn" mat-icon-button (click)="showLink()">
+            <mat-icon>link</mat-icon>
+          </button>
+          <button class="edit-btn" mat-icon-button>
+            <mat-icon>delete</mat-icon>
+          </button>
+          <div class="input-link-div" *ngIf="dataservice.inputLinkVisibility[2]">
+            <input
+              type="text"
+              class="input-link"
+              name="inputlink"
+              id="input-link"
+              placeholder="Input Link here"
+            />
+          </div>
+        </div>
       </div>
       <div
         class="col percent-block d-flex flex-column align-items-center justify-content-center p-0"
       >
-        <h2 class="upto-40-percent">{{storeTemplateData.sectionTwo.twoSection.text.discount}}</h2>
-        <p class="special-offers">{{storeTemplateData.sectionTwo.twoSection.text.otherText}}</p>
+        <h2 class="upto-40-percent">{{dataservice.template.sectionTwo.twoSection.text.discount}}</h2>
+        <p class="special-offers">{{dataservice.template.sectionTwo.twoSection.text.otherText}}</p>
         <button class="btn shop-now">SHOP NOW</button>
       </div>
     </div>
   </section>
 
   <section class="featured-items container-fluid">
-    <div class="featured-items-header">{{storeTemplateData.sectionThree.name}}</div>
+    <div class="featured-items-header">{{dataservice.template.sectionThree.name}}</div>
     <div
       class="row justify-content-between row-cols-4 w-100"
     >

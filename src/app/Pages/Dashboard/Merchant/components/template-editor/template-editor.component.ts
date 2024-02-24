@@ -155,12 +155,13 @@ export class TemplateEditorComponent  implements AfterViewInit{
   }
 
   changeFontType(){
-    console.log(this.fontName);
-    document.execCommand(`fontName`,false, `${this.fontName}`)
+    console.log(this.dataservice.template.fontFamily);
+    // document.execCommand(`fontName`,false, `${this.fontName}`)
   }
 
   changeFontColor(){
     console.log(this.fontColor);
+    // console.log(this.dataservice.template.primaryColor.color);
     document.execCommand(`foreColor`,false, `${this.fontColor}`)
   }
   ngAfterViewInit() {

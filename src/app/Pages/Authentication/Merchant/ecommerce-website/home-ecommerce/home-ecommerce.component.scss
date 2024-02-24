@@ -14,15 +14,36 @@
 .card-container {
   margin-top: 3rem;
 }
+
 .main-comp {
   position: relative;
 }
 .overlay {
   position: absolute;
-  top: 70%; /* Adjust as needed */
-  left: 50%; /* Adjust as needed */
-  transform: translate(-50%, -50%);
-  padding: 20px;
+  width: 100%;
+  bottom: 0;
+  display: flex;
+  height: 63px;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.30);  
+  backdrop-filter: blur(2px);
+  span{
+    display: flex;
+    width: 175px;
+    height: 56px;
+    flex-direction: column;
+    justify-content: center;
+    flex-shrink: 0;
+    // color: var(--Colors-Primary-Slate-900, #1C222B);
+    // text-align: center;
+    // font-family: Inter;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 30px; 
+    letter-spacing: -0.3px;
+  }
 }
 
 .input-link-div {
@@ -30,8 +51,8 @@
 
   .input-link {
     padding: 0.5rem 1rem 0.5rem 0.5rem;
-    color: #aaa;
-    font-family: Roboto;
+    // color: #aaa;
+    // font-family: Roboto;
     font-size: 12px;
     font-style: normal;
     font-weight: 400;
@@ -42,16 +63,16 @@
   }
 }
 section.level-up {
-  text-align: center;
+  // text-align: center;
 
   button {
-    font-family: Inter;
+    // font-family: Inter;
     font-size: 18px;
     font-style: normal;
     font-weight: 700;
     line-height: 30px; /* 166.667% */
     letter-spacing: -0.3px;
-    color: #1c222b;
+    // color: #1c222b;
 
     background-color: transparent; /* Transparent background */
     border: 1px solid #1c222b;
@@ -73,8 +94,8 @@ section.level-up {
     justify-content: center;
     flex-direction: column;
     h1.home-header {
-      color: #1c222b;
-      font-family: Inter;
+      // color: #1c222b;
+      // font-family: Inter;
       font-size: 72px;
       font-style: normal;
       font-weight: 700;
@@ -86,11 +107,11 @@ section.level-up {
   }
 }
 section.categories {
-  text-align: center;
+  // text-align: center;
 
   .section-header {
-    color: #1c222b;
-    font-family: Inter;
+    // color: #1c222b;
+    // font-family: Inter;
     font-size: 24px;
     font-style: normal;
     font-weight: 700;
@@ -123,9 +144,9 @@ section.categories {
       background-color: #f2f2f2;
 
       h2.upto-40-percent {
-        color: #1c222b;
-        text-align: center;
-        font-family: Inter;
+        // color: #1c222b;
+        // text-align: center;
+        // font-family: Inter;
         font-size: 48px;
         font-style: normal;
         font-weight: 600;
@@ -134,10 +155,10 @@ section.categories {
         margin-bottom: 2rem;
       }
       p.special-offers {
-        color: #1c222b;
-        text-align: center;
+        // color: #1c222b;
+        // text-align: center;
         margin-bottom: 2rem;
-        font-family: Inter;
+        // font-family: Inter;
         font-size: 20px;
         font-style: normal;
         font-weight: 400;
@@ -145,9 +166,9 @@ section.categories {
         letter-spacing: -0.3px;
       }
       button.shop-now {
-        color: #1c222b;
-        text-align: center;
-        font-family: Inter;
+        // color: #1c222b;
+        // text-align: center;
+        // font-family: Inter;
         font-size: 18px;
         font-style: normal;
         font-weight: 700;
@@ -164,10 +185,10 @@ section.categories {
 }
 section.featured-items {
   margin: 5rem 0;
-  text-align: center;
+  // text-align: center;
   .featured-items-header {
-    color: #000;
-    font-family: Inter;
+    // color: #000;
+    // font-family: Inter;
     font-size: 24px;
     font-style: normal;
     font-weight: 700;
@@ -175,7 +196,7 @@ section.featured-items {
     letter-spacing: -0.5px;
   }
   .card {
-    text-align: left;
+    // text-align: left;
     margin-top: 2rem;
   }
   div.card {
@@ -184,8 +205,8 @@ section.featured-items {
       padding: 0;
     }
     .card-title {
-      color: #1c222b;
-      font-family: Inter;
+      // color: #1c222b;
+      // font-family: Inter;
       font-size: 16px;
       font-style: normal;
       font-weight: 700;
@@ -194,8 +215,8 @@ section.featured-items {
       margin: 0;
     }
     .blossom-bag-paragraph {
-      color: #1c222b;
-      font-family: Inter;
+      // color: #1c222b;
+      // font-family: Inter;
       font-size: 14px;
       font-style: normal;
       font-weight: 400;
@@ -204,8 +225,8 @@ section.featured-items {
     }
 
     .product-price {
-      color: #1c222b;
-      font-family: Inter;
+      // color: #1c222b;
+      // font-family: Inter;
       font-size: 16px;
       font-style: normal;
       font-weight: 700;
@@ -216,8 +237,8 @@ section.featured-items {
     div.ratings {
       margin-bottom: 1rem;
       .ratings-43 {
-        color: #1c222b;
-        font-family: Inter;
+        // color: #1c222b;
+        // font-family: Inter;
         font-size: 14px;
         font-style: normal;
         font-weight: 500;
@@ -248,7 +269,23 @@ section.featured-items {
     }
   }
 }
-
+.categories{
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap:10px;
+  .cats{
+    background-color: lightblue;
+    width: 100%;
+    height:50px;
+  }
+}
+.categories-container{
+  display: flex;
+  flex-direction: column;
+  // text-align: center;
+  gap: 2rem;
+}
 @media (max-width: 992px) {
   section.categories {
     // display: none;
@@ -260,9 +297,9 @@ section.featured-items {
     }
   }
   section.level-up .bg-image h1.h1.home-header {
-    color: #1c222b;
-    text-align: center;
-    font-family: Inter;
+    // color: #1c222b;
+    // text-align: center;
+    // font-family: Inter;
     font-size: 32px;
     font-style: normal;
     font-weight: 700;

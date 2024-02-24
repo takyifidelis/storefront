@@ -30,7 +30,7 @@
                 </span>
             </nav>
         </header>
-        <div class="template row ms-2" [style.display]="isTemplateVisible ? 'block' : 'none'">
+        <!-- <div class="template row ms-2" [style.display]="isTemplateVisible ? 'block' : 'none'">
             <section>
                 <h1>H1 Heading 64px</h1>
                 <h2>H2 Heading 48px</h2>
@@ -145,22 +145,22 @@
                 <div style="display: flex; flex-direction: column; gap: 0.55rem;">
                     <button style="
                         color: var(--white, #FFF);
-text-align: center;
-font-family: Roboto;
-font-size: 16.019px;
-font-style: normal;
-font-weight: 600;
-line-height: normal;
-width: 100%; 
-height: 2rem; 
-background-color: #15616B; 
-border: none;">Button</button>
+                        text-align: center;
+                        font-family: Roboto;
+                        font-size: 16.019px;
+                        font-style: normal;
+                        font-weight: 600;
+                        line-height: normal;
+                        width: 100%; 
+                        height: 2rem; 
+                        background-color: #15616B; 
+                        border: none;">Button</button>
                     <button style="border-radius:  0.5rem;width: 100%; height: 2rem; background-color: #15616B; border: none;">Button</button>
                 </div>
             </section>
             <section>
             </section>
-         </div>
+         </div> -->
          <div class="color-palette-extension row" [style.display]="isColorVisible ? 'block' : 'none'">
             <section class="d-flex flex-column" style="gap: 0.5rem; ">
                 <span class="row g-1" style="justify-content: center;">
@@ -342,11 +342,48 @@ border: none;">Button</button>
             </span>
         </div>
     </div>
+    <!-- <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">Toggle top offcanvas</button> -->
+
+<div class="offcanvas offcanvas-top" style="height: max-content;" data-bs-backdrop="false" data-bs-scroll="true" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
+    <div style="display: flex; align-items: center; background-color: rgb(150, 217, 248);">
+        <input [(ngModel)]="dataservice.template.primaryBackground" type="color" />
+        <input [(ngModel)]="dataservice.template.primaryColor" type="color" />
+        <select [(ngModel)]="dataservice.template.fontFamily" data-element="fontSize" (click)="changeFontType()" name="cars" id="cars">
+            @for (font of dataservice.template.fontArray; track font) {
+                <option [value]="font">{{font}}</option>
+              }
+        </select>
+        <select [(ngModel)]="fontSize" data-element="fontSize" (click)="changeFontSize()" name="cars" id="cars">
+            <option default value=1>16</option>
+            <option value=2>12</option>
+            <option value=3>24</option>
+            <option value=4>36</option>
+            <option value=5>48</option>
+            <option value=6>64</option>
+            <option value=7>72</option>
+        </select>
+        <button (click)="dataservice.template.textAlign = 'left'" mat-icon-button>
+            <mat-icon>format_align_left</mat-icon>
+        </button>
+        <button (click)="dataservice.template.textAlign = 'center'" mat-icon-button>
+            <mat-icon>format_align_center</mat-icon>
+        </button>
+        <button (click)="dataservice.template.textAlign = 'right'" mat-icon-button>
+            <mat-icon>format_align_right</mat-icon>
+        </button>
+        <button (click)="dataservice.template.textAlign = 'justify'" mat-icon-button>
+            <mat-icon>format_align_justify</mat-icon>
+        </button>
+        <button mat-icon-button (click)="dataservice.isEditable = !dataservice.isEditable">
+            <mat-icon>link</mat-icon>
+        </button>
+    </div>
+</div>
     <mat-drawer-container class="container-fluid p-0 test">
         <mat-drawer #drawer mode="side" [opened]="true" class="side-nav mat-elevated-z4">
             <ul>
-                <li matTooltip="Add Templates" (click)="showHideDiv('isTemplateVisible')">
-                    <button mat-fab style="background-color: white; color: #0085FF;"
+                <li matTooltip="Add Templates" >
+                    <button data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop" mat-fab style="background-color: white; color: #0085FF;"
                         aria-label="Example icon button with a bookmark icon">
                         <mat-icon>add</mat-icon>
                     </button>
@@ -385,39 +422,7 @@ border: none;">Button</button>
                 </li>
             </ul>
         </mat-drawer>
-        <mat-drawer-content class="conatainer" style="position: relative;" >
-            <div *ngIf="!dataservice.isMobileBool" [ngClass]="!dataservice.isEditable ? 'my-typograpy-hide' : 'my-typography'">
-                <input [(ngModel)]="fontColor" (change)="changeFontColor()" type="color" value="#fff" />
-                <select [(ngModel)]="fontName" data-element="fontSize" (click)="changeFontType()" name="cars" id="cars">
-                    @for (font of fontType; track font) {
-                        <option [value]="font">{{font}}</option>
-                      }
-                </select>
-                <select [(ngModel)]="fontSize" data-element="fontSize" (click)="changeFontSize()" name="cars" id="cars">
-                    <option default value=1>16</option>
-                    <option value=2>12</option>
-                    <option value=3>24</option>
-                    <option value=4>36</option>
-                    <option value=5>48</option>
-                    <option value=6>64</option>
-                    <option value=7>72</option>
-                </select>
-                <button mat-icon-button data-element="justifyLeft">
-                    <mat-icon>format_align_left</mat-icon>
-                </button>
-                <button mat-icon-button data-element="justifyCenter">
-                    <mat-icon>format_align_center</mat-icon>
-                </button>
-                <button mat-icon-button data-element="justifyRight">
-                    <mat-icon>format_align_right</mat-icon>
-                </button>
-                <button mat-icon-button data-element="justifyFull">
-                    <mat-icon>format_align_justify</mat-icon>
-                </button>
-                <button mat-icon-button data-element="createLink">
-                    <mat-icon>link</mat-icon>
-                </button>
-            </div>
+        <mat-drawer-content class="conatainer" >
             <div *ngIf="dataservice.isMobileBool" style="display: flex; width: 100%; height: 100%;justify-content: center; ">
                 <iframe title="mobile checker" [ngClass]="dataservice.isMobileBool ? 'mobile1' : 'desktop1'" src="/ecommerce/home"></iframe> 
             </div>
