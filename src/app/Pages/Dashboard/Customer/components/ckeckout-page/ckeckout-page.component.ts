@@ -6,11 +6,13 @@ import { DataService } from '../../../../../Services/data.service';
 import { environment } from '../../../../../../environments/environment.development';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { faCircleInfo } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @Component({
   selector: 'app-ckeckout-page',
   standalone: true,
-  imports: [NgxPayPalModule],
+  imports: [NgxPayPalModule, FontAwesomeModule],
   templateUrl: './ckeckout-page.component.html',
   styleUrl: './ckeckout-page.component.scss',
 })
@@ -20,6 +22,7 @@ export class CkeckoutPageComponent implements OnInit {
   customerId: string | undefined;
   cart: any;
   storeId: string | undefined;
+  info = faCircleInfo;
 
   constructor(
     public apiService: APIService,
