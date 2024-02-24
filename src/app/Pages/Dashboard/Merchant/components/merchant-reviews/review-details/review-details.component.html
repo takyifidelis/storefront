@@ -1,0 +1,74 @@
+<h2 mat-dialog-title>Review Details</h2>
+<mat-dialog-content>
+  <div class="container-fluid">
+    <div class="first-block d-flex align-items-center">
+      <div class="image-detail">
+        <img src="assets\images\hat-review.svg" alt="" />
+      </div>
+      <div class="customer-detail">
+        <h3 class="customer-name">Cooper, Kristin</h3>
+        <p class="customer-country">Country: <span> Saudi Arabia</span></p>
+      </div>
+      <div class="amount-detail">
+        <p class="total-spent">
+          Total Spent: $ <span class="amount">200</span>
+        </p>
+        <p class="total-review">Total Review: <span class="review">14</span></p>
+      </div>
+    </div>
+
+    <hr />
+    <div class="second-block">
+      <div class="product-details d-flex align-items-center">
+        <div class="product-image">
+          <img src="assets\images\hat-review.svg" alt="" />
+        </div>
+        <div class="product-name-date">
+          <h5 class="product-name">Channel Hat</h5>
+          <p class="product-date">
+            Posted: <span class="date">07 Jan 2023</span>
+          </p>
+        </div>
+      </div>
+      <div class="review-message-block">
+        <div
+          class="title-rating d-flex justify-content-between align-items-center"
+        >
+          <p class="review-title">Disappointing</p>
+          <div class="ratings">
+            <img src="assets\icons\star-ratings.svg" alt="" />
+            <img src="assets\icons\star-ratings.svg" alt="" />
+            <img src="assets\icons\star-ratings.svg" alt="" />
+            <img src="assets\icons\star-ratings.svg" alt="" />
+            <img src="assets\icons\star-ratings.svg" alt="" />
+          </div>
+        </div>
+        <p class="review-description">
+          I'm extremely disappointed in the quality of your product. It isn't
+          what I expected, and I'm unhappy with the experience. I paid a lot for
+          it and am let down. Please take my feedback into account and improve
+          the quality.
+        </p>
+      </div>
+    </div>
+    <hr />
+    <div class="third-block reply-form">
+      <form action="">
+        <div class="form-group">
+          <label for="message">Reply</label>
+          <textarea
+            id="message"
+            name="message"
+            rows="3"
+            class="form-control"
+            placeholder="Enter a description..."
+          ></textarea>
+        </div>
+        <div class="review-buttons d-flex justify-content-between">
+          <button class="btn btn-cancel">Cancel</button>
+          <button class="btn btn-primary">Send</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</mat-dialog-content>
