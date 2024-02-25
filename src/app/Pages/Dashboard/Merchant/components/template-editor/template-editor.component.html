@@ -31,9 +31,30 @@
             </nav>
         </header>
         <div class="offcanvas offcanvas-top" style="height: max-content;" data-bs-backdrop="false" data-bs-scroll="true" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
-            <div style="padding: 0.5rem;">
+            <div style="padding: 2rem; 
+            overflow-y: scroll;
+            overflow-x: hidden;">
                 <div class="editor-heading"><h3>Typography</h3></div>
                 <hr class="editor-hr">
+                <div class="typo-heading">Justify Styling</div>
+                <hr class="editor-hr">
+                <div class="typo-heading">
+                    <div class="d-flex">
+                       
+                        <button (click)="dataservice.template.textAlign = 'left'" mat-icon-button>
+                            <mat-icon>format_align_left</mat-icon>
+                        </button>
+                        <button (click)="dataservice.template.textAlign = 'center'" mat-icon-button>
+                            <mat-icon>format_align_center</mat-icon>
+                        </button>
+                        <button (click)="dataservice.template.textAlign = 'right'" mat-icon-button>
+                            <mat-icon>format_align_right</mat-icon>
+                        </button>
+                        <button (click)="dataservice.template.textAlign = 'justify'" mat-icon-button>
+                            <mat-icon>format_align_justify</mat-icon>
+                        </button>
+                    </div>
+                </div>
                 <div class="typo-heading">Font Styling</div>
                 <hr class="editor-hr">
                 <div class="global-fonts-styles">
@@ -136,19 +157,23 @@
                             <input [(ngModel)]="dataservice.template.buttons.backgroundColor" type="color" />
                         </span>
                         <span class="name-element-group">
-                            <span>NavBar Color</span>
-                            <input [(ngModel)]="dataservice.template.navbarColor" type="color" />
+                            <span>Text Color</span>
+                            <input [(ngModel)]="dataservice.template.buttons.color" type="color" />
                         </span>
                     </div>
 
                     <div class="second">
                         <span class="name-element-group">
-                            <span>Hero Color</span>
-                            <input [(ngModel)]="dataservice.template.headings.heroHeading.color" type="color" />
+                            <span>Border Color</span>
+                            <input [(ngModel)]="dataservice.template.buttons.borderColor" type="color" />
                         </span>
                         <span class="name-element-group">
-                            <span>Store Background</span>
-                            <input [(ngModel)]="dataservice.template.primaryBackground" type="color" />
+                            <span>Border Radius</span>
+                            <select [(ngModel)]="dataservice.template.buttons.borderRadius" data-element="fontSize" (click)="changeFontSize()" name="cars" id="cars">
+                                @for(radius of dataservice.template.buttonBorderRadiusList; track radius){
+                                    <option [value]="radius">{{radius}}</option>
+                                }
+                            </select>
                         </span>
                     </div>
                 </div>

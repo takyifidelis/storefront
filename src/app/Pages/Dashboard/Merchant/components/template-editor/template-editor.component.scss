@@ -270,8 +270,13 @@ nav{
     right: 0;
     left: 84px;
     width: max-content;
-    background: #0085ff;
+    // background: #0085ff;
     border-radius: 10px;
+    max-height: 400px;
+    :first-child::-webkit-scrollbar {
+            display: none;
+          }
+    
 }
 
 .global-fonts-styles{

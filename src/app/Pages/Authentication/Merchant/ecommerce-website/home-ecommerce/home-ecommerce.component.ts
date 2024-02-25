@@ -7,6 +7,11 @@ import { APIService } from '../../../../../Services/api.service';
 import  {Response as resp} from '../../../../../interfaces/all-interfaces';
 import {RouterModule } from '@angular/router';
 
+interface Item {
+  name: string;
+  image: string;
+}
+
 @Component({
   selector: 'app-home-ecommerce',
   standalone: true,
@@ -64,17 +69,35 @@ constructor(private cdr: ChangeDetectorRef, public dataservice:DataService, priv
   goToProduct(){
 
   }
+  removeDuplicates(items: Item[]): Item[] {
+    // Create a Map to store unique names as keys
+    const uniqueNames = new Map<string, boolean>();
+
+    // Filter out duplicate items based on the 'name' property
+    const uniqueItems = items.filter(item => {
+        if (!uniqueNames.has(item.name)) {
+            uniqueNames.set(item.name, true);
+            return true;
+        }
+        return false;
+    });
+
+    return uniqueItems;
+}
 ngOnInit(){
   // this.apiService.getStore(this.dataservice.businessId).subscribe((storeResData:any) =>{
-  this.apiService.getStore("61f757fe-17f8-4ad7-a91d-32bda3965702").subscribe((storeResData:any) =>{
+  this.apiService.getStore("599719d7-d5e3-48db-955a-b56ad261dd89").subscribe((storeResData:any) =>{
     console.log({storeId: storeResData});
-    this.dataservice.storeId = storeResData.data[0].id
+    // this.dataservice.storeId = storeResData.data[0].id
+    this.dataservice.storeId = "f9586428-62e3-4455-bb1d-61262a407d1a"
     this.apiService.getStoreProducts(this.dataservice.storeId).subscribe((productResData:any)=>{
-      this.dataservice.products = productResData.data
+      // this.dataservice.products = productResData.data
+      this.dataservice.products = productResData.data.products
       for (const product of this.dataservice.products) {
+
         this.dataservice.productCategory.push({name: product.category, image:""})
       }
-      this.dataservice.productCategory = [...this.dataservice.productCategory]
+      this.dataservice.productCategory= this.removeDuplicates(this.dataservice.productCategory)
       console.log(this.dataservice.productCategory)
     })
   })

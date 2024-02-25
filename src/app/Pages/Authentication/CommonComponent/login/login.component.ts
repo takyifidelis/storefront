@@ -123,9 +123,9 @@ export class LoginComponent implements OnInit {
     newLogin(ata:any) {
       this.apiService.authenticateUser(this.dataService.loginCredentials)
       .subscribe((resData:any)=>{
-        console.log(resData.data.id);
-        this.dataService.businessId=resData.data.id
-        this.router.navigate(['/customer']);
+        console.log(resData.data);
+        this.dataService.businessId=resData.data?.business
+        this.router.navigate(['/merchant']);
       })
     }
 }

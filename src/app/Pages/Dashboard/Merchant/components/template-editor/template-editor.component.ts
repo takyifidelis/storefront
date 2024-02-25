@@ -15,6 +15,7 @@ import { NgbPopoverModule } from '@ng-bootstrap/ng-bootstrap';
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatSliderModule} from '@angular/material/slider';
 
 @Component({
   selector: 'app-template-editor',
@@ -22,6 +23,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
   imports: [NgbPopoverModule,MatInputModule,MatSelectModule,
     RouterModule,CommonModule,FormsModule,MatFormFieldModule,
     MatProgressBarModule, MatCardModule, MatButtonModule,
+    MatSliderModule,
     MatIconModule, MatSidenavModule,MatMenuModule, MatTooltipModule
   ],
   templateUrl: './template-editor.component.html',
@@ -105,6 +107,7 @@ export class TemplateEditorComponent  implements AfterViewInit{
       })
     }
   }
+
   isMobile(val:string){
     if (val === 'true') {
       this.dataservice.isMobileBool = true;

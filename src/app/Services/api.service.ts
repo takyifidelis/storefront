@@ -38,8 +38,14 @@ export class APIService {
       withCredentials: true,
     })
   }
+  // getStoreProducts(storeId: string): Observable<Response>{
+  //   return this.http.get<Response>(`${environment.baseApiUrl}/store/get-store-products/${storeId}`,
+  //   {
+  //     withCredentials: true,
+  //   })
+  // }
   getStoreProducts(storeId: string): Observable<Response>{
-    return this.http.get<Response>(`${environment.baseApiUrl}/store/get-store-products/${storeId}`,
+    return this.http.get<Response>(`${environment.baseApiUrl}/product/get-all-products/${storeId}`,
     {
       withCredentials: true,
     })

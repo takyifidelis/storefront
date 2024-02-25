@@ -45,6 +45,7 @@ export class DataService {
     lineHeightList: ["1","1.2","1.3","1.4","1.5","1.6","1.7","1.8","1.9","2.0"],
     lineHeight: "1.5",
     fontWeightList: ["100","200","300","400","500","600","700","800","900"],
+    buttonBorderRadiusList: ["0px","2px","4px","6px","8px","10px","12px","16px","18px"],
     primaryColor: "violet",
     primaryBackground: "#f5f5f5",
     navbarBackgroundColor: "#212529",
@@ -59,7 +60,7 @@ export class DataService {
     },
     buttons: {
         borderColor: "green",
-        borderRadius: "1px",
+        borderRadius: "0px",
         color: "blue",
         backgroundColor: "pink",
         padding:"1rem 3rem"
@@ -132,8 +133,8 @@ export class DataService {
     }
     },
     includePage: {
-        about: true,
-        contact: true
+        about: false,
+        contact: false
     },
     
     aboutUs: {
