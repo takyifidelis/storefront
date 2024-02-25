@@ -10,7 +10,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { FormsModule } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  FormGroupDirective,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { dummyUserInterface } from '../../../Customer/components/favorite-product/favorite-product.component';
 import { SelectionModel } from '@angular/cdk/collections';
 import {
@@ -20,6 +27,8 @@ import {
   MatDialogModule,
   MatDialogTitle,
 } from '@angular/material/dialog';
+import { AuthService } from '../../../../Authentication/Auth/auth.service';
+import { CommonModule } from '@angular/common';
 
 export interface CustomerInterface {
   checkbox: string;
@@ -45,6 +54,8 @@ export interface CustomerInterface {
     MatSortModule,
     MatPaginatorModule,
     MatDialogModule,
+    ReactiveFormsModule,
+    CommonModule,
   ],
   templateUrl: './merchant-reviews.component.html',
   styleUrl: './merchant-reviews.component.scss',
@@ -132,12 +143,54 @@ export class MerchantReviewsComponent {
 @Component({
   selector: 'app-review-details',
   standalone: true,
-  imports: [MatDialogTitle, MatDialogContent],
+  imports: [
+    MatDialogTitle,
+    MatDialogContent,
+    FontAwesomeModule,
+    FormsModule,
+    MatIconModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
+    MatDialogModule,
+    ReactiveFormsModule,
+    CommonModule,
+  ],
   templateUrl: 'review-details/review-details.component.html',
   styleUrl: 'review-details/review-details.component.scss',
 })
 export class ReviewDetailsComponent {
-  constructor(@Inject(MAT_DIALOG_DATA) public data: dummyUserInterface) {
-    console.log('kji');
+  replyReview: FormGroup;
+  error: string | any = null;
+
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: dummyUserInterface,
+    private authService: AuthService
+  ) {
+    this.replyReview = new FormGroup({
+      comment: new FormControl('', Validators.required),
+    });
+  }
+
+  onSubmit(form: FormGroupDirective) {
+    if (!form.valid) {
+      return;
+    }
+    const comment = form.value.comment;
+    const review = form.value.review;
+    this.authService.replyReview(comment, review).subscribe(
+      (resData) => {
+        console.log(resData);
+      },
+      (errorMessage) => {
+        console.log(errorMessage);
+        this.error = errorMessage;
+      }
+    );
+    form.reset();
   }
 }

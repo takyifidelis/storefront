@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { catchError,  switchMap } from 'rxjs/operators';
+import { catchError, switchMap } from 'rxjs/operators';
 import { throwError, Observable } from 'rxjs';
 import {
   ForgetPasswordResponse,
   ResetPasswordResponse,
   SignupResponseData,
 } from '../Auth/api.model';
-
 
 interface AuthResponseData {
   kind: string;
@@ -121,7 +120,6 @@ export class AuthService {
       .pipe(catchError(this.handleError));
   }
 
-
   // Verify account
   verifyAccount(code: string) {
     return this.http
@@ -143,6 +141,20 @@ export class AuthService {
         'https://storefront-backend-jan-dev-api.vercel.app/api/account/password/resetCode/verify',
         {
           code,
+        },
+        {
+          withCredentials: true,
+        }
+      )
+      .pipe(catchError(this.handleError));
+  }
+  replyReview(comment: string, review: string) {
+    return this.http
+      .post<SignupResponseData>(
+        'https://storefront-backend-jan-dev-api.vercel.app/api/customer/reply-review/{customer_id}',
+        {
+          comment,
+          review,
         },
         {
           withCredentials: true,
@@ -177,9 +189,8 @@ export class AuthService {
         }
       )
       .pipe(catchError(this.handleError));
-
   }
-getStores() {
+  getStores() {
     return this.http
       .get<BusinessStores>(
         'https://storefront-backend-jan-dev-api.vercel.app//api/business/get-stores/${business_id}',
@@ -216,7 +227,7 @@ getStores() {
       }),
       catchError(this.handleError) // Handle errors from both getStores and postProduct
     );
-
+  }
   private handleError(errorRes: HttpErrorResponse) {
     console.error('Error Response:', errorRes);
     let errorMessage = 'An unknown error occurred!';

@@ -53,7 +53,13 @@
     </div>
     <hr />
     <div class="third-block reply-form">
-      <form action="">
+      <form
+        action=""
+        class="form"
+        #replyReviewForm="ngForm"
+        [formGroup]="replyReview"
+        (ngSubmit)="onSubmit(replyReviewForm)"
+      >
         <div class="form-group">
           <label for="message">Reply</label>
           <textarea
@@ -62,11 +68,15 @@
             rows="3"
             class="form-control"
             placeholder="Enter a description..."
+            formControlName="comment"
+            name="comment"
           ></textarea>
         </div>
         <div class="review-buttons d-flex justify-content-between">
           <button class="btn btn-cancel">Cancel</button>
-          <button class="btn btn-primary">Send</button>
+          <button class="btn btn-primary" [disabled]="!replyReviewForm.valid">
+            Send
+          </button>
         </div>
       </form>
     </div>
