@@ -10,12 +10,17 @@ import { CommonModule } from '@angular/common';
 import { DataService } from '../../../../../Services/data.service';
 import { FormsModule } from '@angular/forms';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { APIService } from '../../../../../Services/api.service';
+import { NgbPopoverModule } from '@ng-bootstrap/ng-bootstrap';
+import {MatInputModule} from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 @Component({
   selector: 'app-template-editor',
   standalone: true,
-  imports: [
-    RouterModule,CommonModule,FormsModule,
+  imports: [NgbPopoverModule,MatInputModule,MatSelectModule,
+    RouterModule,CommonModule,FormsModule,MatFormFieldModule,
     MatProgressBarModule, MatCardModule, MatButtonModule,
     MatIconModule, MatSidenavModule,MatMenuModule, MatTooltipModule
   ],
@@ -33,7 +38,7 @@ export class TemplateEditorComponent  implements AfterViewInit{
   fontSize:number = 0
   fontName:string = ""
   fontColor:string = ""
-  constructor(private elementRef: ElementRef<HTMLElement>, public dataservice: DataService){ }
+  constructor(private elementRef: ElementRef<HTMLElement>, public dataservice: DataService, private apiService: APIService){ }
   @HostListener ('window:keydown.control.b', ['$event']) makeEditableUi(){
     this.dataservice.isEditable  = !this.dataservice.isEditable
     if (this.dataservice.isEditable) {
@@ -163,6 +168,14 @@ export class TemplateEditorComponent  implements AfterViewInit{
     console.log(this.fontColor);
     // console.log(this.dataservice.template.primaryColor.color);
     document.execCommand(`foreColor`,false, `${this.fontColor}`)
+  }
+
+  saveTemplateDraft(template:any){
+    template = JSON.stringify(template);
+    // console.log(typeof template);
+    this.apiService.saveTemplateDraft('22095521-d6e3-4ed1-a7de-e96e1f81bed3',{options:template}).subscribe((data:any)=>{
+      console.log(data);
+    })
   }
   ngAfterViewInit() {
     // document.querySelectorAll('button').forEach((btn)=>{

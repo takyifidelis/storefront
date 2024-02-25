@@ -50,4 +50,11 @@ export class APIService {
       withCredentials: true,
     })
   }
+
+  saveTemplateDraft(storeId: string, template:any): Observable<Response>{
+    return this.http.patch<Response>(`${environment.baseApiUrl}/store/save-template-draft/${storeId}`,
+    template, {
+      withCredentials: true,
+    })
+  }
 }

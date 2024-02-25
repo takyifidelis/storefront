@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
@@ -18,9 +18,9 @@ export class HomeEcommerceComponent implements OnInit {
 
 
  
-
+  imageUrl:any = null
   @ViewChild('fileInput') fileInput!: ElementRef;
-constructor(public dataservice:DataService, private apiService: APIService){}
+constructor(private cdr: ChangeDetectorRef, public dataservice:DataService, private apiService: APIService){}
   openFileInput(fileInput: HTMLInputElement) {
     fileInput.click();
     // this.dataservice.inputLinkVisibility[index] = true;
@@ -30,16 +30,19 @@ constructor(public dataservice:DataService, private apiService: APIService){}
     this.dataservice.showInputLink = !this.dataservice.showInputLink;
   }
   onSelectFile(event: any, target:string) {
+    const file: File = event.target.files[0]; // Get the selected file
+//     if (file) {
+//  }
+
+
     if (event.target.files && event.target.files.length > 0) {
       const reader = new FileReader();
       reader.readAsDataURL(event.target.files[0]);
       reader.onload = (e: any) => {
         switch (target) {
           case 'hero':
-            console.log(event.target.files[0])
-            this.dataservice.template.headings.heroHeading.bgImage.background = `linear-gradient(148deg,rgba(255, 255, 255, 0.5) 54.97%,rgba(255, 255, 255, 0) 109.02%),url(${e.target.result}), lightgray 50% / cover no-repeat`;
-            // console.log( `linear-gradient(148deg,rgba(255, 255, 255, 0.5) 54.97%,rgba(255, 255, 255, 0) 109.02%),url(${e.target.result}), lightgray 50% / cover no-repeat`)
             
+          this.dataservice.template.templateImages.heroImage = e.target.result;
             break;
         
           case 'tSection':
@@ -47,6 +50,7 @@ constructor(public dataservice:DataService, private apiService: APIService){}
             break;
 
           case 'twoSection':
+            console.log( e.target.result)
             this.dataservice.template.sectionTwo.twoSection.image = e.target.result;
             break;
           

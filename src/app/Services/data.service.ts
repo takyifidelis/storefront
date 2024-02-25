@@ -31,43 +31,56 @@ export class DataService {
   };
   products:any = []
   productCategory:any = []
-  templateImages = {
-    heroImage: "/assets/images/shopping-image.jpeg",
-    promoImage: "assets/images/ecommerce-home-two-ladies.svg",
-    aboutHeroImage: "https://gitinspired.s3.amazonaws.com/aboutUsHero.jpg",
-    aboutFooterImage: "https://gitinspired.s3.amazonaws.com/aboutFooterImage.jpg",
-    ContactImage: "https://gitinspired.s3.amazonaws.com/contactUsImage.png"
-}
+  
   template ={
     id: "template-1",
     screenshot: "/assets/images/Text.svg",
     text: "ShopNest",
     fontFamily: "Inter",
     fontArray: ["Inter","Roboto", "Anta", "Helvetica", "sans-serif","Kode Mono", "monospace"],
+    bodyFontSizeArray: ["12px","14px","16px","18px","24px","36px","48px","64px","72px"],
+    headerFontSizeArray: ["12px","14px","16px","18px","24px","36px","48px","64px","72px"],
+    headerfontWeightList: ["300","400","500","600","700","800","900"],
     fontSize: "16px",
+    lineHeightList: ["1","1.2","1.3","1.4","1.5","1.6","1.7","1.8","1.9","2.0"],
     lineHeight: "1.5",
-    fontWeight: 400,
-    primaryColor: "red",
-    secondaryColor: "#b1b",
+    fontWeightList: ["100","200","300","400","500","600","700","800","900"],
+    primaryColor: "violet",
     primaryBackground: "#f5f5f5",
-    secondaryBackground: "#0c0404",
-    primaryAccentBackground: "#000000",
-    secondaryAccentBackground: "#000000",
-    primaryAccentColor: "#000000",
-    secondaryAccentColor: "#00000017",
+    navbarBackgroundColor: "#212529",
+    navbarColor: "#fff",
+    body:{
+        fontSize:"16px",
+        fontWeight: "400",
+    },
+    headers:{
+        fontSize:"24px",
+        fontWeight: "400",
+    },
+    buttons: {
+        borderColor: "green",
+        borderRadius: "1px",
+        color: "blue",
+        backgroundColor: "pink",
+        padding:"1rem 3rem"
+    },
+    templateImages : {
+        heroImage: "/assets/images/shopping-image.jpeg",
+        promoImage: "assets/images/ecommerce-home-two-ladies.svg",
+        aboutHeroImage: "https://gitinspired.s3.amazonaws.com/aboutUsHero.jpg",
+        aboutFooterImage: "https://gitinspired.s3.amazonaws.com/aboutFooterImage.jpg",
+        contactImage: "https://gitinspired.s3.amazonaws.com/contactUsImage.png"
+    },
     textAlign:"center",
     headings: {
         heroHeading: {
             btnText: "SHOP NOW",
             text: "level up your style with our summer collections",
-            styles:{
-                color: "yellow",
-                fontSize: "72px",
-                lineHeight: "90px",
-                fontWeight: 700
-            },
+            color: "yellow",
+            fontSize: "72px",
+            lineHeight: "90px",
+            fontWeight: 700,
             bgImage:{
-                background: `linear-gradient(148deg,rgba(255, 255, 255, 0.5) 54.97%,rgba(255, 255, 255, 0) 109.02%),url(${this.templateImages.heroImage}), lightgray 50% / cover no-repeat`,
                 backgroundSize: "cover",
                 width: "100%",
                 height: "50rem",
@@ -78,6 +91,7 @@ export class DataService {
             }
 
         },
+        headFontSize:"14px",
         aboutHeading: {
             text: "level up your style with our summer collections",
             color: "#1C222B",
@@ -118,15 +132,8 @@ export class DataService {
     }
     },
     includePage: {
-        about: false,
-        contact: false
-    },
-    buttons: {
-        borderColor: "red",
-        borderRadius: "1px",
-        color: "blue",
-        backgroundColor: "pink",
-        padding:"1rem 3rem"
+        about: true,
+        contact: true
     },
     
     aboutUs: {
@@ -185,11 +192,16 @@ export class DataService {
         ]
     },
     contactUs: {
-        contactMessage: "",
-        phone: "+1012 3456 789",
-        email: "demo@gmail.com",
-        location: "132 Dartmouth Street Boston, Massachusetts 02156 United States"
-    }
+        contactMessage: "CONTACT US",
+        leftPanelInfo:{
+            heading:"GET IN TOUCH",
+            pTag: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+            phone: "+1012 3456 789",
+            email: "demo@gmail.com",
+            location: "132 Dartmouth Street Boston, Massachusetts 02156 United States"
+        }
+    },
+    pagesOrder:[{name:"home", value:"home"}, {name:"about-us", value:"about us"}, {name:"contact-us", value:"contact us"}]
 }
   constructor() { }
 }
