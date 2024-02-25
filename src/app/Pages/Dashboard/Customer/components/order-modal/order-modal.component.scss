@@ -54,7 +54,7 @@
 }
 
 .text {
-    margin-top: 6px;
+  margin-top: 6px;
   p {
     color: var(--Colors-Primary-Slate-600, #455468);
     font-family: Inter;
@@ -64,5 +64,50 @@
     line-height: 28px; /* 175% */
     letter-spacing: -0.3px;
     margin: 0;
+  }
+}
+form {
+  text-align: center;
+  margin-top: 1rem;
+
+  .how-will-you-div {
+    background-color: #f9fafb;
+    padding: 1rem;
+    border-radius: 5px;
+    margin-bottom: 2rem;
+    .how-will-you {
+      color: #4b5563;
+      font-family: Inter;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 135%;
+      margin-bottom: 0;
+    }
+  }
+  textarea#message.form-control,
+  .title-filter {
+    margin-bottom: 2rem;
+  }
+  .title-filter {
+    color: #4b5563;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    font-family: Inter;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+  }
+  button.btn {
+    margin-top: 1rem;
+    padding: 16px 24px;
+    background-color: #000;
+    color: #fff;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 14px;
+    border-radius: 0;
   }
 }
