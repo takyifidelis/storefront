@@ -63,4 +63,10 @@ export class APIService {
       withCredentials: true,
     })
   }
+  publishTemplate(storeId: string, template:any): Observable<Response>{
+    return this.http.patch<Response>(`${environment.baseApiUrl}/store/publish-template/${storeId}`,
+    template, {
+      withCredentials: true,
+    })
+  }
 }

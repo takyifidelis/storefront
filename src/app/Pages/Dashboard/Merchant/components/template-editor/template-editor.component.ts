@@ -11,7 +11,6 @@ import { DataService } from '../../../../../Services/data.service';
 import { FormsModule } from '@angular/forms';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { APIService } from '../../../../../Services/api.service';
-import { NgbPopoverModule } from '@ng-bootstrap/ng-bootstrap';
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -20,7 +19,7 @@ import {MatSliderModule} from '@angular/material/slider';
 @Component({
   selector: 'app-template-editor',
   standalone: true,
-  imports: [NgbPopoverModule,MatInputModule,MatSelectModule,
+  imports: [MatInputModule,MatSelectModule,
     RouterModule,CommonModule,FormsModule,MatFormFieldModule,
     MatProgressBarModule, MatCardModule, MatButtonModule,
     MatSliderModule,
@@ -172,11 +171,18 @@ export class TemplateEditorComponent  implements AfterViewInit{
     // console.log(this.dataservice.template.primaryColor.color);
     document.execCommand(`foreColor`,false, `${this.fontColor}`)
   }
-
   saveTemplateDraft(template:any){
     template = JSON.stringify(template);
-    // console.log(typeof template);
+    // console.log(template);
     this.apiService.saveTemplateDraft('22095521-d6e3-4ed1-a7de-e96e1f81bed3',{options:template}).subscribe((data:any)=>{
+      console.log(data);
+    })
+  }
+
+  publishTemplate(template:any){
+    template = JSON.stringify(template);
+    // console.log(template);
+    this.apiService.publishTemplate('22095521-d6e3-4ed1-a7de-e96e1f81bed3',{options:template}).subscribe((data:any)=>{
       console.log(data);
     })
   }
