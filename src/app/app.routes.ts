@@ -32,7 +32,8 @@ import { AuthTokenComponent } from './Pages/Authentication/CommonComponent/auth-
 import { ShopComponent } from './Pages/Dashboard/Customer/components/shop/shop.component';
 import { FavoriteProductComponent } from './Pages/Dashboard/Customer/components/favorite-product/favorite-product.component';
 import { HistoryComponent } from './Pages/Dashboard/Customer/components/history/history.component';
-
+import { OrderComponent } from './Pages/Dashboard/Customer/components/order/order.component';
+import { SearchOrderComponent } from './Pages/Dashboard/Customer/components/search-order/search-order.component';
 
 import { PaymentOptionComponent } from './Pages/Dashboard/Customer/components/payment-option/payment-option.component';
 import { NewPaymentOptionComponent } from './Pages/Dashboard/Customer/components/new-payment-option/new-payment-option.component';
@@ -94,11 +95,12 @@ export const routes: Routes = [
       {path: 'history', component: HistoryComponent},
       {path: 'new-payment-opt', component: NewPaymentOptionComponent},
       {path: 'payment-opt', component: PaymentOptionComponent},
-      {path: 'orders', component: ShopComponent},
+      {path: 'orders', component:  OrderComponent},
     ]
 
 
   },
+  {path: 'search-order', component: SearchOrderComponent},
   {
     path: 'merchant',
     component: MerchantDashboardComponent,
