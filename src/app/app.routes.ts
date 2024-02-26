@@ -32,14 +32,19 @@ import { AuthTokenComponent } from './Pages/Authentication/CommonComponent/auth-
 import { ShopComponent } from './Pages/Dashboard/Customer/components/shop/shop.component';
 import { FavoriteProductComponent } from './Pages/Dashboard/Customer/components/favorite-product/favorite-product.component';
 import { HistoryComponent } from './Pages/Dashboard/Customer/components/history/history.component';
-
+import { OrderComponent } from './Pages/Dashboard/Customer/components/order/order.component';
+import { SearchOrderComponent } from './Pages/Dashboard/Customer/components/search-order/search-order.component';
 
 import { PaymentOptionComponent } from './Pages/Dashboard/Customer/components/payment-option/payment-option.component';
 import { NewPaymentOptionComponent } from './Pages/Dashboard/Customer/components/new-payment-option/new-payment-option.component';
 
 import { AuthSuccessfulComponent } from './Pages/Authentication/CommonComponent/auth-successful/auth-successful.component';
+import { contactUsGuard } from './gaurds/contact-us.guard';
+import { aboutUsGuard } from './gaurds/about-us.guard';
+
 import { MerchantAddProductComponent } from './Pages/Dashboard/Merchant/components/merchant-add-product/merchant-add-product.component';
 import { CkeckoutPageComponent } from './Pages/Dashboard/Customer/components/ckeckout-page/ckeckout-page.component';
+import { AuthSuccessfulComponent } from './Pages/Authentication/CommonComponent/auth-successful/auth-successful.component';
 
 
 
@@ -72,8 +77,8 @@ export const routes: Routes = [
         component: EcommerceWebsiteComponent,
         children: [
           { path: 'home', component: HomeEcommerceComponent },
-          { path: 'about-us', component: AboutUsComponent },
-          { path: 'contact-us', component: ContactUsComponent },
+          { path: 'about', canActivate:[aboutUsGuard], component: AboutUsComponent },
+          { path: 'contact', canActivate:[contactUsGuard],component: ContactUsComponent },
 
           { path: '', redirectTo: 'home', pathMatch: 'full' },
         ],
@@ -84,17 +89,20 @@ export const routes: Routes = [
     path: 'customer',
     component: CustomerDashboardComponent,
 
+
     children:[
       {path: 'shop', component: ShopComponent},
       {path: 'fav-product', component: FavoriteProductComponent},
       {path: 'history', component: HistoryComponent},
       {path: 'new-payment-opt', component: NewPaymentOptionComponent},
       {path: 'payment-opt', component: PaymentOptionComponent},
-      {path: 'orders', component: ShopComponent},
+      {path: 'orders', component:  OrderComponent},
     ]
+
 
   },
   {path: 'checkout-page', component: CkeckoutPageComponent},
+  {path: 'search-order', component: SearchOrderComponent},
   {
     path: 'merchant',
     component: MerchantDashboardComponent,
@@ -117,9 +125,9 @@ export const routes: Routes = [
       { path: 'home', component: HomeEcommerceComponent },
       { path: 'about-us', component: AboutUsComponent },
       { path: 'contact-us', component: ContactUsComponent },
-      { path: 'shop', component: ReviewComponent },
+      { path: 'shop/:id', component: ReviewComponent },
     ],
   },
 
-  { path: '**', component: LandingPageComponent },
+  // { path: '**', component: LandingPageComponent },
 ];

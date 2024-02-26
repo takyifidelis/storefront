@@ -1,15 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faHeart, faStar } from '@fortawesome/free-solid-svg-icons';
 import { MatTabsModule } from '@angular/material/tabs';
 import { CommonModule } from '@angular/common';
+import { DataService } from '../../../../../Services/data.service';
+import { APIService } from '../../../../../Services/api.service';
+
 @Component({
   selector: 'app-review',
   standalone: true,
@@ -28,23 +31,48 @@ import { CommonModule } from '@angular/common';
   templateUrl: './review.component.html',
   styleUrl: './review.component.scss',
 })
-export class ReviewComponent {
+export class ReviewComponent implements OnInit {
   isFormDisplayed: boolean = false;
-  selectedImage: string = 'assets/images/ecommerce-sneaker-back-image.svg';
+  selectedImage: string | undefined;
   heartIcon = faHeart;
   starIcon = faStar;
+  product: any;
   quantity: number = 1;
-  amount: number = this.quantity * 90;
+  initialAmount: number | undefined;
+  initialPrice: any;
+  addToBuy: any = [];
 
+  constructor(public dataService: DataService, public apiService: APIService) {}
+
+  ngOnInit(): void {
+    // this.apiService.getProduct(this.dataService.productId).subscribe((data: Response) =>{
+    //   console.log(data);
+    // this.product = data;
+
+    // this.apiService.getStore
+    // })
+
+    this.product = this.apiService.getProductTemp();
+    this.selectedImage = this.product.images[0].url;
+
+    // Iterating over the images array to access each image URL
+   
+    this.initialPrice = this.product.price;
+  amount: number = this.quantity * 90;
+  productItem :any
+constructor(private route: ActivatedRoute,private dataService:DataService){}
   increaseQuantity(): void {
+    // this.quantity = this.product.quantity;
     this.quantity++;
-    this.amount = this.quantity * 90;
+    this.product.price = this.quantity * this.initialPrice;
   }
 
   decreaseQuantity(): void {
     if (this.quantity > 1) {
       this.quantity--;
-      this.amount = this.quantity * 90;
+    
+      this.product.price = this.quantity * this.initialPrice;
+      console.log(this.initialPrice);
     }
   }
   showForm(): void {
@@ -59,5 +87,20 @@ export class ReviewComponent {
 
   switchImage(imageName: string) {
     this.selectedImage = imageName;
+  }
+
+  onAddToBuy() {
+    this.addToBuy.push(this.product);
+    console.log(this.addToBuy);
+  ngOnInit(){
+    for (const product of this.dataService.products) {
+      if (product.id === this.route.snapshot.params['id']) {
+        this.productItem = product
+        console.log(this.productItem);
+      }
+    }
+     
+    // console.log(this.dataService.products.find((element:any) => console.log(element.id)));
+    
   }
 }

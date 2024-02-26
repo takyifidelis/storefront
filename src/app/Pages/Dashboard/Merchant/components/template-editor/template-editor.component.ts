@@ -10,13 +10,21 @@ import { CommonModule } from '@angular/common';
 import { DataService } from '../../../../../Services/data.service';
 import { FormsModule } from '@angular/forms';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { APIService } from '../../../../../Services/api.service';
+import {MatInputModule} from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatSliderModule} from '@angular/material/slider';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+
 
 @Component({
   selector: 'app-template-editor',
   standalone: true,
-  imports: [
-    RouterModule,CommonModule,FormsModule,
+  imports: [MatInputModule,MatSelectModule,
+    RouterModule,CommonModule,FormsModule,MatFormFieldModule,
     MatProgressBarModule, MatCardModule, MatButtonModule,
+    MatSliderModule,MatCheckboxModule,
     MatIconModule, MatSidenavModule,MatMenuModule, MatTooltipModule
   ],
   templateUrl: './template-editor.component.html',
@@ -29,11 +37,7 @@ export class TemplateEditorComponent  implements AfterViewInit{
   isColorVisible: boolean = false;
   isShapesVisible: boolean = false;
   isPagesVisible:boolean = false;
-  fontType: string[]=["Arial", "Helvetica", "Times New Roman", "Verdana"]
-  fontSize:number = 0
-  fontName:string = ""
-  fontColor:string = ""
-  constructor(private elementRef: ElementRef<HTMLElement>, public dataservice: DataService){ }
+  constructor(private elementRef: ElementRef<HTMLElement>, public dataservice: DataService, private apiService: APIService){ }
   @HostListener ('window:keydown.control.b', ['$event']) makeEditableUi(){
     this.dataservice.isEditable  = !this.dataservice.isEditable
     if (this.dataservice.isEditable) {
@@ -100,6 +104,7 @@ export class TemplateEditorComponent  implements AfterViewInit{
       })
     }
   }
+
   isMobile(val:string){
     if (val === 'true') {
       this.dataservice.isMobileBool = true;
@@ -116,18 +121,12 @@ export class TemplateEditorComponent  implements AfterViewInit{
     }
     return false;
   }
-
-  
   toggleBtnFunction() {
     this.dropDownMenu = document.querySelector('#dropdownMenu');
     if (this.dropDownMenu) {
       this.dropDownMenu.classList.toggle('open');
     }
   }
-
-
-  
-
   showHideDiv(el:string) {
     switch (el) {
       case 'isColorVisible':
@@ -149,19 +148,39 @@ export class TemplateEditorComponent  implements AfterViewInit{
         break;
     }
   }
-  changeFontSize(){
-    console.log(this.fontSize);
-    document.execCommand(`fontSize`,false, `${this.fontSize}`)
+
+  logPages(){
+    console.log(this.dataservice.template.pagesOrder)
+  }
+  // changeFontSize(){
+  //   console.log(this.fontSize);
+  //   document.execCommand(`fontSize`,false, `${this.fontSize}`)
+  // }
+
+  // changeFontType(){
+  //   console.log(this.dataservice.template.fontFamily);
+  //   // document.execCommand(`fontName`,false, `${this.fontName}`)
+  // }
+
+  // changeFontColor(){
+  //   console.log(this.fontColor);
+  //   // console.log(this.dataservice.template.primaryColor.color);
+  //   document.execCommand(`foreColor`,false, `${this.fontColor}`)
+  // }
+  saveTemplateDraft(template:any){
+    template = JSON.stringify(template);
+    // console.log(template);
+    this.apiService.saveTemplateDraft('22095521-d6e3-4ed1-a7de-e96e1f81bed3',{options:template}).subscribe((data:any)=>{
+      console.log(data);
+    })
   }
 
-  changeFontType(){
-    console.log(this.fontName);
-    document.execCommand(`fontName`,false, `${this.fontName}`)
-  }
-
-  changeFontColor(){
-    console.log(this.fontColor);
-    document.execCommand(`foreColor`,false, `${this.fontColor}`)
+  publishTemplate(template:any){
+    template = JSON.stringify(template);
+    // console.log(template);
+    this.apiService.publishTemplate('22095521-d6e3-4ed1-a7de-e96e1f81bed3',{options:template}).subscribe((data:any)=>{
+      console.log(data);
+    })
   }
   ngAfterViewInit() {
     // document.querySelectorAll('button').forEach((btn)=>{
