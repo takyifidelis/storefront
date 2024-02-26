@@ -72,6 +72,7 @@ export class LoginComponent implements OnInit {
     private loginService: AuthService,
     private apiService: APIService,
     public dataService: DataService,
+
     private router: Router
   ) {
     this.loginForm = new FormGroup({
@@ -105,6 +106,11 @@ export class LoginComponent implements OnInit {
     this.loginService.login(email, password).subscribe(
       (resData) => {
         console.log(resData);
+        if (resData.data?.type == 'Business') {
+          this.router.navigate(['merchant']);
+        } else if (resData.data?.type == 'Customer') {
+          this.router.navigate(['customer']);
+        }
       },
       (errorMessage) => {
         console.log(errorMessage);
@@ -116,6 +122,7 @@ export class LoginComponent implements OnInit {
 
   onShowPassword() {
     this.showPassword = !this.showPassword;
+
     this.eyeIcon = this.showPassword? faEye : faEyeSlash;
     }
 
@@ -128,4 +135,5 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/merchant']);
       })
     }
+
 }

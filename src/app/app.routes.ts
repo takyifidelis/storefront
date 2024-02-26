@@ -36,12 +36,13 @@ import { HistoryComponent } from './Pages/Dashboard/Customer/components/history/
 
 import { PaymentOptionComponent } from './Pages/Dashboard/Customer/components/payment-option/payment-option.component';
 import { NewPaymentOptionComponent } from './Pages/Dashboard/Customer/components/new-payment-option/new-payment-option.component';
+
 import { AuthSuccessfulComponent } from './Pages/Authentication/CommonComponent/auth-successful/auth-successful.component';
 import { contactUsGuard } from './gaurds/contact-us.guard';
 import { aboutUsGuard } from './gaurds/about-us.guard';
 
-import { AuthSuccessfulComponent } from './Pages/Authentication/CommonComponent/auth-successful/auth-successful.component';
 import { MerchantAddProductComponent } from './Pages/Dashboard/Merchant/components/merchant-add-product/merchant-add-product.component';
+import { AuthSuccessfulComponent } from './Pages/Authentication/CommonComponent/auth-successful/auth-successful.component';
 
 
 
@@ -86,6 +87,7 @@ export const routes: Routes = [
     path: 'customer',
     component: CustomerDashboardComponent,
 
+
     children:[
       {path: 'shop', component: ShopComponent},
       {path: 'fav-product', component: FavoriteProductComponent},
@@ -94,6 +96,7 @@ export const routes: Routes = [
       {path: 'payment-opt', component: PaymentOptionComponent},
       {path: 'orders', component: ShopComponent},
     ]
+
 
   },
   {
