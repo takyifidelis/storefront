@@ -10,6 +10,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faHeart, faStar } from '@fortawesome/free-solid-svg-icons';
 import { MatTabsModule } from '@angular/material/tabs';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../../Auth/auth.service';
 @Component({
   selector: 'app-review',
   standalone: true,
@@ -47,6 +48,7 @@ export class ReviewComponent {
       this.amount = this.quantity * 90;
     }
   }
+  productReview: any;
   showForm(): void {
     this.isFormDisplayed = true;
   }
@@ -59,5 +61,21 @@ export class ReviewComponent {
 
   switchImage(imageName: string) {
     this.selectedImage = imageName;
+  }
+  constructor(private authService: AuthService) {}
+  ngOnInit() {
+    // for(const product of this.dataService.product){
+    //   if(product.id===this.route.snapshot.params['id']){
+    //     this.productItem=product
+    //     console.log(this.productItem);
+
+    //   }
+    // }
+
+    this.authService.getReviews().subscribe((response: any) => {
+      console.log(response);
+      // this.users = response.data
+      this.productReview = response.data;
+    });
   }
 }

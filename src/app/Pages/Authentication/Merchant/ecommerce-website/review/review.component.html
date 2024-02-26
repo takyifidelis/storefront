@@ -328,6 +328,45 @@
             </button>
           </form>
         </div>
+
+        <!-- Feedback Block -->
+        <div
+          class="feedbacks-block d-flex"
+          *ngFor="let review of productReview"
+        >
+          <div class="comment">
+            <div class="feedback-image">
+              <img src="assets\images\feedback-image.svg" alt="" />
+            </div>
+          </div>
+
+          <div class="feedback-content">
+            <p class="feedback-name">
+              <span class="first-name"
+                >{{ review.customerReview.firstName }} </span
+              ><span class="last-name">{{
+                review.customerReview.lastName
+              }}</span>
+            </p>
+            <div class="ratings">
+              <img src="assets\icons\green-star.svg" alt="" /><img
+                src="assets\icons\green-star.svg"
+                alt=""
+              /><img src="assets\icons\green-star.svg" alt="" /><img
+                src="assets\icons\green-star.svg"
+                alt=""
+              />
+              <img src="/assets/icons/star.svg" alt="" />
+            </div>
+            <p class="feedback-date">
+              {{ review.createdAt | date : "longDate" }}
+            </p>
+            <p class="feedback-messgae">
+              {{ review.comment }}
+            </p>
+          </div>
+        </div>
+        <!-- Feedback Block -->
         <div class="feedbacks-block d-flex">
           <div class="comment">
             <div class="feedback-image">

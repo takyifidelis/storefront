@@ -73,7 +73,6 @@
             (change)="$event ? toggleAllRows() : null"
             [checked]="selection.hasValue() && isAllSelected()"
             [indeterminate]="selection.hasValue() && !isAllSelected()"
-            [aria-label]="checkboxLabel()"
           >
           </mat-checkbox>
         </th>
@@ -82,7 +81,6 @@
             (click)="showSelection($event)"
             (change)="$event ? selection.toggle(row) : null"
             [checked]="selection.isSelected(row)"
-            [aria-label]="checkboxLabel(row)"
           >
           </mat-checkbox>
         </td>
@@ -100,11 +98,13 @@
         <td mat-cell *matCellDef="let row" (click)="moreVert(row)">
           <div class="product-info d-flex align-items-center">
             <div class="product-image">
-              <img src="assets\images\hat-review.svg" alt="" />
+              <img [src]="row.productReview.images[0].url" alt="" />
             </div>
             <div class="product-name-date">
-              <p class="product-name">Channel Hat</p>
-              <p class="product-date">Posted: 07 Jan 2023</p>
+              <p class="product-name">{{ row.productReview.name }}</p>
+              <p class="product-date">
+                Posted: <span>{{ row.createdAt | date : "mediumDate" }}</span>
+              </p>
             </div>
           </div>
         </td>
@@ -129,8 +129,15 @@
               />
             </div>
             <div class="product-name-date">
-              <p class="product-name">Cooper, Kristin</p>
-              <p class="product-date">Saudi Arabia</p>
+              <p class="product-name">
+                <span class="first-name">{{
+                  row.customerReview.firstName
+                }}</span
+                ><span class="last-name">
+                  {{ row.customerReview.lastName }}
+                </span>
+              </p>
+              <p class="product-date">Ghana</p>
             </div>
           </div>
         </td>
@@ -147,12 +154,9 @@
         </th>
         <td mat-cell *matCellDef="let row" (click)="moreVert(row)">
           <div class="customer-review">
-            <h5 class="review-title">Disappointing</h5>
+            <h5 class="review-title">{{ row.remarks }}</h5>
             <p class="review-description">
-              I'm extremely disappointed in the quality of your product. It
-              isn't what I expected, and I'm unhappy with the experience. I paid
-              a lot for it and am let down. Please take my feedback into account
-              and improve the quality.
+              {{ row.comment }}
             </p>
           </div>
         </td>
@@ -189,4 +193,8 @@
     [pageSizeOptions]="[5, 10, 25, 100]"
     aria-label="Select page of users"
   ></mat-paginator>
+
+  <!-- <div *ngFor="let review of reviews$ | async">
+    {{rating }}
+  </div> -->
 </section>

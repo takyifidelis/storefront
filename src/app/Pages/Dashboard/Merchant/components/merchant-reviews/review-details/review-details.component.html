@@ -6,14 +6,21 @@
         <img src="assets\images\hat-review.svg" alt="" />
       </div>
       <div class="customer-detail">
-        <h3 class="customer-name">Cooper, Kristin</h3>
-        <p class="customer-country">Country: <span> Saudi Arabia</span></p>
+        <h3 class="customer-name">
+          <span class="first-name">{{ data.customerReview.firstName }} </span>
+          <span class="last-name">{{ data.customerReview.lastName }}</span>
+        </h3>
+        <p class="customer-country">Country: <span> Ghana</span></p>
       </div>
       <div class="amount-detail">
         <p class="total-spent">
-          Total Spent: $ <span class="amount">200</span>
+          Total Spent: $
+          <span class="amount">{{ data.orderReview.items[0].price }}</span>
         </p>
-        <p class="total-review">Total Review: <span class="review">14</span></p>
+        <p class="total-review">
+          Total Review:
+          <span class="review">{{ data.orderReview.items[0].total }}</span>
+        </p>
       </div>
     </div>
 
@@ -21,12 +28,17 @@
     <div class="second-block">
       <div class="product-details d-flex align-items-center">
         <div class="product-image">
-          <img src="assets\images\hat-review.svg" alt="" />
+          <img
+            [src]="data.productReview.images[0].url"
+            alt=""
+            class="product-image"
+          />
         </div>
         <div class="product-name-date">
-          <h5 class="product-name">Channel Hat</h5>
+          <h5 class="product-name">{{ data.productReview.name }}</h5>
           <p class="product-date">
-            Posted: <span class="date">07 Jan 2023</span>
+            Posted:
+            <span class="date">{{ data.createdAt | date : "mediumDate" }}</span>
           </p>
         </div>
       </div>
@@ -34,7 +46,7 @@
         <div
           class="title-rating d-flex justify-content-between align-items-center"
         >
-          <p class="review-title">Disappointing</p>
+          <p class="review-title">{{ data.remarks }}</p>
           <div class="ratings">
             <img src="assets\icons\star-ratings.svg" alt="" />
             <img src="assets\icons\star-ratings.svg" alt="" />
@@ -44,10 +56,7 @@
           </div>
         </div>
         <p class="review-description">
-          I'm extremely disappointed in the quality of your product. It isn't
-          what I expected, and I'm unhappy with the experience. I paid a lot for
-          it and am let down. Please take my feedback into account and improve
-          the quality.
+          {{ data.comment }}
         </p>
       </div>
     </div>

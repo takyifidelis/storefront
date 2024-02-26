@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { catchError, switchMap } from 'rxjs/operators';
+import { catchError, map, switchMap } from 'rxjs/operators';
 import { throwError, Observable } from 'rxjs';
 import {
   ForgetPasswordResponse,
   ResetPasswordResponse,
+  ReviewResponseData,
   SignupResponseData,
 } from '../Auth/api.model';
 
@@ -151,7 +152,7 @@ export class AuthService {
   replyReview(comment: string, review: string) {
     return this.http
       .post<SignupResponseData>(
-        'https://storefront-backend-jan-dev-api.vercel.app/api/customer/reply-review/{customer_id}',
+        'https://storefront-backend-jan-dev-api.vercel.app/api/store/reply-customer/22095521-d6e3-4ed1-a7de-e96e1f81bed3',
         {
           comment,
           review,
@@ -228,6 +229,17 @@ export class AuthService {
       catchError(this.handleError) // Handle errors from both getStores and postProduct
     );
   }
+
+  getReviews(): Observable<ReviewResponseData> {
+    return this.http
+      .get<ReviewResponseData>(
+        'https://storefront-backend-jan-dev-api.vercel.app/api/store/get-reviews/22095521-d6e3-4ed1-a7de-e96e1f81bed3',
+        { withCredentials: true }
+      )
+
+      .pipe(catchError(this.handleError));
+  }
+
   private handleError(errorRes: HttpErrorResponse) {
     console.error('Error Response:', errorRes);
     let errorMessage = 'An unknown error occurred!';

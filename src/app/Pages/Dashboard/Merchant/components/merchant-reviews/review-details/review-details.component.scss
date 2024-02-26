@@ -38,31 +38,34 @@
   }
 }
 .second-block {
-  .product-image {
-    width: 56px;
-    height: 56px;
-    border-radius: 4px;
-  }
-  .product-name-date {
-    margin-left: 1.5rem;
-    .product-name {
-      color: #455468;
-      font-family: Inter;
-      font-size: 16px;
-      font-style: normal;
-      font-weight: 500;
-      line-height: 28px;
-      letter-spacing: -0.3px;
-      margin-bottom: 0;
+  .product-details {
+    margin-bottom: 1rem;
+    .product-image {
+      width: 4rem;
+      height: 4rem;
+      border-radius: 4px;
     }
-    .product-date {
-      color: #5e718d;
-      font-family: Inter;
-      font-size: 12px;
-      font-style: normal;
-      font-weight: 400;
-      line-height: 20px;
-      letter-spacing: -0.2px;
+    .product-name-date {
+      margin-left: 1.5rem;
+      .product-name {
+        color: #455468;
+        font-family: Inter;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 28px;
+        letter-spacing: -0.3px;
+        margin-bottom: 0;
+      }
+      .product-date {
+        color: #5e718d;
+        font-family: Inter;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 20px;
+        letter-spacing: -0.2px;
+      }
     }
   }
   .review-message-block {

@@ -29,6 +29,9 @@ import {
 } from '@angular/material/dialog';
 import { AuthService } from '../../../../Authentication/Auth/auth.service';
 import { CommonModule } from '@angular/common';
+import { response } from 'express';
+import { Observable } from 'rxjs';
+import { ReviewResponseData } from '../../../../Authentication/Auth/api.model';
 
 export interface CustomerInterface {
   checkbox: string;
@@ -61,9 +64,14 @@ export interface CustomerInterface {
   styleUrl: './merchant-reviews.component.scss',
 })
 export class MerchantReviewsComponent {
+  reviews$!: Observable<ReviewResponseData>;
   filterIcon = faFilter;
   seaechICon = faSearch;
-  constructor(public dataService: DataService, public dialog: MatDialog) {
+  constructor(
+    public dataService: DataService,
+    public dialog: MatDialog,
+    private authService: AuthService
+  ) {
     this.dataSource = new MatTableDataSource(this.users);
   }
 
@@ -74,29 +82,27 @@ export class MerchantReviewsComponent {
     'customer',
     'rating',
   ];
-  dataSource: MatTableDataSource<CustomerInterface>;
-  selection = new SelectionModel<CustomerInterface>(true, []);
+  dataSource: MatTableDataSource<ReviewResponseData>;
+  selection = new SelectionModel<ReviewResponseData>(true, []);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
   // creating a dummy user data source for the table
-  users = [
-    {
-      checkbox: '1',
-      product: 'Asher A.',
-      name: '44',
+  // users = [
+  //   {
+  //     checkbox: '1',
+  //     product: 'Asher A.',
+  //     name: '44',
 
-      customer: 'Add me',
-      rating: 'Rate me',
-    },
-  ];
+  //     customer: 'Add me',
+  //     rating: 'Rate me',
+  //   },
+  // ];
+  users: any;
 
-  moreVert(e: dummyUserInterface) {
+  moreVert(e: ReviewResponseData) {
     this.dialog.open(ReviewDetailsComponent, {
-      data: {
-        itemName: 'hat',
-        itemPrice: 'hat',
-      },
+      data: e,
       width: '479px',
       position: { right: '50px', top: '10%' },
     });
@@ -125,17 +131,25 @@ export class MerchantReviewsComponent {
   }
 
   /** The label for the checkbox on the passed row */
-  checkboxLabel(row?: CustomerInterface): string {
-    if (!row) {
-      return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
-    }
-    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${
-      row.checkbox + 1
-    }`;
-  }
+  // checkboxLabel(row?: CustomerInterface): string {
+  //   if (!row) {
+  //     return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
+  //   }
+  //   return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${
+  //     row.checkbox + 1
+  //   }`;
+  // }
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+  }
+
+  ngOnInit() {
+    this.authService.getReviews().subscribe((response: any) => {
+      console.log(response);
+      // this.users = response.data
+      this.dataSource = new MatTableDataSource(response.data);
+    });
   }
 }
 
@@ -168,7 +182,7 @@ export class ReviewDetailsComponent {
   error: string | any = null;
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: dummyUserInterface,
+    @Inject(MAT_DIALOG_DATA) public data: ReviewResponseData,
     private authService: AuthService
   ) {
     this.replyReview = new FormGroup({
@@ -180,8 +194,9 @@ export class ReviewDetailsComponent {
     if (!form.valid) {
       return;
     }
+
+    const review = '0c2c1c7c-4010-440e-89ff-f8d62bd69aa1';
     const comment = form.value.comment;
-    const review = form.value.review;
     this.authService.replyReview(comment, review).subscribe(
       (resData) => {
         console.log(resData);
