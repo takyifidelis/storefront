@@ -14,7 +14,11 @@ import { AboutUsComponent } from './about-us/about-us.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { CommonModule } from '@angular/common';
 import { DataService } from '../../../../Services/data.service';
+import {MatBadgeModule} from '@angular/material/badge';
+
+
 import {CdkDrag, CdkDragDrop, CdkDropList, DragDropModule, moveItemInArray} from '@angular/cdk/drag-drop';
+
 @Component({
   selector: 'app-ecommerce-website',
   standalone: true,
@@ -31,6 +35,7 @@ import {CdkDrag, CdkDragDrop, CdkDropList, DragDropModule, moveItemInArray} from
     MatIconModule,
     MatSidenavModule,
     MatMenuModule,
+    MatBadgeModule
     DragDropModule,
     CdkDropList, CdkDrag
   ],

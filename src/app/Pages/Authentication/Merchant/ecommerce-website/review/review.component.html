@@ -2,58 +2,16 @@
   <section class="">
     <mat-drawer-container class="example-container">
       <mat-drawer mode="side" opened="true">
-        <div class="" style="height: 100%; overflow: hidden">
-          <div>
-            <img
-              src="assets\images\ecommerce-sneaker-back-image.svg"
-              class="side-shoe"
-              alt=""
-              (click)="
-                switchImage('assets/images/ecommerce-sneaker-back-image.svg')
-              "
-            />
-          </div>
-          <div>
-            <img
-              src="assets\images\ecommerce-sneaker-image-2.svg"
-              class="side-shoe"
-              alt=""
-              (click)="
-                switchImage('assets/images/ecommerce-sneaker-image-2.svg')
-              "
-            />
-          </div>
-          <div>
-            <img
-              src="assets\images\ecommerce-sneaker-image-3.svg"
-              class="side-shoe"
-              alt=""
-              (click)="
-                switchImage('assets/images/ecommerce-sneaker-image-3.svg')
-              "
-            />
-          </div>
-          <div>
-            <img
-              src="assets\images\ecommerce-sneaker-image-4.svg"
-              class="side-shoe"
-              alt=""
-              (click)="
-                switchImage('assets/images/ecommerce-sneaker-image-4.svg')
-              "
-            />
-          </div>
-          <div>
-            <img
-              src="assets\images\ecommerce-sneaker-image-5.svg"
-              class="side-shoe"
-              alt=""
-              (click)="
-                switchImage('assets/images/ecommerce-sneaker-image-5.svg')
-              "
-            />
-          </div>
+        @for(image of this.product.images; track image){
+        <div>
+          <img
+            [src]="image.url"
+            class="side-shoe"
+            alt=""
+            (click)="switchImage(image.url)"
+          />
         </div>
+        }
       </mat-drawer>
       <mat-drawer-content>
         <div class="row">
@@ -64,12 +22,12 @@
             <div class="container">
               <div class="row top">
                 <div class="col">
-                  <p class="txt">Home / Women’s Shoe / All Stars</p>
+                  <p class="txt">{{ product.description }}</p>
                 </div>
               </div>
               <div class="row">
                 <div class="col">
-                  <h4 class="item-name">Converse All Stars</h4>
+                  <h4 class="item-name">{{ product.name }}</h4>
                 </div>
               </div>
               <div class="row">
@@ -134,12 +92,12 @@
               </div>
 
               <div class="d-flex align-items-center justify-content-start">
-                <button class="size one">XS</button>
-                <button class="size">S</button>
-                <button class="size">L</button>
-                <button class="size">XL</button>
-                <button class="size">XXL</button>
-                <button class="size">XXXL</button>
+                <button
+                  class="size one"
+                  *ngFor="let variation of this.product.variations[0].values"
+                >
+                  {{ variation }}
+                </button>
               </div>
               <div class="quantity-price d-flex align-items-center">
                 <div class="quantity">
@@ -163,13 +121,15 @@
                 <div class="price">
                   <p class="price-name quantity-price-name">PRICE</p>
                   <div class="price-amount amount">
-                    {{ amount + ".00 EUR" }}
+                    {{ product.price + ".00 EUR" }}
                   </div>
                 </div>
               </div>
 
               <div class="add-to-save">
-                <span class="add-to-buy">ADD TO BUY</span>
+                <span class="add-to-buy" (click)="onAddToBuy()"
+                  >ADD TO BUY</span
+                >
                 <span class="save">
                   <fa-icon [icon]="heartIcon"></fa-icon> SAVE
                 </span>

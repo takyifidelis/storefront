@@ -10,6 +10,11 @@ import { UserCredentials } from '../interfaces/all-interfaces';
 export class APIService {
 
   constructor(private http: HttpClient) { }
+ 
+ 
+
+
+ 
 
   merchantSignup(user:UserCredentials): Observable<Response> {
     return this.http.post<Response>(`${environment.baseApiUrl}/account/register/local`, user,
@@ -38,6 +43,7 @@ export class APIService {
       withCredentials: true,
     })
   }
+
   // getStoreProducts(storeId: string): Observable<Response>{
   //   return this.http.get<Response>(`${environment.baseApiUrl}/store/get-store-products/${storeId}`,
   //   {
@@ -50,12 +56,21 @@ export class APIService {
       withCredentials: true,
     })
   }
+
   getOneProducts(productId: string): Observable<Response>{
     return this.http.get<Response>(`${environment.baseApiUrl}/product/${productId}`,
     {
       withCredentials: true,
     })
   }
+
+  authenticateUser(user:UserCredentials): Observable<Response> {
+    return this.http.post<Response>(`${environment.baseApiUrl}/account/login/local`, user,
+    {
+      withCredentials: true,
+    })
+  }
+
 
   saveTemplateDraft(storeId: string, template:any): Observable<Response>{
     return this.http.patch<Response>(`${environment.baseApiUrl}/store/save-template-draft/${storeId}`,
