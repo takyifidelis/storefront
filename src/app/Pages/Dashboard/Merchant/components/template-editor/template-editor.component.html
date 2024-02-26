@@ -22,247 +22,205 @@
                     </button>
                 </div>
                 <div class="action-buttons">
-                    <button class="btn btn-dark">Save</button>
-                    <button class="btn btn-dark ms-2">Publish</button>
+                    <button (click)="saveTemplateDraft(dataservice.template)" class="btn btn-dark">Save</button>
+                    <button (click)="publishTemplate(dataservice.template)" class="btn btn-dark ms-2">Publish</button>
                 </div>
                 <span routerLink="/" class="app-name">
                     storefront
                 </span>
             </nav>
         </header>
-        <div class="template row ms-2" [style.display]="isTemplateVisible ? 'block' : 'none'">
-            <section>
-                <h1>H1 Heading 64px</h1>
-                <h2>H2 Heading 48px</h2>
-                <h3>H3 Heading 24px</h3>
-                <h4>H4 Heading 16px</h4>
-                <hr>
-                <div class="d-flex"  style="gap: 0.5rem; align-items: center;justify-content: space-evenly;">
-                    <div class="d-flex flex-column" style="gap: 0.5rem; ">
-                        <span class="row g-1" style="justify-content: center;">
-                            <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
-                                <svg width="31.4" height="33.5" >
-                                    <rect width="31.4" height="33.5" fill="#15616B" />
-                                </svg>
-                            </div>
-                            <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
-                                <svg width="31.4" height="33.5">
-                                    <rect width="31.4" height="33.5" fill="#219BAB" />
-                                </svg>
-                            </div>
-                            <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
-                                <svg width="31.4" height="33.5">
-                                    <rect width="31.4" height="33.5" fill="#54CEDE" />
-                                </svg>
-                            </div>
-                            <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
-                                <svg width="31.4" height="33.5">
-                                    <rect width="31.4" height="33.5" fill="#AAE6EE" />
-                                </svg>
-                            </div>
-                            <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
-                                <svg width="31.4" height="33.5">
-                                    <rect width="31.4" height="33.5" fill="#FFFFFF" />
-                                </svg>
-                            </div>
+        <div class="offcanvas offcanvas-top" style="height: max-content;" data-bs-backdrop="false" data-bs-scroll="true" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
+            <div style="padding: 2rem; 
+            overflow-y: scroll;
+            overflow-x: hidden;">
+                <div class="editor-heading"><h3>Typography</h3></div>
+                <hr class="editor-hr">
+                <div class="typo-heading">Justify Styling</div>
+                <hr class="editor-hr">
+                <div class="typo-heading">
+                    <div class="d-flex">
+                       
+                        <button (click)="dataservice.template.textAlign = 'left'" mat-icon-button>
+                            <mat-icon>format_align_left</mat-icon>
+                        </button>
+                        <button (click)="dataservice.template.textAlign = 'center'" mat-icon-button>
+                            <mat-icon>format_align_center</mat-icon>
+                        </button>
+                        <button (click)="dataservice.template.textAlign = 'right'" mat-icon-button>
+                            <mat-icon>format_align_right</mat-icon>
+                        </button>
+                        <button (click)="dataservice.template.textAlign = 'justify'" mat-icon-button>
+                            <mat-icon>format_align_justify</mat-icon>
+                        </button>
+                    </div>
+                </div>
+                <div class="typo-heading">Font Styling</div>
+                <hr class="editor-hr">
+                <div class="global-fonts-styles">
+                    <div class="first">
+                        <span class="name-element-group">
+                            <span>Font Weight</span>
+                            <select [(ngModel)]="dataservice.template.body.fontWeight" data-element="fontSize" name="cars" id="cars">
+                                @for(weight of dataservice.template.fontWeightList; track weight){
+                                    <option [value]="weight">{{weight}}</option>
+                                }
+                            </select>
                         </span>
-                        <span class="row g-1" style="justify-content: center;">
-                            <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
-                                <svg width="31.4" height="33.5">
-                                    <rect width="31.4" height="33.5" fill="#15616B" />
-                                </svg>
-                            </div>
-                            <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
-                                <svg width="31.4" height="33.5">
-                                    <rect width="31.4" height="33.5" fill="#114D55" />
-                                </svg>
-                            </div>
-                            <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
-                                <svg width="31.4" height="33.5">
-                                    <rect width="31.4" height="33.5" fill="#0E4248" />
-                                </svg>
-                            </div>
-                            <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
-                                <svg width="31.4" height="33.5">
-                                    <rect width="31.4" height="33.5" fill="#0D3A40" />
-                                </svg>
-                            </div>
-                            <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
-                                <svg width="31.4" height="33.5">
-                                    <rect width="31.4" height="33.5" fill="Black" />
-                                </svg>
-                            </div>
+                        <span class="name-element-group">
+                            <span>Font Style</span>
+                            <select [(ngModel)]="dataservice.template.fontFamily" data-element="fontSize" name="cars" id="cars">
+                                @for (font of dataservice.template.fontArray; track font) {
+                                    <option [value]="font">{{font}}</option>
+                                  }
+                            </select>
                         </span>
-                        <span class="row g-1" style="justify-content: center;">
-                            <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
-                                <svg width="31.4" height="33.5">
-                                    <rect width="31.4" height="33.5" fill="#FFFFFF" />
-                                </svg>
-                            </div>
-                            <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
-                                <svg width="31.4" height="33.5">
-                                    <rect width="31.4" height="33.5" fill="#D4D4D4" />
-                                </svg>
-                            </div>
-                            <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
-                                <svg width="31.4" height="33.5">
-                                    <rect width="31.4" height="33.5" fill="#808080" />
-                                </svg>
-                            </div>
-                            <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
-                                <svg width="31.4" height="33.5">
-                                    <rect width="31.4" height="33.5" fill="#4D4D4D" />
-                                </svg>
-                            </div>
-                            <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
-                                <svg width="31.4" height="33.5">
-                                    <rect width="31.4" height="33.5" fill="#4D4D4D" />
-                                </svg>
-                            </div>
+                        
+                        <span class="name-element-group">
+                            <span>Body Font Size</span>
+                            <select [(ngModel)]="dataservice.template.body.fontSize" data-element="fontSize" name="cars" id="cars">
+                                @for(size of dataservice.template.bodyFontSizeArray; track size){
+                                    <option [value]="size">{{size}}</option>
+                                }
+                            </select>
                         </span>
                     </div>
-                    <svg (click)="showHideDiv('isColorVisible')" xmlns="http://www.w3.org/2000/svg" width="12" height="29" viewBox="0 0 12 29" fill="none">
-                        <path d="M12 14.5L0.750001 28.7894L0.750002 0.21058L12 14.5Z" fill="#222222"/>
-                      </svg>
+
+                    <div class="second">
+                        <span class="name-element-group">
+                            <span>Line Height</span>
+                            <select [(ngModel)]="dataservice.template.lineHeight" data-element="fontSize" name="cars" id="cars">
+                                @for(lineH of dataservice.template.lineHeightList; track lineH){
+                                    <option [value]="lineH">{{lineH}}</option>
+                                }
+                            </select>
+                        </span>
+                        <span class="name-element-group">
+                            <span>Headers Font Size</span>
+                            <select [(ngModel)]="dataservice.template.headers.fontSize" data-element="fontSize" name="cars" id="cars">
+                                @for(size of dataservice.template.headerFontSizeArray; track size){
+                                    <option [value]="size">{{size}}</option>
+                                }
+                            </select>
+                        </span>
+                        <span class="name-element-group">
+                            <span>Headers Font Weight</span>
+                            <select [(ngModel)]="dataservice.template.headers.fontWeight" data-element="fontSize" name="cars" id="cars">
+                                @for(weight of dataservice.template.headerfontWeightList; track weight){
+                                    <option [value]="weight">{{weight}}</option>
+                                }
+                            </select>
+                        </span>
+                        <span class="name-element-group">
+                            <span>Hero Font Size</span>
+                            <select [(ngModel)]="dataservice.template.headings.heroHeading.fontSize" data-element="fontSize" name="cars" id="cars">
+                                @for(size of dataservice.template.headerFontSizeArray; track size){
+                                    <option [value]="size">{{size}}</option>
+                                }
+                            </select>
+                        </span>
+                    </div>
                 </div>
-                <hr>
-                <div class="d-flex" style="justify-content: space-evenly; align-items: center;">
-                    <img src="/assets/images/editor-small-card.svg" alt="" srcset="">
-                    <img src="/assets/images/editor-small-card.svg" alt="" srcset="">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="29" viewBox="0 0 12 29" fill="none">
-                        <path d="M12 14.5L0.750001 28.7894L0.750002 0.21058L12 14.5Z" fill="#222222"/>
-                      </svg>
+
+                <div class="typo-heading">Color Styling</div>
+                <hr class="editor-hr">
+                <div class="global-fonts-styles">
+                    <div class="first">
+                        <span class="name-element-group">
+                            <span>NavBar Background</span>
+                            <input [(ngModel)]="dataservice.template.navbarBackgroundColor" type="color" />
+                        </span>
+                        <span class="name-element-group">
+                            <span>NavBar Color</span>
+                            <input [(ngModel)]="dataservice.template.navbarColor" type="color" />
+                        </span>
+                    </div>
+
+                    <div class="second">
+                        <span class="name-element-group">
+                            <span>Hero Color</span>
+                            <input [(ngModel)]="dataservice.template.headings.heroHeading.color" type="color" />
+                        </span>
+                        <span class="name-element-group">
+                            <span>Store Background</span>
+                            <input [(ngModel)]="dataservice.template.primaryBackground" type="color" />
+                        </span>
+                    </div>
                 </div>
-                <hr>
-                <div class="d-flex" style="justify-content: space-evenly; align-items: center;">
-                    <img src="/assets/images/editor-small-card-2.svg" alt="" srcset="">
-                    <img src="/assets/images/editor-small-card-2.svg" alt="" srcset="">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="29" viewBox="0 0 12 29" fill="none">
-                        <path d="M12 14.5L0.750001 28.7894L0.750002 0.21058L12 14.5Z" fill="#222222"/>
-                      </svg>
+
+                <div class="typo-heading">Button Styling</div>
+                <hr class="editor-hr">
+                <div class="global-fonts-styles">
+                    <div class="first">
+                        <span class="name-element-group">
+                            <span>Background Color</span>
+                            <input [(ngModel)]="dataservice.template.buttons.backgroundColor" type="color" />
+                        </span>
+                        <span class="name-element-group">
+                            <span>Text Color</span>
+                            <input [(ngModel)]="dataservice.template.buttons.color" type="color" />
+                        </span>
+                    </div>
+
+                    <div class="second">
+                        <span class="name-element-group">
+                            <span>Border Color</span>
+                            <input [(ngModel)]="dataservice.template.buttons.borderColor" type="color" />
+                        </span>
+                        <span class="name-element-group">
+                            <span>Border Radius</span>
+                            <select [(ngModel)]="dataservice.template.buttons.borderRadius" data-element="fontSize" name="cars" id="cars">
+                                @for(radius of dataservice.template.buttonBorderRadiusList; track radius){
+                                    <option [value]="radius">{{radius}}</option>
+                                }
+                            </select>
+                        </span>
+                    </div>
                 </div>
-                <hr>
-                <div style="display: flex; flex-direction: column; gap: 0.55rem;">
-                    <button style="
-                        color: var(--white, #FFF);
-text-align: center;
-font-family: Roboto;
-font-size: 16.019px;
-font-style: normal;
-font-weight: 600;
-line-height: normal;
-width: 100%; 
-height: 2rem; 
-background-color: #15616B; 
-border: none;">Button</button>
-                    <button style="border-radius:  0.5rem;width: 100%; height: 2rem; background-color: #15616B; border: none;">Button</button>
-                </div>
-            </section>
-            <section>
-            </section>
-         </div>
-         <div class="color-palette-extension row" [style.display]="isColorVisible ? 'block' : 'none'">
-            <section class="d-flex flex-column" style="gap: 0.5rem; ">
-                <span class="row g-1" style="justify-content: center;">
-                    <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
-                        <svg width="31.4" height="33.5" >
-                            <rect width="31.4" height="33.5" fill="#E91E63" />
-                        </svg>
-                    </div>
-                    <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
-                        <svg width="31.4" height="33.5">
-                            <rect width="31.4" height="33.5" fill="#9C27B0" />
-                        </svg>
-                    </div>
-                    <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
-                        <svg width="31.4" height="33.5">
-                            <rect width="31.4" height="33.5" fill="#3F51B5" />
-                        </svg>
-                    </div>
-                    <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
-                        <svg width="31.4" height="33.5">
-                            <rect width="31.4" height="33.5" fill="#2196F3" />
-                        </svg>
-                    </div>
-                    <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
-                        <svg width="31.4" height="33.5">
-                            <rect width="31.4" height="33.5" fill="#03A9F4" />
-                        </svg>
-                    </div>
-                    <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
-                        <svg width="31.4" height="33.5">
-                            <rect width="31.4" height="33.5" fill="#00BCD4" />
-                        </svg>
-                    </div>
-                </span>
-                <span class="row g-1" style="justify-content: center;">
-                    <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
-                        <svg width="31.4" height="33.5">
-                            <rect width="31.4" height="33.5" fill="#CDDC39" />
-                        </svg>
-                    </div>
-                    <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
-                        <svg width="31.4" height="33.5">
-                            <rect width="31.4" height="33.5" fill="#FFEB3B" />
-                        </svg>
-                    </div>
-                    <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
-                        <svg width="31.4" height="33.5">
-                            <rect width="31.4" height="33.5" fill="#FFC107" />
-                        </svg>
-                    </div>
-                    <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
-                        <svg width="31.4" height="33.5">
-                            <rect width="31.4" height="33.5" fill="#FF9800" />
-                        </svg>
-                    </div>
-                    <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
-                        <svg width="31.4" height="33.5">
-                            <rect width="31.4" height="33.5" fill="#E04C1E" />
-                        </svg>
-                    </div>
-                    <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
-                        <svg width="31.4" height="33.5">
-                            <rect width="31.4" height="33.5" fill="#F44336" />
-                        </svg>
-                    </div>
-                </span>
-                <span class="row g-1" style="justify-content: center;">
-                    <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
-                        <svg width="31.4" height="33.5">
-                            <rect width="31.4" height="33.5" fill="#795548" />
-                        </svg>
-                    </div>
-                    <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
-                        <svg width="31.4" height="33.5">
-                            <rect width="31.4" height="33.5" fill="#9A9A9A" />
-                        </svg>
-                    </div>
-                    <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
-                        <svg width="31.4" height="33.5">
-                            <rect width="31.4" height="33.5" fill="#607D8B" />
-                        </svg>
-                    </div>
-                    <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
-                        <svg width="31.4" height="33.5">
-                            <rect width="31.4" height="33.5" fill="#009688" />
-                        </svg>
-                    </div>
-                    <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
-                        <svg width="31.4" height="33.5">
-                            <rect width="31.4" height="33.5" fill="#4BAB4F" />
-                        </svg>
-                    </div>
-                    <div style="box-shadow: rgb(0, 0, 0) -1px 1px 2px; width: fit-content; padding:0">
-                        <svg width="31.4" height="33.5">
-                            <rect width="31.4" height="33.5" fill="#8BC34A" />
-                        </svg>
-                    </div>
-                    <!-- <input type="color" name="red" id=""> -->
-                </span>
-            </section>
+
+
+                <!-- <input [(ngModel)]="dataservice.template.primaryBackground" type="color" />
+                <input [(ngModel)]="dataservice.template.primaryColor" type="color" />
+                <input [(ngModel)]="dataservice.template.navbarBackgroundColor" type="color" />
+                <input [(ngModel)]="dataservice.template.navbarColor" type="color" />
+                <select [(ngModel)]="dataservice.template.fontFamily" data-element="fontSize" name="cars" id="cars">
+                    @for (font of dataservice.template.fontArray; track font) {
+                        <option [value]="font">{{font}}</option>
+                      }
+                </select>
+                <select [(ngModel)]="dataservice.template.headings.headFontSize" data-element="fontSize" (click)="changeFontSize()" name="cars" id="cars">
+                    @for(size of dataservice.template.headerFontSize; track size){
+                        <option [value]="size">{{size}}</option>
+                    }
+                </select>
+                <select [(ngModel)]="dataservice.template.fontWeight" data-element="fontSize" (click)="changeFontSize()" name="cars" id="cars">
+                    @for(weight of dataservice.template.fontWeightList; track weight){
+                        <option [value]="weight">{{weight}}</option>
+                    }
+                </select>
+                <select [(ngModel)]="dataservice.template.lineHeight" data-element="fontSize" (click)="changeFontSize()" name="cars" id="cars">
+                    @for(lineH of dataservice.template.lineHeightList; track lineH){
+                        <option [value]="lineH">{{lineH}}</option>
+                    }
+                </select>
+                <button (click)="dataservice.template.textAlign = 'left'" mat-icon-button>
+                    <mat-icon>format_align_left</mat-icon>
+                </button>
+                <button (click)="dataservice.template.textAlign = 'center'" mat-icon-button>
+                    <mat-icon>format_align_center</mat-icon>
+                </button>
+                <button (click)="dataservice.template.textAlign = 'right'" mat-icon-button>
+                    <mat-icon>format_align_right</mat-icon>
+                </button>
+                <button (click)="dataservice.template.textAlign = 'justify'" mat-icon-button>
+                    <mat-icon>format_align_justify</mat-icon>
+                </button>
+                <button mat-icon-button (click)="dataservice.isEditable = !dataservice.isEditable">
+                    <mat-icon>link</mat-icon>
+                </button> -->
+            </div>
         </div>
-        <div class="shapes collapse" id="shapes">
+        <!-- <div class="shapes collapse" id="shapes">
             <section style="display: flex;">
                 <button mat-icon-button>
                     <mat-icon>circle</mat-icon>
@@ -274,15 +232,15 @@ border: none;">Button</button>
                     <span style="align-items: center;justify-content: center; display: flex; font-weight:900; text-align: center;">|</span>
                 </button>
             </section>
-        </div>
-        <div class="pages collapse" id="pages">
-            <button style="display: flex; border: none;background-color: transparent; justify-content: center;align-items: center;"><img src="/assets/icons/plus.svg" alt="" srcset=""> <h3 style="margin: 0;">Add Pages</h3></button>
+        </div> -->
+        <div class="pages collapse" id="pagesForm">
+            <button data-bs-toggle="modal" data-bs-target="#pagesModal" style="display: flex; border: none;background-color: transparent; justify-content: center;align-items: center;"><img src="/assets/icons/plus.svg" alt="" srcset=""> <h3 style="margin: 0;">Add Pages</h3></button>
             <hr>
             <div>
                 
             <button routerLink="home" style="display: flex; border: none;background-color: transparent; justify-content: center;align-items: center; margin-bottom: 1.6rem;"><img src="/assets/icons/black_sqr.svg" style="margin: 0 24px 0 0;">Landing page</button>
-            <button routerLink="contact-us" style="display: flex; border: none;background-color: transparent; align-items: center; margin-bottom: 1.6rem;"><img src="/assets/icons/black_sqr.svg" style="margin: 0 24px 0 0;">About us</button>
-            <button routerLink="about-us" style="display: flex; border: none;background-color: transparent; align-items: center;"><img src="/assets/icons/black_sqr.svg" style="margin: 0 24px 0 0;">Contact us</button>
+            <button *ngIf="dataservice.template.pagesOrder[2].includePage" routerLink="contact" style="display: flex; border: none;background-color: transparent; align-items: center; margin-bottom: 1.6rem;"><img src="/assets/icons/black_sqr.svg" style="margin: 0 24px 0 0;">About us</button>
+            <button *ngIf="dataservice.template.pagesOrder[1].includePage" routerLink="about" style="display: flex; border: none;background-color: transparent; align-items: center;"><img src="/assets/icons/black_sqr.svg" style="margin: 0 24px 0 0;">Contact us</button>
             </div>
         </div>
         
@@ -342,39 +300,32 @@ border: none;">Button</button>
             </span>
         </div>
     </div>
+
     <mat-drawer-container class="container-fluid p-0 test">
+        
         <mat-drawer #drawer mode="side" [opened]="true" class="side-nav mat-elevated-z4">
             <ul>
-                <li matTooltip="Add Templates" (click)="showHideDiv('isTemplateVisible')">
-                    <button mat-fab style="background-color: white; color: #0085FF;"
+                <li matTooltip="Add Templates" >
+                    <button data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop" mat-fab style="background-color: white; color: #0085FF;"
                         aria-label="Example icon button with a bookmark icon">
                         <mat-icon>add</mat-icon>
                     </button>
                 </li>
-                <li matTooltip="Add Shapes" data-bs-toggle="collapse" data-bs-target="#shapes">
+                <!-- <li matTooltip="Add Shapes" data-bs-toggle="collapse" data-bs-target="#shapes">
                     <button mat-fab style="background-color: white; color: black;">
                         <mat-icon style="background-color: black;" fontIcon="crop_square"></mat-icon>
                     </button>
-                </li>
+                </li> -->
+                
                 <li>
                     <button matTooltip="Upload file" data-bs-toggle="modal" data-bs-target="#exampleModal"  style="background-color: white; color: #0085FF;" mat-fab color="accent" aria-label="Example icon button with a bookmark icon">
                         <mat-icon>upload_2</mat-icon>
                     </button>
                 </li>
-                <li data-bs-toggle="collapse" data-bs-target="#pages">
+                <li data-bs-toggle="collapse" data-bs-target="#pagesForm">
                     <button matTooltip="Add Pages" mat-fab style="background-color: white;"
                         aria-label="Example icon button with a bookmark icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="27" viewBox="0 0 28 30" fill="none">
-                            <path
-                                d="M1 24.2534H5.10354M9.20707 24.2534H5.10354M5.10354 24.2534V20.1498M5.10354 24.2534V28.3569M7.85017 1H20.8447L27 7.1553V24.2534"
-                                stroke="#0085FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                            <path
-                                d="M13.3213 28.3569H20.8444C21.3886 28.3569 21.9105 28.1407 22.2953 27.7559C22.68 27.3712 22.8962 26.8493 22.8962 26.3051V10.2316C22.8963 10.1236 22.8751 10.0167 22.8338 9.91692C22.7925 9.81716 22.7319 9.72654 22.6555 9.65024L18.3495 5.34426C18.273 5.2677 18.1822 5.20702 18.0822 5.1657C17.9822 5.12439 17.875 5.10325 17.7668 5.10352H4.43031C3.88615 5.10352 3.36427 5.31969 2.97949 5.70447C2.59471 6.08925 2.37854 6.61112 2.37854 7.15529V16.0463"
-                                stroke="#0085FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                            <path
-                                d="M17.4248 5.10352V9.75419C17.4248 9.97185 17.5113 10.1806 17.6652 10.3345C17.8191 10.4884 18.0278 10.5749 18.2455 10.5749H22.8962"
-                                stroke="#0085FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
+                        <img src="/assets/icons/add_files_btn.svg" alt="" srcset="">
                     </button>
                 </li>
                 <li data-bs-toggle="collapse" data-bs-target="#layers">
@@ -385,39 +336,7 @@ border: none;">Button</button>
                 </li>
             </ul>
         </mat-drawer>
-        <mat-drawer-content class="conatainer" style="position: relative;" >
-            <div *ngIf="!dataservice.isMobileBool" [ngClass]="!dataservice.isEditable ? 'my-typograpy-hide' : 'my-typography'">
-                <input [(ngModel)]="fontColor" (change)="changeFontColor()" type="color" value="#fff" />
-                <select [(ngModel)]="fontName" data-element="fontSize" (click)="changeFontType()" name="cars" id="cars">
-                    @for (font of fontType; track font) {
-                        <option [value]="font">{{font}}</option>
-                      }
-                </select>
-                <select [(ngModel)]="fontSize" data-element="fontSize" (click)="changeFontSize()" name="cars" id="cars">
-                    <option default value=1>16</option>
-                    <option value=2>12</option>
-                    <option value=3>24</option>
-                    <option value=4>36</option>
-                    <option value=5>48</option>
-                    <option value=6>64</option>
-                    <option value=7>72</option>
-                </select>
-                <button mat-icon-button data-element="justifyLeft">
-                    <mat-icon>format_align_left</mat-icon>
-                </button>
-                <button mat-icon-button data-element="justifyCenter">
-                    <mat-icon>format_align_center</mat-icon>
-                </button>
-                <button mat-icon-button data-element="justifyRight">
-                    <mat-icon>format_align_right</mat-icon>
-                </button>
-                <button mat-icon-button data-element="justifyFull">
-                    <mat-icon>format_align_justify</mat-icon>
-                </button>
-                <button mat-icon-button data-element="createLink">
-                    <mat-icon>link</mat-icon>
-                </button>
-            </div>
+        <mat-drawer-content class="conatainer" >
             <div *ngIf="dataservice.isMobileBool" style="display: flex; width: 100%; height: 100%;justify-content: center; ">
                 <iframe title="mobile checker" [ngClass]="dataservice.isMobileBool ? 'mobile1' : 'desktop1'" src="/ecommerce/home"></iframe> 
             </div>
@@ -443,7 +362,20 @@ border: none;">Button</button>
       </div>
     </div>
   </div>
-
+<div class="modal fade" tabindex="-1" id="pagesModal" data-bs-backdrop="static">
+<div class="modal-dialog  modal-dialog-centered">
+    <div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title">Select A Page To Add</h5>
+        <button type="button" (click)="logPages()" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body d-flex" style="flex-direction: column;">
+        <mat-checkbox color="primary" class="example-margin" [(ngModel)]="dataservice.template.pagesOrder[2].includePage">Add Contact Us Page</mat-checkbox>
+        <mat-checkbox color="primary" class="example-margin" [(ngModel)]="dataservice.template.pagesOrder[1].includePage">Add About Us Page</mat-checkbox>
+    </div>
+    </div>
+</div>
+</div>
 
 <div style="z-index: 99; position: relative;">
   
