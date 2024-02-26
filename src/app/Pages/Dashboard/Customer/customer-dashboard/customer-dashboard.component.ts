@@ -8,6 +8,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { Router, RouterModule } from '@angular/router';
 import { DataService } from '../../../../Services/data.service';
 import { MediaMatcher } from '@angular/cdk/layout';
+import { AuthService } from '../../../Authentication/Auth/auth.service';
 
 @Component({
   selector: 'app-customer-dashboard',
@@ -22,14 +23,31 @@ import { MediaMatcher } from '@angular/cdk/layout';
     MatMenuModule,
   ],
   templateUrl: './customer-dashboard.component.html',
-  styleUrl: './customer-dashboard.component.scss'
+  styleUrl: './customer-dashboard.component.scss',
 })
 export class CustomerDashboardComponent {
-  screenWidth:number
-  constructor(public dataService: DataService, media: MediaMatcher, public router:Router) {
+  screenWidth: number;
+  constructor(
+    public dataService: DataService,
+    media: MediaMatcher,
+    public router: Router,
+    private authService: AuthService
+  ) {
     this.screenWidth = window.innerWidth;
     window.onresize = () => {
       this.screenWidth = window.innerWidth;
     };
+  }
+
+  logout() {
+    this.authService.logout().subscribe(
+      () => {
+        this.router.navigate(['login']);
+      },
+      (error) => {
+        // Optional: Handle error if logout fails.
+        console.error('Logout error:', error);
+      }
+    );
   }
 }

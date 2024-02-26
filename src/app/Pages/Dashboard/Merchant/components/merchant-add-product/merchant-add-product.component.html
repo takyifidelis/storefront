@@ -1,6 +1,8 @@
 <div class="main-container">
   <section class="add-product">
-    <form class="form">
+    <div
+      class="form"
+    >
       <div
         class="product-save d-flex align-items-center justify-content-between"
       >
@@ -16,8 +18,19 @@
           </div>
         </div>
         <div class="save-cancel">
-          <button type="button" class="btn cancel-btn">Cancel</button>
-          <button type="button" class="btn btn-primary">Save</button>
+          <button
+            type="button"
+            class="btn cancel-btn"
+          >
+            Cancel
+          </button>
+          <button
+            type="submit"
+            class="btn btn-primary"
+            (click)="onSubmit()"
+          >
+            Save
+          </button>
         </div>
       </div>
       <div class="details-media d-flex justify-content-between">
@@ -29,9 +42,9 @@
           <div class="form-group">
             <label for="product-name" class="label-name">Product Name</label>
             <input
+              [(ngModel)]="productDetails.name"
               type="tel"
               id="product-name"
-              name="product-name"
               class="form-control"
               placeholder="Enter product name"
               maxlength="50"
@@ -47,9 +60,9 @@
             <div class="price-input-tag">
               <label for="price" class="label-name">Price</label>
               <input
+                [(ngModel)]="productDetails.price"
                 type="text"
                 id="price"
-                name="productPrice"
                 class="form-control"
                 placeholder="GH$"
               />
@@ -57,9 +70,9 @@
             <div class="stock">
               <label for="stock" class="label-name">Stock</label>
               <input
+              [(ngModel)]="productDetails.quantity"
                 type="stock"
                 id="stock"
-                name="productStock"
                 class="form-control"
                 placeholder="1"
               />
@@ -69,8 +82,8 @@
           <div class="form-group">
             <label for="Description" class="label-name">Description</label>
             <textarea
+            [(ngModel)]="productDetails.description"
               id=""
-              name="productDescription"
               rows="4"
               class="form-control"
               placeholder="Enter a description..."
@@ -87,29 +100,14 @@
             <div
               class="radio-btn d-flex justify-content-between align-items-center"
             >
-              <input
-                type="radio"
-                id="dresses"
-                name="category"
-                value="option1"
-              />
-              <label for="category1">Dresses</label>
-              <input type="radio" id="tops" name="category" value="option2" />
-              <label for="category2">Tops</label>
-              <input
-                type="radio"
-                id="sneaker"
-                name="category"
-                value="option3"
-              />
-              <label for="category3">Sneakers</label>
-              <input
-                type="radio"
-                id="accessories"
-                name="category"
-                value="option4"
-              />
-              <label for="category4">Accessories</label>
+            <mat-radio-group color="primary"
+              class="example-radio-group"
+              [(ngModel)]="productDetails.category">
+              @for (cat of categories; track cat) {
+                <mat-radio-button class="example-radio-button" [value]="cat">{{cat}}</mat-radio-button>
+              }
+            </mat-radio-group>
+
             </div>
           </div>
           <div class="product-status">
@@ -206,6 +204,6 @@
           </div>
         </div>
       </div>
-    </form>
+    </div>
   </section>
 </div>

@@ -18,7 +18,7 @@
           class="login100-form"
           #loginUserForm="ngForm"
           [formGroup]="loginForm"
-          (ngSubmit)="onSubmit(loginUserForm)"
+          (ngSubmit)="newLogin(loginUserForm)">
         >
           <div class="login-form">
             <div class="title">Storefront</div>
@@ -50,6 +50,7 @@
                     placeholder="felix.hagan@amalitech.com"
                     formControlName="email"
                     name="email"
+                    [(ngModel)]="dataService.loginCredentials.email"
                   />
                 </div>
               </div>
@@ -89,6 +90,7 @@
                       formControlName="password"
                       name="password"
                       placeholder="●●●●●●●●●●"
+                      [(ngModel)]="dataService.loginCredentials.password"
                     />
                   </div>
                   <div>
