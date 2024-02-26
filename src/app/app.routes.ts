@@ -36,6 +36,9 @@ import { HistoryComponent } from './Pages/Dashboard/Customer/components/history/
 
 import { PaymentOptionComponent } from './Pages/Dashboard/Customer/components/payment-option/payment-option.component';
 import { NewPaymentOptionComponent } from './Pages/Dashboard/Customer/components/new-payment-option/new-payment-option.component';
+import { AuthSuccessfulComponent } from './Pages/Authentication/CommonComponent/auth-successful/auth-successful.component';
+import { contactUsGuard } from './gaurds/contact-us.guard';
+import { aboutUsGuard } from './gaurds/about-us.guard';
 
 import { AuthSuccessfulComponent } from './Pages/Authentication/CommonComponent/auth-successful/auth-successful.component';
 import { MerchantAddProductComponent } from './Pages/Dashboard/Merchant/components/merchant-add-product/merchant-add-product.component';
@@ -71,8 +74,8 @@ export const routes: Routes = [
         component: EcommerceWebsiteComponent,
         children: [
           { path: 'home', component: HomeEcommerceComponent },
-          { path: 'about-us', component: AboutUsComponent },
-          { path: 'contact-us', component: ContactUsComponent },
+          { path: 'about', canActivate:[aboutUsGuard], component: AboutUsComponent },
+          { path: 'contact', canActivate:[contactUsGuard],component: ContactUsComponent },
 
           { path: '', redirectTo: 'home', pathMatch: 'full' },
         ],
@@ -115,9 +118,9 @@ export const routes: Routes = [
       { path: 'home', component: HomeEcommerceComponent },
       { path: 'about-us', component: AboutUsComponent },
       { path: 'contact-us', component: ContactUsComponent },
-      { path: 'shop', component: ReviewComponent },
+      { path: 'shop/:id', component: ReviewComponent },
     ],
   },
 
-  { path: '**', component: LandingPageComponent },
+  // { path: '**', component: LandingPageComponent },
 ];

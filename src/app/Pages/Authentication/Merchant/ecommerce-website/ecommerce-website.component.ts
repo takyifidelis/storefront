@@ -14,7 +14,7 @@ import { AboutUsComponent } from './about-us/about-us.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { CommonModule } from '@angular/common';
 import { DataService } from '../../../../Services/data.service';
-
+import {CdkDrag, CdkDragDrop, CdkDropList, DragDropModule, moveItemInArray} from '@angular/cdk/drag-drop';
 @Component({
   selector: 'app-ecommerce-website',
   standalone: true,
@@ -31,6 +31,8 @@ import { DataService } from '../../../../Services/data.service';
     MatIconModule,
     MatSidenavModule,
     MatMenuModule,
+    DragDropModule,
+    CdkDropList, CdkDrag
   ],
   templateUrl: './ecommerce-website.component.html',
   styleUrl: './ecommerce-website.component.scss',
@@ -43,9 +45,7 @@ export class EcommerceWebsiteComponent {
   dropDownMenu: HTMLElement | null = null;
 
   @ViewChild('fileInput') fileInput!: ElementRef;
-
-
-  constructor(public dataservice:DataService){}
+  constructor(public dataservice: DataService) {}
 
   toggleBtnFunction() {
     this.dropDownMenu = document.querySelector('#dropdownMenu');
@@ -56,5 +56,11 @@ export class EcommerceWebsiteComponent {
 
   openFileInput() {
     this.fileInput.nativeElement.click();
+  }
+
+  drop(event: CdkDragDrop<string[]>) {
+   if (this.dataservice.isEditable) {
+    moveItemInArray(this.dataservice.template.pagesOrder, event.previousIndex, event.currentIndex);
+   }
   }
 }
