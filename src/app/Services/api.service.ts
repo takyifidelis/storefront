@@ -32,7 +32,12 @@ export class APIService {
     })
   }
 
-  
+  getMerchantStores(businessId: string): Observable<Response>{
+    return this.http.get<Response>(`${environment.baseApiUrl}/business/get-stores/${businessId}`,
+    {
+      withCredentials: true,
+    })
+  }
 
   getStore(businessId: string): Observable<Response>{
     return this.http.get<Response>(`${environment.baseApiUrl}/store/get-all`,
@@ -65,13 +70,6 @@ addShipping(customerId: string, user: any) {
 
   getOneProducts(productId: string): Observable<Response>{
     return this.http.get<Response>(`${environment.baseApiUrl}/product/${productId}`,
-    {
-      withCredentials: true,
-    })
-  }
-
-  authenticateUser(user:UserCredentials): Observable<Response> {
-    return this.http.post<Response>(`${environment.baseApiUrl}/account/login/local`, user,
     {
       withCredentials: true,
     })

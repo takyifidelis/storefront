@@ -16,7 +16,6 @@ export class DataService {
   loginCredentials:UserCredentials = {email:'', password:''}
   ecommerceWebsite: string= ''
   businessId: string = ''
-  storeId: string =''
   showInputLink: boolean = false;
   inputLinkVisibility: { [key: number]: boolean } = {
     1: false,

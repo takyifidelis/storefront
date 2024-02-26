@@ -42,15 +42,15 @@ export class OrderModalComponent {
     const rating = 3;
     const remarks = form.value.remarks;
     const comment = form.value.comment;
-    this.authService.reviewProduct(product, rating, remarks, comment).subscribe(
-      (resData) => {
-        console.log(resData);
-      },
-      (errorMessage) => {
-        console.log(errorMessage);
-        this.error = errorMessage;
-      }
-    );
+    // this.authService.reviewProduct(product, rating, remarks, comment).subscribe(
+    //   (resData:any) => {
+    //     console.log(resData);
+    //   },
+    //   (errorMessage) => {
+    //     console.log(errorMessage);
+    //     this.error = errorMessage;
+    //   }
+    // );
 
     form.reset();
   }

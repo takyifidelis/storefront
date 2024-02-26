@@ -42,25 +42,14 @@ export class ReviewComponent implements OnInit {
   initialPrice: any;
   addToBuy: any = [];
 
-  constructor(public dataService: DataService, public apiService: APIService) {}
+ 
+  //   this.product = this.apiService.getProductTemp();
+  //   this.selectedImage = this.product.images[0].url;
 
-  ngOnInit(): void {
-    // this.apiService.getProduct(this.dataService.productId).subscribe((data: Response) =>{
-    //   console.log(data);
-    // this.product = data;
-
-    // this.apiService.getStore
-    // })
-
-    this.product = this.apiService.getProductTemp();
-    this.selectedImage = this.product.images[0].url;
-
-    // Iterating over the images array to access each image URL
-   
-    this.initialPrice = this.product.price;
+  // this.initialPrice = this.product.price;
   amount: number = this.quantity * 90;
   productItem :any
-constructor(private route: ActivatedRoute,private dataService:DataService){}
+constructor(private route: ActivatedRoute,private dataService:DataService,public apiService: APIService){}
   increaseQuantity(): void {
     // this.quantity = this.product.quantity;
     this.quantity++;
@@ -92,6 +81,7 @@ constructor(private route: ActivatedRoute,private dataService:DataService){}
   onAddToBuy() {
     this.addToBuy.push(this.product);
     console.log(this.addToBuy);
+  }
   ngOnInit(){
     for (const product of this.dataService.products) {
       if (product.id === this.route.snapshot.params['id']) {
@@ -101,6 +91,5 @@ constructor(private route: ActivatedRoute,private dataService:DataService){}
     }
      
     // console.log(this.dataService.products.find((element:any) => console.log(element.id)));
-    
+    }
   }
-}
