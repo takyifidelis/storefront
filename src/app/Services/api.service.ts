@@ -1,19 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { environment } from '../../environments/environment.development';
 import { UserCredentials } from '../interfaces/all-interfaces';
+import { DataService } from './data.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class APIService {
 
-  constructor(private http: HttpClient) { }
- 
- 
-
-
+  constructor(private http: HttpClient, public dataService: DataService) { }
  
 
   merchantSignup(user:UserCredentials): Observable<Response> {
@@ -44,6 +41,15 @@ export class APIService {
     })
   }
 
+initializePayment(customerId:string, cart:any): Observable<Response> {
+  return this.http.post<Response>(`${environment.baseApiUrl}/order/initialize/${customerId}`, cart, {
+    withCredentials: true,
+  })
+}
+
+addShipping(customerId: string, user: any) {
+  return this.http.post(`${environment.baseApiUrl}/customer/add-shipping-address/${customerId}`, user)
+}
   // getStoreProducts(storeId: string): Observable<Response>{
   //   return this.http.get<Response>(`${environment.baseApiUrl}/store/get-store-products/${storeId}`,
   //   {
@@ -85,3 +91,8 @@ export class APIService {
     })
   }
 }
+
+
+// initializePayment(user: UserCredentials) {
+
+// }

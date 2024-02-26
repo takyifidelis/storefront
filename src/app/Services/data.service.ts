@@ -9,6 +9,8 @@ export class DataService {
   doesNotExist = {exist: false, term:''}
   isMobileBool: boolean = false;
   isEditable: boolean = false;
+  customerId: string = '';
+  orderId: string =''
   storeId: string = ''
   productId: string = '';
   loginCredentials:UserCredentials = {email:'', password:''}

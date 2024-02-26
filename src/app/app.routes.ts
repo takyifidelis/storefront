@@ -43,6 +43,7 @@ import { contactUsGuard } from './gaurds/contact-us.guard';
 import { aboutUsGuard } from './gaurds/about-us.guard';
 
 import { MerchantAddProductComponent } from './Pages/Dashboard/Merchant/components/merchant-add-product/merchant-add-product.component';
+import { CkeckoutPageComponent } from './Pages/Dashboard/Customer/components/ckeckout-page/ckeckout-page.component';
 import { AuthSuccessfulComponent } from './Pages/Authentication/CommonComponent/auth-successful/auth-successful.component';
 
 
@@ -100,6 +101,7 @@ export const routes: Routes = [
 
 
   },
+  {path: 'checkout-page', component: CkeckoutPageComponent},
   {path: 'search-order', component: SearchOrderComponent},
   {
     path: 'merchant',
