@@ -35,6 +35,8 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from '../../Auth/auth.service';
 import { faEye } from '@fortawesome/free-regular-svg-icons';
+import { APIService } from '../../../../Services/api.service';
+import { DataService } from '../../../../Services/data.service';
 
 @Component({
   selector: 'app-login',
@@ -68,6 +70,9 @@ export class LoginComponent implements OnInit {
     private authService: SocialAuthService,
     @Inject(DOCUMENT) private document: Document,
     private loginService: AuthService,
+    private apiService: APIService,
+    public dataService: DataService,
+
     private router: Router
   ) {
     this.loginForm = new FormGroup({
@@ -117,6 +122,18 @@ export class LoginComponent implements OnInit {
 
   onShowPassword() {
     this.showPassword = !this.showPassword;
-    this.eyeIcon = this.showPassword ? faEye : faEyeSlash;
-  }
+
+    this.eyeIcon = this.showPassword? faEye : faEyeSlash;
+    }
+
+
+    newLogin(ata:any) {
+      this.apiService.authenticateUser(this.dataService.loginCredentials)
+      .subscribe((resData:any)=>{
+        console.log(resData.data);
+        this.dataService.businessId=resData.data?.business
+        this.router.navigate(['/merchant']);
+      })
+    }
+
 }

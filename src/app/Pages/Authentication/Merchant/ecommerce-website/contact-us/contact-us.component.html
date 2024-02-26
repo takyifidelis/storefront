@@ -1,25 +1,23 @@
 <section class="about-us container-fluid">
-  <h1 class="contact-us-header">CONTACT US</h1>
+  <h1 [innerText]="dataService.template.contactUs.contactMessage" class="contact-us-header"></h1>
+  <!-- <div contenteditable="true" class="editor" (input)="onInput($event)"></div> -->
   <div class="d-flex align-items-center justify-content-between contact-blocks">
     <div class="get-in-touch-div">
-      <h1 class="get-in-touch-header">GET IN TOUCH</h1>
-      <p class="get-in-touch-paragraph about-us-paragraph">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua.
-      </p>
+      <h1 class="get-in-touch-header" [innerText]="dataService.template.contactUs.leftPanelInfo.heading"></h1>
+      <p class="get-in-touch-paragraph about-us-paragraph" [innerText]="dataService.template.contactUs.leftPanelInfo.pTag"></p>
       <p class="telephone about-us-paragraph">
         <img
           src="assets\icons\contact-us-telephone.svg"
           alt=""
           class="contact-us-icon"
-        /><a href=""> +1012 3456 789</a>
+        /><a href="" [innerText]="dataService.template.contactUs.leftPanelInfo.phone"></a>
       </p>
       <p class="email about-us-paragraph">
         <img
           src="assets\icons\contact-us-message.svg"
           alt=""
           class="contact-us-icon"
-        /><a href="mailto:demo@gmail.com">demogmail.com</a>
+        /><a href="mailto:demo@gmail.com" [innerText]="dataService.template.contactUs.leftPanelInfo.email"></a>
       </p>
       <div class="location d-flex justify-content-center align-items-normal">
         <div class="location-image me-2">
@@ -29,9 +27,7 @@
             class="contact-us-icon"
           />
         </div>
-        <p class="location about-us-paragraph">
-          132 Dartmouth Street Boston, Massachusetts 02156 United States
-        </p>
+        <p class="location about-us-paragraph"[innerText]="dataService.template.contactUs.leftPanelInfo.location"></p>
       </div>
     </div>
     <div class="contact-us-form-div">
