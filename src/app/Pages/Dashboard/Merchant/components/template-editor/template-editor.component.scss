@@ -264,3 +264,45 @@ nav{
 .my-typograpy-hide{
     display: none;
 }
+
+.offcanvas.offcanvas-top {
+    top: 20%;
+    right: 0;
+    left: 84px;
+    width: max-content;
+    // background: #0085ff;
+    border-radius: 10px;
+    max-height: 400px;
+    :first-child::-webkit-scrollbar {
+            display: none;
+          }
+    
+}
+
+.global-fonts-styles{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+    .first,.second{
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+    .name-element-group{
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+
+}
+.typo-heading{
+    font-size: 18px;
+    font-weight: 600;
+    margin-top: 2rem;
+}
+
+.editor-hr{
+    margin-top: 0;
+}

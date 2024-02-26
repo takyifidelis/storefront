@@ -1,0 +1,95 @@
+<h2 mat-dialog-title>Order Details</h2>
+<mat-dialog-content>
+  <mat-tab-group>
+    <mat-tab label=" Items">
+      <div class="Items Purchased">
+        <div class="purchase-item">
+          <img src="/assets/images/chanel-big-hat.svg" alt="" />
+          <span class="d-flex flex-column">
+            <span class="d-flex" style="align-items: end">
+              <span class="item-name" style="width: 187px">Channel</span>
+              <span class="item-collection-type">$100</span>
+            </span>
+            <span class="item-collection-type">Hat</span>
+          </span>
+        </div>
+        <hr />
+        <div class="total-price">
+          <span class="price-tag detail-type">Total Price</span>
+          <span class="price">$200</span>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab label="Address">
+      <hr />
+      <div class="text shipment-address">
+        <p>Ghana</p>
+        <p>Anaji Ssnit</p>
+        <p>C.K Mann Road 19</p>
+        <p style="color: #667085 !important">+233502456097</p>
+      </div>
+      <hr />
+    </mat-tab>
+    <mat-tab label="Payment">
+      <hr />
+      <div
+        class="Payment-method"
+        style="margin-top: 6px; gap: 15px; display: flex"
+      >
+        <div>
+          <img src="/assets/icons/master-card.svg" alt="" />
+        </div>
+        <div>
+          <p style="color: #455468">Dean Andrew</p>
+          <p style="color: #455468">0038347668173</p>
+          <p style="color: #667085 !important">Expiry 06/2024</p>
+        </div>
+      </div>
+      <hr />
+    </mat-tab>
+    <mat-tab label="Review">
+      <form
+        method="post"
+        #reviewForm="ngForm"
+        [formGroup]="postReview"
+        (ngSubmit)="onSubmit(reviewForm)"
+      >
+        <div
+          class="how-will-you-div d-flex justify-content-between align-items-center"
+        >
+          <p class="how-will-you">How will you rate this product?</p>
+          <div class="star-form-ratings">
+            <app-star-rating></app-star-rating>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <select
+            class="form-select form-control title-filter"
+            id="title"
+            name="title"
+            formControlName="remarks"
+          >
+            <option value="" selected>Title</option>
+            <option>Satisfactory</option>
+            <option>Outstanding</option>
+            <option>Disappointing</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <textarea
+            id="description"
+            name="description"
+            rows="4"
+            class="form-control"
+            formControlName="comment"
+            placeholder="Any feedback you would like to give your account manager..."
+          ></textarea>
+        </div>
+
+        <button class="btn btn" type="submit">Submit Feedback</button>
+      </form>
+    </mat-tab>
+  </mat-tab-group>
+</mat-dialog-content>

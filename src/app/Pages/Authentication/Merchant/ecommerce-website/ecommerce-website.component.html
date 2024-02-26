@@ -1,7 +1,12 @@
-<div class="">
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<div 
+[style.lineHeight]="dataservice.template.lineHeight"
+[style.background]="dataservice.template.primaryBackground">
+  <nav class="navbar navbar-expand-lg navbar-dark" 
+  [style.backgroundColor]="dataservice.template.navbarBackgroundColor" 
+  [style.color]="dataservice.template.navbarColor"
+  style="z-index: 20;">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">SHOPNEST</a>
+      <a [style.color]="dataservice.template.navbarColor" class="navbar-brand" href="#" [innerText]="dataservice.template.text"></a>
       <button
         class="menu-btn toggle-btn"
         color="primary"
@@ -14,36 +19,22 @@
       <div
         class="collapse navbar-collapse d-flex justify-content-center"
         id="navbarNavAltMarkup"
+        cdkDropList cdkDropListOrientation="horizontal" class="example-list" (cdkDropListDropped)="drop($event)"
       >
-        <div class="navbar-nav nav-content">
-          <a
+        <div class="navbar-nav nav-content" id="parent">
+          @for (menuItem of dataservice.template.pagesOrder; track menuItem) {
+            <a *ngIf="menuItem.includePage" [style.color]="dataservice.template.navbarColor" cdkDrag
             class="nav-link"
-            [routerLink]="['home']"
+            [routerLink]="[menuItem.name]"
             routerLinkActive="router-link-active"
-            >Home</a
-          >
-          <a
-            class="nav-link"
-            [routerLink]="['about-us']"
-            routerLinkActive="router-link-active"
-            >About Us</a
-          >
-          <a
-            class="nav-link"
-            [routerLink]="['contact-us']"
-            routerLinkActive="router-link-active"
-            >Contact Us</a
-          >
-          <a
-            class="nav-link"
-            [routerLink]="['shop']"
-            routerLinkActive="router-link-active"
-            >Shop</a
-          >
+            >{{menuItem.value}}</a>
+          }
+          
 
           <form class="d-flex justify-content-center align-items-center">
-            <fa-icon [icon]="searchIcon" style="color: #fff"></fa-icon>
+            <fa-icon [icon]="searchIcon" [style.color]="dataservice.template.navbarColor"></fa-icon>
             <input
+            [style.color]="dataservice.template.navbarColor"
               type="search"
               placeholder="Search"
               aria-label="Search"
@@ -52,7 +43,11 @@
           </form>
         </div>
 
-        <div class="navbar-nav dropdown-content" id="dropdownMenu">
+        <div 
+        
+        [style.color]="dataservice.template.navbarColor" class="navbar-nav dropdown-content" id="dropdownMenu">
+
+
           <a class="nav-link" [routerLink]="['home']">Home</a>
           <a class="nav-link" [routerLink]="['about-us']">About Us</a>
           <a class="nav-link" [routerLink]="['contact-us']">Contact Us</a>
