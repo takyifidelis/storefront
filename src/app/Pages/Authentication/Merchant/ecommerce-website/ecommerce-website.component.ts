@@ -35,7 +35,7 @@ import {CdkDrag, CdkDragDrop, CdkDropList, DragDropModule, moveItemInArray} from
     MatIconModule,
     MatSidenavModule,
     MatMenuModule,
-    MatBadgeModule
+    MatBadgeModule,
     DragDropModule,
     CdkDropList, CdkDrag
   ],

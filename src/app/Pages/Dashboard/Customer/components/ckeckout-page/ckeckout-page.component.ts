@@ -36,16 +36,6 @@ export class CkeckoutPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.initConfig();
-    this.apiService
-      .authenticateUser({ email: '', password: '' })
-      .subscribe((response: any) => {
-          this.customerId = response.data.id;
-      });
-
-    this.apiService.getStores().subscribe((response: any) => {
-      if(this.storeId)
-      {this.storeId = response.data.id;}
-    });
 
     this.user = new FormGroup({
       'first-name': new FormControl(null),
@@ -117,13 +107,13 @@ export class CkeckoutPageComponent implements OnInit {
   private initConfig(): void {
     this.payPalConfig = {
       clientId: environment.paypalClientID,
-      createOrderOnServer: (data) => {
+      createOrderOnServer: (data:any) => {
         return this.createOrder();
       },
-      onApprove: (data, actions) => {
+      onApprove: (data:any, actions:any) => {
         return this.onApprove(data);
       },
-      onClientAuthorization: (data) => {
+      onClientAuthorization: (data:any) => {
         console.log(
           'onClientAuthorization - you should probably inform your server about completed transaction at this point',
           data

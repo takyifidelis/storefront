@@ -10,6 +10,7 @@ import {  Router, RouterModule } from '@angular/router';
 import { DataService } from '../../../../Services/data.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { APIService } from '../../../../Services/api.service';
 
 
 
@@ -30,7 +31,7 @@ export class HomeComponent implements OnInit {
   threeOpened: boolean = false;
   fourOpened: boolean = false;
   isActive:boolean = false
-  constructor(public dataService: DataService, private router:Router) {}
+  constructor(public dataService: DataService, private router:Router,private apiService:APIService) {}
   toggleOpenClose(key: number): void {
     switch (key) {
       case 1:
@@ -74,7 +75,17 @@ export class HomeComponent implements OnInit {
   }
 
   editStore(){
-    this.router.navigate(['/template-editor']);
+    
+    console.log(this.dataService.businessId)
+    this.apiService.getMerchantStores(this.dataService.businessId).subscribe((data:any) => {
+      // console.log(data);
+      if (data.data.length) {
+        console.log(data.data)
+        this.router.navigate(['/template-editor']);
+      } else {
+        this.router.navigate(['/merchant-onboarding-1']);
+      }
+    })
   }
   ngOnInit() {
     this.dataService.merchantDashboardNoProjects = false

@@ -37,8 +37,6 @@ import { SearchOrderComponent } from './Pages/Dashboard/Customer/components/sear
 
 import { PaymentOptionComponent } from './Pages/Dashboard/Customer/components/payment-option/payment-option.component';
 import { NewPaymentOptionComponent } from './Pages/Dashboard/Customer/components/new-payment-option/new-payment-option.component';
-
-import { AuthSuccessfulComponent } from './Pages/Authentication/CommonComponent/auth-successful/auth-successful.component';
 import { contactUsGuard } from './gaurds/contact-us.guard';
 import { aboutUsGuard } from './gaurds/about-us.guard';
 
