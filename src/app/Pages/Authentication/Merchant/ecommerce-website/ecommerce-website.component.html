@@ -23,7 +23,7 @@
       >
         <div class="navbar-nav nav-content" id="parent">
           @for (menuItem of dataservice.template.pagesOrder; track menuItem) {
-            <a [style.color]="dataservice.template.navbarColor" cdkDrag
+            <a *ngIf="menuItem.includePage" [style.color]="dataservice.template.navbarColor" cdkDrag
             class="nav-link"
             [routerLink]="[menuItem.name]"
             routerLinkActive="router-link-active"

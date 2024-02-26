@@ -61,7 +61,7 @@
                     <div class="first">
                         <span class="name-element-group">
                             <span>Font Weight</span>
-                            <select [(ngModel)]="dataservice.template.body.fontWeight" data-element="fontSize" (click)="changeFontSize()" name="cars" id="cars">
+                            <select [(ngModel)]="dataservice.template.body.fontWeight" data-element="fontSize" name="cars" id="cars">
                                 @for(weight of dataservice.template.fontWeightList; track weight){
                                     <option [value]="weight">{{weight}}</option>
                                 }
@@ -69,7 +69,7 @@
                         </span>
                         <span class="name-element-group">
                             <span>Font Style</span>
-                            <select [(ngModel)]="dataservice.template.fontFamily" data-element="fontSize" (click)="changeFontType()" name="cars" id="cars">
+                            <select [(ngModel)]="dataservice.template.fontFamily" data-element="fontSize" name="cars" id="cars">
                                 @for (font of dataservice.template.fontArray; track font) {
                                     <option [value]="font">{{font}}</option>
                                   }
@@ -78,7 +78,7 @@
                         
                         <span class="name-element-group">
                             <span>Body Font Size</span>
-                            <select [(ngModel)]="dataservice.template.body.fontSize" data-element="fontSize" (click)="changeFontSize()" name="cars" id="cars">
+                            <select [(ngModel)]="dataservice.template.body.fontSize" data-element="fontSize" name="cars" id="cars">
                                 @for(size of dataservice.template.bodyFontSizeArray; track size){
                                     <option [value]="size">{{size}}</option>
                                 }
@@ -89,7 +89,7 @@
                     <div class="second">
                         <span class="name-element-group">
                             <span>Line Height</span>
-                            <select [(ngModel)]="dataservice.template.lineHeight" data-element="fontSize" (click)="changeFontSize()" name="cars" id="cars">
+                            <select [(ngModel)]="dataservice.template.lineHeight" data-element="fontSize" name="cars" id="cars">
                                 @for(lineH of dataservice.template.lineHeightList; track lineH){
                                     <option [value]="lineH">{{lineH}}</option>
                                 }
@@ -97,7 +97,7 @@
                         </span>
                         <span class="name-element-group">
                             <span>Headers Font Size</span>
-                            <select [(ngModel)]="dataservice.template.headers.fontSize" data-element="fontSize" (click)="changeFontSize()" name="cars" id="cars">
+                            <select [(ngModel)]="dataservice.template.headers.fontSize" data-element="fontSize" name="cars" id="cars">
                                 @for(size of dataservice.template.headerFontSizeArray; track size){
                                     <option [value]="size">{{size}}</option>
                                 }
@@ -105,7 +105,7 @@
                         </span>
                         <span class="name-element-group">
                             <span>Headers Font Weight</span>
-                            <select [(ngModel)]="dataservice.template.headers.fontWeight" data-element="fontSize" (click)="changeFontSize()" name="cars" id="cars">
+                            <select [(ngModel)]="dataservice.template.headers.fontWeight" data-element="fontSize" name="cars" id="cars">
                                 @for(weight of dataservice.template.headerfontWeightList; track weight){
                                     <option [value]="weight">{{weight}}</option>
                                 }
@@ -113,7 +113,7 @@
                         </span>
                         <span class="name-element-group">
                             <span>Hero Font Size</span>
-                            <select [(ngModel)]="dataservice.template.headings.heroHeading.fontSize" data-element="fontSize" (click)="changeFontSize()" name="cars" id="cars">
+                            <select [(ngModel)]="dataservice.template.headings.heroHeading.fontSize" data-element="fontSize" name="cars" id="cars">
                                 @for(size of dataservice.template.headerFontSizeArray; track size){
                                     <option [value]="size">{{size}}</option>
                                 }
@@ -169,7 +169,7 @@
                         </span>
                         <span class="name-element-group">
                             <span>Border Radius</span>
-                            <select [(ngModel)]="dataservice.template.buttons.borderRadius" data-element="fontSize" (click)="changeFontSize()" name="cars" id="cars">
+                            <select [(ngModel)]="dataservice.template.buttons.borderRadius" data-element="fontSize" name="cars" id="cars">
                                 @for(radius of dataservice.template.buttonBorderRadiusList; track radius){
                                     <option [value]="radius">{{radius}}</option>
                                 }
@@ -183,7 +183,7 @@
                 <input [(ngModel)]="dataservice.template.primaryColor" type="color" />
                 <input [(ngModel)]="dataservice.template.navbarBackgroundColor" type="color" />
                 <input [(ngModel)]="dataservice.template.navbarColor" type="color" />
-                <select [(ngModel)]="dataservice.template.fontFamily" data-element="fontSize" (click)="changeFontType()" name="cars" id="cars">
+                <select [(ngModel)]="dataservice.template.fontFamily" data-element="fontSize" name="cars" id="cars">
                     @for (font of dataservice.template.fontArray; track font) {
                         <option [value]="font">{{font}}</option>
                       }
@@ -220,7 +220,7 @@
                 </button> -->
             </div>
         </div>
-        <div class="shapes collapse" id="shapes">
+        <!-- <div class="shapes collapse" id="shapes">
             <section style="display: flex;">
                 <button mat-icon-button>
                     <mat-icon>circle</mat-icon>
@@ -232,15 +232,15 @@
                     <span style="align-items: center;justify-content: center; display: flex; font-weight:900; text-align: center;">|</span>
                 </button>
             </section>
-        </div>
-        <div class="pages collapse" id="pages">
-            <button style="display: flex; border: none;background-color: transparent; justify-content: center;align-items: center;"><img src="/assets/icons/plus.svg" alt="" srcset=""> <h3 style="margin: 0;">Add Pages</h3></button>
+        </div> -->
+        <div class="pages collapse" id="pagesForm">
+            <button data-bs-toggle="modal" data-bs-target="#pagesModal" style="display: flex; border: none;background-color: transparent; justify-content: center;align-items: center;"><img src="/assets/icons/plus.svg" alt="" srcset=""> <h3 style="margin: 0;">Add Pages</h3></button>
             <hr>
             <div>
                 
             <button routerLink="home" style="display: flex; border: none;background-color: transparent; justify-content: center;align-items: center; margin-bottom: 1.6rem;"><img src="/assets/icons/black_sqr.svg" style="margin: 0 24px 0 0;">Landing page</button>
-            <button routerLink="contact-us" style="display: flex; border: none;background-color: transparent; align-items: center; margin-bottom: 1.6rem;"><img src="/assets/icons/black_sqr.svg" style="margin: 0 24px 0 0;">About us</button>
-            <button routerLink="about-us" style="display: flex; border: none;background-color: transparent; align-items: center;"><img src="/assets/icons/black_sqr.svg" style="margin: 0 24px 0 0;">Contact us</button>
+            <button *ngIf="dataservice.template.pagesOrder[2].includePage" routerLink="contact" style="display: flex; border: none;background-color: transparent; align-items: center; margin-bottom: 1.6rem;"><img src="/assets/icons/black_sqr.svg" style="margin: 0 24px 0 0;">About us</button>
+            <button *ngIf="dataservice.template.pagesOrder[1].includePage" routerLink="about" style="display: flex; border: none;background-color: transparent; align-items: center;"><img src="/assets/icons/black_sqr.svg" style="margin: 0 24px 0 0;">Contact us</button>
             </div>
         </div>
         
@@ -300,49 +300,7 @@
             </span>
         </div>
     </div>
-<!-- <div class="offcanvas offcanvas-top" style="height: max-content;" data-bs-backdrop="false" data-bs-scroll="true" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
-    <div style="display: flex; align-items: center; background-color: rgb(150, 217, 248);">
-        <input [(ngModel)]="dataservice.template.primaryBackground" type="color" />
-        <input [(ngModel)]="dataservice.template.primaryColor" type="color" />
-        <input [(ngModel)]="dataservice.template.navbarBackgroundColor" type="color" />
-        <input [(ngModel)]="dataservice.template.navbarColor" type="color" />
-        <select [(ngModel)]="dataservice.template.fontFamily" data-element="fontSize" (click)="changeFontType()" name="cars" id="cars">
-            @for (font of dataservice.template.fontArray; track font) {
-                <option [value]="font">{{font}}</option>
-              }
-        </select>
-        <select [(ngModel)]="dataservice.template.headings.headFontSize" data-element="fontSize" (click)="changeFontSize()" name="cars" id="cars">
-            @for(size of dataservice.template.headerFontSize; track size){
-                <option [value]="size">{{size}}</option>
-            }
-        </select>
-        <select [(ngModel)]="dataservice.template.fontWeight" data-element="fontSize" (click)="changeFontSize()" name="cars" id="cars">
-            @for(weight of dataservice.template.fontWeightList; track weight){
-                <option [value]="weight">{{weight}}</option>
-            }
-        </select>
-        <select [(ngModel)]="dataservice.template.lineHeight" data-element="fontSize" (click)="changeFontSize()" name="cars" id="cars">
-            @for(lineH of dataservice.template.lineHeightList; track lineH){
-                <option [value]="lineH">{{lineH}}</option>
-            }
-        </select>
-        <button (click)="dataservice.template.textAlign = 'left'" mat-icon-button>
-            <mat-icon>format_align_left</mat-icon>
-        </button>
-        <button (click)="dataservice.template.textAlign = 'center'" mat-icon-button>
-            <mat-icon>format_align_center</mat-icon>
-        </button>
-        <button (click)="dataservice.template.textAlign = 'right'" mat-icon-button>
-            <mat-icon>format_align_right</mat-icon>
-        </button>
-        <button (click)="dataservice.template.textAlign = 'justify'" mat-icon-button>
-            <mat-icon>format_align_justify</mat-icon>
-        </button>
-        <button mat-icon-button (click)="dataservice.isEditable = !dataservice.isEditable">
-            <mat-icon>link</mat-icon>
-        </button>
-    </div>
-</div> -->
+
     <mat-drawer-container class="container-fluid p-0 test">
         
         <mat-drawer #drawer mode="side" [opened]="true" class="side-nav mat-elevated-z4">
@@ -353,31 +311,21 @@
                         <mat-icon>add</mat-icon>
                     </button>
                 </li>
-                <li matTooltip="Add Shapes" data-bs-toggle="collapse" data-bs-target="#shapes">
+                <!-- <li matTooltip="Add Shapes" data-bs-toggle="collapse" data-bs-target="#shapes">
                     <button mat-fab style="background-color: white; color: black;">
                         <mat-icon style="background-color: black;" fontIcon="crop_square"></mat-icon>
                     </button>
-                </li>
+                </li> -->
                 
                 <li>
                     <button matTooltip="Upload file" data-bs-toggle="modal" data-bs-target="#exampleModal"  style="background-color: white; color: #0085FF;" mat-fab color="accent" aria-label="Example icon button with a bookmark icon">
                         <mat-icon>upload_2</mat-icon>
                     </button>
                 </li>
-                <li data-bs-toggle="collapse" data-bs-target="#pages">
+                <li data-bs-toggle="collapse" data-bs-target="#pagesForm">
                     <button matTooltip="Add Pages" mat-fab style="background-color: white;"
                         aria-label="Example icon button with a bookmark icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="27" viewBox="0 0 28 30" fill="none">
-                            <path
-                                d="M1 24.2534H5.10354M9.20707 24.2534H5.10354M5.10354 24.2534V20.1498M5.10354 24.2534V28.3569M7.85017 1H20.8447L27 7.1553V24.2534"
-                                stroke="#0085FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                            <path
-                                d="M13.3213 28.3569H20.8444C21.3886 28.3569 21.9105 28.1407 22.2953 27.7559C22.68 27.3712 22.8962 26.8493 22.8962 26.3051V10.2316C22.8963 10.1236 22.8751 10.0167 22.8338 9.91692C22.7925 9.81716 22.7319 9.72654 22.6555 9.65024L18.3495 5.34426C18.273 5.2677 18.1822 5.20702 18.0822 5.1657C17.9822 5.12439 17.875 5.10325 17.7668 5.10352H4.43031C3.88615 5.10352 3.36427 5.31969 2.97949 5.70447C2.59471 6.08925 2.37854 6.61112 2.37854 7.15529V16.0463"
-                                stroke="#0085FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                            <path
-                                d="M17.4248 5.10352V9.75419C17.4248 9.97185 17.5113 10.1806 17.6652 10.3345C17.8191 10.4884 18.0278 10.5749 18.2455 10.5749H22.8962"
-                                stroke="#0085FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
+                        <img src="/assets/icons/add_files_btn.svg" alt="" srcset="">
                     </button>
                 </li>
                 <li data-bs-toggle="collapse" data-bs-target="#layers">
@@ -414,7 +362,20 @@
       </div>
     </div>
   </div>
-
+<div class="modal fade" tabindex="-1" id="pagesModal" data-bs-backdrop="static">
+<div class="modal-dialog  modal-dialog-centered">
+    <div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title">Select A Page To Add</h5>
+        <button type="button" (click)="logPages()" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body d-flex" style="flex-direction: column;">
+        <mat-checkbox color="primary" class="example-margin" [(ngModel)]="dataservice.template.pagesOrder[2].includePage">Add Contact Us Page</mat-checkbox>
+        <mat-checkbox color="primary" class="example-margin" [(ngModel)]="dataservice.template.pagesOrder[1].includePage">Add About Us Page</mat-checkbox>
+    </div>
+    </div>
+</div>
+</div>
 
 <div style="z-index: 99; position: relative;">
   

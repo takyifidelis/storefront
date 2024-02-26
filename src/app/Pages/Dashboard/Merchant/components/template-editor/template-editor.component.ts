@@ -15,6 +15,8 @@ import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSliderModule} from '@angular/material/slider';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+
 
 @Component({
   selector: 'app-template-editor',
@@ -22,7 +24,7 @@ import {MatSliderModule} from '@angular/material/slider';
   imports: [MatInputModule,MatSelectModule,
     RouterModule,CommonModule,FormsModule,MatFormFieldModule,
     MatProgressBarModule, MatCardModule, MatButtonModule,
-    MatSliderModule,
+    MatSliderModule,MatCheckboxModule,
     MatIconModule, MatSidenavModule,MatMenuModule, MatTooltipModule
   ],
   templateUrl: './template-editor.component.html',
@@ -35,10 +37,6 @@ export class TemplateEditorComponent  implements AfterViewInit{
   isColorVisible: boolean = false;
   isShapesVisible: boolean = false;
   isPagesVisible:boolean = false;
-  fontType: string[]=["Arial", "Helvetica", "Times New Roman", "Verdana"]
-  fontSize:number = 0
-  fontName:string = ""
-  fontColor:string = ""
   constructor(private elementRef: ElementRef<HTMLElement>, public dataservice: DataService, private apiService: APIService){ }
   @HostListener ('window:keydown.control.b', ['$event']) makeEditableUi(){
     this.dataservice.isEditable  = !this.dataservice.isEditable
@@ -123,18 +121,12 @@ export class TemplateEditorComponent  implements AfterViewInit{
     }
     return false;
   }
-
-  
   toggleBtnFunction() {
     this.dropDownMenu = document.querySelector('#dropdownMenu');
     if (this.dropDownMenu) {
       this.dropDownMenu.classList.toggle('open');
     }
   }
-
-
-  
-
   showHideDiv(el:string) {
     switch (el) {
       case 'isColorVisible':
@@ -156,21 +148,25 @@ export class TemplateEditorComponent  implements AfterViewInit{
         break;
     }
   }
-  changeFontSize(){
-    console.log(this.fontSize);
-    document.execCommand(`fontSize`,false, `${this.fontSize}`)
-  }
 
-  changeFontType(){
-    console.log(this.dataservice.template.fontFamily);
-    // document.execCommand(`fontName`,false, `${this.fontName}`)
+  logPages(){
+    console.log(this.dataservice.template.pagesOrder)
   }
+  // changeFontSize(){
+  //   console.log(this.fontSize);
+  //   document.execCommand(`fontSize`,false, `${this.fontSize}`)
+  // }
 
-  changeFontColor(){
-    console.log(this.fontColor);
-    // console.log(this.dataservice.template.primaryColor.color);
-    document.execCommand(`foreColor`,false, `${this.fontColor}`)
-  }
+  // changeFontType(){
+  //   console.log(this.dataservice.template.fontFamily);
+  //   // document.execCommand(`fontName`,false, `${this.fontName}`)
+  // }
+
+  // changeFontColor(){
+  //   console.log(this.fontColor);
+  //   // console.log(this.dataservice.template.primaryColor.color);
+  //   document.execCommand(`foreColor`,false, `${this.fontColor}`)
+  // }
   saveTemplateDraft(template:any){
     template = JSON.stringify(template);
     // console.log(template);

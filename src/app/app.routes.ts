@@ -69,8 +69,8 @@ export const routes: Routes = [
         component: EcommerceWebsiteComponent,
         children: [
           { path: 'home', component: HomeEcommerceComponent },
-          { path: 'about-us', canActivate:[aboutUsGuard], component: AboutUsComponent },
-          { path: 'contact-us', canActivate:[contactUsGuard],component: ContactUsComponent },
+          { path: 'about', canActivate:[aboutUsGuard], component: AboutUsComponent },
+          { path: 'contact', canActivate:[contactUsGuard],component: ContactUsComponent },
 
           { path: '', redirectTo: 'home', pathMatch: 'full' },
         ],

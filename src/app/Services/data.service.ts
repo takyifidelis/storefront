@@ -39,7 +39,7 @@ export class DataService {
     fontFamily: "Inter",
     fontArray: ["Inter","Roboto", "Anta", "Helvetica", "sans-serif","Kode Mono", "monospace"],
     bodyFontSizeArray: ["12px","14px","16px","18px","24px","36px","48px","64px","72px"],
-    headerFontSizeArray: ["12px","14px","16px","18px","24px","36px","48px","64px","72px"],
+    headerFontSizeArray: ["12px","14px","16px","18px","24px","36px","48px","64px","72px","96px"],
     headerfontWeightList: ["300","400","500","600","700","800","900"],
     fontSize: "16px",
     lineHeightList: ["1","1.2","1.3","1.4","1.5","1.6","1.7","1.8","1.9","2.0"],
@@ -132,10 +132,6 @@ export class DataService {
         image:"assets/images/ecommerce-home-two-ladies.svg",text:{discount:"UPTO 40% OFF",otherText:"Special offers and great deals"}
     }
     },
-    includePage: {
-        about: false,
-        contact: false
-    },
     
     aboutUs: {
         ourStory: "ShopNest was born from a vision to redefine the way you shop online. With years of experience in the eCommerce industry, we set out to create a one-stop destination where you can discover high-quality products, connect with trusted sellers, and enjoy seamless shopping from the comfort of your own nest",
@@ -202,7 +198,7 @@ export class DataService {
             location: "132 Dartmouth Street Boston, Massachusetts 02156 United States"
         }
     },
-    pagesOrder:[{name:"home", value:"home"}, {name:"about-us", value:"about us"}, {name:"contact-us", value:"contact us"}]
+    pagesOrder:[{name:"home", value:"home", includePage: true}, {name:"about", value:"about us",IncludePage: false}, {name:"contact", value:"contact us", includePage: false}]
 }
   constructor() { }
 }

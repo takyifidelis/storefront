@@ -4,6 +4,5 @@ import { DataService } from '../Services/data.service';
 
 export const contactUsGuard: CanActivateFn = (route, state) => {
   console.log(route, state);
-  
-  return inject(DataService).template.includePage.contact? true : false;
+  return inject(DataService).template.pagesOrder[2].includePage ? true : false;
 };
