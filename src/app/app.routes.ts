@@ -99,7 +99,7 @@ export const routes: Routes = [
 
 
   },
-  {path: 'checkout-page', component: CkeckoutPageComponent},
+  {path: 'ecommerce/checkout-page', component: CkeckoutPageComponent},
   {path: 'search-order', component: SearchOrderComponent},
   {
     path: 'merchant',

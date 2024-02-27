@@ -1,42 +1,61 @@
-<div class="container-fluid" 
+<div
+  class="container-fluid"
   [style.background]="dataservice.template.primaryBackground"
   [style.fontFamily]="dataservice.template.fontFamily"
   [style.textAlign]="dataservice.template.textAlign"
   [style.fontWeight]="dataservice.template.body.fontWeight"
   [style.fontSize]="dataservice.template.body.fontSize"
-  [style.color]="dataservice.template.primaryColor">
+  [style.color]="dataservice.template.primaryColor"
+>
   <section class="container-fluid d-flex level-up main-comp p-0">
     <div [style]="dataservice.template.headings.heroHeading.bgImage">
-      <img [src]="dataservice.template.templateImages.heroImage" class="" style="width: 100%; height: 50rem " alt="" srcset="">
+      <img
+        [src]="dataservice.template.templateImages.heroImage"
+        class=""
+        style="width: 100%; height: 50rem"
+        alt=""
+        srcset=""
+      />
       <div class="hero-overlay">
-        <h1 [contentEditable]="dataservice.isEditable" [innerText]="dataservice.template.headings.heroHeading.text" 
-        [style.color]="dataservice.template.headings.heroHeading.color"
-        [style.fontSize]="dataservice.template.headings.heroHeading.fontSize"
-        [style.lineHeight]="dataservice.template.headings.heroHeading.lineHeight"
-        [style.fontWeight]="dataservice.template.headings.heroHeading.fontWeight"></h1>
-        <button  
-        [style.padding]="dataservice.template.buttons.padding"
-        [style.backgroundColor]="dataservice.template.buttons.backgroundColor"
-        [style.borderRadius]="dataservice.template.buttons.borderRadius"
-        [style.color]="dataservice.template.buttons.color"
-        [style.borderColor]="dataservice.template.buttons.borderColor"
-        >{{dataservice.template.headings.heroHeading.btnText}}</button>
+        <h1
+          [contentEditable]="dataservice.isEditable"
+          [innerText]="dataservice.template.headings.heroHeading.text"
+          [style.color]="dataservice.template.headings.heroHeading.color"
+          [style.fontSize]="dataservice.template.headings.heroHeading.fontSize"
+          [style.lineHeight]="
+            dataservice.template.headings.heroHeading.lineHeight
+          "
+          [style.fontWeight]="
+            dataservice.template.headings.heroHeading.fontWeight
+          "
+        ></h1>
+        <button
+          [style.padding]="dataservice.template.buttons.padding"
+          [style.backgroundColor]="dataservice.template.buttons.backgroundColor"
+          [style.borderRadius]="dataservice.template.buttons.borderRadius"
+          [style.color]="dataservice.template.buttons.color"
+          [style.borderColor]="dataservice.template.buttons.borderColor"
+        >
+          {{ dataservice.template.headings.heroHeading.btnText }}
+        </button>
       </div>
       <div class="overlay-backdrop"></div>
     </div>
-    <div [ngClass]="!dataservice.isEditable ? 'd-none' : 'overlay edit-btn-block'" >
+    <div
+      [ngClass]="!dataservice.isEditable ? 'd-none' : 'overlay edit-btn-block'"
+    >
       <button
         class="edit-btn"
         mat-icon-button
         (click)="openFileInput(fileInput3)"
-        >
-          <mat-icon>edit</mat-icon>
-        </button>
-        <input
-          type="file"
-          name=""
-          #fileInput3
-          style="display: none"
+      >
+        <mat-icon>edit</mat-icon>
+      </button>
+      <input
+        type="file"
+        name=""
+        #fileInput3
+        style="display: none"
         (change)="onSelectFile($event, 'hero')"
       />
       <button class="edit-btn" mat-icon-button (click)="showLink()">
@@ -57,27 +76,44 @@
     </div>
   </section>
   <section class="container-fluid categories-container">
-    <div 
-    [style.fontSize]="dataservice.template.headers.fontSize"
-    [style.fontWeight]="dataservice.template.headers.fontWeight"
-     class="section-header">Categories</div>
+    <div
+      [style.fontSize]="dataservice.template.headers.fontSize"
+      [style.fontWeight]="dataservice.template.headers.fontWeight"
+      class="section-header"
+    >
+      Categories
+    </div>
     <div class="row categories">
       @for(category of dataservice.productCategory; track category){
-        <div style="position: relative;margin-bottom: 20px;" class="cat col-md-3">
-          <img class="w-100" src="assets/images/ecommerce-home-dresses.svg" alt="" />
-          <div class="overlay">
-            <span >{{category.name}}</span>
-          </div>
-          
+      <div style="position: relative; margin-bottom: 20px" class="cat col-md-3">
+        <img
+          class="w-100"
+          src="assets/images/ecommerce-home-dresses.svg"
+          alt=""
+        />
+        <div class="overlay">
+          <span>{{ category.name }}</span>
         </div>
+      </div>
       }
     </div>
 
     <div class="row second-row-percent">
-      <div class="col percent-image-div main-comp p-0" style="position: relative;">
-        <img [src]="dataservice.template.sectionTwo.twoSection.image" alt="two ladies in red" class="two-ladies w-100" />
-        
-        <div [ngClass]="!dataservice.isEditable ? 'd-none' : 'overlay edit-btn-block'" >
+      <div
+        class="col percent-image-div main-comp p-0"
+        style="position: relative"
+      >
+        <img
+          [src]="dataservice.template.sectionTwo.twoSection.image"
+          alt="two ladies in red"
+          class="two-ladies w-100"
+        />
+
+        <div
+          [ngClass]="
+            !dataservice.isEditable ? 'd-none' : 'overlay edit-btn-block'
+          "
+        >
           <button
             class="edit-btn"
             mat-icon-button
@@ -98,7 +134,10 @@
           <button class="edit-btn" mat-icon-button>
             <mat-icon>delete</mat-icon>
           </button>
-          <div class="input-link-div" *ngIf="dataservice.inputLinkVisibility[2]">
+          <div
+            class="input-link-div"
+            *ngIf="dataservice.inputLinkVisibility[2]"
+          >
             <input
               type="text"
               class="input-link"
@@ -112,71 +151,79 @@
       <div
         class="col percent-block d-flex flex-column align-items-center justify-content-center p-0"
       >
-        <h2 
-        [style.fontSize]="dataservice.template.headers.fontSize"
-        [style.fontWeight]="dataservice.template.headers.fontWeight"
-         class="upto-40-percent">{{dataservice.template.sectionTwo.twoSection.text.discount}}</h2>
-        <p class="special-offers">{{dataservice.template.sectionTwo.twoSection.text.otherText}}</p>
-        <button 
-        [style.padding]="dataservice.template.buttons.padding"
-        [style.backgroundColor]="dataservice.template.buttons.backgroundColor"
-        [style.borderRadius]="dataservice.template.buttons.borderRadius"
-        [style.color]="dataservice.template.buttons.color"
-        [style.borderColor]="dataservice.template.buttons.borderColor"
-        >SHOP NOW</button>
+        <h2
+          [style.fontSize]="dataservice.template.headers.fontSize"
+          [style.fontWeight]="dataservice.template.headers.fontWeight"
+          class="upto-40-percent"
+        >
+          {{ dataservice.template.sectionTwo.twoSection.text.discount }}
+        </h2>
+        <p class="special-offers">
+          {{ dataservice.template.sectionTwo.twoSection.text.otherText }}
+        </p>
+        <button
+          [style.padding]="dataservice.template.buttons.padding"
+          [style.backgroundColor]="dataservice.template.buttons.backgroundColor"
+          [style.borderRadius]="dataservice.template.buttons.borderRadius"
+          [style.color]="dataservice.template.buttons.color"
+          [style.borderColor]="dataservice.template.buttons.borderColor"
+        >
+          SHOP NOW
+        </button>
       </div>
     </div>
   </section>
 
   <section class="featured-items container-fluid">
-    <div 
-    [style.fontSize]="dataservice.template.headers.fontSize"
-    [style.fontWeight]="dataservice.template.headers.fontWeight"
-     class="featured-items-header">{{dataservice.template.sectionThree.name}}</div>
     <div
-      class="row justify-content-between"
+      [style.fontSize]="dataservice.template.headers.fontSize"
+      [style.fontWeight]="dataservice.template.headers.fontWeight"
+      class="featured-items-header"
     >
-    @for(product of dataservice.products; track product){
-        <div class="col-md-3" [routerLink]="['/ecommerce/shop',product.id]" (click)="goToProduct()">
-          <div class="card card-structure">
-            <img
-              [src]="product.images[0].url"
-              class="card-img-top card-img"
-              alt="..."
-            />
-            <div class="card-body">
-              <div
-                class="product-name d-flex justify-content-between align-items-center"
-              >
-                <h5 class="card-title">{{product.category}}</h5>
-                <div class="product-btn">
-                  <button class="heart nav-icons" color="primary" mat-icon-button>
-                    <mat-icon>favorite_border</mat-icon>
-                  </button>
-                  <button class="cart nav-icons" color="primary" mat-icon-button>
-                    <mat-icon>shopping_cart</mat-icon>
-                  </button>
-                </div>
+      {{ dataservice.template.sectionThree.name }}
+    </div>
+    <div class="row justify-content-between">
+      @for(product of dataservice.products; track product){
+      <div class="col-md-3" (click)="goToProduct(product.id)">
+        <div class="card card-structure">
+          <img
+            [src]="product.images[0].url"
+            class="card-img-top card-img"
+            alt="..."
+          />
+          <div class="card-body">
+            <div
+              class="product-name d-flex justify-content-between align-items-center"
+            >
+              <h5 class="card-title">{{ product.category }}</h5>
+              <div class="product-btn">
+                <button class="heart nav-icons" color="primary" mat-icon-button>
+                  <mat-icon>favorite_border</mat-icon>
+                </button>
+                <button class="cart nav-icons" color="primary" mat-icon-button>
+                  <mat-icon>shopping_cart</mat-icon>
+                </button>
               </div>
-              <p class="blossom-bag-paragraph">{{product.name}}</p>
-              <div class="ratings">
-                <img src="assets/images/star-rating.svg" alt="ratings" />
-                <img src="assets/images/star-rating.svg" alt="ratings" />
-                <img src="assets/images/star-rating.svg" alt="ratings" />
-                <img src="assets/images/star-rating.svg" alt="ratings" />
-                <img src="assets/images/star-rating-unfilled.svg" alt="" />
-                <span class="ratings-43">43 Ratings </span>
-              </div>
-              <div class="product-price">${{product.price}}</div>
-              <div class="product-color-div d-flex">
-                <div class="blue product-color"></div>
-                <div class="yellow product-color"></div>
-                <div class="voilet product-color"></div>
-                <div class="red product-color"></div>
-              </div>
+            </div>
+            <p class="blossom-bag-paragraph">{{ product.name }}</p>
+            <div class="ratings">
+              <img src="assets/images/star-rating.svg" alt="ratings" />
+              <img src="assets/images/star-rating.svg" alt="ratings" />
+              <img src="assets/images/star-rating.svg" alt="ratings" />
+              <img src="assets/images/star-rating.svg" alt="ratings" />
+              <img src="assets/images/star-rating-unfilled.svg" alt="" />
+              <span class="ratings-43">43 Ratings </span>
+            </div>
+            <div class="product-price">${{ product.price }}</div>
+            <div class="product-color-div d-flex">
+              <div class="blue product-color"></div>
+              <div class="yellow product-color"></div>
+              <div class="voilet product-color"></div>
+              <div class="red product-color"></div>
             </div>
           </div>
         </div>
+      </div>
       }
     </div>
   </section>

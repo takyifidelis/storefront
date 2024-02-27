@@ -2,7 +2,7 @@
   <section class="">
     <mat-drawer-container class="example-container">
       <mat-drawer mode="side" opened="true">
-        @for(image of this.product.images; track image){
+        @for(image of productItem.images; track image){
         <div>
           <img
             [src]="image.url"
@@ -22,48 +22,29 @@
             <div class="container">
               <div class="row top">
                 <div class="col">
-                  <p class="txt">{{ product.description }}</p>
+                  <p class="txt">{{ productItem.description }}</p>
                 </div>
               </div>
               <div class="row">
                 <div class="col">
-                  <h4 class="item-name">{{ product.name }}</h4>
+                  <h4 class="item-name">{{ productItem.name }}</h4>
                 </div>
               </div>
               <div class="row">
                 <div class="col d-inline-flex">
                   <div class="item-rating d-flex">
                     <div class="starIcon">
-                      <img
-                        src="/assets/icons/green-star.svg"
-                        alt=""
-                        style="width: 24px; height: 24px"
-                      />
-                      <img
-                        src="/assets/icons/green-star.svg"
-                        alt=""
-                        style="width: 24px; height: 24px"
-                      />
-                      <img
-                        src="/assets/icons/green-star.svg"
-                        alt=""
-                        style="width: 24px; height: 24px"
-                      />
-                      <img
-                        src="/assets/icons/green-star.svg"
-                        alt=""
-                        style="width: 24px; height: 24px"
-                      />
-                      <img
-                        src="/assets/icons/star.svg"
-                        alt=""
-                        style="width: 24px; height: 24px"
-                      />
+                      <app-star-rating
+                        [readonly]="true"
+                        [rating]="productItem.rating"
+                      ></app-star-rating>
                     </div>
                     <p class="txt-2 m-0">4.0 Ratings</p>
                   </div>
                   <div class="items-available d-flex align-items-center">
-                    <p class="txt-2 m-0">10 Available</p>
+                    <p class="txt-2 m-0">
+                      Available Stock: {{ productItem.quantity }}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -92,10 +73,7 @@
               </div>
 
               <div class="d-flex align-items-center justify-content-start">
-                <button
-                  class="size one"
-                  *ngFor="let variation of this.product.variations[0].values"
-                >
+                <button class="size one" *ngFor="let variation of sizes">
                   {{ variation }}
                 </button>
               </div>
@@ -121,7 +99,7 @@
                 <div class="price">
                   <p class="price-name quantity-price-name">PRICE</p>
                   <div class="price-amount amount">
-                    {{ product.price + ".00 EUR" }}
+                    {{ productItem.price + "EUR" }}
                   </div>
                 </div>
               </div>
@@ -130,7 +108,7 @@
                 <span class="add-to-buy" (click)="onAddToBuy()"
                   >ADD TO BUY</span
                 >
-                <span class="save">
+                <span class="save" (click)="onLikedProducts()">
                   <fa-icon [icon]="heartIcon"></fa-icon> SAVE
                 </span>
               </div>

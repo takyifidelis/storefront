@@ -12,6 +12,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { CommonModule } from '@angular/common';
 import { DataService } from '../../../../../Services/data.service';
 import { APIService } from '../../../../../Services/api.service';
+import { StarRatingComponent } from '../../../../Dashboard/Customer/components/star-rating/star-rating.component';
 
 @Component({
   selector: 'app-review',
@@ -27,6 +28,7 @@ import { APIService } from '../../../../../Services/api.service';
     FontAwesomeModule,
     MatTabsModule,
     CommonModule,
+    StarRatingComponent
   ],
   templateUrl: './review.component.html',
   styleUrl: './review.component.scss',
@@ -38,30 +40,27 @@ export class ReviewComponent implements OnInit {
   starIcon = faStar;
   product: any;
   quantity: number = 1;
-  initialAmount: number | undefined;
-  initialPrice: any;
+  initialPrice?: number;
   addToBuy: any = [];
-
- 
-  //   this.product = this.apiService.getProductTemp();
-  //   this.selectedImage = this.product.images[0].url;
-
-  // this.initialPrice = this.product.price;
+  likedProducts: any = [];
   amount: number = this.quantity * 90;
   productItem :any
+  sizes: string[] | undefined;
+
 constructor(private route: ActivatedRoute,private dataService:DataService,public apiService: APIService){}
+
   increaseQuantity(): void {
-    // this.quantity = this.product.quantity;
     this.quantity++;
-    this.product.price = this.quantity * this.initialPrice;
+    if(this.initialPrice)
+    this.productItem.price = this.quantity * this.initialPrice;
+    console.log(this.productItem.price);
   }
 
   decreaseQuantity(): void {
     if (this.quantity > 1) {
       this.quantity--;
-    
-      this.product.price = this.quantity * this.initialPrice;
-      console.log(this.initialPrice);
+      if(this.initialPrice)
+      this.productItem.price = this.quantity * this.initialPrice;
     }
   }
   showForm(): void {
@@ -79,17 +78,28 @@ constructor(private route: ActivatedRoute,private dataService:DataService,public
   }
 
   onAddToBuy() {
-    this.addToBuy.push(this.product);
-    console.log(this.addToBuy);
+    this.addToBuy.push(this.productItem);
+    localStorage.setItem('cart', this.addToBuy);
   }
+
+  onLikedProducts(){
+    this.likedProducts.push(this.productItem);
+    localStorage.setItem('favouriteProducts', this.likedProducts);
+  }
+
   ngOnInit(){
-    for (const product of this.dataService.products) {
-      if (product.id === this.route.snapshot.params['id']) {
-        this.productItem = product
-        console.log(this.productItem);
-      }
-    }
-     
-    // console.log(this.dataService.products.find((element:any) => console.log(element.id)));
+    let productJson = localStorage.getItem('selectedProduct');
+    let product = JSON.parse(productJson!);
+    this.productItem = product;
+
+    this.selectedImage = this.productItem.images[0].url;
+     this.initialPrice = this.productItem.price;
+
+     let values = this.productItem.variations[0].values;
+     if(!values) {
+      return
+     }else {
+      this.sizes = values[0].split(',');
+     }
     }
   }

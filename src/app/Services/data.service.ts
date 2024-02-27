@@ -13,6 +13,7 @@ export class DataService {
   orderId: string =''
   storeId: string = ''
   productId: string = '';
+  product: any;
   loginCredentials:UserCredentials = {email:'', password:''}
   ecommerceWebsite: string= ''
   businessId: string = ''
@@ -120,7 +121,7 @@ export class DataService {
       },
     sectionThree:{
     name:"Featured Items",
-    // products:[
+    products:[
     //     {id: "string",name: "ACCESSORIES",images: [{id: "string",url: "assets/images/featured-accesories-rings.svg",key: "string"}],description: "string",isActive: true,quantity: 0,reStockLevel: 0,category: "string",price: 39,discount: 0,promotion: "string"},
     //     {id: "string",name: "ACCESSORIES",images: [{id: "string",url: "assets/images/featured-accesories-rings.svg",key: "string"}],description: "string",isActive: true,quantity: 0,reStockLevel: 0,category: "string",price: 39,discount: 0,promotion: "string"},
     //     {id: "string",name: "ACCESSORIES",images: [{id: "string",url: "assets/images/featured-accesories-rings.svg",key: "string"}],description: "string",isActive: true,quantity: 0,reStockLevel: 0,category: "string",price: 39,discount: 0,promotion: "string"},
@@ -130,7 +131,7 @@ export class DataService {
     //     {id: "string",name: "ACCESSORIES",images: [{id: "string",url: "assets/images/featured-accesories-rings.svg",key: "string"}],description: "string",isActive: true,quantity: 0,reStockLevel: 0,category: "string",price: 39,discount: 0,promotion: "string"},
     //     {id: "string",name: "ACCESSORIES",images: [{id: "string",url: "assets/images/featured-accesories-rings.svg",key: "string"}],description: "string",isActive: true,quantity: 0,reStockLevel: 0,category: "string",price: 39,discount: 0,promotion: "string"},
     //     {id: "string",name: "ACCESSORIES",images: [{id: "string",url: "assets/images/featured-accesories-rings.svg",key: "string"}],description: "string",isActive: true,quantity: 0,reStockLevel: 0,category: "string",price: 39,discount: 0,promotion: "string"},
-    // ],
+    ],
     twoSection:{
         image:"assets/images/ecommerce-home-two-ladies.svg",text:{discount:"UPTO 40% OFF",otherText:"Special offers and great deals"}
     }
@@ -203,5 +204,4 @@ export class DataService {
     },
     pagesOrder:[{name:"home", value:"home", includePage: true}, {name:"about", value:"about us",IncludePage: false}, {name:"contact", value:"contact us", includePage: false}]
 }
-  constructor() { }
 }

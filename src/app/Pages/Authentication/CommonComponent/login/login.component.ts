@@ -106,11 +106,11 @@ export class LoginComponent implements OnInit {
     this.loginService.login(email, password).subscribe(
       (resData) => {
         console.log(resData);
-        if (resData.data?.type == 'Business') {
-          this.router.navigate(['merchant']);
-        } else if (resData.data?.type == 'Customer') {
-          this.router.navigate(['customer']);
-        }
+        // if (resData.data?.type == 'Business') {
+        //   this.router.navigate(['merchant']);
+        // } else if (resData.data?.type == 'Customer') {
+        //   this.router.navigate(['customer']);
+        // }
       },
       (errorMessage) => {
         console.log(errorMessage);

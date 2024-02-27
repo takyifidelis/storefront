@@ -59,7 +59,7 @@ export class CkeckoutPageComponent implements OnInit {
       destination: 'BO',
     };
     const response = await fetch(
-      `${environment.baseApiUrl}/api/order/initialize/${this.customerId}`,
+      `${environment.baseApiUrl}/order/initialize/${this.customerId}`,
       {
         method: 'POST',
         headers: {
@@ -81,7 +81,7 @@ export class CkeckoutPageComponent implements OnInit {
 
   async onApprove(data: { orderID: string }) {
     const response = await fetch(
-      `${environment.baseApiUrl}/api/order/approve-payment/` + data.orderID,
+      `${environment.baseApiUrl}/order/approve-payment/` + data.orderID,
       {
         method: 'POST',
         headers: {

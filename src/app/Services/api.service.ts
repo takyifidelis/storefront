@@ -55,13 +55,14 @@ initializePayment(customerId:string, cart:any): Observable<Response> {
 addShipping(customerId: string, user: any) {
   return this.http.post(`${environment.baseApiUrl}/customer/add-shipping-address/${customerId}`, user)
 }
-  // getStoreProducts(storeId: string): Observable<Response>{
-  //   return this.http.get<Response>(`${environment.baseApiUrl}/store/get-store-products/${storeId}`,
-  //   {
-  //     withCredentials: true,
-  //   })
-  // }
-  getStoreProducts(storeId: string): Observable<Response>{
+  getStoreProductsCustomer(storeId: string): Observable<Response>{
+    return this.http.get<Response>(`${environment.baseApiUrl}/store/get-store-products/${storeId}`,
+    {
+      withCredentials: true,
+    })
+  }
+  
+  getStoreProductsMerchant(storeId: string): Observable<Response>{
     return this.http.get<Response>(`${environment.baseApiUrl}/product/get-all-products/${storeId}`,
     {
       withCredentials: true,
@@ -82,9 +83,16 @@ addShipping(customerId: string, user: any) {
       withCredentials: true,
     })
   }
+
   publishTemplate(storeId: string, template:any): Observable<Response>{
     return this.http.patch<Response>(`${environment.baseApiUrl}/store/publish-template/${storeId}`,
     template, {
+      withCredentials: true,
+    })
+  }
+
+  addTOViews(customerId: string, products: any): Observable<Response>{
+    return this.http.post<Response>(`${environment.baseApiUrl}/customer/add-to-views/${customerId}`, products, {
       withCredentials: true,
     })
   }
