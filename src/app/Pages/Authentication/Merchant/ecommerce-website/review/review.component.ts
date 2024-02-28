@@ -78,13 +78,18 @@ constructor(private route: ActivatedRoute,private dataService:DataService,public
   }
 
   onAddToBuy() {
-    this.addToBuy.push(this.productItem);
-    localStorage.setItem('cart', this.addToBuy);
+    let cart = JSON.parse(localStorage.getItem('cart')|| '')
+    this.productItem.quant =this.quantity;
+    cart.push(this.productItem);
+    let addTobuyJson = JSON.stringify(cart);
+    localStorage.setItem('cart', addTobuyJson);
   }
 
   onLikedProducts(){
-    this.likedProducts.push(this.productItem);
-    localStorage.setItem('favouriteProducts', this.likedProducts);
+    let like = JSON.parse(localStorage.getItem('cart')|| '')
+    like.push(this.productItem);
+    let likedProductsJson = JSON.stringify(like);
+    localStorage.setItem('favouriteProducts', likedProductsJson);
   }
 
   ngOnInit(){

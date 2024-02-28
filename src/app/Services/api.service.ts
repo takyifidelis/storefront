@@ -46,8 +46,8 @@ export class APIService {
     })
   }
 
-initializePayment(customerId:string, cart:any): Observable<Response> {
-  return this.http.post<Response>(`${environment.baseApiUrl}/order/initialize/${customerId}`, cart, {
+initializePayment(payload:any): Observable<Response> {
+  return this.http.post<Response>(`${environment.baseApiUrl}/order/initialize/f739a921-7267-4e02-8222-ceb2b4c352cf`, payload, {
     withCredentials: true,
   })
 }

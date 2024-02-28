@@ -8,12 +8,20 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { faCircleInfo } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { SignupResponseData } from '../../../../Authentication/Auth/api.model';
+import { HttpClient } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-ckeckout-page',
   standalone: true,
-  imports: [NgxPayPalModule, FontAwesomeModule, ReactiveFormsModule],
+  imports: [NgxPayPalModule, FontAwesomeModule, ReactiveFormsModule, CommonModule],
   templateUrl: './ckeckout-page.component.html',
   styleUrl: './ckeckout-page.component.scss',
 })
@@ -25,58 +33,60 @@ export class CkeckoutPageComponent implements OnInit {
   storeId: string | undefined;
   info = faCircleInfo;
   user!: FormGroup;
-  shippingId: string = ''
+  shippingId: string = '';
+  payload: any;
+ 
 
   constructor(
     public apiService: APIService,
     public dataService: DataService,
     private snackBar: MatSnackBar,
     private router: Router,
+    public http: HttpClient
   ) {}
-
+  getdata(){
+    this.cart = JSON.parse(localStorage.getItem('cart')!);
+    let items = []
+    for (const item of this.cart) {
+        items.push({product:item.id ,quantity: item.quant, variations:[] })
+    }
+    return items;
+  }
+  // createOrder() {
+  //   this.apiService.initializePayment(this.payload).subscribe((res: any) =>{
+  //     this.orderId = res.data.orderId;
+  //     return this.orderId;
+  //   });
+  // }
   ngOnInit(): void {
     this.initConfig();
 
     this.user = new FormGroup({
-      'first-name': new FormControl(null),
-      'streetAddress': new FormControl(null),
-      'telephone': new FormControl(null),
-      'countryCode':  new FormControl(null),
-      'city':  new FormControl(null),
-      'appartmentNumber':  new FormControl(null)
-    })
-  }
+      name: new FormControl(null, Validators.required),
+      streetAddress: new FormControl(null, Validators.required),
+      postalCode: new FormControl(null, Validators.required),
+      phone: new FormControl(null, Validators.required),
+      countryCode: new FormControl(null, Validators.required),
+      city: new FormControl(null, Validators.required),
+      apartmentNo: new FormControl(null, Validators.required),
 
-  async createOrder() {
-    const payload = this.cart && {
-      items: this.cart.items.map((item: any) => ({
-        product: item.id,
-        quantity: item.quantity,
-        variations: item.variations,
-      })),
-      shipping: this.cart.shipping,
-      store: this.storeId,
-      destination: 'BO',
+    });
+    this.payload = {
+      items: this.getdata(),
+      shipping: '38839ef8-8d01-47f3-bb50-91dbe5f2f6ce',
+      store: 'f9586428-62e3-4455-bb1d-61262a407d1a',
     };
-    const response = await fetch(
-      `${environment.baseApiUrl}/order/initialize/${this.customerId}`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload),
-      }
-    );
-    alert('Paused');
-    const res = await response.json();
-    if (res.type === 'error') {
-      this.snackBar.open(res.error[0].reason, 'Close', { duration: 3000 });
-    } else {
-      this.snackBar.open(res.message, 'Close', { duration: 3000 });
-    }
-    const order = await res.data.orderId;
-    return order;
+
+    console.log(this.getdata());
+    this.createOrder()
+
+  }
+  createOrder() {
+    this.apiService.initializePayment(this.payload).subscribe((res: any) =>{
+      console.log(res);
+      this.orderId = res.data.orderId;
+      return  this.orderId;
+    });
   }
 
   async onApprove(data: { orderID: string }) {
@@ -107,13 +117,11 @@ export class CkeckoutPageComponent implements OnInit {
   private initConfig(): void {
     this.payPalConfig = {
       clientId: environment.paypalClientID,
-      createOrderOnServer: (data:any) => {
-        return this.createOrder();
+      createOrderOnServer: this.createOrder()!,
+      onApprove: (data: any, actions: any) => {
+         this.onApprove(data);
       },
-      onApprove: (data:any, actions:any) => {
-        return this.onApprove(data);
-      },
-      onClientAuthorization: (data:any) => {
+      onClientAuthorization: (data: any) => {
         console.log(
           'onClientAuthorization - you should probably inform your server about completed transaction at this point',
           data
@@ -131,17 +139,21 @@ export class CkeckoutPageComponent implements OnInit {
     };
   }
 
+
+
   onSubmit() {
-    if(this.user.valid){
-      this.apiService.addShipping(this.dataService.customerId, this.user.value).subscribe((response: any) => {
-        console.log('response:', response);
-        this.shippingId = response.data.id;
-      }, (error) => {
-        console.log("Error", error)
+    console.log(this.user);
+    this.http
+      .post<SignupResponseData>(
+        `${environment.baseApiUrl}/customer/add-shipping-address/f739a921-7267-4e02-8222-ceb2b4c352cf`,
+        this.user.value,
+        {
+          withCredentials: true,
+        }
+      )
+      .subscribe((res: any) => {
+        console.log(res);
       });
-      
-      this.user.reset();
-    }
   }
 }
 

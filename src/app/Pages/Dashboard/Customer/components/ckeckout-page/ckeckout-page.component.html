@@ -36,7 +36,7 @@
                       type="text"
                       id="first-name"
                       class="form-control"
-                      formControlName="first-name"
+                      formControlName="name"
                     />
                   </div>
                 </div>
@@ -51,7 +51,7 @@
               </div>
               <div class="address margin">
                 <div class="label title">
-                  <label for="address">Address</label>
+                  <label for="address">Street Address</label>
                 </div>
                 <div class="input">
                   <input
@@ -64,21 +64,21 @@
               </div>
               <div class="address margin">
                 <div class="label title">
-                  <label for="appartment-number">Address</label>
+                  <label for="apartment-number">Apartment Number</label>
                 </div>
                 <div class="input">
                   <input
                     type="text"
-                    id="appartment-number"
+                    id="apartment-number"
                     class="form-control"
-                    formControlName="appartmentNumber"
+                    formControlName="apartmentNo"
                   />
                 </div>
               </div>
               <div class="country margin">
                 <div class="country">
                   <div class="label title">
-                    <label for="country-code">Pnone number</label>
+                    <label for="country-code">Country Code</label>
                   </div>
                   <div class="input">
                     <input
@@ -92,13 +92,39 @@
               </div>
               <div class="address margin">
                 <div class="label title">
-                  <label for="telephone">Pnone number</label>
+                  <label for="telephone">Phone number</label>
                 </div>
                 <div class="input">
                   <input
                     type="text"
-                    formControlName="telephone"
+                    formControlName="phone"
                     id="telephone"
+                    class="form-control"
+                  />
+                </div>
+              </div>
+              <div class="address margin">
+                <div class="label title">
+                  <label for="city">City</label>
+                </div>
+                <div class="input">
+                  <input
+                    type="text"
+                    formControlName="city"
+                    id="city"
+                    class="form-control"
+                  />
+                </div>
+              </div>
+              <div class="address margin">
+                <div class="label title">
+                  <label for="postal-code">Postal Code</label>
+                </div>
+                <div class="input">
+                  <input
+                    type="text"
+                    formControlName="postalCode"
+                    id="postal-code"
                     class="form-control"
                   />
                 </div>
@@ -126,17 +152,17 @@
             </div>
           </div>
         </div>
-        <div class="row">
+        <div class="row" *ngFor="let item of cart">
           <div class="col">
-            <p class="text-2">Carbon Offsets</p>
+            <p class="text-2">{{ item.name }}</p>
           </div>
           <div class="col">
             <div class="row">
               <div class="col">
-                <p class="text-2">36,000 lbs</p>
+                <p class="text-2">{{ item.quant }}</p>
               </div>
               <div class="col">
-                <P class="text-2">$176.4</P>
+                <P class="text-2">{{ item.price }} EUR</P>
               </div>
             </div>
           </div>
@@ -161,6 +187,7 @@
               color: rgb(48, 77, 4);
               border: 1px solid rgb(4, 54, 4);
             "
+            (click)="createOrder()"
           >
             PROMO CODE
           </button>

@@ -203,5 +203,22 @@ export class DataService {
         }
     },
     pagesOrder:[{name:"home", value:"home", includePage: true}, {name:"about", value:"about us",IncludePage: false}, {name:"contact", value:"contact us", includePage: false}]
+
+    
 }
+
+payload = {
+    shipping: '38839ef8-8d01-47f3-bb50-91dbe5f2f6ce',
+    store: 'f9586428-62e3-4455-bb1d-61262a407d1a',
+    items: [
+        {
+            product: 'a58c5939-a33e-43df-89d9-86d5c67ef798',
+            quantity: 4,
+            variations: []
+            
+        }
+    ]
+}
+
+
 }
