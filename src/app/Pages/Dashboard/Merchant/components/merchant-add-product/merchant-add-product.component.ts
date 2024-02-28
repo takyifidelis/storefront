@@ -13,6 +13,8 @@ import {
 } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../../../Authentication/Auth/auth.service';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 @Component({
   selector: 'app-merchant-add-product',
@@ -23,11 +25,16 @@ import { AuthService } from '../../../../Authentication/Auth/auth.service';
     CommonModule,
     RouterModule,
     ReactiveFormsModule,
+    CKEditorModule,
   ],
   templateUrl: './merchant-add-product.component.html',
   styleUrl: './merchant-add-product.component.scss',
 })
 export class MerchantAddProductComponent {
+  public Editor = ClassicEditor;
+  public productDetailss: any = {
+    description: '<p></p>', // Initial value for the description
+  };
   images: string[] = []; // Assuming we don't need topImages and bottomImages arrays separately anymore
   productForm: FormGroup;
   inputText: string = '';

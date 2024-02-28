@@ -70,13 +70,17 @@
 
           <div class="form-group">
             <label for="Description" class="label-name">Description</label>
-            <textarea
-              [(ngModel)]="productDetails.description"
+            <!-- <textarea
+              [(ngModel)]="productDetailss.description"
               id=""
               rows="4"
               class="form-control"
               placeholder="Enter a description..."
-            ></textarea>
+            ></textarea> -->
+            <ckeditor
+              [editor]="Editor"
+              [(ngModel)]="productDetailss.description"
+            ></ckeditor>
           </div>
           <div class="category">
             <div class="head d-flex align-items-center justify-content-between">
