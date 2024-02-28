@@ -35,7 +35,7 @@
       >
         Order Number
       </th>
-      <td mat-cell *matCellDef="let row">{{ row.orderNumber }}</td>
+      <td mat-cell *matCellDef="let row">{{ row.orderId }}</td>
     </ng-container>
 
     <ng-container matColumnDef="store">
@@ -47,7 +47,7 @@
       >
         Store
       </th>
-      <td mat-cell *matCellDef="let row">{{ row.store }}</td>
+      <td mat-cell *matCellDef="let row">{{ row.storeOrder?.storeName }}</td>
     </ng-container>
 
     <ng-container matColumnDef="status">
@@ -71,7 +71,7 @@
       >
         Date
       </th>
-      <td mat-cell *matCellDef="let row">{{ row.date }}</td>
+      <td mat-cell *matCellDef="let row">{{ row.updatedAt }}</td>
     </ng-container>
 
     <ng-container matColumnDef="price">
@@ -83,7 +83,7 @@
       >
         Price
       </th>
-      <td mat-cell *matCellDef="let row">{{ row.price }}</td>
+      <td mat-cell *matCellDef="let row">{{ row.amount }}</td>
     </ng-container>
 
     <ng-container matColumnDef="bubble">

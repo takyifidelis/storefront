@@ -52,12 +52,7 @@ export class CkeckoutPageComponent implements OnInit {
     }
     return items;
   }
-  // createOrder() {
-  //   this.apiService.initializePayment(this.payload).subscribe((res: any) =>{
-  //     this.orderId = res.data.orderId;
-  //     return this.orderId;
-  //   });
-  // }
+  
   ngOnInit(): void {
     this.initConfig();
 
@@ -116,7 +111,7 @@ export class CkeckoutPageComponent implements OnInit {
 
   private initConfig(): void {
     this.payPalConfig = {
-      clientId: environment.paypalClientID,
+      clientId: environment.paypalClientID2,
       createOrderOnServer: this.createOrder()!,
       onApprove: (data: any, actions: any) => {
          this.onApprove(data);
