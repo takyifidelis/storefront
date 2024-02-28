@@ -1,23 +1,200 @@
-@if(!dataService.merchantDashboardNoProjects){
-    <div class="d-flex justify-content-center align-items-center h-100">
-        <div class="empty-dashboard">
-            <span>
-              <img src="/assets/icons/merchant_review_empty.svg" alt="" srcset=""> 
-            </span>
-            <h1>No projects found</h1>
-            <p>It seems there are no products matching your criteria. To get started, click the button below to add a new
-              product</p>
-            <button>
-              <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
-                <path d="M10.5 4.50586V16.1725M4.66669 10.3392H16.3334" stroke="white" stroke-width="1.66667"
-                  stroke-linecap="round" stroke-linejoin="round" />
-              </svg>
-              <span>create new</span>
-            </button>
-          </div>
-    </div>
-}
+<!-- @if(!dataService.merchantDashboardNoProjects){
+<div class="d-flex justify-content-center align-items-center h-100">
+  <div class="empty-dashboard">
+    <span>
+      <img src="/assets/icons/merchant_review_empty.svg" alt="" srcset="" />
+    </span>
+    <h1>No projects found</h1>
+    <p>
+      It seems there are no products matching your criteria. To get started,
+      click the button below to add a new product
+    </p>
+    <button>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="21"
+        height="21"
+        viewBox="0 0 21 21"
+        fill="none"
+      >
+        <path
+          d="M10.5 4.50586V16.1725M4.66669 10.3392H16.3334"
+          stroke="white"
+          stroke-width="1.66667"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+      <span>create new</span>
+    </button>
+  </div>
+</div>
+}  -->
+<!-- @if(dataService.merchantDashboardNoProjects){
 
-@if(dataService.merchantDashboardNoProjects){
- we have projects already, this content will show
-}
+
+} -->
+
+<section class="review-page">
+  <div class="filter-block">
+    <div class="row justify-content-between" style="padding-left: 41px">
+      <div class="col">
+        <h4>Reviews</h4>
+      </div>
+      <div
+        class="col d-flex justify-content-end align-items-center"
+        style="gap: 10px; padding-right: 31px"
+      >
+        <button class="d-flex justify-content-around button">
+          <fa-icon [icon]="filterIcon" style="font-size: 15px"></fa-icon>
+          <p>Filter</p>
+        </button>
+        <form>
+          <div class="search d-flex">
+            <fa-icon
+              [icon]="seaechICon"
+              style="font-size: 15px; color: #1b4dff"
+            ></fa-icon>
+            <input type="text" placeholder="Search........" />
+          </div>
+        </form>
+        <button class="new-payment">
+          <p>New Product</p>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="table-form">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+      <!-- Checkbox Column -->
+      <ng-container matColumnDef="checkbox">
+        <th style="background-color: #f9fafb" mat-header-cell *matHeaderCellDef>
+          <mat-checkbox
+            (change)="$event ? toggleAllRows() : null"
+            [checked]="selection.hasValue() && isAllSelected()"
+            [indeterminate]="selection.hasValue() && !isAllSelected()"
+          >
+          </mat-checkbox>
+        </th>
+        <td mat-cell *matCellDef="let row">
+          <mat-checkbox
+            (click)="showSelection($event)"
+            (change)="$event ? selection.toggle(row) : null"
+            [checked]="selection.isSelected(row)"
+          >
+          </mat-checkbox>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="product">
+        <th
+          style="background-color: #f9fafb"
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+        >
+          Product Info
+        </th>
+        <td mat-cell *matCellDef="let row" (click)="moreVert(row)">
+          <div class="product-info d-flex align-items-center">
+            <div class="product-image">
+              <img [src]="row.productReview.images[0].url" alt="" />
+            </div>
+            <div class="product-name-date">
+              <p class="product-name">{{ row.productReview.name }}</p>
+              <p class="product-date">
+                Posted: <span>{{ row.createdAt | date : "mediumDate" }}</span>
+              </p>
+            </div>
+          </div>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <th
+          style="background-color: #f9fafb"
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+        >
+          Name
+        </th>
+        <td mat-cell *matCellDef="let row" (click)="moreVert(row)">
+          <div class="product-info d-flex align-items-center">
+            <div class="product-image">
+              <img
+                src="assets\images\hat-review.svg"
+                alt=""
+                style="border-radius: 50%"
+              />
+            </div>
+            <div class="product-name-date">
+              <p class="product-name">
+                <span class="first-name">{{
+                  row.customerReview.firstName
+                }}</span
+                ><span class="last-name">
+                  {{ row.customerReview.lastName }}
+                </span>
+              </p>
+              <p class="product-date">Ghana</p>
+            </div>
+          </div>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="customer">
+        <th
+          style="background-color: #f9fafb"
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+        >
+          Customer Reviews
+        </th>
+        <td mat-cell *matCellDef="let row" (click)="moreVert(row)">
+          <div class="customer-review">
+            <h5 class="review-title">{{ row.remarks }}</h5>
+            <p class="review-description">
+              {{ row.comment }}
+            </p>
+          </div>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="rating">
+        <th
+          style="background-color: #f9fafb"
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+        >
+          Rated
+        </th>
+        <td mat-cell *matCellDef="let row" (click)="moreVert(row)">
+          <div class="rating">
+            <img src="assets\icons\star-ratings.svg" alt="" />
+            <img src="assets\icons\star-ratings.svg" alt="" />
+            <img src="assets\icons\star-ratings.svg" alt="" />
+            <img src="assets\icons\star-ratings.svg" alt="" />
+            <img src="assets\icons\star-ratings.svg" alt="" />
+          </div>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <!-- <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+        (click)="selection.toggle(row)">
+    </tr> -->
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </div>
+  <mat-paginator
+    style="margin-top: 30px"
+    [pageSizeOptions]="[5, 10, 25, 100]"
+    aria-label="Select page of users"
+  ></mat-paginator>
+
+  <!-- <div *ngFor="let review of reviews$ | async">
+    {{rating }}
+  </div> -->
+</section>

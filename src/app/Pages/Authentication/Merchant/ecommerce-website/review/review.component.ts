@@ -10,8 +10,10 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faHeart, faStar } from '@fortawesome/free-solid-svg-icons';
 import { MatTabsModule } from '@angular/material/tabs';
 import { CommonModule } from '@angular/common';
+
 import { DataService } from '../../../../../Services/data.service';
 import { APIService } from '../../../../../Services/api.service';
+import { AuthService } from '../../../Auth/auth.service';
 
 @Component({
   selector: 'app-review',
@@ -49,7 +51,7 @@ export class ReviewComponent implements OnInit {
   // this.initialPrice = this.product.price;
   amount: number = this.quantity * 90;
   productItem :any
-constructor(private route: ActivatedRoute,private dataService:DataService,public apiService: APIService){}
+constructor(private route: ActivatedRoute,private dataService:DataService,public apiService: APIService, private authService: AuthService){}
   increaseQuantity(): void {
     // this.quantity = this.product.quantity;
     this.quantity++;
@@ -64,6 +66,7 @@ constructor(private route: ActivatedRoute,private dataService:DataService,public
       console.log(this.initialPrice);
     }
   }
+  productReview: any;
   showForm(): void {
     this.isFormDisplayed = true;
   }
@@ -78,6 +81,7 @@ constructor(private route: ActivatedRoute,private dataService:DataService,public
     this.selectedImage = imageName;
   }
 
+
   onAddToBuy() {
     this.addToBuy.push(this.product);
     console.log(this.addToBuy);
@@ -89,7 +93,14 @@ constructor(private route: ActivatedRoute,private dataService:DataService,public
         console.log(this.productItem);
       }
     }
+    
+    this.authService.getReviews().subscribe((response: any) => {
+      console.log(response);
+      // this.users = response.data
+      this.productReview = response.data;
+    });
      
     // console.log(this.dataService.products.find((element:any) => console.log(element.id)));
     }
   }
+
