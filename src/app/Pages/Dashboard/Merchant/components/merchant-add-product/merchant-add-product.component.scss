@@ -313,3 +313,10 @@ section.add-product {
 .modal {
   text-align: center;
 }
+.description-div {
+  margin-bottom: 1.5rem;
+}
+
+::ng-deep .ck-content {
+  height: 5rem;
+}

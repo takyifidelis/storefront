@@ -22,6 +22,7 @@ import { MatInputModule } from '@angular/material/input';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCheck, faFilter, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 
 export interface dummyUserInterface {
   checkbox: string;
@@ -49,6 +50,7 @@ export interface dummyUserInterface {
     MatDialogModule,
     HttpClientModule,
     CommonModule,
+    RouterModule,
   ],
   templateUrl: './merchant-products-dashboad.component.html',
   styleUrl: './merchant-products-dashboad.component.scss',

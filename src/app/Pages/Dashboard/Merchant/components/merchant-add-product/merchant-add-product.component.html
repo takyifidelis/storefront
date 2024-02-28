@@ -16,7 +16,13 @@
           </div>
         </div>
         <div class="save-cancel">
-          <button type="button" class="btn cancel-btn">Cancel</button>
+          <button
+            type="button"
+            class="btn cancel-btn"
+            [routerLink]="['/merchant/product']"
+          >
+            Cancel
+          </button>
           <button type="submit" class="btn btn-primary" (click)="onSubmit()">
             Save
           </button>
@@ -68,10 +74,10 @@
             </div>
           </div>
 
-          <div class="form-group">
+          <div class="form-group description-div">
             <label for="Description" class="label-name">Description</label>
             <!-- <textarea
-              [(ngModel)]="productDetailss.description"
+              [(ngModel)]="productDetails.description"
               id=""
               rows="4"
               class="form-control"
@@ -123,8 +129,8 @@
               class="form-group form-control"
               (change)="onStatusChange($event)"
             >
-              <option value="active">Active</option>
-              <option value="notActive">Not Active</option>
+              <option value="true">Active</option>
+              <option value="false">Not Active</option>
             </select>
           </div>
         </div>

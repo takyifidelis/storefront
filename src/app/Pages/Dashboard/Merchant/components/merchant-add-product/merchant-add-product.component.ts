@@ -57,7 +57,7 @@ export class MerchantAddProductComponent {
     name: '',
     price: '',
     quantity: '',
-    description: '',
+    description: this.productDetailss.description,
     isActive: 'true',
     category: '',
   };
@@ -109,6 +109,7 @@ export class MerchantAddProductComponent {
     this.authService.postProduct(this.data).subscribe(
       (resData) => {
         console.log(resData);
+        this.router.navigate(['/merchant/product']);
       },
       (errorMessage) => {
         console.log(errorMessage);
@@ -168,6 +169,7 @@ export class MerchantAddProductComponent {
     this.selectedStatus = target.value;
 
     this.displayedStatus =
-      this.selectedStatus === 'active' ? 'Active' : 'Not Active';
+      this.selectedStatus === 'true' ? 'Active' : 'Not Active';
+    this.productDetails.isActive = this.selectedStatus;
   }
 }
