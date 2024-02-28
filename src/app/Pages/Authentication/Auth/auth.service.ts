@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { catchError, map, switchMap } from 'rxjs/operators';
+
+import { catchError,  map,  switchMap } from 'rxjs/operators';
+
 import { throwError, Observable } from 'rxjs';
 import {
   ForgetPasswordResponse,
@@ -134,6 +136,7 @@ export class AuthService {
       )
       .pipe(catchError(this.handleError));
   }
+
   resendCode() {
     return this.http
       .get(
@@ -142,6 +145,7 @@ export class AuthService {
       )
       .pipe(catchError(this.handleError));
   }
+
 
   // Verify account
   verifyAccount(code: string) {
@@ -164,6 +168,20 @@ export class AuthService {
         'https://storefront-backend-jan-dev-api.vercel.app/api/account/password/resetCode/verify',
         {
           code,
+        },
+        {
+          withCredentials: true,
+        }
+      )
+      .pipe(catchError(this.handleError));
+  }
+  replyReview(comment: string, review: string) {
+    return this.http
+      .post<SignupResponseData>(
+        'https://storefront-backend-jan-dev-api.vercel.app/api/store/reply-customer/22095521-d6e3-4ed1-a7de-e96e1f81bed3',
+        {
+          comment,
+          review,
         },
         {
           withCredentials: true,
@@ -207,11 +225,18 @@ export class AuthService {
       )
       .pipe(catchError(this.handleError));
   }
-
+  
   getProducts() {
     return this.http
       .get<ProductResponseData>(
         'https://storefront-backend-jan-dev-api.vercel.app/api/product/get-all-products/22095521-d6e3-4ed1-a7de-e96e1f81bed3',
+
+
+    getReviews(): Observable<ReviewResponseData> {
+    return this.http
+      .get<ReviewResponseData>(
+        'https://storefront-backend-jan-dev-api.vercel.app/api/store/get-reviews/22095521-d6e3-4ed1-a7de-e96e1f81bed3',
+>
         { withCredentials: true }
       )
 
@@ -224,6 +249,7 @@ export class AuthService {
         'https://storefront-backend-jan-dev-api.vercel.app/api/product/add/f9586428-62e3-4455-bb1d-61262a407d1a',
 
         formData,
+
 
         {
           withCredentials: true,

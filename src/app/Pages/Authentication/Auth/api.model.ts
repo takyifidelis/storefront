@@ -92,6 +92,7 @@ export interface ReviewResponseData {
   comment: string;
 }
 
+
 export interface ProductResponseData {
   id: string;
   name: string;
@@ -116,3 +117,4 @@ export interface ProductResponseData {
   promotionProduct: string;
   rating: number;
 }
+
