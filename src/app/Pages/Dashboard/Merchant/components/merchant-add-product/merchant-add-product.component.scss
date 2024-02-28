@@ -187,6 +187,19 @@ section.add-product {
           }
         }
       }
+      .variation-block {
+        margin-top: 2rem;
+        .variation-header {
+          color: #3d4a5c;
+          font-family: Inter;
+          font-size: 20px;
+          font-style: normal;
+          font-weight: 900;
+          line-height: 30px;
+          letter-spacing: -0.3px;
+        }
+      }
+
       .media-sizes {
         margin-top: 3rem;
         .size-header {
@@ -278,4 +291,24 @@ section.add-product {
   width: 100vw;
   height: 100vh;
   background-color: var(--bs-backdrop-bg);
+}
+.add-variation {
+  color: #0f3cd9;
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: -0.2px;
+  cursor: pointer;
+}
+.key-value {
+  margin-right: 1rem;
+}
+.add-cat-btn {
+  margin-top: 2rem;
+  padding: 0.5rem 2rem;
+}
+.modal {
+  text-align: center;
 }

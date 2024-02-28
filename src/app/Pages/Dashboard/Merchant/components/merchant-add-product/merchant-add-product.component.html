@@ -178,19 +178,25 @@
               </p>
             </div>
           </div>
-          <div class="media-sizes">
+          <div
+            class="variation-block d-flex justify-content justify-content-between align-items-center"
+          >
+            <h5 class="variation-header">Variations</h5>
+            <p
+              class="add-variation"
+              data-bs-toggle="modal"
+              data-bs-target="#addSize"
+            >
+              <img src="assets\icons\product-plus-sign.svg" alt="" /> Add
+              variation
+            </p>
+          </div>
+          <div class="media-sizes" *ngFor="let variation of variationArray">
             <div class="head d-flex align-items-center justify-content-between">
-              <h4 class="size-header product-header">Size</h4>
-              <p
-                class="add-size"
-                data-bs-toggle="modal"
-                data-bs-target="#addSize"
-              >
-                <img src="assets\icons\product-plus-sign.svg" alt="" /> Add Size
-              </p>
+              <h4 class="size-header product-header">{{ variation.key }}</h4>
             </div>
-            <span class="media-size" *ngFor="let size of sizeArray">{{
-              size
+            <span class="media-size" *ngFor="let value of variation.values">{{
+              value
             }}</span>
           </div>
           <div class="media-colours">
@@ -268,22 +274,35 @@
       <div class="modal-body upload-modal" style="margin: 43px">
         <div class="input-group mb-3">
           <div action="" class="">
-            <h6 class="model head">Add Size</h6>
+            <h6 class="model head">Add Variation</h6>
             <div
               class="form-group d-flex align-items-center justify-content-between"
             >
-              <input
-                type="text"
-                name=""
-                id=""
-                class="form-control"
-                [(ngModel)]="inputSize"
-              />
-              <button
-                class="btn btn-primary"
-                style="margin-left: 1rem"
-                (click)="addSize()"
-              >
+              <div class="form-group key-value">
+                <label for="type">Type: </label>
+                <input
+                  type="text"
+                  name="type"
+                  placeholder="Ex: Size"
+                  id=""
+                  class="form-control"
+                  [(ngModel)]="variationKey"
+                />
+              </div>
+              <div class="form-group key-value">
+                <label for="value">Value:</label>
+                <input
+                  type="text"
+                  name="value"
+                  placeholder="Ex: XL"
+                  id=""
+                  class="form-control"
+                  [(ngModel)]="variationValue"
+                />
+              </div>
+            </div>
+            <div class="variation-btn">
+              <button class="btn btn-primary add-cat-btn" (click)="addSize()">
                 Add
               </button>
             </div>
@@ -314,8 +333,10 @@
                 type="color"
                 name=""
                 id=""
+                placeholder="Click"
                 class="form-control"
                 [(ngModel)]="inputColor"
+                style="width: 6rem"
               />
               <button
                 class="btn btn-primary"

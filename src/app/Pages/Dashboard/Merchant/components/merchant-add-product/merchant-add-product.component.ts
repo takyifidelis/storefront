@@ -32,10 +32,14 @@ export class MerchantAddProductComponent {
   productForm: FormGroup;
   inputText: string = '';
   inputSize: string = '';
+
   inputColor: string = '';
   textArray: string[] = [];
   sizeArray: string[] = [];
   colorArray: string[] = [];
+  variationKey: string = '';
+  variationValue: string = '';
+  variationArray: { key: string; values: string[] }[] = [];
   selectedStatus: string = 'Active';
   displayedStatus: string = 'Active';
   error: string | any = null;
@@ -129,13 +133,28 @@ export class MerchantAddProductComponent {
     this.inputText = '';
   }
   addSize() {
-    this.sizeArray.push(this.inputSize);
-    this.inputSize = '';
+    console.log('Hello World');
+    if (this.variationKey && this.variationValue) {
+      let existingVariation = this.variationArray.find(
+        (variation) => variation.key === this.variationKey
+      );
+      if (existingVariation) {
+        existingVariation.values.push(this.variationValue);
+      } else {
+        this.variationArray.push({
+          key: this.variationKey,
+          values: [this.variationValue],
+        });
+      }
+      this.variationKey = '';
+      this.variationValue = '';
+    }
   }
   addColor() {
     this.colorArray.push(this.inputColor);
     this.inputColor = '';
   }
+  addVariation() {}
 
   onStatusChange(event: Event) {
     const target = event.target as HTMLSelectElement;

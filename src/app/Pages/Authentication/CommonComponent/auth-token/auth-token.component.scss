@@ -157,3 +157,7 @@
     }
   }
 }
+
+input.ng-dirty.ng-touched.ng-valid {
+  border: 1px solid #62ea5f !important;
+}
