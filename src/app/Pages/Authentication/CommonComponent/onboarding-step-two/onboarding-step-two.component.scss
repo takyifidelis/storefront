@@ -59,6 +59,10 @@
 color: #0085FF;
 cursor: pointer;
 }
+.website-type:active{
+    color: #0085FF;
+    cursor:not-allowed;
+    }
 .website-type-container{
     display: flex;
     flex-direction: column;

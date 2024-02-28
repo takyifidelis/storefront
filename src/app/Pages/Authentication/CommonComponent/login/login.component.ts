@@ -37,6 +37,7 @@ import { AuthService } from '../../Auth/auth.service';
 import { faEye } from '@fortawesome/free-regular-svg-icons';
 import { APIService } from '../../../../Services/api.service';
 import { DataService } from '../../../../Services/data.service';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-login',
@@ -49,6 +50,7 @@ import { DataService } from '../../../../Services/data.service';
     SocialLoginModule,
     FormsModule,
     ReactiveFormsModule,
+    MatProgressSpinnerModule
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
@@ -82,6 +84,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.dataService.isLoading = false;
     this.authService.authState.subscribe((user) => {
       console.log(user);
       this.user = user;
@@ -106,9 +109,11 @@ export class LoginComponent implements OnInit {
     this.loginService.login(email, password).subscribe(
       (resData) => {
         console.log(resData);
-        if (resData.data?.type == 'Business') {
+        if (resData.type == 'Business') {
+          localStorage.setItem("businessId", resData.data.business)
           this.router.navigate(['merchant']);
-        } else if (resData.data?.type == 'Customer') {
+        } else if (resData.type == 'Customer') {
+          localStorage.setItem("customerId", JSON.stringify(resData.data.customer))
           this.router.navigate(['customer']);
         }
       },
@@ -128,12 +133,29 @@ export class LoginComponent implements OnInit {
 
 
     newLogin(ata:any) {
+      
+    this.dataService.isLoading = true
       this.apiService.authenticateUser(this.dataService.loginCredentials)
       .subscribe((resData:any)=>{
         console.log(resData.data);
-        this.dataService.businessId=resData.data?.business
-        this.router.navigate(['/merchant']);
-      })
+        if (resData.data.type === "Business") {
+          // this.dataService.businessId=resData.data?.business
+          localStorage.setItem("businessId", resData.data.business)
+          this.dataService.isLoading =false
+          this.router.navigate(['merchant']);
+        } else if (resData.data.type === "Customer") {
+          localStorage.setItem("customerId", resData.data.customer)
+          this.dataService.isLoading =false
+          this.router.navigate(['customer']);
+        }else{
+          console.log(resData)
+          this.dataService.isLoading =false
+        }
+      }),(errorMessage: any) => {
+        this.dataService.isLoading =false
+        console.log(errorMessage);
+        this.error = errorMessage;
+      }
     }
 
 }

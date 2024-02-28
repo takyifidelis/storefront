@@ -4,18 +4,39 @@ import { UserCredentials } from '../interfaces/all-interfaces';
 @Injectable({
   providedIn: 'root'
 })
+// merchantDashboardNoProjects: boolean = false;
+// loginCredentials:UserCredentials = {email:'', password:''}
+// doesNotExist = {exist: false, term:''}
+// isMobileBool: boolean = false;
+// isEditable: boolean = false;
+// customerId: string = localStorage.getItem("customerId") || '';
+// orderId: string =''
+// storeId: string = ''
+// //   stores = JSON.parse(localStorage.getItem("stores")!)|| '' ;
+// productId: string = '';
+// merchantBusinessType1: string =localStorage.getItem("storeType") || '';
+// businessId: string = localStorage.getItem("businessId") || ''
+// merchantStoreName: string = localStorage.getItem("storeName") || ''
+// showInputLink: boolean = false;
+// isLoading: boolean = false
+
 export class DataService {
   merchantDashboardNoProjects: boolean = false;
   doesNotExist = {exist: false, term:''}
   isMobileBool: boolean = false;
+  isLoading = false;
   isEditable: boolean = false;
   customerId: string = '';
   orderId: string =''
   storeId: string = ''
+  merchantBusinessType1: string = ''
+  merchantStoreName: string  = ''
+  isInEditMode:boolean = false
   productId: string = '';
   loginCredentials:UserCredentials = {email:'', password:''}
   ecommerceWebsite: string= ''
   businessId: string = ''
+  typesOfStore = ["online", "offline"]
   showInputLink: boolean = false;
   inputLinkVisibility: { [key: number]: boolean } = {
     1: false,
@@ -35,7 +56,8 @@ export class DataService {
   products:any = []
   productCategory:any = []
   
-  template ={
+template:any
+  template1 ={
     id: "template-1",
     screenshot: "/assets/images/Text.svg",
     text: "ShopNest",

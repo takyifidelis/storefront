@@ -32,13 +32,30 @@ export class APIService {
     })
   }
 
+  setBusinessType(businessId: string, data:{}): Observable<Response>{
+    return this.http.patch<Response>(`${environment.baseApiUrl}/business/set-business-type/${businessId}`,
+    data,{
+      withCredentials: true,
+    })
+  }
+  createStore(businessId: string, data:{}): Observable<Response>{
+    return this.http.post<Response>(`${environment.baseApiUrl}/business/create-new-store/${businessId}`,
+    data,{
+      withCredentials: true,
+    })
+  }
   getMerchantStores(businessId: string): Observable<Response>{
     return this.http.get<Response>(`${environment.baseApiUrl}/business/get-stores/${businessId}`,
     {
       withCredentials: true,
     })
   }
-
+  getPublishedTemp(storeId: string): Observable<Response>{
+    return this.http.get<Response>(`${environment.baseApiUrl}/store/get-temp/${storeId}`,
+    {
+      withCredentials: true,
+    })
+  }
   getStore(businessId: string): Observable<Response>{
     return this.http.get<Response>(`${environment.baseApiUrl}/store/get-all`,
     {

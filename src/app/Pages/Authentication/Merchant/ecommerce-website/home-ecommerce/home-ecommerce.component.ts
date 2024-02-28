@@ -86,20 +86,17 @@ constructor(private cdr: ChangeDetectorRef, public dataservice:DataService, priv
 }
 ngOnInit(){
   // this.apiService.getStore(this.dataservice.businessId).subscribe((storeResData:any) =>{
-  this.apiService.getStore("599719d7-d5e3-48db-955a-b56ad261dd89").subscribe((storeResData:any) =>{
-    console.log({storeId: storeResData});
-    // this.dataservice.storeId = storeResData.data[0].id
-    this.dataservice.storeId = "f9586428-62e3-4455-bb1d-61262a407d1a"
-    this.apiService.getStoreProducts(this.dataservice.storeId).subscribe((productResData:any)=>{
-      // this.dataservice.products = productResData.data
-      this.dataservice.products = productResData.data.products
-      for (const product of this.dataservice.products) {
+  // this.apiService.getStore(this.dataservice.storeId).subscribe((storeResData:any) =>{
+    // console.log({storeId: storeResData});
+    // this.apiService.getStoreProducts(this.dataservice.storeId).subscribe((productResData:any)=>{
+    //   this.dataservice.products = productResData.data.products
+    //   for (const product of this.dataservice.products) {
 
-        this.dataservice.productCategory.push({name: product.category, image:""})
-      }
-      this.dataservice.productCategory= this.removeDuplicates(this.dataservice.productCategory)
-      console.log(this.dataservice.productCategory)
-    })
-  })
+    //     this.dataservice.productCategory.push({name: product.category, image:""})
+    //   }
+    //   this.dataservice.productCategory= this.removeDuplicates(this.dataservice.productCategory)
+    //   console.log(this.dataservice.productCategory)
+    // })
+  // })
 }
 }

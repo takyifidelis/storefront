@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, HostListener } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, HostListener, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -30,7 +30,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
   templateUrl: './template-editor.component.html',
   styleUrl: './template-editor.component.scss'
 })
-export class TemplateEditorComponent  implements AfterViewInit{
+export class TemplateEditorComponent  implements AfterViewInit,OnInit{
   screenWidth:number = 800
   dropDownMenu: HTMLElement | null = null;
   isTemplateVisible: boolean = false;
@@ -168,27 +168,29 @@ export class TemplateEditorComponent  implements AfterViewInit{
   //   document.execCommand(`foreColor`,false, `${this.fontColor}`)
   // }
   saveTemplateDraft(template:any){
-    template = JSON.stringify(template);
+    // template = JSON.stringify(template);
+    // template = JSON.stringify(template);
+    // localStorage.setItem('template',  JSON.stringify(template));
+    // console.log(this.dataservice.template.navbarBackgroundColor) 
     // console.log(template);
-    this.apiService.saveTemplateDraft('22095521-d6e3-4ed1-a7de-e96e1f81bed3',{options:template}).subscribe((data:any)=>{
+    JSON.stringify(template)
+    this.apiService.saveTemplateDraft(localStorage.getItem('storeId')!,{options:JSON.stringify(template)}).subscribe((data:any)=>{
       console.log(data);
     })
   }
 
   publishTemplate(template:any){
-    template = JSON.stringify(template);
-    // console.log(template);
-    this.apiService.publishTemplate('22095521-d6e3-4ed1-a7de-e96e1f81bed3',{options:template}).subscribe((data:any)=>{
+    // template = JSON.stringify(template);
+    console.log(template);
+    this.apiService.publishTemplate(localStorage.getItem('storeId')!,{options:JSON.stringify(template)}).subscribe((data:any)=>{
+      this.apiService.getMerchantStores(localStorage.getItem('businessId')!).subscribe((templatesData:any) => {
+        console.log(templatesData.data)
+      })
       console.log(data);
     })
   }
   ngAfterViewInit() {
-    // document.querySelectorAll('button').forEach((btn)=>{
-    //   btn.addEventListener('click', ()=>{
-    //     // btn.dataset['element']
-    //     console.log(btn.dataset['element'])
-    //     document.execCommand(`${btn.dataset['element']}`,false, 'null')
-    //   })
-    // });
+  }
+  ngOnInit() {
   }
 }

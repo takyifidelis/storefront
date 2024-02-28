@@ -50,7 +50,11 @@ export class EcommerceWebsiteComponent {
   dropDownMenu: HTMLElement | null = null;
 
   @ViewChild('fileInput') fileInput!: ElementRef;
-  constructor(public dataservice: DataService) {}
+  constructor(public dataservice: DataService) {
+    if(dataservice.isInEditMode) {
+      dataservice.template = JSON.parse(localStorage.getItem('tempTemplate')!)
+    }
+  }
 
   toggleBtnFunction() {
     this.dropDownMenu = document.querySelector('#dropdownMenu');
