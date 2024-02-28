@@ -30,10 +30,18 @@ import { AuthService } from '../../../../Authentication/Auth/auth.service';
 export class MerchantAddProductComponent {
   images: string[] = []; // Assuming we don't need topImages and bottomImages arrays separately anymore
   productForm: FormGroup;
+  inputText: string = '';
+  inputSize: string = '';
+  inputColor: string = '';
+  textArray: string[] = [];
+  sizeArray: string[] = [];
+  colorArray: string[] = [];
+  selectedStatus: string = 'Active';
+  displayedStatus: string = 'Active';
   error: string | any = null;
   files: any;
   data = new FormData();
-  categories: string[] = ['Dresses', 'Tops', 'Sneakers', 'Accessories'];
+  categories: string[] = [];
   productDetails = {
     name: '',
     price: '',
@@ -115,5 +123,25 @@ export class MerchantAddProductComponent {
       isActive: 'true',
       category: '',
     };
+  }
+  addCategory() {
+    this.textArray.push(this.inputText);
+    this.inputText = '';
+  }
+  addSize() {
+    this.sizeArray.push(this.inputSize);
+    this.inputSize = '';
+  }
+  addColor() {
+    this.colorArray.push(this.inputColor);
+    this.inputColor = '';
+  }
+
+  onStatusChange(event: Event) {
+    const target = event.target as HTMLSelectElement;
+    this.selectedStatus = target.value;
+
+    this.displayedStatus =
+      this.selectedStatus === 'active' ? 'Active' : 'Not Active';
   }
 }

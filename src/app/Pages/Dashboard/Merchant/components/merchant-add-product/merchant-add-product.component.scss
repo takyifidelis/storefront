@@ -105,6 +105,7 @@ section.add-product {
         font-weight: 500;
         line-height: 24px;
         letter-spacing: -0.2px;
+        cursor: pointer;
       }
     }
     .add-media {
@@ -206,6 +207,7 @@ section.add-product {
           font-weight: 500;
           line-height: 24px;
           letter-spacing: -0.2px;
+          cursor: pointer;
         }
         .media-size {
           padding: 0.5rem 1rem;
@@ -228,7 +230,8 @@ section.add-product {
         }
         p.add-colour {
           color: #0f3cd9;
-
+          cursor: pointer;
+          margin-top: 1rem;
           font-family: Inter;
           font-size: 14px;
           font-style: normal;
@@ -237,10 +240,11 @@ section.add-product {
           letter-spacing: -0.2px;
         }
         span.media-colour {
-          padding: 0.5rem 1rem;
-          border-radius: 50%;
+          padding: 0.4rem 1rem;
+          // border-radius: 50%;
           border: 1px solid #afbaca;
           margin-right: 0.5rem;
+
           cursor: pointer;
         }
         .red {
@@ -261,4 +265,17 @@ section.add-product {
       }
     }
   }
+}
+
+::ng-deep .modal-backdrop {
+  --bs-backdrop-zindex: 0;
+  --bs-backdrop-bg: #000;
+  --bs-backdrop-opacity: 0.5;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: var(--bs-backdrop-zindex);
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--bs-backdrop-bg);
 }

@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../../../../Services/data.service';
 import { MerchantAddProductComponent } from '../merchant-add-product/merchant-add-product.component';
+import { MerchantProductsDashboadComponent } from '../merchant-products-dashboad/merchant-products-dashboad.component';
 
 @Component({
   selector: 'app-merchant-products',
   standalone: true,
-  imports: [MerchantAddProductComponent],
+  imports: [MerchantAddProductComponent, MerchantProductsDashboadComponent],
   templateUrl: './merchant-products.component.html',
   styleUrl: './merchant-products.component.scss',
 })

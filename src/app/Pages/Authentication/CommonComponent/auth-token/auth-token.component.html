@@ -82,7 +82,10 @@
             </div>
           </div>
           <div class="text">
-            <p>Didn’t get, <a href="#">Resend</a></p>
+            <p>
+              Didn’t get,
+              <a (click)="resendVerificationCode()">Resend</a>
+            </p>
           </div>
           <p>
             <span class="help-block" *ngIf="error">
