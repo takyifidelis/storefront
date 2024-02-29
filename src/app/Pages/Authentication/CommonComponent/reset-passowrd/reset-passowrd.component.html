@@ -66,6 +66,15 @@
                 </div>
               </div>
             </div>
+            <span
+              class="help-block"
+              *ngIf="
+                ResetPassword.get('password')?.touched &&
+                ResetPassword.get('password')?.pristine
+              "
+            >
+              *This field is required
+            </span>
             <div class="password-wrapper">
               <div class="password">
                 <label for="password">Confirmed Password</label>
@@ -101,9 +110,29 @@
                 </div>
               </div>
             </div>
+            <span
+              class="help-block"
+              *ngIf="
+                ResetPassword.hasError('passwordsNotMatching') &&
+                ResetPassword.get('confirmPassword')?.touched &&
+                ResetPassword.get('confirmPassword')?.dirty
+              "
+              >Password doesn't match</span
+            >
+            <span
+              class="help-block"
+              *ngIf="
+                ResetPassword.get('confirmPassword')?.touched &&
+                ResetPassword.get('confirmPassword')?.pristine
+              "
+            >
+              *This field is required
+            </span>
             <div class="checks">
               <div class="checks-wrapper-1">
-                <div class="length-checker">
+                <div
+                  class="length-checker d-flex align-item-center justify-content-center"
+                >
                   <div class="icon">
                     <svg
                       width="14"
