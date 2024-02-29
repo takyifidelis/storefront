@@ -16,6 +16,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSliderModule} from '@angular/material/slider';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 @Component({
@@ -25,7 +26,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     RouterModule,CommonModule,FormsModule,MatFormFieldModule,
     MatProgressBarModule, MatCardModule, MatButtonModule,
     MatSliderModule,MatCheckboxModule,
-    MatIconModule, MatSidenavModule,MatMenuModule, MatTooltipModule
+    MatIconModule, MatSidenavModule,MatMenuModule, MatTooltipModule,CommonModule ,
+    MatProgressSpinnerModule
   ],
   templateUrl: './template-editor.component.html',
   styleUrl: './template-editor.component.scss'
@@ -173,9 +175,19 @@ export class TemplateEditorComponent  implements AfterViewInit,OnInit{
     // localStorage.setItem('template',  JSON.stringify(template));
     // console.log(this.dataservice.template.navbarBackgroundColor) 
     // console.log(template);
+    this.dataservice.isLoading =true
     JSON.stringify(template)
     this.apiService.saveTemplateDraft(localStorage.getItem('storeId')!,{options:JSON.stringify(template)}).subscribe((data:any)=>{
       console.log(data);
+      if(data.data){
+        this.apiService.getMerchantStores(localStorage.getItem('businessId')!).subscribe((storeData:any) => {
+          localStorage.setItem('storeId',storeData.data[0].id)
+          localStorage.setItem('tempTemplate',storeData.data[0].template.temp.options)
+          localStorage.setItem('template',storeData.data[0].template.options)
+          this.dataservice.template = JSON.parse(localStorage.getItem('tempTemplate')!)
+          this.dataservice.isLoading =false
+        })
+      }
     })
   }
 
@@ -192,5 +204,6 @@ export class TemplateEditorComponent  implements AfterViewInit,OnInit{
   ngAfterViewInit() {
   }
   ngOnInit() {
+    this.dataservice.isInEditMode = true
   }
 }

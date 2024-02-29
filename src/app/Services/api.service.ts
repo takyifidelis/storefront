@@ -56,13 +56,19 @@ export class APIService {
       withCredentials: true,
     })
   }
-  getStore(businessId: string): Observable<Response>{
+  getStore(): Observable<Response>{
     return this.http.get<Response>(`${environment.baseApiUrl}/store/get-all`,
     {
       withCredentials: true,
     })
   }
 
+  getStoreCategories(storeId: string): Observable<Response>{
+    return this.http.get<Response>(`${environment.baseApiUrl}/store/get-categories/${storeId}`,
+    {
+      withCredentials: true,
+    })
+  }
 initializePayment(customerId:string, cart:any): Observable<Response> {
   return this.http.post<Response>(`${environment.baseApiUrl}/order/initialize/${customerId}`, cart, {
     withCredentials: true,
@@ -70,9 +76,23 @@ initializePayment(customerId:string, cart:any): Observable<Response> {
 }
 
 addShipping(customerId: string, user: any) {
-  return this.http.post(`${environment.baseApiUrl}/customer/add-shipping-address/${customerId}`, user)
+  return this.http.post(`${environment.baseApiUrl}/customer/add-shipping-address/${customerId}`, user,
+  {
+    withCredentials: true,
+  })
 }
-  // getStoreProducts(storeId: string): Observable<Response>{
+getAllShippingAddresses(customerId: string) {
+  return this.http.get(`${environment.baseApiUrl}/customer/get-shipping-addresses/${customerId}`,
+  {
+    withCredentials: true,
+  })
+} 
+onApprovePayment(orderId:string): Observable<Response> {
+  return this.http.post<Response>(`${environment.baseApiUrl}/order/approve-payment/${orderId}`, {
+    withCredentials: true,
+  })
+}
+// getStoreProducts(storeId: string): Observable<Response>{
   //   return this.http.get<Response>(`${environment.baseApiUrl}/store/get-store-products/${storeId}`,
   //   {
   //     withCredentials: true,
