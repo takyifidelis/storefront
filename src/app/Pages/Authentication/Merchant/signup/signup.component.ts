@@ -37,6 +37,7 @@ export class SignupMerchantComponent {
   eyeIcon2 = faEyeSlash;
   showConfirmedPassword: boolean | undefined;
   showPassword: boolean | undefined;
+  isLoading = false;
 
   signupForm: FormGroup;
   error: string | any = null;
@@ -71,17 +72,20 @@ export class SignupMerchantComponent {
     const confirmPassword = form.value.confirmPassword;
     const businessName = form.value.businessName;
     const type = 'Business';
+    this.isLoading = true;
 
     this.authService
       .signupMerchant(businessName, email, type, password, confirmPassword)
       .subscribe(
         (resData) => {
           console.log(resData);
+          this.isLoading = false;
           this.router.navigate(['Authentication'], {
             queryParams: { action: 'signup' },
           });
         },
         (errorMessage) => {
+          this.isLoading = false;
           console.log(errorMessage);
           this.error = errorMessage;
         }

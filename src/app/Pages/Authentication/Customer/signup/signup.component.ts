@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RouterModule, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../Auth/auth.service';
+import { ToastrService } from 'ngx-toastr';
 import {
   FormGroup,
   FormControl,
@@ -44,12 +45,17 @@ export class SignupCustomerComponent {
   showConfirmedPassword: boolean | undefined;
   eyeIcon = faEyeSlash;
   eyeIcon2 = faEyeSlash;
+  isLoading: boolean = false;
 
   // Email and Password Validation Below
   signupForm: FormGroup;
   error: string | any = null;
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private toastr: ToastrService
+  ) {
     this.signupForm = new FormGroup(
       {
         email: new FormControl('', [
@@ -80,7 +86,7 @@ export class SignupCustomerComponent {
     const firstName = form.value.firstName;
     const lastName = form.value.lastName;
     const type = 'Customer';
-
+    this.isLoading = true;
     this.authService
       .signupCustomer(
         firstName,
@@ -92,12 +98,16 @@ export class SignupCustomerComponent {
       )
       .subscribe(
         (resData) => {
+          this.toastr.info('Check your Email for token', 'Email Verification');
           console.log(resData);
+          this.isLoading = false;
           this.router.navigate(['Authentication']);
         },
         (errorMessage) => {
           console.log(errorMessage);
           this.error = errorMessage;
+          this.isLoading = false;
+          this.toastr.error(this.error, 'Failed');
         }
       );
     form.reset();
@@ -161,7 +171,5 @@ export class SignupCustomerComponent {
     this.eyeIcon2 = this.showConfirmedPassword ? faEye : faEyeSlash;
   }
 
-  onSignUp(): void{
-    
-  }
+  onSignUp(): void {}
 }
