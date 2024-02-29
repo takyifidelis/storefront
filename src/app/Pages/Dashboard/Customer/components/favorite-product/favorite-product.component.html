@@ -35,9 +35,9 @@
       >
         Name
       </th>
-      <td mat-cell *matCellDef="let row">
-        <div class="product-details">
-          <!-- <img *ngIf="row.images.length" [src]="row.images[0]!.url" alt="" /> -->
+      <td mat-cell class="table" *matCellDef="let row">
+        <div class="product-details" style="display: flex; gap: 20px">
+          <img [src]="row.images[0].url" style="width: 20%" />
           <div class="product-name">{{ row.name }}</div>
         </div>
       </td>

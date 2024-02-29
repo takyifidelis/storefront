@@ -23,7 +23,10 @@ export interface dummyUserInterface {
   checkbox: string;
   name: any;
   store: string;
-  categories: string;
+  category: string;
+  price: number;
+  images: any;
+  quantity: number;
 }
 
 @Component({
@@ -55,13 +58,8 @@ export class FavoriteProductComponent implements OnInit{
   products: any;
 
   // creatine a dummy user data source for the table
-  users = [
-    {
-        "checkbox": "1",
-        "name": "Asher A.",
-        "store": "44",
-        "categories": "peach"
-    }
+  users: dummyUserInterface[] = [
+    
 ]
   constructor(public dialog: MatDialog, private apiService: APIService) {
     this.dataSource = new MatTableDataSource(this.users);
@@ -74,17 +72,16 @@ export class FavoriteProductComponent implements OnInit{
 
      this.apiService.getSavedProducts().subscribe((res: any) => {
       this.products = res.data;
-      console.log(this.products[0].id);
     this.dataSource = new MatTableDataSource(this.products);
     });
   }
 
   moreVert(e:dummyUserInterface) {
-    // this.dialog.open(PurchaseDetailComponent, {
-    //   data: e,
-    //     width: '479px', 
-    //     position: {right:'50px', top: '10%'} 
-    // });
+    this.dialog.open(PurchaseDetailComponent, {
+      data: e,
+        width: '479px', 
+        position: {right:'50px', top: '10%'} 
+    });
     console.log(e);
   }
   
@@ -143,7 +140,7 @@ showSelection(e:any) {
 })
 export class PurchaseDetailComponent {
   constructor(@Inject(MAT_DIALOG_DATA) public data: dummyUserInterface) {
-    console.log(this.data);
+    // console.log(this.data);
     
   }
   

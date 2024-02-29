@@ -11,11 +11,13 @@ import { MatSortModule, MatSort } from '@angular/material/sort';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { dummyUserInterface } from '../favorite-product/favorite-product.component';
 import { APIService } from '../../../../../Services/api.service';
+import { HistoryModalComponent } from './history-modal/history-modal.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-history',
   standalone: true,
-  imports: [FormsModule,MatIconModule,MatButtonModule,MatCheckboxModule, MatFormFieldModule, MatInputModule, MatTableModule, MatSortModule, MatPaginatorModule],
+  imports: [FormsModule,MatIconModule,MatButtonModule,MatCheckboxModule, MatFormFieldModule, MatInputModule, MatTableModule, MatSortModule, MatPaginatorModule, HistoryModalComponent],
   templateUrl: './history.component.html',
   styleUrl: './history.component.scss'
 })
@@ -27,15 +29,10 @@ export class HistoryComponent implements OnInit{
   @ViewChild(MatSort) sort!: MatSort;
   cart: any;
   // creatine a dummy user data source for the table
-  users = [
-    {
-        "checkbox": "1",
-        "name": "Asher A.",
-        "store": "44",
-        "categories": "peach"
-    }
-]
-  constructor(private apiService: APIService) {
+  users: dummyUserInterface[] = [
+    
+  ]
+  constructor(private apiService: APIService, public dialog: MatDialog) {
     this.dataSource = new MatTableDataSource(this.users);
   }
 
@@ -45,28 +42,21 @@ export class HistoryComponent implements OnInit{
 
     this.apiService.getHistoryProducts().subscribe((response: any) => {
       this.cart = response.data;
-      console.log(this.cart);
     this.dataSource = new MatTableDataSource(this.cart);
 
     })
     
-    // console.log(this.cart);
     
   }
 
   moreVert(e:dummyUserInterface) {
-    console.log(e);
-    
+    this.dialog.open(HistoryModalComponent, {
+      data: e,
+        width: '479px', 
+        position: {right:'50px', top: '10%'} 
+    });
+
   }
-
-
-
-
-
-
-
-
-
 
   // the code below is all for the checkboxes in the table
   isAllSelected() {
@@ -76,13 +66,11 @@ export class HistoryComponent implements OnInit{
   }
 showSelection(e:any) {
   e.stopPropagation()
-  console.log(this.selection.selected);
 }
   /** Selects all rows if they are not all selected; otherwise clear selection. */
   toggleAllRows() {
     if (this.isAllSelected()) {
       this.selection.clear();
-      console.log(this.selection.selected);
       return;
     }
 
