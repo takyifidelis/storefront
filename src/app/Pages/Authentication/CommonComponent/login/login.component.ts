@@ -1,5 +1,5 @@
 declare var google: any;
-
+import { ToastrService } from 'ngx-toastr';
 import {
   GoogleSigninButtonModule,
   SocialAuthService,
@@ -63,6 +63,7 @@ export class LoginComponent implements OnInit {
   facebookIcon = faFacebook;
   eyeIcon = faEyeSlash;
   showPassword = false;
+  isLoading: boolean = false;
 
   @ViewChild('search') search!: ElementRef;
 
@@ -72,8 +73,8 @@ export class LoginComponent implements OnInit {
     private loginService: AuthService,
     private apiService: APIService,
     public dataService: DataService,
-
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) {
     this.loginForm = new FormGroup({
       email: new FormControl('', Validators.required),
@@ -105,6 +106,7 @@ export class LoginComponent implements OnInit {
     const password = form.value.password;
     this.loginService.login(email, password).subscribe(
       (resData) => {
+        this.toastr.success('Success', 'Login Account!');
         console.log(resData);
         if (resData.data?.type == 'Business') {
           this.router.navigate(['merchant']);
@@ -113,8 +115,10 @@ export class LoginComponent implements OnInit {
         }
       },
       (errorMessage) => {
+        this.toastr.error('Success', 'Login Account!');
         console.log(errorMessage);
         this.error = errorMessage;
+        this.toastr.error('Success', this.error);
       }
     );
     form.reset();
@@ -123,17 +127,32 @@ export class LoginComponent implements OnInit {
   onShowPassword() {
     this.showPassword = !this.showPassword;
 
-    this.eyeIcon = this.showPassword? faEye : faEyeSlash;
-    }
+    this.eyeIcon = this.showPassword ? faEye : faEyeSlash;
+  }
 
+  newLogin(ata: any) {
+    this.isLoading = true;
+    this.apiService
+      .authenticateUser(this.dataService.loginCredentials)
+      .subscribe(
+        (resData: any) => {
+          this.toastr.success('Login Successful', 'Success');
+          console.log(resData.data);
+          this.dataService.businessId = resData.data?.business;
+          this.router.navigate(['/merchant']);
+          this.isLoading = false;
+        },
+        (errorMessage) => {
+          console.log(errorMessage);
+          this.error = errorMessage;
+          this.toastr.error(this.error, 'Login Failed');
+          this.isLoading = false;
+        }
+      );
+    this.dataService.loginCredentials = { email: '', password: '' };
+  }
 
-    newLogin(ata:any) {
-      this.apiService.authenticateUser(this.dataService.loginCredentials)
-      .subscribe((resData:any)=>{
-        console.log(resData.data);
-        this.dataService.businessId=resData.data?.business
-        this.router.navigate(['/merchant']);
-      })
-    }
-
+  showSuccess() {
+    this.toastr.info('Hello world!', 'Toastr fun!');
+  }
 }

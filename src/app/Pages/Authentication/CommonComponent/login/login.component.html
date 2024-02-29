@@ -1,6 +1,7 @@
 <script src="https://accounts.google.com/gsi/client" async></script>
 <div class="overflow-x-hidden" style="height: 100vh !important">
   <!-- <div class="container-login"> -->
+
   <div class="row h-100">
     <div class="col-6">
       <div class="w-100 h-100 bg-image">
@@ -18,8 +19,9 @@
           class="login100-form"
           #loginUserForm="ngForm"
           [formGroup]="loginForm"
-          (ngSubmit)="newLogin(loginUserForm)">
+          (ngSubmit)="newLogin(loginUserForm)"
         >
+          >
           <div class="login-form">
             <div class="title">Storefront</div>
             <div class="welcome">
@@ -121,10 +123,17 @@
           </div>
 
           <div class="button">
-            <span class="help-block" *ngIf="error">{{ error }}</span>
+            <!-- <span class="help-block" *ngIf="error">{{ error }}</span> -->
 
             <button class="btn btn-primary" [disabled]="!loginUserForm.valid">
-              Continue
+              <span class="continue-btn" *ngIf="!isLoading">Continue</span>
+              <span class="loading" *ngIf="isLoading"
+                ><img
+                  src="assets\icons\loading-btn-spinner.svg"
+                  alt="Loading.."
+                />
+                Loading...</span
+              >
             </button>
           </div>
         </form>
