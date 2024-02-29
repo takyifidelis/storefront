@@ -25,6 +25,7 @@ import {
 import { OrderModalComponent } from '../order-modal/order-modal.component';
 import { dummyUserInterface } from '../../../../../interface/dummy-user.model';
 import { APIService } from '../../../../../Services/api.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-order',
@@ -72,6 +73,8 @@ export class OrderComponent implements OnInit {
   ];
 unsorted: any = [];
 sorted: any = [];
+  formattedDate!: string | null;
+   datepipe: DatePipe = new DatePipe('en-US');
 
   constructor(public dialog: MatDialog, public apiService: APIService) {
     this.dataSource = new MatTableDataSource(this.users);
@@ -82,13 +85,12 @@ sorted: any = [];
     
     this.apiService.getOrders().subscribe((res: any) =>{
       this.orders = res;
-      console.log(this.orders);
       this.unsorted = this.orders.data;
+      console.log(this.orders.data)
       this.dataSource = new MatTableDataSource(this.orders.data);
     })
-      // this.orders.data.forEach((order: any, index: number) => {
       
-      // });
+     
   }
 
   moreVert(e: dummyUserInterface) {
@@ -97,6 +99,7 @@ sorted: any = [];
       width: '479px',
       position: { right: '50px', top: '10%' },
     });
+    console.log(e);
   }
 
   isAllSelected() {

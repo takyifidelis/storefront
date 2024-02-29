@@ -1,5 +1,10 @@
-import { Component } from '@angular/core';
-import { MatDialogModule } from '@angular/material/dialog';
+import { Component, Inject, OnInit } from '@angular/core';
+import {
+  MAT_DIALOG_DATA,
+  MatDialogContent,
+  MatDialogModule,
+  MatDialogTitle,
+} from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
 import { MatTabsModule } from '@angular/material/tabs';
 import { StarRatingComponent } from '../../../../Dashboard/Customer/components/star-rating/star-rating.component';
@@ -11,6 +16,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { AuthService } from '../../../../Authentication/Auth/auth.service';
+import { dummyUserInterface } from '../favorite-product/favorite-product.component';
 
 @Component({
   selector: 'app-order-modal',
@@ -21,19 +27,32 @@ import { AuthService } from '../../../../Authentication/Auth/auth.service';
     MatTabsModule,
     StarRatingComponent,
     ReactiveFormsModule,
+    MatDialogTitle,
+    MatDialogContent,
+    CommonModule
   ],
   templateUrl: './order-modal.component.html',
   styleUrl: './order-modal.component.scss',
 })
-export class OrderModalComponent {
+export class OrderModalComponent implements OnInit {
   postReview: FormGroup;
   error: string | any = null;
+  sum = 0;
 
-  constructor(private authService: AuthService) {
+  constructor(
+    private authService: AuthService,
+    @Inject(MAT_DIALOG_DATA) public data: dummyUserInterface
+  ) {
     this.postReview = new FormGroup({
       remarks: new FormControl('', Validators.required),
       comment: new FormControl('', Validators.required),
     });
+  }
+  ngOnInit(): void {
+     
+    for (const itemPrice of this.data.items) {
+      this.sum += itemPrice.price;
+    }
   }
 
   onSubmit(form: FormGroupDirective) {

@@ -27,6 +27,8 @@ export interface dummyUserInterface {
   price: number;
   images: any;
   quantity: number;
+  items: any
+  orderShipping: any
 }
 
 @Component({
