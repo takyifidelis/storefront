@@ -88,7 +88,11 @@
               </span>
             </p> -->
           </div>
-          <button class="btn btn-primary" [disabled]="!authenticate.valid">
+          <button
+            type="submit"
+            class="btn btn-primary"
+            [disabled]="!authenticate.valid"
+          >
             <span class="continue-btn" *ngIf="!isLoading">Continue</span>
             <span class="loading" *ngIf="isLoading"
               ><img

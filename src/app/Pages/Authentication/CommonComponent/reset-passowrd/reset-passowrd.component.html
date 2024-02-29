@@ -60,7 +60,11 @@
                   />
                 </div>
                 <div>
-                  <button (click)="onShowPassword()" class="eye-icon">
+                  <button
+                    type="button"
+                    (click)="onShowPassword()"
+                    class="eye-icon"
+                  >
                     <fa-icon class="icon" [icon]="eyeIcon"></fa-icon>
                   </button>
                 </div>
@@ -104,7 +108,11 @@
                   />
                 </div>
                 <div>
-                  <button (click)="onShowConfirmedPassword()" class="eye-icon">
+                  <button
+                    type="button"
+                    (click)="onShowConfirmedPassword()"
+                    class="eye-icon"
+                  >
                     <fa-icon class="icon" [icon]="eyeIcon2"></fa-icon>
                   </button>
                 </div>
@@ -256,6 +264,7 @@
               <button
                 [disabled]="!ResetPasswordForm.valid"
                 class="btn btn-primary"
+                type="submit"
               >
                 <span class="continue-btn" *ngIf="!isLoading">Continue</span>
                 <span class="loading" *ngIf="isLoading"
