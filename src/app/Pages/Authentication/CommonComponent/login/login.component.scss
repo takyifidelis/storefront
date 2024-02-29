@@ -56,7 +56,8 @@
       text-align: center;
       letter-spacing: -0.1094rem;
       color: #1c222b;
-      margin: 0;
+      // margin: 0;
+      margin-bottom: 1rem;
     }
 
     .welcome-text {
@@ -170,6 +171,7 @@
   .forgotten-password {
     justify-content: end;
     display: flex;
+    margin-top: 1rem;
   }
 
   .button button {
@@ -199,7 +201,7 @@
     margin-top: 0.2rem;
   }
 
-  .social-icon img{
+  .social-icon img {
     width: 20px;
   }
 
@@ -215,4 +217,3 @@
     background: #fff;
   }
 }
-

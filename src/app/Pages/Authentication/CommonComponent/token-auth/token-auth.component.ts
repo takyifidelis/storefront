@@ -13,6 +13,7 @@ import {
 } from '@angular/forms';
 import { AuthService } from '../../Auth/auth.service';
 import { ToastrService } from 'ngx-toastr';
+import { APIService } from '../../../../Services/api.service';
 
 @Component({
   selector: 'app-token-auth',
@@ -27,7 +28,7 @@ export class TokenAuthComponent {
   isLoading: boolean = false;
 
   constructor(
-    private authService: AuthService,
+    private authService: APIService,
     private router: Router,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
@@ -61,13 +62,13 @@ export class TokenAuthComponent {
     this.isLoading = true;
 
     this.authService.verifyPassword(authCode).subscribe(
-      (resData) => {
+      (resData: Response) => {
         console.log(resData);
         this.isLoading = false;
         this.toastr.info('Email is verified', 'Rest Password');
         this.router.navigate(['reset-password']);
       },
-      (errorMessage) => {
+      (errorMessage: Response) => {
         console.log(errorMessage);
         this.isLoading = false;
         this.error = errorMessage;
@@ -76,5 +77,16 @@ export class TokenAuthComponent {
     );
     //
     form.reset();
+  }
+  resendVerificationCode() {
+    this.authService.resendCode().subscribe((resData) => {
+      console.log(resData);
+      this.toastr.info('Check Email for verification code', 'Token Sent');
+      this.router.navigate(['Email-notification']);
+      // Set a timeout to navigate to another component after 3 seconds
+      setTimeout(() => {
+        this.router.navigate(['Password-Authentication']);
+      }, 3000);
+    });
   }
 }

@@ -43,6 +43,21 @@ export class APIService {
       )
       .pipe(catchError(this.handleError));
   }
+
+  // Password Verification
+  verifyPassword(code: string) {
+    return this.http
+      .post<Response>(
+        'https://storefront-backend-jan-dev-api.vercel.app/api/account/password/resetCode/verify',
+        {
+          code,
+        },
+        {
+          withCredentials: true,
+        }
+      )
+      .pipe(catchError(this.handleError));
+  }
   authenticateUser(user: UserCredentials): Observable<Response> {
     return this.http
       .post<Response>(`${environment.baseApiUrl}/account/login/local`, user, {
@@ -138,7 +153,15 @@ export class APIService {
       )
       .pipe(catchError(this.handleError));
   }
-
+  //Resend Verification Code
+  resendCode() {
+    return this.http
+      .get(
+        'https://storefront-backend-jan-dev-api.vercel.app/api/account/resend/code',
+        { withCredentials: true }
+      )
+      .pipe(catchError(this.handleError));
+  }
   // Error Handling
   private handleError(errorRes: HttpErrorResponse) {
     console.error('Error Response:', errorRes);
