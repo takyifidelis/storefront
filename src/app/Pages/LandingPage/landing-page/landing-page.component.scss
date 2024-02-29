@@ -354,12 +354,19 @@ footer {
   }
   .second-row {
     .middle-block {
-      width: 45rem;
+      position: relative;
       background-color: #fff;
       border-radius: 20px;
+      width: 47rem;
+      height: 20rem;
+      text-align: center;
       box-shadow: 0px 18px 52.854px 0px rgba(215, 228, 249, 0.5);
 
       .block-paragraph {
+        position: absolute;
+        width: 51rem;
+
+        margin-left: -2rem;
         color: #1c222b;
         font-size: 18px;
         font-weight: 400;
@@ -371,12 +378,13 @@ footer {
         box-shadow: 0px 18px 52.854px 0px rgba(215, 228, 249, 0.5);
         padding-top: 5rem;
         padding-bottom: 7rem;
-        padding-left: 3rem;
+        padding-left: 5rem;
         background-color: #fff;
         border-radius: 20px;
         background-image: url("/assets/images/middle-block-bg.svg");
         background-repeat: no-repeat;
         background-position: center;
+        padding-right: 7rem;
       }
     }
   }
