@@ -115,10 +115,9 @@ export class LoginComponent implements OnInit {
         }
       },
       (errorMessage) => {
-        this.toastr.error('Success', 'Login Account!');
         console.log(errorMessage);
         this.error = errorMessage;
-        this.toastr.error('Success', this.error);
+        this.toastr.error('Failed', this.error);
       }
     );
     form.reset();

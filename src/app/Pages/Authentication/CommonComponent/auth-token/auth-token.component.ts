@@ -65,7 +65,7 @@ export class AuthTokenComponent {
       (resData: Response) => {
         console.log(resData);
         this.isLoading = false;
-        this.toastr.success('Proceed to Login', 'Success');
+        this.toastr.success('Proceed to Login', 'Verification Successful');
         this.router.navigate(['authSuccess']);
       },
       (errorMessage: Response) => {

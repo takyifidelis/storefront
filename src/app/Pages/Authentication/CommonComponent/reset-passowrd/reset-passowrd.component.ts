@@ -1,5 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+
 import {
   AbstractControl,
   FormControl,
@@ -14,7 +16,7 @@ import { Router, RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faEyeSlash } from '@fortawesome/free-regular-svg-icons';
 import { faCircle, faEye } from '@fortawesome/free-solid-svg-icons';
-import { AuthService } from '../../Auth/auth.service';
+import { APIService } from '../../../../Services/api.service';
 
 @Component({
   selector: 'app-reset-passowrd',
@@ -36,11 +38,16 @@ export class ResetPassowrdComponent {
   eyeIcon2 = faEyeSlash;
   showConfirmedPassword: boolean | undefined;
   showPassword: boolean | undefined;
+  isLoading: boolean = false;
 
   ResetPassword: FormGroup;
   error: string | any = null;
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(
+    private authService: APIService,
+    private router: Router,
+    private toastr: ToastrService
+  ) {
     this.ResetPassword = new FormGroup(
       {
         password: new FormControl('', [
@@ -60,15 +67,19 @@ export class ResetPassowrdComponent {
 
     const password = form.value.password;
     const confirmPassword = form.value.confirmPassword;
-
+    this.isLoading = true;
     this.authService.newPasswordReset(password, confirmPassword).subscribe(
       (resData) => {
         console.log(resData);
+        this.toastr.success('Proceed to Login', 'Password Reset Successful!');
+        this.isLoading = false;
         this.router.navigate(['login']);
       },
       (errorMessage) => {
         console.log(errorMessage);
+        this.isLoading = false;
         this.error = errorMessage;
+        this.toastr.error(this.error, 'Error');
       }
     );
     form.reset();

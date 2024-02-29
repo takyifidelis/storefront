@@ -65,7 +65,7 @@ export class TokenAuthComponent {
       (resData: Response) => {
         console.log(resData);
         this.isLoading = false;
-        this.toastr.info('Email is verified', 'Rest Password');
+        this.toastr.info('Email is verified', 'Reset Password');
         this.router.navigate(['reset-password']);
       },
       (errorMessage: Response) => {

@@ -257,7 +257,14 @@
                 [disabled]="!ResetPasswordForm.valid"
                 class="btn btn-primary"
               >
-                Continue
+                <span class="continue-btn" *ngIf="!isLoading">Continue</span>
+                <span class="loading" *ngIf="isLoading"
+                  ><img
+                    src="assets\icons\loading-btn-spinner.svg"
+                    alt="Loading.."
+                  />
+                  Loading...</span
+                >
               </button>
             </div>
           </div>
