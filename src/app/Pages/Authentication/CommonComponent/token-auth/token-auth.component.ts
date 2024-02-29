@@ -12,6 +12,7 @@ import {
   FormBuilder,
 } from '@angular/forms';
 import { AuthService } from '../../Auth/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-token-auth',
@@ -23,12 +24,14 @@ import { AuthService } from '../../Auth/auth.service';
 export class TokenAuthComponent {
   PasswordAuthCode: FormGroup;
   error: string | any = null;
+  isLoading: boolean = false;
 
   constructor(
     private authService: AuthService,
     private router: Router,
     private route: ActivatedRoute,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private toastr: ToastrService
   ) {
     this.PasswordAuthCode = new FormGroup({
       keyOne: new FormControl('', Validators.required),
@@ -55,15 +58,20 @@ export class TokenAuthComponent {
       formValue.keySix,
     ].join('');
     console.log({ code: authCode });
+    this.isLoading = true;
 
     this.authService.verifyPassword(authCode).subscribe(
       (resData) => {
         console.log(resData);
+        this.isLoading = false;
+        this.toastr.info('Email is verified', 'Rest Password');
         this.router.navigate(['reset-password']);
       },
       (errorMessage) => {
         console.log(errorMessage);
+        this.isLoading = false;
         this.error = errorMessage;
+        this.toastr.error(this.error, 'Error');
       }
     );
     //

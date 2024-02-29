@@ -29,6 +29,20 @@ export class APIService {
       })
       .pipe(catchError(this.handleError));
   }
+  // Verify account
+  verifyAccount(code: string) {
+    return this.http
+      .post<Response>(
+        'https://storefront-backend-jan-dev-api.vercel.app/api/account/verify',
+        {
+          code,
+        },
+        {
+          withCredentials: true,
+        }
+      )
+      .pipe(catchError(this.handleError));
+  }
   authenticateUser(user: UserCredentials): Observable<Response> {
     return this.http
       .post<Response>(`${environment.baseApiUrl}/account/login/local`, user, {
@@ -136,6 +150,9 @@ export class APIService {
         break;
       case 'ACCOUNT_NOT_FOUND':
         errorMessage = 'Incorrect email';
+        break;
+      case 'EMAIL_VERIFICATION_FAILED':
+        errorMessage = 'Email Verification Failed';
         break;
     }
     return throwError(errorMessage);
