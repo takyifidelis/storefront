@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RouterModule, Router } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faFacebook, faGoogle } from '@fortawesome/free-brands-svg-icons';
+import { ToastrService } from 'ngx-toastr';
 import {
   faEnvelope,
   faEyeSlash,
@@ -42,7 +43,11 @@ export class SignupMerchantComponent {
   signupForm: FormGroup;
   error: string | any = null;
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private toastr: ToastrService
+  ) {
     this.signupForm = new FormGroup(
       {
         email: new FormControl('', [
@@ -79,6 +84,7 @@ export class SignupMerchantComponent {
       .subscribe(
         (resData) => {
           console.log(resData);
+          this.toastr.info('Check your Email for token', 'Email Verification');
           this.isLoading = false;
           this.router.navigate(['Authentication'], {
             queryParams: { action: 'signup' },
@@ -88,6 +94,7 @@ export class SignupMerchantComponent {
           this.isLoading = false;
           console.log(errorMessage);
           this.error = errorMessage;
+          this.toastr.error(this.error, 'Failed');
         }
       );
     form.reset();
