@@ -82,11 +82,11 @@
           </div>
           <div class="text">
             <p>Didn’t get, <a href="#">Resend</a></p>
-            <p>
+            <!-- <p>
               <span class="help-block" *ngIf="error">
                 {{ error }}
               </span>
-            </p>
+            </p> -->
           </div>
           <button class="btn btn-primary" [disabled]="!authenticate.valid">
             <span class="continue-btn" *ngIf="!isLoading">Continue</span>

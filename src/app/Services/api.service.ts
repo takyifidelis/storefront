@@ -124,6 +124,20 @@ export class APIService {
       }
     );
   }
+  // Password Reset
+  passwordReset(email: string) {
+    return this.http
+      .post<Response>(
+        'https://storefront-backend-jan-dev-api.vercel.app/api/account/request/password/reset',
+        {
+          email,
+        },
+        {
+          withCredentials: true,
+        }
+      )
+      .pipe(catchError(this.handleError));
+  }
 
   // Error Handling
   private handleError(errorRes: HttpErrorResponse) {
@@ -149,7 +163,7 @@ export class APIService {
         errorMessage = 'Incorrect token';
         break;
       case 'ACCOUNT_NOT_FOUND':
-        errorMessage = 'Incorrect email';
+        errorMessage = 'Incorrect email address';
         break;
       case 'EMAIL_VERIFICATION_FAILED':
         errorMessage = 'Email Verification Failed';
