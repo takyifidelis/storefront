@@ -13,6 +13,7 @@ import { CommonModule } from '@angular/common';
 import { DataService } from '../../../../../Services/data.service';
 import { APIService } from '../../../../../Services/api.service';
 import { StarRatingComponent } from '../../../../Dashboard/Customer/components/star-rating/star-rating.component';
+import { ProductObject } from '../../../../../interfaces/all-interfaces';
 
 @Component({
   selector: 'app-review',
@@ -83,13 +84,24 @@ constructor(private route: ActivatedRoute,private dataService:DataService,public
     cart.push(this.productItem);
     let addTobuyJson = JSON.stringify(cart);
     localStorage.setItem('cart', addTobuyJson);
+  
   }
 
   onLikedProducts(){
-    let like = JSON.parse(localStorage.getItem('cart')|| '')
+    let like = JSON.parse(localStorage.getItem('favouriteProducts')|| '')
     like.push(this.productItem);
     let likedProductsJson = JSON.stringify(like);
     localStorage.setItem('favouriteProducts', likedProductsJson);
+    
+    let productObj: ProductObject = {
+      products: []
+    }
+    for (const likeditem of like){
+      productObj.products.push(likeditem.id)
+    }
+    this.apiService.addToFavourite(productObj).subscribe((res)=>{
+        console.log(res);
+      })
   }
 
   ngOnInit(){
@@ -101,10 +113,27 @@ constructor(private route: ActivatedRoute,private dataService:DataService,public
      this.initialPrice = this.productItem.price;
 
      let values = this.productItem.variations[0].values;
-     if(!values) {
-      return
-     }else {
+     
       this.sizes = values[0].split(',');
-     }
+     
+    console.log(this.productItem);
+    let obj: any = {
+      products: []
     }
+    // let arrayJson = JSON.stringify(array)
+    // let cartJson = localStorage.getItem('favouriteProducts');
+    // let cart = JSON.parse(cartJson!);
+    // console.log(cart);
+    // if(cart){
+    //   for (const item of cart){
+    //     obj.products.push(item.id)
+    //   }
+    // }
+    // console.log(obj)
+   
+    // this.apiService.addToFavourite(obj).subscribe((res)=>{
+    //   console.log(res)
+    // })
+    }
+    
   }

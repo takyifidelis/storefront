@@ -93,10 +93,7 @@ sorted: any = [];
 
   moreVert(e: dummyUserInterface) {
     this.dialog.open(OrderModalComponent, {
-      data: {
-        itemName: 'hat',
-        itemPrice: 'hat',
-      },
+      data: e,
       width: '479px',
       position: { right: '50px', top: '10%' },
     });

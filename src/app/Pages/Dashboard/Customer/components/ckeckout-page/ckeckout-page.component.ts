@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NgxPayPalModule } from 'ngx-paypal';
 import { IPayPalConfig } from 'ngx-paypal';
 import { APIService } from '../../../../../Services/api.service';
@@ -35,7 +35,8 @@ export class CkeckoutPageComponent implements OnInit {
   user!: FormGroup;
   shippingId: string = '';
   payload: any;
- 
+  PAYPAL_CLIENT_ID: string =   `${environment.paypalClientID2}`;
+  @ViewChild('paypalRef', { static: true }) private paypalRef: ElementRef | undefined;
 
   constructor(
     public apiService: APIService,
@@ -64,6 +65,7 @@ export class CkeckoutPageComponent implements OnInit {
       countryCode: new FormControl(null, Validators.required),
       city: new FormControl(null, Validators.required),
       apartmentNo: new FormControl(null, Validators.required),
+      
 
     });
     this.payload = {
@@ -72,8 +74,9 @@ export class CkeckoutPageComponent implements OnInit {
       store: 'f9586428-62e3-4455-bb1d-61262a407d1a',
     };
 
-    console.log(this.getdata());
-    this.createOrder()
+this.createOrder();
+
+    // console.log(this.getdata());
 
   }
   createOrder() {
@@ -85,6 +88,8 @@ export class CkeckoutPageComponent implements OnInit {
   }
 
   async onApprove(data: { orderID: string }) {
+    console.log(data);
+    alert("paused");
     const response = await fetch(
       `${environment.baseApiUrl}/order/approve-payment/` + data.orderID,
       {
@@ -97,6 +102,7 @@ export class CkeckoutPageComponent implements OnInit {
         }),
       }
     );
+    console.log(response);
     const orderData = await response.json();
     if (orderData.type === 'success') {
       this.snackBar.open(
@@ -109,30 +115,70 @@ export class CkeckoutPageComponent implements OnInit {
     this.router.navigate(['/customer/orders']);
   }
 
+  // private initConfig(): void {
+  //   this.payPalConfig = {
+  //     clientId: environment.paypalClientID2,
+  //     createOrderOnServer: this.createOrder()!,
+  //     onApprove: (data: any, actions: any) => {
+  //        this.onApprove(data);
+  //     },
+  //     onClientAuthorization: (data: any) => {
+  //       console.log(
+  //         'onClientAuthorization - you should probably inform your server about completed transaction at this point',
+  //         data
+  //       );
+  //     },
+  //     onCancel: (data, actions) => {
+  //       console.log('OnCancel', data, actions);
+  //     },
+  //     onError: (err) => {
+  //       console.log('OnError', err);
+  //     },
+  //     onClick: (data, actions) => {
+  //       console.log('onClick', data, actions);
+  //     },
+  //   };
+  // }
+
   private initConfig(): void {
+    
     this.payPalConfig = {
-      clientId: environment.paypalClientID2,
-      createOrderOnServer: this.createOrder()!,
-      onApprove: (data: any, actions: any) => {
-         this.onApprove(data);
-      },
-      onClientAuthorization: (data: any) => {
-        console.log(
-          'onClientAuthorization - you should probably inform your server about completed transaction at this point',
-          data
-        );
-      },
-      onCancel: (data, actions) => {
-        console.log('OnCancel', data, actions);
-      },
-      onError: (err) => {
-        console.log('OnError', err);
-      },
-      onClick: (data, actions) => {
-        console.log('onClick', data, actions);
-      },
+        clientId: `${environment.paypalClientID2}`,
+        // for creating orders (transactions) on server see
+        // https://developer.paypal.com/docs/checkout/reference/server-integration/set-up-transaction/
+        createOrderOnServer: (data) => fetch(`${environment.baseApiUrl}order/initialize/f739a921-7267-4e02-8222-ceb2b4c352cf`,{
+          method: "POST",
+          headers: {
+                  "Content-Type": "application/json",
+                },
+    body: JSON.stringify(this.payload),
+
+        }
+        
+        ).then((res) => res.json())
+            .then((order) => order.orderID),
+        onApprove: (data, actions) => {
+            console.log('onApprove - transaction was approved, but not authorized', data, actions);
+            actions.order.get().then((details: any) => {
+                console.log('onApprove - you can get full order details inside onApprove: ', details);
+            });
+
+        },
+        onClientAuthorization: (data) => {
+            console.log('onClientAuthorization - you should probably inform your server about completed transaction at this point', data);
+        },
+        onCancel: (data, actions) => {
+            console.log('OnCancel', data, actions);
+
+        },
+        onError: err => {
+            console.log('OnError', err);
+        },
+        onClick: (data, actions) => {
+            console.log('onClick', data, actions);
+        },
     };
-  }
+}
 
 
 
@@ -151,5 +197,59 @@ export class CkeckoutPageComponent implements OnInit {
       });
   }
 }
+
+
+
+// function createOrder() {
+//   const payload = cart && {
+//     items: cart.items.map((item) => ({
+//       product: item.id,
+//       quantity: item.quantity,
+//       variations: item.variations,
+//     })),
+//     shipping: cart.shipping,
+//     store: activeSite?.id,
+//     destination: "BO",
+//   };
+//   return fetch(`${apiBaseUrl}/api/order/initialize/${customerData?.id}`, {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify(payload),
+//   })
+//     .then(async (response) => {
+//       alert("Paused");
+//       const res = await response.json();
+//       res.type === "error"
+//         ? toast.error(res.error[0].reason)
+//         : toast.success(res.message);
+//       return res.data.orderId;
+//     })
+//     .then((order) => {
+//       return order;
+//     });
+// }
+
+// function onApprove(data: { orderID: string }) {
+//   return fetch(`${apiBaseUrl}/api/order/approve-payment/` + data.orderID, {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify({
+//       orderID: data.orderID,
+//     }),
+//   })
+//     .then((response) => response.json())
+//     .then((orderData) => {
+//       orderData.type === "success" &&
+//         toast.success(
+//           `Transaction completed for order ${orderData.data.orderId}`
+//         );
+//       dispatch(clearCart());
+//       navigate(`/customer/orders`);
+//     });
+// }
 
 // function

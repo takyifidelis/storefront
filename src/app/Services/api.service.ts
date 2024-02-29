@@ -102,6 +102,26 @@ addShipping(customerId: string, user: any) {
       withCredentials: true
     })
   }
+
+  addToFavourite(products: any): Observable<Response>{
+    return this.http.post<Response>(`${environment.baseApiUrl}/customer/add-to-views/f739a921-7267-4e02-8222-ceb2b4c352cf`, products, {
+      withCredentials: true,
+    })
+  }
+
+  getSavedProducts(): Observable<Response>{
+    return this.http.get<Response>(`${environment.baseApiUrl}/customer/get-saved-products/f739a921-7267-4e02-8222-ceb2b4c352cf/?likedOnly=true`, {
+      withCredentials: true
+    })
+  }
+
+  getHistoryProducts(): Observable<Response>{
+    return this.http.get<Response>(`${environment.baseApiUrl}/customer/get-saved-products/f739a921-7267-4e02-8222-ceb2b4c352cf`, {
+      withCredentials: true
+    })
+  }
+
+
 }
 
 

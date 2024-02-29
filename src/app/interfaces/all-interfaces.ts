@@ -11,3 +11,7 @@ export interface Response {
         [key: string]: any;
       }
 }
+
+export interface ProductObject {
+    products: string[];
+}

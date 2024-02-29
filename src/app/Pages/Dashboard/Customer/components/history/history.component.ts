@@ -1,5 +1,5 @@
 import { SelectionModel } from '@angular/cdk/collections';
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -10,6 +10,7 @@ import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
 import { MatSortModule, MatSort } from '@angular/material/sort';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { dummyUserInterface } from '../favorite-product/favorite-product.component';
+import { APIService } from '../../../../../Services/api.service';
 
 @Component({
   selector: 'app-history',
@@ -18,13 +19,13 @@ import { dummyUserInterface } from '../favorite-product/favorite-product.compone
   templateUrl: './history.component.html',
   styleUrl: './history.component.scss'
 })
-export class HistoryComponent {
-  displayedColumns: string[] = ['checkbox', 'name', 'store', 'categories','bubble'];
+export class HistoryComponent implements OnInit{
+  displayedColumns: string[] = ['checkbox', 'name', 'store', 'categories','price','bubble'];
   dataSource: MatTableDataSource<dummyUserInterface>;
   selection = new SelectionModel<dummyUserInterface>(true, []);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-
+  cart: any;
   // creatine a dummy user data source for the table
   users = [
     {
@@ -32,125 +33,27 @@ export class HistoryComponent {
         "name": "Asher A.",
         "store": "44",
         "categories": "peach"
-    },
-    {
-        "checkbox": "2",
-        "name": "Charlotte J.",
-        "store": "29",
-        "categories": "pineapple"
-    },
-    {
-        "checkbox": "3",
-        "name": "Isla O.",
-        "store": "44",
-        "categories": "lychee"
-    },
-    {
-        "checkbox": "4",
-        "name": "Violet T.",
-        "store": "45",
-        "categories": "lime"
-    },
-    {
-        "checkbox": "5",
-        "name": "Cora A.",
-        "store": "43",
-        "categories": "lychee"
-    },
-    {
-        "checkbox": "6",
-        "name": "Jasper J.",
-        "store": "49",
-        "categories": "lime"
-    },
-    {
-        "checkbox": "7",
-        "name": "Arthur A.",
-        "store": "100",
-        "categories": "peach"
-    },
-    {
-        "checkbox": "8",
-        "name": "Asher A.",
-        "store": "14",
-        "categories": "lychee"
-    },
-    {
-        "checkbox": "9",
-        "name": "Arthur C.",
-        "store": "19",
-        "categories": "peach"
-    },
-    {
-        "checkbox": "10",
-        "name": "Atticus T.",
-        "store": "38",
-        "categories": "kiwi"
-    },
-    {
-        "checkbox": "11",
-        "name": "Theodore O.",
-        "store": "43",
-        "categories": "kiwi"
-    },
-    {
-        "checkbox": "12",
-        "name": "Jasper T.",
-        "store": "91",
-        "categories": "lime"
-    },
-    {
-        "checkbox": "13",
-        "name": "Jasper C.",
-        "store": "46",
-        "categories": "mango"
-    },
-    {
-        "checkbox": "14",
-        "name": "Theodore T.",
-        "store": "17",
-        "categories": "lychee"
-    },
-    {
-        "checkbox": "15",
-        "name": "Levi C.",
-        "store": "56",
-        "categories": "lychee"
-    },
-    {
-        "checkbox": "16",
-        "name": "Isabella I.",
-        "store": "84",
-        "categories": "lychee"
-    },
-    {
-        "checkbox": "17",
-        "name": "Violet E.",
-        "store": "55",
-        "categories": "pomegranate"
-    },
-    {
-        "checkbox": "18",
-        "name": "Olivia A.",
-        "store": "57",
-        "categories": "pomegranate"
-    },
-    {
-        "checkbox": "19",
-        "name": "Oliver O.",
-        "store": "62",
-        "categories": "peach"
-    },
-    {
-        "checkbox": "20",
-        "name": "Levi O.",
-        "store": "67",
-        "categories": "mango"
     }
 ]
-  constructor() {
+  constructor(private apiService: APIService) {
     this.dataSource = new MatTableDataSource(this.users);
   }
+
+  ngOnInit(): void {
+    let cartJson = localStorage.getItem('cart');
+    // this.cart =JSON.parse(cartJson!);
+
+    this.apiService.getHistoryProducts().subscribe((response: any) => {
+      this.cart = response.data;
+      console.log(this.cart);
+    this.dataSource = new MatTableDataSource(this.cart);
+
+    })
+    
+    // console.log(this.cart);
+    
+  }
+
   moreVert(e:dummyUserInterface) {
     console.log(e);
     
