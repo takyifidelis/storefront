@@ -184,9 +184,10 @@
     </div>
     <div class="row justify-content-between">
       @for(product of dataservice.products; track product){
-      <div class="col-md-3" (click)="goToProduct(product.id)">
+      <div class="col-md-3">
         <div class="card card-structure">
           <img
+            (click)="goToProduct(product.id)"
             [src]="product.images[0].url"
             class="card-img-top card-img"
             alt="..."
@@ -197,10 +198,20 @@
             >
               <h5 class="card-title">{{ product.category }}</h5>
               <div class="product-btn">
-                <button class="heart nav-icons" color="primary" mat-icon-button>
-                  <mat-icon>favorite_border</mat-icon>
+                <button
+                  (click)="liked(product)"
+                  class="heart nav-icons"
+                  [ngClass]="{ liked: product.isliked }"
+                  mat-icon-button
+                >
+                  <mat-icon>favorite</mat-icon>
                 </button>
-                <button class="cart nav-icons" color="primary" mat-icon-button>
+                <button
+                  (click)="addToCart(product)"
+                  class="cart nav-icons"
+                  color="primary"
+                  mat-icon-button
+                >
                   <mat-icon>shopping_cart</mat-icon>
                 </button>
               </div>

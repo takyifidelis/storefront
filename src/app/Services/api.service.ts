@@ -97,8 +97,8 @@ addShipping(customerId: string, user: any) {
     })
   }
 
-  addTOViews(customerId: string, products: any): Observable<Response>{
-    return this.http.post<Response>(`${environment.baseApiUrl}/customer/add-to-views/${customerId}`, products, {
+  addTOViews(products: any): Observable<Response>{
+    return this.http.post<Response>(`${environment.baseApiUrl}/customer/add-to-views/f739a921-7267-4e02-8222-ceb2b4c352cf`, products, {
       withCredentials: true,
     })
   }

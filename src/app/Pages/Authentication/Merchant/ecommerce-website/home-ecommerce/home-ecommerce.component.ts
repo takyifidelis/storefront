@@ -10,7 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { DataService } from '../../../../../Services/data.service';
 import { APIService } from '../../../../../Services/api.service';
-import { Response as resp } from '../../../../../interfaces/all-interfaces';
+import { ProductObject, Response as resp } from '../../../../../interfaces/all-interfaces';
 import { Router, RouterModule } from '@angular/router';
 
 interface Item {
@@ -28,6 +28,8 @@ interface Item {
 export class HomeEcommerceComponent implements OnInit {
   imageUrl: any = null;
   @ViewChild('fileInput') fileInput!: ElementRef;
+  isliked: boolean = false;
+// e: any;
 
   constructor(
     private cdr: ChangeDetectorRef,
@@ -130,5 +132,38 @@ export class HomeEcommerceComponent implements OnInit {
             // console.log(this.dataservice.productCategory)
           });
       });
+  }
+
+  liked(product: any) {
+    product.isliked = !product.isliked;
+    let like = JSON.parse(localStorage.getItem('favouriteProducts')|| '')
+    like.push(product);
+    let likedProductsJson = JSON.stringify(like);
+    localStorage.setItem('favouriteProducts', likedProductsJson);
+    let productObj: ProductObject = {
+      products: []
+    }
+    for (const likeditem of like){
+      productObj.products.push(likeditem.id)
+    }
+    this.apiService.addToFavourite(productObj).subscribe((res)=>{
+        console.log(res);
+      })
+  }
+
+  addToCart(product: any) {
+    let cart = JSON.parse(localStorage.getItem('cart')|| '')
+    cart.push(product);
+    let addTobuyJson = JSON.stringify(cart);
+    localStorage.setItem('cart', addTobuyJson);
+    let productObj: ProductObject = {
+      products: []
+    }
+    for (const likeditem of cart){
+      productObj.products.push(likeditem.id)
+    }
+    this.apiService.addTOViews(productObj).subscribe((res)=>{
+        console.log(res);
+      })
   }
 }
