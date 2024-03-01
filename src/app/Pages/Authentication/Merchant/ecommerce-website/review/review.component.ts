@@ -12,6 +12,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { CommonModule } from '@angular/common';
 import { DataService } from '../../../../../Services/data.service';
 import { APIService } from '../../../../../Services/api.service';
+import { StarRatingComponent } from '../../../../Dashboard/Customer/components/star-rating/star-rating.component';
 
 @Component({
   selector: 'app-review',
@@ -27,6 +28,7 @@ import { APIService } from '../../../../../Services/api.service';
     FontAwesomeModule,
     MatTabsModule,
     CommonModule,
+    StarRatingComponent
   ],
   templateUrl: './review.component.html',
   styleUrl: './review.component.scss',
