@@ -11,18 +11,17 @@ export class FilterOnePipe implements PipeTransform {
   //   return null;
   // }
   constructor(private dataService:DataService){}
-  transform(values: any, searchTerm:string, continent:string) {
+  transform(values: any, searchTerm:string) {
     searchTerm = searchTerm.toLowerCase()
-    console.log(continent);
+    // console.log(continent);
     const resultArray:any =[]
   if(searchTerm === ''){
     values = [...new Set(values)]
     return values
   }
-  if(searchTerm.length){
-    if (continent != 'Filter by Region') {
+ if(searchTerm.length){
       for (const item of values) {
-        if (item.region.includes(continent)&&item.name.common.toLowerCase().includes(searchTerm)) {
+        if (item.toLowerCase().includes(searchTerm)) {
           resultArray.push(item)
         }
       }
@@ -33,8 +32,7 @@ export class FilterOnePipe implements PipeTransform {
           resultArray.push(item)
         }
       }
-    }
-  }
+  } 
 
   if (resultArray.length) {
     this.dataService.doesNotExist.exist = false
