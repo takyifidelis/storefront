@@ -69,7 +69,7 @@
         <button class="person nav-icons" color="primary" mat-icon-button>
           <mat-icon>person</mat-icon>
         </button>
-          <mat-icon [matBadge]="dataService.cart.length" style="margin-top: 10px;" matBadgeColor="warn">shopping_cart</mat-icon>
+          <mat-icon [matBadge]="dataService.cart.length" (click)="goToCheckout()" style="margin-top: 10px; cursor: pointer;" matBadgeColor="warn">shopping_cart</mat-icon>
         <!-- <button mat-icon-button
           color="primary"
           matBadge="8"

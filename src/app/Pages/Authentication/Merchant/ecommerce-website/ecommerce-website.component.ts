@@ -62,6 +62,11 @@ export class EcommerceWebsiteComponent implements OnInit{
     }
   }
 
+  goToCheckout(){
+    // console.log(this.dataService.cart)
+    // console.log(JSON.parse(localStorage.getItem('cart')!))
+    this.router.navigate(['/checkout-page']);
+  }
   toggleBtnFunction() {
     this.dropDownMenu = document.querySelector('#dropdownMenu');
     if (this.dropDownMenu) {
@@ -100,8 +105,8 @@ export class EcommerceWebsiteComponent implements OnInit{
     this.apiService.getStore().subscribe((data:{[key: string]: any;} )=>{
       console.log(data)
       if (data['data']) {
-        localStorage.setItem('storeId',data['data'][0].id)
-        localStorage.setItem('template',data['data'][0].template.options)
+        localStorage.setItem('storeId',data['data'][2].id)
+        localStorage.setItem('template',data['data'][2].template.options)
         this.serverResponseReceived = true
           this.dataService.template = JSON.parse(localStorage.getItem('template')!)
         this.dataService.isLoading =false

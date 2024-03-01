@@ -109,14 +109,17 @@ export class LoginComponent implements OnInit {
     this.loginService.login(email, password).subscribe(
       (resData) => {
         console.log(resData);
+        if (resData.data?.type == 'Business') {
         if (resData.type == 'Business') {
           localStorage.setItem("businessId", resData.data.business)
           this.router.navigate(['merchant']);
+        } else if (resData.data?.type == 'Customer') {
         } else if (resData.type == 'Customer') {
           localStorage.setItem("customerId", JSON.stringify(resData.data.customer))
           this.router.navigate(['customer']);
         }
-      },
+      }
+    },
       (errorMessage) => {
         console.log(errorMessage);
         this.error = errorMessage;
@@ -137,7 +140,6 @@ export class LoginComponent implements OnInit {
     this.dataService.isLoading = true
       this.apiService.authenticateUser(this.dataService.loginCredentials)
       .subscribe((resData:any)=>{
-        console.log(resData.data);
         if (resData.data.type === "Business") {
           // this.dataService.businessId=resData.data?.business
           localStorage.setItem("businessId", resData.data.business)
@@ -157,5 +159,4 @@ export class LoginComponent implements OnInit {
         this.error = errorMessage;
       }
     }
-
 }
