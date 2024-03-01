@@ -9,6 +9,7 @@ import { Router, RouterModule } from '@angular/router';
 import { DataService } from '../../../../Services/data.service';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { AuthService } from '../../../Authentication/Auth/auth.service';
+import { APIService } from '../../../../Services/api.service';
 
 @Component({
   selector: 'app-customer-dashboard',
@@ -31,7 +32,7 @@ export class CustomerDashboardComponent {
     public dataService: DataService,
     media: MediaMatcher,
     public router: Router,
-    private authService: AuthService
+    private authService: APIService
   ) {
     this.screenWidth = window.innerWidth;
     window.onresize = () => {
