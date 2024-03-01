@@ -92,12 +92,12 @@ onApprovePayment(orderId:string): Observable<Response> {
     withCredentials: true,
   })
 }
-// getStoreProducts(storeId: string): Observable<Response>{
-  //   return this.http.get<Response>(`${environment.baseApiUrl}/store/get-store-products/${storeId}`,
-  //   {
-  //     withCredentials: true,
-  //   })
-  // }
+getCustomerStoreProducts(storeId: string): Observable<Response>{
+    return this.http.get<Response>(`${environment.baseApiUrl}/store/get-store-products/${storeId}`,
+    {
+      withCredentials: true,
+    })
+  }
   getStoreProducts(storeId: string): Observable<Response>{
     return this.http.get<Response>(`${environment.baseApiUrl}/product/get-all-products/${storeId}`,
     {
