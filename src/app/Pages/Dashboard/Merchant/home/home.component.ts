@@ -76,7 +76,6 @@ export class HomeComponent implements OnInit {
 
   editStore(){
     
-    console.log(this.dataService.businessId)
     this.apiService.getMerchantStores(this.dataService.businessId).subscribe((data:any) => {
       // console.log(data);
       if (data.data.length) {
