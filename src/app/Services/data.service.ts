@@ -25,6 +25,25 @@ export class DataService {
     5: false,
     6: false,
   };
+  merchantData= {businessId:"",businessName:"",store:{name:""} }
+  typesOfStore:string[]=[
+    'Online Store',
+    'Blog',
+    'Restaurant',
+    'Technology company',
+    'Portfolio',
+    'Weddings',
+    'Photography',
+    'Professional Services',
+    'Online Store',
+    'Blog',
+    'Restaurant',
+    'Technology company',
+    'Portfolio',
+    'Weddings',
+    'Photography',
+    'Professional Services'
+  ]
   urls: { [key: number]: string } = {
     1: 'assets/images/ecommerce-home-dresses.svg',
     3: 'assets/images/ecommerce-home-tops.svg',
