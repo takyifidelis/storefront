@@ -88,6 +88,14 @@ export class APIService {
       }
     );
   }
+  logout() {
+    return this.http
+      .get<Response>(
+        'https://storefront-backend-jan-dev-api.vercel.app/api/account/logout',
+        { withCredentials: true }
+      )
+      .pipe(catchError(this.handleError));
+  }
 
   getStore(businessId: string): Observable<Response> {
     return this.http.get<Response>(`${environment.baseApiUrl}/store/get-all`, {
@@ -117,6 +125,19 @@ export class APIService {
   //     withCredentials: true,
   //   })
   // }
+  postProduct(formData: FormData) {
+    return this.http
+      .post<Response>(
+        'https://storefront-backend-jan-dev-api.vercel.app/api/product/add/f9586428-62e3-4455-bb1d-61262a407d1a',
+
+        formData,
+
+        {
+          withCredentials: true,
+        }
+      )
+      .pipe(catchError(this.handleError));
+  }
   getStoreProducts(storeId: string): Observable<Response> {
     return this.http.get<Response>(
       `${environment.baseApiUrl}/product/get-all-products/${storeId}`,
@@ -176,6 +197,49 @@ export class APIService {
       )
       .pipe(catchError(this.handleError));
   }
+  reviewProduct(review: { [key: string]: any }, order_id: string) {
+    return this.http
+      .post<Response>(
+        `${environment.baseApiUrl}/customer/review-product/${order_id}`,
+        review,
+        {
+          withCredentials: true,
+        }
+      )
+      .pipe(catchError(this.handleError));
+  }
+  getSingleOrder(id: string) {
+    return this.http.get<Response>(
+      `${environment.baseApiUrl}/order/get-single-order/${id}`,
+      {
+        withCredentials: true,
+      }
+    );
+  }
+  replyReview(comment: string, review: string, storeId: string) {
+    return this.http
+      .post<Response>(
+        `https://storefront-backend-jan-dev-api.vercel.app/api/store/reply-customer/${storeId}`,
+        {
+          comment,
+          review,
+        },
+        {
+          withCredentials: true,
+        }
+      )
+      .pipe(catchError(this.handleError));
+  }
+  getReviews(): Observable<Response> {
+    return this.http
+      .get<Response>(
+        'https://storefront-backend-jan-dev-api.vercel.app/api/store/get-reviews/22095521-d6e3-4ed1-a7de-e96e1f81bed3',
+        { withCredentials: true }
+      )
+
+      .pipe(catchError(this.handleError));
+  }
+
   // Error Handling
   private handleError(errorRes: HttpErrorResponse) {
     console.error('Error Response:', errorRes);

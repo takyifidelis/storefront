@@ -10,8 +10,8 @@ import { DataService } from '../../../../Services/data.service';
 
 import { MerchantAddProductComponent } from '../components/merchant-add-product/merchant-add-product.component';
 import { AuthService } from '../../../Authentication/Auth/auth.service';
+import { APIService } from '../../../../Services/api.service';
 // import { MerchantAddProductComponent } from '../components/merchant-add-product';
-
 
 @Component({
   selector: 'app-merchant-dashboard',
@@ -32,7 +32,7 @@ import { AuthService } from '../../../Authentication/Auth/auth.service';
 export class MerchantDashboardComponent {
   constructor(
     public dataService: DataService,
-    private authService: AuthService,
+    private authService: APIService,
     private router: Router
   ) {}
 
