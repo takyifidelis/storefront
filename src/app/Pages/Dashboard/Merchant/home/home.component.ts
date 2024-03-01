@@ -11,6 +11,7 @@ import { DataService } from '../../../../Services/data.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { APIService } from '../../../../Services/api.service';
+
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
@@ -72,6 +73,8 @@ export class HomeComponent implements OnInit {
           this.fiveOpened = false;
         }
         break;
+      
+        
       case 5:
         this.fiveOpened = !this.fiveOpened;
         if (this.fiveOpened) {
@@ -89,16 +92,12 @@ export class HomeComponent implements OnInit {
   }
 
   editStore(){
-    
     this.dataService.isLoading =true
     this.apiService.getMerchantStores(localStorage.getItem('businessId')!).subscribe((data:any) => {
-      console.log(data)
+      localStorage.setItem('storeId',data.data[0].id)
+      localStorage.setItem('tempTemplate',data.data[0].template.temp.options)
       this.dataService.isInEditMode = true 
       if (data.data.length>0) {
-        localStorage.setItem('storeId',data.data[0].id)
-        localStorage.setItem('tempTemplate',data.data[0].template.temp.options)
-        localStorage.setItem('template',data.data[0].template.options)
-        this.dataService.template = JSON.parse(localStorage.getItem('tempTemplate')!)
         this.router.navigate(['/template-editor']);
         this.dataService.isLoading =false
       } else {
