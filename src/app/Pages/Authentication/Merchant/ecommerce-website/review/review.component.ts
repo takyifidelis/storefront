@@ -47,6 +47,8 @@ export class ReviewComponent implements OnInit {
   amount: number = this.quantity * 90;
   productItem :any
   sizes: string[] | undefined;
+  storeId = 'f9586428-62e3-4455-bb1d-61262a407d1a';
+  similarProducts: any = []
 
 constructor(private route: ActivatedRoute,private dataService:DataService,public apiService: APIService){}
 
@@ -112,14 +114,22 @@ constructor(private route: ActivatedRoute,private dataService:DataService,public
     this.selectedImage = this.productItem.images[0].url;
      this.initialPrice = this.productItem.price;
 
-     let values = this.productItem.variations[0].values;
+    //  let values = this.productItem.variations[0].values;
      
-      this.sizes = values[0].split(',');
-     
-    console.log(this.productItem);
-    let obj: any = {
-      products: []
-    }
+    //   this.sizes = values[0].split(',');
+
+      this.apiService.getStoreProductsCustomer(this.storeId).subscribe((res: any) => {
+        console.log(res)
+        res.data.filter((product: any) => {
+          if (product.category === this.productItem.category){
+            this.similarProducts.push(product)
+          }
+        })
+         
+
+        
+      })
+    
     // let arrayJson = JSON.stringify(array)
     // let cartJson = localStorage.getItem('favouriteProducts');
     // let cart = JSON.parse(cartJson!);

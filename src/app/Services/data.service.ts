@@ -36,7 +36,6 @@ export class DataService {
   products:any = [
     {
         isliked: false,
-        isAdded: false
     }
   ]
   productCategory:any = []
