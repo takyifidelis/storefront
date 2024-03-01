@@ -13,6 +13,7 @@ import {
 } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../../../Authentication/Auth/auth.service';
+import { APIService } from '../../../../../Services/api.service';
 
 @Component({
   selector: 'app-merchant-add-product',
@@ -67,7 +68,7 @@ export class MerchantAddProductComponent {
     return this.images.length < 4;
   }
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(private authService: APIService, private router: Router) {
     this.productForm = new FormGroup({
       productName: new FormControl('', Validators.required),
       productPrice: new FormControl('', Validators.required),
