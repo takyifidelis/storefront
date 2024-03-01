@@ -53,7 +53,7 @@ export class DataService {
     5: 'assets/images/ecommerce-home-sneakers.svg',
     6: 'assets/images/ecommerce-home-two-ladies.svg',
   };
-  cart=[]
+  cart:any=[]
   products:any = []
   productCategories:any = []
   productSearchString:string = ''
