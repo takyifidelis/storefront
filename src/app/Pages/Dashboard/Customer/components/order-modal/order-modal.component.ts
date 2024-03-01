@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { MatDialogModule } from '@angular/material/dialog';
+import { Component, EventEmitter, Inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
 import { MatTabsModule } from '@angular/material/tabs';
 import { StarRatingComponent } from '../../../../Dashboard/Customer/components/star-rating/star-rating.component';
@@ -11,6 +11,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { AuthService } from '../../../../Authentication/Auth/auth.service';
+import { APIService } from '../../../../../Services/api.service';
+import { dummyUserInterface } from '../../../../../interface/dummy-user.model';
 
 @Component({
   selector: 'app-order-modal',
@@ -28,30 +30,45 @@ import { AuthService } from '../../../../Authentication/Auth/auth.service';
 export class OrderModalComponent {
   postReview: FormGroup;
   error: string | any = null;
+  starRating!: number;
 
-  constructor(private authService: AuthService) {
+  constructor(
+    private authService: APIService,
+    @Inject(MAT_DIALOG_DATA) public data: { [key: string]: any }
+  ) {
     this.postReview = new FormGroup({
       remarks: new FormControl('', Validators.required),
       comment: new FormControl('', Validators.required),
+      starRating: new FormControl('', Validators.required),
     });
+    console.log(data);
   }
 
   onSubmit(form: FormGroupDirective) {
-    console.log(form.value);
-    const product = '50c9690f-9623-4cf6-bc3f-f73069abdc93';
-    const rating = 3;
-    const remarks = form.value.remarks;
-    const comment = form.value.comment;
-    // this.authService.reviewProduct(product, rating, remarks, comment).subscribe(
-    //   (resData:any) => {
-    //     console.log(resData);
-    //   },
-    //   (errorMessage) => {
-    //     console.log(errorMessage);
-    //     this.error = errorMessage;
-    //   }
-    // );
+    let reviewData = {
+      product: this.data['items'][0].id,
+      rating: this.starRating,
+      remarks: form.value.remarks,
+      comment: form.value.comment,
+    };
+    console.log(reviewData);
+    // console.log('rating:' + rating);
+    // console.log(comment, remarks);
+
+    this.authService.reviewProduct(reviewData, this.data['orderId']).subscribe(
+      (resData: any) => {
+        console.log(resData);
+      },
+      (errorMessage) => {
+        console.log(errorMessage);
+        this.error = errorMessage;
+      }
+    );
 
     form.reset();
+  }
+
+  onSetStar(value: number) {
+    this.starRating = value;
   }
 }

@@ -44,14 +44,17 @@ export class ReviewComponent implements OnInit {
   initialPrice: any;
   addToBuy: any = [];
 
- 
   //   this.product = this.apiService.getProductTemp();
   //   this.selectedImage = this.product.images[0].url;
 
   // this.initialPrice = this.product.price;
   amount: number = this.quantity * 90;
-  productItem :any
-constructor(private route: ActivatedRoute,private dataService:DataService,public apiService: APIService, private authService: AuthService){}
+  productItem: any;
+  constructor(
+    private route: ActivatedRoute,
+    private dataService: DataService,
+    public apiService: APIService
+  ) {}
   increaseQuantity(): void {
     // this.quantity = this.product.quantity;
     this.quantity++;
@@ -61,7 +64,7 @@ constructor(private route: ActivatedRoute,private dataService:DataService,public
   decreaseQuantity(): void {
     if (this.quantity > 1) {
       this.quantity--;
-    
+
       this.product.price = this.quantity * this.initialPrice;
       console.log(this.initialPrice);
     }
@@ -81,26 +84,24 @@ constructor(private route: ActivatedRoute,private dataService:DataService,public
     this.selectedImage = imageName;
   }
 
-
   onAddToBuy() {
     this.addToBuy.push(this.product);
     console.log(this.addToBuy);
   }
-  ngOnInit(){
+  ngOnInit() {
     for (const product of this.dataService.products) {
       if (product.id === this.route.snapshot.params['id']) {
-        this.productItem = product
+        this.productItem = product;
         console.log(this.productItem);
       }
     }
-    
-    this.authService.getReviews().subscribe((response: any) => {
+
+    this.apiService.getReviews().subscribe((response: any) => {
       console.log(response);
       // this.users = response.data
       this.productReview = response.data;
     });
-     
-    // console.log(this.dataService.products.find((element:any) => console.log(element.id)));
-    }
-  }
 
+    // console.log(this.dataService.products.find((element:any) => console.log(element.id)));
+  }
+}
