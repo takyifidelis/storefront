@@ -30,7 +30,7 @@ export class CkeckoutPageComponent implements OnInit {
   items:any = []
 
   constructor(
-    public apiService: APIService,
+    private apiService: APIService,
     public dataService: DataService,
     private snackBar: MatSnackBar,
     private router: Router,
@@ -38,7 +38,8 @@ export class CkeckoutPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.initConfig();
-
+    this.dataService.cart = JSON.parse(localStorage.getItem('cart')!);
+    // console.log(this.dataService.cart);
     this.user = new FormGroup({
       'first-name': new FormControl(null),
       'streetAddress': new FormControl(null),
@@ -48,69 +49,13 @@ export class CkeckoutPageComponent implements OnInit {
       'appartmentNumber':  new FormControl(null)
     })
   }
-
-  // async createOrder() {
-  //   const payload = this.cart && {
-  //     items: this.cart.items.map((item: any) => ({
-  //       product: item.id,
-  //       quantity: item.quantity,
-  //       variations: item.variations,
-  //     })),
-  //     shipping: this.cart.shipping,
-  //     store: this.storeId,
-  //     destination: 'BO',
-  //   };
-  //   const response = await fetch(
-  //     `${environment.baseApiUrl}/api/order/initialize/${this.customerId}`,
-  //     {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //       body: JSON.stringify(payload),
-  //     }
-  //   );
-  //   alert('Paused');
-  //   const res = await response.json();
-  //   if (res.type === 'error') {
-  //     this.snackBar.open(res.error[0].reason, 'Close', { duration: 3000 });
-  //   } else {
-  //     this.snackBar.open(res.message, 'Close', { duration: 3000 });
-  //   }
-  //   const order = await res.data.orderId;
-  //   return order;
-  // }
-
-  // async onApprove(data: { orderID: string }) {
-  //   const response = await fetch(
-  //     `${environment.baseApiUrl}/order/approve-payment/` + '4UJ77761JM560402R',
-  //     {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //       body: JSON.stringify({
-  //         orderID: '9JL371110H147321Y',
-  //       }),
-  //     }
-  //   );
-  //   const orderData = await response.json();
-  //   console.log(orderData);
-  //   if (orderData.type === 'success') {
-  //     this.snackBar.open(
-  //       `Transaction completed for order ${orderData.data.orderId}`,
-  //       'Close',
-  //       { duration: 3000 }
-  //     );
-      
-  //   this.router.navigate(['/customer/orders']);
-  //   }
-  //   // dispatch(clearCart());
-  // }
+  getTotalCost() {
+    return this.dataService.cart.map((t:any) => t.price).reduce((acc: any, value: any) => acc + value, 0);
+  }
   getdata(){
-    if (localStorage.getItem('cart') && JSON.parse(localStorage.getItem('cart')!)) {
-      this.cart = JSON.parse(localStorage.getItem('cart')!);
-      for (const item of this.cart) {
+    if (this.dataService.cart.length > 0) {
+      // this.cart = JSON.parse(localStorage.getItem('cart')!);
+      for (const item of this.dataService.cart) {
           this.items.push({product:item.id ,quantity: 1, variations:[] })
       }
     console.log(this.items);
@@ -120,8 +65,9 @@ export class CkeckoutPageComponent implements OnInit {
         'Close',
         { duration: 3000 }
       );
+      this.router.navigate(['/ecommerce']);
     }
-    this.router.navigate(['/ecommerce']);
+   
   }
   private initConfig(): void {
     
@@ -209,34 +155,6 @@ export class CkeckoutPageComponent implements OnInit {
     }
   }
 
-  // initConfig(): void {
-  //   this.payPalConfig = {
-  //     clientId: environment.paypalClientID,
-  //     createOrderOnServer: (data:any) => {
-  //       return new Promise<string>((resolve, reject) => {
-  //         resolve("03V91106CX760652J");
-  //     });
-  //     },
-  //     onApprove: (data:any, actions:any) => {
-  //       return this.onApprove(data);
-  //     },
-  //     onClientAuthorization: (data:any) => {
-  //       console.log(
-  //         'onClientAuthorization - you should probably inform your server about completed transaction at this point',
-  //         data
-  //       );
-  //     },
-  //     onCancel: (data, actions) => {
-  //       console.log('OnCancel', data, actions);
-  //     },
-  //     onError: (err) => {
-  //       console.log('OnError', err);
-  //     },
-  //     onClick: (data, actions) => {
-  //       console.log('onClick', data, actions);
-  //     },
-  //   };
-  // }
+
 }
 
-// function
