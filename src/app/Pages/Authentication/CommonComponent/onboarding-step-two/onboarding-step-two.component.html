@@ -19,7 +19,8 @@
         <p class="body-txt-p">Let us have an idea of the website you want to create so that we can tailor your storefront experience for you</p>
         <div class="body-options-container">
             <div class="search-box">
-                <input type="text" class="d-flex w-100" (keyup)="filterList($event)" placeholder="Search for your business or website type">
+                <!-- <input type="text" class="d-flex w-100" (keyup)="filterList($event)" placeholder="Search for your business or website type"> -->
+                <input type="text" class="d-flex w-100" [(ngModel)]="searchString" placeholder="Search for your business or website type" >
                 <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 17 17" fill="none">
                     <path d="M12.2026 12.2032L15.9995 16.0001M14.125 7.5625C14.125 11.1869 11.1869 14.125 7.5625 14.125C3.93813 14.125 1 11.1869 1 7.5625C1 3.93813 3.93813 1 7.5625 1C11.1869 1 14.125 3.93813 14.125 7.5625Z" stroke="#5E718D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
@@ -32,12 +33,12 @@
             <div class="type-selector-container">
                 <p>EXAMPLES</p>
                 <div class="website-type-container">
-                    @for (type of types; track type){
-                        <span class="website-type">{{type}}</span>
+                    @for (type of dataService.typesOfStore | filterOne:searchString; track type){
+                        <span (click)="onSelect($event.target)" class="website-type">{{type}}</span>
                     }
                 </div>
             </div>
         </div>
-        <button [routerLink]="['/merchant-onboarding-3']" class="body-btn" style="font-size: 18px; padding: 13px 20px;">continue</button>
+        <button (click)="continueToStep3()" class="body-btn" style="font-size: 18px; padding: 13px 20px;">continue</button>
     </main>
 </div>
