@@ -86,7 +86,10 @@ constructor(private route: ActivatedRoute,private dataService:DataService,public
     cart.push(this.productItem);
     let addTobuyJson = JSON.stringify(cart);
     localStorage.setItem('cart', addTobuyJson);
-  
+  }
+
+  onAddOneToBuy(product: any) {
+
   }
 
   onLikedProducts(){
@@ -106,6 +109,21 @@ constructor(private route: ActivatedRoute,private dataService:DataService,public
       })
   }
 
+  onLikeOne(product: any){
+    product.isliked = !product.isliked;
+    let like = JSON.parse(localStorage.getItem('favouriteProducts')|| '')
+    like.push(this.productItem);
+    let productObj: ProductObject = {
+      products: []
+    }
+    for (const likeditem of like){
+      productObj.products.push(likeditem.id)
+    }
+    this.apiService.addToFavourite(productObj).subscribe((res)=>{
+        console.log(res);
+      })
+  }
+
   ngOnInit(){
     let productJson = localStorage.getItem('selectedProduct');
     let product = JSON.parse(productJson!);
@@ -114,9 +132,9 @@ constructor(private route: ActivatedRoute,private dataService:DataService,public
     this.selectedImage = this.productItem.images[0].url;
      this.initialPrice = this.productItem.price;
 
-    //  let values = this.productItem.variations[0].values;
+     let values = this.productItem.variations[0].values;
      
-    //   this.sizes = values[0].split(',');
+      this.sizes = values[0].split(',');
 
       this.apiService.getStoreProductsCustomer(this.storeId).subscribe((res: any) => {
         console.log(res)

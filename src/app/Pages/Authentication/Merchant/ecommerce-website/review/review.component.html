@@ -359,6 +359,7 @@
     </mat-tab-group>
   </section>
   <section class="similar-products">
+    <h1 style="text-align: center">Similar Products</h1>
     <div
       class="first-row"
       style="
@@ -369,7 +370,7 @@
       "
     >
       <div
-        class="card"
+        class="card .card-container"
         style="width: 18rem"
         *ngFor="let product of similarProducts"
       >
@@ -380,10 +381,20 @@
           >
             <h5 class="card-title"></h5>
             <div class="product-btn">
-              <button class="heart nav-icons" color="primary" mat-icon-button>
-                <mat-icon>favorite_border</mat-icon>
+              <button
+                (click)="onLikeOne(product)"
+                class="heart nav-icons"
+                [ngClass]="{ liked: product.isliked }"
+                mat-icon-button
+              >
+                <mat-icon>favorite</mat-icon>
               </button>
-              <button class="cart nav-icons" color="primary" mat-icon-button>
+              <button
+                class="cart nav-icons"
+                (click)="onAddOneToBuy(product)"
+                color="primary"
+                mat-icon-button
+              >
                 <mat-icon>shopping_cart</mat-icon>
               </button>
             </div>

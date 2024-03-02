@@ -165,5 +165,6 @@ export class HomeEcommerceComponent implements OnInit {
     this.apiService.addTOViews(productObj).subscribe((res)=>{
         console.log(res);
       })
+      
   }
 }

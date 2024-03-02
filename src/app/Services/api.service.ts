@@ -116,13 +116,19 @@ addShipping(customerId: string, user: any) {
   }
 
   getSavedProducts(): Observable<Response>{
-    return this.http.get<Response>(`${environment.baseApiUrl}/customer/get-saved-products/f739a921-7267-4e02-8222-ceb2b4c352cf/?likedOnly=true`, {
+    return this.http.get<Response>(`${environment.baseApiUrl}/customer/get-saved-products/f739a921-7267-4e02-8222-ceb2b4c352cf/?idOnly=true&likedOnly=true`, {
       withCredentials: true
     })
   }
 
   getHistoryProducts(): Observable<Response>{
     return this.http.get<Response>(`${environment.baseApiUrl}/customer/get-saved-products/f739a921-7267-4e02-8222-ceb2b4c352cf`, {
+      withCredentials: true
+    })
+  }
+
+  removeProducts(){
+    return this.http.patch<Response>(`${environment.baseApiUrl}/customer/remove-products-from-favorites/f739a921-7267-4e02-8222-ceb2b4c352cf`, {
       withCredentials: true
     })
   }

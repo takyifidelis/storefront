@@ -75,6 +75,7 @@ export class FavoriteProductComponent implements OnInit{
      this.apiService.getSavedProducts().subscribe((res: any) => {
       this.products = res.data;
     this.dataSource = new MatTableDataSource(this.products);
+    console.log(this.products)
     });
   }
 
