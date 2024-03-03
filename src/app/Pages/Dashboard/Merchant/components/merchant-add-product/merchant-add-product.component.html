@@ -1,8 +1,6 @@
 <div class="main-container">
   <section class="add-product">
-    <div
-      class="form"
-    >
+    <div class="form">
       <div
         class="product-save d-flex align-items-center justify-content-between"
       >
@@ -18,22 +16,13 @@
           </div>
         </div>
         <div class="save-cancel">
-          <button
-            type="button"
-            class="btn cancel-btn"
-          >
-            Cancel
-          </button>
-          <button
-            type="submit"
-            class="btn btn-primary"
-            (click)="onSubmit()"
-          >
+          <button type="button" class="btn cancel-btn">Cancel</button>
+          <button type="submit" class="btn btn-primary" (click)="onSubmit()">
             Save
           </button>
         </div>
       </div>
-      <div class="details-media d-flex justify-content-between">
+      <div class="details-media d-flex justify-content-around">
         <div class="product-details">
           <h3 class="product-details-header product-header">Product details</h3>
           <p class="product-details-paragraph product-paragraph">
@@ -70,7 +59,7 @@
             <div class="stock">
               <label for="stock" class="label-name">Stock</label>
               <input
-              [(ngModel)]="productDetails.quantity"
+                [(ngModel)]="productDetails.quantity"
                 type="stock"
                 id="stock"
                 class="form-control"
@@ -82,7 +71,7 @@
           <div class="form-group">
             <label for="Description" class="label-name">Description</label>
             <textarea
-            [(ngModel)]="productDetails.description"
+              [(ngModel)]="productDetails.description"
               id=""
               rows="4"
               class="form-control"
@@ -100,14 +89,17 @@
             <div
               class="radio-btn d-flex justify-content-between align-items-center"
             >
-            <mat-radio-group color="primary"
-              class="example-radio-group"
-              [(ngModel)]="productDetails.category">
-              @for (cat of categories; track cat) {
-                <mat-radio-button class="example-radio-button" [value]="cat">{{cat}}</mat-radio-button>
-              }
-            </mat-radio-group>
-
+              <mat-radio-group
+                color="primary"
+                class="example-radio-group"
+                [(ngModel)]="productDetails.category"
+              >
+                @for (cat of categories; track cat) {
+                <mat-radio-button class="example-radio-button" [value]="cat">{{
+                  cat
+                }}</mat-radio-button>
+                }
+              </mat-radio-group>
             </div>
           </div>
           <div class="product-status">

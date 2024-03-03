@@ -58,3 +58,36 @@ export interface Data {
   createdAt: string;
   updatedAt: string;
 }
+export interface ReviewResponseData {
+  id: string;
+  replies: string[];
+  productReview: {
+    id: string;
+    name: string;
+    images: { url: string }[];
+  };
+  orderReview: {
+    id: string;
+    paid: boolean;
+    orderId: string;
+    status: string;
+    currency: string;
+    items: {
+      name: string;
+      image: string;
+      price: number;
+      total: number;
+      discount: number;
+      variations: any[];
+      product: string;
+    }[];
+  };
+  customerReview: {
+    firstName: string;
+    lastName: string;
+  };
+  createdAt: string;
+  rating: number;
+  remarks: string;
+  comment: string;
+}

@@ -4,6 +4,7 @@ import { UserCredentials } from '../interfaces/all-interfaces';
 @Injectable({
   providedIn: 'root'
 })
+
 // merchantDashboardNoProjects: boolean = false;
 // loginCredentials:UserCredentials = {email:'', password:''}
 // doesNotExist = {exist: false, term:''}
@@ -19,6 +20,7 @@ import { UserCredentials } from '../interfaces/all-interfaces';
 // merchantStoreName: string = localStorage.getItem("storeName") || ''
 // showInputLink: boolean = false;
 // isLoading: boolean = false
+
 
 export class DataService {
   merchantDashboardNoProjects: boolean = false;
@@ -58,6 +60,7 @@ export class DataService {
   productCategories:any = []
   productSearchString:string = ''
   template:any
+
 //   template ={
 //     id: "template-1",
 //     screenshot: "/assets/images/Text.svg",
@@ -226,5 +229,6 @@ export class DataService {
 //     },
 //     pagesOrder:[{name:"home", value:"home", includePage: true}, {name:"about", value:"about us",IncludePage: false}, {name:"contact", value:"contact us", includePage: false}]
 // }
+
   constructor() { }
 }
