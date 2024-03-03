@@ -1,0 +1,138 @@
+.first-block {
+  .image-detail {
+    width: 56px;
+    height: 56px;
+    flex-shrink: 0;
+  }
+  .customer-detail {
+    margin-left: 1.5rem;
+    .customer-name {
+      color: #455468;
+      font-family: Inter;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 28px;
+      letter-spacing: -0.3px;
+      margin-bottom: 0;
+    }
+    .customer-country {
+      color: #5e718d;
+      font-family: Inter;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 20px;
+      letter-spacing: -0.2px;
+    }
+  }
+  .amount-detail {
+    color: #5e718d;
+    font-family: Inter;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: -0.2px;
+    margin-left: 1.5rem;
+  }
+}
+.second-block {
+  .product-details {
+    margin-bottom: 1rem;
+    .product-image {
+      width: 4rem;
+      height: 4rem;
+      border-radius: 4px;
+    }
+    .product-name-date {
+      margin-left: 1.5rem;
+      .product-name {
+        color: #455468;
+        font-family: Inter;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 28px;
+        letter-spacing: -0.3px;
+        margin-bottom: 0;
+      }
+      .product-date {
+        color: #5e718d;
+        font-family: Inter;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 20px;
+        letter-spacing: -0.2px;
+      }
+    }
+  }
+  .review-message-block {
+    .review-title {
+      color: #5e718d;
+      font-family: Inter;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 24px;
+      letter-spacing: -0.2px;
+    }
+    .review-description {
+      color: #5e718d;
+
+      font-family: Inter;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 20px;
+      letter-spacing: -0.2px;
+    }
+  }
+}
+.third-block {
+  label {
+    color: #3d4a5c;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: -0.2px;
+    margin-bottom: 0.5rem;
+  }
+  textarea {
+    color: #3d4a5c;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: -0.2px;
+  }
+  textarea::placeholder {
+    color: #8897ae;
+  }
+  .review-buttons {
+    margin-left: 0.3rem;
+    margin-right: 0.3rem;
+    margin-top: 1.5rem;
+
+    button {
+      font-family: Inter;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 28px; /* 175% */
+      letter-spacing: -0.3px;
+      border-radius: 8px;
+      padding: 10px 18px;
+      width: 48%;
+    }
+    .btn-cancel {
+      background-color: #fff;
+      color: #344054;
+      border: 1px solid #d0d5dd;
+    }
+  }
+}

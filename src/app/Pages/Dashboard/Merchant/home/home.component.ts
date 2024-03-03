@@ -11,6 +11,7 @@ import { DataService } from '../../../../Services/data.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { APIService } from '../../../../Services/api.service';
+
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
@@ -72,6 +73,8 @@ export class HomeComponent implements OnInit {
           this.fiveOpened = false;
         }
         break;
+      
+        
       case 5:
         this.fiveOpened = !this.fiveOpened;
         if (this.fiveOpened) {
@@ -89,7 +92,6 @@ export class HomeComponent implements OnInit {
   }
 
   editStore(){
-    
     this.dataService.isLoading =true
     this.apiService.getMerchantStores(localStorage.getItem('businessId')!).subscribe((data:any) => {
       console.log(data)

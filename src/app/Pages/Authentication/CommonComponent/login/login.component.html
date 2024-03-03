@@ -1,4 +1,5 @@
 <script src="https://accounts.google.com/gsi/client" async></script>
+<div class="overflow-x-hidden" style="height: 100vh !important">
 <div class="overflow-x-hidden" style="height: 100vh !important; position: relative;">
   <!-- <div class="container-login"> -->
   <div class="row h-100">
@@ -18,7 +19,7 @@
           class="login100-form"
           #loginUserForm="ngForm"
           [formGroup]="loginForm"
-          (ngSubmit)="newLogin(loginUserForm)">
+          (ngSubmit)="newLogin(loginUserForm)"
         >
           <div class="login-form">
             <div class="title">Storefront</div>

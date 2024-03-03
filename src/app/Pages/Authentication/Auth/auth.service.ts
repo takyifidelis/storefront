@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+
 import { catchError,  map,  switchMap } from 'rxjs/operators';
+
 import { throwError, Observable } from 'rxjs';
 import {
   ForgetPasswordResponse,
   ResetPasswordResponse,
+  ReviewResponseData,
   SignupResponseData,
 } from '../Auth/api.model';
 
@@ -131,7 +134,6 @@ export class AuthService {
       .pipe(catchError(this.handleError));
   }
 
-
   // Verify account
   verifyAccount(code: string) {
     return this.http
@@ -153,6 +155,20 @@ export class AuthService {
         'https://storefront-backend-jan-dev-api.vercel.app/api/account/password/resetCode/verify',
         {
           code,
+        },
+        {
+          withCredentials: true,
+        }
+      )
+      .pipe(catchError(this.handleError));
+  }
+  replyReview(comment: string, review: string) {
+    return this.http
+      .post<SignupResponseData>(
+        'https://storefront-backend-jan-dev-api.vercel.app/api/store/reply-customer/22095521-d6e3-4ed1-a7de-e96e1f81bed3',
+        {
+          comment,
+          review,
         },
         {
           withCredentials: true,
@@ -197,12 +213,23 @@ export class AuthService {
       .pipe(catchError(this.handleError));
   }
 
+
+    getReviews(): Observable<ReviewResponseData> {
+    return this.http
+      .get<ReviewResponseData>(
+        'https://storefront-backend-jan-dev-api.vercel.app/api/store/get-reviews/22095521-d6e3-4ed1-a7de-e96e1f81bed3',
+        { withCredentials: true }
+      )
+
+      .pipe(catchError(this.handleError));
+  }
   postProduct(formData: FormData) {
     return this.http
       .post<ProductResponse>(
         'https://storefront-backend-jan-dev-api.vercel.app/api/product/add/f9586428-62e3-4455-bb1d-61262a407d1a',
 
         formData,
+
 
         {
           withCredentials: true,
