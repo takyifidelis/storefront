@@ -1,3 +1,12 @@
+
+import { Component, Inject, OnInit } from '@angular/core';
+import {
+  MAT_DIALOG_DATA,
+  MatDialogContent,
+  MatDialogModule,
+  MatDialogTitle,
+} from '@angular/material/dialog';
+
 import { Component, EventEmitter, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
@@ -11,6 +20,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { AuthService } from '../../../../Authentication/Auth/auth.service';
+import { dummyUserInterface } from '../favorite-product/favorite-product.component';
 import { APIService } from '../../../../../Services/api.service';
 import { dummyUserInterface } from '../../../../../interface/dummy-user.model';
 
@@ -23,14 +33,22 @@ import { dummyUserInterface } from '../../../../../interface/dummy-user.model';
     MatTabsModule,
     StarRatingComponent,
     ReactiveFormsModule,
+    MatDialogTitle,
+    MatDialogContent,
+    CommonModule
   ],
   templateUrl: './order-modal.component.html',
   styleUrl: './order-modal.component.scss',
 })
-export class OrderModalComponent {
+export class OrderModalComponent implements OnInit {
   postReview: FormGroup;
   error: string | any = null;
-  starRating!: number;
+  sum = 0;
+
+//   constructor(
+//     private authService: AuthService,
+//     @Inject(MAT_DIALOG_DATA) public data: dummyUserInterface
+//   starRating!: number;
 
   constructor(
     private authService: APIService,
@@ -42,6 +60,12 @@ export class OrderModalComponent {
       starRating: new FormControl('', Validators.required),
     });
     console.log(data);
+  }
+  ngOnInit(): void {
+     
+    for (const itemPrice of this.data.items) {
+      this.sum += itemPrice.price;
+    }
   }
 
   onSubmit(form: FormGroupDirective) {

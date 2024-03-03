@@ -393,12 +393,20 @@ section.decription-review {
 section.similar-products {
   margin: 5rem 2rem;
 
+  
   .card {
     text-align: left;
     margin-top: 2rem;
+
+    .card-img-top{
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
   }
   div.card {
     border: 0;
+    width: 22rem !important;
     .card-body {
       padding: 0;
     }
@@ -466,4 +474,8 @@ section.similar-products {
       }
     }
   }
+}
+
+.liked{
+  color: red;
 }

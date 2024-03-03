@@ -24,6 +24,8 @@ import {
 } from '@angular/material/dialog';
 import { OrderModalComponent } from '../order-modal/order-modal.component';
 import { dummyUserInterface } from '../../../../../interface/dummy-user.model';
+import { APIService } from '../../../../../Services/api.service';
+import { DatePipe } from '@angular/common';
 import { DataService } from '../../../../../Services/data.service';
 import { APIService } from '../../../../../Services/api.service';
 
@@ -59,35 +61,67 @@ export class OrderComponent implements OnInit {
   selection = new SelectionModel<dummyUserInterface>(true, []);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+  orders: any;
 
   users = [
     {
-      checkbox: '1',
-      orderNumber: '#1233893',
-      store: 'shopNest',
-      status: 'Delievered',
-      date: '21/09/2023',
-      price: '$52.00',
-    },
-    {
-      checkbox: '1',
-      orderNumber: '#1233893',
-      store: 'shopNest',
-      status: 'Delievered',
-      date: '21/09/2023',
-      price: '$52.00',
-    },
+
+      checkbox: '',
+      orderNumber: '',
+      store: '',
+      status: '',
+      date: '',
+      price: '',
+    }
   ];
+unsorted: any = [];
+sorted: any = [];
+  formattedDate!: string | null;
+   datepipe: DatePipe = new DatePipe('en-US');
+
+//   constructor(public dialog: MatDialog, public apiService: APIService) {
+
+//       checkbox: '1',
+//       orderNumber: '#1233893',
+//       store: 'shopNest',
+//       status: 'Delievered',
+//       date: '21/09/2023',
+//       price: '$52.00',
+//     },
+//     {
+//       checkbox: '1',
+//       orderNumber: '#1233893',
+//       store: 'shopNest',
+//       status: 'Delievered',
+//       date: '21/09/2023',
+//       price: '$52.00',
+//     },
+//   ];
 
   constructor(public dialog: MatDialog, private apiService: APIService) {
     this.dataSource = new MatTableDataSource(this.users);
+    
   }
+
+  ngOnInit(): void {
+    
+    this.apiService.getOrders().subscribe((res: any) =>{
+      this.orders = res;
+      this.unsorted = this.orders.data;
+      console.log(this.orders.data)
+      this.dataSource = new MatTableDataSource(this.orders.data);
+    })
+      
+     
+  }
+
   moreVert(e: dummyUserInterface) {
     this.dialog.open(OrderModalComponent, {
       data: e,
       width: '479px',
       position: { right: '50px', top: '10%' },
     });
+    console.log(e);
   }
 
   isAllSelected() {
@@ -124,11 +158,23 @@ export class OrderComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
-  ngOnInit(): void {
-    this.apiService
-      .getSingleOrder('1233893')
-      .subscribe((res: { [key: string]: any }) => {
-        console.log(res);
-      });
-  }
+
+
+  onSort(status: string) {
+    this.sorted = [];
+    this.unsorted.forEach((order: any) =>{
+      if(order.status === status) {
+        this.sorted.push(order);
+      }
+    })
+    this.dataSource = new MatTableDataSource(this.sorted);
+
+//   ngOnInit(): void {
+//     this.apiService
+//       .getSingleOrder('1233893')
+//       .subscribe((res: { [key: string]: any }) => {
+//         console.log(res);
+//       });
+
+//   }
 }

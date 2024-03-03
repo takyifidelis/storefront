@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ViewChild,Inject} from '@angular/core';
+import {AfterViewInit, Component, ViewChild,Inject, OnInit} from '@angular/core';
 import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 import {MatSort, MatSortModule} from '@angular/material/sort';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
@@ -16,12 +16,19 @@ import {
   MatDialogTitle,
   MatDialogContent,
 } from '@angular/material/dialog';
+import { APIService } from '../../../../../Services/api.service';
+import { CommonModule } from '@angular/common';
 
 export interface dummyUserInterface {
   checkbox: string;
   name: any;
   store: string;
-  categories: string;
+  category: string;
+  price: number;
+  images: any;
+  quantity: number;
+  items: any
+  orderShipping: any
 }
 
 @Component({
@@ -37,154 +44,48 @@ export interface dummyUserInterface {
       MatTableModule, 
       MatSortModule, 
       MatPaginatorModule,
-      MatDialogModule
+      MatDialogModule,
+      CommonModule
     ],
   templateUrl: './favorite-product.component.html',
   styleUrl: './favorite-product.component.scss'
 })
-export class FavoriteProductComponent {
-  displayedColumns: string[] = ['checkbox', 'name', 'store', 'categories','bubble'];
+export class FavoriteProductComponent implements OnInit{
+  displayedColumns: string[] = ['checkbox', 'name', 'store', 'categories','price','bubble'];
   dataSource: MatTableDataSource<dummyUserInterface>;
   selection = new SelectionModel<dummyUserInterface>(true, []);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+  likedProduct: any;
+  products: any;
 
   // creatine a dummy user data source for the table
-  users = [
-    {
-        "checkbox": "1",
-        "name": "Asher A.",
-        "store": "44",
-        "categories": "peach"
-    },
-    {
-        "checkbox": "2",
-        "name": "Charlotte J.",
-        "store": "29",
-        "categories": "pineapple"
-    },
-    {
-        "checkbox": "3",
-        "name": "Isla O.",
-        "store": "44",
-        "categories": "lychee"
-    },
-    {
-        "checkbox": "4",
-        "name": "Violet T.",
-        "store": "45",
-        "categories": "lime"
-    },
-    {
-        "checkbox": "5",
-        "name": "Cora A.",
-        "store": "43",
-        "categories": "lychee"
-    },
-    {
-        "checkbox": "6",
-        "name": "Jasper J.",
-        "store": "49",
-        "categories": "lime"
-    },
-    {
-        "checkbox": "7",
-        "name": "Arthur A.",
-        "store": "100",
-        "categories": "peach"
-    },
-    {
-        "checkbox": "8",
-        "name": "Asher A.",
-        "store": "14",
-        "categories": "lychee"
-    },
-    {
-        "checkbox": "9",
-        "name": "Arthur C.",
-        "store": "19",
-        "categories": "peach"
-    },
-    {
-        "checkbox": "10",
-        "name": "Atticus T.",
-        "store": "38",
-        "categories": "kiwi"
-    },
-    {
-        "checkbox": "11",
-        "name": "Theodore O.",
-        "store": "43",
-        "categories": "kiwi"
-    },
-    {
-        "checkbox": "12",
-        "name": "Jasper T.",
-        "store": "91",
-        "categories": "lime"
-    },
-    {
-        "checkbox": "13",
-        "name": "Jasper C.",
-        "store": "46",
-        "categories": "mango"
-    },
-    {
-        "checkbox": "14",
-        "name": "Theodore T.",
-        "store": "17",
-        "categories": "lychee"
-    },
-    {
-        "checkbox": "15",
-        "name": "Levi C.",
-        "store": "56",
-        "categories": "lychee"
-    },
-    {
-        "checkbox": "16",
-        "name": "Isabella I.",
-        "store": "84",
-        "categories": "lychee"
-    },
-    {
-        "checkbox": "17",
-        "name": "Violet E.",
-        "store": "55",
-        "categories": "pomegranate"
-    },
-    {
-        "checkbox": "18",
-        "name": "Olivia A.",
-        "store": "57",
-        "categories": "pomegranate"
-    },
-    {
-        "checkbox": "19",
-        "name": "Oliver O.",
-        "store": "62",
-        "categories": "peach"
-    },
-    {
-        "checkbox": "20",
-        "name": "Levi O.",
-        "store": "67",
-        "categories": "mango"
-    }
+  users: dummyUserInterface[] = [
+    
 ]
-  constructor(public dialog: MatDialog) {
+  constructor(public dialog: MatDialog, private apiService: APIService) {
     this.dataSource = new MatTableDataSource(this.users);
   }
+
+  ngOnInit(): void {
+    let cartJson = localStorage.getItem('favouriteProducts');
+    this.likedProduct =JSON.parse(cartJson!);
+    // console.log(this.likedProduct);
+
+     this.apiService.getSavedProducts().subscribe((res: any) => {
+      this.products = res.data;
+    this.dataSource = new MatTableDataSource(this.products);
+    console.log(this.products)
+    });
+  }
+
   moreVert(e:dummyUserInterface) {
     this.dialog.open(PurchaseDetailComponent, {
-      data: {
-        itemName: 'hat',
-        itemPrice: 'hat',
-      }, 
+      data: e,
         width: '479px', 
         position: {right:'50px', top: '10%'} 
     });
-    // console.log(e);
+    console.log(e);
   }
   
 
@@ -242,7 +143,7 @@ showSelection(e:any) {
 })
 export class PurchaseDetailComponent {
   constructor(@Inject(MAT_DIALOG_DATA) public data: dummyUserInterface) {
-    console.log('kji');
+    // console.log(this.data);
     
   }
   

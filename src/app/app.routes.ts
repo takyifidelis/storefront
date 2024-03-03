@@ -102,8 +102,12 @@ export const routes: Routes = [
       { path: 'orders', component: OrderComponent },
     ],
   },
+  {path: 'ecommerce/checkout-page', component: CkeckoutPageComponent},
+  {path: 'search-order', component: SearchOrderComponent},
+
   { path: 'checkout-page', component: CkeckoutPageComponent },
   { path: 'search-order', component: SearchOrderComponent },
+
   {
     path: 'merchant',
     component: MerchantDashboardComponent,

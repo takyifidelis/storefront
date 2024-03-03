@@ -1,20 +1,35 @@
-
-
-  <div class="d-flex" style="justify-content: center;">
-    <div class="search-box">
-        <mat-form-field style="width: 100%;">
-            <input type="text" matInput placeholder="Search for your business or website type">
-            <mat-icon matSuffix>search</mat-icon>
-          </mat-form-field>
-    </div>
+<div class="d-flex" style="justify-content: center">
+  <div class="search-box">
+    <mat-form-field style="width: 100%">
+      <input
+        type="text"
+        matInput
+        placeholder="Search for your business or website type"
+      />
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+  </div>
 </div>
 
 <div class="template-options-container d-flex">
-    <div class="row row-cols-sm-2 row-cols-lg-3 w-100" style="flex-wrap: wrap;">
-        <div class="col template-container" (click)="goToStore()">
-            <img class="mouse-pointer" src="/assets/images/Text.svg" alt="" srcset="">
-        </div>
-        <div class="col template-container">
+  <div class="row row-cols-sm-2 row-cols-lg-3 w-100" style="flex-wrap: wrap">
+    <div
+      class="col template-container"
+      (click)="goToStore()"
+      *ngFor="let store of stores"
+      style="display: flex; flex-direction: column"
+    >
+      <img
+        class="mouse-pointer"
+        src="/assets/images/shop-image.png"
+        alt=""
+        srcset=""
+        style="width: 70%; padding: 20px"
+      />
+      <span class="text" style="margin-left: 27%">{{ store.storeName }}</span>
+    </div>
+
+    <!-- <div class="col template-container">
             <img class="mouse-pointer" src="/assets/images/Text1.svg" alt="" srcset="">
         </div>
         <div class="col template-container">
@@ -23,5 +38,6 @@
         <div class="col template-container">
             <img class="mouse-pointer" src="/assets/images/Text3.svg" alt="" srcset="">
         </div>
-    </div>
+    </div> -->
+  </div>
 </div>

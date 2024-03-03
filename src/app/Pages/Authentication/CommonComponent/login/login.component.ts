@@ -37,7 +37,11 @@ import { AuthService } from '../../Auth/auth.service';
 import { faEye } from '@fortawesome/free-regular-svg-icons';
 import { APIService } from '../../../../Services/api.service';
 import { DataService } from '../../../../Services/data.service';
+
+import { environment } from '../../../../../environments/environment.development';
+
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+
 
 @Component({
   selector: 'app-login',
@@ -111,6 +115,14 @@ export class LoginComponent implements OnInit {
       (resData) => {
         this.toastr.success('Success', 'Login Account!');
         console.log(resData);
+
+        // if (resData.data?.type == 'Business') {
+        //   this.router.navigate(['merchant']);
+        // } else if (resData.data?.type == 'Customer') {
+        //   this.router.navigate(['customer']);
+        // }
+      },
+
         if (resData.data?.type == 'Business') {
         if (resData.type == 'Business') {
           localStorage.setItem("businessId", resData.data.business)
@@ -122,6 +134,7 @@ export class LoginComponent implements OnInit {
         }
       }
     },
+
       (errorMessage) => {
         console.log(errorMessage);
         this.error = errorMessage;
@@ -168,5 +181,14 @@ export class LoginComponent implements OnInit {
          this.toastr.error(this.error, 'Login Failed');
       }
     }
+
+
+    handleGoogleResponse() {
+      // this.apiService.getGoogle().subscribe((res: any)=> {
+      //   console.log(res)
+      // })
+      window.open(`${environment.baseApiUrl}/account/google/auth`, "_self");
+    }
+
 }
 

@@ -23,24 +23,33 @@
             <div class="container">
               <div class="row top">
                 <div class="col">
-                  <p class="txt">{{productItem.description}} </p>
+
+                  <p class="txt">{{ productItem.description }}</p>
+
                 </div>
               </div>
               <div class="row">
                 <div class="col">
-                  <h4 class="item-name">{{productItem.name}} </h4>
+
+                  <h4 class="item-name">{{ productItem.name }}</h4>
+
                 </div>
               </div>
               <div class="row">
                 <div class="col d-inline-flex">
                   <div class="item-rating d-flex">
                     <div class="starIcon">
+
                       <app-star-rating [readonly]="true" [rating]="productItem.rating"></app-star-rating>
                     </div>
-                    <p class="txt-2 m-0">4.0 Ratings</p>
+                    <p class="txt-2 m-0">{{ productItem.rating }} Ratings</p>
                   </div>
                   <div class="items-available d-flex align-items-center">
-                    <p class="txt-2 m-0">Available Stock: {{productItem.quantity}}</p>
+
+                    <p class="txt-2 m-0">
+                      Available Stock: {{ productItem.quantity }}
+                    </p>
+
                   </div>
                 </div>
               </div>
@@ -69,6 +78,9 @@
               </div>
 
               <div class="d-flex align-items-center justify-content-start">
+
+                <button class="size one" *ngFor="let variation of sizes">
+
                 <!-- <button
                   class="size one"
                   *ngFor="let variation of this.product.variations[0].values"
@@ -98,7 +110,7 @@
                 <div class="price">
                   <p class="price-name quantity-price-name">PRICE</p>
                   <div class="price-amount amount">
-                    {{productItem.price + "EUR"}} 
+                    {{ productItem.price + "EUR" }}
                   </div>
                 </div>
               </div>
@@ -107,7 +119,7 @@
                 <span class="add-to-buy" (click)="onAddToBuy()"
                   >ADD TO BUY</span
                 >
-                <span class="save">
+                <span class="save" (click)="onLikedProducts()">
                   <fa-icon [icon]="heartIcon"></fa-icon> SAVE
                 </span>
               </div>
@@ -397,18 +409,76 @@
     </mat-tab-group>
   </section>
   <section class="similar-products">
-    <div class="first-row d-flex justify-content-between align-items-center">
-      <div class="card" style="width: 18rem">
-        <img
-          src="assets\images\featured-accesories-rings.svg"
-          class="card-img-top"
-          alt="..."
-        />
+    <h1 style="text-align: center">Similar Products</h1>
+    <div
+      class="first-row"
+      style="
+        display: grid;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 18px;
+      "
+    >
+      <div
+        class="card .card-container"
+        style="width: 18rem"
+        *ngFor="let product of similarProducts"
+      >
+        <img [src]="product?.images[0]?.url" class="card-img-top" alt="..." />
         <div class="card-body">
           <div
             class="product-name d-flex justify-content-between align-items-center"
           >
-            <h5 class="card-title">ACCESORIES</h5>
+            <h5 class="card-title"></h5>
+            <div class="product-btn">
+              <button
+                (click)="onLikeOne(product)"
+                class="heart nav-icons"
+                [ngClass]="{ liked: product.isliked }"
+                mat-icon-button
+              >
+                <mat-icon>favorite</mat-icon>
+              </button>
+              <button
+                class="cart nav-icons"
+                (click)="onAddOneToBuy(product)"
+                color="primary"
+                mat-icon-button
+              >
+                <mat-icon>shopping_cart</mat-icon>
+              </button>
+            </div>
+          </div>
+          <p class="blossom-bag-paragraph">{{ product?.name }}</p>
+          <div
+            class="ratings d-flex align-items-center justify-content-between"
+          >
+            <app-star-rating
+              [rating]="product.rating"
+              [readonly]="true"
+            ></app-star-rating>
+            <span class="ratings-43"
+              ><span class="rating-number"> {{ product?.rating }} </span>ratings
+            </span>
+          </div>
+          <div class="product-price">{{ product?.price }}</div>
+          <div class="product-color-div d-flex">
+            <div class="blue product-color"></div>
+            <div class="yellow product-color"></div>
+            <div class="voilet product-color"></div>
+            <div class="red product-color"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="second-row">
+      <div class="card" style="width: 18rem">
+        <img [src]="" class="card-img-top" alt="..." />
+        <div class="card-body">
+          <div
+            class="product-name d-flex justify-content-between align-items-center"
+          >
+            <h5 class="card-title">{{ product?.category }}</h5>
             <div class="product-btn">
               <button class="heart nav-icons" color="primary" mat-icon-button>
                 <mat-icon>favorite_border</mat-icon>
@@ -436,47 +506,7 @@
           </div>
         </div>
       </div>
-    </div>
-    <div class="second-row">
-      <div class="card" style="width: 18rem">
-        <img
-          src="assets\images\featured-accesories-rings.svg"
-          class="card-img-top"
-          alt="..."
-        />
-        <div class="card-body">
-          <div
-            class="product-name d-flex justify-content-between align-items-center"
-          >
-            <h5 class="card-title">ACCESORIES</h5>
-            <div class="product-btn">
-              <button class="heart nav-icons" color="primary" mat-icon-button>
-                <mat-icon>favorite_border</mat-icon>
-              </button>
-              <button class="cart nav-icons" color="primary" mat-icon-button>
-                <mat-icon>shopping_cart</mat-icon>
-              </button>
-            </div>
-          </div>
-          <p class="blossom-bag-paragraph">Blossom Bag</p>
-          <div class="ratings">
-            <img src="assets\images\star-rating.svg" alt="ratings" />
-            <img src="assets\images\star-rating.svg" alt="ratings" />
-            <img src="assets\images\star-rating.svg" alt="ratings" />
-            <img src="assets\images\star-rating.svg" alt="ratings" />
-            <img src="assets\images\star-rating-unfilled.svg" alt="" />
-            <span class="ratings-43">43 Ratings </span>
-          </div>
-          <div class="product-price">$39.49</div>
-          <div class="product-color-div d-flex">
-            <div class="blue product-color"></div>
-            <div class="yellow product-color"></div>
-            <div class="voilet product-color"></div>
-            <div class="red product-color"></div>
-          </div>
-        </div>
-      </div>
-    </div>
+    </div> -->
     <hr />
   </section>
 </div>

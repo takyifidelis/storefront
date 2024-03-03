@@ -122,6 +122,22 @@ export class APIService {
     });
   }
 
+  getStores(): Observable<Response> {
+    return this.http.get<Response>(`${environment.baseApiUrl}/store/get-all`, {
+      withCredentials: true,
+    })
+  }
+
+// initializePayment(payload:any): Observable<Response> {
+//   return this.http.post<Response>(`${environment.baseApiUrl}/order/initialize/f739a921-7267-4e02-8222-ceb2b4c352cf`, payload, {
+//     withCredentials: true,
+//   })
+// }
+
+getGoogle(): Observable<Response>{
+  return this.http.get<Response>(`${environment.baseApiUrl}/account/google/auth`,
+  {
+
 
   getStoreCategories(storeId: string): Observable<Response>{
     return this.http.get<Response>(`${environment.baseApiUrl}/store/get-categories/${storeId}`,
@@ -131,6 +147,7 @@ export class APIService {
   }
 initializePayment(customerId:string, cart:any): Observable<Response> {
   return this.http.post<Response>(`${environment.baseApiUrl}/order/initialize/${customerId}`, cart, {
+
     withCredentials: true,
   })
 }
@@ -141,6 +158,16 @@ addShipping(customerId: string, user: any) {
     withCredentials: true,
   })
 }
+  getStoreProductsCustomer(storeId: string): Observable<Response>{
+    return this.http.get<Response>(`${environment.baseApiUrl}/store/get-store-products/${storeId}`,
+    {
+      withCredentials: true,
+    })
+  }
+  
+  getStoreProductsMerchant(storeId: string): Observable<Response>{
+    return this.http.get<Response>(`${environment.baseApiUrl}/product/get-all-products/${storeId}`,
+
 getAllShippingAddresses(customerId: string) {
   return this.http.get(`${environment.baseApiUrl}/customer/get-shipping-addresses/${customerId}`,
   {
@@ -180,6 +207,54 @@ getCustomerStoreProducts(storeId: string): Observable<Response>{
       )
       .pipe(catchError(this.handleError));
   }
+
+
+  publishTemplate(storeId: string, template:any): Observable<Response>{
+    return this.http.patch<Response>(`${environment.baseApiUrl}/store/publish-template/${storeId}`,
+    template, {
+      withCredentials: true,
+    })
+  }
+
+  addTOViews(products: any): Observable<Response>{
+    return this.http.post<Response>(`${environment.baseApiUrl}/customer/add-to-views/f739a921-7267-4e02-8222-ceb2b4c352cf`, products, {
+      withCredentials: true,
+    })
+  }
+
+  getOrders(): Observable<Response>{
+    return this.http.get<Response>(`${environment.baseApiUrl}/customer/get-orders/f739a921-7267-4e02-8222-ceb2b4c352cf`, {
+      withCredentials: true
+    })
+  }
+
+  addToFavourite(products: any): Observable<Response>{
+    return this.http.post<Response>(`${environment.baseApiUrl}/customer/add-to-views/f739a921-7267-4e02-8222-ceb2b4c352cf`, products, {
+      withCredentials: true,
+    })
+  }
+
+  getSavedProducts(): Observable<Response>{
+    return this.http.get<Response>(`${environment.baseApiUrl}/customer/get-saved-products/f739a921-7267-4e02-8222-ceb2b4c352cf/?idOnly=true&likedOnly=true`, {
+      withCredentials: true
+    })
+  }
+
+  getHistoryProducts(): Observable<Response>{
+    return this.http.get<Response>(`${environment.baseApiUrl}/customer/get-saved-products/f739a921-7267-4e02-8222-ceb2b4c352cf`, {
+      withCredentials: true
+    })
+  }
+
+  removeProducts(){
+    return this.http.patch<Response>(`${environment.baseApiUrl}/customer/remove-products-from-favorites/f739a921-7267-4e02-8222-ceb2b4c352cf`, {
+      withCredentials: true
+    })
+  }
+
+
+}
+
   getStoreProducts(storeId: string): Observable<Response> {
     return this.http.get<Response>(
       `${environment.baseApiUrl}/product/get-all-products/${storeId}`,
@@ -188,6 +263,7 @@ getCustomerStoreProducts(storeId: string): Observable<Response>{
       }
     );
   }
+
 
   getOneProducts(productId: string): Observable<Response> {
     return this.http.get<Response>(
