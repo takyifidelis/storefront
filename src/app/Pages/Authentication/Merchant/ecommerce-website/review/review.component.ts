@@ -10,10 +10,13 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faHeart, faStar } from '@fortawesome/free-solid-svg-icons';
 import { MatTabsModule } from '@angular/material/tabs';
 import { CommonModule } from '@angular/common';
+
 import { DataService } from '../../../../../Services/data.service';
 import { APIService } from '../../../../../Services/api.service';
 import { StarRatingComponent } from '../../../../Dashboard/Customer/components/star-rating/star-rating.component';
 import { ProductObject } from '../../../../../interfaces/all-interfaces';
+import { AuthService } from '../../../Auth/auth.service';
+
 
 @Component({
   selector: 'app-review',
@@ -52,6 +55,20 @@ export class ReviewComponent implements OnInit {
 
 constructor(private route: ActivatedRoute,private dataService:DataService,public apiService: APIService){}
 
+
+
+  //   this.product = this.apiService.getProductTemp();
+  //   this.selectedImage = this.product.images[0].url;
+
+  // this.initialPrice = this.product.price;
+  amount: number = this.quantity * 90;
+  productItem: any;
+  constructor(
+    private route: ActivatedRoute,
+    private dataService: DataService,
+    public apiService: APIService
+  ) {}
+
   increaseQuantity(): void {
     this.quantity++;
     if(this.initialPrice)
@@ -66,6 +83,7 @@ constructor(private route: ActivatedRoute,private dataService:DataService,public
       this.productItem.price = this.quantity * this.initialPrice;
     }
   }
+  productReview: any;
   showForm(): void {
     this.isFormDisplayed = true;
   }
@@ -87,6 +105,7 @@ constructor(private route: ActivatedRoute,private dataService:DataService,public
     let addTobuyJson = JSON.stringify(cart);
     localStorage.setItem('cart', addTobuyJson);
   }
+
 
   onAddOneToBuy(product: any) {
 
@@ -165,3 +184,22 @@ constructor(private route: ActivatedRoute,private dataService:DataService,public
     }
     
   }
+
+  ngOnInit() {
+//     for (const product of this.dataService.products) {
+//       if (product.id === this.route.snapshot.params['id']) {
+//         this.productItem = product;
+//         console.log(this.productItem);
+//       }
+//     }
+
+//     this.apiService.getReviews().subscribe((response: any) => {
+//       console.log(response);
+//       // this.users = response.data
+//       this.productReview = response.data;
+//     });
+
+//     // console.log(this.dataService.products.find((element:any) => console.log(element.id)));
+//   }
+// }
+

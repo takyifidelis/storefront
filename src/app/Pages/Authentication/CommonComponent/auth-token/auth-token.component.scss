@@ -122,6 +122,10 @@
           text-align: center;
           letter-spacing: -0.3px;
           color: #3d4a5c;
+          a {
+            cursor: pointer;
+            color: #0f3cd9;
+          }
         }
       }
       .help-block {
@@ -152,4 +156,8 @@
       }
     }
   }
+}
+
+input.ng-dirty.ng-touched.ng-valid {
+  border: 1px solid #62ea5f !important;
 }

@@ -14,6 +14,11 @@ import {
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../../../Authentication/Auth/auth.service';
 
+import { APIService } from '../../../../../Services/api.service';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+
+
 @Component({
   selector: 'app-merchant-add-product',
   standalone: true,
@@ -23,22 +28,39 @@ import { AuthService } from '../../../../Authentication/Auth/auth.service';
     CommonModule,
     RouterModule,
     ReactiveFormsModule,
+    CKEditorModule,
   ],
   templateUrl: './merchant-add-product.component.html',
   styleUrl: './merchant-add-product.component.scss',
 })
 export class MerchantAddProductComponent {
+  public Editor = ClassicEditor;
+  public productDetailss: any = {
+    description: '<p></p>', // Initial value for the description
+  };
   images: string[] = []; // Assuming we don't need topImages and bottomImages arrays separately anymore
   productForm: FormGroup;
+  inputText: string = '';
+  inputSize: string = '';
+
+  inputColor: string = '';
+  textArray: string[] = [];
+  sizeArray: string[] = [];
+  colorArray: string[] = [];
+  variationKey: string = '';
+  variationValue: string = '';
+  variationArray: { key: string; values: string[] }[] = [];
+  selectedStatus: string = 'Active';
+  displayedStatus: string = 'Active';
   error: string | any = null;
   files: any;
   data = new FormData();
-  categories: string[] = ['Dresses', 'Tops', 'Sneakers', 'Accessories'];
+  categories: string[] = [];
   productDetails = {
     name: '',
     price: '',
     quantity: '',
-    description: '',
+    description: this.productDetailss.description,
     isActive: 'true',
     category: '',
   };
@@ -67,7 +89,7 @@ export class MerchantAddProductComponent {
     return this.images.length < 4;
   }
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(private authService: APIService, private router: Router) {
     this.productForm = new FormGroup({
       productName: new FormControl('', Validators.required),
       productPrice: new FormControl('', Validators.required),
@@ -90,6 +112,7 @@ export class MerchantAddProductComponent {
     this.authService.postProduct(this.data).subscribe(
       (resData) => {
         console.log(resData);
+        this.router.navigate(['/merchant/product']);
       },
       (errorMessage) => {
         console.log(errorMessage);
@@ -115,5 +138,41 @@ export class MerchantAddProductComponent {
       isActive: 'true',
       category: '',
     };
+  }
+  addCategory() {
+    this.textArray.push(this.inputText);
+    this.inputText = '';
+  }
+  addSize() {
+    console.log('Hello World');
+    if (this.variationKey && this.variationValue) {
+      let existingVariation = this.variationArray.find(
+        (variation) => variation.key === this.variationKey
+      );
+      if (existingVariation) {
+        existingVariation.values.push(this.variationValue);
+      } else {
+        this.variationArray.push({
+          key: this.variationKey,
+          values: [this.variationValue],
+        });
+      }
+      this.variationKey = '';
+      this.variationValue = '';
+    }
+  }
+  addColor() {
+    this.colorArray.push(this.inputColor);
+    this.inputColor = '';
+  }
+  addVariation() {}
+
+  onStatusChange(event: Event) {
+    const target = event.target as HTMLSelectElement;
+    this.selectedStatus = target.value;
+
+    this.displayedStatus =
+      this.selectedStatus === 'true' ? 'Active' : 'Not Active';
+    this.productDetails.isActive = this.selectedStatus;
   }
 }

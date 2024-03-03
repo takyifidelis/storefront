@@ -15,10 +15,12 @@ export class StarRatingComponent {
   @Input() rating: number = 0;
   @Input() readonly: boolean = false;
   @Output() ratingChange: EventEmitter<number> = new EventEmitter<number>();
+  @Input() emitter: EventEmitter<number> | undefined;
 
   setRating(value: number) {
     if (this.readonly) return;
     this.rating = value;
     this.ratingChange.emit(this.rating);
+    // console.log(value);
   }
 }

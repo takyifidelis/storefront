@@ -1,10 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { catchError,  map,  switchMap } from 'rxjs/operators';
+
+import { catchError, map, switchMap } from 'rxjs/operators';
+
 import { throwError, Observable } from 'rxjs';
 import {
   ForgetPasswordResponse,
+  ProductResponseData,
   ResetPasswordResponse,
+  ReviewResponseData,
   SignupResponseData,
 } from '../Auth/api.model';
 
@@ -80,25 +84,11 @@ export class AuthService {
       )
       .pipe(catchError(this.handleError));
   }
-  signupCustomer(
-    firstName: string,
-    lastName: string,
-    email: string,
-    type: string,
-    password: string,
-    confirmPassword: string
-  ) {
+  signupCustomer(credentials: { [key: string]: any }) {
     return this.http
       .post<SignupResponseData>(
         'https://storefront-backend-jan-dev-api.vercel.app/api/account/register/local',
-        {
-          firstName,
-          lastName,
-          email,
-          type,
-          password,
-          confirmPassword,
-        },
+        credentials,
         {
           withCredentials: true,
         }
@@ -117,15 +107,26 @@ export class AuthService {
           withCredentials: true,
         }
       )
-      .pipe(map((response: any) => {
-        return response.data.customer;
-      }));
+      .pipe(
+        map((response: any) => {
+          return response.data.customer;
+        })
+      );
   }
 
   logout() {
     return this.http
       .get<SignupResponseData>(
         'https://storefront-backend-jan-dev-api.vercel.app/api/account/logout',
+        { withCredentials: true }
+      )
+      .pipe(catchError(this.handleError));
+  }
+
+  resendCode() {
+    return this.http
+      .get(
+        'https://storefront-backend-jan-dev-api.vercel.app/api/account/resend/code',
         { withCredentials: true }
       )
       .pipe(catchError(this.handleError));
@@ -160,6 +161,20 @@ export class AuthService {
       )
       .pipe(catchError(this.handleError));
   }
+  replyReview(comment: string, review: string, storeId: string) {
+    return this.http
+      .post<SignupResponseData>(
+        `https://storefront-backend-jan-dev-api.vercel.app/api/store/reply-customer/${storeId}`,
+        {
+          comment,
+          review,
+        },
+        {
+          withCredentials: true,
+        }
+      )
+      .pipe(catchError(this.handleError));
+  }
   // Password Reset
   passwordReset(email: string) {
     return this.http
@@ -167,6 +182,28 @@ export class AuthService {
         'https://storefront-backend-jan-dev-api.vercel.app/api/account/request/password/reset',
         {
           email,
+        },
+        {
+          withCredentials: true,
+        }
+      )
+      .pipe(catchError(this.handleError));
+  }
+  reviewProduct(
+    productId: string,
+    rating: number,
+    remarks: string,
+    comment: string
+  ) {
+    return this.http
+      .post<ForgetPasswordResponse>(
+        'https://storefront-backend-jan-dev-api.vercel.app/api/customer/review-product/{order_id}',
+        {
+          productId,
+          rating,
+
+          remarks,
+          comment,
         },
         {
           withCredentials: true,
@@ -196,6 +233,22 @@ export class AuthService {
       )
       .pipe(catchError(this.handleError));
   }
+  
+  getProducts() {
+    return this.http
+      .get<ProductResponseData>(
+        'https://storefront-backend-jan-dev-api.vercel.app/api/product/get-all-products/22095521-d6e3-4ed1-a7de-e96e1f81bed3',
+
+  getReviews(): Observable<ReviewResponseData> {
+    return this.http
+      .get<ReviewResponseData>(
+        'https://storefront-backend-jan-dev-api.vercel.app/api/store/get-reviews/22095521-d6e3-4ed1-a7de-e96e1f81bed3',
+>
+        { withCredentials: true }
+      )
+
+      .pipe(catchError(this.handleError));
+  }
 
   postProduct(formData: FormData) {
     return this.http
@@ -211,7 +264,6 @@ export class AuthService {
       .pipe(catchError(this.handleError));
   }
 
-  
   private handleError(errorRes: HttpErrorResponse) {
     console.error('Error Response:', errorRes);
     let errorMessage = 'An unknown error occurred!';
@@ -237,4 +289,4 @@ export class AuthService {
     }
     return throwError(errorMessage);
   }
-  }
+}

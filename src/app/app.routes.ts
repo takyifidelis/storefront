@@ -43,9 +43,7 @@ import { aboutUsGuard } from './gaurds/about-us.guard';
 import { MerchantAddProductComponent } from './Pages/Dashboard/Merchant/components/merchant-add-product/merchant-add-product.component';
 import { CkeckoutPageComponent } from './Pages/Dashboard/Customer/components/ckeckout-page/ckeckout-page.component';
 import { AuthSuccessfulComponent } from './Pages/Authentication/CommonComponent/auth-successful/auth-successful.component';
-
-
-
+import { MerchantProductsDashboadComponent } from './Pages/Dashboard/Merchant/components/merchant-products-dashboad/merchant-products-dashboad.component';
 
 export const routes: Routes = [
   { path: '', component: LandingPageComponent },
@@ -75,8 +73,16 @@ export const routes: Routes = [
         component: EcommerceWebsiteComponent,
         children: [
           { path: 'home', component: HomeEcommerceComponent },
-          { path: 'about', canActivate:[aboutUsGuard], component: AboutUsComponent },
-          { path: 'contact', canActivate:[contactUsGuard],component: ContactUsComponent },
+          {
+            path: 'about',
+            canActivate: [aboutUsGuard],
+            component: AboutUsComponent,
+          },
+          {
+            path: 'contact',
+            canActivate: [contactUsGuard],
+            component: ContactUsComponent,
+          },
 
           { path: '', redirectTo: 'home', pathMatch: 'full' },
         ],
@@ -87,32 +93,41 @@ export const routes: Routes = [
     path: 'customer',
     component: CustomerDashboardComponent,
 
-
-    children:[
-      {path: 'shop', component: ShopComponent},
-      {path: 'fav-product', component: FavoriteProductComponent},
-      {path: 'history', component: HistoryComponent},
-      {path: 'new-payment-opt', component: NewPaymentOptionComponent},
-      {path: 'payment-opt', component: PaymentOptionComponent},
-      {path: 'orders', component:  OrderComponent},
-    ]
-
-
+    children: [
+      { path: 'shop', component: ShopComponent },
+      { path: 'fav-product', component: FavoriteProductComponent },
+      { path: 'history', component: HistoryComponent },
+      { path: 'new-payment-opt', component: NewPaymentOptionComponent },
+      { path: 'payment-opt', component: PaymentOptionComponent },
+      { path: 'orders', component: OrderComponent },
+    ],
   },
   {path: 'ecommerce/checkout-page', component: CkeckoutPageComponent},
   {path: 'search-order', component: SearchOrderComponent},
+
+  { path: 'checkout-page', component: CkeckoutPageComponent },
+  { path: 'search-order', component: SearchOrderComponent },
+
   {
     path: 'merchant',
     component: MerchantDashboardComponent,
     children: [
       { path: '', component: HomeComponent },
       { path: 'home', component: HomeComponent },
-      { path: 'product', component: MerchantProductsComponent },
       { path: 'discount', component: MerchantDiscountComponent },
       { path: 'reviews', component: MerchantReviewsComponent },
       { path: 'order', component: MerchantOrdersComponent },
       { path: 'customers', component: MerchantCustomersComponent },
       { path: 'analytics', component: MerchantAnalyticsComponent },
+      {
+        path: 'product',
+        component: MerchantProductsComponent,
+        children: [
+          // { path: '', component: MerchantProductsComponent },
+          { path: 'add-product', component: MerchantAddProductComponent },
+          { path: '', component: MerchantProductsDashboadComponent },
+        ],
+      },
     ],
   },
   {

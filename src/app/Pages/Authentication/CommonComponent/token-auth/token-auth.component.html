@@ -81,15 +81,28 @@
             </div>
           </div>
           <div class="text">
-            <p>Didn’t get, <a href="#">Resend</a></p>
-            <p>
+
+            <p>Didn’t get, <a (click)="resendVerificationCode()">Resend</a></p>
+            <!-- <p>
+
               <span class="help-block" *ngIf="error">
                 {{ error }}
               </span>
-            </p>
+            </p> -->
           </div>
-          <button class="btn btn-primary" [disabled]="!authenticate.valid">
-            Continue
+          <button
+            type="submit"
+            class="btn btn-primary"
+            [disabled]="!authenticate.valid"
+          >
+            <span class="continue-btn" *ngIf="!isLoading">Continue</span>
+            <span class="loading" *ngIf="isLoading"
+              ><img
+                src="assets\icons\loading-btn-spinner.svg"
+                alt="Loading.."
+              />
+              Loading...</span
+            >
           </button>
         </div>
       </div>

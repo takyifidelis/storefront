@@ -17,6 +17,9 @@ import {
 import { SignupResponseData } from '../../../../Authentication/Auth/api.model';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { HttpErrorResponse } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-ckeckout-page',
@@ -37,9 +40,11 @@ export class CkeckoutPageComponent implements OnInit {
   payload: any;
   PAYPAL_CLIENT_ID: string =   `${environment.paypalClientID2}`;
   @ViewChild('paypalRef', { static: true }) private paypalRef: ElementRef | undefined;
+  items:any = []
+
 
   constructor(
-    public apiService: APIService,
+    private apiService: APIService,
     public dataService: DataService,
     private snackBar: MatSnackBar,
     private router: Router,
@@ -56,8 +61,10 @@ export class CkeckoutPageComponent implements OnInit {
   
   ngOnInit(): void {
     this.initConfig();
-
+    this.dataService.cart = JSON.parse(localStorage.getItem('cart')!);
+    // console.log(this.dataService.cart);
     this.user = new FormGroup({
+
       name: new FormControl(null, Validators.required),
       streetAddress: new FormControl(null, Validators.required),
       postalCode: new FormControl(null, Validators.required),
@@ -105,15 +112,37 @@ this.createOrder();
     console.log(response);
     const orderData = await response.json();
     if (orderData.type === 'success') {
+
+//       'first-name': new FormControl(null),
+//       'streetAddress': new FormControl(null),
+//       'telephone': new FormControl(null),
+//       'countryCode':  new FormControl(null),
+//       'city':  new FormControl(null),
+//       'appartmentNumber':  new FormControl(null)
+//     })
+//   }
+//   getTotalCost() {
+//     return this.dataService.cart.map((t:any) => t.price).reduce((acc: any, value: any) => acc + value, 0);
+//   }
+//   getdata(){
+//     if (this.dataService.cart.length > 0) {
+//       // this.cart = JSON.parse(localStorage.getItem('cart')!);
+//       for (const item of this.dataService.cart) {
+//           this.items.push({product:item.id ,quantity: 1, variations:[] })
+//       }
+//     console.log(this.items);
+//     } else {
+
       this.snackBar.open(
-        `Transaction completed for order ${orderData.data.orderId}`,
+        `Your cart is empty, please add products`,
         'Close',
         { duration: 3000 }
       );
+      this.router.navigate(['/ecommerce']);
     }
-    // dispatch(clearCart());
-    this.router.navigate(['/customer/orders']);
+   
   }
+
 
   // private initConfig(): void {
   //   this.payPalConfig = {
@@ -177,6 +206,78 @@ this.createOrder();
         onClick: (data, actions) => {
             console.log('onClick', data, actions);
         },
+
+  private initConfig(): void {
+    
+    this.payPalConfig = {
+      clientId: environment.paypalClientID,
+      createOrderOnServer: (data:any) => {
+        console.log(data)
+        return new Promise<string>((resolve, reject) => {
+                  // resolve("9JL371110H147321Y");
+                  
+                  let orderData={
+                    store: localStorage.getItem('storeId')!,
+                    shipping: "",
+                    destination: "",
+                    items:this.items
+                  }
+                  this.apiService.getAllShippingAddresses(localStorage.getItem('customerId')!).subscribe((shippingResponseData:{[key: string]: any;} )=> {
+                    console.log(shippingResponseData)
+                    console.log(shippingResponseData['type'])
+                    if (shippingResponseData['type']==="success") {
+                      orderData.shipping = shippingResponseData['data'][0].id
+                      console.log(orderData)
+                      this.apiService.initializePayment(localStorage.getItem('customerId')!,orderData).subscribe((orderResponseData:{[key: string]: any;}) => {
+                        resolve(orderResponseData['data'].orderId)
+                      }),(error:HttpErrorResponse) => {
+                        console.error('Error creating order:', error);
+                        reject(error);
+                      }
+                    }
+
+                  }),
+                  (error:HttpErrorResponse) => {
+                    console.error('Error creating order:', error);
+                    reject(error);
+                  }
+              });
+      },
+      onApprove: (data:any, actions:any) => {
+        console.log(data)
+        return new Promise<string>((resolve, reject) => {
+          this.apiService.onApprovePayment(data.orderID).subscribe((response:{[key: string]: any;}) =>{
+            console.log(response)
+            if (response['type'] === 'success') {
+              this.snackBar.open(
+                `Transaction completed for order ${data.orderID}`,
+                'Close',
+                { duration: 3000 }
+              );
+            }
+            // dispatch(clearCart());
+            localStorage.removeItem('cart');
+            this.router.navigate(['/customer/orders']);
+            
+          })
+        })
+      },
+      onClientAuthorization: (data:any) => {
+        console.log(
+          'onClientAuthorization - you should probably inform your server about completed transaction at this point',
+          data
+        );
+      },
+      onCancel: (data, actions) => {
+        console.log('OnCancel', data, actions);
+      },
+      onError: (err) => {
+        console.log('OnError', err);
+      },
+      onClick: (data, actions) => {
+        console.log('onClick', data, actions);
+      },
+
     };
 }
 
@@ -196,7 +297,10 @@ this.createOrder();
         console.log(res);
       });
   }
+
+
 }
+
 
 
 
@@ -252,4 +356,4 @@ this.createOrder();
 //     });
 // }
 
-// function
+/

@@ -12,6 +12,7 @@
           />
         </div>
         }
+        
       </mat-drawer>
       <mat-drawer-content>
         <div class="row">
@@ -22,29 +23,33 @@
             <div class="container">
               <div class="row top">
                 <div class="col">
+
                   <p class="txt">{{ productItem.description }}</p>
+
                 </div>
               </div>
               <div class="row">
                 <div class="col">
+
                   <h4 class="item-name">{{ productItem.name }}</h4>
+
                 </div>
               </div>
               <div class="row">
                 <div class="col d-inline-flex">
                   <div class="item-rating d-flex">
                     <div class="starIcon">
-                      <app-star-rating
-                        [readonly]="true"
-                        [rating]="productItem.rati"
-                      ></app-star-rating>
+
+                      <app-star-rating [readonly]="true" [rating]="productItem.rating"></app-star-rating>
                     </div>
                     <p class="txt-2 m-0">{{ productItem.rating }} Ratings</p>
                   </div>
                   <div class="items-available d-flex align-items-center">
+
                     <p class="txt-2 m-0">
                       Available Stock: {{ productItem.quantity }}
                     </p>
+
                   </div>
                 </div>
               </div>
@@ -73,9 +78,15 @@
               </div>
 
               <div class="d-flex align-items-center justify-content-start">
+
                 <button class="size one" *ngFor="let variation of sizes">
+
+                <!-- <button
+                  class="size one"
+                  *ngFor="let variation of this.product.variations[0].values"
+                >
                   {{ variation }}
-                </button>
+                </button> -->
               </div>
               <div class="quantity-price d-flex align-items-center">
                 <div class="quantity">
@@ -87,7 +98,7 @@
                     >
                       -
                     </button>
-                    <div class="num">{{ quantity }}</div>
+                    <div class="num">quantity</div>
                     <button
                       class="minus-plus border-0"
                       (click)="increaseQuantity()"
@@ -266,6 +277,45 @@
             </button>
           </form>
         </div>
+
+        <!-- Feedback Block -->
+        <div
+          class="feedbacks-block d-flex"
+          *ngFor="let review of productReview"
+        >
+          <div class="comment">
+            <div class="feedback-image">
+              <img src="assets\images\feedback-image.svg" alt="" />
+            </div>
+          </div>
+
+          <div class="feedback-content">
+            <p class="feedback-name">
+              <span class="first-name"
+                >{{ review.customerReview.firstName }} </span
+              ><span class="last-name">{{
+                review.customerReview.lastName
+              }}</span>
+            </p>
+            <div class="ratings">
+              <img src="assets\icons\green-star.svg" alt="" /><img
+                src="assets\icons\green-star.svg"
+                alt=""
+              /><img src="assets\icons\green-star.svg" alt="" /><img
+                src="assets\icons\green-star.svg"
+                alt=""
+              />
+              <img src="/assets/icons/star.svg" alt="" />
+            </div>
+            <p class="feedback-date">
+              {{ review.createdAt | date : "longDate" }}
+            </p>
+            <p class="feedback-messgae">
+              {{ review.comment }}
+            </p>
+          </div>
+        </div>
+        <!-- Feedback Block -->
         <div class="feedbacks-block d-flex">
           <div class="comment">
             <div class="feedback-image">

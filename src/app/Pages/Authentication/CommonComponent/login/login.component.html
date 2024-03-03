@@ -1,6 +1,8 @@
 <script src="https://accounts.google.com/gsi/client" async></script>
 <div class="overflow-x-hidden" style="height: 100vh !important">
+<div class="overflow-x-hidden" style="height: 100vh !important; position: relative;">
   <!-- <div class="container-login"> -->
+
   <div class="row h-100">
     <div class="col-6">
       <div class="w-100 h-100 bg-image">
@@ -82,7 +84,11 @@
                     />
                   </div>
                   <div>
-                    <button (click)="onShowPassword()" class="eye-icon">
+                    <button
+                      type="button"
+                      (click)="onShowPassword()"
+                      class="eye-icon"
+                    >
                       <fa-icon class="icon" [icon]="eyeIcon"></fa-icon>
                     </button>
                   </div>
@@ -109,10 +115,21 @@
           </div>
 
           <div class="button">
-            <span class="help-block" *ngIf="error">{{ error }}</span>
+            <!-- <span class="help-block" *ngIf="error">{{ error }}</span> -->
 
-            <button class="btn btn-primary" [disabled]="!loginUserForm.valid">
-              Continue
+            <button
+              class="btn btn-primary"
+              type="submit"
+              [disabled]="!loginUserForm.valid"
+            >
+              <span class="continue-btn" *ngIf="!isLoading">Continue</span>
+              <span class="loading" *ngIf="isLoading"
+                ><img
+                  src="assets\icons\loading-btn-spinner.svg"
+                  alt="Loading.."
+                />
+                Loading...</span
+              >
             </button>
           </div>
         </form>
@@ -144,4 +161,7 @@
       </div>
     </div>
   </div>
+</div>
+<div *ngIf="dataService.isLoading" class="loading-spinner">
+  <mat-spinner></mat-spinner>
 </div>

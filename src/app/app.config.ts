@@ -9,6 +9,7 @@ import {
 } from '@abacritt/angularx-social-login';
 import { HttpClientModule } from '@angular/common/http';
 import { provideNativeDateAdapter } from '@angular/material/core';
+import { provideToastr } from 'ngx-toastr';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -34,6 +35,9 @@ export const appConfig: ApplicationConfig = {
         },
       } as SocialAuthServiceConfig,
     },
-    provideAnimationsAsync(), provideAnimationsAsync(),provideNativeDateAdapter(), 
+    provideAnimationsAsync(),
+    provideAnimationsAsync(),
+    provideNativeDateAdapter(),
+    provideToastr(),
   ],
 };

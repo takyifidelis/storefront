@@ -26,6 +26,8 @@ import { OrderModalComponent } from '../order-modal/order-modal.component';
 import { dummyUserInterface } from '../../../../../interface/dummy-user.model';
 import { APIService } from '../../../../../Services/api.service';
 import { DatePipe } from '@angular/common';
+import { DataService } from '../../../../../Services/data.service';
+import { APIService } from '../../../../../Services/api.service';
 
 @Component({
   selector: 'app-order',
@@ -63,6 +65,7 @@ export class OrderComponent implements OnInit {
 
   users = [
     {
+
       checkbox: '',
       orderNumber: '',
       store: '',
@@ -76,7 +79,26 @@ sorted: any = [];
   formattedDate!: string | null;
    datepipe: DatePipe = new DatePipe('en-US');
 
-  constructor(public dialog: MatDialog, public apiService: APIService) {
+//   constructor(public dialog: MatDialog, public apiService: APIService) {
+
+//       checkbox: '1',
+//       orderNumber: '#1233893',
+//       store: 'shopNest',
+//       status: 'Delievered',
+//       date: '21/09/2023',
+//       price: '$52.00',
+//     },
+//     {
+//       checkbox: '1',
+//       orderNumber: '#1233893',
+//       store: 'shopNest',
+//       status: 'Delievered',
+//       date: '21/09/2023',
+//       price: '$52.00',
+//     },
+//   ];
+
+  constructor(public dialog: MatDialog, private apiService: APIService) {
     this.dataSource = new MatTableDataSource(this.users);
     
   }
@@ -137,6 +159,7 @@ sorted: any = [];
     this.dataSource.sort = this.sort;
   }
 
+
   onSort(status: string) {
     this.sorted = [];
     this.unsorted.forEach((order: any) =>{
@@ -145,5 +168,13 @@ sorted: any = [];
       }
     })
     this.dataSource = new MatTableDataSource(this.sorted);
-  }
+
+//   ngOnInit(): void {
+//     this.apiService
+//       .getSingleOrder('1233893')
+//       .subscribe((res: { [key: string]: any }) => {
+//         console.log(res);
+//       });
+
+//   }
 }

@@ -68,7 +68,30 @@
                 <div class="accordion-body d-flex">
                   <div style="display: flex; flex-direction: column; gap: 1rem;">
                     <span>Add pages, descriptions and customize your website how you want it</span>
-                    <button class="btn btn-primary" style="width: fit-content; background-color: #0F3CD9;">Customize store</button>
+                    <button class="btn btn-primary" style="width: fit-content; background-color: #0F3CD9;">Add product</button>
+                  </div>
+                  <span><img src="/assets/images/add-product.svg" alt="" srcset=""></span>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingFive">
+                <button (click)="toggleOpenClose(5)" id="" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                  <div class="d-flex w-100 align-items-center">
+                    <span class="step-number mat-elevation-z2" [class.active]="fiveOpened">3</span>
+                    Set payment
+                    <span style="margin-left: auto;">
+                      <mat-icon [ngClass]="fiveOpened  ? 'd-none' : ''">expand_more</mat-icon>
+                      <mat-icon [ngClass]="fiveOpened  ? '' : 'd-none'">expand_less</mat-icon>
+                    </span>
+                  </div>
+                </button>
+              </h2>
+              <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#accordionExample">
+                <div class="accordion-body d-flex">
+                  <div style="display: flex; flex-direction: column; gap: 1rem;">
+                    <span>Add pages, descriptions and customize your website how you want it</span>
+                    <button class="btn btn-primary" style="width: fit-content; background-color: #0F3CD9;">Set payment</button>
                   </div>
                   <span><img src="/assets/images/add-product.svg" alt="" srcset=""></span>
                 </div>
@@ -78,8 +101,8 @@
               <h2 class="accordion-header" id="headingThree">
                 <button (click)="toggleOpenClose(3)" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                   <div class="d-flex w-100 align-items-center">
-                    <span class="step-number mat-elevation-z2"  [class.active]="threeOpened">3</span>
-                    Set up shipping
+                    <span class="step-number mat-elevation-z2"  [class.active]="threeOpened">4</span>
+                    Set up shipping and delivery
                     <span style="margin-left: auto;">
                       <mat-icon [ngClass]="threeOpened  ? 'd-none' : ''">expand_more</mat-icon>
                       <mat-icon [ngClass]="threeOpened  ? '' : 'd-none'">expand_less</mat-icon>
@@ -101,7 +124,7 @@
               <h2 class="accordion-header" id="headingThree">
                 <button (click)="toggleOpenClose(4)" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
                   <div class="d-flex w-100 align-items-center">
-                    <span class="step-number mat-elevation-z2"  [class.active]="fourOpened">4</span>
+                    <span class="step-number mat-elevation-z2"  [class.active]="fourOpened">5</span>
                     Add domain
                     <span style="margin-left: auto;">
                       <mat-icon [ngClass]="fourOpened  ? 'd-none' : ''">expand_more</mat-icon>
@@ -123,5 +146,8 @@
           </div>
         </div>
       </div>
+    </div>
+    <div *ngIf="dataService.isLoading" class="loading-spinner">
+      <mat-spinner></mat-spinner>
     </div>
 }

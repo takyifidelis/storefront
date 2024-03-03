@@ -35,6 +35,7 @@
 }
 .overlay {
   position: absolute;
+  text-align: center;
   z-index: 21;
   width: 100%;
   bottom: 0;
@@ -79,20 +80,14 @@
   }
 }
 section.level-up {
-  // text-align: center;
 
   button {
-    // font-family: Inter;
-    // font-size: 18px;
     font-style: normal;
     font-weight: 700;
-    line-height: 30px; /* 166.667% */
+    line-height: 30px; 
     letter-spacing: -0.3px;
-    // color: #1c222b;
 
-    background-color: transparent; /* Transparent background */
-    border: 1px solid #1c222b;
-    border-radius: 0;
+    border: 2px solid #1c222b;
   }
   .bg-image {
     background: linear-gradient(

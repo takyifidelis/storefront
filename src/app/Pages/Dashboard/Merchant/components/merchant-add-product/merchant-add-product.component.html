@@ -1,8 +1,6 @@
-<div class="main-container">
+<div class="main-container" style="position: relative">
   <section class="add-product">
-    <div
-      class="form"
-    >
+    <div class="form">
       <div
         class="product-save d-flex align-items-center justify-content-between"
       >
@@ -18,22 +16,21 @@
           </div>
         </div>
         <div class="save-cancel">
+
           <button
             type="button"
             class="btn cancel-btn"
+            [routerLink]="['/merchant/product']"
           >
             Cancel
           </button>
-          <button
-            type="submit"
-            class="btn btn-primary"
-            (click)="onSubmit()"
-          >
+
+          <button type="submit" class="btn btn-primary" (click)="onSubmit()">
             Save
           </button>
         </div>
       </div>
-      <div class="details-media d-flex justify-content-between">
+      <div class="details-media d-flex justify-content-around">
         <div class="product-details">
           <h3 class="product-details-header product-header">Product details</h3>
           <p class="product-details-paragraph product-paragraph">
@@ -70,7 +67,7 @@
             <div class="stock">
               <label for="stock" class="label-name">Stock</label>
               <input
-              [(ngModel)]="productDetails.quantity"
+                [(ngModel)]="productDetails.quantity"
                 type="stock"
                 id="stock"
                 class="form-control"
@@ -79,20 +76,30 @@
             </div>
           </div>
 
-          <div class="form-group">
+          <div class="form-group description-div">
             <label for="Description" class="label-name">Description</label>
-            <textarea
-            [(ngModel)]="productDetails.description"
+
+            <!-- <textarea
+
+              [(ngModel)]="productDetails.description"
               id=""
               rows="4"
               class="form-control"
               placeholder="Enter a description..."
-            ></textarea>
+            ></textarea> -->
+            <ckeditor
+              [editor]="Editor"
+              [(ngModel)]="productDetailss.description"
+            ></ckeditor>
           </div>
           <div class="category">
             <div class="head d-flex align-items-center justify-content-between">
               <h4 class="category-header product-header">Category</h4>
-              <p class="add-category">
+              <p
+                data-bs-toggle="modal"
+                data-bs-target="#addCategory"
+                class="add-category"
+              >
                 <img src="assets\icons\product-plus-sign.svg" alt="" /> Add
                 category
               </p>
@@ -100,14 +107,19 @@
             <div
               class="radio-btn d-flex justify-content-between align-items-center"
             >
-            <mat-radio-group color="primary"
-              class="example-radio-group"
-              [(ngModel)]="productDetails.category">
-              @for (cat of categories; track cat) {
-                <mat-radio-button class="example-radio-button" [value]="cat">{{cat}}</mat-radio-button>
-              }
-            </mat-radio-group>
+              <mat-radio-group
+                color="primary"
+                class="example-radio-group"
+                [(ngModel)]="productDetails.category"
+              >
 
+                @for (cat of textArray; track cat) {
+
+                <mat-radio-button class="example-radio-button" [value]="cat">{{
+                  cat
+                }}</mat-radio-button>
+                }
+              </mat-radio-group>
             </div>
           </div>
           <div class="product-status">
@@ -117,8 +129,15 @@
               <h4 class="product-status-header product-header">
                 Product Status
               </h4>
-              <div class="status">Not Active</div>
+              <div class="status">{{ displayedStatus }}</div>
             </div>
+            <select
+              class="form-group form-control"
+              (change)="onStatusChange($event)"
+            >
+              <option value="true">Active</option>
+              <option value="false">Not Active</option>
+            </select>
           </div>
         </div>
         <div class="add-media">
@@ -175,35 +194,178 @@
               </p>
             </div>
           </div>
-          <div class="media-sizes">
+          <div
+            class="variation-block d-flex justify-content justify-content-between align-items-center"
+          >
+            <h5 class="variation-header">Variations</h5>
+            <p
+              class="add-variation"
+              data-bs-toggle="modal"
+              data-bs-target="#addSize"
+            >
+              <img src="assets\icons\product-plus-sign.svg" alt="" /> Add
+              variation
+            </p>
+          </div>
+          <div class="media-sizes" *ngFor="let variation of variationArray">
             <div class="head d-flex align-items-center justify-content-between">
-              <h4 class="size-header product-header">Size</h4>
-              <p class="add-size">
-                <img src="assets\icons\product-plus-sign.svg" alt="" /> Add Size
-              </p>
+              <h4 class="size-header product-header">{{ variation.key }}</h4>
             </div>
-            <span class="media-size">XS</span>
-            <span class="media-size">S</span>
-            <span class="media-size">L</span>
-            <span class="media-size">XL</span>
-            <span class="media-size">XXL</span>
+            <span class="media-size" *ngFor="let value of variation.values">{{
+              value
+            }}</span>
           </div>
           <div class="media-colours">
             <div class="head d-flex align-items-center justify-content-between">
               <h4 class="colour-header product-header">Colour</h4>
-              <p class="add-colour">
+              <p
+                class="add-colour"
+                data-bs-toggle="modal"
+                data-bs-target="#addColor"
+              >
                 <img src="assets\icons\product-plus-sign.svg" alt="" /> Add
                 Colour
               </p>
             </div>
-            <span class="media-colour blue"></span>
-            <span class="media-colour yellow"></span>
-            <span class="media-colour green"></span>
-            <span class="media-colour black"></span>
-            <span class="media-colour red"></span>
+
+            <span
+              class="media-colour"
+              *ngFor="let color of colorArray"
+              [ngStyle]="{ 'background-color': color }"
+            ></span>
           </div>
         </div>
       </div>
     </div>
   </section>
+</div>
+
+<div
+  class="modal fade"
+  id="addCategory"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body upload-modal" style="margin: 43px">
+        <div class="input-group mb-3">
+          <div action="" class="">
+            <h6 class="model head">Add category</h6>
+            <div
+              class="form-group d-flex align-items-center justify-content-between"
+            >
+              <input
+                type="text"
+                name=""
+                id=""
+                class="form-control"
+                [(ngModel)]="inputText"
+              />
+              <button
+                class="btn btn-primary"
+                style="margin-left: 1rem"
+                (click)="addCategory()"
+              >
+                Add
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="d-flex justify-content-end" style="margin-top: 54px"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div
+  class="modal fade"
+  id="addSize"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body upload-modal" style="margin: 43px">
+        <div class="input-group mb-3">
+          <div action="" class="">
+            <h6 class="model head">Add Variation</h6>
+            <div
+              class="form-group d-flex align-items-center justify-content-between"
+            >
+              <div class="form-group key-value">
+                <label for="type">Type: </label>
+                <input
+                  type="text"
+                  name="type"
+                  placeholder="Ex: Size"
+                  id=""
+                  class="form-control"
+                  [(ngModel)]="variationKey"
+                />
+              </div>
+              <div class="form-group key-value">
+                <label for="value">Value:</label>
+                <input
+                  type="text"
+                  name="value"
+                  placeholder="Ex: XL"
+                  id=""
+                  class="form-control"
+                  [(ngModel)]="variationValue"
+                />
+              </div>
+            </div>
+            <div class="variation-btn">
+              <button class="btn btn-primary add-cat-btn" (click)="addSize()">
+                Add
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="d-flex justify-content-end" style="margin-top: 54px"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div
+  class="modal fade"
+  id="addColor"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body upload-modal" style="margin: 43px">
+        <div class="input-group mb-3">
+          <div action="" class="">
+            <h6 class="model head">Add Color</h6>
+            <div
+              class="form-group d-flex align-items-center justify-content-between"
+            >
+              <input
+                type="color"
+                name=""
+                id=""
+                placeholder="Click"
+                class="form-control"
+                [(ngModel)]="inputColor"
+                style="width: 6rem"
+              />
+              <button
+                class="btn btn-primary"
+                style="margin-left: 1rem"
+                (click)="addColor()"
+              >
+                Add
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="d-flex justify-content-end" style="margin-top: 54px"></div>
+      </div>
+    </div>
+  </div>
 </div>

@@ -68,7 +68,9 @@
         >
           <p class="how-will-you">How will you rate this product?</p>
           <div class="star-form-ratings">
-            <app-star-rating></app-star-rating>
+            <app-star-rating
+              (ratingChange)="onSetStar($event)"
+            ></app-star-rating>
           </div>
         </div>
 
