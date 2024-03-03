@@ -1,5 +1,6 @@
 <script src="https://accounts.google.com/gsi/client" async></script>
 <div class="overflow-x-hidden" style="height: 100vh !important">
+<div class="overflow-x-hidden" style="height: 100vh !important; position: relative;">
   <!-- <div class="container-login"> -->
   <div class="row h-100">
     <div class="col-6">
@@ -157,4 +158,7 @@
       </div>
     </div>
   </div>
+</div>
+<div *ngIf="dataService.isLoading" class="loading-spinner">
+  <mat-spinner></mat-spinner>
 </div>

@@ -4,7 +4,7 @@
             <div class="d-flex w-100" style="margin-top: 25px;">
                 <span class="d-flex">
                     <span class="animate_animated animate__rubberBand app-name">StoreFront</span>
-                    <span [routerLink]="['/merchant/1']" class="mouse-pointer d-flex text-center align-items-center">
+                    <span [routerLink]="['/merchant-onboarding-2']" class="mouse-pointer d-flex text-center align-items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                             <path d="M12.1667 5.83333L11.1667 5L6.66667 10L11.1667 15L12.1667 14.1667L8.33333 10L12.1667 5.83333Z" fill="#3D4A5C"/>
                         </svg>
@@ -16,12 +16,12 @@
     </header>
     <main class="animate__animated animate__pulse" style="justify-content: center; text-align: center;">
         <div>
-            <span class="body-txt-header">List of stores</span>
+            <span class="body-txt-header">Choose a template to start</span>
             <p class="body-txt-p">Don't worry you can always change this later</p>
         </div>
         <div class="body-options-container">
             <div class="row row-cols-sm-2 row-cols-lg-3 row-cols-xl-4" style="flex-wrap: wrap; justify-content: center;">
-                <div class="col template-container">
+                <div (click)="selectStore('ShopNest')" class="col template-container">
                     <img class="mouse-pointer" src="/assets/images/Text.svg" alt="" srcset="">
                 </div>
                 <div class="col template-container">
@@ -35,6 +35,9 @@
                 </div>
             </div>
         </div>
-        <button [routerLink]="['/merchant']" class="body-btn" style="font-size: 18px; padding: 13px 20px;">continue</button>
+        <button class="body-btn" style="font-size: 18px; padding: 13px 20px;" (click)="createStore()">continue</button>
     </main>
 </div>
+<!-- <div *ngIf="dataService.isLoading" class="loading-spinner">
+    <mat-spinner></mat-spinner>
+  </div> -->

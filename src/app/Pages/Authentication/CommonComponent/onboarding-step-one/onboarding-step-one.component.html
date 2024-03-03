@@ -1,7 +1,7 @@
 <div class="container-fluid main-container">
     <header class="d-flex" style="flex-wrap: wrap;">
         <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
-            <div class="d-flex w-100" style="margin-top: 25px;">
+            <div routerLink="/merchant" class="d-flex w-100" style="margin-top: 25px; cursor: pointer;">
                 <span class="d-flex home-header-span">
                     <span class="app-name">StoreFront</span>
                     <span class="d-flex text-center align-items-center">
@@ -16,23 +16,23 @@
     <main>
         <span class="body-txt-header">Which type of business establishment do you have</span>
         <p class="body-txt-p">Let as know your ecommerce journey so that we can tailor your storefront experience for you</p>
-        <div class="row bdt row-cols-2">
+        <mat-radio-group [(ngModel)]="dataService.merchantBusinessType1" class="row bdt row-cols-2">
             <span class="p-2 pt-3">
                 <span class="span-option-container col-xs-2" >
-                    <mat-radio-button color="primary" value="">I’m just starting my business</mat-radio-button>
+                    <mat-radio-button color="primary" value=" just starting my business">I’m just starting my business</mat-radio-button>
                 </span>
             </span>
             <span class="p-2 pt-3">
                 <span class="span-option-container col-xs-2">
-                    <mat-radio-button value="">I’m already selling but not online</mat-radio-button>
+                    <mat-radio-button color="primary"  value="already selling but not online">I’m already selling but not online</mat-radio-button>
                 </span>
             </span>
             <span class="p-2 pt-3">
                 <span class="span-option-container col-xs-2">
-                    <mat-radio-button value="">I'm already selling online</mat-radio-button>
+                    <mat-radio-button color="primary" value="already selling online">I'm already selling online</mat-radio-button>
                 </span>
             </span>
-        </div>
+        </mat-radio-group>
         <button [routerLink]="['/merchant-onboarding-2']" class="body-btn" style="font-size: 18px; padding: 13px 20px;">continue</button>
     </main>
 </div>
