@@ -37,6 +37,7 @@ import { AuthService } from '../../Auth/auth.service';
 import { faEye } from '@fortawesome/free-regular-svg-icons';
 import { APIService } from '../../../../Services/api.service';
 import { DataService } from '../../../../Services/data.service';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-login',
@@ -49,6 +50,7 @@ import { DataService } from '../../../../Services/data.service';
     SocialLoginModule,
     FormsModule,
     ReactiveFormsModule,
+    MatProgressSpinnerModule
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
@@ -83,6 +85,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.dataService.isLoading = false;
     this.authService.authState.subscribe((user) => {
       console.log(user);
       this.user = user;
@@ -109,11 +112,16 @@ export class LoginComponent implements OnInit {
         this.toastr.success('Success', 'Login Account!');
         console.log(resData);
         if (resData.data?.type == 'Business') {
+        if (resData.type == 'Business') {
+          localStorage.setItem("businessId", resData.data.business)
           this.router.navigate(['merchant']);
         } else if (resData.data?.type == 'Customer') {
+        } else if (resData.type == 'Customer') {
+          localStorage.setItem("customerId", JSON.stringify(resData.data.customer))
           this.router.navigate(['customer']);
         }
-      },
+      }
+    },
       (errorMessage) => {
         console.log(errorMessage);
         this.error = errorMessage;
@@ -129,29 +137,36 @@ export class LoginComponent implements OnInit {
     this.eyeIcon = this.showPassword ? faEye : faEyeSlash;
   }
 
-  newLogin(ata: any) {
-    this.isLoading = true;
-    this.apiService
-      .authenticateUser(this.dataService.loginCredentials)
-      .subscribe(
-        (resData: any) => {
-          this.toastr.success('Login Successful', 'Success');
-          console.log(resData.data);
-          this.dataService.businessId = resData.data?.business;
-          this.router.navigate(['/merchant']);
-          this.isLoading = false;
-        },
-        (errorMessage) => {
-          console.log(errorMessage);
-          this.error = errorMessage;
-          this.toastr.error(this.error, 'Login Failed');
-          this.isLoading = false;
-        }
-      );
-    this.dataService.loginCredentials = { email: '', password: '' };
-  }
 
-  showSuccess() {
-    this.toastr.info('Hello world!', 'Toastr fun!');
-  }
+    newLogin(ata:any) {
+    this.isLoading = true;
+      
+//     this.dataService.isLoading = true
+      this.apiService.authenticateUser(this.dataService.loginCredentials)
+      .subscribe((resData:any)=>{
+           this.isLoading = false;
+        this.toastr.success('Login Successful', 'Success');
+        if (resData.data.type === "Business") {
+          // this.dataService.businessId=resData.data?.business
+          localStorage.setItem("businessId", resData.data.business)
+//           this.dataService.isLoading =false
+          this.router.navigate(['merchant']);
+        } else if (resData.data.type === "Customer") {
+          localStorage.setItem("customerId", resData.data.customer)
+//           this.dataService.isLoading =false
+          this.router.navigate(['customer']);
+        }else{
+          console.log(resData)
+          this.dataService.isLoading =false
+        }
+      }),(errorMessage: any) => {
+         this.isLoading = false;
+//        this.dataService.isLoading =false
+        console.log(errorMessage);
+        this.error = errorMessage;
+          
+         this.toastr.error(this.error, 'Login Failed');
+      }
+    }
 }
+

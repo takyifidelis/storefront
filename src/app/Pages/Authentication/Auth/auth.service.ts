@@ -6,6 +6,7 @@ import { catchError, map, switchMap } from 'rxjs/operators';
 import { throwError, Observable } from 'rxjs';
 import {
   ForgetPasswordResponse,
+  ProductResponseData,
   ResetPasswordResponse,
   ReviewResponseData,
   SignupResponseData,
@@ -122,6 +123,16 @@ export class AuthService {
       .pipe(catchError(this.handleError));
   }
 
+  resendCode() {
+    return this.http
+      .get(
+        'https://storefront-backend-jan-dev-api.vercel.app/api/account/resend/code',
+        { withCredentials: true }
+      )
+      .pipe(catchError(this.handleError));
+  }
+
+
   // Verify account
   verifyAccount(code: string) {
     return this.http
@@ -222,16 +233,23 @@ export class AuthService {
       )
       .pipe(catchError(this.handleError));
   }
+  
+  getProducts() {
+    return this.http
+      .get<ProductResponseData>(
+        'https://storefront-backend-jan-dev-api.vercel.app/api/product/get-all-products/22095521-d6e3-4ed1-a7de-e96e1f81bed3',
 
   getReviews(): Observable<ReviewResponseData> {
     return this.http
       .get<ReviewResponseData>(
         'https://storefront-backend-jan-dev-api.vercel.app/api/store/get-reviews/22095521-d6e3-4ed1-a7de-e96e1f81bed3',
+>
         { withCredentials: true }
       )
 
       .pipe(catchError(this.handleError));
   }
+
   postProduct(formData: FormData) {
     return this.http
       .post<ProductResponse>(

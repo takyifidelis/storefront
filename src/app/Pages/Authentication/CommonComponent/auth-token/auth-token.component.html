@@ -28,6 +28,7 @@
                 name="keyOne"
                 formControlName="keyOne"
                 maxlength="1"
+                class="field"
               />
             </div>
             <div class="rectangle">
@@ -82,7 +83,10 @@
             </div>
           </div>
           <div class="text">
-            <p>Didn’t get, <a href="#">Resend</a></p>
+            <p>
+              Didn’t get,
+              <a (click)="resendVerificationCode()">Resend</a>
+            </p>
           </div>
           <p>
             <!-- <span class="help-block" *ngIf="error">

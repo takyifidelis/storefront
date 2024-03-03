@@ -81,7 +81,9 @@ export class TokenAuthComponent {
   resendVerificationCode() {
     this.authService.resendCode().subscribe((resData) => {
       console.log(resData);
+
       this.toastr.info('Check Email for verification code', 'Token Sent');
+
       this.router.navigate(['Email-notification']);
       // Set a timeout to navigate to another component after 3 seconds
       setTimeout(() => {

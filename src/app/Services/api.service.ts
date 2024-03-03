@@ -80,15 +80,14 @@ export class APIService {
       .pipe(catchError(this.handleError));
   }
 
-  getMerchantStores(businessId: string): Observable<Response> {
-    return this.http.get<Response>(
-      `${environment.baseApiUrl}/business/get-stores/${businessId}`,
-      {
-        withCredentials: true,
-      }
-    );
+
+  setBusinessType(businessId: string, data:{}): Observable<Response>{
+    return this.http.patch<Response>(`${environment.baseApiUrl}/business/set-business-type/${businessId}`,
+    data,{
+      withCredentials: true,
+    })
   }
-  logout() {
+   logout() {
     return this.http
       .get<Response>(
         'https://storefront-backend-jan-dev-api.vercel.app/api/account/logout',
@@ -97,38 +96,81 @@ export class APIService {
       .pipe(catchError(this.handleError));
   }
 
-  getStore(businessId: string): Observable<Response> {
-    return this.http.get<Response>(`${environment.baseApiUrl}/store/get-all`, {
+  createStore(businessId: string, data:{}): Observable<Response>{
+    return this.http.post<Response>(`${environment.baseApiUrl}/business/create-new-store/${businessId}`,
+    data,{
+      withCredentials: true,
+    })
+  }
+  getMerchantStores(businessId: string): Observable<Response>{
+    return this.http.get<Response>(`${environment.baseApiUrl}/business/get-stores/${businessId}`,
+    {
+      withCredentials: true,
+    })
+  }
+  getPublishedTemp(storeId: string): Observable<Response>{
+    return this.http.get<Response>(`${environment.baseApiUrl}/store/get-temp/${storeId}`,
+    {
+      withCredentials: true,
+    })
+  }
+  getStore(): Observable<Response>{
+    return this.http.get<Response>(`${environment.baseApiUrl}/store/get-all`,
+    {
+
       withCredentials: true,
     });
   }
 
-  initializePayment(customerId: string, cart: any): Observable<Response> {
-    return this.http.post<Response>(
-      `${environment.baseApiUrl}/order/initialize/${customerId}`,
-      cart,
-      {
-        withCredentials: true,
-      }
-    );
-  }
 
-  addShipping(customerId: string, user: any) {
-    return this.http.post(
-      `${environment.baseApiUrl}/customer/add-shipping-address/${customerId}`,
-      user
-    );
+  getStoreCategories(storeId: string): Observable<Response>{
+    return this.http.get<Response>(`${environment.baseApiUrl}/store/get-categories/${storeId}`,
+    {
+      withCredentials: true,
+    })
   }
-  // getStoreProducts(storeId: string): Observable<Response>{
-  //   return this.http.get<Response>(`${environment.baseApiUrl}/store/get-store-products/${storeId}`,
-  //   {
-  //     withCredentials: true,
-  //   })
-  // }
-  postProduct(formData: FormData) {
+initializePayment(customerId:string, cart:any): Observable<Response> {
+  return this.http.post<Response>(`${environment.baseApiUrl}/order/initialize/${customerId}`, cart, {
+    withCredentials: true,
+  })
+}
+
+addShipping(customerId: string, user: any) {
+  return this.http.post(`${environment.baseApiUrl}/customer/add-shipping-address/${customerId}`, user,
+  {
+    withCredentials: true,
+  })
+}
+getAllShippingAddresses(customerId: string) {
+  return this.http.get(`${environment.baseApiUrl}/customer/get-shipping-addresses/${customerId}`,
+  {
+    withCredentials: true,
+  })
+} 
+onApprovePayment(orderId:string): Observable<Response> {
+  return this.http.post<Response>(`${environment.baseApiUrl}/order/approve-payment/${orderId}`, {
+    withCredentials: true,
+  })
+}
+
+
+getCustomerStoreProducts(storeId: string): Observable<Response>{
+    return this.http.get<Response>(`${environment.baseApiUrl}/store/get-store-products/${storeId}`,
+    {
+      withCredentials: true,
+    })
+  }
+  getStoreProducts(storeId: string): Observable<Response>{
+    return this.http.get<Response>(`${environment.baseApiUrl}/product/get-all-products/${storeId}`,
+    {
+      withCredentials: true,
+    })
+  }
+   postProduct(formData: FormData) {
     return this.http
       .post<Response>(
         'https://storefront-backend-jan-dev-api.vercel.app/api/product/add/f9586428-62e3-4455-bb1d-61262a407d1a',
+
 
         formData,
 
@@ -240,6 +282,7 @@ export class APIService {
       .pipe(catchError(this.handleError));
   }
 
+
   // Error Handling
   private handleError(errorRes: HttpErrorResponse) {
     console.error('Error Response:', errorRes);
@@ -279,3 +322,4 @@ export class APIService {
     return throwError(errorMessage);
   }
 }
+

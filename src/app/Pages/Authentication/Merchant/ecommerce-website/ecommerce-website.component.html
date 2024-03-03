@@ -1,12 +1,12 @@
-<div 
-[style.lineHeight]="dataservice.template.lineHeight"
-[style.background]="dataservice.template.primaryBackground">
+<div *ngIf="serverResponseReceived"
+[style.lineHeight]="dataService.template.lineHeight"
+[style.background]="dataService.template.primaryBackground">
   <nav class="navbar navbar-expand-lg navbar-dark" 
-  [style.backgroundColor]="dataservice.template.navbarBackgroundColor" 
-  [style.color]="dataservice.template.navbarColor"
+  [style.backgroundColor]="dataService.template.navbarBackgroundColor" 
+  [style.color]="dataService.template.navbarColor"
   style="z-index: 20;">
     <div class="container-fluid">
-      <a [style.color]="dataservice.template.navbarColor" class="navbar-brand" href="#" [innerText]="dataservice.template.text"></a>
+      <a [style.color]="dataService.template.navbarColor" class="navbar-brand" href="#" [innerText]="dataService.template.text"></a>
       <button
         class="menu-btn toggle-btn"
         color="primary"
@@ -22,8 +22,8 @@
         cdkDropList cdkDropListOrientation="horizontal" class="example-list" (cdkDropListDropped)="drop($event)"
       >
         <div class="navbar-nav nav-content" id="parent">
-          @for (menuItem of dataservice.template.pagesOrder; track menuItem) {
-            <a *ngIf="menuItem.includePage" [style.color]="dataservice.template.navbarColor" cdkDrag
+          @for (menuItem of dataService.template.pagesOrder; track menuItem) {
+            <a *ngIf="menuItem.includePage" [style.color]="dataService.template.navbarColor" cdkDrag
             class="nav-link"
             [routerLink]="[menuItem.name]"
             routerLinkActive="router-link-active"
@@ -32,20 +32,22 @@
           
 
           <form class="d-flex justify-content-center align-items-center">
-            <fa-icon [icon]="searchIcon" [style.color]="dataservice.template.navbarColor"></fa-icon>
+            <fa-icon [icon]="searchIcon" [style.color]="dataService.template.navbarColor"></fa-icon>
             <input
-            [style.color]="dataservice.template.navbarColor"
+            [style.color]="dataService.template.navbarColor"
+            [(ngModel)]="dataService.productSearchString"
               type="search"
               placeholder="Search"
               aria-label="Search"
               class="search"
+              name="d"
             />
           </form>
         </div>
 
         <div 
         
-        [style.color]="dataservice.template.navbarColor" class="navbar-nav dropdown-content" id="dropdownMenu">
+        [style.color]="dataService.template.navbarColor" class="navbar-nav dropdown-content" id="dropdownMenu">
 
 
           <a class="nav-link" [routerLink]="['home']">Home</a>
@@ -67,15 +69,15 @@
         <button class="person nav-icons" color="primary" mat-icon-button>
           <mat-icon>person</mat-icon>
         </button>
-        <button
-          mat-raised-button
+          <mat-icon [matBadge]="dataService.cart.length" (click)="goToCheckout()" style="margin-top: 10px; cursor: pointer;" matBadgeColor="warn">shopping_cart</mat-icon>
+        <!-- <button mat-icon-button
           color="primary"
           matBadge="8"
           matBadgePosition="before"
           matBadgeColor="accent"
         >
           <mat-icon>shopping_cart</mat-icon>
-        </button>
+        </button> -->
       </div>
     </div>
   </nav>

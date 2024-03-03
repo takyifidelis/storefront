@@ -78,4 +78,13 @@ export class AuthTokenComponent {
     //
     form.reset();
   }
+  resendVerificationCode() {
+    this.authService.resendCode().subscribe((resData) => {
+      this.router.navigate(['Email-notification']);
+      // Set a timeout to navigate to another component after 3 seconds
+      setTimeout(() => {
+        this.router.navigate(['Authentication']);
+      }, 3000);
+    });
+  }
 }
