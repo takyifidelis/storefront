@@ -94,10 +94,13 @@ export class HomeComponent implements OnInit {
   editStore(){
     this.dataService.isLoading =true
     this.apiService.getMerchantStores(localStorage.getItem('businessId')!).subscribe((data:any) => {
-      localStorage.setItem('storeId',data.data[0].id)
-      localStorage.setItem('tempTemplate',data.data[0].template.temp.options)
+      console.log(data)
       this.dataService.isInEditMode = true 
       if (data.data.length>0) {
+        localStorage.setItem('storeId',data.data[0].id)
+        localStorage.setItem('tempTemplate',data.data[0].template.temp.options)
+        localStorage.setItem('template',data.data[0].template.options)
+        this.dataService.template = JSON.parse(localStorage.getItem('tempTemplate')!)
         this.router.navigate(['/template-editor']);
         this.dataService.isLoading =false
       } else {
