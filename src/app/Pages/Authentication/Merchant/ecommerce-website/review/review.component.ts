@@ -13,7 +13,9 @@ import { CommonModule } from '@angular/common';
 
 import { DataService } from '../../../../../Services/data.service';
 import { APIService } from '../../../../../Services/api.service';
+import { StarRatingComponent } from '../../../../Dashboard/Customer/components/star-rating/star-rating.component';
 import { AuthService } from '../../../Auth/auth.service';
+
 
 @Component({
   selector: 'app-review',
@@ -29,6 +31,7 @@ import { AuthService } from '../../../Auth/auth.service';
     FontAwesomeModule,
     MatTabsModule,
     CommonModule,
+    StarRatingComponent
   ],
   templateUrl: './review.component.html',
   styleUrl: './review.component.scss',

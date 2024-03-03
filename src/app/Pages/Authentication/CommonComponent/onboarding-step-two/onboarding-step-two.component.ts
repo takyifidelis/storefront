@@ -12,6 +12,7 @@ import { APIService } from '../../../../Services/api.service';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { CommonModule } from '@angular/common';
 
+
 @Component({
   selector: 'app-onboarding-step-two',
   standalone: true,
@@ -29,15 +30,27 @@ searchString = ''
 selectedValue: any= 'Filter by Region'
 
 onSelect(val: any) {
+
+//   this.selectedValue = val.value
+//   console.log(val.innerText)
+//   this.dataService.merchantData.store.name = val.innerText
+
   this.selectedValue = val.innerText
   this.searchString = val.innerText
   console.log(val.innerText)
   localStorage.setItem('storeType',this.selectedValue)
   // this.dataService.merchantData.store.name = val.innerText
 
+
 }
 
 continueToStep3(){
+//   this.apiService.setBusinessType(this.dataService.businessId,{businessType:this.dataService.merchantData.store.name}).subscribe(data =>{
+//     console.log(data);
+//     this.router.navigate(['/merchant-onboarding-3'])
+//   })
+// }
+
   this.dataService.isLoading =true
   this.apiService.setBusinessType(this.dataService.businessId,{businessType:this.dataService.merchantStoreName}).subscribe(data =>{
     console.log(data);

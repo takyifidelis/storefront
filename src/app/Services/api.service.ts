@@ -38,6 +38,7 @@ export class APIService {
       withCredentials: true,
     })
   }
+
   createStore(businessId: string, data:{}): Observable<Response>{
     return this.http.post<Response>(`${environment.baseApiUrl}/business/create-new-store/${businessId}`,
     data,{
