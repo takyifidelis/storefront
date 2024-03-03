@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterModule, Router, ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
 import {
   FormGroup,
   FormControl,
@@ -12,6 +13,7 @@ import {
   FormBuilder,
 } from '@angular/forms';
 import { AuthService } from '../../Auth/auth.service';
+import { APIService } from '../../../../Services/api.service';
 
 @Component({
   selector: 'app-auth-token',
@@ -23,12 +25,14 @@ import { AuthService } from '../../Auth/auth.service';
 export class AuthTokenComponent {
   AuthCode: FormGroup;
   error: string | any = null;
+  isLoading: boolean = false;
 
   constructor(
-    private authService: AuthService,
+    private authService: APIService,
     private router: Router,
     private route: ActivatedRoute,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private toastr: ToastrService
   ) {
     this.AuthCode = new FormGroup({
       keyOne: new FormControl('', Validators.required),
@@ -55,15 +59,20 @@ export class AuthTokenComponent {
       formValue.keySix,
     ].join('');
     console.log({ code: authCode });
+    this.isLoading = true;
 
     this.authService.verifyAccount(authCode).subscribe(
-      (resData) => {
+      (resData: Response) => {
         console.log(resData);
+        this.isLoading = false;
+        this.toastr.success('Proceed to Login', 'Verification Successful');
         this.router.navigate(['authSuccess']);
       },
-      (errorMessage) => {
+      (errorMessage: Response) => {
         console.log(errorMessage);
+        this.isLoading = false;
         this.error = errorMessage;
+        this.toastr.error(this.error, 'Error');
       }
     );
     //

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RouterModule, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../Auth/auth.service';
+import { ToastrService } from 'ngx-toastr';
 import {
   FormGroup,
   FormControl,
@@ -25,6 +26,7 @@ import {
   SocialAuthService,
   SocialUser,
 } from '@abacritt/angularx-social-login';
+import { APIService } from '../../../../Services/api.service';
 
 @Component({
   selector: 'app-signup-customer',
@@ -44,12 +46,17 @@ export class SignupCustomerComponent {
   showConfirmedPassword: boolean | undefined;
   eyeIcon = faEyeSlash;
   eyeIcon2 = faEyeSlash;
+  isLoading: boolean = false;
 
   // Email and Password Validation Below
   signupForm: FormGroup;
   error: string | any = null;
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(
+    private authService: APIService,
+    private router: Router,
+    private toastr: ToastrService
+  ) {
     this.signupForm = new FormGroup(
       {
         email: new FormControl('', [
@@ -74,32 +81,29 @@ export class SignupCustomerComponent {
     if (!form.valid) {
       return;
     }
-    const email = form.value.email;
-    const password = form.value.password;
-    const confirmPassword = form.value.confirmPassword;
-    const firstName = form.value.firstName;
-    const lastName = form.value.lastName;
-    const type = 'Customer';
-
-    this.authService
-      .signupCustomer(
-        firstName,
-        lastName,
-        email,
-        type,
-        password,
-        confirmPassword
-      )
-      .subscribe(
-        (resData) => {
-          console.log(resData);
-          this.router.navigate(['Authentication']);
-        },
-        (errorMessage) => {
-          console.log(errorMessage);
-          this.error = errorMessage;
-        }
-      );
+    let userCredentials = {
+      firstName: form.value.lastName,
+      lastName: form.value.firstName,
+      email: form.value.email,
+      type: 'Customer',
+      password: form.value.confirmPassword,
+      confirmPassword: form.value.password,
+    };
+    this.isLoading = true;
+    this.authService.merchantSignup(userCredentials).subscribe(
+      (resData) => {
+        this.toastr.info('Check your Email for token', 'Email Verification');
+        console.log(resData);
+        this.isLoading = false;
+        this.router.navigate(['Authentication']);
+      },
+      (errorMessage) => {
+        console.log(errorMessage);
+        this.error = errorMessage;
+        this.isLoading = false;
+        this.toastr.error(this.error, 'Failed');
+      }
+    );
     form.reset();
   }
   // Custom validator function for password strength and matching
@@ -161,7 +165,5 @@ export class SignupCustomerComponent {
     this.eyeIcon2 = this.showConfirmedPassword ? faEye : faEyeSlash;
   }
 
-  onSignUp(): void{
-    
-  }
+  onSignUp(): void {}
 }

@@ -1,5 +1,5 @@
 declare var google: any;
-
+import { ToastrService } from 'ngx-toastr';
 import {
   GoogleSigninButtonModule,
   SocialAuthService,
@@ -65,6 +65,7 @@ export class LoginComponent implements OnInit {
   facebookIcon = faFacebook;
   eyeIcon = faEyeSlash;
   showPassword = false;
+  isLoading: boolean = false;
 
   @ViewChild('search') search!: ElementRef;
 
@@ -74,8 +75,8 @@ export class LoginComponent implements OnInit {
     private loginService: AuthService,
     private apiService: APIService,
     public dataService: DataService,
-
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) {
     this.loginForm = new FormGroup({
       email: new FormControl('', Validators.required),
@@ -108,6 +109,7 @@ export class LoginComponent implements OnInit {
     const password = form.value.password;
     this.loginService.login(email, password).subscribe(
       (resData) => {
+        this.toastr.success('Success', 'Login Account!');
         console.log(resData);
         if (resData.data?.type == 'Business') {
         if (resData.type == 'Business') {
@@ -123,6 +125,7 @@ export class LoginComponent implements OnInit {
       (errorMessage) => {
         console.log(errorMessage);
         this.error = errorMessage;
+        this.toastr.error('Failed', this.error);
       }
     );
     form.reset();
@@ -131,32 +134,39 @@ export class LoginComponent implements OnInit {
   onShowPassword() {
     this.showPassword = !this.showPassword;
 
-    this.eyeIcon = this.showPassword? faEye : faEyeSlash;
-    }
+    this.eyeIcon = this.showPassword ? faEye : faEyeSlash;
+  }
 
 
     newLogin(ata:any) {
+    this.isLoading = true;
       
-    this.dataService.isLoading = true
+//     this.dataService.isLoading = true
       this.apiService.authenticateUser(this.dataService.loginCredentials)
       .subscribe((resData:any)=>{
+           this.isLoading = false;
+        this.toastr.success('Login Successful', 'Success');
         if (resData.data.type === "Business") {
           // this.dataService.businessId=resData.data?.business
           localStorage.setItem("businessId", resData.data.business)
-          this.dataService.isLoading =false
+//           this.dataService.isLoading =false
           this.router.navigate(['merchant']);
         } else if (resData.data.type === "Customer") {
           localStorage.setItem("customerId", resData.data.customer)
-          this.dataService.isLoading =false
+//           this.dataService.isLoading =false
           this.router.navigate(['customer']);
         }else{
           console.log(resData)
           this.dataService.isLoading =false
         }
       }),(errorMessage: any) => {
-        this.dataService.isLoading =false
+         this.isLoading = false;
+//        this.dataService.isLoading =false
         console.log(errorMessage);
         this.error = errorMessage;
+          
+         this.toastr.error(this.error, 'Login Failed');
       }
     }
 }
+

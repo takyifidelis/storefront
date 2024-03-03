@@ -32,6 +32,7 @@ import { CommonModule } from '@angular/common';
 import { response } from 'express';
 import { Observable } from 'rxjs';
 import { ReviewResponseData } from '../../../../Authentication/Auth/api.model';
+import { APIService } from '../../../../../Services/api.service';
 
 export interface CustomerInterface {
   checkbox: string;
@@ -183,7 +184,7 @@ export class ReviewDetailsComponent {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: ReviewResponseData,
-    private authService: AuthService
+    private authService: APIService
   ) {
     this.replyReview = new FormGroup({
       comment: new FormControl('', Validators.required),
@@ -195,17 +196,19 @@ export class ReviewDetailsComponent {
       return;
     }
 
-    const review = '0c2c1c7c-4010-440e-89ff-f8d62bd69aa1';
+    const review = this.data.id;
     const comment = form.value.comment;
-    this.authService.replyReview(comment, review).subscribe(
-      (resData) => {
-        console.log(resData);
-      },
-      (errorMessage) => {
-        console.log(errorMessage);
-        this.error = errorMessage;
-      }
-    );
+    this.authService
+      .replyReview(comment, review, localStorage.getItem('storeId')!)
+      .subscribe(
+        (resData) => {
+          console.log(resData);
+        },
+        (errorMessage) => {
+          console.log(errorMessage);
+          this.error = errorMessage;
+        }
+      );
     form.reset();
   }
 }

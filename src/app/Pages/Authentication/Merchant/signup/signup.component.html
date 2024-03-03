@@ -127,7 +127,11 @@
                     name="password"
                   />
                 </div>
-                <button (click)="onShowPassword()" class="eye-icon">
+                <button
+                  type="button"
+                  (click)="onShowPassword()"
+                  class="eye-icon"
+                >
                   <fa-icon class="icon" [icon]="eyeIcon"></fa-icon>
                 </button>
               </div>
@@ -170,7 +174,11 @@
                     formControlName="confirmPassword"
                   />
                 </div>
-                <button (click)="onShowConfirmedPassword()" class="eye-icon">
+                <button
+                  type="button"
+                  (click)="onShowConfirmedPassword()"
+                  class="eye-icon"
+                >
                   <fa-icon class="icon" [icon]="eyeIcon2"></fa-icon>
                 </button>
               </div>
@@ -194,9 +202,6 @@
               *This field is required
             </span>
           </div>
-          <span class="help-block" *ngIf="error">
-            {{ error }}
-          </span>
 
           <div class="checks">
             <div class="checks-wrapper-1">
@@ -309,8 +314,19 @@
             </div>
           </div>
           <div class="button">
-            <button class="btn btn-primary" [disabled]="!authForm.valid">
-              Continue
+            <button
+              class="btn btn-primary"
+              type="submit"
+              [disabled]="!authForm.valid"
+            >
+              <span class="continue-btn" *ngIf="!isLoading">Continue</span>
+              <span class="loading" *ngIf="isLoading"
+                ><img
+                  src="assets\icons\loading-btn-spinner.svg"
+                  alt="Loading.."
+                />
+                Loading...</span
+              >
             </button>
           </div>
           <div class="optional-input">
@@ -331,7 +347,7 @@
                 </span>
               </a>
 
-              <button class="social-icon">
+              <button type="button" class="social-icon">
                 <img src="/assets/icons/facebook-icon.svg" alt="" />
                 <p>Facebook</p>
               </button>

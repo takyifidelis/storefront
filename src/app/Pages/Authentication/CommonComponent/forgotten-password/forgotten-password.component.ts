@@ -13,6 +13,8 @@ import {
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../Auth/auth.service';
+import { ToastrService } from 'ngx-toastr';
+import { APIService } from '../../../../Services/api.service';
 
 @Component({
   selector: 'app-forgotten-password',
@@ -31,11 +33,13 @@ import { AuthService } from '../../Auth/auth.service';
 export class ForgottenPasswordComponent {
   ResetPass: FormGroup;
   error: string | any = null;
+  isLoading: boolean = false;
 
   constructor(
-    private authService: AuthService,
+    private authService: APIService,
     private router: Router,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private toastr: ToastrService
   ) {
     this.ResetPass = new FormGroup({
       email: new FormControl('', [
@@ -51,10 +55,13 @@ export class ForgottenPasswordComponent {
     if (!form.valid) {
       return;
     }
+    this.isLoading = true;
     const email = form.value.email;
     this.authService.passwordReset(email).subscribe(
       (resData) => {
         console.log(resData);
+        this.isLoading = false;
+        this.toastr.info('Check Email for token', 'Email Verification');
         this.router.navigate(['Email-notification']);
         // Set a timeout to navigate to another component after 3 seconds
         setTimeout(() => {
@@ -63,8 +70,11 @@ export class ForgottenPasswordComponent {
       },
       (errorMessage) => {
         console.log(errorMessage);
+        this.isLoading = false;
         this.error = errorMessage;
+        this.toastr.error(this.error, 'Failed');
       }
     );
+    form.reset();
   }
 }

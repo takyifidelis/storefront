@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RouterModule, Router } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faFacebook, faGoogle } from '@fortawesome/free-brands-svg-icons';
+import { ToastrService } from 'ngx-toastr';
 import {
   faEnvelope,
   faEyeSlash,
@@ -37,11 +38,16 @@ export class SignupMerchantComponent {
   eyeIcon2 = faEyeSlash;
   showConfirmedPassword: boolean | undefined;
   showPassword: boolean | undefined;
+  isLoading = false;
 
   signupForm: FormGroup;
   error: string | any = null;
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private toastr: ToastrService
+  ) {
     this.signupForm = new FormGroup(
       {
         email: new FormControl('', [
@@ -71,19 +77,24 @@ export class SignupMerchantComponent {
     const confirmPassword = form.value.confirmPassword;
     const businessName = form.value.businessName;
     const type = 'Business';
+    this.isLoading = true;
 
     this.authService
       .signupMerchant(businessName, email, type, password, confirmPassword)
       .subscribe(
         (resData) => {
           console.log(resData);
+          this.toastr.info('Check your Email for token', 'Email Verification');
+          this.isLoading = false;
           this.router.navigate(['Authentication'], {
             queryParams: { action: 'signup' },
           });
         },
         (errorMessage) => {
+          this.isLoading = false;
           console.log(errorMessage);
           this.error = errorMessage;
+          this.toastr.error(this.error, 'Failed');
         }
       );
     form.reset();

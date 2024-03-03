@@ -89,12 +89,19 @@
             </p>
           </div>
           <p>
-            <span class="help-block" *ngIf="error">
+            <!-- <span class="help-block" *ngIf="error">
               {{ error }}
-            </span>
+            </span> -->
           </p>
           <button class="btn btn-primary" [disabled]="!authenticate.valid">
-            Continue
+            <span class="continue-btn" *ngIf="!isLoading">Continue</span>
+            <span class="loading" *ngIf="isLoading"
+              ><img
+                src="assets\icons\loading-btn-spinner.svg"
+                alt="Loading.."
+              />
+              Loading...</span
+            >
           </button>
         </div>
       </form>
