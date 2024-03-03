@@ -37,6 +37,7 @@ import { AuthService } from '../../Auth/auth.service';
 import { faEye } from '@fortawesome/free-regular-svg-icons';
 import { APIService } from '../../../../Services/api.service';
 import { DataService } from '../../../../Services/data.service';
+import { environment } from '../../../../../environments/environment.development';
 
 @Component({
   selector: 'app-login',
@@ -134,6 +135,13 @@ export class LoginComponent implements OnInit {
         this.dataService.businessId=resData.data?.business
         this.router.navigate(['/merchant']);
       })
+    }
+
+    handleGoogleResponse() {
+      // this.apiService.getGoogle().subscribe((res: any)=> {
+      //   console.log(res)
+      // })
+      window.open(`${environment.baseApiUrl}/account/google/auth`, "_self");
     }
 
 }

@@ -58,6 +58,13 @@ initializePayment(payload:any): Observable<Response> {
   })
 }
 
+getGoogle(): Observable<Response>{
+  return this.http.get<Response>(`${environment.baseApiUrl}/account/google/auth`,
+  {
+    withCredentials: true,
+  })
+}
+
 addShipping(customerId: string, user: any) {
   return this.http.post(`${environment.baseApiUrl}/customer/add-shipping-address/${customerId}`, user)
 }

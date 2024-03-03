@@ -12,6 +12,7 @@ import { DataService } from '../../../../../Services/data.service';
 import { APIService } from '../../../../../Services/api.service';
 import { ProductObject, Response as resp } from '../../../../../interfaces/all-interfaces';
 import { Router, RouterModule } from '@angular/router';
+import { StarRatingComponent } from '../../../../Dashboard/Customer/components/star-rating/star-rating.component';
 
 interface Item {
   name: string;
@@ -21,7 +22,7 @@ interface Item {
 @Component({
   selector: 'app-home-ecommerce',
   standalone: true,
-  imports: [RouterModule, MatIconModule, MatButtonModule, CommonModule],
+  imports: [RouterModule, MatIconModule, MatButtonModule, CommonModule, StarRatingComponent],
   templateUrl: './home-ecommerce.component.html',
   styleUrl: './home-ecommerce.component.scss',
 })
@@ -165,6 +166,6 @@ export class HomeEcommerceComponent implements OnInit {
     this.apiService.addTOViews(productObj).subscribe((res)=>{
         console.log(res);
       })
-      
+
   }
 }

@@ -217,13 +217,16 @@
               </div>
             </div>
             <p class="blossom-bag-paragraph">{{ product.name }}</p>
-            <div class="ratings">
-              <img src="assets/images/star-rating.svg" alt="ratings" />
-              <img src="assets/images/star-rating.svg" alt="ratings" />
-              <img src="assets/images/star-rating.svg" alt="ratings" />
-              <img src="assets/images/star-rating.svg" alt="ratings" />
-              <img src="assets/images/star-rating-unfilled.svg" alt="" />
-              <span class="ratings-43">43 Ratings </span>
+            <div
+              class="ratings d-flex justify-content-betweeen align-items-center"
+            >
+              <app-star-rating
+                [rating]="product.rating"
+                [readonly]="true"
+              ></app-star-rating>
+              <span class="ratings-43">
+                <span class="number-rating">{{ product.rating }}</span> Ratings
+              </span>
             </div>
             <div class="product-price">${{ product.price }}</div>
             <div class="product-color-div d-flex">

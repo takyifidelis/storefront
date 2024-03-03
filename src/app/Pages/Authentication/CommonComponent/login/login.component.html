@@ -124,13 +124,12 @@
           </div>
 
           <div class="optional-login text-center mb-2">Log In</div>
-          <a
-            href="https://storefront-backend-jan-dev-api.vercel.app/api/account/google/auth"
-            ><span class="social-icon">
-              <img src="/assets/icons/google-icon.svg" alt="" />
-              <p class="mb-0">Google</p>
-            </span>
-          </a>
+
+          <span (click)="handleGoogleResponse()" class="social-icon">
+            <img src="/assets/icons/google-icon.svg" alt="" />
+            <p class="mb-0">Google</p>
+          </span>
+
           <div class="social-icon mt-2">
             <img src="/assets/icons/facebook-icon.svg" alt="" />
             <div>Facebook</div>
