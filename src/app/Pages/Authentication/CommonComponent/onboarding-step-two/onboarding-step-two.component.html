@@ -4,7 +4,7 @@
             <div class="d-flex w-100" style="margin-top: 25px;">
                 <span class="d-flex">
                     <span class="animate_animated animate__rubberBand app-name">StoreFront</span>
-                    <span [routerLink]="['/merchant']" class="mouse-pointer d-flex text-center align-items-center">
+                    <span [routerLink]="['/merchant-onboarding-1']" class="mouse-pointer d-flex text-center align-items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                             <path d="M12.1667 5.83333L11.1667 5L6.66667 10L11.1667 15L12.1667 14.1667L8.33333 10L12.1667 5.83333Z" fill="#3D4A5C"/>
                         </svg>
@@ -42,3 +42,6 @@
         <button (click)="continueToStep3()" class="body-btn" style="font-size: 18px; padding: 13px 20px;">continue</button>
     </main>
 </div>
+<div *ngIf="dataService.isLoading" class="loading-spinner">
+    <mat-spinner></mat-spinner>
+  </div>

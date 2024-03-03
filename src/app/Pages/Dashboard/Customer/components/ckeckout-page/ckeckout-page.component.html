@@ -1,5 +1,5 @@
 <div class="container-fluid" style="height: 100vh">
-  <form [formGroup]="user" (ngSubmit)="onSubmit()">
+  <div [formGroup]="user">
     <div class="row" style="height: 100vh">
       <div class="col-7" style="background-color: rgb(238, 234, 234)">
         <div class="m-4">
@@ -111,67 +111,84 @@
         <div>
           <p class="title">ORDER SUMMARY</p>
         </div>
-        <div class="row">
-          <div class="col">
-            <p class="text">ITEM</p>
-          </div>
-          <div class="col">
-            <div class="row">
-              <div class="col">
-                <p class="text">QUANTITY</p>
+        <!-- @for(product of dataService.cart; track product){ -->
+        
+          <div class="row">
+            <div class="col">
+              <p class="text">ITEM</p>
+            </div>
+            <div class="col">
+              <div class="row">
+                <div class="col">
+                  <p class="text">QUANTITY</p>
+                </div>
+                <div class="col">
+                  <P class="text">PRICE</P>
+                </div>
               </div>
-              <div class="col">
-                <P class="text">PRICE</P>
+            </div>
+            <div class="col">
+                <div class="col">
               </div>
             </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="col">
-            <p class="text-2">Carbon Offsets</p>
+          <div class="">
+          
+            @for (product of dataService.cart; track product) {
+              <div class="row">
+                <div class="col">
+                  <p class="text-2">{{product.name}}</p>
+                </div>
+                <div class="col">
+                  <div class="row">
+                    <div class="col">
+                      <p class="text-2">{{product.quant || 1}}</p>
+                    </div>
+                    <div class="col">
+                      <P class="text-2">{{product.price}}</P>
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                    <div class="col">
+                  </div>
+                </div>
+              </div>
+          }
           </div>
-          <div class="col">
-            <div class="row">
-              <div class="col">
-                <p class="text-2">36,000 lbs</p>
-              </div>
-              <div class="col">
-                <P class="text-2">$176.4</P>
-              </div>
+          <div class="d-flex justify-content-between">
+            <div>
+              <p class="text">Total:</p>
             </div>
+            <div class="title" style="margin-right: 64px">${{ getTotalCost()}}</div>
           </div>
-        </div>
-        <div class="d-flex justify-content-between">
-          <div>
-            <p class="text">Total:</p>
-          </div>
-          <div class="title" style="margin-right: 64px">$176.4</div>
-        </div>
-        <div
-          style="
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 20px;
-          "
-        >
-          <button
+          <div
             style="
-              background: rgb(233, 238, 233);
-              color: rgb(48, 77, 4);
-              border: 1px solid rgb(4, 54, 4);
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              margin-top: 20px;
             "
           >
-            PROMO CODE
-          </button>
-          <button
-            type="submit"
-            style="background: rgb(114, 176, 20); color: #fff"
-          >
-            CONFIRM YOUR ORDER
-          </button>
-        </div>
+            <button
+              style="
+                background: rgb(233, 238, 233);
+                color: rgb(48, 77, 4);
+                border: 1px solid rgb(4, 54, 4);
+              "
+            >
+              PROMO CODE
+            </button>
+            <button
+              type="submit"
+              style="background: rgb(114, 176, 20); color: #fff"
+              (click)="getdata()"
+            >
+              CONFIRM YOUR ORDER
+            </button>
+          </div>
       </div>
     </div>
-  </form>
+  </div>
+ 
 </div>

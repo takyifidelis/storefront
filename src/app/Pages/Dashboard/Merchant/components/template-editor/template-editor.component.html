@@ -30,7 +30,7 @@
                 </span>
             </nav>
         </header>
-        <div class="offcanvas offcanvas-top" style="height: max-content;" data-bs-backdrop="false" data-bs-scroll="true" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
+        <div *ngIf="dataservice.isInEditMode" class="offcanvas offcanvas-top" style="height: max-content;" data-bs-backdrop="false" data-bs-scroll="true" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
             <div style="padding: 2rem; 
             overflow-y: scroll;
             overflow-x: hidden;">
@@ -380,3 +380,6 @@
 <div style="z-index: 99; position: relative;">
   
 </div> 
+<div *ngIf="dataservice.isLoading" class="loading-spinner">
+    <mat-spinner></mat-spinner>
+  </div>

@@ -1,0 +1,93 @@
+<h2 mat-dialog-title>Review Details</h2>
+<mat-dialog-content>
+  <div class="container-fluid">
+    <div class="first-block d-flex align-items-center">
+      <div class="image-detail">
+        <img src="assets\images\hat-review.svg" alt="" />
+      </div>
+      <div class="customer-detail">
+        <h3 class="customer-name">
+          <span class="first-name">{{ data.customerReview.firstName }} </span>
+          <span class="last-name">{{ data.customerReview.lastName }}</span>
+        </h3>
+        <p class="customer-country">Country: <span> Ghana</span></p>
+      </div>
+      <div class="amount-detail">
+        <p class="total-spent">
+          Total Spent: $
+          <span class="amount">{{ data.orderReview.items[0].price }}</span>
+        </p>
+        <p class="total-review">
+          Total Review:
+          <span class="review">{{ data.orderReview.items[0].total }}</span>
+        </p>
+      </div>
+    </div>
+
+    <hr />
+    <div class="second-block">
+      <div class="product-details d-flex align-items-center">
+        <div class="product-image">
+          <img
+            [src]="data.productReview.images[0].url"
+            alt=""
+            class="product-image"
+          />
+        </div>
+        <div class="product-name-date">
+          <h5 class="product-name">{{ data.productReview.name }}</h5>
+          <p class="product-date">
+            Posted:
+            <span class="date">{{ data.createdAt | date : "mediumDate" }}</span>
+          </p>
+        </div>
+      </div>
+      <div class="review-message-block">
+        <div
+          class="title-rating d-flex justify-content-between align-items-center"
+        >
+          <p class="review-title">{{ data.remarks }}</p>
+          <div class="ratings">
+            <img src="assets\icons\star-ratings.svg" alt="" />
+            <img src="assets\icons\star-ratings.svg" alt="" />
+            <img src="assets\icons\star-ratings.svg" alt="" />
+            <img src="assets\icons\star-ratings.svg" alt="" />
+            <img src="assets\icons\star-ratings.svg" alt="" />
+          </div>
+        </div>
+        <p class="review-description">
+          {{ data.comment }}
+        </p>
+      </div>
+    </div>
+    <hr />
+    <div class="third-block reply-form">
+      <form
+        action=""
+        class="form"
+        #replyReviewForm="ngForm"
+        [formGroup]="replyReview"
+        (ngSubmit)="onSubmit(replyReviewForm)"
+      >
+        <div class="form-group">
+          <label for="message">Reply</label>
+          <textarea
+            id="message"
+            name="message"
+            rows="3"
+            class="form-control"
+            placeholder="Enter a description..."
+            formControlName="comment"
+            name="comment"
+          ></textarea>
+        </div>
+        <div class="review-buttons d-flex justify-content-between">
+          <button class="btn btn-cancel">Cancel</button>
+          <button class="btn btn-primary" [disabled]="!replyReviewForm.valid">
+            Send
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</mat-dialog-content>

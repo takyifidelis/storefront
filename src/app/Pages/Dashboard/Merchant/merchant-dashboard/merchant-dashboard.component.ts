@@ -39,12 +39,10 @@ export class MerchantDashboardComponent {
   logout() {
     this.authService.logout().subscribe(
       (resData) => {
-        // Optional: Add any logic you need after logout, such as redirecting the user.
         console.log(resData);
         this.router.navigate(['login']);
       },
       (error) => {
-        // Optional: Handle error if logout fails.
         console.error('Logout error:', error);
       }
     );

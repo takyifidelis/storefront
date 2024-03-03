@@ -6,6 +6,8 @@ import { DataService } from '../../../../../Services/data.service';
 import { APIService } from '../../../../../Services/api.service';
 import  {Response as resp} from '../../../../../interfaces/all-interfaces';
 import {RouterModule } from '@angular/router';
+import { FilterOnePipe } from '../../../../../Pipes/filter-one.pipe';
+import { FilterProductPipe } from '../../../../../Pipes/filter-product.pipe';
 
 interface Item {
   name: string;
@@ -15,7 +17,7 @@ interface Item {
 @Component({
   selector: 'app-home-ecommerce',
   standalone: true,
-  imports: [RouterModule,MatIconModule, MatButtonModule, CommonModule],
+  imports: [RouterModule,MatIconModule, MatButtonModule, CommonModule,FilterOnePipe,FilterProductPipe],
   templateUrl: './home-ecommerce.component.html',
   styleUrl: './home-ecommerce.component.scss',
 })
@@ -23,6 +25,7 @@ export class HomeEcommerceComponent implements OnInit {
 
 
  
+  cart:any = []
   imageUrl:any = null
   @ViewChild('fileInput') fileInput!: ElementRef;
 constructor(private cdr: ChangeDetectorRef, public dataservice:DataService, private apiService: APIService){}
@@ -69,6 +72,31 @@ constructor(private cdr: ChangeDetectorRef, public dataservice:DataService, priv
   goToProduct(){
 
   }
+  addToCart(product:any){
+    // this.cart.push(product);
+    // console.log(this.cart);
+    if (localStorage.getItem('cart')) {
+      if (JSON.parse(localStorage.getItem('cart')!)) {
+        this.cart = JSON.parse(localStorage.getItem('cart')!);
+        this.cart.push(product);
+        this.dataservice.cart = this.cart
+        localStorage.setItem('cart', JSON.stringify(this.cart));
+      }
+      else{
+        localStorage.setItem('cart', JSON.stringify('[]'));
+        this.cart = JSON.parse(localStorage.getItem('cart')!);
+        console.log(this.cart);
+        this.cart.push(product);
+        this.dataservice.cart = this.cart
+        localStorage.setItem('cart', JSON.stringify(this.cart));
+      }
+    }
+    else {
+      this.cart.push(product);
+      this.dataservice.cart = this.cart
+      localStorage.setItem('cart', JSON.stringify(this.cart));
+    }
+  }
   removeDuplicates(items: Item[]): Item[] {
     // Create a Map to store unique names as keys
     const uniqueNames = new Map<string, boolean>();
@@ -86,20 +114,20 @@ constructor(private cdr: ChangeDetectorRef, public dataservice:DataService, priv
 }
 ngOnInit(){
   // this.apiService.getStore(this.dataservice.businessId).subscribe((storeResData:any) =>{
-  this.apiService.getStore("599719d7-d5e3-48db-955a-b56ad261dd89").subscribe((storeResData:any) =>{
-    console.log({storeId: storeResData});
-    // this.dataservice.storeId = storeResData.data[0].id
-    this.dataservice.storeId = "f9586428-62e3-4455-bb1d-61262a407d1a"
-    this.apiService.getStoreProducts(this.dataservice.storeId).subscribe((productResData:any)=>{
-      // this.dataservice.products = productResData.data
-      this.dataservice.products = productResData.data.products
-      for (const product of this.dataservice.products) {
-
-        this.dataservice.productCategory.push({name: product.category, image:""})
+  // this.apiService.getStore(this.dataservice.storeId).subscribe((storeResData:any) =>{
+    // console.log({storeId: storeResData});
+    this.apiService.getCustomerStoreProducts(this.dataservice.storeId).subscribe((productResData:any)=>{
+      console.log(productResData);
+      this.dataservice.products = productResData.data
+      // this.apiService.getStoreCategories(this.dataservice.storeId).subscribe((storeCatsData:any)=>{
+        // this.dataservice.productCategories = storeCatsData.data
+        // console.log(this.dataservice.productCategories)
+      // });
+      if (JSON.parse(localStorage.getItem('cart')!)) {
+        this.cart = JSON.parse(localStorage.getItem('cart')!);
+        this.dataservice.cart = this.cart
       }
-      this.dataservice.productCategory= this.removeDuplicates(this.dataservice.productCategory)
-      console.log(this.dataservice.productCategory)
     })
-  })
+  // })
 }
 }
