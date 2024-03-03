@@ -16,6 +16,7 @@
           </div>
         </div>
         <div class="save-cancel">
+
           <button
             type="button"
             class="btn cancel-btn"
@@ -23,12 +24,13 @@
           >
             Cancel
           </button>
+
           <button type="submit" class="btn btn-primary" (click)="onSubmit()">
             Save
           </button>
         </div>
       </div>
-      <div class="details-media d-flex justify-content-between">
+      <div class="details-media d-flex justify-content-around">
         <div class="product-details">
           <h3 class="product-details-header product-header">Product details</h3>
           <p class="product-details-paragraph product-paragraph">
@@ -76,7 +78,9 @@
 
           <div class="form-group description-div">
             <label for="Description" class="label-name">Description</label>
+
             <!-- <textarea
+
               [(ngModel)]="productDetails.description"
               id=""
               rows="4"
@@ -108,7 +112,9 @@
                 class="example-radio-group"
                 [(ngModel)]="productDetails.category"
               >
+
                 @for (cat of textArray; track cat) {
+
                 <mat-radio-button class="example-radio-button" [value]="cat">{{
                   cat
                 }}</mat-radio-button>
