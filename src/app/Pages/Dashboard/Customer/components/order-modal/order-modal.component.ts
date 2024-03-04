@@ -1,5 +1,4 @@
 
-import { Component, Inject, OnInit } from '@angular/core';
 import {
   MAT_DIALOG_DATA,
   MatDialogContent,
@@ -8,7 +7,6 @@ import {
 } from '@angular/material/dialog';
 
 import { Component, EventEmitter, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
 import { MatTabsModule } from '@angular/material/tabs';
 import { StarRatingComponent } from '../../../../Dashboard/Customer/components/star-rating/star-rating.component';
@@ -20,7 +18,6 @@ import {
   Validators,
 } from '@angular/forms';
 import { AuthService } from '../../../../Authentication/Auth/auth.service';
-import { dummyUserInterface } from '../favorite-product/favorite-product.component';
 import { APIService } from '../../../../../Services/api.service';
 import { dummyUserInterface } from '../../../../../interface/dummy-user.model';
 
@@ -48,7 +45,7 @@ export class OrderModalComponent implements OnInit {
 //   constructor(
 //     private authService: AuthService,
 //     @Inject(MAT_DIALOG_DATA) public data: dummyUserInterface
-//   starRating!: number;
+  starRating!: number;
 
   constructor(
     private authService: APIService,
@@ -63,7 +60,7 @@ export class OrderModalComponent implements OnInit {
   }
   ngOnInit(): void {
      
-    for (const itemPrice of this.data.items) {
+    for (const itemPrice of this.data['items']) {
       this.sum += itemPrice.price;
     }
   }
@@ -71,7 +68,7 @@ export class OrderModalComponent implements OnInit {
   onSubmit(form: FormGroupDirective) {
     let reviewData = {
       product: this.data['items'][0].id,
-      rating: this.starRating,
+      // rating: this.starRating,
       remarks: form.value.remarks,
       comment: form.value.comment,
     };
@@ -91,7 +88,7 @@ export class OrderModalComponent implements OnInit {
 
     form.reset();
   }
-
+  // onSetStar($event){}
   onSetStar(value: number) {
     this.starRating = value;
   }
