@@ -49,19 +49,22 @@ export class CkeckoutPageComponent implements OnInit {
     private router: Router,
     public http: HttpClient
   ) {}
+
   getdata(){
     this.cart = JSON.parse(localStorage.getItem('cart')!);
-    let items = []
+    console.log(this.cart)
+    this.items = []
     for (const item of this.cart) {
-        items.push({product:item.id ,quantity: item.quant, variations:[] })
+        this.items.push({product:item.id ,quantity: item.quant, variations:[] })
     }
-    return items;
+// console.log(items);
+
+    return this.items;
   }
   
   ngOnInit(): void {
     this.initConfig();
     this.dataService.cart = JSON.parse(localStorage.getItem('cart')!);
-    // console.log(this.dataService.cart);
     this.user = new FormGroup({
 
       name: new FormControl(null, Validators.required),
@@ -80,9 +83,11 @@ export class CkeckoutPageComponent implements OnInit {
       store: 'f9586428-62e3-4455-bb1d-61262a407d1a',
     };
 
-this.createOrder();
+    // console.log(this.payload);
 
-    // console.log(this.getdata());
+// this.createOrder();
+
+    // console.log(this.items);
 
   }
   createOrder() {
@@ -92,9 +97,11 @@ this.createOrder();
       return  this.orderId;
     });
   }
+
   getTotalCost() {
     return this.dataService.cart.map((t:any) => t.price).reduce((acc: any, value: any) => acc + value, 0);
   }
+
   async onApprove(data: { orderID: string }) {
     console.log(data);
     alert("paused");
@@ -122,26 +129,28 @@ this.createOrder();
 //       'appartmentNumber':  new FormControl(null)
 //     })
 //   }
+} else {
 
-//   getdata(){
-//     if (this.dataService.cart.length > 0) {
-//       // this.cart = JSON.parse(localStorage.getItem('cart')!);
-//       for (const item of this.dataService.cart) {
-//           this.items.push({product:item.id ,quantity: 1, variations:[] })
-//       }
-//     console.log(this.items);
-//     } else {
-
-      this.snackBar.open(
-        `Your cart is empty, please add products`,
-        'Close',
-        { duration: 3000 }
-      );
-      this.router.navigate(['/ecommerce']);
-    }
-   
+  this.snackBar.open(
+    `Your cart is empty, please add products`,
+    'Close',
+    { duration: 3000 }
+  );
+  this.router.navigate(['/ecommerce']);
+}
   }
 
+  // getOrderData(){
+  //   if (this.dataService.cart.length > 0) {
+  //     // this.cart = JSON.parse(localStorage.getItem('cart')!);
+  //     for (const item of this.dataService.cart) {
+  //         this.items.push({product:item.id ,quantity: 1, variations:[] })
+  //     }
+  //   console.log(this.items);
+    
+  //   }
+  // }
+  
 
   // private initConfig(): void {
   //   this.payPalConfig = {

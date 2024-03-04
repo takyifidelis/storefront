@@ -52,7 +52,7 @@ export class ReviewComponent implements OnInit {
   sizes: string[] | undefined;
   storeId = 'f9586428-62e3-4455-bb1d-61262a407d1a';
   similarProducts: any = []
-
+cart: any = [];
 
 
   //   this.product = this.apiService.getProductTemp();
@@ -96,10 +96,11 @@ export class ReviewComponent implements OnInit {
   }
 
   onAddToBuy() {
-    let cart = JSON.parse(localStorage.getItem('cart')|| '')
+    // let cart = JSON.parse(localStorage.getItem('cart')|| '')
     this.productItem.quant =this.quantity;
-    cart.push(this.productItem);
-    let addTobuyJson = JSON.stringify(cart);
+    this.cart.push(this.productItem);
+    console.log(this.cart);
+    let addTobuyJson = JSON.stringify(this.cart);
     localStorage.setItem('cart', addTobuyJson);
   }
 
@@ -148,20 +149,17 @@ export class ReviewComponent implements OnInit {
     this.selectedImage = this.productItem.images[0].url;
      this.initialPrice = this.productItem.price;
 
-     let values = this.productItem.variations[0].values;
+     let values = this.productItem.variations;
      
-      this.sizes = values[0].split(',');
+      // this.sizes = values[0].split(',');
 
       this.apiService.getStoreProductsCustomer(this.storeId).subscribe((res: any) => {
-        console.log(res)
+        // console.log(res)
         res.data.filter((product: any) => {
           if (product.category === this.productItem.category){
             this.similarProducts.push(product)
           }
         })
-         
-
-        
       })
     
     // let arrayJson = JSON.stringify(array)

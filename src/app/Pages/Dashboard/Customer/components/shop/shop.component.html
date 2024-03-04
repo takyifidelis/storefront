@@ -15,8 +15,8 @@
   <div class="row row-cols-sm-2 row-cols-lg-3 w-100" style="flex-wrap: wrap">
     <div
       class="col template-container"
-      (click)="goToStore()"
-      *ngFor="let store of stores"
+      (click)="goToStore(i)"
+      *ngFor="let store of stores; let i"
       style="display: flex; flex-direction: column"
     >
       <img

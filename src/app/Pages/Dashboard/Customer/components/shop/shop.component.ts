@@ -23,7 +23,11 @@ export class ShopComponent implements OnInit{
 
   constructor(private apiService:APIService, private router:Router,private dataService:DataService){}
 
-  goToStore(){
+  goToStore(store:any){
+    console.log(store)
+    this.dataService.template = JSON.parse(store.template.options)
+    localStorage.setItem('storeId',store.id)
+    console.log(this.dataService.template)
     this.router.navigate(['/ecommerce']);
   }
 
