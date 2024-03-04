@@ -19,7 +19,7 @@
         <mat-radio-group [(ngModel)]="dataService.merchantBusinessType1" class="row bdt row-cols-2">
             <span class="p-2 pt-3">
                 <span class="span-option-container col-xs-2" >
-                    <mat-radio-button color="primary" value=" just starting my business">I’m just starting my business</mat-radio-button>
+                    <mat-radio-button (click)="setBusinessType($event.target)" color="primary" value="just starting my business">I’m just starting my business</mat-radio-button>
                 </span>
             </span>
             <span class="p-2 pt-3">
