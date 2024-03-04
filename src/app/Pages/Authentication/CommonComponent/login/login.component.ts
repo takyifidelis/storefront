@@ -40,8 +40,7 @@ import { DataService } from '../../../../Services/data.service';
 
 import { environment } from '../../../../../environments/environment.development';
 
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-login',
@@ -54,7 +53,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     SocialLoginModule,
     FormsModule,
     ReactiveFormsModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
@@ -89,7 +88,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.dataService.isLoading = false;
+    // this.dataService.isLoading = false;
     this.authService.authState.subscribe((user) => {
       console.log(user);
       this.user = user;
@@ -111,34 +110,32 @@ export class LoginComponent implements OnInit {
     }
     const email = form.value.email;
     const password = form.value.password;
+    this.isLoading = true;
     this.loginService.login(email, password).subscribe(
       (resData) => {
-        this.toastr.success('Success', 'Login Account!');
+        // this.toastr.success('Success', 'Login Account!');
+        this.isLoading = false;
         console.log(resData);
-
-        // if (resData.data?.type == 'Business') {
-        //   this.router.navigate(['merchant']);
-        // } else if (resData.data?.type == 'Customer') {
-        //   this.router.navigate(['customer']);
-        // }
-      },
-
         if (resData.data?.type == 'Business') {
-        if (resData.type == 'Business') {
-          localStorage.setItem("businessId", resData.data.business)
-          this.router.navigate(['merchant']);
-        } else if (resData.data?.type == 'Customer') {
-        } else if (resData.type == 'Customer') {
-          localStorage.setItem("customerId", JSON.stringify(resData.data.customer))
-          this.router.navigate(['customer']);
+          if (resData.type == 'Business') {
+            localStorage.setItem('businessId', resData.data.business);
+            this.router.navigate(['merchant']);
+          } else if (resData.data?.type == 'Customer') {
+          } else if (resData.type == 'Customer') {
+            localStorage.setItem(
+              'customerId',
+              JSON.stringify(resData.data.customer)
+            );
+            this.router.navigate(['customer']);
+          }
         }
-      }
-    },
+      },
 
       (errorMessage) => {
         console.log(errorMessage);
         this.error = errorMessage;
         this.toastr.error('Failed', this.error);
+        this.isLoading = false;
       }
     );
     form.reset();
@@ -150,45 +147,45 @@ export class LoginComponent implements OnInit {
     this.eyeIcon = this.showPassword ? faEye : faEyeSlash;
   }
 
-
-    newLogin(ata:any) {
+  newLogin(ata: any) {
     this.isLoading = true;
-      
-//     this.dataService.isLoading = true
-      this.apiService.authenticateUser(this.dataService.loginCredentials)
-      .subscribe((resData:any)=>{
-           this.isLoading = false;
-        this.toastr.success('Login Successful', 'Success');
-        if (resData.data.type === "Business") {
-          // this.dataService.businessId=resData.data?.business
-          localStorage.setItem("businessId", resData.data.business)
-//           this.dataService.isLoading =false
-          this.router.navigate(['merchant']);
-        } else if (resData.data.type === "Customer") {
-          localStorage.setItem("customerId", resData.data.customer)
-//           this.dataService.isLoading =false
-          this.router.navigate(['customer']);
-        }else{
-          console.log(resData)
-          this.dataService.isLoading =false
+
+    //     this.dataService.isLoading = true
+    this.apiService
+      .authenticateUser(this.dataService.loginCredentials)
+      .subscribe(
+        (resData: any) => {
+          this.isLoading = false;
+          this.toastr.success('Login Successful', 'Success');
+          if (resData.data.type === 'Business') {
+            // this.dataService.businessId=resData.data?.business
+            localStorage.setItem('businessId', resData.data.business);
+            //this.dataService.isLoading =false
+            this.router.navigate(['merchant']);
+          } else if (resData.data.type === 'Customer') {
+            localStorage.setItem('customerId', resData.data.customer);
+            //           this.dataService.isLoading =false
+            this.router.navigate(['customer']);
+          } else {
+            console.log(resData);
+
+            // this.dataService.isLoading = false;
+          }
+        },
+        (errorMessage: any) => {
+          this.isLoading = false; //
+          console.log(errorMessage);
+          this.error = errorMessage;
+          this.toastr.error(this.error, 'Login Failed');
         }
-      }),(errorMessage: any) => {
-         this.isLoading = false;
-//        this.dataService.isLoading =false
-        console.log(errorMessage);
-        this.error = errorMessage;
-          
-         this.toastr.error(this.error, 'Login Failed');
-      }
-    }
+      );
+    this.dataService.loginCredentials = { email: '', password: '' };
+  }
 
-
-    handleGoogleResponse() {
-      // this.apiService.getGoogle().subscribe((res: any)=> {
-      //   console.log(res)
-      // })
-      window.open(`${environment.baseApiUrl}/account/google/auth`, "_self");
-    }
-
+  handleGoogleResponse() {
+    // this.apiService.getGoogle().subscribe((res: any)=> {
+    //   console.log(res)
+    // })
+    window.open(`${environment.baseApiUrl}/account/google/auth`, '_self');
+  }
 }
-

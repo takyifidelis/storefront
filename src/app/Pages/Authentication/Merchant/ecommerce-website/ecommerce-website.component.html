@@ -17,24 +17,23 @@
         [innerText]="dataservice.template.text"
       ></a> -->
 
-<div *ngIf="serverResponseReceived"
-[style.lineHeight]="dataService.template.lineHeight"
-[style.background]="dataService.template.primaryBackground">
-  <nav class="navbar navbar-expand-lg navbar-dark" 
-  [style.backgroundColor]="dataService.template.navbarBackgroundColor" 
-  [style.color]="dataService.template.navbarColor"
-  style="z-index: 20;">
+    <div *ngIf="serverResponseReceived"
+      [style.lineHeight]="dataService.template.lineHeight"
+      [style.background]="dataService.template.primaryBackground">
+      <nav class="navbar navbar-expand-lg navbar-dark" 
+        [style.backgroundColor]="dataService.template.navbarBackgroundColor" 
+        [style.color]="dataService.template.navbarColor"
+        style="z-index: 20;">
     <div class="container-fluid">
       <a [style.color]="dataService.template.navbarColor" class="navbar-brand" href="#" [innerText]="dataService.template.text"></a>
-
-      <button
-        class="menu-btn toggle-btn"
-        color="primary"
-        mat-icon-button
-        (click)="toggleBtnFunction()"
-      >
-        <mat-icon>menu</mat-icon>
-      </button>
+        <button
+          class="menu-btn toggle-btn"
+          color="primary"
+          mat-icon-button
+          (click)="toggleBtnFunction()"
+        >
+          <mat-icon>menu</mat-icon>
+        </button>
 
       <div
         class="collapse navbar-collapse d-flex justify-content-center"
@@ -45,59 +44,41 @@
         (cdkDropListDropped)="drop($event)"
       >
         <div class="navbar-nav nav-content" id="parent">
-
-<!--           @for (menuItem of dataservice.template.pagesOrder; track menuItem) {
-          <a
-            *ngIf="menuItem.includePage"
-            [style.color]="dataservice.template.navbarColor"
-            cdkDrag -->
-
           @for (menuItem of dataService.template.pagesOrder; track menuItem) {
             <a *ngIf="menuItem.includePage" [style.color]="dataService.template.navbarColor" cdkDrag
-
-            class="nav-link"
-            [routerLink]="[menuItem.name]"
-            routerLinkActive="router-link-active"
-            >{{ menuItem.value }}</a
-          >
+              class="nav-link"
+              [routerLink]="[menuItem.name]"
+              routerLinkActive="router-link-active"
+            >
+              {{ menuItem.value }}
+            </a>
           }
 
           <form class="d-flex justify-content-center align-items-center">
-<!--             <fa-icon
-              [icon]="searchIcon"
-              [style.color]="dataservice.template.navbarColor"
-            ></fa-icon>
-            <input
-              [style.color]="dataservice.template.navbarColor" -->
-
             <fa-icon [icon]="searchIcon" [style.color]="dataService.template.navbarColor"></fa-icon>
             <input
-            [style.color]="dataService.template.navbarColor"
-            [(ngModel)]="dataService.productSearchString"
-
+              [style.color]="dataService.template.navbarColor"
+              [(ngModel)]="dataService.productSearchString"
               type="search"
               placeholder="Search"
               aria-label="Search"
               class="search"
-              name="d"
-            />
+              name="d"/>
           </form>
         </div>
-        [style.color]="dataService.template.navbarColor" class="navbar-nav dropdown-content" id="dropdownMenu">
-
+        
+        <div [style.color]="dataService.template.navbarColor" class="navbar-nav dropdown-content" id="dropdownMenu">
           <a class="nav-link" [routerLink]="['home']">Home</a>
           <a class="nav-link" [routerLink]="['about-us']">About Us</a>
           <a class="nav-link" [routerLink]="['contact-us']">Contact Us</a>
           <a class="nav-link" [routerLink]="['shop']">Shop</a>
-          <a class="nav-link"
-            ><fa-icon [icon]="searchIcon" style="color: #fff"></fa-icon
-            >Search</a
-          >
+          <a class="nav-link">
+            <fa-icon [icon]="searchIcon" style="color: #fff"></fa-icon>
+            Search
+          </a>
         </div>
       </div>
-      <div
-        class="navbar-icons d-flex justify-content-between align-items-center"
-      >
+      <div class="navbar-icons d-flex justify-content-between align-items-center">
         <button class="heart nav-icons" color="primary" mat-icon-button>
           <mat-icon>favorite_border</mat-icon>
         </button>
@@ -105,11 +86,10 @@
           <mat-icon>person</mat-icon>
         </button>
 
-        <button
-          class="person nav-icons"
-
+        <!-- <button class="person nav-icons" -->
           <mat-icon [matBadge]="dataService.cart.length" (click)="goToCheckout()" style="margin-top: 10px; cursor: pointer;" matBadgeColor="warn">shopping_cart</mat-icon>
-        <!-- <button mat-icon-button
+
+          <!-- <button mat-icon-button
 
           color="primary"
           mat-icon-button
