@@ -27,7 +27,6 @@ import { dummyUserInterface } from '../../../../../interface/dummy-user.model';
 import { APIService } from '../../../../../Services/api.service';
 import { DatePipe } from '@angular/common';
 import { DataService } from '../../../../../Services/data.service';
-import { APIService } from '../../../../../Services/api.service';
 
 @Component({
   selector: 'app-order',
@@ -168,7 +167,7 @@ sorted: any = [];
       }
     })
     this.dataSource = new MatTableDataSource(this.sorted);
-
+  }
 //   ngOnInit(): void {
 //     this.apiService
 //       .getSingleOrder('1233893')

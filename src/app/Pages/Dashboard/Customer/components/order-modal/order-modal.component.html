@@ -10,7 +10,7 @@
   <mat-tab-group>
     <mat-tab label=" Items">
       <div class="Items Purchased">
-        <div class="purchase-item" *ngFor="let item of data?.items">
+        <div class="purchase-item" *ngFor="let item of data['items']">
           <img [src]="item.image" style="width: 20%" alt="" />
           <span class="d-flex flex-column">
             <span class="d-flex" style="align-items: end">
@@ -32,10 +32,10 @@
     <mat-tab label="Address">
       <hr />
       <div class="text shipment-address">
-        <p>{{ data.orderShipping.name }}</p>
-        <p>{{ data.orderShipping.city }}</p>
-        <p>{{ data.orderShipping.streetAddress }}</p>
-        <p style="color: #667085 !important">{{ data.orderShipping.phone }}</p>
+        <p>{{ data['orderShipping'].name }}</p>
+        <p>{{ data['orderShipping'].city }}</p>
+        <p>{{ data['orderShipping'].streetAddress }}</p>
+        <p style="color: #667085 !important">{{ data['orderShipping'].phone }}</p>
       </div>
       <hr />
     </mat-tab>

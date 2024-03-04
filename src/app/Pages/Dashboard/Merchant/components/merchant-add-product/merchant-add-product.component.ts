@@ -109,7 +109,7 @@ export class MerchantAddProductComponent {
     this.data.append('category', this.productDetails.category);
     console.log(this.data);
 
-    this.authService.postProduct(this.data).subscribe(
+    this.authService.postProduct(this.data, localStorage.getItem('storeId')!).subscribe(
       (resData) => {
         console.log(resData);
         this.router.navigate(['/merchant/product']);

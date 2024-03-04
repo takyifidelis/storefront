@@ -71,7 +71,7 @@ export class MerchantReviewsComponent {
   constructor(
     public dataService: DataService,
     public dialog: MatDialog,
-    private authService: AuthService
+    private authService: APIService,
   ) {
     this.dataSource = new MatTableDataSource(this.users);
   }
