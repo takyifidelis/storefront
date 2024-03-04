@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -24,7 +24,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './onboarding-step-two.component.html',
   styleUrl: './onboarding-step-two.component.scss'
 })
-export class OnboardingStepTwoComponent {
+export class OnboardingStepTwoComponent implements OnDestroy {
 constructor(public dataService:DataService, private apiService:APIService, private router: Router){}
 searchString = ''
 selectedValue: any= 'Filter by Region'
@@ -38,26 +38,28 @@ onSelect(val: any) {
   this.selectedValue = val.innerText
   this.searchString = val.innerText
   console.log(val.innerText)
-  localStorage.setItem('storeType',this.selectedValue)
+  localStorage.setItem('storeName',this.selectedValue)
   // this.dataService.merchantData.store.name = val.innerText
-
-
 }
 
 continueToStep3(){
 //   this.apiService.setBusinessType(this.dataService.businessId,{businessType:this.dataService.merchantData.store.name}).subscribe(data =>{
 //     console.log(data);
-//     this.router.navigate(['/merchant-onboarding-3'])
+    localStorage.setItem('storeName',this.searchString)
+    this.router.navigate(['/merchant-onboarding-3'])
 //   })
 // }
 
-  this.dataService.isLoading =true
-  this.apiService.setBusinessType(this.dataService.businessId,{businessType:this.dataService.merchantStoreName}).subscribe(data =>{
-    console.log(data);
-    this.dataService.isLoading =false
-    this.router.navigate(['/merchant-onboarding-3'])
-  }),(errorMessage: any) => {
-    console.log(errorMessage);
-  }
+  // this.dataService.isLoading =true
+  // this.apiService.setBusinessType(localStorage.getItem('businessId')!,{businessType:localStorage.getItem('storeType')}).subscribe(data =>{
+  //   console.log(data);
+  //   this.dataService.isLoading =false
+  //   this.router.navigate(['/merchant-onboarding-3'])
+  // }),(errorMessage: any) => {
+  //   console.log(errorMessage);
+  // }
+}
+ngOnDestroy(){
+  this.dataService.isLoading = false;
 }
 }
