@@ -48,38 +48,39 @@
                   </div>
                 </div>
               </div>
-              <div class="row">
-                <div class="col d-flex">
-                  <div class="select-color">
-                    <p>SELECT COLOR</p>
+              <div *ngFor="let variation of variations">
+                <div class="row">
+                  <div class="col d-flex">
+                    <div class="select-color">
+                      <p>SELECT {{ variation?.type }}</p>
+                    </div>
+                    <div class="color d-flex gap">
+                      <div class="box" style="background-color: #1b4dff"></div>
+                      <div class="box" style="background-color: #ffd027"></div>
+                      <div class="box" style="background-color: #8f0ea2"></div>
+                      <div class="box" style="background-color: #e92215"></div>
+                    </div>
                   </div>
-                  <div class="color d-flex gap">
-                    <div class="box" style="background-color: #1b4dff"></div>
-                    <div class="box" style="background-color: #ffd027"></div>
-                    <div class="box" style="background-color: #8f0ea2"></div>
-                    <div class="box" style="background-color: #e92215"></div>
+                </div>
+                <div class="row">
+                  <div class="col d-flex">
+                    <div class="select-size">
+                      <p>SELECT SIZE</p>
+                    </div>
+                    <div class="size-guide txt-2">
+                      <div
+                        class="d-flex align-items-center justify-content-start"
+                      >
+                        <button class="size one">
+                          {{ variation }}
+                        </button>
+                      </div>
+                      <!-- <a href="#">size guide</a> -->
+                    </div>
                   </div>
                 </div>
               </div>
-              <div class="row">
-                <div class="col d-flex">
-                  <div class="select-size">
-                    <p>SELECT SIZE</p>
-                  </div>
-                  <div class="size-guide txt-2">
-                    <a href="#">size guide</a>
-                  </div>
-                </div>
-              </div>
-              <div class="d-flex align-items-center justify-content-start">
-                <button class="size one" *ngFor="let variation of sizes">
-                  <!-- <button
-                        class="size one"
-                        *ngFor="let variation of this.product.variations[0].values"
-                      > -->
-                  {{ variation }}
-                </button>
-              </div>
+
               <div class="quantity-price d-flex align-items-center">
                 <div class="quantity">
                   <p class="quantity-name quantity-price-name">QUANTITY</p>
