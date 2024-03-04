@@ -225,9 +225,9 @@ nav {
 }
 #teams {
   text-align: center;
-  background-image: url("/assets/mages/agencies-background-image.svg");
-  background-size: cover; /* Adjust the cover to contain as needed */
-  background-position: center; /* Center the background image */
+  background-image: url("/assets/images/teams-background-image.svg");
+  background-size: cover;
+  background-position: center;
   background-repeat: no-repeat;
 
   .team-container {
@@ -310,11 +310,11 @@ footer {
 
   padding: 5rem 5rem;
   border-radius: 1890px;
-  background-color: radial-gradient(
-    50% 50% at -0.34% 50.34%,
-    rgba(255, 210, 210, 0.65) 0%,
-    rgba(255, 244, 229, 0) 100%
-  );
+  // background-image: url("/assets/images/agencies-background-image.svg");
+  // background-size: 100%;
+  // background-position: center;
+  // background-repeat: no-repeat;
+
   // width: 100%;
   // height: 100vh;
   // overflow: hidden;
