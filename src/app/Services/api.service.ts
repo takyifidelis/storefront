@@ -96,7 +96,7 @@ export class APIService {
       .pipe(catchError(this.handleError));
   }
 
-  createStore(businessId: string, data:{}): Observable<Response>{
+  createStore(businessId: string, data:{[key:string]:any}): Observable<Response>{
     return this.http.post<Response>(`${environment.baseApiUrl}/business/create-new-store/${businessId}`,
     data,{
       withCredentials: true,
@@ -137,7 +137,15 @@ export class APIService {
 getGoogle(): Observable<Response>{
   return this.http.get<Response>(`${environment.baseApiUrl}/account/google/auth`,
   {
-
+    withCredentials: true,
+  })
+}
+AddStoreCategories(storeId: string, categoryName:{[key:string]:string[]}): Observable<Response>{
+  return this.http.post<Response>(`${environment.baseApiUrl}/store/add-category/${storeId}`,
+  categoryName,{
+    withCredentials: true,
+  })
+}
 
   getStoreCategories(storeId: string): Observable<Response>{
     return this.http.get<Response>(`${environment.baseApiUrl}/store/get-categories/${storeId}`,
@@ -150,7 +158,7 @@ initializePayment(customerId:string, cart:any): Observable<Response> {
 
     withCredentials: true,
   })
-}
+} 
 
 addShipping(customerId: string, user: any) {
   return this.http.post(`${environment.baseApiUrl}/customer/add-shipping-address/${customerId}`, user,
@@ -167,7 +175,10 @@ addShipping(customerId: string, user: any) {
   
   getStoreProductsMerchant(storeId: string): Observable<Response>{
     return this.http.get<Response>(`${environment.baseApiUrl}/product/get-all-products/${storeId}`,
-
+    {
+      withCredentials: true,
+    })
+  }
 getAllShippingAddresses(customerId: string) {
   return this.http.get(`${environment.baseApiUrl}/customer/get-shipping-addresses/${customerId}`,
   {
@@ -187,20 +198,17 @@ getCustomerStoreProducts(storeId: string): Observable<Response>{
       withCredentials: true,
     })
   }
-  getStoreProducts(storeId: string): Observable<Response>{
+getStoreProducts(storeId: string): Observable<Response>{
     return this.http.get<Response>(`${environment.baseApiUrl}/product/get-all-products/${storeId}`,
     {
       withCredentials: true,
     })
   }
-   postProduct(formData: FormData) {
+postProduct(formData: FormData, storeId: string) {
     return this.http
       .post<Response>(
-        'https://storefront-backend-jan-dev-api.vercel.app/api/product/add/f9586428-62e3-4455-bb1d-61262a407d1a',
-
-
+        `https://storefront-backend-jan-dev-api.vercel.app/api/product/add/${storeId}`,
         formData,
-
         {
           withCredentials: true,
         }
@@ -209,12 +217,12 @@ getCustomerStoreProducts(storeId: string): Observable<Response>{
   }
 
 
-  publishTemplate(storeId: string, template:any): Observable<Response>{
-    return this.http.patch<Response>(`${environment.baseApiUrl}/store/publish-template/${storeId}`,
-    template, {
-      withCredentials: true,
-    })
-  }
+  // publishTemplate(storeId: string, template:any): Observable<Response>{
+  //   return this.http.patch<Response>(`${environment.baseApiUrl}/store/publish-template/${storeId}`,
+  //   template, {
+  //     withCredentials: true,
+  //   })
+  // }
 
   addTOViews(products: any): Observable<Response>{
     return this.http.post<Response>(`${environment.baseApiUrl}/customer/add-to-views/f739a921-7267-4e02-8222-ceb2b4c352cf`, products, {
@@ -253,16 +261,16 @@ getCustomerStoreProducts(storeId: string): Observable<Response>{
   }
 
 
-}
 
-  getStoreProducts(storeId: string): Observable<Response> {
-    return this.http.get<Response>(
-      `${environment.baseApiUrl}/product/get-all-products/${storeId}`,
-      {
-        withCredentials: true,
-      }
-    );
-  }
+
+  // getStoreProducts(storeId: string): Observable<Response> {
+  //   return this.http.get<Response>(
+  //     `${environment.baseApiUrl}/product/get-all-products/${storeId}`,
+  //     {
+  //       withCredentials: true,
+  //     }
+  //   );
+  // }
 
 
   getOneProducts(productId: string): Observable<Response> {
@@ -348,10 +356,10 @@ getCustomerStoreProducts(storeId: string): Observable<Response>{
       )
       .pipe(catchError(this.handleError));
   }
-  getReviews(): Observable<Response> {
+  getReviews(id:string): Observable<Response> {
     return this.http
       .get<Response>(
-        'https://storefront-backend-jan-dev-api.vercel.app/api/store/get-reviews/22095521-d6e3-4ed1-a7de-e96e1f81bed3',
+        'https://storefront-backend-jan-dev-api.vercel.app/api/store/get-reviews/${storeId}',
         { withCredentials: true }
       )
 
