@@ -194,25 +194,4 @@ export class HomeEcommerceComponent implements OnInit {
   }
 
 
-
-ngOnInit(){
-  // this.apiService.getStore(this.dataservice.businessId).subscribe((storeResData:any) =>{
-  // this.apiService.getStore(this.dataservice.storeId).subscribe((storeResData:any) =>{
-    // console.log({storeId: storeResData});
-    this.apiService.getCustomerStoreProducts(localStorage.getItem('storeId')!).subscribe((productResData:any)=>{
-      console.log(productResData);
-      this.dataservice.products = productResData.data
-      // this.apiService.getStoreCategories(this.dataservice.storeId).subscribe((storeCatsData:any)=>{
-        // this.dataservice.productCategories = storeCatsData.data
-        // console.log(this.dataservice.productCategories)
-      // });
-      if (JSON.parse(localStorage.getItem('cart')!)) {
-        this.cart = JSON.parse(localStorage.getItem('cart')!);
-        this.dataservice.cart = this.cart
-      }
-    })
-  // })
-}
-
-
 }

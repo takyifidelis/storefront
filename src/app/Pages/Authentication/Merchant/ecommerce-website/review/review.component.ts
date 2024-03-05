@@ -54,7 +54,7 @@ export class ReviewComponent implements OnInit {
   similarProducts: any = []
 
 cart: any = [];
-variations?: Varaiation;
+variations?: Varaiation[];
 
 
 
@@ -151,8 +151,10 @@ variations?: Varaiation;
 
     this.selectedImage = this.productItem.images[0].url;
      this.initialPrice = this.productItem.price;
-
-     this.variations = this.productItem.variations;
+if (this.variations) {
+  this.variations = this.productItem.variations;
+}
+     
      
       // this.sizes = values[0].split(',');
 
