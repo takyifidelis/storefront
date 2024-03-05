@@ -292,16 +292,6 @@ postProduct(formData: FormData, storeId: string) {
   }
 
 
-
-  // getStoreProducts(storeId: string): Observable<Response> {
-  //   return this.http.get<Response>(
-  //     `${environment.baseApiUrl}/product/get-all-products/${storeId}`,
-  //     {
-  //       withCredentials: true,
-  //     }
-  //   );
-  // }
-
   getOneProducts(productId: string): Observable<Response> {
     return this.http.get<Response>(
       `${environment.baseApiUrl}/product/${productId}`,
@@ -385,14 +375,25 @@ postProduct(formData: FormData, storeId: string) {
       )
       .pipe(catchError(this.handleError));
   }
+
   getReviews(id:string): Observable<Response> {
     return this.http
       .get<Response>(
-        'https://storefront-backend-jan-dev-api.vercel.app/api/store/get-reviews/${storeId}',
+        `https://storefront-backend-jan-dev-api.vercel.app/api/store/get-reviews/${id}`,
         { withCredentials: true }
       )
 
       .pipe(catchError(this.handleError));
+  }
+
+  getOrdersForMerchant(storeId: string): Observable<Response> {
+    return this.http.get<Response>(`${environment.baseApiUrl}/store/get-all-orders/${storeId}`)
+  }
+
+  deleteOrders(orderId: string): Observable<Response> {
+    return this.http.delete<Response>(`${environment.baseApiUrl}/order/remove-items/${orderId}`, {
+      withCredentials: true
+    })
   }
 
   // Error Handling
