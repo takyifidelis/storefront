@@ -122,8 +122,8 @@ export class APIService {
       }
     );
   }
-  getStore(): Observable<Response> {
-    return this.http.get<Response>(`${environment.baseApiUrl}/store/get-all`, {
+  getStore(storeId: string): Observable<Response> {
+    return this.http.get<Response>(`${environment.baseApiUrl}/api/store/get-store/${storeId}`, {
       withCredentials: true,
     });
   }
@@ -132,6 +132,12 @@ export class APIService {
     return this.http.get<Response>(`${environment.baseApiUrl}/store/get-all`, {
       withCredentials: true,
     });
+  }
+
+  getStoresForMerchant(businessId: string): Observable<Response> {
+    return this.http.get<Response>(`${environment.baseApiUrl}/api/business/get-stores/${businessId}`,{
+      withCredentials: true
+    })
   }
 
 

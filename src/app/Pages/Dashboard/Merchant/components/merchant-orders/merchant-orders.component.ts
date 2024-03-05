@@ -64,7 +64,6 @@ sorted: any = [];
 
  
   ngOnInit(): void {
-    
     this.apiService.getOrders().subscribe((res: any) =>{
       this.orders = res;
       this.unsorted = this.orders.data;
@@ -72,7 +71,9 @@ sorted: any = [];
       this.dataSource = new MatTableDataSource(this.orders.data);
     })
       
-     
+     this.apiService.getOrdersForMerchant(localStorage.getItem('storeId')!).subscribe((res: any) => {
+      console.log(res);
+     })
   }
 
   moreVert(e: dummyUserInterface) {
