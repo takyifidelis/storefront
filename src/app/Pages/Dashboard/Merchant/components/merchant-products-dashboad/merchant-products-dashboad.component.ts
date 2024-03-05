@@ -32,7 +32,7 @@ export interface dummyUserInterface {
   categories: string;
   inventory: string;
   status: string;
-  images: {[key:string]:any}[];
+  images: { [key: string]: any }[];
 }
 
 @Component({
@@ -75,8 +75,6 @@ export class MerchantProductsDashboadComponent {
   selection = new SelectionModel<dummyUserInterface>(true, []);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-
-
 
   constructor(public dialog: MatDialog, private apiService: APIService) {
     this.dataSource = new MatTableDataSource();
@@ -130,12 +128,14 @@ export class MerchantProductsDashboadComponent {
   }
 
   ngOnInit() {
-    this.apiService.getStoreProductsMerchant(localStorage.getItem('storeId')!).subscribe((response: any) => {
-      console.log(response.data.products);
-      // console.log(response.data.products[0].images[0].url);
-      // this.users = response.data
-      this.dataSource = new MatTableDataSource(response.data.products);
-    });
+    this.apiService
+      .getStoreProductsMerchant(localStorage.getItem('storeId')!)
+      .subscribe((response: any) => {
+        console.log(response.data.products);
+        // console.log(response.data.products[0].images[0].url);
+        // this.users = response.data
+        this.dataSource = new MatTableDataSource(response.data.products);
+      });
   }
 }
 

@@ -1,23 +1,60 @@
-@if(!dataService.merchantDashboardNoProjects){
-    <div class="d-flex justify-content-center align-items-center h-100">
-        <div class="empty-dashboard">
-            <span>
-              <img src="/assets/icons/merchant_discount_empty.svg" alt="" srcset="">               
-            </span>
-            <h1>No projects found</h1>
-            <p>It seems there are no products matching your criteria. To get started, click the button below to add a new
-              product</p>
-            <button>
-              <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
-                <path d="M10.5 4.50586V16.1725M4.66669 10.3392H16.3334" stroke="white" stroke-width="1.66667"
-                  stroke-linecap="round" stroke-linejoin="round" />
-              </svg>
-              <span>create new</span>
-            </button>
-          </div>
+<div class="product-header d-flex align-items-center justify-content-between">
+  <div class="product-title d-flex align-items-center">
+    <h2 class="product-head">Discount</h2>
+    <span class="product-members"
+      ><span class="number-customers">100 </span> Discount
+    </span>
+  </div>
+  <div class="search-filter">
+    <div class="col d-flex justify-content-end align-items-center">
+      <button class="d-flex justify-content-around button">
+        <fa-icon [icon]="filterIcon" style="font-size: 15px"></fa-icon>
+        <p>Filter</p>
+      </button>
+      <form>
+        <div class="search d-flex">
+          <fa-icon
+            [icon]="seaechICon"
+            style="font-size: 15px; color: #1b4dff"
+          ></fa-icon>
+          <input type="text" placeholder="Search........" />
+        </div>
+      </form>
+      <button class="new-product">New Discount</button>
     </div>
-}
+  </div>
+</div>
 
-@if(dataService.merchantDashboardNoProjects){
-we have projects already, this content will show
-}
+@if(!dataService.merchantDashboardNoProjects){
+<div class="d-flex justify-content-center align-items-center">
+  <div class="empty-dashboard">
+    <span>
+      <img src="/assets/icons/merchant_discount_empty.svg" alt="" srcset="" />
+    </span>
+    <h1>No projects found</h1>
+    <p>
+      It seems there are no products matching your criteria. To get started,
+      click the button below to add a new product
+    </p>
+    <button>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="21"
+        height="21"
+        viewBox="0 0 21 21"
+        fill="none"
+      >
+        <path
+          d="M10.5 4.50586V16.1725M4.66669 10.3392H16.3334"
+          stroke="white"
+          stroke-width="1.66667"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+      <span>create new</span>
+    </button>
+  </div>
+</div>
+} @if(dataService.merchantDashboardNoProjects){ we have projects already, this
+content will show }
