@@ -21,4 +21,11 @@ export class OnboardingStepOneComponent {
   constructor(public dataService: DataService){
     
   }
+  setBusinessType(type:any){
+    console.log(type.value)
+    localStorage.setItem('storeType', type.value);
+  }
+  ngOnDestroy(){
+    this.dataService.isLoading = false;
+  }
 }

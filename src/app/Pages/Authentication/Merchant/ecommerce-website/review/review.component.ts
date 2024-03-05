@@ -52,8 +52,10 @@ export class ReviewComponent implements OnInit {
   sizes: string[] | undefined;
   storeId = 'f9586428-62e3-4455-bb1d-61262a407d1a';
   similarProducts: any = []
+
 cart: any = [];
 variations?: Varaiation;
+
 
 
   //   this.product = this.apiService.getProductTemp();
@@ -154,7 +156,7 @@ variations?: Varaiation;
      
       // this.sizes = values[0].split(',');
 
-      this.apiService.getStoreProductsCustomer(this.storeId).subscribe((res: any) => {
+      this.apiService.getCustomerStoreProducts(this.storeId).subscribe((res: any) => {
         // console.log(res)
         res.data.filter((product: any) => {
           if (product.category === this.productItem.category){

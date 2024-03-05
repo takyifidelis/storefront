@@ -111,7 +111,10 @@
                 class="example-radio-group"
                 [(ngModel)]="productDetails.category"
               >
-                @for (cat of textArray; track cat) {
+
+
+                @for (cat of categories; track cat) {
+
 
                 <mat-radio-button class="example-radio-button" [value]="cat">{{
                   cat

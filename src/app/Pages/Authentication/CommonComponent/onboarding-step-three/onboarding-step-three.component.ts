@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -16,31 +16,37 @@ import { APIService } from '../../../../Services/api.service';
   templateUrl: './onboarding-step-three.component.html',
   styleUrl: './onboarding-step-three.component.scss'
 })
-export class OnboardingStepThreeComponent {
+export class OnboardingStepThreeComponent implements OnDestroy {
   constructor(public dataService: DataService, private apiService: APIService, private router:Router){}
-  selectStore(storeName:string){
-    localStorage.setItem('storeName',storeName)
-   
-  }
+  
   createStore(){
     this.dataService.isLoading =true
     let payload ={
-      storeType: this.dataService.merchantBusinessType1,
-      storeName: this.dataService.merchantStoreName,
+      storeType: localStorage.getItem('storeType'),
+      storeName: localStorage.getItem('storeName'),
       template: {
         id: "template 1a",
-        options: JSON.stringify(this.dataService.template),
-        temp: JSON.stringify(this.dataService.template)
+        options: JSON.stringify(this.dataService.template1),
+        temp: JSON.stringify(this.dataService.template1)
       }
     }
     
     console.log(payload);
-    this.apiService.createStore(this.dataService.businessId,payload).subscribe(data =>{
+    this.apiService.setBusinessType(localStorage.getItem('businessId')!,{businessType:localStorage.getItem('storeType')}).subscribe(data =>{
       console.log(data);
-      this.dataService.isLoading =false
-      this.router.navigate(['/merchant'])
+      this.apiService.createStore(localStorage.getItem('businessId')!,payload).subscribe(data =>{
+        console.log(data);
+        this.dataService.isLoading =false
+        this.router.navigate(['/merchant'])
+      }),(errorMessage: any) => {
+        console.log(errorMessage);
+      }
     }),(errorMessage: any) => {
       console.log(errorMessage);
     }
+    
+  }
+  ngOnDestroy(){
+    this.dataService.isLoading = false;
   }
 }

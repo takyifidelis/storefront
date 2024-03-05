@@ -5,12 +5,15 @@
   [style.textAlign]="dataservice.template.textAlign"
   [style.fontWeight]="dataservice.template.body.fontWeight"
   [style.fontSize]="dataservice.template.body.fontSize"
+
   [style.color]="dataservice.template.primaryColor"
 >
   <section
     *ngIf="dataservice.productSearchString.length < 1"
     class="container-fluid d-flex level-up main-comp p-0"
   >
+
+
     <div [style]="dataservice.template.headings.heroHeading.bgImage">
       <img
         [src]="dataservice.template.templateImages.heroImage"
@@ -122,7 +125,9 @@
             <span>{{ category.name }}</span>
           </div>
         </div>
+
       </div>
+
       <!-- </div> -->
       }
     </div>
@@ -244,6 +249,7 @@
                   <mat-icon>shopping_cart</mat-icon>
                 </button> -->
 
+
       @for(product of dataservice.products |
       filterProduct:dataservice.productSearchString; track product){
       <div class="col-md-3">
@@ -276,6 +282,7 @@
                 >
                   <mat-icon>shopping_cart</mat-icon>
                 </button>
+
               </div>
             </div>
             <p class="blossom-bag-paragraph">{{ product.name }}</p>
@@ -318,7 +325,9 @@
               <div class="red product-color"></div>
             </div> -->
         </div>
+
       </div>
+
       <!-- </div> -->
       }
       <span

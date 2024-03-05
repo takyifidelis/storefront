@@ -32,6 +32,7 @@ export class ShopComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    console.log(this.dataService.template);
     this.apiService.getStores().subscribe((response: any) => {
       console.log(response.data);
       this.stores = response.data;

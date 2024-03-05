@@ -24,18 +24,8 @@ import { UserCredentials } from '../interfaces/all-interfaces';
 
 export class DataService {
 
-    payload = {
-        shipping: '38839ef8-8d01-47f3-bb50-91dbe5f2f6ce',
-        store: 'f9586428-62e3-4455-bb1d-61262a407d1a',
-        items: [
-            {
-                product: 'a58c5939-a33e-43df-89d9-86d5c67ef798',
-                quantity: 4,
-                variations: []
-                
-            }
-        ]
-    }
+
+
 
 
 
@@ -103,8 +93,9 @@ export class DataService {
     }
   ]
   productCategory:any = []
-  
-  template ={
+//   template=JSON.parse(localStorage.getItem('template')!)
+  template:any
+  template1 ={
     id: "template-1",
     screenshot: "/assets/images/Text.svg",
     text: "ShopNest",
@@ -250,17 +241,6 @@ export class DataService {
       },
     sectionThree:{
     name:"Featured Items",
-    products:[
-    //     {id: "string",name: "ACCESSORIES",images: [{id: "string",url: "assets/images/featured-accesories-rings.svg",key: "string"}],description: "string",isActive: true,quantity: 0,reStockLevel: 0,category: "string",price: 39,discount: 0,promotion: "string"},
-    //     {id: "string",name: "ACCESSORIES",images: [{id: "string",url: "assets/images/featured-accesories-rings.svg",key: "string"}],description: "string",isActive: true,quantity: 0,reStockLevel: 0,category: "string",price: 39,discount: 0,promotion: "string"},
-    //     {id: "string",name: "ACCESSORIES",images: [{id: "string",url: "assets/images/featured-accesories-rings.svg",key: "string"}],description: "string",isActive: true,quantity: 0,reStockLevel: 0,category: "string",price: 39,discount: 0,promotion: "string"},
-    //     {id: "string",name: "ACCESSORIES",images: [{id: "string",url: "assets/images/featured-accesories-rings.svg",key: "string"}],description: "string",isActive: true,quantity: 0,reStockLevel: 0,category: "string",price: 39,discount: 0,promotion: "string"},
-    //     {id: "string",name: "ACCESSORIES",images: [{id: "string",url: "assets/images/featured-accesories-rings.svg",key: "string"}],description: "string",isActive: true,quantity: 0,reStockLevel: 0,category: "string",price: 39,discount: 0,promotion: "string"},
-    //     {id: "string",name: "ACCESSORIES",images: [{id: "string",url: "assets/images/featured-accesories-rings.svg",key: "string"}],description: "string",isActive: true,quantity: 0,reStockLevel: 0,category: "string",price: 39,discount: 0,promotion: "string"},
-    //     {id: "string",name: "ACCESSORIES",images: [{id: "string",url: "assets/images/featured-accesories-rings.svg",key: "string"}],description: "string",isActive: true,quantity: 0,reStockLevel: 0,category: "string",price: 39,discount: 0,promotion: "string"},
-    //     {id: "string",name: "ACCESSORIES",images: [{id: "string",url: "assets/images/featured-accesories-rings.svg",key: "string"}],description: "string",isActive: true,quantity: 0,reStockLevel: 0,category: "string",price: 39,discount: 0,promotion: "string"},
-    //     {id: "string",name: "ACCESSORIES",images: [{id: "string",url: "assets/images/featured-accesories-rings.svg",key: "string"}],description: "string",isActive: true,quantity: 0,reStockLevel: 0,category: "string",price: 39,discount: 0,promotion: "string"},
-    ],
     twoSection:{
         image:"assets/images/ecommerce-home-two-ladies.svg",text:{discount:"UPTO 40% OFF",otherText:"Special offers and great deals"}
     }

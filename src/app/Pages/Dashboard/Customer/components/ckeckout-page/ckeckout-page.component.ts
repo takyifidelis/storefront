@@ -98,9 +98,11 @@ export class CkeckoutPageComponent implements OnInit {
     });
   }
 
+
   getTotalCost() {
     return this.dataService.cart.map((t:any) => t.price).reduce((acc: any, value: any) => acc + value, 0);
   }
+
 
   async onApprove(data: { orderID: string }) {
     console.log(data);
@@ -129,6 +131,7 @@ export class CkeckoutPageComponent implements OnInit {
 //       'appartmentNumber':  new FormControl(null)
 //     })
 //   }
+
 } else {
 
   this.snackBar.open(
@@ -138,6 +141,7 @@ export class CkeckoutPageComponent implements OnInit {
   );
   this.router.navigate(['/ecommerce']);
 }
+
   }
 
   // getOrderData(){
