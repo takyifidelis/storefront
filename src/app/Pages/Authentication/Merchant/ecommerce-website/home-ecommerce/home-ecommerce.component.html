@@ -4,11 +4,6 @@
   [style.textAlign]="dataservice.template.textAlign"
   [style.fontWeight]="dataservice.template.body.fontWeight"
   [style.fontSize]="dataservice.template.body.fontSize"
-
-<!--   [style.color]="dataservice.template.primaryColor"
->
-  <section class="container-fluid d-flex level-up main-comp p-0"> -->
-
   [style.color]="dataservice.template.primaryColor">
   <section *ngIf="dataservice.productSearchString.length < 1" class="container-fluid d-flex level-up main-comp p-0">
 
@@ -114,7 +109,7 @@
           </div>
           </div>
         </div>
-      </div>
+      <!-- </div> -->
       }
     </div>
 
@@ -204,7 +199,7 @@
       {{ dataservice.template.sectionThree.name }}
     </div>
     <div class="row justify-content-between">
-      @for(product of dataservice.products; track product){
+      <!-- @for(product of dataservice.products; track product){
       <div class="col-md-3">
         <div class="card card-structure">
           <img
@@ -234,12 +229,12 @@
                   mat-icon-button
                 >
                   <mat-icon>shopping_cart</mat-icon>
-                </button>
+                </button> -->
 
-<!--     @for(product of dataservice.products | filterProduct:dataservice.productSearchString; track product){
-        <div class="col-md-3" (click)="goToProduct()">
+    @for(product of dataservice.products | filterProduct:dataservice.productSearchString; track product){
+        <div class="col-md-3">
           <div class="card card-structure">
-            <img [routerLink]="['/ecommerce/shop',product.id]" 
+            <img (click)="goToProduct(product.id)" 
               [src]="product.images[0].url"
               class="card-img-top card-img"
               alt="..."
@@ -272,7 +267,7 @@
                 <div class="blue product-color"></div>
                 <div class="yellow product-color"></div>
                 <div class="voilet product-color"></div>
-                <div class="red product-color"></div> -->
+                <div class="red product-color"></div>
               </div>
             </div>
             <p class="blossom-bag-paragraph">{{ product.name }}</p>
@@ -296,7 +291,7 @@
             </div>
           </div>
         </div>
-      </div>
+      <!-- </div> -->
       }
       <span>no product with name <i><strong>{{dataservice.productSearchString}}</strong></i> exist</span>
     </div>

@@ -115,14 +115,6 @@ export class LoginComponent implements OnInit {
       (resData) => {
         this.toastr.success('Success', 'Login Account!');
         console.log(resData);
-
-        // if (resData.data?.type == 'Business') {
-        //   this.router.navigate(['merchant']);
-        // } else if (resData.data?.type == 'Customer') {
-        //   this.router.navigate(['customer']);
-        // }
-      },
-
         if (resData.data?.type == 'Business') {
         if (resData.type == 'Business') {
           localStorage.setItem("businessId", resData.data.business)
@@ -157,6 +149,7 @@ export class LoginComponent implements OnInit {
 //     this.dataService.isLoading = true
       this.apiService.authenticateUser(this.dataService.loginCredentials)
       .subscribe((resData:any)=>{
+        console.log(resData);
            this.isLoading = false;
         this.toastr.success('Login Successful', 'Success');
         if (resData.data.type === "Business") {

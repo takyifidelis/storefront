@@ -71,7 +71,7 @@ export class MerchantReviewsComponent {
   constructor(
     public dataService: DataService,
     public dialog: MatDialog,
-    private authService: AuthService
+    private authService: APIService,
   ) {
     this.dataSource = new MatTableDataSource(this.users);
   }
@@ -146,7 +146,7 @@ export class MerchantReviewsComponent {
   }
 
   ngOnInit() {
-    this.authService.getReviews().subscribe((response: any) => {
+    this.authService.getReviews(localStorage.getItem('storeId')!).subscribe((response: any) => {
       console.log(response);
       // this.users = response.data
       this.dataSource = new MatTableDataSource(response.data);

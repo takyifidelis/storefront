@@ -53,16 +53,13 @@ export class ReviewComponent implements OnInit {
   storeId = 'f9586428-62e3-4455-bb1d-61262a407d1a';
   similarProducts: any = []
 
-constructor(private route: ActivatedRoute,private dataService:DataService,public apiService: APIService){}
-
 
 
   //   this.product = this.apiService.getProductTemp();
   //   this.selectedImage = this.product.images[0].url;
 
   // this.initialPrice = this.product.price;
-  amount: number = this.quantity * 90;
-  productItem: any;
+  
   constructor(
     private route: ActivatedRoute,
     private dataService: DataService,
@@ -183,9 +180,9 @@ constructor(private route: ActivatedRoute,private dataService:DataService,public
     // })
     }
     
-  }
+  
 
-  ngOnInit() {
+  // ngOnInit() {
 //     for (const product of this.dataService.products) {
 //       if (product.id === this.route.snapshot.params['id']) {
 //         this.productItem = product;
@@ -202,4 +199,5 @@ constructor(private route: ActivatedRoute,private dataService:DataService,public
 //     // console.log(this.dataService.products.find((element:any) => console.log(element.id)));
 //   }
 // }
-
+  // }
+}

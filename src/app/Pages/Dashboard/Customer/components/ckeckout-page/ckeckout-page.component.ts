@@ -17,7 +17,6 @@ import {
 import { SignupResponseData } from '../../../../Authentication/Auth/api.model';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 
 
@@ -87,13 +86,15 @@ this.createOrder();
 
   }
   createOrder() {
-    this.apiService.initializePayment(this.payload).subscribe((res: any) =>{
+    this.apiService.initializePayment(localStorage.getItem('customerId')!,this.payload).subscribe((res: any) =>{
       console.log(res);
       this.orderId = res.data.orderId;
       return  this.orderId;
     });
   }
-
+  getTotalCost() {
+    return this.dataService.cart.map((t:any) => t.price).reduce((acc: any, value: any) => acc + value, 0);
+  }
   async onApprove(data: { orderID: string }) {
     console.log(data);
     alert("paused");
@@ -121,9 +122,7 @@ this.createOrder();
 //       'appartmentNumber':  new FormControl(null)
 //     })
 //   }
-//   getTotalCost() {
-//     return this.dataService.cart.map((t:any) => t.price).reduce((acc: any, value: any) => acc + value, 0);
-//   }
+
 //   getdata(){
 //     if (this.dataService.cart.length > 0) {
 //       // this.cart = JSON.parse(localStorage.getItem('cart')!);
@@ -169,43 +168,43 @@ this.createOrder();
   //   };
   // }
 
-  private initConfig(): void {
+  // private initConfig(): void {
     
-    this.payPalConfig = {
-        clientId: `${environment.paypalClientID2}`,
-        // for creating orders (transactions) on server see
-        // https://developer.paypal.com/docs/checkout/reference/server-integration/set-up-transaction/
-        createOrderOnServer: (data) => fetch(`${environment.baseApiUrl}order/initialize/f739a921-7267-4e02-8222-ceb2b4c352cf`,{
-          method: "POST",
-          headers: {
-                  "Content-Type": "application/json",
-                },
-    body: JSON.stringify(this.payload),
+    // this.payPalConfig = {
+    //     clientId: `${environment.paypalClientID2}`,
+    //     // for creating orders (transactions) on server see
+    //     // https://developer.paypal.com/docs/checkout/reference/server-integration/set-up-transaction/
+    //     createOrderOnServer: (data) => fetch(`${environment.baseApiUrl}order/initialize/f739a921-7267-4e02-8222-ceb2b4c352cf`,{
+    //       method: "POST",
+    //       headers: {
+    //               "Content-Type": "application/json",
+    //             },
+    // body: JSON.stringify(this.payload),
 
-        }
+    //     }
         
-        ).then((res) => res.json())
-            .then((order) => order.orderID),
-        onApprove: (data, actions) => {
-            console.log('onApprove - transaction was approved, but not authorized', data, actions);
-            actions.order.get().then((details: any) => {
-                console.log('onApprove - you can get full order details inside onApprove: ', details);
-            });
+    //     ).then((res) => res.json())
+    //         .then((order) => order.orderID),
+    //     onApprove: (data, actions) => {
+    //         console.log('onApprove - transaction was approved, but not authorized', data, actions);
+    //         actions.order.get().then((details: any) => {
+    //             console.log('onApprove - you can get full order details inside onApprove: ', details);
+    //         });
 
-        },
-        onClientAuthorization: (data) => {
-            console.log('onClientAuthorization - you should probably inform your server about completed transaction at this point', data);
-        },
-        onCancel: (data, actions) => {
-            console.log('OnCancel', data, actions);
+    //     },
+    //     onClientAuthorization: (data) => {
+    //         console.log('onClientAuthorization - you should probably inform your server about completed transaction at this point', data);
+    //     },
+    //     onCancel: (data, actions) => {
+    //         console.log('OnCancel', data, actions);
 
-        },
-        onError: err => {
-            console.log('OnError', err);
-        },
-        onClick: (data, actions) => {
-            console.log('onClick', data, actions);
-        },
+    //     },
+    //     onError: err => {
+    //         console.log('OnError', err);
+    //     },
+    //     onClick: (data, actions) => {
+    //         console.log('onClick', data, actions);
+    //     },
 
   private initConfig(): void {
     
@@ -356,4 +355,3 @@ this.createOrder();
 //     });
 // }
 
-/

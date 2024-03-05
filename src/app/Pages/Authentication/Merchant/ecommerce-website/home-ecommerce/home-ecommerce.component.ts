@@ -14,9 +14,6 @@ import { APIService } from '../../../../../Services/api.service';
 import { ProductObject, Response as resp } from '../../../../../interfaces/all-interfaces';
 import { Router, RouterModule } from '@angular/router';
 import { StarRatingComponent } from '../../../../Dashboard/Customer/components/star-rating/star-rating.component';
-
-import  {Response as resp} from '../../../../../interfaces/all-interfaces';
-import {RouterModule } from '@angular/router';
 import { FilterOnePipe } from '../../../../../Pipes/filter-one.pipe';
 import { FilterProductPipe } from '../../../../../Pipes/filter-product.pipe';
 
@@ -39,8 +36,6 @@ export class HomeEcommerceComponent implements OnInit {
   isliked: boolean = false;
 // e: any;
  cart:any = []
-  imageUrl:any = null;
-  @ViewChild('fileInput') fileInput!: ElementRef;
 
 
   constructor(
@@ -206,12 +201,12 @@ export class HomeEcommerceComponent implements OnInit {
 
   }
 
-}
+
 ngOnInit(){
   // this.apiService.getStore(this.dataservice.businessId).subscribe((storeResData:any) =>{
   // this.apiService.getStore(this.dataservice.storeId).subscribe((storeResData:any) =>{
     // console.log({storeId: storeResData});
-    this.apiService.getCustomerStoreProducts(this.dataservice.storeId).subscribe((productResData:any)=>{
+    this.apiService.getCustomerStoreProducts(localStorage.getItem('storeId')!).subscribe((productResData:any)=>{
       console.log(productResData);
       this.dataservice.products = productResData.data
       // this.apiService.getStoreCategories(this.dataservice.storeId).subscribe((storeCatsData:any)=>{

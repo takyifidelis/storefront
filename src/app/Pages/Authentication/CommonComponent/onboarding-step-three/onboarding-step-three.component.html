@@ -11,7 +11,7 @@
                         Back
                     </span>
                 </span>
-                <button class="header-btn btn btn-light" style="margin-left:auto;">skip this step</button>
+                <button [routerLink]="['/merchant']" class="header-btn btn btn-light" style="margin-left:auto;">skip this step</button>
             </div>
     </header>
     <main class="animate__animated animate__pulse" style="justify-content: center; text-align: center;">
@@ -21,7 +21,8 @@
         </div>
         <div class="body-options-container">
             <div class="row row-cols-sm-2 row-cols-lg-3 row-cols-xl-4" style="flex-wrap: wrap; justify-content: center;">
-                <div (click)="selectStore('ShopNest')" class="col template-container">
+                <div class="col template-container">
+                    <!-- <div (click)="selectStore('ShopNest')" class="col template-container"> -->
                     <img class="mouse-pointer" src="/assets/images/Text.svg" alt="" srcset="">
                 </div>
                 <div class="col template-container">

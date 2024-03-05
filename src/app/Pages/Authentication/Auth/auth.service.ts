@@ -238,12 +238,15 @@ export class AuthService {
     return this.http
       .get<ProductResponseData>(
         'https://storefront-backend-jan-dev-api.vercel.app/api/product/get-all-products/22095521-d6e3-4ed1-a7de-e96e1f81bed3',
+        { withCredentials: true }
+      )
+      .pipe(catchError(this.handleError));
+  }
 
   getReviews(): Observable<ReviewResponseData> {
     return this.http
       .get<ReviewResponseData>(
         'https://storefront-backend-jan-dev-api.vercel.app/api/store/get-reviews/22095521-d6e3-4ed1-a7de-e96e1f81bed3',
->
         { withCredentials: true }
       )
 
