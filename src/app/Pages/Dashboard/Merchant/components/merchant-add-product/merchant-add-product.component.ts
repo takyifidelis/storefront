@@ -36,7 +36,7 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 export class MerchantAddProductComponent {
   public Editor = ClassicEditor;
   public productDetailss: any = {
-    description: '<p></p>', // Initial value for the description
+    description: '', // Initial value for the description
   };
   images: string[] = []; // Assuming we don't need topImages and bottomImages arrays separately anymore
   productForm: FormGroup;
@@ -44,7 +44,7 @@ export class MerchantAddProductComponent {
   inputSize: string = '';
 
   inputColor: string = '';
-  textArray: string[] = [];
+  // textArray: string[] = [];
   sizeArray: string[] = [];
   colorArray: string[] = [];
   variationKey: string = '';
@@ -89,7 +89,8 @@ export class MerchantAddProductComponent {
     return this.images.length < 4;
   }
 
-  constructor(private authService: APIService, private router: Router) {
+
+  constructor(private authService: APIService, private router: Router, private apiService: APIService) {
     this.productForm = new FormGroup({
       productName: new FormControl('', Validators.required),
       productPrice: new FormControl('', Validators.required),
@@ -104,23 +105,23 @@ export class MerchantAddProductComponent {
     this.data.append('name', this.productDetails.name);
     this.data.append('price', this.productDetails.price);
     this.data.append('quantity', this.productDetails.quantity);
-    this.data.append('description', this.productDetails.description);
+    this.data.append('description', this.productDetailss.description);
     this.data.append('isActive', 'true');
     this.data.append('category', this.productDetails.category);
     console.log(this.data);
 
-    this.authService
-      .postProduct(this.data, localStorage.getItem('storeId')!)
-      .subscribe(
-        (resData) => {
-          console.log(resData);
-          this.router.navigate(['/merchant/product']);
-        },
-        (errorMessage) => {
-          console.log(errorMessage);
-          this.error = errorMessage;
-        }
-      );
+
+    this.authService.postProduct(this.data, localStorage.getItem('storeId')!).subscribe(
+      (resData) => {
+        console.log(resData);
+        this.router.navigate(['/merchant/product']);
+      },
+      (errorMessage) => {
+        console.log(errorMessage);
+        this.error = errorMessage;
+      }
+    );
+
     this.productDetails = {
       name: '',
       price: '',
@@ -142,8 +143,11 @@ export class MerchantAddProductComponent {
     };
   }
   addCategory() {
-    this.textArray.push(this.inputText);
-    this.inputText = '';
+    this.apiService.AddStoreCategories(localStorage.getItem('storeId')!, {names:[`${this.inputText}`]}).subscribe((data:{[key:string]:any} )=> {
+      this.categories.push(this.inputText);
+      this.inputText = '';
+      console.log(data);
+    })
   }
   addSize() {
     console.log('Hello World');
@@ -176,5 +180,14 @@ export class MerchantAddProductComponent {
     this.displayedStatus =
       this.selectedStatus === 'true' ? 'Active' : 'Not Active';
     this.productDetails.isActive = this.selectedStatus;
+  }
+  ngOnInit(){
+    this.apiService.getStoreCategories(localStorage.getItem('storeId')!).subscribe((catResData: {[key:string]:any}) =>{
+      console.log(catResData);
+      for (const cat of catResData['data']) {
+        this.categories.push(cat.name)
+      }
+      console.log(this.categories)
+    })
   }
 }

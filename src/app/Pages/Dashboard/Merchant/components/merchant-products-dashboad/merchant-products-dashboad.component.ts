@@ -23,6 +23,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCheck, faFilter, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+import { APIService } from '../../../../../Services/api.service';
 
 export interface dummyUserInterface {
   checkbox: string;
@@ -31,6 +32,7 @@ export interface dummyUserInterface {
   categories: string;
   inventory: string;
   status: string;
+  images: {[key:string]:any}[];
 }
 
 @Component({
@@ -74,20 +76,10 @@ export class MerchantProductsDashboadComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  // creatine a dummy user data source for the table
-  users = [
-    {
-      checkbox: '1',
-      name: 'Asher A.',
-      store: '44',
-      categories: 'peach',
-      status: 'status',
-      inventory: 'more money',
-    },
-  ];
 
-  constructor(public dialog: MatDialog, private authService: AuthService) {
-    this.dataSource = new MatTableDataSource(this.users);
+
+  constructor(public dialog: MatDialog, private apiService: APIService) {
+    this.dataSource = new MatTableDataSource();
   }
   moreVert(e: dummyUserInterface) {
     this.dialog.open(MerchantProductDiscountComponent, {
@@ -138,9 +130,9 @@ export class MerchantProductsDashboadComponent {
   }
 
   ngOnInit() {
-    this.authService.getProducts().subscribe((response: any) => {
+    this.apiService.getStoreProductsMerchant(localStorage.getItem('storeId')!).subscribe((response: any) => {
       console.log(response.data.products);
-      console.log(response.data.products[0].images[0].url);
+      // console.log(response.data.products[0].images[0].url);
       // this.users = response.data
       this.dataSource = new MatTableDataSource(response.data.products);
     });

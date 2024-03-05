@@ -206,7 +206,7 @@ ngOnInit(){
   // this.apiService.getStore(this.dataservice.businessId).subscribe((storeResData:any) =>{
   // this.apiService.getStore(this.dataservice.storeId).subscribe((storeResData:any) =>{
     // console.log({storeId: storeResData});
-    this.apiService.getCustomerStoreProducts(this.dataservice.storeId).subscribe((productResData:any)=>{
+    this.apiService.getCustomerStoreProducts(localStorage.getItem('storeId')!).subscribe((productResData:any)=>{
       console.log(productResData);
       this.dataservice.products = productResData.data
       // this.apiService.getStoreCategories(this.dataservice.storeId).subscribe((storeCatsData:any)=>{

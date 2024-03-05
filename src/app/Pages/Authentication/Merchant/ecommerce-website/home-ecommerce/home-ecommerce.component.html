@@ -232,9 +232,11 @@
                 </button> -->
 
     @for(product of dataservice.products | filterProduct:dataservice.productSearchString; track product){
-        <div class="col-md-3" (click)="goToProduct(product.id)">
+
+        <div class="col-md-3">
+
           <div class="card card-structure">
-            <img [routerLink]="['/ecommerce/shop',product.id]" 
+            <img (click)="goToProduct(product.id)" 
               [src]="product.images[0].url"
               class="card-img-top card-img"
               alt="..."

@@ -17,8 +17,12 @@
         [innerText]="dataservice.template.text"
       ></a> -->
 
-    <div *ngIf="serverResponseReceived"
+
+    <!-- <div *ngIf="serverResponseReceived" -->
+    <div
       [style.lineHeight]="dataService.template.lineHeight"
+      [style.color]="dataService.template.primaryColor"
+
       [style.background]="dataService.template.primaryBackground">
       <nav class="navbar navbar-expand-lg navbar-dark" 
         [style.backgroundColor]="dataService.template.navbarBackgroundColor" 

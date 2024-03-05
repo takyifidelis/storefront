@@ -98,14 +98,13 @@ export class APIService {
       .pipe(catchError(this.handleError));
   }
 
-  createStore(businessId: string, data: {}): Observable<Response> {
-    return this.http.post<Response>(
-      `${environment.baseApiUrl}/business/create-new-store/${businessId}`,
-      data,
-      {
-        withCredentials: true,
-      }
-    );
+
+  createStore(businessId: string, data:{[key:string]:any}): Observable<Response>{
+    return this.http.post<Response>(`${environment.baseApiUrl}/business/create-new-store/${businessId}`,
+    data,{
+      withCredentials: true,
+    })
+
   }
   getMerchantStores(businessId: string): Observable<Response> {
     return this.http.get<Response>(
@@ -135,20 +134,39 @@ export class APIService {
     });
   }
 
-  // initializePayment(payload:any): Observable<Response> {
-  //   return this.http.post<Response>(`${environment.baseApiUrl}/order/initialize/f739a921-7267-4e02-8222-ceb2b4c352cf`, payload, {
-  //     withCredentials: true,
-  //   })
-  // }
 
-  getGoogle(): Observable<Response> {
-    return this.http.get<Response>(
-      `${environment.baseApiUrl}/account/google/auth`,
-      {
-        withCredentials: true,
-      }
-    );
+// initializePayment(payload:any): Observable<Response> {
+//   return this.http.post<Response>(`${environment.baseApiUrl}/order/initialize/f739a921-7267-4e02-8222-ceb2b4c352cf`, payload, {
+//     withCredentials: true,
+//   })
+// }
+
+getGoogle(): Observable<Response>{
+  return this.http.get<Response>(`${environment.baseApiUrl}/account/google/auth`,
+  {
+    withCredentials: true,
+  })
+}
+AddStoreCategories(storeId: string, categoryName:{[key:string]:string[]}): Observable<Response>{
+  return this.http.post<Response>(`${environment.baseApiUrl}/store/add-category/${storeId}`,
+  categoryName,{
+    withCredentials: true,
+  })
+}
+
+  getStoreCategories(storeId: string): Observable<Response>{
+    return this.http.get<Response>(`${environment.baseApiUrl}/store/get-categories/${storeId}`,
+    {
+      withCredentials: true,
+    })
   }
+initializePayment(customerId:string, cart:any): Observable<Response> {
+  return this.http.post<Response>(`${environment.baseApiUrl}/order/initialize/${customerId}`, cart, {
+
+    withCredentials: true,
+  })
+} 
+
 
   getStoreCategories(storeId: string): Observable<Response> {
     return this.http.get<Response>(
@@ -172,14 +190,6 @@ export class APIService {
     return this.http.post(
       `${environment.baseApiUrl}/customer/add-shipping-address/${customerId}`,
       user,
-      {
-        withCredentials: true,
-      }
-    );
-  }
-  getStoreProductsCustomer(storeId: string): Observable<Response> {
-    return this.http.get<Response>(
-      `${environment.baseApiUrl}/store/get-store-products/${storeId}`,
       {
         withCredentials: true,
       }
@@ -219,15 +229,15 @@ export class APIService {
       }
     );
   }
-  getStoreProducts(storeId: string): Observable<Response> {
-    return this.http.get<Response>(
-      `${environment.baseApiUrl}/product/get-all-products/${storeId}`,
-      {
-        withCredentials: true,
-      }
-    );
+
+getStoreProducts(storeId: string): Observable<Response>{
+    return this.http.get<Response>(`${environment.baseApiUrl}/product/get-all-products/${storeId}`,
+    {
+      withCredentials: true,
+    })
   }
-  postProduct(formData: FormData, storeId: string) {
+postProduct(formData: FormData, storeId: string) {
+
     return this.http
       .post<Response>(
         `https://storefront-backend-jan-dev-api.vercel.app/api/product/add/${storeId}`,
@@ -246,15 +256,22 @@ export class APIService {
   //   })
   // }
 
-  addTOViews(products: any): Observable<Response> {
-    return this.http.post<Response>(
-      `${environment.baseApiUrl}/customer/add-to-views/f739a921-7267-4e02-8222-ceb2b4c352cf`,
-      products,
-      {
-        withCredentials: true,
-      }
-    );
+
+  // publishTemplate(storeId: string, template:any): Observable<Response>{
+  //   return this.http.patch<Response>(`${environment.baseApiUrl}/store/publish-template/${storeId}`,
+  //   template, {
+  //     withCredentials: true,
+  //   })
+  // }
+
+  addTOViews(products: any): Observable<Response>{
+    return this.http.post<Response>(`${environment.baseApiUrl}/customer/add-to-views/f739a921-7267-4e02-8222-ceb2b4c352cf`, products, {
+      withCredentials: true,
+    })
   }
+
+
+  
 
   getOrders(): Observable<Response> {
     return this.http.get<Response>(
@@ -293,6 +310,7 @@ export class APIService {
     );
   }
 
+
   removeProducts() {
     return this.http.patch<Response>(
       `${environment.baseApiUrl}/customer/remove-products-from-favorites/f739a921-7267-4e02-8222-ceb2b4c352cf`,
@@ -301,6 +319,7 @@ export class APIService {
       }
     );
   }
+
 
   // getStoreProducts(storeId: string): Observable<Response> {
   //   return this.http.get<Response>(
@@ -394,10 +413,10 @@ export class APIService {
       )
       .pipe(catchError(this.handleError));
   }
-  getReviews(): Observable<Response> {
+  getReviews(id:string): Observable<Response> {
     return this.http
       .get<Response>(
-        'https://storefront-backend-jan-dev-api.vercel.app/api/store/get-reviews/22095521-d6e3-4ed1-a7de-e96e1f81bed3',
+        'https://storefront-backend-jan-dev-api.vercel.app/api/store/get-reviews/${storeId}',
         { withCredentials: true }
       )
 

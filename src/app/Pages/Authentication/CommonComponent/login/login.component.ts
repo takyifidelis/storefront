@@ -150,6 +150,7 @@ export class LoginComponent implements OnInit {
   newLogin(ata: any) {
     this.isLoading = true;
 
+
     //     this.dataService.isLoading = true
     this.apiService
       .authenticateUser(this.dataService.loginCredentials)
