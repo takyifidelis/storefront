@@ -15,20 +15,20 @@ import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../../../Authentication/Auth/auth.service';
 
 import { APIService } from '../../../../../Services/api.service';
-import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+// import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 @Component({
   selector: 'app-merchant-add-product',
   standalone: true,
   imports: [
+    CKEditorModule,
     MatRadioModule,
     FormsModule,
     CommonModule,
     RouterModule,
     ReactiveFormsModule,
-    CKEditorModule,
   ],
   templateUrl: './merchant-add-product.component.html',
   styleUrl: './merchant-add-product.component.scss',
@@ -110,6 +110,7 @@ export class MerchantAddProductComponent {
     this.data.append('category', this.productDetails.category);
     console.log(this.data);
 
+
     this.authService.postProduct(this.data, localStorage.getItem('storeId')!).subscribe(
       (resData) => {
         console.log(resData);
@@ -120,6 +121,7 @@ export class MerchantAddProductComponent {
         this.error = errorMessage;
       }
     );
+
     this.productDetails = {
       name: '',
       price: '',

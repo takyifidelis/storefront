@@ -27,7 +27,6 @@ export class DataService {
 
 
 
-
     cart:any=[]
     // products:any = []
     productCategories:any = []
