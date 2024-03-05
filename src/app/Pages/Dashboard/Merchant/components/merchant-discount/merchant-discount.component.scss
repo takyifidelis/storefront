@@ -236,3 +236,32 @@
     }
   }
 }
+
+.table-div {
+  width: 97%;
+  table {
+    margin: 1rem;
+    margin-top: 2rem;
+
+    th.mat-mdc-header-cell {
+      background-color: #f9fafb;
+      color: #8897ae;
+
+      font-family: Inter;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 20px;
+      letter-spacing: -0.2px;
+    }
+    td.mat-column-checkbox {
+      width: 5%;
+    }
+    .table-loading {
+      //   width: 3rem;
+    }
+  }
+  ::ng-deep .mat-mdc-table {
+    max-width: 90%;
+  }
+}
