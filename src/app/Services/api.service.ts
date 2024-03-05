@@ -135,11 +135,7 @@ export class APIService {
   }
 
 
-// initializePayment(payload:any): Observable<Response> {
-//   return this.http.post<Response>(`${environment.baseApiUrl}/order/initialize/f739a921-7267-4e02-8222-ceb2b4c352cf`, payload, {
-//     withCredentials: true,
-//   })
-// }
+
 
 getGoogle(): Observable<Response>{
   return this.http.get<Response>(`${environment.baseApiUrl}/account/google/auth`,
@@ -147,12 +143,14 @@ getGoogle(): Observable<Response>{
     withCredentials: true,
   })
 }
+
 AddStoreCategories(storeId: string, categoryName:{[key:string]:string[]}): Observable<Response>{
   return this.http.post<Response>(`${environment.baseApiUrl}/store/add-category/${storeId}`,
   categoryName,{
     withCredentials: true,
   })
 }
+
 
   getStoreCategories(storeId: string): Observable<Response>{
     return this.http.get<Response>(`${environment.baseApiUrl}/store/get-categories/${storeId}`,
@@ -168,23 +166,8 @@ initializePayment(customerId:string, cart:any): Observable<Response> {
 } 
 
 
-  getStoreCategories(storeId: string): Observable<Response> {
-    return this.http.get<Response>(
-      `${environment.baseApiUrl}/store/get-categories/${storeId}`,
-      {
-        withCredentials: true,
-      }
-    );
-  }
-  initializePayment(customerId: string, cart: any): Observable<Response> {
-    return this.http.post<Response>(
-      `${environment.baseApiUrl}/order/initialize/${customerId}`,
-      cart,
-      {
-        withCredentials: true,
-      }
-    );
-  }
+
+
 
   addShipping(customerId: string, user: any) {
     return this.http.post(
@@ -195,6 +178,7 @@ initializePayment(customerId:string, cart:any): Observable<Response> {
       }
     );
   }
+
 
   getStoreProductsMerchant(storeId: string): Observable<Response> {
     return this.http.get<Response>(
@@ -249,20 +233,6 @@ postProduct(formData: FormData, storeId: string) {
       .pipe(catchError(this.handleError));
   }
 
-  // publishTemplate(storeId: string, template:any): Observable<Response>{
-  //   return this.http.patch<Response>(`${environment.baseApiUrl}/store/publish-template/${storeId}`,
-  //   template, {
-  //     withCredentials: true,
-  //   })
-  // }
-
-
-  // publishTemplate(storeId: string, template:any): Observable<Response>{
-  //   return this.http.patch<Response>(`${environment.baseApiUrl}/store/publish-template/${storeId}`,
-  //   template, {
-  //     withCredentials: true,
-  //   })
-  // }
 
   addTOViews(products: any): Observable<Response>{
     return this.http.post<Response>(`${environment.baseApiUrl}/customer/add-to-views/f739a921-7267-4e02-8222-ceb2b4c352cf`, products, {
@@ -311,6 +281,7 @@ postProduct(formData: FormData, storeId: string) {
   }
 
 
+
   removeProducts() {
     return this.http.patch<Response>(
       `${environment.baseApiUrl}/customer/remove-products-from-favorites/f739a921-7267-4e02-8222-ceb2b4c352cf`,
@@ -319,6 +290,7 @@ postProduct(formData: FormData, storeId: string) {
       }
     );
   }
+
 
 
   // getStoreProducts(storeId: string): Observable<Response> {
