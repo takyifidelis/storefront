@@ -1,23 +1,165 @@
-@if(!dataService.merchantDashboardNoProjects){
-    <div class="d-flex justify-content-center align-items-center h-100">
-        <div class="empty-dashboard">
-            <span>
-              <img src="/assets/images/orders_empty.svg" alt="" srcset="">
-            </span>
-            <h1>No projects found</h1>
-            <p>It seems there are no products matching your criteria. To get started, click the button below to add a new
-              product</p>
-            <button>
-              <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
-                <path d="M10.5 4.50586V16.1725M4.66669 10.3392H16.3334" stroke="white" stroke-width="1.66667"
-                  stroke-linecap="round" stroke-linejoin="round" />
-              </svg>
-              <span>create new</span>
-            </button>
-          </div>
-    </div>
-}
-
 @if(dataService.merchantDashboardNoProjects){
- we have projects already, this content will show
+<div class="d-flex justify-content-center align-items-center h-100">
+  <div class="empty-dashboard">
+    <span>
+      <img src="/assets/images/orders_empty.svg" alt="" srcset="" />
+    </span>
+    <h1>No projects found</h1>
+    <p>
+      It seems there are no products matching your criteria. To get started,
+      click the button below to add a new product
+    </p>
+    <button>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="21"
+        height="21"
+        viewBox="0 0 21 21"
+        fill="none"
+      >
+        <path
+          d="M10.5 4.50586V16.1725M4.66669 10.3392H16.3334"
+          stroke="white"
+          stroke-width="1.66667"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+      <span>create new</span>
+    </button>
+  </div>
+</div>
+} @if(!dataService.merchantDashboardNoProjects){
+<div class="container-fluid">
+  <div class="d-flex mb-5 align-items-center gap-3">
+    <h2 class="m-0">Orders</h2>
+  </div>
+  <div class="sub-header d-flex" style="gap: 115px; padding-bottom: 20px">
+    <span style="cursor: pointer">All</span>
+    <span style="cursor: pointer">Processing</span>
+    <span style="cursor: pointer">Shipped</span>
+    <span style="cursor: pointer">Delieverd</span>
+    <span style="cursor: pointer">Cancelled</span>
+  </div>
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+    <!-- Checkbox Column -->
+    <ng-container matColumnDef="checkbox">
+      <th style="background-color: #f9fafb" mat-header-cell *matHeaderCellDef>
+        <mat-checkbox
+          (change)="$event ? toggleAllRows() : null"
+          [checked]="selection.hasValue() && isAllSelected()"
+          [indeterminate]="selection.hasValue() && !isAllSelected()"
+          [aria-label]="checkboxLabel()"
+        >
+        </mat-checkbox>
+      </th>
+      <td mat-cell *matCellDef="let row">
+        <mat-checkbox
+          (click)="showSelection($event)"
+          (change)="$event ? selection.toggle(row) : null"
+          [checked]="selection.isSelected(row)"
+          [aria-label]="checkboxLabel(row)"
+        >
+        </mat-checkbox>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="orderNumber">
+      <th
+        style="background-color: #f9fafb"
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+      >
+        Order Number
+      </th>
+      <td mat-cell *matCellDef="let row">{{ row.orderId }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="store">
+      <th
+        style="background-color: #f9fafb"
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+      >
+        Store
+      </th>
+      <td mat-cell *matCellDef="let row">{{ row.storeOrder?.storeName }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <th
+        style="background-color: #f9fafb"
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+      >
+        Status
+      </th>
+      <td mat-cell *matCellDef="let row" class="p-2">
+        <div
+          style="
+            border-radius: 6px;
+            background: #f0f3f9;
+            margin-bottom: 0;
+            width: 118px;
+          "
+        >
+          <p style="margin-bottom: 0">
+            {{ row.status }}
+          </p>
+        </div>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="date">
+      <th
+        style="background-color: #f9fafb"
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+      >
+        Date
+      </th>
+      <td mat-cell *matCellDef="let row">
+        {{ datepipe.transform(row.updatedAt, "dd-MMM-YYYY") }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="price">
+      <th
+        style="background-color: #f9fafb"
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+      >
+        Price
+      </th>
+      <td mat-cell *matCellDef="let row">${{ row.amount }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="bubble">
+      <th
+        style="background-color: #f9fafb"
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+      ></th>
+      <td mat-cell *matCellDef="let row">
+        <span (click)="moreVert(row)" class="btn">
+          <img src="/assets/icons/bubble.svg" alt="" />
+        </span>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 25, 100]"
+    aria-label="Select page of users"
+  ></mat-paginator>
+</div>
+
 }

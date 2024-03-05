@@ -1,13 +1,135 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { DataService } from '../../../../../Services/data.service';
+import { SelectionModel } from '@angular/cdk/collections';
+import { DatePipe } from '@angular/common';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatSort, MatSortModule } from '@angular/material/sort';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { APIService } from '../../../../../Services/api.service';
+import { OrderModalComponent } from '../../../Customer/components/order-modal/order-modal.component';
+import { dummyUserInterface } from '../merchant-products-dashboad/merchant-products-dashboad.component';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-merchant-orders',
   standalone: true,
-  imports: [],
+  imports: [
+    FormsModule,
+    MatIconModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
+    MatDialogModule,
+  ],
   templateUrl: './merchant-orders.component.html',
   styleUrl: './merchant-orders.component.scss'
 })
 export class MerchantOrdersComponent {
-  constructor(public dataService: DataService) {}
+  constructor(public dataService: DataService, public dialog: MatDialog, private apiService: APIService) {
+    this.dataSource = new MatTableDataSource(this.users);
+
+  }
+
+  displayedColumns: string[] = [
+    'checkbox',
+    'orderNumber',
+    'store',
+    'status',
+    'date',
+    'price',
+    'bubble',
+  ];
+  dataSource: MatTableDataSource<dummyUserInterface>;
+  selection = new SelectionModel<dummyUserInterface>(true, []);
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+  orders: any;
+
+  users: dummyUserInterface[] = [
+  ];
+unsorted: any = [];
+sorted: any = [];
+  formattedDate!: string | null;
+   datepipe: DatePipe = new DatePipe('en-US');
+
+ 
+  ngOnInit(): void {
+    
+    this.apiService.getOrders().subscribe((res: any) =>{
+      this.orders = res;
+      this.unsorted = this.orders.data;
+      console.log(this.orders.data)
+      this.dataSource = new MatTableDataSource(this.orders.data);
+    })
+      
+     
+  }
+
+  moreVert(e: dummyUserInterface) {
+    this.dialog.open(OrderModalComponent, {
+      data: e,
+      width: '479px',
+      position: { right: '50px', top: '10%' },
+    });
+    console.log(e);
+  }
+
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.dataSource.data.length;
+    return numSelected === numRows;
+  }
+  showSelection(e: any) {
+    e.stopPropagation();
+    console.log(this.selection.selected);
+  }
+  /** Selects all rows if they are not all selected; otherwise clear selection. */
+  toggleAllRows() {
+    if (this.isAllSelected()) {
+      this.selection.clear();
+      console.log(this.selection.selected);
+      return;
+    }
+
+    this.selection.select(...this.dataSource.data);
+    console.log(this.selection.selected);
+  }
+
+  /** The label for the checkbox on the passed row */
+  checkboxLabel(row?: dummyUserInterface): string {
+    if (!row) {
+      return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
+    }
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${
+      row.checkbox + 1
+    }`;
+  }
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
+
+  onSort(status: string) {
+    this.sorted = [];
+    this.unsorted.forEach((order: any) =>{
+      if(order.status === status) {
+        this.sorted.push(order);
+      }
+    })
+    this.dataSource = new MatTableDataSource(this.sorted);
+  }
+//   ngOnInit():
 }
+
+
