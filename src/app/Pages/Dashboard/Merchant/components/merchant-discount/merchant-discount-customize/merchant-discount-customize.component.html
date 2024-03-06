@@ -48,7 +48,14 @@
         <!-- Table above -->
       </mat-tab>
       <mat-tab label="Update Promotion">
-        <form action="#" method="post" class="discount-form">
+        <form
+          action="#"
+          method="post"
+          class="discount-form"
+          #updateDiscount="ngForm"
+          [formGroup]="discountUpdate"
+          (ngSubmit)="onSubmit(updateDiscount)"
+        >
           <div
             class="discount-head d-flex justify-content-between align-items-center"
           >
@@ -62,26 +69,34 @@
               name="discount"
               class="form-control"
               placeholder="eg. Black Friday"
+              formControlName="discountName"
             />
           </div>
           <div class="form-group d-flex align-items-center orders-quantity">
             <div class="applies-to">
               <label for="the-orders">Applies to</label>
-              <select class="form-select" id="the-orders">
-                <option selected>All orders</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+              <select
+                class="form-select"
+                id="the-orders"
+                formControlName="storeCategory"
+              >
+                <option selected>All</option>
+                <option *ngFor="let cat of storeCategories">
+                  {{ cat }}
+                </option>
               </select>
             </div>
             <div class="discount-quantity">
               <label for="quantity"></label>
               <input
-                type="text"
+                type="number"
                 id="quantity"
                 name="quantity"
                 class="form-control"
                 placeholder="Quantity"
+                formControlName="quantity"
+                min="1"
+                max="100"
               />
             </div>
           </div>
@@ -94,6 +109,7 @@
                 name="startDate"
                 class="form-control"
                 placeholder="Start date"
+                formControlName="startDate"
               />
             </div>
             <div class="form-group end-date">
@@ -104,11 +120,16 @@
                 name="endDate"
                 class="form-control"
                 placeholder="End date"
+                formControlName="endDate"
               />
             </div>
           </div>
           <div class="discount-btns">
-            <button class="btn btn-primary" type="submit">
+            <button
+              class="btn btn-primary"
+              type="submit"
+              [disabled]="!updateDiscount.valid"
+            >
               Update Promotion
             </button>
           </div>

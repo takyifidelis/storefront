@@ -34,6 +34,7 @@ import { RouterModule } from '@angular/router';
 import { APIService } from '../../../../../Services/api.service';
 
 export interface dummyUserInterface {
+  id: string;
   checkbox: string;
   name: any;
   store: string;
@@ -103,6 +104,7 @@ export class MerchantDiscountComponent {
 
   users = [
     {
+      id: '',
       checkbox: '1',
       name: 'Asher A.',
       store: '44',
@@ -177,6 +179,7 @@ export class MerchantDiscountComponent {
     this.dataSource.sort = this.sort;
   }
   moreVert(e: dummyUserInterface) {
+    localStorage.setItem('promoId', e.id);
     this.dialog.open(MerchantDiscountCustomizeComponent, {
       data: e,
       width: '479px',
@@ -204,8 +207,9 @@ export class MerchantDiscountComponent {
         localStorage.getItem('storeId')!
       )
       .subscribe(
-        (resData) => {
+        (resData: { [key: string]: any }) => {
           console.log(resData);
+          this.dataSource = new MatTableDataSource(resData['data']);
         },
         (errorMessage) => {
           console.log(errorMessage);
@@ -217,7 +221,14 @@ export class MerchantDiscountComponent {
 @Component({
   selector: 'app-merchant-discount-customize',
   standalone: true,
-  imports: [MatDialogTitle, MatDialogContent, MatTabsModule, MatTableModule],
+  imports: [
+    MatDialogTitle,
+    MatDialogContent,
+    MatTabsModule,
+    MatTableModule,
+    CommonModule,
+    ReactiveFormsModule,
+  ],
   templateUrl:
     'merchant-discount-customize/merchant-discount-customize.component.html',
   styleUrl:
@@ -226,6 +237,8 @@ export class MerchantDiscountComponent {
 export class MerchantDiscountCustomizeComponent {
   dataSource!: MatTableDataSource<productInterface>;
   displayedColumns: string[] = ['name', 'price', 'category', 'inventory'];
+  storeCategories: string[] = [];
+  discountUpdate: FormGroup;
   users = [
     {
       name: '1',
@@ -234,11 +247,60 @@ export class MerchantDiscountCustomizeComponent {
   ];
   panelOpenState = false;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: productInterface) {
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: productInterface,
+    private apiService: APIService
+  ) {
     console.log('kji');
+
+    this.discountUpdate = new FormGroup({
+      discountName: new FormControl('', Validators.required),
+      storeCategory: new FormControl('', Validators.required),
+      quantity: new FormControl('', Validators.required),
+      startDate: new FormControl('', Validators.required),
+      endDate: new FormControl('', Validators.required),
+    });
   }
-  // the code below is all for the checkboxes in the table
+
   ngOnInit() {
     this.dataSource = new MatTableDataSource(this.users);
+
+    // Get categories
+    this.apiService
+      .getStoreCategories(localStorage.getItem('storeId')!)
+      .subscribe((catResData: { [key: string]: any }) => {
+        // this.storeCategories = catResData['data']
+        for (const cat of catResData['data']) {
+          this.storeCategories.push(cat.name);
+        }
+      });
+  }
+  onSubmit(form: FormGroupDirective) {
+    if (!form.valid) {
+      return;
+    }
+    const name = form.value.discountName;
+    const statement = form.value.storeCategory;
+    const discount = Number(form.value.quantity);
+    const end = new Date(form.value.endDate);
+    const start = new Date(form.value.startDate);
+    console.log(form.value.quantity);
+    this.apiService
+      .updatePromotionForStore(
+        end,
+        name,
+        discount,
+        statement,
+        start,
+        localStorage.getItem('promoId')!
+      )
+      .subscribe(
+        (resData: { [key: string]: any }) => {
+          this.dataSource = new MatTableDataSource(resData['data']);
+        },
+        (errorMessage) => {
+          console.log(errorMessage);
+        }
+      );
   }
 }
