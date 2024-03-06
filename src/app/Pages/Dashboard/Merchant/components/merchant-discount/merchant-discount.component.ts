@@ -18,6 +18,15 @@ import {
   MatDialogModule,
   MatDialogTitle,
 } from '@angular/material/dialog';
+import {
+  FormGroup,
+  FormControl,
+  FormGroupDirective,
+  ReactiveFormsModule,
+  Validators,
+  ValidationErrors,
+  AbstractControl,
+} from '@angular/forms';
 import { MatTabsModule } from '@angular/material/tabs';
 import { SelectionModel } from '@angular/cdk/collections';
 import { HttpClientModule } from '@angular/common/http';
@@ -51,6 +60,7 @@ export interface productInterface {
     MatDialogModule,
     HttpClientModule,
     RouterModule,
+    ReactiveFormsModule,
   ],
   templateUrl: './merchant-discount.component.html',
   styleUrl: './merchant-discount.component.scss',
@@ -60,6 +70,7 @@ export class MerchantDiscountComponent {
   seaechICon = faSearch;
   checkIcon = faCheck;
   showForm: boolean = false;
+  addDiscount: FormGroup;
   storeCategories: string[] = [];
   constructor(
     private apiService: APIService,
@@ -67,6 +78,13 @@ export class MerchantDiscountComponent {
     public dialog: MatDialog
   ) {
     this.dataSource = new MatTableDataSource();
+    this.addDiscount = new FormGroup({
+      discountName: new FormControl('', Validators.required),
+      storeCategory: new FormControl('', Validators.required),
+      quantity: new FormControl('', Validators.required),
+      startDate: new FormControl('', Validators.required),
+      endDate: new FormControl('', Validators.required),
+    });
   }
 
   displayedColumns: string[] = [
@@ -111,6 +129,18 @@ export class MerchantDiscountComponent {
           this.storeCategories.push(cat.name);
         }
       });
+    // Get Store Promotions
+    this.apiService
+      .getPromotionForStore(localStorage.getItem('storeId')!)
+      .subscribe(
+        (promoData: { [key: string]: any }) => {
+          console.log(promoData);
+          this.dataSource = new MatTableDataSource(promoData['data']);
+        },
+        (errorMessage) => {
+          console.log(errorMessage);
+        }
+      );
   }
   isAllSelected() {
     const numSelected = this.selection.selected.length;
@@ -148,13 +178,39 @@ export class MerchantDiscountComponent {
   }
   moreVert(e: dummyUserInterface) {
     this.dialog.open(MerchantDiscountCustomizeComponent, {
-      data: {
-        itemName: 'hat',
-        itemPrice: 'hat',
-      },
+      data: e,
       width: '479px',
       position: { right: '50px', top: '10%' },
     });
+  }
+  // Posting the new Promotion
+  onSubmit(form: FormGroupDirective) {
+    if (!form.valid) {
+      return;
+    }
+    const name = form.value.discountName;
+    const statement = form.value.storeCategory;
+    const discount = Number(form.value.quantity);
+    const end = new Date(form.value.endDate);
+    const start = new Date(form.value.startDate);
+    console.log(form.value.quantity);
+    this.apiService
+      .addPromotionToStore(
+        end,
+        name,
+        discount,
+        statement,
+        start,
+        localStorage.getItem('storeId')!
+      )
+      .subscribe(
+        (resData) => {
+          console.log(resData);
+        },
+        (errorMessage) => {
+          console.log(errorMessage);
+        }
+      );
   }
 }
 

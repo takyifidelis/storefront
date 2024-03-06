@@ -27,7 +27,15 @@
       </div>
     </div>
   </div>
-  <form action="#" method="post" class="discount-form" *ngIf="showForm">
+  <form
+    action="#"
+    method="post"
+    class="discount-form"
+    *ngIf="showForm"
+    #postDiscount="ngForm"
+    [formGroup]="addDiscount"
+    (ngSubmit)="onSubmit(postDiscount)"
+  >
     <div
       class="discount-head d-flex justify-content-between align-items-center"
     >
@@ -47,13 +55,18 @@
         name="discount"
         class="form-control"
         placeholder="eg. Black Friday"
+        formControlName="discountName"
       />
     </div>
     <div class="form-group d-flex align-items-center orders-quantity">
       <div class="applies-to">
         <label for="the-orders">Applies to</label>
-        <select class="form-select" id="the-orders">
-          <option value="1" selected>All</option>
+        <select
+          class="form-select"
+          id="the-orders"
+          formControlName="storeCategory"
+        >
+          <option selected>All</option>
           <option *ngFor="let cat of storeCategories">
             {{ cat }}
           </option>
@@ -62,11 +75,14 @@
       <div class="discount-quantity">
         <label for="quantity"></label>
         <input
-          type="text"
+          type="number"
           id="quantity"
           name="quantity"
           class="form-control"
-          placeholder="Quantity"
+          placeholder="Discount %"
+          formControlName="quantity"
+          min="1"
+          max="100"
         />
       </div>
     </div>
@@ -79,6 +95,7 @@
           name="startDate"
           class="form-control"
           placeholder="Start date"
+          formControlName="startDate"
         />
       </div>
       <div class="form-group end-date">
@@ -89,6 +106,7 @@
           name="endDate"
           class="form-control"
           placeholder="End date"
+          formControlName="endDate"
         />
       </div>
     </div>
@@ -96,7 +114,13 @@
       <button class="btn cancel-btn" type="button" (click)="toggleForm()">
         Cancel
       </button>
-      <button class="btn btn-primary" type="submit">Send</button>
+      <button
+        class="btn btn-primary"
+        type="submit"
+        [disabled]="!postDiscount.valid"
+      >
+        Send
+      </button>
     </div>
   </form>
 </div>
@@ -143,25 +167,35 @@
       <th mat-header-cell *matHeaderCellDef style="background-color: #f9fafb">
         Name
       </th>
-      <td mat-cell *matCellDef="let element"><span>Hello</span></td>
+      <td mat-cell *matCellDef="let row">
+        <span>{{ row.name }}</span>
+      </td>
     </ng-container>
 
     <ng-container matColumnDef="category">
       <th mat-header-cell *matHeaderCellDef>Category</th>
-      <td mat-cell *matCellDef="let element"><span>Hello</span></td>
+      <td mat-cell *matCellDef="let row">
+        <span>{{ row.statement }}</span>
+      </td>
     </ng-container>
 
     <ng-container matColumnDef="quantity">
-      <th mat-header-cell *matHeaderCellDef>Quantity</th>
-      <td mat-cell *matCellDef="let element"><span>Hello</span></td>
+      <th mat-header-cell *matHeaderCellDef>Discount %</th>
+      <td mat-cell *matCellDef="let row">
+        <span>{{ row.discount }}</span>
+      </td>
     </ng-container>
     <ng-container matColumnDef="start">
       <th mat-header-cell *matHeaderCellDef>Start Date</th>
-      <td mat-cell *matCellDef="let element"><span>Hello</span></td>
+      <td mat-cell *matCellDef="let row">
+        <span>{{ row.start | date : "shortDate" }}</span>
+      </td>
     </ng-container>
     <ng-container matColumnDef="end">
       <th mat-header-cell *matHeaderCellDef>End Date</th>
-      <td mat-cell *matCellDef="let element"><span>Hello</span></td>
+      <td mat-cell *matCellDef="let row">
+        <span>{{ row.end | date : "shortDate" }}</span>
+      </td>
     </ng-container>
 
     <ng-container matColumnDef="bubble">
