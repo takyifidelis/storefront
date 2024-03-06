@@ -140,7 +140,11 @@ export class APIService {
     })
   }
 
-
+getCustomers(): Observable<Response> {
+  return this.http.get<Response>(`${environment.baseApiUrl}/store/get-all-customers`, {
+    withCredentials: true
+  })
+}
 
 
 getGoogle(): Observable<Response>{
