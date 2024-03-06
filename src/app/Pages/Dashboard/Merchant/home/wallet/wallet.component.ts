@@ -1,12 +1,41 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { environment } from '../../../../../../environments/environment.development';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-wallet',
   standalone: true,
-  imports: [],
+  imports: [ReactiveFormsModule],
   templateUrl: './wallet.component.html',
   styleUrl: './wallet.component.scss'
 })
-export class WalletComponent {
+export class WalletComponent implements OnInit{
+walletForm!: FormGroup;
 
+constructor(public http: HttpClient){}
+
+  ngOnInit(): void {
+    this.walletForm = new FormGroup({
+      'name': new FormControl(null, Validators.required),
+      'method': new FormControl(null, Validators.required),
+      'walletId': new FormControl(null, Validators.required),
+      'secret': new FormControl(null, Validators.required)
+    })
+  }
+
+  onSubmit(){
+    console.log(this.walletForm);
+    this.http
+      .post<Response>(
+        `${environment.baseApiUrl}/store/add-wallet/f739a921-7267-4e02-8222-ceb2b4c352cf`,
+        this.walletForm.value,
+        {
+          withCredentials: true,
+        }
+      )
+      .subscribe((res: any) => {
+        console.log(res);
+      });
+  }
 }

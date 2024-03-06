@@ -24,8 +24,7 @@
 }
 
 .arrow {
-  font-size: 18px;
-  margin-top: -3px;
+  margin-top: -11px;
 }
 
 .button {
@@ -86,4 +85,13 @@ margin-bottom: 10px;
 
 .input{
     margin-bottom: 10px;
+}
+
+
+.payment-card-selected{
+    border-radius: 8px;
+    border: 1px solid #0408e7;
+    background: #f5f5ff;
+    padding: 16px;
+    margin: 20px;
 }
