@@ -215,6 +215,7 @@ export class MerchantDiscountComponent {
           console.log(errorMessage);
         }
       );
+    form.reset();
   }
 }
 
@@ -222,11 +223,11 @@ export class MerchantDiscountComponent {
   selector: 'app-merchant-discount-customize',
   standalone: true,
   imports: [
+    CommonModule,
     MatDialogTitle,
     MatDialogContent,
     MatTabsModule,
     MatTableModule,
-    CommonModule,
     ReactiveFormsModule,
   ],
   templateUrl:
@@ -255,7 +256,7 @@ export class MerchantDiscountCustomizeComponent {
 
     this.discountUpdate = new FormGroup({
       discountName: new FormControl('', Validators.required),
-      storeCategory: new FormControl('', Validators.required),
+      storeCategory: new FormControl(''),
       quantity: new FormControl('', Validators.required),
       startDate: new FormControl('', Validators.required),
       endDate: new FormControl('', Validators.required),
@@ -297,6 +298,19 @@ export class MerchantDiscountCustomizeComponent {
       .subscribe(
         (resData: { [key: string]: any }) => {
           this.dataSource = new MatTableDataSource(resData['data']);
+        },
+        (errorMessage) => {
+          console.log(errorMessage);
+        }
+      );
+    form.reset();
+  }
+  onDelete() {
+    this.apiService
+      .deletePromotionForStore(localStorage.getItem('promoId')!)
+      .subscribe(
+        (resData) => {
+          console.log(resData);
         },
         (errorMessage) => {
           console.log(errorMessage);
