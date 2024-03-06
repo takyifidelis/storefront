@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { DataService } from '../../../../../Services/data.service';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
@@ -17,7 +17,10 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SelectionModel } from '@angular/cdk/collections';
 import { faFilter, faSearch, faCheck } from '@fortawesome/free-solid-svg-icons';
 import { APIService } from '../../../../../Services/api.service';
-import { dummyUserInterface, MerchantProductDiscountComponent } from '../merchant-products-dashboad/merchant-products-dashboad.component';
+import {
+  dummyUserInterface,
+  MerchantProductDiscountComponent,
+} from '../merchant-products-dashboad/merchant-products-dashboad.component';
 
 @Component({
   selector: 'app-merchant-customers',
@@ -39,30 +42,32 @@ import { dummyUserInterface, MerchantProductDiscountComponent } from '../merchan
     RouterModule,
   ],
   templateUrl: './merchant-customers.component.html',
-  styleUrl: './merchant-customers.component.scss'
+  styleUrl: './merchant-customers.component.scss',
 })
-export class MerchantCustomersComponent {
+export class MerchantCustomersComponent implements OnInit {
   filterIcon = faFilter;
   seaechICon = faSearch;
   checkIcon = faCheck;
   displayedColumns: string[] = [
     'checkbox',
-    'name',
-    'store',
-    'categories',
+    'name and email',
+    'orderId',
+    'date',
     'status',
-    'inventory',
-
+    'price',
     'bubble',
   ];
+  customers: any;
   dataSource: MatTableDataSource<dummyUserInterface>;
   selection = new SelectionModel<dummyUserInterface>(true, []);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-
-
-  constructor(public dialog: MatDialog, private apiService: APIService, public dataService: DataService) {
+  constructor(
+    public dialog: MatDialog,
+    private apiService: APIService,
+    public dataService: DataService
+  ) {
     this.dataSource = new MatTableDataSource();
   }
   moreVert(e: dummyUserInterface) {
@@ -114,11 +119,10 @@ export class MerchantCustomersComponent {
   }
 
   ngOnInit() {
-    this.apiService.getStoreProductsMerchant(localStorage.getItem('storeId')!).subscribe((response: any) => {
-      console.log(response.data.products);
-      // console.log(response.data.products[0].images[0].url);
-      // this.users = response.data
-      this.dataSource = new MatTableDataSource(response.data.products);
-    });
+    this.apiService.getCustomers().subscribe((res: any)=> {
+      this.customers = res.data;
+console.log(this.customers)
+    this.dataSource = new MatTableDataSource(this.customers);
+    })
   }
 }

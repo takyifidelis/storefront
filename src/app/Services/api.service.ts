@@ -141,7 +141,7 @@ export class APIService {
   }
 
 getCustomers(): Observable<Response> {
-  return this.http.get<Response>(`${environment.baseApiUrl}/store/get-all-customers`, {
+  return this.http.get<Response>(`${environment.baseApiUrl}/store/get-all-customers/f739a921-7267-4e02-8222-ceb2b4c352cf`, {
     withCredentials: true
   })
 }
