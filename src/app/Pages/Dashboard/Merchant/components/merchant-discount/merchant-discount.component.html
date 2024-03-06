@@ -53,10 +53,10 @@
       <div class="applies-to">
         <label for="the-orders">Applies to</label>
         <select class="form-select" id="the-orders">
-          <option selected>All orders</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
+          <option value="1" selected>All</option>
+          <option *ngFor="let cat of storeCategories">
+            {{ cat }}
+          </option>
         </select>
       </div>
       <div class="discount-quantity">

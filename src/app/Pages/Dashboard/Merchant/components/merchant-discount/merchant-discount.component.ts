@@ -22,12 +22,17 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { SelectionModel } from '@angular/cdk/collections';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+import { APIService } from '../../../../../Services/api.service';
 
 export interface dummyUserInterface {
   checkbox: string;
   name: any;
   store: string;
   categories: string;
+}
+export interface productInterface {
+  name: string;
+  price: number;
 }
 @Component({
   selector: 'app-merchant-discount',
@@ -55,7 +60,12 @@ export class MerchantDiscountComponent {
   seaechICon = faSearch;
   checkIcon = faCheck;
   showForm: boolean = false;
-  constructor(public dataService: DataService, public dialog: MatDialog) {
+  storeCategories: string[] = [];
+  constructor(
+    private apiService: APIService,
+    public dataService: DataService,
+    public dialog: MatDialog
+  ) {
     this.dataSource = new MatTableDataSource();
   }
 
@@ -91,6 +101,16 @@ export class MerchantDiscountComponent {
   // the code below is all for the checkboxes in the table
   ngOnInit() {
     this.dataSource = new MatTableDataSource(this.users);
+
+    // Get categories
+    this.apiService
+      .getStoreCategories(localStorage.getItem('storeId')!)
+      .subscribe((catResData: { [key: string]: any }) => {
+        // this.storeCategories = catResData['data']
+        for (const cat of catResData['data']) {
+          this.storeCategories.push(cat.name);
+        }
+      });
   }
   isAllSelected() {
     const numSelected = this.selection.selected.length;
@@ -141,14 +161,28 @@ export class MerchantDiscountComponent {
 @Component({
   selector: 'app-merchant-discount-customize',
   standalone: true,
-  imports: [MatDialogTitle, MatDialogContent, MatTabsModule],
+  imports: [MatDialogTitle, MatDialogContent, MatTabsModule, MatTableModule],
   templateUrl:
     'merchant-discount-customize/merchant-discount-customize.component.html',
   styleUrl:
     'merchant-discount-customize/merchant-discount-customize.component.scss',
 })
 export class MerchantDiscountCustomizeComponent {
-  constructor(@Inject(MAT_DIALOG_DATA) public data: dummyUserInterface) {
+  dataSource!: MatTableDataSource<productInterface>;
+  displayedColumns: string[] = ['name', 'price', 'category', 'inventory'];
+  users = [
+    {
+      name: '1',
+      price: 1,
+    },
+  ];
+  panelOpenState = false;
+
+  constructor(@Inject(MAT_DIALOG_DATA) public data: productInterface) {
     console.log('kji');
+  }
+  // the code below is all for the checkboxes in the table
+  ngOnInit() {
+    this.dataSource = new MatTableDataSource(this.users);
   }
 }
