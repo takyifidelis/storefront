@@ -1,0 +1,83 @@
+.container-fluid {
+  text-align: center;
+  .discount-form {
+    text-align: left;
+    font-family: Inter;
+    font-style: normal;
+    padding: 1.5rem;
+    border-radius: 12px;
+    float: right;
+    border-radius: 12px;
+    background-color: #fff;
+    box-shadow: 0px 8px 8px -4px rgba(16, 24, 40, 0.03),
+      0px 20px 24px -4px rgba(16, 24, 40, 0.08);
+    input::placeholder {
+      color: #8897ae;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 24px;
+      letter-spacing: -0.2px;
+    }
+    label {
+      color: #3d4a5c;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 24px;
+      letter-spacing: -0.2px;
+    }
+    .discount-head {
+      .discount-heading {
+        color: #101828;
+        font-size: 18px;
+        font-weight: 600;
+        line-height: 30px;
+        letter-spacing: -0.3px;
+      }
+    }
+    .discount-name {
+      margin-bottom: 1rem;
+    }
+    .orders-quantity {
+      margin-bottom: 1rem;
+      // width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .applies-to {
+        width: 48%;
+      }
+      .discount-quantity {
+        width: 48%;
+      }
+    }
+    .discount-date {
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      .start-date {
+        width: 48%;
+      }
+      .end-date {
+        width: 48%;
+      }
+    }
+    .discount-btns {
+      text-align: center;
+      button {
+        padding: 0.5rem 3rem;
+      }
+      .cancel-btn {
+        border: 1px solid #afbaca;
+        background-color: #fff;
+      }
+    }
+  }
+  .table {
+    td {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-wrap: wrap;
+    }
+  }
+}
