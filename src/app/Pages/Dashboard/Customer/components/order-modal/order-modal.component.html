@@ -2,9 +2,9 @@
   <div class="col">
     <h2 mat-dialog-title>Order Details</h2>
   </div>
-  <div class="col">
-    <p>X</p>
-  </div>
+  <!-- <div class="col"> -->
+  <!-- <p>X</p> -->
+  <!-- </div> -->
 </div>
 <mat-dialog-content>
   <mat-tab-group>
@@ -32,10 +32,12 @@
     <mat-tab label="Address">
       <hr />
       <div class="text shipment-address">
-        <p>{{ data['orderShipping'].name }}</p>
-        <p>{{ data['orderShipping'].city }}</p>
-        <p>{{ data['orderShipping'].streetAddress }}</p>
-        <p style="color: #667085 !important">{{ data['orderShipping'].phone }}</p>
+        <p>{{ data["orderShipping"].name }}</p>
+        <p>{{ data["orderShipping"].city }}</p>
+        <p>{{ data["orderShipping"].streetAddress }}</p>
+        <p style="color: #667085 !important">
+          {{ data["orderShipping"].phone }}
+        </p>
       </div>
       <hr />
     </mat-tab>

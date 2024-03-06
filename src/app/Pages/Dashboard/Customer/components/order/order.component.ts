@@ -4,6 +4,7 @@ import {
   ViewChild,
   Inject,
   OnInit,
+  ElementRef,
 } from '@angular/core';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
@@ -78,26 +79,8 @@ sorted: any = [];
   formattedDate!: string | null;
    datepipe: DatePipe = new DatePipe('en-US');
 
-//   constructor(public dialog: MatDialog, public apiService: APIService) {
 
-//       checkbox: '1',
-//       orderNumber: '#1233893',
-//       store: 'shopNest',
-//       status: 'Delievered',
-//       date: '21/09/2023',
-//       price: '$52.00',
-//     },
-//     {
-//       checkbox: '1',
-//       orderNumber: '#1233893',
-//       store: 'shopNest',
-//       status: 'Delievered',
-//       date: '21/09/2023',
-//       price: '$52.00',
-//     },
-//   ];
-
-  constructor(public dialog: MatDialog, private apiService: APIService) {
+  constructor(public dialog: MatDialog, private apiService: APIService, private elementRef: ElementRef) {
     this.dataSource = new MatTableDataSource(this.users);
     
   }
@@ -107,10 +90,18 @@ sorted: any = [];
     this.apiService.getOrders().subscribe((res: any) =>{
       this.orders = res;
       this.unsorted = this.orders.data;
-      console.log(this.orders.data)
+      console.log(this.orders)
       this.dataSource = new MatTableDataSource(this.orders.data);
     })
       
+    const statusElement = this.elementRef.nativeElement.querySelector('#statusElement');
+    const status = statusElement.innerText;
+
+    // Adding background color based on status
+    if (status === 'Processing') {
+      statusElement.style.backgroundColor = 'yellow';
+    }
+    console.log(status);
      
   }
 
@@ -164,9 +155,13 @@ sorted: any = [];
     this.unsorted.forEach((order: any) =>{
       if(order.status === status) {
         this.sorted.push(order);
+        // console.log(this.sorted)
+    this.dataSource = new MatTableDataSource(this.sorted);
+
+      }else if (status === 'All'){
+this.dataSource = new MatTableDataSource(this.unsorted)
       }
     })
-    this.dataSource = new MatTableDataSource(this.sorted);
   }
 //   ngOnInit(): void {
 //     this.apiService
