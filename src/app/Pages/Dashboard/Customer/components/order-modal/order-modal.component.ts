@@ -1,4 +1,3 @@
-
 import {
   MAT_DIALOG_DATA,
   MatDialogContent,
@@ -32,7 +31,7 @@ import { dummyUserInterface } from '../../../../../interface/dummy-user.model';
     ReactiveFormsModule,
     MatDialogTitle,
     MatDialogContent,
-    CommonModule
+    CommonModule,
   ],
   templateUrl: './order-modal.component.html',
   styleUrl: './order-modal.component.scss',
@@ -42,9 +41,9 @@ export class OrderModalComponent implements OnInit {
   error: string | any = null;
   sum = 0;
 
-//   constructor(
-//     private authService: AuthService,
-//     @Inject(MAT_DIALOG_DATA) public data: dummyUserInterface
+  //   constructor(
+  //     private authService: AuthService,
+  //     @Inject(MAT_DIALOG_DATA) public data: dummyUserInterface
   starRating!: number;
 
   constructor(
@@ -59,7 +58,6 @@ export class OrderModalComponent implements OnInit {
     console.log(data);
   }
   ngOnInit(): void {
-     
     for (const itemPrice of this.data['items']) {
       this.sum += itemPrice.price;
     }
@@ -68,7 +66,7 @@ export class OrderModalComponent implements OnInit {
   onSubmit(form: FormGroupDirective) {
     let reviewData = {
       product: this.data['items'][0].id,
-      // rating: this.starRating,
+      rating: this.starRating,
       remarks: form.value.remarks,
       comment: form.value.comment,
     };

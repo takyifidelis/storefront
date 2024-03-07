@@ -64,60 +64,55 @@ export class OrderComponent implements OnInit {
 
   users = [
     {
-
       checkbox: '',
       orderNumber: '',
       store: '',
       status: '',
       date: '',
       price: '',
-    }
+    },
   ];
-unsorted: any = [];
-sorted: any = [];
+  unsorted: any = [];
+  sorted: any = [];
   formattedDate!: string | null;
-   datepipe: DatePipe = new DatePipe('en-US');
+  datepipe: DatePipe = new DatePipe('en-US');
 
-//   constructor(public dialog: MatDialog, public apiService: APIService) {
+  //   constructor(public dialog: MatDialog, public apiService: APIService) {
 
-//       checkbox: '1',
-//       orderNumber: '#1233893',
-//       store: 'shopNest',
-//       status: 'Delievered',
-//       date: '21/09/2023',
-//       price: '$52.00',
-//     },
-//     {
-//       checkbox: '1',
-//       orderNumber: '#1233893',
-//       store: 'shopNest',
-//       status: 'Delievered',
-//       date: '21/09/2023',
-//       price: '$52.00',
-//     },
-//   ];
+  //       checkbox: '1',
+  //       orderNumber: '#1233893',
+  //       store: 'shopNest',
+  //       status: 'Delievered',
+  //       date: '21/09/2023',
+  //       price: '$52.00',
+  //     },
+  //     {
+  //       checkbox: '1',
+  //       orderNumber: '#1233893',
+  //       store: 'shopNest',
+  //       status: 'Delievered',
+  //       date: '21/09/2023',
+  //       price: '$52.00',
+  //     },
+  //   ];
 
   constructor(public dialog: MatDialog, private apiService: APIService) {
     this.dataSource = new MatTableDataSource(this.users);
-    
   }
 
   ngOnInit(): void {
-    
-    this.apiService.getOrders().subscribe((res: any) =>{
+    this.apiService.getOrders().subscribe((res: any) => {
       this.orders = res;
       this.unsorted = this.orders.data;
-      console.log(this.orders.data)
+      console.log(this.orders.data);
       this.dataSource = new MatTableDataSource(this.orders.data);
-    })
-      
-     
+    });
   }
 
   moreVert(e: dummyUserInterface) {
     this.dialog.open(OrderModalComponent, {
       data: e,
-      width: '479px',
+      width: '500px',
       position: { right: '50px', top: '10%' },
     });
     console.log(e);
@@ -158,22 +153,21 @@ sorted: any = [];
     this.dataSource.sort = this.sort;
   }
 
-
   onSort(status: string) {
     this.sorted = [];
-    this.unsorted.forEach((order: any) =>{
-      if(order.status === status) {
+    this.unsorted.forEach((order: any) => {
+      if (order.status === status) {
         this.sorted.push(order);
       }
-    })
+    });
     this.dataSource = new MatTableDataSource(this.sorted);
   }
-//   ngOnInit(): void {
-//     this.apiService
-//       .getSingleOrder('1233893')
-//       .subscribe((res: { [key: string]: any }) => {
-//         console.log(res);
-//       });
+  //   ngOnInit(): void {
+  //     this.apiService
+  //       .getSingleOrder('1233893')
+  //       .subscribe((res: { [key: string]: any }) => {
+  //         console.log(res);
+  //       });
 
-//   }
+  //   }
 }
