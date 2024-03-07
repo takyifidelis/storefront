@@ -32,6 +32,7 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { APIService } from '../../../../../Services/api.service';
+import { Response } from '../../../../../interfaces/all-interfaces';
 
 export interface dummyUserInterface {
   id: string;
@@ -43,6 +44,7 @@ export interface dummyUserInterface {
 export interface productInterface {
   name: string;
   price: number;
+  id: string;
 }
 @Component({
   selector: 'app-merchant-discount',
@@ -106,7 +108,7 @@ export class MerchantDiscountComponent {
     {
       id: '',
       checkbox: '1',
-      name: 'Asher A.',
+      name: '',
       store: '44',
       categories: 'peach',
     },
@@ -180,11 +182,16 @@ export class MerchantDiscountComponent {
   }
   moreVert(e: dummyUserInterface) {
     localStorage.setItem('promoId', e.id);
-    this.dialog.open(MerchantDiscountCustomizeComponent, {
-      data: e,
-      width: '479px',
-      position: { right: '50px', top: '10%' },
-    });
+    this.dialog
+      .open(MerchantDiscountCustomizeComponent, {
+        data: e,
+        width: '590px',
+        position: { right: '50px', top: '10%' },
+      })
+      .afterClosed()
+      .subscribe(() => {
+        this.ngOnInit();
+      });
   }
   // Posting the new Promotion
   onSubmit(form: FormGroupDirective) {
@@ -209,7 +216,8 @@ export class MerchantDiscountComponent {
       .subscribe(
         (resData: { [key: string]: any }) => {
           console.log(resData);
-          this.dataSource = new MatTableDataSource(resData['data']);
+          this.ngOnInit();
+          // this.dataSource = new MatTableDataSource(resData['data']);
         },
         (errorMessage) => {
           console.log(errorMessage);
@@ -236,7 +244,7 @@ export class MerchantDiscountComponent {
     'merchant-discount-customize/merchant-discount-customize.component.scss',
 })
 export class MerchantDiscountCustomizeComponent {
-  dataSource!: MatTableDataSource<productInterface>;
+  productDataSource!: MatTableDataSource<productInterface>;
   displayedColumns: string[] = ['name', 'price', 'category', 'inventory'];
   storeCategories: string[] = [];
   discountUpdate: FormGroup;
@@ -244,6 +252,7 @@ export class MerchantDiscountCustomizeComponent {
     {
       name: '1',
       price: 1,
+      id: '',
     },
   ];
   panelOpenState = false;
@@ -252,7 +261,7 @@ export class MerchantDiscountCustomizeComponent {
     @Inject(MAT_DIALOG_DATA) public data: productInterface,
     private apiService: APIService
   ) {
-    console.log('kji');
+    console.log(data);
 
     this.discountUpdate = new FormGroup({
       discountName: new FormControl('', Validators.required),
@@ -264,8 +273,6 @@ export class MerchantDiscountCustomizeComponent {
   }
 
   ngOnInit() {
-    this.dataSource = new MatTableDataSource(this.users);
-
     // Get categories
     this.apiService
       .getStoreCategories(localStorage.getItem('storeId')!)
@@ -274,7 +281,22 @@ export class MerchantDiscountCustomizeComponent {
         for (const cat of catResData['data']) {
           this.storeCategories.push(cat.name);
         }
+        this.apiService.getProductUnderPromotion(this.data.id).subscribe(
+          (resData: Response) => {
+            console.log(resData.data);
+            let d: any = [];
+            d = resData.data;
+            console.log(d);
+            this.productDataSource = new MatTableDataSource(d.products);
+          },
+          (errorMessage) => {
+            console.log(errorMessage);
+          }
+        );
       });
+
+    // Get Products under a promotion
+    // this.getPromotionProducts(this.data.id);
   }
   onSubmit(form: FormGroupDirective) {
     if (!form.valid) {
@@ -296,8 +318,11 @@ export class MerchantDiscountCustomizeComponent {
         localStorage.getItem('promoId')!
       )
       .subscribe(
-        (resData: { [key: string]: any }) => {
-          this.dataSource = new MatTableDataSource(resData['data']);
+        (resData: Response) => {
+          let d: any = [];
+          d = resData.data;
+          console.log(d);
+          this.productDataSource = new MatTableDataSource(d);
         },
         (errorMessage) => {
           console.log(errorMessage);
@@ -316,5 +341,20 @@ export class MerchantDiscountCustomizeComponent {
           console.log(errorMessage);
         }
       );
+  }
+  getPromotionProducts(promoId: string) {
+    // Get Products under a promotion
+    // this.apiService.getProductUnderPromotion(promoId).subscribe(
+    //   (resData: Response) => {
+    //     console.log(resData.data);
+    //     let d: any = [];
+    //     d = resData.data;
+    //     console.log(d);
+    //     this.productDataSource = new MatTableDataSource(d.products);
+    //   },
+    //   (errorMessage) => {
+    //     console.log(errorMessage);
+    //   }
+    // );
   }
 }

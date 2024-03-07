@@ -4,7 +4,7 @@ import { Observable, catchError, map, throwError } from 'rxjs';
 import { environment } from '../../environments/environment.development';
 import { UserCredentials } from '../interfaces/all-interfaces';
 import { DataService } from './data.service';
-
+import { Response } from './../interfaces/all-interfaces';
 @Injectable({
   providedIn: 'root',
 })
@@ -481,6 +481,38 @@ export class APIService {
       `${environment.baseApiUrl}/store/delete-promotion/${promoId}`,
       { withCredentials: true }
     );
+  }
+  addProductsToPromotion(
+    promoId: string,
+    data: { products: string[]; categories: string[] }
+  ) {
+    return this.http.patch<Response>(
+      `${environment.baseApiUrl}/product/add-promotion-products/${promoId}`,
+      data,
+      { withCredentials: true }
+    );
+  }
+  deleteProductFromStore(products: string[]) {
+    return this.http
+      .post<Response>(
+        `${environment.baseApiUrl}/product/delete`,
+        { products },
+        {
+          withCredentials: true,
+        }
+      )
+      .pipe(catchError(this.handleError));
+  }
+  getProductUnderPromotion(promoId: string): Observable<Response> {
+    return this.http
+      .get<Response>(
+        `${environment.baseApiUrl}/store/get-promotion-products/${promoId}`,
+        {
+          withCredentials: true,
+          // /api/store/get-promotion-products
+        }
+      )
+      .pipe(catchError(this.handleError));
   }
 
   // Error Handling

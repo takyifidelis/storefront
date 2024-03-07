@@ -1,7 +1,12 @@
 import { Component, Inject, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatRadioModule } from '@angular/material/radio';
-
+import {
+  FormControl,
+  FormGroupDirective,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import {
   MAT_DIALOG_DATA,
   MatDialog,
@@ -13,7 +18,7 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { SelectionModel } from '@angular/cdk/collections';
-import { FormsModule } from '@angular/forms';
+import { FormGroup, FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -36,10 +41,11 @@ export interface dummyUserInterface {
   images: { [key: string]: any }[];
 }
 export interface productDetailInterface {
+  id: string;
   createdAt: string;
   name: any;
   discount: number;
-  categories: string;
+  category: string;
   statement: string;
   start: string;
   end: string;
@@ -94,12 +100,16 @@ export class MerchantProductsDashboadComponent {
   moreVert(e: dummyUserInterface) {
     console.log(e);
 
-    this.dialog.open(MerchantProductDiscountComponent, {
-      data: e,
-      width: '479px',
-      position: { right: '50px', top: '10%' },
-    });
-    console.log(e);
+    this.dialog
+      .open(MerchantProductDiscountComponent, {
+        data: e,
+        width: '479px',
+        position: { right: '50px', top: '10%' },
+      })
+      .afterClosed()
+      .subscribe(() => {
+        this.ngOnInit();
+      });
   }
 
   // the code below is all for the checkboxes in the table
@@ -142,7 +152,7 @@ export class MerchantProductsDashboadComponent {
     this.apiService
       .getStoreProductsMerchant(localStorage.getItem('storeId')!)
       .subscribe((response: any) => {
-        console.log(response.data.products);
+        console.log(response.data);
         // console.log(response.data.products[0].images[0].url);
         // this.users = response.data
         this.dataSource = new MatTableDataSource(response.data.products);
@@ -159,6 +169,7 @@ export class MerchantProductsDashboadComponent {
     CommonModule,
     MatTabsModule,
     MatRadioModule,
+    ReactiveFormsModule,
   ],
   templateUrl:
     'merchant-product-discount/merchant-product-discount.component.html',
@@ -167,11 +178,22 @@ export class MerchantProductsDashboadComponent {
 })
 export class MerchantProductDiscountComponent {
   promoData!: { [key: string]: any }[];
+  addPromotion: FormGroup;
+  product = '';
+  categories = '';
+  selectedPromo: any;
+  pdata: { products: string[]; categories: string[] } = {
+    products: [],
+    categories: [],
+  };
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: productDetailInterface,
     private apiService: APIService
   ) {
-    console.log('kji');
+    this.addPromotion = new FormGroup({
+      promo: new FormControl('', Validators.required),
+    });
+
     this.apiService
       .getPromotionForStore(localStorage.getItem('storeId')!)
       .subscribe(
@@ -185,4 +207,34 @@ export class MerchantProductDiscountComponent {
       );
   }
   ngOnInit() {}
+
+  addPromotionToStore(form: FormGroupDirective) {
+    this.pdata.products.push(this.data.id);
+    this.pdata.categories.push(this.data.category);
+    console.log(this.pdata);
+    this.apiService
+      .addProductsToPromotion(form.value.promo.id, this.pdata)
+      .subscribe(
+        (promoData) => {
+          console.log(promoData);
+        },
+        (errorMessage) => {
+          console.log(errorMessage);
+        }
+      );
+  }
+
+  onDeleteProduct() {
+    let deleteIds: string[] = [];
+    deleteIds.push(this.data.id);
+    console.log({ products: deleteIds });
+    this.apiService.deleteProductFromStore(deleteIds).subscribe(
+      (deleteResponse) => {
+        console.log(deleteResponse);
+      },
+      (errorMessage) => {
+        console.log(errorMessage);
+      }
+    );
+  }
 }
