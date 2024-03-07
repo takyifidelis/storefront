@@ -15,6 +15,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MerchantOrderModalComponent } from '../merchant-order-modal/merchant-order-modal.component';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @Component({
   selector: 'app-merchant-orders',
@@ -30,6 +32,7 @@ import { MatInputModule } from '@angular/material/input';
     MatSortModule,
     MatPaginatorModule,
     MatDialogModule,
+    MatTabsModule
   ],
   templateUrl: './merchant-orders.component.html',
   styleUrl: './merchant-orders.component.scss'
@@ -53,10 +56,16 @@ export class MerchantOrdersComponent {
   selection = new SelectionModel<dummyUserInterface>(true, []);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  orders: any;
+  
 
   users: dummyUserInterface[] = [
   ];
+  orders: any = [
+    {
+      storeName: ''
+    }
+    
+  ]
 unsorted: any = [];
 sorted: any = [];
   formattedDate!: string | null;
@@ -64,20 +73,32 @@ sorted: any = [];
 
  
   ngOnInit(): void {
-    this.apiService.getOrders().subscribe((res: any) =>{
-      this.orders = res;
-      this.unsorted = this.orders.data;
-      console.log(this.orders.data)
-      this.dataSource = new MatTableDataSource(this.orders.data);
-    })
-      
-     this.apiService.getOrdersForMerchant(localStorage.getItem('storeId')!).subscribe((res: any) => {
+     this.apiService.getOrdersForMerchant('f9586428-62e3-4455-bb1d-61262a407d1a').subscribe((res: any) => {
       console.log(res);
+      this.orders = res.data;
+      this.unsorted = this.orders
+      this.dataSource = new MatTableDataSource(this.orders);
+
+      this.apiService.getStoresForMerchant(localStorage.getItem('businessId')!).subscribe((res: any) => {
+        // console.log(res.data[0].storeName);
+        // console.log(res)
+        res.data.forEach((data: any) => {
+          if (data.id === 'f9586428-62e3-4455-bb1d-61262a407d1a'){
+            console.log(data.storeName);
+            this.orders.storeName = data.storeName;
+            console.log(this.orders.storeName);
+
+            
+          }
+        });
+        
+      })
      })
+
   }
 
   moreVert(e: dummyUserInterface) {
-    this.dialog.open(OrderModalComponent, {
+    this.dialog.open(MerchantOrderModalComponent, {
       data: e,
       width: '479px',
       position: { right: '50px', top: '10%' },
@@ -126,9 +147,11 @@ sorted: any = [];
     this.unsorted.forEach((order: any) =>{
       if(order.status === status) {
         this.sorted.push(order);
+    this.dataSource = new MatTableDataSource(this.sorted);
+      }else if(status === 'All'){
+        this.dataSource = new MatTableDataSource(this.unsorted);
       }
     })
-    this.dataSource = new MatTableDataSource(this.sorted);
   }
 //   ngOnInit():
 }

@@ -135,7 +135,7 @@ export class APIService {
   }
 
   getStoresForMerchant(businessId: string): Observable<Response> {
-    return this.http.get<Response>(`${environment.baseApiUrl}/api/business/get-stores/${businessId}`,{
+    return this.http.get<Response>(`${environment.baseApiUrl}/business/get-stores/${businessId}`,{
       withCredentials: true
     })
   }
@@ -320,6 +320,7 @@ postProduct(formData: FormData, storeId: string) {
       }
     );
   }
+
   publishTemplate(storeId: string, template: any): Observable<Response> {
     return this.http.patch<Response>(
       `${environment.baseApiUrl}/store/publish-template/${storeId}`,
@@ -329,6 +330,7 @@ postProduct(formData: FormData, storeId: string) {
       }
     );
   }
+
   // Password Reset
   passwordReset(email: string) {
     return this.http
@@ -343,6 +345,7 @@ postProduct(formData: FormData, storeId: string) {
       )
       .pipe(catchError(this.handleError));
   }
+
   //Resend Verification Code
   resendCode() {
     return this.http
@@ -352,6 +355,7 @@ postProduct(formData: FormData, storeId: string) {
       )
       .pipe(catchError(this.handleError));
   }
+
   reviewProduct(review: { [key: string]: any }, order_id: string) {
     return this.http
       .post<Response>(
@@ -363,6 +367,7 @@ postProduct(formData: FormData, storeId: string) {
       )
       .pipe(catchError(this.handleError));
   }
+
   getSingleOrder(id: string) {
     return this.http.get<Response>(
       `${environment.baseApiUrl}/order/get-single-order/${id}`,
@@ -371,6 +376,7 @@ postProduct(formData: FormData, storeId: string) {
       }
     );
   }
+
   replyReview(comment: string, review: string, storeId: string) {
     return this.http
       .post<Response>(
@@ -397,11 +403,7 @@ postProduct(formData: FormData, storeId: string) {
   }
 
   getOrdersForMerchant(storeId: string): Observable<Response> {
-    return this.http.get<Response>(`${environment.baseApiUrl}/store/get-all-orders/${storeId}`)
-  }
-
-  deleteOrders(orderId: string): Observable<Response> {
-    return this.http.delete<Response>(`${environment.baseApiUrl}/order/remove-items/${orderId}`, {
+    return this.http.get<Response>(`${environment.baseApiUrl}/store/get-all-orders/${storeId}`, {
       withCredentials: true
     })
   }

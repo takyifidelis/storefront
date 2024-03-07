@@ -20,7 +20,6 @@ constructor(public http: HttpClient){}
       'name': new FormControl(null, Validators.required),
       'method': new FormControl(null, Validators.required),
       'walletId': new FormControl(null, Validators.required),
-      'secret': new FormControl(null, Validators.required)
     })
   }
 
@@ -28,7 +27,7 @@ constructor(public http: HttpClient){}
     console.log(this.walletForm);
     this.http
       .post<Response>(
-        `${environment.baseApiUrl}/store/add-wallet/f739a921-7267-4e02-8222-ceb2b4c352cf`,
+        `${environment.baseApiUrl}/store/add-wallet/f9586428-62e3-4455-bb1d-61262a407d1a`,
         this.walletForm.value,
         {
           withCredentials: true,
