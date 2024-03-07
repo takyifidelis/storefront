@@ -7,7 +7,6 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { APIService } from '../../../../../Services/api.service';
-import { OrderModalComponent } from '../../../Customer/components/order-modal/order-modal.component';
 import { dummyUserInterface } from '../merchant-products-dashboad/merchant-products-dashboad.component';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -77,11 +76,10 @@ sorted: any = [];
       console.log(res);
       this.orders = res.data;
       this.unsorted = this.orders
+      console.log(this.orders)
       this.dataSource = new MatTableDataSource(this.orders);
 
       this.apiService.getStoresForMerchant(localStorage.getItem('businessId')!).subscribe((res: any) => {
-        // console.log(res.data[0].storeName);
-        // console.log(res)
         res.data.forEach((data: any) => {
           if (data.id === 'f9586428-62e3-4455-bb1d-61262a407d1a'){
             console.log(data.storeName);
@@ -103,7 +101,7 @@ sorted: any = [];
       width: '479px',
       position: { right: '50px', top: '10%' },
     });
-    console.log(e);
+    // console.log(e);
   }
 
   isAllSelected() {

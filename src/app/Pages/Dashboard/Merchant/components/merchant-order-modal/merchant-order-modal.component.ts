@@ -23,14 +23,12 @@ import { MatTabsModule } from '@angular/material/tabs';
 export class MerchantOrderModalComponent {
   error: string | any = null;
   sum = 0;
+  orderId?: string
 
-//   constructor(
-//     private authService: AuthService,
-//     @Inject(MAT_DIALOG_DATA) public data: dummyUserInterface
   starRating!: number;
 
   constructor(
-    private authService: APIService,
+    private apiService: APIService,
     @Inject(MAT_DIALOG_DATA) public data: { [key: string]: any }
   ) {
     
@@ -40,7 +38,14 @@ export class MerchantOrderModalComponent {
      
     for (const itemPrice of this.data['items']) {
       this.sum += itemPrice.price;
+      
     }
+  }
+
+  shipped(orderId: string) {
+    this.apiService.orderShipped(orderId).subscribe((res: any) => {
+      console.log(res);
+    })
   }
 
   

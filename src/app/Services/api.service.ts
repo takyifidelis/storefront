@@ -168,12 +168,25 @@ AddStoreCategories(storeId: string, categoryName:{[key:string]:string[]}): Obser
       withCredentials: true,
     })
   }
-initializePayment(customerId:string, cart:any): Observable<Response> {
+
+initializePayment(customerId: string, cart:any): Observable<Response> {
   return this.http.post<Response>(`${environment.baseApiUrl}/order/initialize/${customerId}`, cart, {
 
     withCredentials: true,
   })
 } 
+
+orderDelivered(orderId: string): Observable<Response> {
+  return this.http.patch<Response>(`${environment.baseApiUrl}/order/delivered/${orderId}`,{
+    withCredentials: true
+  })
+}
+
+orderShipped(orderId: string): Observable<Response> {
+  return this.http.patch<Response>(`${environment.baseApiUrl}/order/shipped/${orderId}`,{
+    withCredentials: true
+  })
+}
 
 
 
