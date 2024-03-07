@@ -1,6 +1,6 @@
 import { Component, Inject, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AuthService } from '../../../../Authentication/Auth/auth.service';
+import { MatRadioModule } from '@angular/material/radio';
 
 import {
   MAT_DIALOG_DATA,
@@ -24,6 +24,7 @@ import { faCheck, faFilter, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { APIService } from '../../../../../Services/api.service';
+import { MatTabsModule } from '@angular/material/tabs';
 
 export interface dummyUserInterface {
   checkbox: string;
@@ -34,7 +35,18 @@ export interface dummyUserInterface {
   status: string;
   images: { [key: string]: any }[];
 }
-
+export interface productDetailInterface {
+  createdAt: string;
+  name: any;
+  discount: number;
+  categories: string;
+  statement: string;
+  start: string;
+  end: string;
+  inventory: string;
+  status: string;
+  images: { [key: string]: any }[];
+}
 @Component({
   selector: 'app-merchant-products-dashboad',
   standalone: true,
@@ -80,15 +92,14 @@ export class MerchantProductsDashboadComponent {
     this.dataSource = new MatTableDataSource();
   }
   moreVert(e: dummyUserInterface) {
+    console.log(e);
+
     this.dialog.open(MerchantProductDiscountComponent, {
-      data: {
-        itemName: 'hat',
-        itemPrice: 'hat',
-      },
+      data: e,
       width: '479px',
       position: { right: '50px', top: '10%' },
     });
-    // console.log(e);
+    console.log(e);
   }
 
   // the code below is all for the checkboxes in the table
@@ -142,14 +153,36 @@ export class MerchantProductsDashboadComponent {
 @Component({
   selector: 'app-merchant-product-discount',
   standalone: true,
-  imports: [MatDialogTitle, MatDialogContent],
+  imports: [
+    MatDialogTitle,
+    MatDialogContent,
+    CommonModule,
+    MatTabsModule,
+    MatRadioModule,
+  ],
   templateUrl:
     'merchant-product-discount/merchant-product-discount.component.html',
   styleUrl:
     'merchant-product-discount/merchant-product-discount.component.scss',
 })
 export class MerchantProductDiscountComponent {
-  constructor(@Inject(MAT_DIALOG_DATA) public data: dummyUserInterface) {
+  promoData!: { [key: string]: any }[];
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: productDetailInterface,
+    private apiService: APIService
+  ) {
     console.log('kji');
+    this.apiService
+      .getPromotionForStore(localStorage.getItem('storeId')!)
+      .subscribe(
+        (promoData: { [key: string]: any }) => {
+          this.promoData = promoData['data'];
+          console.log(promoData);
+        },
+        (errorMessage) => {
+          console.log(errorMessage);
+        }
+      );
   }
+  ngOnInit() {}
 }

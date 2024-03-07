@@ -1,0 +1,61 @@
+.product-details {
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  .product-image {
+    width: 56px;
+    height: 56px;
+    border-radius: 4px;
+  }
+  .product-info {
+    font-family: Inter;
+    font-style: normal;
+    .product-date {
+      color: #5e718d;
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 20px;
+      letter-spacing: -0.2px;
+    }
+    .product-name {
+      color: #455468;
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 28px;
+      letter-spacing: -0.3px;
+      text-transform: capitalize;
+    }
+  }
+}
+
+.promo-data {
+  margin-top: 1rem;
+  padding: 0.5rem;
+  border: 1px solid #5e718d;
+  border-radius: 6px;
+  background: #fff;
+
+  font-family: Inter;
+  font-style: normal;
+  .promo-name {
+    color: #455468;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 28px;
+    letter-spacing: -0.3px;
+  }
+  .card-text {
+    color: #5e718d;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: -0.2px;
+    .start-date {
+      margin-right: 1rem;
+    }
+  }
+  .promo-title {
+    color: #455468;
+    font-weight: 700;
+    font-size: 14px;
+  }
+}
