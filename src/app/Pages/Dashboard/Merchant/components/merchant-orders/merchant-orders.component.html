@@ -34,13 +34,15 @@
   <div class="d-flex mb-5 align-items-center gap-3">
     <h2 class="m-0">Orders</h2>
   </div>
-  <div class="sub-header d-flex" style="gap: 115px; padding-bottom: 20px">
-    <span style="cursor: pointer" (click)="onSort('All')">All</span>
+  <div class="sub-header d-flex" style="gap: 40px; padding-bottom: 10px">
+    <span class="active" style="cursor: pointer" (click)="onSort('All')"
+      >All</span
+    >
     <span style="cursor: pointer" (click)="onSort('Processing')"
       >Processing</span
     >
     <span style="cursor: pointer" (click)="onSort('Shipped')">Shipped</span>
-    <span style="cursor: pointer" (click)="onSort('Delieverd')">Delieverd</span>
+    <span style="cursor: pointer" (click)="onSort('Delivered')">Delivered</span>
     <span style="cursor: pointer" (click)="onSort('Cancelled')">Cancelled</span>
   </div>
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>

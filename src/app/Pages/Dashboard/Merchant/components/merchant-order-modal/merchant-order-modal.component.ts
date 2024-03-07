@@ -43,8 +43,16 @@ export class MerchantOrderModalComponent {
   }
 
   shipped(orderId: string) {
-    this.apiService.orderShipped(orderId).subscribe((res: any) => {
+    console.log('shipped:'+this.data['id'])
+    this.apiService.orderShipped(this.data['id']).subscribe((res: any) => {
       console.log(res);
+    })
+  }
+
+  delivered(orderId: string) {
+    console.log('shipped:'+`${this.data['id']}`)
+    this.apiService.orderDelivered(this.data['id']).subscribe((res: any)=> {
+      console.log(res)
     })
   }
 

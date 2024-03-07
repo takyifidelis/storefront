@@ -182,14 +182,17 @@ orderDelivered(orderId: string): Observable<Response> {
   })
 }
 
+getWallet(storeId: string): Observable<Response> {
+  return this.http.get<Response>(`${environment.baseApiUrl}/store/get-wallets/${storeId}`, {
+    withCredentials: true
+  })
+}
+
 orderShipped(orderId: string): Observable<Response> {
   return this.http.patch<Response>(`${environment.baseApiUrl}/order/shipped/${orderId}`,{
     withCredentials: true
   })
 }
-
-
-
 
 
   addShipping(customerId: string, user: any) {
@@ -302,7 +305,6 @@ postProduct(formData: FormData, storeId: string) {
       }
     );
   }
-
 
 
   removeProducts() {

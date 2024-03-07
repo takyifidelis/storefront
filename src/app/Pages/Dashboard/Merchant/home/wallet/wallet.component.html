@@ -21,9 +21,10 @@
   </div>
 </div>
 <section class="container">
+  @for (info of walletInfo; track info) {
   <div
     class="d-flex justify-content-center payment-card-selected"
-    style="gap: 20px; margin-bottom: 20px"
+    style="gap: 20px; margin-bottom: 20px; cursor: pointer"
   >
     <div>
       <!-- <fa-icon [icon]="visa" style="font-size: 40px"></fa-icon> -->
@@ -31,20 +32,18 @@
     <div class="d-flex justify-content-between w-100">
       <div>
         <div>
-          <p>Emmanuella Neizer</p>
-          <p>822873648717</p>
-          <p>Expiry 06/2024</p>
+          <p>{{ info.name }}</p>
+          <p>{{ info.walletId }}</p>
+          <p>{{ info.method }}</p>
         </div>
-        <div class="d-flex" style="gap: 12px">
+        <!-- <div class="d-flex" style="gap: 12px">
           <p>Set as Default</p>
           <span>Edit</span>
-        </div>
+        </div> -->
       </div>
-      <button class="check">
-        <!-- <fa-icon [icon]="checkIcon"></fa-icon> -->
-      </button>
     </div>
   </div>
+  }
 </section>
 <section class="container" style="padding: 20px">
   <form [formGroup]="walletForm" (ngSubmit)="onSubmit()">
@@ -81,17 +80,6 @@
         formControlName="walletId"
       />
     </div>
-    <!-- <div class="label">
-      <label for="secret">Secret</label>
-    </div>
-    <div class="input">
-      <input
-        type="text"
-        id="secret"
-        class="form-control"
-        formControlName="secret"
-      />
-    </div> -->
     <button class="btn btn-primary" type="submit">Submit</button>
   </form>
 </section>

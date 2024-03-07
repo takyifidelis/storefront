@@ -66,7 +66,9 @@
       >
         Shipped
       </button>
-      <button class="btn btn-success">Delivered</button>
+      <button class="btn btn-success" (click)="delivered(data['id'])">
+        Delivered
+      </button>
     </mat-tab>
   </mat-tab-group>
 </mat-dialog-content>
