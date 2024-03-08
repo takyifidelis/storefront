@@ -87,21 +87,11 @@ sorted: any = [];
 
   ngOnInit(): void {
     
-    this.apiService.getOrders().subscribe((res: any) =>{
+    this.apiService.getOrders(localStorage.getItem('customerId')!).subscribe((res: any) =>{
       this.orders = res;
       this.unsorted = this.orders.data;
-      console.log(this.orders)
       this.dataSource = new MatTableDataSource(this.orders.data);
     })
-      
-    const statusElement = this.elementRef.nativeElement.querySelector('#statusElement');
-    const status = statusElement.innerText;
-
-    // Adding background color based on status
-    if (status === 'Processing') {
-      statusElement.style.backgroundColor = 'yellow';
-    }
-    console.log(status);
      
   }
 
@@ -111,7 +101,6 @@ sorted: any = [];
       width: '479px',
       position: { right: '50px', top: '10%' },
     });
-    console.log(e);
   }
 
   isAllSelected() {
@@ -121,18 +110,15 @@ sorted: any = [];
   }
   showSelection(e: any) {
     e.stopPropagation();
-    console.log(this.selection.selected);
   }
   /** Selects all rows if they are not all selected; otherwise clear selection. */
   toggleAllRows() {
     if (this.isAllSelected()) {
       this.selection.clear();
-      console.log(this.selection.selected);
       return;
     }
 
     this.selection.select(...this.dataSource.data);
-    console.log(this.selection.selected);
   }
 
   /** The label for the checkbox on the passed row */
@@ -163,12 +149,5 @@ this.dataSource = new MatTableDataSource(this.unsorted)
       }
     })
   }
-//   ngOnInit(): void {
-//     this.apiService
-//       .getSingleOrder('1233893')
-//       .subscribe((res: { [key: string]: any }) => {
-//         console.log(res);
-//       });
 
-//   }
 }

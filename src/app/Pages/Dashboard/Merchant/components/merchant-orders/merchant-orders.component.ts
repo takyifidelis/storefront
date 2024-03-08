@@ -100,7 +100,9 @@ sorted: any = [];
       data: e,
       width: '479px',
       position: { right: '50px', top: '10%' },
-    });
+    }).afterClosed().subscribe(()=>{
+      this.ngOnInit()
+    })
     // console.log(e);
   }
 

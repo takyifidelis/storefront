@@ -177,19 +177,20 @@ initializePayment(customerId: string, cart:any): Observable<Response> {
 } 
 
 orderDelivered(orderId: string): Observable<Response> {
-  return this.http.patch<Response>(`${environment.baseApiUrl}/order/delivered/${orderId}`,{
+  return this.http.patch<Response>(`${environment.baseApiUrl}/order/delivered/${orderId}`,{},{
+    withCredentials: true
+  })
+}
+
+
+orderShipped(orderId: string): Observable<Response> {
+  return this.http.patch<Response>(`${environment.baseApiUrl}/order/shipped/${orderId}`,{},{
     withCredentials: true
   })
 }
 
 getWallet(storeId: string): Observable<Response> {
   return this.http.get<Response>(`${environment.baseApiUrl}/store/get-wallets/${storeId}`, {
-    withCredentials: true
-  })
-}
-
-orderShipped(orderId: string): Observable<Response> {
-  return this.http.patch<Response>(`${environment.baseApiUrl}/order/shipped/${orderId}`,{
     withCredentials: true
   })
 }
@@ -269,9 +270,9 @@ postProduct(formData: FormData, storeId: string) {
 
   
 
-  getOrders(): Observable<Response> {
+  getOrders(customerId: string): Observable<Response> {
     return this.http.get<Response>(
-      `${environment.baseApiUrl}/customer/get-orders/f739a921-7267-4e02-8222-ceb2b4c352cf`,
+      `${environment.baseApiUrl}/customer/get-orders/${customerId}`,
       {
         withCredentials: true,
       }
