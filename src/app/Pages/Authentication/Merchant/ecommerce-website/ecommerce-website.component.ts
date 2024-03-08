@@ -53,7 +53,6 @@ export class EcommerceWebsiteComponent implements OnInit{
   searchIcon = faSearch;
   serverResponseReceived = false
   dropDownMenu: HTMLElement | null = null;
-
   @ViewChild('fileInput') fileInput!: ElementRef;
   constructor(public dataService: DataService, private apiService:APIService, private router:Router) {
     if(dataService.isInEditMode) {
@@ -84,6 +83,7 @@ export class EcommerceWebsiteComponent implements OnInit{
    }
   }
   ngOnInit(): void {
+
     
   if (!this.dataService.isInEditMode) {
   //     this.apiService.getStore().subscribe((data:{[key: string]: any;} )=>{
@@ -115,7 +115,8 @@ export class EcommerceWebsiteComponent implements OnInit{
   //     }
   //   })
   }
+
    
-    console.log(this.dataService.template)
+    // console.log(this.dataService.template)
   }
 }

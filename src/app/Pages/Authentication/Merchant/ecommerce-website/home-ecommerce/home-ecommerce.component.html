@@ -1,11 +1,18 @@
-<div class="container-fluid p-0" 
+<div
+  class="container-fluid p-0"
   [style.background]="dataservice.template.primaryBackground"
   [style.fontFamily]="dataservice.template.fontFamily"
   [style.textAlign]="dataservice.template.textAlign"
   [style.fontWeight]="dataservice.template.body.fontWeight"
   [style.fontSize]="dataservice.template.body.fontSize"
-  [style.color]="dataservice.template.primaryColor">
-  <section *ngIf="dataservice.productSearchString.length < 1" class="container-fluid d-flex level-up main-comp p-0">
+
+  [style.color]="dataservice.template.primaryColor"
+>
+  <section
+    *ngIf="dataservice.productSearchString.length < 1"
+    class="container-fluid d-flex level-up main-comp p-0"
+  >
+
 
     <div [style]="dataservice.template.headings.heroHeading.bgImage">
       <img
@@ -75,7 +82,7 @@
     </div>
   </section>
 
-<!--   <section class="container-fluid categories-container">
+  <!--   <section class="container-fluid categories-container">
     <div
       [style.fontSize]="dataservice.template.headers.fontSize"
       [style.fontWeight]="dataservice.template.headers.fontWeight"
@@ -94,21 +101,33 @@
         <div class="overlay">
           <span>{{ category.name }}</span> -->
 
-  <section *ngIf="dataservice.productSearchString.length < 1" class="container-fluid categories-container">
-    <div 
-    [style.fontSize]="dataservice.template.headers.fontSize"
-    [style.fontWeight]="dataservice.template.headers.fontWeight"
-     class="section-header">Categories</div>
+  <section
+    *ngIf="dataservice.productSearchString.length < 1"
+    class="container-fluid categories-container"
+  >
+    <div
+      [style.fontSize]="dataservice.template.headers.fontSize"
+      [style.fontWeight]="dataservice.template.headers.fontWeight"
+      class="section-header"
+    >
+      Categories
+    </div>
     <div class="row categories">
       @for(category of dataservice.productCategories; track category){
-        <div style="margin-bottom: 20px;" class="cat col-md-3">
-          <div style="position: relative;;">
-            <img class="w-100" src="assets/images/ecommerce-home-dresses.svg" alt="" />
+      <div style="margin-bottom: 20px" class="cat col-md-3">
+        <div style="position: relative">
+          <img
+            class="w-100"
+            src="assets/images/ecommerce-home-dresses.svg"
+            alt=""
+          />
           <div class="overlay">
-            <span >{{category.name}}</span>
-          </div>
+            <span>{{ category.name }}</span>
           </div>
         </div>
+
+      </div>
+
       <!-- </div> -->
       }
     </div>
@@ -195,7 +214,6 @@
       [style.fontWeight]="dataservice.template.headers.fontWeight"
       class="featured-items-header"
     >
-
       {{ dataservice.template.sectionThree.name }}
     </div>
     <div class="row justify-content-between">
@@ -231,43 +249,40 @@
                   <mat-icon>shopping_cart</mat-icon>
                 </button> -->
 
-    @for(product of dataservice.products | filterProduct:dataservice.productSearchString; track product){
-        <div class="col-md-3">
-          <div class="card card-structure">
-            <img (click)="goToProduct(product.id)" 
-              [src]="product.images[0].url"
-              class="card-img-top card-img"
-              alt="..."
-            />
-            <div class="card-body">
-              <div
-                class="product-name d-flex justify-content-between align-items-center"
-              >
-                <h5 class="card-title">{{product.category}}</h5>
-                <div class="product-btn">
-                  <button class="heart nav-icons" color="primary" mat-icon-button>
-                    <mat-icon>favorite_border</mat-icon>
-                  </button>
-                  <button (click)="addToCart(product)" class="cart nav-icons" color="primary" mat-icon-button>
-                    <mat-icon>shopping_cart</mat-icon>
-                  </button>
-                </div>
-              </div>
-              <p class="blossom-bag-paragraph">{{product.name}}</p>
-              <div class="ratings">
-                <img src="assets/images/star-rating.svg" alt="ratings" />
-                <img src="assets/images/star-rating.svg" alt="ratings" />
-                <img src="assets/images/star-rating.svg" alt="ratings" />
-                <img src="assets/images/star-rating.svg" alt="ratings" />
-                <img src="assets/images/star-rating-unfilled.svg" alt="" />
-                <span class="ratings-43">43 Ratings </span>
-              </div>
-              <div class="product-price">${{product.price}}</div>
-              <div class="product-color-div d-flex">
-                <div class="blue product-color"></div>
-                <div class="yellow product-color"></div>
-                <div class="voilet product-color"></div>
-                <div class="red product-color"></div>
+
+      @for(product of dataservice.products |
+      filterProduct:dataservice.productSearchString; track product){
+      <div class="col-md-3">
+        <div class="card card-structure">
+          <img
+            (click)="goToProduct(product.id)"
+            [src]="product.images[0].url"
+            class="card-img-top card-img"
+            alt="..."
+          />
+          <div class="card-body">
+            <div
+              class="product-name d-flex justify-content-between align-items-center"
+            >
+              <h5 class="card-title">{{ product.category }}</h5>
+              <div class="product-btn">
+                <button
+                  class="heart nav-icons"
+                  (click)="liked(product)"
+                  [ngClass]="{ liked: product.isliked }"
+                  mat-icon-button
+                >
+                  <mat-icon>favorite</mat-icon>
+                </button>
+                <button
+                  (click)="addToCart(product)"
+                  class="cart nav-icons"
+                  color="primary"
+                  mat-icon-button
+                >
+                  <mat-icon>shopping_cart</mat-icon>
+                </button>
+
               </div>
             </div>
             <p class="blossom-bag-paragraph">{{ product.name }}</p>
@@ -290,10 +305,38 @@
               <div class="red product-color"></div>
             </div>
           </div>
+          <!-- <p class="blossom-bag-paragraph">{{ product.name }}</p>
+            <div
+              class="ratings d-flex justify-content-betweeen align-items-center"
+            >
+              <app-star-rating
+                [rating]="product.rating"
+                [readonly]="true"
+              ></app-star-rating>
+              <span class="ratings-43">
+                <span class="number-rating">{{ product.rating }}</span> Ratings
+              </span>
+            </div> -->
+          <!-- <div class="product-price">${{ product.price }}</div> -->
+          <!-- <div class="product-color-div d-flex">
+              <div class="blue product-color"></div>
+              <div class="yellow product-color"></div>
+              <div class="voilet product-color"></div>
+              <div class="red product-color"></div>
+            </div> -->
         </div>
+
+      </div>
+
       <!-- </div> -->
       }
-      <span>no product with name <i><strong>{{dataservice.productSearchString}}</strong></i> exist</span>
+      <span
+        >no product with name
+        <i
+          ><strong>{{ dataservice.productSearchString }}</strong></i
+        >
+        exist</span
+      >
     </div>
   </section>
 </div>

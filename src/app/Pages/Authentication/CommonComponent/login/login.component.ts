@@ -88,7 +88,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.dataService.isLoading = false;
+    // this.dataService.isLoading = false;
     this.authService.authState.subscribe((user) => {
       console.log(user);
       this.user = user;
@@ -110,9 +110,11 @@ export class LoginComponent implements OnInit {
     }
     const email = form.value.email;
     const password = form.value.password;
+    this.isLoading = true;
     this.loginService.login(email, password).subscribe(
       (resData) => {
-        this.toastr.success('Success', 'Login Account!');
+        // this.toastr.success('Success', 'Login Account!');
+        this.isLoading = false;
         console.log(resData);
         if (resData.data?.type == 'Business') {
           if (resData.type == 'Business') {
@@ -133,6 +135,7 @@ export class LoginComponent implements OnInit {
         console.log(errorMessage);
         this.error = errorMessage;
         this.toastr.error('Failed', this.error);
+        this.isLoading = false;
       }
     );
     form.reset();
@@ -152,13 +155,15 @@ export class LoginComponent implements OnInit {
       .authenticateUser(this.dataService.loginCredentials)
       .subscribe(
         (resData: any) => {
+
           console.log(resData);
+
           this.isLoading = false;
           this.toastr.success('Login Successful', 'Success');
           if (resData.data.type === 'Business') {
             // this.dataService.businessId=resData.data?.business
             localStorage.setItem('businessId', resData.data.business);
-            //           this.dataService.isLoading =false
+
             this.router.navigate(['merchant']);
           } else if (resData.data.type === 'Customer') {
             localStorage.setItem('customerId', resData.data.customer);
@@ -166,18 +171,20 @@ export class LoginComponent implements OnInit {
             this.router.navigate(['customer']);
           } else {
             console.log(resData);
-            this.dataService.isLoading = false;
+
+
+            // this.dataService.isLoading = false;
           }
         },
         (errorMessage: any) => {
-          this.isLoading = false;
-          //        this.dataService.isLoading =false
+          this.isLoading = false; 
           console.log(errorMessage);
           this.error = errorMessage;
-
           this.toastr.error(this.error, 'Login Failed');
         }
       );
+    this.dataService.loginCredentials = { email: '', password: '' };
+
   }
 
   handleGoogleResponse() {
