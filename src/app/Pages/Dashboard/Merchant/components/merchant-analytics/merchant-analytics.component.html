@@ -386,8 +386,13 @@
       >
         Payment Method
       </th>
-      <td class="content" mat-cell *matCellDef="let row">
-        <img src="/assets/icons/PayPal.svg" alt="" />
+      <td
+        class="content"
+        mat-cell
+        *matCellDef="let row"
+        style="text-align: center; width: 179px"
+      >
+        <img src="/assets/icons/PayPal.svg" alt="" style="text-align: center" />
       </td>
     </ng-container>
     <ng-container matColumnDef="wallet">
@@ -442,9 +447,12 @@
       >
         Commission
       </th>
-      <td class="content commission" mat-cell *matCellDef="let row" class="p-2">
-        <div style="border-radius: 6px; margin-bottom: 0; width: 118px">
-          <p class="content" style="margin-bottom: 0; color: red !important">
+      <td mat-cell *matCellDef="let row" class="p-2">
+        <div>
+          <p
+            class="content commission"
+            style="margin-bottom: 0; color: red !important"
+          >
             {{ row.commission }}%
           </p>
         </div>

@@ -36,24 +36,28 @@
   </div>
   <div class="sub-header d-flex" style="gap: 40px; padding-bottom: 10px">
     <span
+      class="status"
       [ngClass]="isAllActive ? 'active' : ''"
       style="cursor: pointer"
       (click)="onSort('All')"
       >All</span
     >
     <span
+      class="status"
       [ngClass]="isProcessingActive ? 'active' : ''"
       style="cursor: pointer"
       (click)="onSort('Processing')"
       >Processing</span
     >
     <span
+      class="status"
       [ngClass]="isShippedActive ? 'active' : ''"
       style="cursor: pointer"
       (click)="onSort('Shipped')"
       >Shipped</span
     >
     <span
+      class="status"
       [ngClass]="isDeliveredActive ? 'active' : ''"
       style="cursor: pointer"
       (click)="onSort('Delivered')"
@@ -89,10 +93,11 @@
         mat-header-cell
         *matHeaderCellDef
         mat-sort-header
+        class="header"
       >
         Order Number
       </th>
-      <td mat-cell *matCellDef="let row">{{ row.orderId }}</td>
+      <td class="orderId" mat-cell *matCellDef="let row">{{ row.orderId }}</td>
     </ng-container>
 
     <ng-container matColumnDef="store">
@@ -101,10 +106,16 @@
         mat-header-cell
         *matHeaderCellDef
         mat-sort-header
+        class="header"
       >
         Customer Name
       </th>
-      <td mat-cell *matCellDef="let row" style="text-transform: capitalize">
+      <td
+        class="data"
+        mat-cell
+        *matCellDef="let row"
+        style="text-transform: capitalize"
+      >
         {{ row.customerOrder?.firstName }} {{ row.customerOrder?.lastName }}
       </td>
     </ng-container>
@@ -115,12 +126,14 @@
         mat-header-cell
         *matHeaderCellDef
         mat-sort-header
+        class="header"
       >
         Status
       </th>
       <td mat-cell *matCellDef="let row" class="p-2">
         <div style="border-radius: 6px; margin-bottom: 0; width: 118px">
           <p
+            class="status"
             style="margin-bottom: 0"
             [class.pending-payment]="row.status === 'Pending_Payment'"
             [class.processing]="row.status === 'Processing'"
@@ -140,10 +153,11 @@
         mat-header-cell
         *matHeaderCellDef
         mat-sort-header
+        class="header"
       >
         Date
       </th>
-      <td mat-cell *matCellDef="let row">
+      <td class="data" mat-cell *matCellDef="let row">
         {{ datepipe.transform(row.updatedAt, "dd-MMM-YYYY") }}
       </td>
     </ng-container>
@@ -154,6 +168,7 @@
         mat-header-cell
         *matHeaderCellDef
         mat-sort-header
+        class="header"
       >
         Price
       </th>
@@ -169,7 +184,7 @@
         *matHeaderCellDef
         mat-sort-header
       ></th>
-      <td mat-cell *matCellDef="let row">
+      <td class="data" mat-cell *matCellDef="let row">
         <span (click)="moreVert(row)" class="btn">
           <img src="/assets/icons/bubble.svg" alt="" />
         </span>
