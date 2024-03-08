@@ -21,13 +21,14 @@ import { UserCredentials } from '../interfaces/all-interfaces';
 // showInputLink: boolean = false;
 // isLoading: boolean = false
 export class DataService {
-    cart:any=[]
-    // products:any = []
-    productCategories:any = []
-    productSearchString:string = ''
-    // template:any
+  cart: any = [];
+  // products:any = []
+  productCategories: any = [];
+  productSearchString: string = '';
+  // template:any
+  selectedStore: { [key: string]: any } = {};
   merchantDashboardNoProjects: boolean = false;
-  doesNotExist = {exist: false, term:''}
+  doesNotExist = { exist: false, term: '' };
 
   isMobileBool: boolean = false;
   isLoading = false;
