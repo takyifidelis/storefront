@@ -26,7 +26,7 @@ import {
 import { OrderModalComponent } from '../order-modal/order-modal.component';
 import { dummyUserInterface } from '../../../../../interface/dummy-user.model';
 import { APIService } from '../../../../../Services/api.service';
-import { DatePipe } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { DataService } from '../../../../../Services/data.service';
 
 @Component({
@@ -43,10 +43,12 @@ import { DataService } from '../../../../../Services/data.service';
     MatSortModule,
     MatPaginatorModule,
     MatDialogModule,
+    CommonModule
   ],
   templateUrl: './order.component.html',
   styleUrl: './order.component.scss',
 })
+
 export class OrderComponent implements OnInit {
   displayedColumns: string[] = [
     'checkbox',
@@ -65,7 +67,6 @@ export class OrderComponent implements OnInit {
 
   users = [
     {
-
       checkbox: '',
       orderNumber: '',
       store: '',
@@ -78,6 +79,10 @@ unsorted: any = [];
 sorted: any = [];
   formattedDate!: string | null;
    datepipe: DatePipe = new DatePipe('en-US');
+  isAllActive: boolean = false;
+  isProcessingActive: boolean = false;
+  isShippedActive: boolean = false;
+  isDeliveredActive: boolean = false;
 
 
   constructor(public dialog: MatDialog, private apiService: APIService, private elementRef: ElementRef) {
@@ -92,7 +97,7 @@ sorted: any = [];
       this.unsorted = this.orders.data;
       this.dataSource = new MatTableDataSource(this.orders.data);
     })
-     
+  this.isAllActive = true;
   }
 
   moreVert(e: dummyUserInterface) {
@@ -137,6 +142,30 @@ sorted: any = [];
 
 
   onSort(status: string) {
+    if(status === "All" ){
+      this.isAllActive = true;
+      this.isProcessingActive = false;
+      this.isShippedActive = false;
+      this.isDeliveredActive = false;
+    }
+    if(status === "Processing"){
+      this.isProcessingActive = true;
+      this.isAllActive = false;
+      this.isShippedActive = false;
+      this.isDeliveredActive = false;
+    }
+    if(status === "Shipped"){
+      this.isShippedActive = true;
+      this.isAllActive = false;
+      this.isProcessingActive = false;
+      this.isDeliveredActive = false;
+    }
+    if(status === "Delivered"){
+      this.isDeliveredActive = true;
+      this.isAllActive = false;
+      this.isProcessingActive = false;
+      this.isShippedActive = false;
+    }
     this.sorted = [];
     this.unsorted.forEach((order: any) =>{
       if(order.status === status) {

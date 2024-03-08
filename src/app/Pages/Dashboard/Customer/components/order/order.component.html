@@ -3,13 +3,30 @@
     <h2 class="m-0">Orders</h2>
   </div>
   <div class="sub-header d-flex" style="gap: 115px; padding-bottom: 20px">
-    <span style="cursor: pointer" (click)="onSort('All')">All</span>
-    <span style="cursor: pointer" (click)="onSort('Processing')"
+    <span
+      [ngClass]="isAllActive ? 'active' : ''"
+      style="cursor: pointer"
+      (click)="onSort('All')"
+      >All</span
+    >
+    <span
+      [ngClass]="isProcessingActive ? 'active' : ''"
+      style="cursor: pointer"
+      (click)="onSort('Processing')"
       >Processing</span
     >
-    <span style="cursor: pointer" (click)="onSort('Shipped')">Shipped</span>
-    <span style="cursor: pointer" (click)="onSort('Delivered')">Delivered</span>
-    <span style="cursor: pointer" (click)="onSort('Cancelled')">Cancelled</span>
+    <span
+      [ngClass]="isShippedActive ? 'active' : ''"
+      style="cursor: pointer"
+      (click)="onSort('Shipped')"
+      >Shipped</span
+    >
+    <span
+      [ngClass]="isDeliveredActive ? 'active' : ''"
+      style="cursor: pointer"
+      (click)="onSort('Delivered')"
+      >Delivered</span
+    >
   </div>
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
     <!-- Checkbox Column -->

@@ -73,3 +73,14 @@
   gap: 10px;
   padding: 3px;
 }
+
+.active {
+  background: #d0d8f4;
+  color: #4a72ff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 3px;
+  border-radius: 5px;
+}

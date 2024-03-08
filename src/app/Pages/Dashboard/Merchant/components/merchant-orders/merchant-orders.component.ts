@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { DataService } from '../../../../../Services/data.service';
 import { SelectionModel } from '@angular/cdk/collections';
-import { DatePipe } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
@@ -31,7 +31,8 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatSortModule,
     MatPaginatorModule,
     MatDialogModule,
-    MatTabsModule
+    MatTabsModule,
+    CommonModule
   ],
   templateUrl: './merchant-orders.component.html',
   styleUrl: './merchant-orders.component.scss'
@@ -59,16 +60,15 @@ export class MerchantOrdersComponent {
 
   users: dummyUserInterface[] = [
   ];
-  orders: any = [
-    {
-      storeName: ''
-    }
-    
-  ]
+  orders: any = []
 unsorted: any = [];
 sorted: any = [];
   formattedDate!: string | null;
    datepipe: DatePipe = new DatePipe('en-US');
+   isAllActive = false;
+   isProcessingActive = false;
+   isShippedActive = false;
+   isDeliveredActive = false;
 
  
   ngOnInit(): void {
@@ -78,20 +78,9 @@ sorted: any = [];
       this.unsorted = this.orders
       console.log(this.orders)
       this.dataSource = new MatTableDataSource(this.orders);
-
-      this.apiService.getStoresForMerchant(localStorage.getItem('businessId')!).subscribe((res: any) => {
-        res.data.forEach((data: any) => {
-          if (data.id === 'f9586428-62e3-4455-bb1d-61262a407d1a'){
-            console.log(data.storeName);
-            this.orders.storeName = data.storeName;
-            console.log(this.orders.storeName);
-
-            
-          }
-        });
-        
-      })
      })
+
+     this.isAllActive = true;
 
   }
 
@@ -100,10 +89,9 @@ sorted: any = [];
       data: e,
       width: '479px',
       position: { right: '50px', top: '10%' },
-    }).afterClosed().subscribe(()=>{
+    }).afterClosed().subscribe(() => {
       this.ngOnInit()
     })
-    // console.log(e);
   }
 
   isAllSelected() {
@@ -143,6 +131,32 @@ sorted: any = [];
 
 
   onSort(status: string) {
+    if(status === "All" ){
+      this.isAllActive = true;
+      this.isProcessingActive = false;
+      this.isShippedActive = false;
+      this.isDeliveredActive = false;
+    }
+    if(status === "Processing"){
+      this.isProcessingActive = true;
+      this.isAllActive = false;
+      this.isShippedActive = false;
+      this.isDeliveredActive = false;
+    }
+    if(status === "Shipped"){
+      this.isShippedActive = true;
+      this.isAllActive = false;
+      this.isProcessingActive = false;
+      this.isDeliveredActive = false;
+    }
+    if(status === "Delivered"){
+      this.isDeliveredActive = true;
+      this.isAllActive = false;
+      this.isProcessingActive = false;
+      this.isShippedActive = false;
+    }
+    
+
     this.sorted = [];
     this.unsorted.forEach((order: any) =>{
       if(order.status === status) {

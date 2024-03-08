@@ -35,15 +35,30 @@
     <h2 class="m-0">Orders</h2>
   </div>
   <div class="sub-header d-flex" style="gap: 40px; padding-bottom: 10px">
-    <span class="active" style="cursor: pointer" (click)="onSort('All')"
+    <span
+      [ngClass]="isAllActive ? 'active' : ''"
+      style="cursor: pointer"
+      (click)="onSort('All')"
       >All</span
     >
-    <span style="cursor: pointer" (click)="onSort('Processing')"
+    <span
+      [ngClass]="isProcessingActive ? 'active' : ''"
+      style="cursor: pointer"
+      (click)="onSort('Processing')"
       >Processing</span
     >
-    <span style="cursor: pointer" (click)="onSort('Shipped')">Shipped</span>
-    <span style="cursor: pointer" (click)="onSort('Delivered')">Delivered</span>
-    <span style="cursor: pointer" (click)="onSort('Cancelled')">Cancelled</span>
+    <span
+      [ngClass]="isShippedActive ? 'active' : ''"
+      style="cursor: pointer"
+      (click)="onSort('Shipped')"
+      >Shipped</span
+    >
+    <span
+      [ngClass]="isDeliveredActive ? 'active' : ''"
+      style="cursor: pointer"
+      (click)="onSort('Delivered')"
+      >Delivered</span
+    >
   </div>
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
     <!-- Checkbox Column -->
@@ -87,9 +102,11 @@
         *matHeaderCellDef
         mat-sort-header
       >
-        Store
+        Customer Name
       </th>
-      <td mat-cell *matCellDef="let row">{{ row.storeName }}</td>
+      <td mat-cell *matCellDef="let row" style="text-transform: capitalize">
+        {{ row.customerOrder?.firstName }} {{ row.customerOrder?.lastName }}
+      </td>
     </ng-container>
 
     <ng-container matColumnDef="status">
