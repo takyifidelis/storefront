@@ -173,6 +173,7 @@ export class APIService {
       }
     );
   }
+
   initializePayment(customerId: string, cart: any): Observable<Response> {
     return this.http.post<Response>(
       `${environment.baseApiUrl}/order/initialize/${customerId}`,
@@ -192,6 +193,7 @@ export class APIService {
       }
     );
   }
+
   getStoreProductsCustomer(storeId: string): Observable<Response> {
     return this.http.get<Response>(
       `${environment.baseApiUrl}/store/get-store-products/${storeId}`,
@@ -209,6 +211,7 @@ export class APIService {
       }
     );
   }
+
   getAllShippingAddresses(customerId: string) {
     return this.http.get(
       `${environment.baseApiUrl}/customer/get-shipping-addresses/${customerId}`,
@@ -234,6 +237,15 @@ export class APIService {
       }
     );
   }
+  getStoreProducts(storeId: string): Observable<Response> {
+    return this.http.get<Response>(
+      `${environment.baseApiUrl}/product/get-all-products/${storeId}`,
+      {
+        withCredentials: true,
+      }
+    );
+  }
+
   getStoreProducts(storeId: string): Observable<Response> {
     return this.http.get<Response>(
       `${environment.baseApiUrl}/product/get-all-products/${storeId}`,
@@ -284,6 +296,7 @@ export class APIService {
     return this.http.post<Response>(
       `${environment.baseApiUrl}/customer/add-to-views/f739a921-7267-4e02-8222-ceb2b4c352cf`,
       products,
+
       {
         withCredentials: true,
       }
@@ -293,6 +306,7 @@ export class APIService {
   getSavedProducts(): Observable<Response> {
     return this.http.get<Response>(
       `${environment.baseApiUrl}/customer/get-saved-products/f739a921-7267-4e02-8222-ceb2b4c352cf/?idOnly=true&likedOnly=true`,
+
       {
         withCredentials: true,
       }
@@ -302,6 +316,7 @@ export class APIService {
   getHistoryProducts(): Observable<Response> {
     return this.http.get<Response>(
       `${environment.baseApiUrl}/customer/get-saved-products/f739a921-7267-4e02-8222-ceb2b4c352cf`,
+
       {
         withCredentials: true,
       }
@@ -418,6 +433,7 @@ export class APIService {
 
       .pipe(catchError(this.handleError));
   }
+
   addPromotionToStore(
     end: Date,
     name: string,
