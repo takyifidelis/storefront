@@ -1,0 +1,63 @@
+.customer-info {
+  margin-top: 2rem;
+  gap: 1rem;
+  .customer-image {
+    width: 5rem;
+    height: 5rem;
+  }
+  .customer-name-number {
+    font-family: Inter;
+    font-style: normal;
+    .customer-name {
+      color: #455468;
+      font-size: 17px;
+      font-weight: 500;
+      line-height: 28px;
+      letter-spacing: -0.3px;
+    }
+    .customer-email {
+      color: #5e718d;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 20px;
+      letter-spacing: -0.2px;
+    }
+  }
+}
+.number-orders {
+  font-style: normal;
+  font-family: Inter;
+  .orders {
+    color: #5e718d;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: -0.2px;
+  }
+  .number {
+    text-align: right;
+    .order-nums {
+      font-weight: 600;
+    }
+  }
+}
+.shipping-address {
+  font-family: Inter;
+  font-style: normal;
+  .name {
+    color: #5e718d;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: -0.2px;
+  }
+  .phone,
+  .city,
+  .street-address {
+    color: #5e718d;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: -0.2px;
+  }
+}
