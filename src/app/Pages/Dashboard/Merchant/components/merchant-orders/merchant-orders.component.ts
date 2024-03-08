@@ -1,13 +1,159 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { DataService } from '../../../../../Services/data.service';
+import { SelectionModel } from '@angular/cdk/collections';
+import { DatePipe } from '@angular/common';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatSort, MatSortModule } from '@angular/material/sort';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { APIService } from '../../../../../Services/api.service';
+import { dummyUserInterface } from '../merchant-products-dashboad/merchant-products-dashboad.component';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MerchantOrderModalComponent } from '../merchant-order-modal/merchant-order-modal.component';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @Component({
   selector: 'app-merchant-orders',
   standalone: true,
-  imports: [],
+  imports: [
+    FormsModule,
+    MatIconModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
+    MatDialogModule,
+    MatTabsModule
+  ],
   templateUrl: './merchant-orders.component.html',
   styleUrl: './merchant-orders.component.scss'
 })
 export class MerchantOrdersComponent {
-  constructor(public dataService: DataService) {}
+  constructor(public dataService: DataService, public dialog: MatDialog, private apiService: APIService) {
+    this.dataSource = new MatTableDataSource(this.users);
+
+  }
+
+  displayedColumns: string[] = [
+    'checkbox',
+    'orderNumber',
+    'store',
+    'status',
+    'date',
+    'price',
+    'bubble',
+  ];
+  dataSource: MatTableDataSource<dummyUserInterface>;
+  selection = new SelectionModel<dummyUserInterface>(true, []);
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+  
+
+  users: dummyUserInterface[] = [
+  ];
+  orders: any = [
+    {
+      storeName: ''
+    }
+    
+  ]
+unsorted: any = [];
+sorted: any = [];
+  formattedDate!: string | null;
+   datepipe: DatePipe = new DatePipe('en-US');
+
+ 
+  ngOnInit(): void {
+     this.apiService.getOrdersForMerchant('f9586428-62e3-4455-bb1d-61262a407d1a').subscribe((res: any) => {
+      console.log(res);
+      this.orders = res.data;
+      this.unsorted = this.orders
+      console.log(this.orders)
+      this.dataSource = new MatTableDataSource(this.orders);
+
+      this.apiService.getStoresForMerchant(localStorage.getItem('businessId')!).subscribe((res: any) => {
+        res.data.forEach((data: any) => {
+          if (data.id === 'f9586428-62e3-4455-bb1d-61262a407d1a'){
+            console.log(data.storeName);
+            this.orders.storeName = data.storeName;
+            console.log(this.orders.storeName);
+
+            
+          }
+        });
+        
+      })
+     })
+
+  }
+
+  moreVert(e: dummyUserInterface) {
+    this.dialog.open(MerchantOrderModalComponent, {
+      data: e,
+      width: '479px',
+      position: { right: '50px', top: '10%' },
+    }).afterClosed().subscribe(()=>{
+      this.ngOnInit()
+    })
+    // console.log(e);
+  }
+
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.dataSource.data.length;
+    return numSelected === numRows;
+  }
+  showSelection(e: any) {
+    e.stopPropagation();
+    console.log(this.selection.selected);
+  }
+  /** Selects all rows if they are not all selected; otherwise clear selection. */
+  toggleAllRows() {
+    if (this.isAllSelected()) {
+      this.selection.clear();
+      console.log(this.selection.selected);
+      return;
+    }
+
+    this.selection.select(...this.dataSource.data);
+    console.log(this.selection.selected);
+  }
+
+  /** The label for the checkbox on the passed row */
+  checkboxLabel(row?: dummyUserInterface): string {
+    if (!row) {
+      return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
+    }
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${
+      row.checkbox + 1
+    }`;
+  }
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
+
+  onSort(status: string) {
+    this.sorted = [];
+    this.unsorted.forEach((order: any) =>{
+      if(order.status === status) {
+        this.sorted.push(order);
+    this.dataSource = new MatTableDataSource(this.sorted);
+      }else if(status === 'All'){
+        this.dataSource = new MatTableDataSource(this.unsorted);
+      }
+    })
+  }
+//   ngOnInit():
 }
+
+

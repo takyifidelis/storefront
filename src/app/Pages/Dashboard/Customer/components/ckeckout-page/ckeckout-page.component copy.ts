@@ -18,6 +18,9 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
   styleUrl: './ckeckout-page.component.scss',
 })
 export class CkeckoutPageComponent implements OnInit {
+getTotalCost() {
+throw new Error('Method not implemented.');
+}
   public payPalConfig?: IPayPalConfig;
   orderId: string | undefined;
   customerId: string | undefined;

@@ -15,3 +15,8 @@ export interface Response {
 export interface ProductObject {
     products: string[];
 }
+
+export interface Varaiation {
+type: string,
+values: string[]
+}

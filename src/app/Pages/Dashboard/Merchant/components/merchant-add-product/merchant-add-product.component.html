@@ -16,7 +16,6 @@
           </div>
         </div>
         <div class="save-cancel">
-
           <button
             type="button"
             class="btn cancel-btn"
@@ -87,10 +86,10 @@
               class="form-control"
               placeholder="Enter a description..."
             ></textarea> -->
-            <ckeditor
+            <!-- <ckeditor
               [editor]="Editor"
               [(ngModel)]="productDetailss.description"
-            ></ckeditor>
+            ></ckeditor> -->
           </div>
           <div class="category">
             <div class="head d-flex align-items-center justify-content-between">
@@ -113,7 +112,9 @@
                 [(ngModel)]="productDetails.category"
               >
 
+
                 @for (cat of categories; track cat) {
+
 
                 <mat-radio-button class="example-radio-button" [value]="cat">{{
                   cat

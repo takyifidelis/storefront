@@ -58,51 +58,17 @@
       </div>
       <hr />
     </mat-tab>
-    <mat-tab label="Review">
-      <form
-        method="post"
-        #reviewForm="ngForm"
-        [formGroup]="postReview"
-        (ngSubmit)="onSubmit(reviewForm)"
+    <mat-tab label="Update Status">
+      <button
+        class="btn btn-primary"
+        style="margin-right: 20px"
+        (click)="shipped(data['id'])"
       >
-        <div
-          class="how-will-you-div d-flex justify-content-between align-items-center"
-        >
-          <p class="how-will-you">How will you rate this product?</p>
-          <div class="star-form-ratings">
-            <app-star-rating
-              (ratingChange)="onSetStar($event)"
-            ></app-star-rating>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <select
-            class="form-select form-control title-filter"
-            id="title"
-            name="title"
-            formControlName="remarks"
-          >
-            <option value="" selected>Title</option>
-            <option>Satisfactory</option>
-            <option>Outstanding</option>
-            <option>Disappointing</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <textarea
-            id="description"
-            name="description"
-            rows="4"
-            class="form-control"
-            formControlName="comment"
-            placeholder="Any feedback you would like to give your account manager..."
-          ></textarea>
-        </div>
-
-        <button class="btn btn" type="submit">Submit Feedback</button>
-      </form>
+        Shipped
+      </button>
+      <button class="btn btn-success" (click)="delivered(data['id'])">
+        Delivered
+      </button>
     </mat-tab>
   </mat-tab-group>
 </mat-dialog-content>

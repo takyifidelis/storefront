@@ -1,27 +1,75 @@
 :host {
-    width: 100%;
+  width: 100%;
 }
 
-.more-vert-btn{
-    cursor: pointer;
+.more-vert-btn {
+  cursor: pointer;
 }
 
-.product-members{
-padding: 2px 8px;
+.product-members {
+  padding: 2px 8px;
 
-width: 87px;
-height: 24px;
-background: #F0F3F9;
-border-radius: 6px;
-font-family: 'Inter';
-font-style: normal;
-font-weight: 500;
-font-size: 12px;
-line-height: 20px;
-letter-spacing: -0.2px;
-color: #5E718D;
-
-
+  width: 87px;
+  height: 24px;
+  background: #f0f3f9;
+  border-radius: 6px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 20px;
+  letter-spacing: -0.2px;
+  color: #5e718d;
 }
 
+.pending-payment {
+  border-radius: 6px;
+  background: #f0f3f9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 3px;
+}
 
+.processing {
+  border-radius: 6px;
+  background: #f0f3f9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 3px;
+}
+
+.delivered {
+  border-radius: 6px;
+  background: rgb(229, 239, 229);
+  color: rgb(46, 149, 46);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 3px;
+}
+
+.shipped {
+  border-radius: 6px;
+  background: #d0d8f4;
+  color: #4a72ff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 3px;
+}
+.cancelled {
+  border-radius: 6px;
+  background: rgb(246, 233, 233);
+  color: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 3px;
+}
