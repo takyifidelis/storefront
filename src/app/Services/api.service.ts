@@ -424,6 +424,12 @@ postProduct(formData: FormData, storeId: string) {
     })
   }
 
+  getPayouts(storeId: string): Observable<Response>{
+    return this.http.get<Response>(`${environment.baseApiUrl}/store/get-payouts/${storeId}`,{
+      withCredentials: true
+    })
+  }
+
   // Error Handling
   private handleError(errorRes: HttpErrorResponse) {
     console.error('Error Response:', errorRes);
