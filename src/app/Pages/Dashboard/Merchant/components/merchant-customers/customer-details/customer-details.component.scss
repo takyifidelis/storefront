@@ -61,3 +61,34 @@
     letter-spacing: -0.2px;
   }
 }
+
+table {
+  .product-image {
+    width: 56px;
+    height: 56px;
+  }
+  .product-name {
+    color: #455468;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 28px;
+    letter-spacing: -0.3px;
+    width: 70%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    text-wrap: nowrap;
+    margin-left: 0.3rem;
+  }
+  .amount-price,
+  .date {
+    color: #5e718d;
+    font-family: Inter;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px; /* 166.667% */
+    letter-spacing: -0.2px;
+  }
+}

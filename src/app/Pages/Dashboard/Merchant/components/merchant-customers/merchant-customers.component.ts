@@ -10,6 +10,8 @@ import {
   MAT_DIALOG_DATA,
   MatDialog,
   MatDialogModule,
+  MatDialogContent,
+  MatDialogTitle,
 } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -32,6 +34,11 @@ export interface productInterface {
   name: string;
   price: number;
   id: string;
+}
+export interface orderInterface {
+  name: string;
+  price: number;
+  date: string;
 }
 
 @Component({
@@ -84,10 +91,7 @@ export class MerchantCustomersComponent implements OnInit {
   }
   moreVert(e: dummyUserInterface) {
     this.dialog.open(CustomerDetailsComponent, {
-      data: {
-        itemName: 'hat',
-        itemPrice: 'hat',
-      },
+      data: e,
       width: '600px',
       position: { right: '50px', top: '10%' },
     });
@@ -159,12 +163,28 @@ export class MerchantCustomersComponent implements OnInit {
 @Component({
   selector: 'app-customer-details',
   standalone: true,
-  imports: [MatTabsModule],
+  imports: [
+    MatTabsModule,
+    CommonModule,
+    MatDialogTitle,
+    MatDialogContent,
+    MatTabsModule,
+    MatTableModule,
+  ],
   templateUrl: 'customer-details/customer-details.component.html',
   styleUrl: 'customer-details/customer-details.component.scss',
 })
 export class CustomerDetailsComponent {
-  productDataSource!: MatTableDataSource<productInterface>;
-
-  constructor(@Inject(MAT_DIALOG_DATA) public data: productInterface) {}
+  dataSurce!: MatTableDataSource<orderInterface>;
+  productDataSource!: MatTableDataSource<orderInterface>;
+  displayedColumns: string[] = ['name', 'price', 'date'];
+  users: any;
+  constructor(@Inject(MAT_DIALOG_DATA) public data: orderInterface) {
+    // this.users.push(data);
+    // this.dataSource = new MatTableDataSource([
+    //   { name: 'string', price: 5, date: 'string' },
+    //   { name: 'string', price: 5, date: 'string' },
+    // ]);
+    this.dataSurce = new MatTableDataSource();
+  }
 }
