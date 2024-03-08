@@ -65,16 +65,16 @@ export class OrderModalComponent implements OnInit {
 
   onSubmit(form: FormGroupDirective) {
     let reviewData = {
-      product: this.data['items'][0].id,
+      product: this.data['items'][0].product,
       rating: this.starRating,
       remarks: form.value.remarks,
       comment: form.value.comment,
     };
     console.log(reviewData);
-    // console.log('rating:' + rating);
+
     // console.log(comment, remarks);
 
-    this.authService.reviewProduct(reviewData, this.data['orderId']).subscribe(
+    this.authService.reviewProduct(reviewData, this.data['id']).subscribe(
       (resData: any) => {
         console.log(resData);
       },

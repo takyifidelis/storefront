@@ -271,9 +271,9 @@ export class APIService {
     );
   }
 
-  getOrders(): Observable<Response> {
+  getOrders(customerId: string): Observable<Response> {
     return this.http.get<Response>(
-      `${environment.baseApiUrl}/customer/get-orders/f739a921-7267-4e02-8222-ceb2b4c352cf`,
+      `${environment.baseApiUrl}/customer/get-orders/${customerId}`,
       {
         withCredentials: true,
       }

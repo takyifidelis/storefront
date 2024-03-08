@@ -101,12 +101,14 @@ export class OrderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.apiService.getOrders().subscribe((res: any) => {
-      this.orders = res;
-      this.unsorted = this.orders.data;
-      console.log(this.orders.data);
-      this.dataSource = new MatTableDataSource(this.orders.data);
-    });
+    this.apiService
+      .getOrders(localStorage.getItem('customerId')!)
+      .subscribe((res: any) => {
+        this.orders = res;
+        this.unsorted = this.orders.data;
+        console.log(this.orders.data);
+        this.dataSource = new MatTableDataSource(this.orders.data);
+      });
   }
 
   moreVert(e: dummyUserInterface) {
