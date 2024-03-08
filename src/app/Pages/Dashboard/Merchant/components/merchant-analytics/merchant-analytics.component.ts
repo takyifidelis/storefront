@@ -58,30 +58,31 @@ export class MerchantAnalyticsComponent {
 
   users: dummyUserInterface[] = [
   ];
-  orders: any = []
-unsorted: any = [];
-sorted: any = [];
+
   formattedDate!: string | null;
    datepipe: DatePipe = new DatePipe('en-US');
-   isAllActive = false;
-   isProcessingActive = false;
-   isShippedActive = false;
-   isDeliveredActive = false;
+  payout: any = [];
 
  
   ngOnInit(): void {
-     
+     this.apiService.getPayouts('f9586428-62e3-4455-bb1d-61262a407d1a').subscribe((res: any) => {
+console.log(res);
+this.payout = res.data;
+console.log(this.payout[0].orderPayout.orderId);
+this.dataSource = new MatTableDataSource(this.payout);
+
+     })
   }
 
-  moreVert(e: dummyUserInterface) {
-    this.dialog.open(MerchantOrderModalComponent, {
-      data: e,
-      width: '479px',
-      position: { right: '50px', top: '10%' },
-    }).afterClosed().subscribe(() => {
-      this.ngOnInit()
-    })
-  }
+  // moreVert(e: dummyUserInterface) {
+  //   this.dialog.open(MerchantOrderModalComponent, {
+  //     data: e,
+  //     width: '479px',
+  //     position: { right: '50px', top: '10%' },
+  //   }).afterClosed().subscribe(() => {
+  //     this.ngOnInit()
+  //   })
+  // }
 
   isAllSelected() {
     const numSelected = this.selection.selected.length;

@@ -382,10 +382,13 @@
         mat-header-cell
         *matHeaderCellDef
         mat-sort-header
+        class="header"
       >
         Payment Method
       </th>
-      <td mat-cell *matCellDef="let row">{{ row.orderId }}</td>
+      <td class="content" mat-cell *matCellDef="let row">
+        <img src="/assets/icons/PayPal.svg" alt="" />
+      </td>
     </ng-container>
     <ng-container matColumnDef="wallet">
       <th
@@ -393,10 +396,11 @@
         mat-header-cell
         *matHeaderCellDef
         mat-sort-header
+        class="header"
       >
         Wallet
       </th>
-      <td mat-cell *matCellDef="let row">{{ row.orderId }}</td>
+      <td class="content" mat-cell *matCellDef="let row">{{ row?.wallet }}</td>
     </ng-container>
     <ng-container matColumnDef="orderId">
       <th
@@ -404,10 +408,13 @@
         mat-header-cell
         *matHeaderCellDef
         mat-sort-header
+        class="header"
       >
         Order ID
       </th>
-      <td mat-cell *matCellDef="let row">{{ row.orderId }}</td>
+      <td class="content" mat-cell *matCellDef="let row">
+        {{ row.orderPayout?.orderId }}
+      </td>
     </ng-container>
 
     <ng-container matColumnDef="totalCost">
@@ -416,11 +423,12 @@
         mat-header-cell
         *matHeaderCellDef
         mat-sort-header
+        class="header"
       >
         Total Cost
       </th>
-      <td mat-cell *matCellDef="let row" style="text-transform: capitalize">
-        {{ row.customerOrder?.firstName }} {{ row.customerOrder?.lastName }}
+      <td class="content total" mat-cell *matCellDef="let row">
+        {{ row.currency }} {{ row.orderPayout.amount }}
       </td>
     </ng-container>
 
@@ -430,13 +438,14 @@
         mat-header-cell
         *matHeaderCellDef
         mat-sort-header
+        class="header"
       >
         Commission
       </th>
-      <td mat-cell *matCellDef="let row" class="p-2">
+      <td class="content commission" mat-cell *matCellDef="let row" class="p-2">
         <div style="border-radius: 6px; margin-bottom: 0; width: 118px">
-          <p style="margin-bottom: 0">
-            {{ row.status }}
+          <p class="content" style="margin-bottom: 0; color: red !important">
+            {{ row.commission }}%
           </p>
         </div>
       </td>
@@ -448,11 +457,12 @@
         mat-header-cell
         *matHeaderCellDef
         mat-sort-header
+        class="header"
       >
         Recieved
       </th>
-      <td mat-cell *matCellDef="let row">
-        {{ datepipe.transform(row.updatedAt, "dd-MMM-YYYY") }}
+      <td class="content recieved" mat-cell *matCellDef="let row">
+        {{ row.currency }} {{ row.amount }}
       </td>
     </ng-container>
 
@@ -462,10 +472,13 @@
         mat-header-cell
         *matHeaderCellDef
         mat-sort-header
+        class="header"
       >
         Date
       </th>
-      <td mat-cell *matCellDef="let row">${{ row.amount }}</td>
+      <td class="content" mat-cell *matCellDef="let row">
+        {{ datepipe.transform(row.createdAt, "dd-MMM-YYYY") }}
+      </td>
     </ng-container>
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>

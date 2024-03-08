@@ -47,3 +47,29 @@
         margin-top:32px;
     }
 }
+
+.header{
+    font-family: "inter";
+    font-size: 15px;
+    font-weight: bolder;
+    color: rgb(153, 152, 152);
+}
+
+.content{
+    font-size: 14px;
+    font-family: 'Inter';
+    font-weight: 600;
+    color: dimgrey;
+}
+
+.total{
+    color: rgb(247, 247, 10) !important;
+}
+
+.commission{
+    color: red !important;
+}
+
+.recieved{
+    color: green !important
+}

@@ -33,6 +33,12 @@ export interface dummyUserInterface {
   inventory: string;
   status: string;
   images: {[key:string]:any}[];
+  commission: string;
+  currency: string;
+  amount: string;
+  wallet: string;
+  orderPayout: any;
+
 }
 
 @Component({
