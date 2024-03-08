@@ -1,0 +1,97 @@
+.header {
+  color: #1c222b;
+  font-family: Inter;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 35px; /* 159.091% */
+  letter-spacing: -0.3px;
+}
+
+.text {
+  color: #1c222b;
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px; /* 166.667% */
+  letter-spacing: -0.2px;
+  margin: 0;
+}
+
+.hide {
+  color: #b2b9c0;
+}
+
+.arrow {
+  margin-top: -11px;
+}
+
+.button {
+  display: flex;
+  gap: 20px;
+
+  .cancel {
+    color: #1b4dff;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: -0.2px;
+    display: flex;
+    width: 74px;
+    height: 36px;
+    padding: 6px 12px;
+    align-items: center;
+    gap: 10px;
+    border-radius: 6px;
+    background: #f2f5ff;
+  }
+
+  .save {
+    display: flex;
+    height: 36px;
+    padding: 6px 12px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 6px;
+    background: #0f3cd9;
+    color: var(--Colors-Base-00, #fff);
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: -0.2px;
+  }
+}
+
+.label{
+margin-bottom: 10px;
+
+    label{
+        font-family: "Inter", sans-serif;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 0.875rem;
+        line-height: 1.5rem;
+        letter-spacing: 0.0125rem;
+        color: #3d4a5c;
+    }
+    
+}
+
+.input{
+    margin-bottom: 10px;
+}
+
+
+.payment-card-selected{
+    border-radius: 8px;
+    border: 1px solid #0408e7;
+    background: #f5f5ff;
+    padding: 16px;
+    margin: 20px;
+}
