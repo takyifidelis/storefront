@@ -11,11 +11,13 @@ import { CommonModule } from '@angular/common';
 import { DataService } from '../../../../../Services/data.service';
 import { APIService } from '../../../../../Services/api.service';
 import { Router, RouterModule } from '@angular/router';
-import { ProductObject, Response as resp } from '../../../../../interfaces/all-interfaces';
+import {
+  ProductObject,
+  Response as resp,
+} from '../../../../../interfaces/all-interfaces';
 import { StarRatingComponent } from '../../../../Dashboard/Customer/components/star-rating/star-rating.component';
 import { FilterOnePipe } from '../../../../../Pipes/filter-one.pipe';
 import { FilterProductPipe } from '../../../../../Pipes/filter-product.pipe';
-
 
 interface Item {
   name: string;
@@ -25,7 +27,15 @@ interface Item {
 @Component({
   selector: 'app-home-ecommerce',
   standalone: true,
-  imports: [MatIconModule, MatButtonModule, CommonModule,FilterOnePipe,FilterProductPipe,StarRatingComponent, RouterModule],
+  imports: [
+    MatIconModule,
+    MatButtonModule,
+    CommonModule,
+    FilterOnePipe,
+    FilterProductPipe,
+    StarRatingComponent,
+    RouterModule,
+  ],
   templateUrl: './home-ecommerce.component.html',
   styleUrl: './home-ecommerce.component.scss',
 })
@@ -34,9 +44,8 @@ export class HomeEcommerceComponent implements OnInit {
   @ViewChild('fileInput') fileInput!: ElementRef;
   isliked: boolean = false;
   like: any = [];
-// e: any;
- cart:any = []
-
+  // e: any;
+  cart: any = [];
 
   constructor(
     private cdr: ChangeDetectorRef,
@@ -98,31 +107,31 @@ export class HomeEcommerceComponent implements OnInit {
     });
   }
 
-//   addToCart(product:any){
-//     // this.cart.push(product);
-//     // console.log(this.cart);
-//     if (localStorage.getItem('cart')) {
-//       if (JSON.parse(localStorage.getItem('cart')!)) {
-//         this.cart = JSON.parse(localStorage.getItem('cart')!);
-//         this.cart.push(product);
-//         this.dataservice.cart = this.cart
-//         localStorage.setItem('cart', JSON.stringify(this.cart));
-//       }
-//       else{
-//         localStorage.setItem('cart', JSON.stringify('[]'));
-//         this.cart = JSON.parse(localStorage.getItem('cart')!);
-//         console.log(this.cart);
-//         this.cart.push(product);
-//         this.dataservice.cart = this.cart
-//         localStorage.setItem('cart', JSON.stringify(this.cart));
-//       }
-//     }
-//     else {
-//       this.cart.push(product);
-//       this.dataservice.cart = this.cart
-//       localStorage.setItem('cart', JSON.stringify(this.cart));
-//     }
-//   }
+  //   addToCart(product:any){
+  //     // this.cart.push(product);
+  //     // console.log(this.cart);
+  //     if (localStorage.getItem('cart')) {
+  //       if (JSON.parse(localStorage.getItem('cart')!)) {
+  //         this.cart = JSON.parse(localStorage.getItem('cart')!);
+  //         this.cart.push(product);
+  //         this.dataservice.cart = this.cart
+  //         localStorage.setItem('cart', JSON.stringify(this.cart));
+  //       }
+  //       else{
+  //         localStorage.setItem('cart', JSON.stringify('[]'));
+  //         this.cart = JSON.parse(localStorage.getItem('cart')!);
+  //         console.log(this.cart);
+  //         this.cart.push(product);
+  //         this.dataservice.cart = this.cart
+  //         localStorage.setItem('cart', JSON.stringify(this.cart));
+  //       }
+  //     }
+  //     else {
+  //       this.cart.push(product);
+  //       this.dataservice.cart = this.cart
+  //       localStorage.setItem('cart', JSON.stringify(this.cart));
+  //     }
+  //   }
   removeDuplicates(items: Item[]): Item[] {
     // Create a Map to store unique names as keys
     const uniqueNames = new Map<string, boolean>();
@@ -137,25 +146,26 @@ export class HomeEcommerceComponent implements OnInit {
     });
 
     return uniqueItems;
-
   }
 
-  ngOnInit(){
+  ngOnInit() {
     // this.apiService.getStore(this.dataservice.businessId).subscribe((storeResData:any) =>{
     // this.apiService.getStore(this.dataservice.storeId).subscribe((storeResData:any) =>{
-      // console.log({storeId: storeResData});
-      this.apiService.getCustomerStoreProducts(localStorage.getItem('storeId')!).subscribe((productResData:any)=>{
+    // console.log({storeId: storeResData});
+    this.apiService
+      .getCustomerStoreProducts(localStorage.getItem('storeId')!)
+      .subscribe((productResData: any) => {
         console.log(productResData);
-        this.dataservice.products = productResData.data
+        this.dataservice.products = productResData.data;
         // this.apiService.getStoreCategories(this.dataservice.storeId).subscribe((storeCatsData:any)=>{
-          // this.dataservice.productCategories = storeCatsData.data
-          // console.log(this.dataservice.productCategories)
+        // this.dataservice.productCategories = storeCatsData.data
+        // console.log(this.dataservice.productCategories)
         // });
         if (JSON.parse(localStorage.getItem('cart')!)) {
           this.cart = JSON.parse(localStorage.getItem('cart')!);
-          this.dataservice.cart = this.cart
+          this.dataservice.cart = this.cart;
         }
-      })
+      });
     // })
   }
 
@@ -166,14 +176,14 @@ export class HomeEcommerceComponent implements OnInit {
     let likedProductsJson = JSON.stringify(this.like);
     localStorage.setItem('favouriteProducts', likedProductsJson);
     let productObj: ProductObject = {
-      products: []
+      products: [],
+    };
+    for (const likeditem of this.like) {
+      productObj.products.push(likeditem.id);
     }
-    for (const likeditem of this.like){
-      productObj.products.push(likeditem.id)
-    }
-    this.apiService.addToFavourite(productObj).subscribe((res)=>{
-        console.log(res);
-      })
+    this.apiService.addToFavourite(productObj).subscribe((res) => {
+      console.log(res);
+    });
   }
 
   addToCart(product: any) {
@@ -182,37 +192,13 @@ export class HomeEcommerceComponent implements OnInit {
     let addTobuyJson = JSON.stringify(this.cart);
     localStorage.setItem('cart', addTobuyJson);
     let productObj: ProductObject = {
-      products: []
+      products: [],
+    };
+    for (const likeditem of this.cart) {
+      productObj.products.push(likeditem.id);
     }
-    for (const likeditem of this.cart){
-      productObj.products.push(likeditem.id)
-    }
-    this.apiService.addTOViews(productObj).subscribe((res)=>{
-        console.log(res);
-      })
-
+    this.apiService.addTOViews(productObj).subscribe((res) => {
+      console.log(res);
+    });
   }
-
-
-
-ngOnInit(){
-  // this.apiService.getStore(this.dataservice.businessId).subscribe((storeResData:any) =>{
-  // this.apiService.getStore(this.dataservice.storeId).subscribe((storeResData:any) =>{
-    // console.log({storeId: storeResData});
-    this.apiService.getCustomerStoreProducts(localStorage.getItem('storeId')!).subscribe((productResData:any)=>{
-      console.log(productResData);
-      this.dataservice.products = productResData.data
-      // this.apiService.getStoreCategories(this.dataservice.storeId).subscribe((storeCatsData:any)=>{
-        // this.dataservice.productCategories = storeCatsData.data
-        // console.log(this.dataservice.productCategories)
-      // });
-      if (JSON.parse(localStorage.getItem('cart')!)) {
-        this.cart = JSON.parse(localStorage.getItem('cart')!);
-        this.dataservice.cart = this.cart
-      }
-    })
-  // })
-}
-
-
 }

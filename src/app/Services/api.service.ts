@@ -237,14 +237,6 @@ export class APIService {
       }
     );
   }
-  getStoreProducts(storeId: string): Observable<Response> {
-    return this.http.get<Response>(
-      `${environment.baseApiUrl}/product/get-all-products/${storeId}`,
-      {
-        withCredentials: true,
-      }
-    );
-  }
 
   getStoreProducts(storeId: string): Observable<Response> {
     return this.http.get<Response>(
