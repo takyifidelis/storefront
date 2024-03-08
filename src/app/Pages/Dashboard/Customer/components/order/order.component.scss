@@ -84,3 +84,42 @@
   padding: 3px;
   border-radius: 5px;
 }
+
+.status {
+  font-family: "Inter";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: -0.2px;
+}
+
+.header {
+  color: #8897ae;
+  font-family: "Inter";
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: -0.2px;
+}
+
+.orderId{
+  color:  #455468;
+font-family: 'Inter';
+font-size: 16px;
+font-style: normal;
+font-weight: 500;
+line-height: 28px; /* 175% */
+letter-spacing: -0.3px;
+}
+
+.data{
+  color:  #5E718D;
+font-family: Inter;
+font-size: 14px;
+font-style: normal;
+font-weight: 400;
+line-height: 24px; /* 171.429% */
+letter-spacing: -0.2px;
+}
