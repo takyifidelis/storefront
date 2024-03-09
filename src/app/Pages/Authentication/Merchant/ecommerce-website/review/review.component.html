@@ -107,6 +107,14 @@
                   </div>
                 </div>
               </div>
+              <div class="add-to-save">
+                <span class="add-to-buy" (click)="onAddToBuy()"
+                  >ADD TO BUY</span
+                >
+                <span class="save" (click)="onLikedProducts()">
+                  <fa-icon [icon]="heartIcon"></fa-icon> SAVE
+                </span>
+              </div>
             </div>
           </div>
         </div>

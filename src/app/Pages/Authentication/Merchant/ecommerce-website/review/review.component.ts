@@ -100,7 +100,7 @@ variations?: Varaiation[];
 
   onAddToBuy() {
     // let cart = JSON.parse(localStorage.getItem('cart')|| '')
-    this.productItem.quant =this.quantity;
+    this.productItem.quant = this.quantity;
     this.cart.push(this.productItem);
     console.log(this.cart);
     let addTobuyJson = JSON.stringify(this.cart);

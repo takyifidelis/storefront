@@ -23,11 +23,7 @@ import { UserCredentials } from '../interfaces/all-interfaces';
 
 
 export class DataService {
-
-
-
-
-
+    like: any =  [];
 
     cart:any=[]
     // products:any = []

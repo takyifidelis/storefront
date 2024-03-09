@@ -123,18 +123,21 @@ export class HomeEcommerceComponent implements OnInit {
           this.cart = JSON.parse(localStorage.getItem('cart')!);
           this.dataservice.cart = this.cart
         }
+        if(JSON.parse(localStorage.getItem('favouriteProducts')!)){
+          this.dataservice.like = this.like;
+        }
       })
   }
 
   liked(product: any) {
     product.isliked = !product.isliked;
-    this.like.push(product);
-    let likedProductsJson = JSON.stringify(this.like);
+    this.dataservice.like.push(product);
+    let likedProductsJson = JSON.stringify(this.dataservice.like);
     localStorage.setItem('favouriteProducts', likedProductsJson);
     let productObj: ProductObject = {
       products: []
     }
-    for (const likeditem of this.like){
+    for (const likeditem of this.dataservice.like){
       productObj.products.push(likeditem.id)
     }
     this.apiService.addToFavourite(productObj).subscribe((res)=>{
@@ -143,14 +146,14 @@ export class HomeEcommerceComponent implements OnInit {
   }
 
   addToCart(product: any) {
-    this.cart.push(product);
-    let addTobuyJson = JSON.stringify(this.cart);
+    this.dataservice.cart.push(product);
+    let addTobuyJson = JSON.stringify(this.dataservice.cart);
     localStorage.setItem('cart', addTobuyJson);
     let productObj: ProductObject = {
       products: []
     }
-    for (const likeditem of this.cart){
-      productObj.products.push(likeditem.id)
+    for (const item of this.dataservice.cart){
+      productObj.products.push(item.id)
     }
     this.apiService.addTOViews(productObj).subscribe((res)=>{
         console.log(res);

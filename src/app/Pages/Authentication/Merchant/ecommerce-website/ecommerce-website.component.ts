@@ -62,10 +62,9 @@ export class EcommerceWebsiteComponent implements OnInit{
   }
 
   goToCheckout(){
-    // console.log(this.dataService.cart)
-    // console.log(JSON.parse(localStorage.getItem('cart')!))
     this.router.navigate(['/checkout-page']);
   }
+
   toggleBtnFunction() {
     this.dropDownMenu = document.querySelector('#dropdownMenu');
     if (this.dropDownMenu) {
@@ -82,9 +81,7 @@ export class EcommerceWebsiteComponent implements OnInit{
     moveItemInArray(this.dataService.template.pagesOrder, event.previousIndex, event.currentIndex);
    }
   }
-  ngOnInit(): void {
-
-    
+  ngOnInit(): void {   
   if (!this.dataService.isInEditMode) {
   //     this.apiService.getStore().subscribe((data:{[key: string]: any;} )=>{
   //       this.dataService.isLoading =false
