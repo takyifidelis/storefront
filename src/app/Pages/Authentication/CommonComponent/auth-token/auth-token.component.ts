@@ -14,6 +14,7 @@ import {
 } from '@angular/forms';
 import { AuthService } from '../../Auth/auth.service';
 import { APIService } from '../../../../Services/api.service';
+import { Response } from '../../../../interfaces/all-interfaces';
 
 @Component({
   selector: 'app-auth-token',
@@ -62,13 +63,13 @@ export class AuthTokenComponent {
     this.isLoading = true;
 
     this.authService.verifyAccount(authCode).subscribe(
-      (resData: Response) => {
+      (resData) => {
         console.log(resData);
         this.isLoading = false;
         this.toastr.success('Proceed to Login', 'Verification Successful');
         this.router.navigate(['authSuccess']);
       },
-      (errorMessage: Response) => {
+      (errorMessage) => {
         console.log(errorMessage);
         this.isLoading = false;
         this.error = errorMessage;

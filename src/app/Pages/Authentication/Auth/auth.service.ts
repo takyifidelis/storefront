@@ -132,7 +132,6 @@ export class AuthService {
       .pipe(catchError(this.handleError));
   }
 
-
   // Verify account
   verifyAccount(code: string) {
     return this.http
@@ -190,21 +189,18 @@ export class AuthService {
       .pipe(catchError(this.handleError));
   }
   reviewProduct(
-    productId: string,
-    rating: number,
-    remarks: string,
-    comment: string
+    data: {
+      productId: string;
+      rating: number;
+      remarks: string;
+      comment: string;
+    },
+    orderId: string
   ) {
     return this.http
       .post<ForgetPasswordResponse>(
-        'https://storefront-backend-jan-dev-api.vercel.app/api/customer/review-product/{order_id}',
-        {
-          productId,
-          rating,
-
-          remarks,
-          comment,
-        },
+        `https://storefront-backend-jan-dev-api.vercel.app/api/customer/review-product/${orderId}`,
+        data,
         {
           withCredentials: true,
         }
@@ -233,7 +229,7 @@ export class AuthService {
       )
       .pipe(catchError(this.handleError));
   }
-  
+
   getProducts() {
     return this.http
       .get<ProductResponseData>(

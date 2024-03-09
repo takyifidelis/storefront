@@ -62,13 +62,13 @@ export class TokenAuthComponent {
     this.isLoading = true;
 
     this.authService.verifyPassword(authCode).subscribe(
-      (resData: Response) => {
+      (resData) => {
         console.log(resData);
         this.isLoading = false;
         this.toastr.info('Email is verified', 'Reset Password');
         this.router.navigate(['reset-password']);
       },
-      (errorMessage: Response) => {
+      (errorMessage) => {
         console.log(errorMessage);
         this.isLoading = false;
         this.error = errorMessage;
