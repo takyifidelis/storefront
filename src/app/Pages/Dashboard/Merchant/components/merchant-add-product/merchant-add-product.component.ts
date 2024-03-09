@@ -124,9 +124,11 @@ export class MerchantAddProductComponent {
           console.log(resData);
           this.router.navigate(['/merchant/product']);
           this.toastr.info(resData.message, 'Success');
+          this.isLoading = false;
         },
         (errorMessage) => {
           console.log(errorMessage);
+          this.isLoading = false;
 
           this.toastr.error(
             errorMessage.error.message,

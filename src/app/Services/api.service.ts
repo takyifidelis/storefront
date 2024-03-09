@@ -443,18 +443,16 @@ export class APIService {
   }
 
   replyReview(comment: string, review: string, storeId: string) {
-    return this.http
-      .post<Response>(
-        `https://storefront-backend-jan-dev-api.vercel.app/api/store/reply-customer/${storeId}`,
-        {
-          comment,
-          review,
-        },
-        {
-          withCredentials: true,
-        }
-      )
-      .pipe(catchError(this.handleError));
+    return this.http.post<Response>(
+      `https://storefront-backend-jan-dev-api.vercel.app/api/store/reply-customer/${storeId}`,
+      {
+        comment,
+        review,
+      },
+      {
+        withCredentials: true,
+      }
+    );
   }
 
   getReviews(storeId: string): Observable<Response> {

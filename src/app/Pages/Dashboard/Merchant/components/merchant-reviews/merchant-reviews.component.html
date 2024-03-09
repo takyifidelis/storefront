@@ -61,9 +61,6 @@
             <input type="text" placeholder="Search........" />
           </div>
         </form>
-        <button class="new-payment">
-          <p>New Product</p>
-        </button>
       </div>
     </div>
   </div>
@@ -127,16 +124,19 @@
           Name
         </th>
         <td mat-cell *matCellDef="let row" (click)="moreVert(row)">
-          <div class="product-info d-flex align-items-center">
-            <div class="product-image">
-              <img
-                src="assets\images\hat-review.svg"
-                alt=""
-                style="border-radius: 50%"
-              />
+          <div class="customer-info d-flex align-items-center">
+            <div
+              class="customer-image d-flex justify-content-center align-items-center"
+            >
+              <span class="first-initials">{{
+                row.customerReview.firstName.charAt(0)
+              }}</span>
+              <span class="last-initials">
+                {{ row.customerReview.lastName.charAt(0) }}
+              </span>
             </div>
             <div class="product-name-date">
-              <p class="product-name">
+              <p class="customer-name">
                 <span class="first-name">{{
                   row.customerReview.firstName
                 }}</span
@@ -144,7 +144,7 @@
                   {{ row.customerReview.lastName }}
                 </span>
               </p>
-              <p class="product-date">Ghana</p>
+              <p class="customer-date">Ghana</p>
             </div>
           </div>
         </td>

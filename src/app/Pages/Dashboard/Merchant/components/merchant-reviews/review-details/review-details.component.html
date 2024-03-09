@@ -2,8 +2,15 @@
 <mat-dialog-content>
   <div class="container-fluid">
     <div class="first-block d-flex align-items-center">
-      <div class="image-detail">
-        <img src="assets\images\hat-review.svg" alt="" />
+      <div
+        class="customer-image d-flex justify-content-center align-items-center"
+      >
+        <span class="first-initials">{{
+          data.customerReview.firstName.charAt(0)
+        }}</span>
+        <span class="last-initials">
+          {{ data.customerReview.lastName.charAt(0) }}
+        </span>
       </div>
       <div class="customer-detail">
         <h3 class="customer-name">

@@ -80,6 +80,7 @@ export class MerchantProductsDashboadComponent {
   filterIcon = faFilter;
   seaechICon = faSearch;
   checkIcon = faCheck;
+  isLoading: boolean = false;
   displayedColumns: string[] = [
     'checkbox',
     'name',
@@ -150,10 +151,12 @@ export class MerchantProductsDashboadComponent {
   }
 
   ngOnInit() {
+    this.isLoading = true;
     this.apiService
       .getStoreProductsMerchant(localStorage.getItem('storeId')!)
       .subscribe((response: any) => {
         console.log(response.data);
+        this.isLoading = false;
         // console.log(response.data.products[0].images[0].url);
         // this.users = response.data
         this.dataSource = new MatTableDataSource(response.data.products);

@@ -10,6 +10,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { ToastrService } from 'ngx-toastr';
+
 import {
   FormControl,
   FormGroup,
@@ -192,7 +194,8 @@ export class ReviewDetailsComponent {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: ReviewResponseData,
-    private authService: APIService
+    private authService: APIService,
+    private toastr: ToastrService
   ) {
     this.replyReview = new FormGroup({
       comment: new FormControl('', Validators.required),
@@ -211,10 +214,15 @@ export class ReviewDetailsComponent {
       .subscribe(
         (resData) => {
           console.log(resData);
+          this.toastr.info(resData.message, 'Success');
         },
         (errorMessage) => {
           console.log(errorMessage);
           this.error = errorMessage;
+          this.toastr.error(
+            errorMessage.error.message,
+            errorMessage.error.type
+          );
         }
       );
     form.reset();
