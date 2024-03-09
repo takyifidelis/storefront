@@ -9,25 +9,27 @@
         />
       </div>
       <div class="customer-name-number">
-        <div class="customer-name">Fidelis Mensah</div>
-        <div class="customer-email">takyifidegmail.com</div>
+        <div class="customer-name">
+          <span classs="first-name">
+            {{ data.firstName }}
+          </span>
+          <span class="last-name">
+            {{ data.lastName }}
+          </span>
+        </div>
+        <div class="customer-email">{{ data.email }}</div>
       </div>
     </div>
     <div class="number-orders">
       <div class="orders">Number of Orders</div>
-      <div class="number text-right"># <span class="order-nums">32</span></div>
+      <div class="number text-right">
+        # <span class="order-nums">{{ data.orders }}</span>
+      </div>
     </div>
   </div>
   <mat-tab-group>
     <mat-tab label="Order History">
-      <table
-        mat-table
-        [dataSource]="[
-          { name: 'string', price: 5, date: 'string' },
-          { name: 'string', price: 5, date: 'string' }
-        ]"
-        class="mat-elevation-z8 table"
-      >
+      <table mat-table [dataSource]="dataSurce" class="mat-elevation-z8 table">
         <!--- Note that these columns can be defined in any order.
                 The actual rendered columns are set as a property on the row definition" -->
 
@@ -38,13 +40,20 @@
             <div class="product-info d-flex align-items-center">
               <div class="product-images">
                 <img
-                  src="assets\images\hat-review.svg"
+                  [src]="element.items[0].image"
                   alt=""
                   class="product-image"
                 />
               </div>
               <div class="product-name">
-                <div class="product-name">Sneakers is good For</div>
+                <div class="product-name">
+                  {{ element.items[0].name }}
+                  <div>
+                    <span class="more-orders" *ngIf="element.items.length > 1">
+                      +{{ element.items.length }}
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
           </td>
@@ -55,8 +64,8 @@
           <th mat-header-cell *matHeaderCellDef>Amount</th>
           <td mat-cell *matCellDef="let element">
             <div class="amount-price">
-              <span class="amount"></span>USD
-              <span class="amount-price">32</span>
+              <span class="amount"></span>{{ element.currency }}
+              <span class="amount-price">{{ element.amount }}</span>
             </div>
           </td>
         </ng-container>
@@ -65,7 +74,9 @@
         <ng-container matColumnDef="date">
           <th mat-header-cell *matHeaderCellDef>Date</th>
           <td mat-cell *matCellDef="let element">
-            <span class="date"> Feb, 20 2021</span>
+            <span class="date">{{
+              element.createdAt | date : "mediumDate"
+            }}</span>
           </td>
         </ng-container>
 

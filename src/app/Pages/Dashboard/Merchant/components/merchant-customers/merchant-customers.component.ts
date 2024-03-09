@@ -29,6 +29,7 @@ import {
   dummyUserInterface,
 } from '../merchant-products-dashboad/merchant-products-dashboad.component';
 import { dummyUserInterface1 } from '../../../../../interface/dummy-user.model';
+import { Response } from '../../../../../interfaces/all-interfaces';
 
 export interface productInterface {
   name: string;
@@ -36,9 +37,12 @@ export interface productInterface {
   id: string;
 }
 export interface orderInterface {
-  name: string;
-  price: number;
-  date: string;
+  email: string;
+  firstName: number;
+  lastName: number;
+  lastOrderDate: string;
+  orders: string;
+  id: string;
 }
 
 @Component({
@@ -77,6 +81,7 @@ export class MerchantCustomersComponent implements OnInit {
   ];
   users: any;
   customers: any;
+  numberOfCustomer!: number;
   dataSource: MatTableDataSource<dummyUserInterface1>;
   selection = new SelectionModel<dummyUserInterface1>(true, []);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -135,28 +140,18 @@ export class MerchantCustomersComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.apiService.getCustomers().subscribe((res: any) => {
-      this.customers = res.data;
-      console.log(this.customers);
-      this.dataSource = new MatTableDataSource([
-        {
-          checkbox: '',
-          name: 'ddjkjff',
-          email: 'hello@',
-          orders: 'none',
-          lastOrder: 'dd',
-          bubble: '',
+    this.apiService
+      .getAllCustomersForStore(localStorage.getItem('storeId')!)
+      .subscribe(
+        (res: any) => {
+          console.log(res);
+          this.numberOfCustomer = res.data.length;
+          this.dataSource = new MatTableDataSource(res.data);
         },
-        {
-          checkbox: '',
-          name: 'ddjkjff',
-          email: 'hello@',
-          orders: 'none',
-          lastOrder: 'dd',
-          bubble: '',
-        },
-      ]);
-    });
+        (errorMessage) => {
+          console.log(errorMessage);
+        }
+      );
   }
 }
 
@@ -174,17 +169,29 @@ export class MerchantCustomersComponent implements OnInit {
   templateUrl: 'customer-details/customer-details.component.html',
   styleUrl: 'customer-details/customer-details.component.scss',
 })
-export class CustomerDetailsComponent {
+export class CustomerDetailsComponent implements OnInit {
   dataSurce!: MatTableDataSource<orderInterface>;
   productDataSource!: MatTableDataSource<orderInterface>;
   displayedColumns: string[] = ['name', 'price', 'date'];
   users: any;
-  constructor(@Inject(MAT_DIALOG_DATA) public data: orderInterface) {
-    // this.users.push(data);
-    // this.dataSource = new MatTableDataSource([
-    //   { name: 'string', price: 5, date: 'string' },
-    //   { name: 'string', price: 5, date: 'string' },
-    // ]);
-    this.dataSurce = new MatTableDataSource();
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: orderInterface,
+    private apiService: APIService
+  ) {
+    console.log(data);
+  }
+  ngOnInit() {
+    console.log('this.users');
+    this.apiService
+      .getOrderHistoryForCustomer(
+        localStorage.getItem('storeId') ||
+          'f9586428-62e3-4455-bb1d-61262a407d1a',
+        this.data.id
+      )
+      .subscribe((res: Response) => {
+        this.users = res['data'];
+        console.log(this.users.orders);
+        this.dataSurce = new MatTableDataSource(this.users.orders);
+      });
   }
 }

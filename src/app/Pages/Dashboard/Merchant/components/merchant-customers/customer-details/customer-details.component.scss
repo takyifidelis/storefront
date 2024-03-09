@@ -1,3 +1,11 @@
+.container {
+  height: 500px;
+  // overflow: auto;
+}
+.mdc-data-table__content {
+  height: 300px;
+  overflow: auto;
+}
 .customer-info {
   margin-top: 2rem;
   gap: 1rem;
@@ -14,6 +22,7 @@
       font-weight: 500;
       line-height: 28px;
       letter-spacing: -0.3px;
+      text-transform: capitalize;
     }
     .customer-email {
       color: #5e718d;
@@ -21,6 +30,7 @@
       font-weight: 400;
       line-height: 20px;
       letter-spacing: -0.2px;
+      text-transform: lowercase;
     }
   }
 }
@@ -66,6 +76,7 @@ table {
   .product-image {
     width: 56px;
     height: 56px;
+    border-radius: 5px;
   }
   .product-name {
     color: #455468;
@@ -80,6 +91,20 @@ table {
     overflow: hidden;
     text-wrap: nowrap;
     margin-left: 0.3rem;
+    text-transform: capitalize;
+    .more-orders {
+      border-radius: 6px;
+      background-color: #f2f5ff;
+      color: var(--Colors-Primary-Primary-400, #4a72ff);
+      font-family: Inter;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 20px;
+      letter-spacing: -0.2px;
+      object-fit: contain;
+      padding: 0.2rem;
+    }
   }
   .amount-price,
   .date {

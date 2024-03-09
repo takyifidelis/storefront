@@ -4,7 +4,7 @@ import { Observable, catchError, map, throwError } from 'rxjs';
 import { environment } from '../../environments/environment.development';
 import { UserCredentials } from '../interfaces/all-interfaces';
 import { DataService } from './data.service';
-
+import { Response } from './../interfaces/all-interfaces';
 @Injectable({
   providedIn: 'root',
 })
@@ -470,10 +470,13 @@ export class APIService {
       .pipe(catchError(this.handleError));
   }
 
-  getOrderHistoryForCustomer(customerId: string): Observable<Response> {
+  getOrderHistoryForCustomer(
+    storeId: string,
+    customerId: string
+  ): Observable<Response> {
     return this.http
       .get<Response>(
-        `${environment.baseApiUrl}/customer/get-orders/${customerId}`,
+        `${environment.baseApiUrl}/store/${storeId}/get-customer/${customerId}`,
         {
           withCredentials: true,
         }
