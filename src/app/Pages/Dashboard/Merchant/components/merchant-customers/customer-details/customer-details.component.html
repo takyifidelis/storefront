@@ -83,7 +83,27 @@
           <th mat-header-cell *matHeaderCellDef>Order Id</th>
           <td mat-cell *matCellDef="let element">
             <div class="orderid">
-              <span class="order-id">#{{ element.orderId }}</span>
+              <div class="order-div">
+                <span class="order-id">#{{ element.orderId }}</span>
+              </div>
+              <div class="payment-status-div">
+                <span
+                  class="payment-status"
+                  [ngStyle]="{
+                    color: element.paid ? '#11A75C' : '#FF3838',
+                    background: element.paid
+                      ? 'rgba(29, 180, 105, 0.12)'
+                      : '#FFF5F4'
+                  }"
+                >
+                  <span class="for-paid" *ngIf="element.paid == true"
+                    >Paid</span
+                  >
+                  <span class="forunpaid" *ngIf="element.paid !== true"
+                    >Unpaid</span
+                  >
+                </span>
+              </div>
             </div>
           </td>
         </ng-container>
@@ -108,7 +128,29 @@
         <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef>Order Id</th>
           <td mat-cell *matCellDef="let element">
-            <div class="order-id">#{{ element.orderId }}</div>
+            <div class="orderid">
+              <div class="order-div">
+                <span class="order-id">#{{ element.orderId }}</span>
+              </div>
+              <div class="payment-status-div status-alignment">
+                <span
+                  class="payment-status"
+                  [ngStyle]="{
+                    color: element.paid ? '#11A75C' : '#FF3838',
+                    background: element.paid
+                      ? 'rgba(29, 180, 105, 0.12)'
+                      : '#FFF5F4'
+                  }"
+                >
+                  <span class="for-paid" *ngIf="element.paid == true"
+                    >Paid</span
+                  >
+                  <span class="forunpaid" *ngIf="element.paid !== true"
+                    >Unpaid</span
+                  >
+                </span>
+              </div>
+            </div>
           </td>
         </ng-container>
 
