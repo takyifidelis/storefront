@@ -205,21 +205,7 @@
           <h4 class="review-header">3 Reviews</h4>
           <div class="review-ratings">
             <div class="ratings">
-              <span class="rating-stars"
-                ><img src="/assets/icons/star.svg" alt=""
-              /></span>
-              <span class="rating-stars"
-                ><img src="/assets/icons/star.svg" alt=""
-              /></span>
-              <span class="rating-stars"
-                ><img src="/assets/icons/star.svg" alt=""
-              /></span>
-              <span class="rating-stars"
-                ><img src="/assets/icons/star.svg" alt=""
-              /></span>
-              <span class="rating-stars"
-                ><img src="/assets/icons/star.svg" alt=""
-              /></span>
+              <app-star-rating [readonly]="true" [rating]="5"></app-star-rating>
               <span class="ratings-5">5 Ratings</span>
             </div>
             <p class="leave-a-review" (click)="showForm()">Leave my review</p>
@@ -232,11 +218,7 @@
             >
               <p class="how-will-you">How will you rate this product?</p>
               <div class="star-form-ratings">
-                <img src="assets\icons\green-star.svg" alt="" />
-                <img src="assets\icons\green-star.svg" alt="" />
-                <img src="assets\icons\green-star.svg" alt="" />
-                <img src="assets\icons\green-star.svg" alt="" />
-                <img src="assets\icons\green-star.svg" alt="" />
+                <app-star-rating></app-star-rating>
               </div>
             </div>
             <div class="form-group">
@@ -284,14 +266,10 @@
               }}</span>
             </p>
             <div class="ratings">
-              <img src="assets\icons\green-star.svg" alt="" /><img
-                src="assets\icons\green-star.svg"
-                alt=""
-              /><img src="assets\icons\green-star.svg" alt="" /><img
-                src="assets\icons\green-star.svg"
-                alt=""
-              />
-              <img src="/assets/icons/star.svg" alt="" />
+              <app-star-rating
+                [readonly]="true"
+                [rating]="review.customerReview.rating"
+              ></app-star-rating>
             </div>
             <p class="feedback-date">
               {{ review.createdAt | date : "longDate" }}
@@ -312,14 +290,7 @@
           <div class="feedback-content">
             <p class="feedback-name">Leslie Alexander</p>
             <div class="ratings">
-              <img src="assets\icons\green-star.svg" alt="" /><img
-                src="assets\icons\green-star.svg"
-                alt=""
-              /><img src="assets\icons\green-star.svg" alt="" /><img
-                src="assets\icons\green-star.svg"
-                alt=""
-              />
-              <img src="/assets/icons/star.svg" alt="" />
+              <app-star-rating [readonly]="true" [rating]="4"></app-star-rating>
             </div>
             <p class="feedback-date">2nd September, 2023</p>
             <p class="feedback-messgae">
@@ -341,14 +312,7 @@
           <div class="feedback-content">
             <p class="feedback-name">Leslie Alexander</p>
             <div class="ratings">
-              <img src="assets\icons\green-star.svg" alt="" /><img
-                src="assets\icons\green-star.svg"
-                alt=""
-              /><img src="assets\icons\green-star.svg" alt="" /><img
-                src="assets\icons\green-star.svg"
-                alt=""
-              />
-              <img src="/assets/icons/star.svg" alt="" />
+              <app-star-rating [readonly]="true" [rating]="4"></app-star-rating>
             </div>
             <p class="feedback-date">2nd September, 2023</p>
             <p class="feedback-messgae">
@@ -359,36 +323,7 @@
             </p>
           </div>
         </div>
-        <hr />
-        <div class="feedbacks-block d-flex">
-          <div class="comment">
-            <div class="feedback-image">
-              <img src="assets\images\feedback-image.svg" alt="" />
-            </div>
-          </div>
 
-          <div class="feedback-content">
-            <p class="feedback-name">Leslie Alexander</p>
-            <div class="ratings">
-              <img src="assets\icons\green-star.svg" alt="" /><img
-                src="assets\icons\green-star.svg"
-                alt=""
-              /><img src="assets\icons\green-star.svg" alt="" /><img
-                src="assets\icons\green-star.svg"
-                alt=""
-              />
-              <img src="/assets/icons/star.svg" alt="" />
-            </div>
-            <p class="feedback-date">2nd September, 2023</p>
-            <p class="feedback-messgae">
-              I was looking for a bright light for the kitchen but wanted some
-              item more modern than a strip light. this one is perfect, very
-              bright and looks great. I can't comment on interlation as I had an
-              electrition instal it. Would recommend...
-            </p>
-          </div>
-        </div>
-        <hr />
         <hr />
       </mat-tab>
     </mat-tab-group>
@@ -446,7 +381,18 @@
               ><span class="rating-number"> {{ product?.rating }} </span>ratings
             </span>
           </div>
-          <div class="product-price">{{ product?.price }}</div>
+          <div class="product-price">
+            <span class="discount-price">
+              ${{ product.price * ((100 - product.discount) / 100) }}
+            </span>
+            <span class="actual-price" *ngIf="product.discount > 0"
+              >${{ product.price }}</span
+            >
+            <span class="discount-percent" *ngIf="product.discount > 0">
+              {{ product.discount }}<span class="per-off">% OFF</span></span
+            >
+          </div>
+
           <div class="product-color-div d-flex">
             <div class="blue product-color"></div>
             <div class="yellow product-color"></div>

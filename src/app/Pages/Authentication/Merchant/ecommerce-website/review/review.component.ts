@@ -183,6 +183,17 @@ export class ReviewComponent implements OnInit {
     // this.apiService.addToFavourite(obj).subscribe((res)=>{
     //   console.log(res)
     // })
+    // review Product
+    this.apiService.getReviews(localStorage.getItem('storeId')!).subscribe(
+      (response: any) => {
+        console.log(response);
+        // this.users = response.data
+        this.productReview = response.data;
+      },
+      (errorMessage) => {
+        console.log(errorMessage);
+      }
+    );
   }
 
   // ngOnInit() {
