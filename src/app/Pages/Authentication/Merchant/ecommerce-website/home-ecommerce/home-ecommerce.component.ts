@@ -131,6 +131,7 @@ export class HomeEcommerceComponent implements OnInit {
 
   liked(product: any) {
     product.isliked = !product.isliked;
+    product.quant = 1;
     this.dataservice.like.push(product);
     let likedProductsJson = JSON.stringify(this.dataservice.like);
     localStorage.setItem('favouriteProducts', likedProductsJson);
@@ -146,6 +147,7 @@ export class HomeEcommerceComponent implements OnInit {
   }
 
   addToCart(product: any) {
+    product.quant = 1;
     this.dataservice.cart.push(product);
     let addTobuyJson = JSON.stringify(this.dataservice.cart);
     localStorage.setItem('cart', addTobuyJson);

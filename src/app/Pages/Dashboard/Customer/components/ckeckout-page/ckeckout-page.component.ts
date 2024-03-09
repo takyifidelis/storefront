@@ -51,15 +51,11 @@ export class CkeckoutPageComponent implements OnInit {
   ) {}
 
   getdata(){
-    this.cart = JSON.parse(localStorage.getItem('cart')!);
-    console.log(this.cart)
-    this.items = []
-    for (const item of this.cart) {
-        this.items.push({product:item.id ,quantity: item.quant, variations:[] })
-    }
-// console.log(items);
+    // console.log(this.cart)
+    
+// console.log(this.items);
 
-    return this.items;
+    // return this.items;
   }
   
   ngOnInit(): void {
@@ -77,19 +73,19 @@ export class CkeckoutPageComponent implements OnInit {
       
 
     });
+    this.cart = JSON.parse(localStorage.getItem('cart')!);
+    this.items = []
+    for (const item of this.cart) {
+        this.items.push({product:item.id, quantity: item.quant, variations:[] })
+    }
+
     this.payload = {
-      items: this.getdata(),
+      items: this.items,
       shipping: '38839ef8-8d01-47f3-bb50-91dbe5f2f6ce',
       store: 'f9586428-62e3-4455-bb1d-61262a407d1a',
     };
-
-    // console.log(this.payload);
-
-// this.createOrder();
-
-    // console.log(this.items);
-
   }
+
   createOrder() {
     this.apiService.initializePayment(localStorage.getItem('customerId')!,this.payload).subscribe((res: any) =>{
       console.log(res);
@@ -120,18 +116,10 @@ export class CkeckoutPageComponent implements OnInit {
       }
     );
     console.log(response);
+    
     const orderData = await response.json();
     if (orderData.type === 'success') {
-
-//       'first-name': new FormControl(null),
-//       'streetAddress': new FormControl(null),
-//       'telephone': new FormControl(null),
-//       'countryCode':  new FormControl(null),
-//       'city':  new FormControl(null),
-//       'appartmentNumber':  new FormControl(null)
-//     })
-//   }
-
+      localStorage.removeItem('cart');
 } else {
 
   this.snackBar.open(
