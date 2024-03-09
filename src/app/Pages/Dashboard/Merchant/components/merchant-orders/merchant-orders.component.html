@@ -158,7 +158,7 @@
         Date
       </th>
       <td class="data" mat-cell *matCellDef="let row">
-        {{ datepipe.transform(row.updatedAt, "dd-MMM-YYYY") }}
+        {{ row.updatedAt | date : "mediumDate" }}
       </td>
     </ng-container>
 

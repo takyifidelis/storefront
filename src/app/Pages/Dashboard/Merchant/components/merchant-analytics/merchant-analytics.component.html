@@ -485,7 +485,7 @@
         Date
       </th>
       <td class="content" mat-cell *matCellDef="let row">
-        {{ datepipe.transform(row.createdAt, "dd-MMM-YYYY") }}
+        {{ row.createdAt | date : "mediumDate" }}
       </td>
     </ng-container>
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
