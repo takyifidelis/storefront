@@ -112,12 +112,10 @@
       <label for="method">Method</label>
     </div>
     <div class="input">
-      <input
-        type="text"
-        id="method"
-        class="form-control"
-        formControlName="method"
-      />
+      <select id="method" class="form-control" formControlName="method">
+        <option value="Paypal">Paypal</option>
+        <option value="Card">Card</option>
+      </select>
     </div>
     <div class="label">
       <label for="email">Email</label>

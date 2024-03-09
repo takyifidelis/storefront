@@ -189,6 +189,12 @@ orderShipped(orderId: string): Observable<Response> {
   })
 }
 
+orderCancelled(order: any): Observable<Response> {
+  return this.http.patch<Response>(`${environment.baseApiUrl}/order/cancel-orders`,order,{
+    withCredentials: true
+  })
+}
+
 getWallet(storeId: string): Observable<Response> {
   return this.http.get<Response>(`${environment.baseApiUrl}/store/get-wallets/${storeId}`, {
     withCredentials: true
