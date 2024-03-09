@@ -56,7 +56,6 @@ export class HomeEcommerceComponent implements OnInit {
 
   openFileInput(fileInput: HTMLInputElement) {
     fileInput.click();
-    // this.dataservice.inputLinkVisibility[index] = true;
   }
 
   showLink() {
@@ -65,8 +64,7 @@ export class HomeEcommerceComponent implements OnInit {
 
   onSelectFile(event: any, target: string) {
     const file: File = event.target.files[0]; // Get the selected file
-    //     if (file) {
-    //  }
+   
 
     if (event.target.files && event.target.files.length > 0) {
       const reader = new FileReader();
@@ -107,31 +105,7 @@ export class HomeEcommerceComponent implements OnInit {
     });
   }
 
-  //   addToCart(product:any){
-  //     // this.cart.push(product);
-  //     // console.log(this.cart);
-  //     if (localStorage.getItem('cart')) {
-  //       if (JSON.parse(localStorage.getItem('cart')!)) {
-  //         this.cart = JSON.parse(localStorage.getItem('cart')!);
-  //         this.cart.push(product);
-  //         this.dataservice.cart = this.cart
-  //         localStorage.setItem('cart', JSON.stringify(this.cart));
-  //       }
-  //       else{
-  //         localStorage.setItem('cart', JSON.stringify('[]'));
-  //         this.cart = JSON.parse(localStorage.getItem('cart')!);
-  //         console.log(this.cart);
-  //         this.cart.push(product);
-  //         this.dataservice.cart = this.cart
-  //         localStorage.setItem('cart', JSON.stringify(this.cart));
-  //       }
-  //     }
-  //     else {
-  //       this.cart.push(product);
-  //       this.dataservice.cart = this.cart
-  //       localStorage.setItem('cart', JSON.stringify(this.cart));
-  //     }
-  //   }
+
   removeDuplicates(items: Item[]): Item[] {
     // Create a Map to store unique names as keys
     const uniqueNames = new Map<string, boolean>();
@@ -148,30 +122,23 @@ export class HomeEcommerceComponent implements OnInit {
     return uniqueItems;
   }
 
-  ngOnInit() {
-    // this.apiService.getStore(this.dataservice.businessId).subscribe((storeResData:any) =>{
-    // this.apiService.getStore(this.dataservice.storeId).subscribe((storeResData:any) =>{
-    // console.log({storeId: storeResData});
-    this.apiService
-      .getCustomerStoreProducts(localStorage.getItem('storeId')!)
-      .subscribe((productResData: any) => {
+
+  ngOnInit(){
+      this.apiService.getCustomerStoreProducts(localStorage.getItem('storeId')!).subscribe((productResData:any)=>{
         console.log(productResData);
-        this.dataservice.products = productResData.data;
-        // this.apiService.getStoreCategories(this.dataservice.storeId).subscribe((storeCatsData:any)=>{
-        // this.dataservice.productCategories = storeCatsData.data
-        // console.log(this.dataservice.productCategories)
-        // });
+        this.dataservice.products = productResData.data
+
         if (JSON.parse(localStorage.getItem('cart')!)) {
           this.cart = JSON.parse(localStorage.getItem('cart')!);
           this.dataservice.cart = this.cart;
         }
-      });
-    // })
+
+      })
+
   }
 
   liked(product: any) {
     product.isliked = !product.isliked;
-    // let like = JSON.parse(localStorage.getItem('favouriteProducts')|| '')
     this.like.push(product);
     let likedProductsJson = JSON.stringify(this.like);
     localStorage.setItem('favouriteProducts', likedProductsJson);
@@ -187,7 +154,6 @@ export class HomeEcommerceComponent implements OnInit {
   }
 
   addToCart(product: any) {
-    // let cart = JSON.parse(localStorage.getItem('cart')|| '')
     this.cart.push(product);
     let addTobuyJson = JSON.stringify(this.cart);
     localStorage.setItem('cart', addTobuyJson);
@@ -201,4 +167,5 @@ export class HomeEcommerceComponent implements OnInit {
       console.log(res);
     });
   }
+
 }

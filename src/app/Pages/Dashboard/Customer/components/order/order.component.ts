@@ -4,6 +4,7 @@ import {
   ViewChild,
   Inject,
   OnInit,
+  ElementRef,
 } from '@angular/core';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
@@ -77,30 +78,15 @@ export class OrderComponent implements OnInit {
   formattedDate!: string | null;
   datepipe: DatePipe = new DatePipe('en-US');
 
-  //   constructor(public dialog: MatDialog, public apiService: APIService) {
 
-  //       checkbox: '1',
-  //       orderNumber: '#1233893',
-  //       store: 'shopNest',
-  //       status: 'Delievered',
-  //       date: '21/09/2023',
-  //       price: '$52.00',
-  //     },
-  //     {
-  //       checkbox: '1',
-  //       orderNumber: '#1233893',
-  //       store: 'shopNest',
-  //       status: 'Delievered',
-  //       date: '21/09/2023',
-  //       price: '$52.00',
-  //     },
-  //   ];
 
-  constructor(public dialog: MatDialog, private apiService: APIService) {
+  constructor(public dialog: MatDialog, private apiService: APIService, private elementRef: ElementRef) {
+
     this.dataSource = new MatTableDataSource(this.users);
   }
 
   ngOnInit(): void {
+
     this.apiService
       .getOrders(localStorage.getItem('customerId')!)
       .subscribe((res: any) => {
@@ -109,6 +95,7 @@ export class OrderComponent implements OnInit {
         console.log(this.orders.data);
         this.dataSource = new MatTableDataSource(this.orders.data);
       });
+
   }
 
   moreVert(e: dummyUserInterface) {
@@ -117,7 +104,6 @@ export class OrderComponent implements OnInit {
       width: '500px',
       position: { right: '50px', top: '10%' },
     });
-    console.log(e);
   }
 
   isAllSelected() {
@@ -127,18 +113,15 @@ export class OrderComponent implements OnInit {
   }
   showSelection(e: any) {
     e.stopPropagation();
-    console.log(this.selection.selected);
   }
   /** Selects all rows if they are not all selected; otherwise clear selection. */
   toggleAllRows() {
     if (this.isAllSelected()) {
       this.selection.clear();
-      console.log(this.selection.selected);
       return;
     }
 
     this.selection.select(...this.dataSource.data);
-    console.log(this.selection.selected);
   }
 
   /** The label for the checkbox on the passed row */
@@ -160,7 +143,13 @@ export class OrderComponent implements OnInit {
     this.unsorted.forEach((order: any) => {
       if (order.status === status) {
         this.sorted.push(order);
+        // console.log(this.sorted)
+    this.dataSource = new MatTableDataSource(this.sorted);
+
+      }else if (status === 'All'){
+this.dataSource = new MatTableDataSource(this.unsorted)
       }
+
     });
     this.dataSource = new MatTableDataSource(this.sorted);
   }
@@ -172,4 +161,5 @@ export class OrderComponent implements OnInit {
   //       });
 
   //   }
+
 }

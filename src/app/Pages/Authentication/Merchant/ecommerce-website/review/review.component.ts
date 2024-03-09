@@ -53,7 +53,12 @@ export class ReviewComponent implements OnInit {
   productItem: any;
   sizes: string[] | undefined;
   storeId = 'f9586428-62e3-4455-bb1d-61262a407d1a';
-  similarProducts: any = [];
+
+  similarProducts: any = []
+
+cart: any = [];
+variations?: Varaiation[];
+
 
   cart: any = [];
   variations?: Varaiation[];
@@ -147,9 +152,15 @@ export class ReviewComponent implements OnInit {
     this.productItem = product;
 
     this.selectedImage = this.productItem.images[0].url;
-    this.initialPrice = this.productItem.price;
 
-    this.variations = this.productItem.variations;
+     this.initialPrice = this.productItem.price;
+if (this.variations) {
+  this.variations = this.productItem.variations;
+}
+     
+     
+      // this.sizes = values[0].split(',');
+
 
     // this.sizes = values[0].split(',');
 
