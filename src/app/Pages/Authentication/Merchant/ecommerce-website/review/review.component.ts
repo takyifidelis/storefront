@@ -14,9 +14,11 @@ import { CommonModule } from '@angular/common';
 import { DataService } from '../../../../../Services/data.service';
 import { APIService } from '../../../../../Services/api.service';
 import { StarRatingComponent } from '../../../../Dashboard/Customer/components/star-rating/star-rating.component';
-import { ProductObject, Varaiation } from '../../../../../interfaces/all-interfaces';
+import {
+  ProductObject,
+  Varaiation,
+} from '../../../../../interfaces/all-interfaces';
 import { AuthService } from '../../../Auth/auth.service';
-
 
 @Component({
   selector: 'app-review',
@@ -32,7 +34,7 @@ import { AuthService } from '../../../Auth/auth.service';
     FontAwesomeModule,
     MatTabsModule,
     CommonModule,
-    StarRatingComponent
+    StarRatingComponent,
   ],
   templateUrl: './review.component.html',
   styleUrl: './review.component.scss',
@@ -48,21 +50,24 @@ export class ReviewComponent implements OnInit {
   addToBuy: any = [];
   likedProducts: any = [];
   amount: number = this.quantity * 90;
-  productItem :any
+  productItem: any;
   sizes: string[] | undefined;
   storeId = 'f9586428-62e3-4455-bb1d-61262a407d1a';
+
   similarProducts: any = []
 
 cart: any = [];
 variations?: Varaiation[];
 
 
+  cart: any = [];
+  variations?: Varaiation[];
 
   //   this.product = this.apiService.getProductTemp();
   //   this.selectedImage = this.product.images[0].url;
 
   // this.initialPrice = this.product.price;
-  
+
   constructor(
     private route: ActivatedRoute,
     private dataService: DataService,
@@ -71,16 +76,16 @@ variations?: Varaiation[];
 
   increaseQuantity(): void {
     this.quantity++;
-    if(this.initialPrice)
-    this.productItem.price = this.quantity * this.initialPrice;
+    if (this.initialPrice)
+      this.productItem.price = this.quantity * this.initialPrice;
     console.log(this.productItem.price);
   }
 
   decreaseQuantity(): void {
     if (this.quantity > 1) {
       this.quantity--;
-      if(this.initialPrice)
-      this.productItem.price = this.quantity * this.initialPrice;
+      if (this.initialPrice)
+        this.productItem.price = this.quantity * this.initialPrice;
     }
   }
   productReview: any;
@@ -100,56 +105,54 @@ variations?: Varaiation[];
 
   onAddToBuy() {
     // let cart = JSON.parse(localStorage.getItem('cart')|| '')
-    this.productItem.quant =this.quantity;
+    this.productItem.quant = this.quantity;
     this.cart.push(this.productItem);
     console.log(this.cart);
     let addTobuyJson = JSON.stringify(this.cart);
     localStorage.setItem('cart', addTobuyJson);
   }
 
+  onAddOneToBuy(product: any) {}
 
-  onAddOneToBuy(product: any) {
-
-  }
-
-  onLikedProducts(){
-    let like = JSON.parse(localStorage.getItem('favouriteProducts')|| '')
+  onLikedProducts() {
+    let like = JSON.parse(localStorage.getItem('favouriteProducts') || '');
     like.push(this.productItem);
     let likedProductsJson = JSON.stringify(like);
     localStorage.setItem('favouriteProducts', likedProductsJson);
-    
+
     let productObj: ProductObject = {
-      products: []
+      products: [],
+    };
+    for (const likeditem of like) {
+      productObj.products.push(likeditem.id);
     }
-    for (const likeditem of like){
-      productObj.products.push(likeditem.id)
-    }
-    this.apiService.addToFavourite(productObj).subscribe((res)=>{
-        console.log(res);
-      })
+    this.apiService.addToFavourite(productObj).subscribe((res) => {
+      console.log(res);
+    });
   }
 
-  onLikeOne(product: any){
+  onLikeOne(product: any) {
     product.isliked = !product.isliked;
-    let like = JSON.parse(localStorage.getItem('favouriteProducts')|| '')
+    let like = JSON.parse(localStorage.getItem('favouriteProducts') || '');
     like.push(this.productItem);
     let productObj: ProductObject = {
-      products: []
+      products: [],
+    };
+    for (const likeditem of like) {
+      productObj.products.push(likeditem.id);
     }
-    for (const likeditem of like){
-      productObj.products.push(likeditem.id)
-    }
-    this.apiService.addToFavourite(productObj).subscribe((res)=>{
-        console.log(res);
-      })
+    this.apiService.addToFavourite(productObj).subscribe((res) => {
+      console.log(res);
+    });
   }
 
-  ngOnInit(){
+  ngOnInit() {
     let productJson = localStorage.getItem('selectedProduct');
     let product = JSON.parse(productJson!);
     this.productItem = product;
 
     this.selectedImage = this.productItem.images[0].url;
+
      this.initialPrice = this.productItem.price;
 if (this.variations) {
   this.variations = this.productItem.variations;
@@ -158,15 +161,20 @@ if (this.variations) {
      
       // this.sizes = values[0].split(',');
 
-      this.apiService.getCustomerStoreProducts(this.storeId).subscribe((res: any) => {
+
+    // this.sizes = values[0].split(',');
+
+    this.apiService
+      .getCustomerStoreProducts(this.storeId)
+      .subscribe((res: any) => {
         // console.log(res)
         res.data.filter((product: any) => {
-          if (product.category === this.productItem.category){
-            this.similarProducts.push(product)
+          if (product.category === this.productItem.category) {
+            this.similarProducts.push(product);
           }
-        })
-      })
-    
+        });
+      });
+
     // let arrayJson = JSON.stringify(array)
     // let cartJson = localStorage.getItem('favouriteProducts');
     // let cart = JSON.parse(cartJson!);
@@ -177,30 +185,28 @@ if (this.variations) {
     //   }
     // }
     // console.log(obj)
-   
+
     // this.apiService.addToFavourite(obj).subscribe((res)=>{
     //   console.log(res)
     // })
-    }
-    
-  
+  }
 
   // ngOnInit() {
-//     for (const product of this.dataService.products) {
-//       if (product.id === this.route.snapshot.params['id']) {
-//         this.productItem = product;
-//         console.log(this.productItem);
-//       }
-//     }
+  //     for (const product of this.dataService.products) {
+  //       if (product.id === this.route.snapshot.params['id']) {
+  //         this.productItem = product;
+  //         console.log(this.productItem);
+  //       }
+  //     }
 
-//     this.apiService.getReviews().subscribe((response: any) => {
-//       console.log(response);
-//       // this.users = response.data
-//       this.productReview = response.data;
-//     });
+  //     this.apiService.getReviews().subscribe((response: any) => {
+  //       console.log(response);
+  //       // this.users = response.data
+  //       this.productReview = response.data;
+  //     });
 
-//     // console.log(this.dataService.products.find((element:any) => console.log(element.id)));
-//   }
-// }
+  //     // console.log(this.dataService.products.find((element:any) => console.log(element.id)));
+  //   }
+  // }
   // }
 }

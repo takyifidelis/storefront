@@ -48,11 +48,10 @@
         >
           <p class="review-title">{{ data.remarks }}</p>
           <div class="ratings">
-            <img src="assets\icons\star-ratings.svg" alt="" />
-            <img src="assets\icons\star-ratings.svg" alt="" />
-            <img src="assets\icons\star-ratings.svg" alt="" />
-            <img src="assets\icons\star-ratings.svg" alt="" />
-            <img src="assets\icons\star-ratings.svg" alt="" />
+            <app-star-rating
+              [rating]="data.rating"
+              [readonly]="true"
+            ></app-star-rating>
           </div>
         </div>
         <p class="review-description">
