@@ -258,7 +258,9 @@ export class MerchantDiscountCustomizeComponent {
   productDataSource!: MatTableDataSource<productInterface>;
   displayedColumns: string[] = ['name', 'price', 'category', 'inventory'];
   storeCategories: string[] = [];
+  numberOfProducts: any;
   discountUpdate: FormGroup;
+  isLoading: boolean = false;
   users = [
     {
       name: '1',
@@ -293,16 +295,21 @@ export class MerchantDiscountCustomizeComponent {
         for (const cat of catResData['data']) {
           this.storeCategories.push(cat.name);
         }
+        this.isLoading = true;
         this.apiService.getProductUnderPromotion(this.data.id).subscribe(
           (resData: Response) => {
             console.log(resData.data);
+            this.isLoading = false;
             let d: any = [];
             d = resData.data;
+            this.numberOfProducts = d.products.length;
             console.log(d);
+            console.log(this.numberOfProducts);
             this.productDataSource = new MatTableDataSource(d.products);
           },
           (errorMessage) => {
             console.log(errorMessage);
+            this.isLoading = false;
           }
         );
       });
