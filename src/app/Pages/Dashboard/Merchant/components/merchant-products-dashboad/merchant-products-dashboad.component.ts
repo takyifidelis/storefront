@@ -1,6 +1,7 @@
 import { Component, Inject, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatRadioModule } from '@angular/material/radio';
+import { ToastrService } from 'ngx-toastr';
 import {
   FormControl,
   FormGroupDirective,
@@ -188,7 +189,8 @@ export class MerchantProductDiscountComponent {
   };
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: productDetailInterface,
-    private apiService: APIService
+    private apiService: APIService,
+    private toastr: ToastrService
   ) {
     this.addPromotion = new FormGroup({
       promo: new FormControl('', Validators.required),
@@ -217,9 +219,14 @@ export class MerchantProductDiscountComponent {
       .subscribe(
         (promoData) => {
           console.log(promoData);
+          this.toastr.info(promoData.message, 'Success');
         },
         (errorMessage) => {
           console.log(errorMessage);
+          this.toastr.error(
+            errorMessage.error.message,
+            errorMessage.error.type
+          );
         }
       );
   }
@@ -231,9 +238,11 @@ export class MerchantProductDiscountComponent {
     this.apiService.deleteProductFromStore(deleteIds).subscribe(
       (deleteResponse) => {
         console.log(deleteResponse);
+        this.toastr.info(deleteResponse.message, 'Success');
       },
       (errorMessage) => {
         console.log(errorMessage);
+        this.toastr.error(errorMessage.error.message, errorMessage.error.type);
       }
     );
   }

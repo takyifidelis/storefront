@@ -57,7 +57,7 @@
               <label for="price" class="label-name">Price</label>
               <input
                 [(ngModel)]="productDetails.price"
-                type="text"
+                type="number"
                 id="price"
                 class="form-control"
                 placeholder="GH$"
@@ -67,7 +67,7 @@
               <label for="stock" class="label-name">Stock</label>
               <input
                 [(ngModel)]="productDetails.quantity"
-                type="stock"
+                type="number"
                 id="stock"
                 class="form-control"
                 placeholder="1"
@@ -86,10 +86,10 @@
               class="form-control"
               placeholder="Enter a description..."
             ></textarea> -->
-            <!-- <ckeditor
+            <ckeditor
               [editor]="Editor"
               [(ngModel)]="productDetailss.description"
-            ></ckeditor> -->
+            ></ckeditor>
           </div>
           <div class="category">
             <div class="head d-flex align-items-center justify-content-between">
@@ -111,10 +111,7 @@
                 class="example-radio-group"
                 [(ngModel)]="productDetails.category"
               >
-
-
                 @for (cat of categories; track cat) {
-
 
                 <mat-radio-button class="example-radio-button" [value]="cat">{{
                   cat

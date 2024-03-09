@@ -292,15 +292,13 @@ export class APIService {
     );
   }
   postProduct(formData: FormData, storeId: string) {
-    return this.http
-      .post<Response>(
-        `https://storefront-backend-jan-dev-api.vercel.app/api/product/add/${storeId}`,
-        formData,
-        {
-          withCredentials: true,
-        }
-      )
-      .pipe(catchError(this.handleError));
+    return this.http.post<Response>(
+      `https://storefront-backend-jan-dev-api.vercel.app/api/product/add/${storeId}`,
+      formData,
+      {
+        withCredentials: true,
+      }
+    );
   }
 
   // publishTemplate(storeId: string, template:any): Observable<Response>{
@@ -478,21 +476,19 @@ export class APIService {
     start: Date,
     storeId: string
   ) {
-    return this.http
-      .post<Response>(
-        `${environment.baseApiUrl}/store/add-promotion/${storeId}`,
-        {
-          end,
-          name,
-          discount,
-          statement,
-          start,
-        },
-        {
-          withCredentials: true,
-        }
-      )
-      .pipe(catchError(this.handleError));
+    return this.http.post<Response>(
+      `${environment.baseApiUrl}/store/add-promotion/${storeId}`,
+      {
+        end,
+        name,
+        discount,
+        statement,
+        start,
+      },
+      {
+        withCredentials: true,
+      }
+    );
   }
   getPromotionForStore(storeId: string): Observable<Response> {
     return this.http
@@ -610,6 +606,9 @@ export class APIService {
         break;
       case 'RESET_PASSWORD_FAILED':
         errorMessage = 'Password reset failed';
+        break;
+      case 'VALIDATION_ERROR':
+        errorMessage = 'Parameters failed validation';
         break;
     }
     return throwError(errorMessage);

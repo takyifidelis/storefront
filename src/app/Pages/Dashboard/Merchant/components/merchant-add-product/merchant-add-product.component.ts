@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { MatRadioModule } from '@angular/material/radio';
+import { ToastrService } from 'ngx-toastr';
 import {
   FormGroup,
   FormControl,
@@ -35,6 +36,7 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 })
 export class MerchantAddProductComponent {
   public Editor = ClassicEditor;
+  isLoading: boolean = false;
   public productDetailss: any = {
     description: '', // Initial value for the description
   };
@@ -52,7 +54,7 @@ export class MerchantAddProductComponent {
   variationArray: { key: string; values: string[] }[] = [];
   selectedStatus: string = 'Active';
   displayedStatus: string = 'Active';
-  error: string | any = null;
+
   files: any;
   data = new FormData();
   categories: string[] = [];
@@ -89,8 +91,12 @@ export class MerchantAddProductComponent {
     return this.images.length < 4;
   }
 
-
-  constructor(private authService: APIService, private router: Router, private apiService: APIService) {
+  constructor(
+    private authService: APIService,
+    private router: Router,
+    private apiService: APIService,
+    private toastr: ToastrService
+  ) {
     this.productForm = new FormGroup({
       productName: new FormControl('', Validators.required),
       productPrice: new FormControl('', Validators.required),
@@ -109,18 +115,25 @@ export class MerchantAddProductComponent {
     this.data.append('isActive', 'true');
     this.data.append('category', this.productDetails.category);
     console.log(this.data);
+    this.isLoading = true;
 
+    this.authService
+      .postProduct(this.data, localStorage.getItem('storeId')!)
+      .subscribe(
+        (resData) => {
+          console.log(resData);
+          this.router.navigate(['/merchant/product']);
+          this.toastr.info(resData.message, 'Success');
+        },
+        (errorMessage) => {
+          console.log(errorMessage);
 
-    this.authService.postProduct(this.data, localStorage.getItem('storeId')!).subscribe(
-      (resData) => {
-        console.log(resData);
-        this.router.navigate(['/merchant/product']);
-      },
-      (errorMessage) => {
-        console.log(errorMessage);
-        this.error = errorMessage;
-      }
-    );
+          this.toastr.error(
+            errorMessage.error.message,
+            errorMessage.error.type
+          );
+        }
+      );
 
     this.productDetails = {
       name: '',
@@ -143,14 +156,19 @@ export class MerchantAddProductComponent {
     };
   }
   addCategory() {
-    this.apiService.AddStoreCategories(localStorage.getItem('storeId')!, {names:[`${this.inputText}`]}).subscribe((data:{[key:string]:any} )=> {
-      this.categories.push(this.inputText);
-      this.inputText = '';
-      console.log(data);
-    })
+    this.apiService
+      .AddStoreCategories(localStorage.getItem('storeId')!, {
+        names: [`${this.inputText}`],
+      })
+      .subscribe((data) => {
+        this.categories.push(this.inputText);
+        this.inputText = '';
+
+        console.log(data);
+        this.toastr.info(data.message, data.type);
+      });
   }
   addSize() {
-    console.log('Hello World');
     if (this.variationKey && this.variationValue) {
       let existingVariation = this.variationArray.find(
         (variation) => variation.key === this.variationKey
@@ -181,13 +199,15 @@ export class MerchantAddProductComponent {
       this.selectedStatus === 'true' ? 'Active' : 'Not Active';
     this.productDetails.isActive = this.selectedStatus;
   }
-  ngOnInit(){
-    this.apiService.getStoreCategories(localStorage.getItem('storeId')!).subscribe((catResData: {[key:string]:any}) =>{
-      console.log(catResData);
-      for (const cat of catResData['data']) {
-        this.categories.push(cat.name)
-      }
-      console.log(this.categories)
-    })
+  ngOnInit() {
+    this.apiService
+      .getStoreCategories(localStorage.getItem('storeId')!)
+      .subscribe((catResData: { [key: string]: any }) => {
+        console.log(catResData);
+        for (const cat of catResData['data']) {
+          this.categories.push(cat.name);
+        }
+        console.log(this.categories);
+      });
   }
 }
