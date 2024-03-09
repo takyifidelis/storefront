@@ -435,8 +435,12 @@
         <div
           class="customer-info d-flex justify-content-start align-items-center"
         >
-          <div class="customer-image">
-            <img src="assets\images\hat-review.svg" alt="" />
+          <div
+            class="customer-image d-flex justify-content-center align-items-center"
+          >
+            <span class="first-intial"> {{ row.firstName.charAt(0) }} </span>
+
+            <span class="second-initial"> {{ row.lastName.charAt(0) }} </span>
           </div>
 
           <div class="customer-name">

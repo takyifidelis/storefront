@@ -10,8 +10,18 @@
   margin-top: 2rem;
   gap: 1rem;
   .customer-image {
-    width: 5rem;
-    height: 5rem;
+    width: 3.5rem;
+    height: 3.5rem;
+    color: #ffff;
+    background-color: #4a72ff;
+    border-radius: 50%;
+    font-size: 20px;
+    font-weight: 700;
+    font-family: "Poppins";
+    text-transform: capitalize;
+    .first-intial {
+      margin-right: 2px;
+    }
   }
   .customer-name-number {
     font-family: Inter;

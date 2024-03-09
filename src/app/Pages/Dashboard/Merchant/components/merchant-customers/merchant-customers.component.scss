@@ -169,9 +169,19 @@ th {
 .customer-info {
   gap: 0.8rem;
   .customer-image {
-    width: 56px;
-    height: 56px;
-    border-radius: 5px;
+    margin-top: 0.2rem;
+    width: 60px;
+    height: 60px;
+    color: #ffff;
+    background-color: #4a72ff;
+    border-radius: 50%;
+    font-size: 20px;
+    font-weight: 700;
+    font-family: "Poppins";
+    text-transform: capitalize;
+    .first-intial {
+      margin-right: 2px;
+    }
   }
   .customer-name {
     color: #455468;

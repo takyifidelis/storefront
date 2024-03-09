@@ -1,12 +1,16 @@
 <div class="container">
   <div class="d-flex justify-content-between align-items-end">
     <div class="customer-info d-flex align-items-center">
-      <div class="customer-images">
-        <img
-          src="assets\images\team-image2.svg"
-          alt=""
-          class="customer-image"
-        />
+      <div
+        class="customer-image d-flex justify-content-center align-items-center"
+      >
+        <span class="first-intial">
+          {{ data.firstName.toString().charAt(0) }}
+        </span>
+
+        <span class="second-initial">
+          {{ data.lastName.toString().charAt(0) }}
+        </span>
       </div>
       <div class="customer-name-number">
         <div class="customer-name">
