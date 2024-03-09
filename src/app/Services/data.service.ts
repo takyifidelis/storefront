@@ -27,7 +27,7 @@ export class DataService {
   productSearchString: string = '';
   // template:any
   selectedStore: { [key: string]: any } = {};
-  merchantDashboardNoProjects: boolean = false;
+  merchantDashboardNoProjects: boolean = true;
   doesNotExist = { exist: false, term: '' };
 
   isMobileBool: boolean = false;
