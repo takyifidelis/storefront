@@ -97,7 +97,7 @@ export class MerchantCustomersComponent implements OnInit {
   moreVert(e: dummyUserInterface) {
     this.dialog.open(CustomerDetailsComponent, {
       data: e,
-      width: '600px',
+      width: '800px',
       position: { right: '50px', top: '10%' },
     });
     // console.log(e);
@@ -172,7 +172,7 @@ export class MerchantCustomersComponent implements OnInit {
 export class CustomerDetailsComponent implements OnInit {
   dataSurce!: MatTableDataSource<orderInterface>;
   productDataSource!: MatTableDataSource<orderInterface>;
-  displayedColumns: string[] = ['name', 'price', 'date'];
+  displayedColumns: string[] = ['name', 'price', 'date', 'orders'];
   users: any;
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: orderInterface,

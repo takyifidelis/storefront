@@ -79,18 +79,74 @@
             }}</span>
           </td>
         </ng-container>
+        <ng-container matColumnDef="orders">
+          <th mat-header-cell *matHeaderCellDef>Order Id</th>
+          <td mat-cell *matCellDef="let element">
+            <div class="orderid">
+              <span class="order-id">#{{ element.orderId }}</span>
+            </div>
+          </td>
+        </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="['name', 'price', 'date']"></tr>
+        <tr
+          mat-header-row
+          *matHeaderRowDef="['name', 'price', 'date', 'orders']"
+        ></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
       </table>
     </mat-tab>
     <mat-tab label="Shipping Address">
-      <div class="shipping-address">
-        <div class="name">Fidelis</div>
-        <div class="street-address">Dansoman</div>
-        <div class="city">Accra</div>
-        <div class="phone">0240387717</div>
-      </div>
+      <table
+        mat-table
+        [dataSource]="dataSurce"
+        class="mat-elevation-z8 table shipping-address"
+      >
+        <!--- Note that these columns can be defined in any order.
+                The actual rendered columns are set as a property on the row definition" -->
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Order Id</th>
+          <td mat-cell *matCellDef="let element">
+            <div class="order-id">#{{ element.orderId }}</div>
+          </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="price">
+          <th mat-header-cell *matHeaderCellDef>Name</th>
+          <td mat-cell *matCellDef="let element">
+            <div class="shipping-name-number">
+              <div class="shipping-name">{{ element.orderShipping.name }}</div>
+              <div class="shipping-number">
+                {{ element.orderShipping.phone }}
+              </div>
+            </div>
+          </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="date">
+          <th mat-header-cell *matHeaderCellDef>City</th>
+          <td mat-cell *matCellDef="let element">
+            <div class="street-city">{{ element.orderShipping.city }}</div>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="orders">
+          <th mat-header-cell *matHeaderCellDef>Street Address</th>
+          <td mat-cell *matCellDef="let element">
+            <div class="street-address">
+              {{ element.orderShipping.streetAddress }}
+            </div>
+          </td>
+        </ng-container>
+
+        <tr
+          mat-header-row
+          *matHeaderRowDef="['name', 'price', 'date', 'orders']"
+        ></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
     </mat-tab>
   </mat-tab-group>
 </div>

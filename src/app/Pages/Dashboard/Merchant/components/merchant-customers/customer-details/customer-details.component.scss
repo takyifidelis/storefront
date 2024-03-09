@@ -51,26 +51,6 @@
     }
   }
 }
-.shipping-address {
-  font-family: Inter;
-  font-style: normal;
-  .name {
-    color: #5e718d;
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 24px;
-    letter-spacing: -0.2px;
-  }
-  .phone,
-  .city,
-  .street-address {
-    color: #5e718d;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 20px;
-    letter-spacing: -0.2px;
-  }
-}
 
 table {
   .product-image {
@@ -116,4 +96,34 @@ table {
     line-height: 20px; /* 166.667% */
     letter-spacing: -0.2px;
   }
+  .order-id {
+    color: #5e718d;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: -0.2px;
+  }
+}
+
+.shipping-name {
+  color: #5e718d;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: -0.2px;
+  font-family: Inter;
+  font-style: normal;
+}
+.shipping-number,
+.street-city,
+.street-address {
+  color: #5e718d;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: -0.2px;
+  font-family: Inter;
+  font-style: normal;
 }
