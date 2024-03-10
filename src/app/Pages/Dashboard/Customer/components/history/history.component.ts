@@ -37,7 +37,7 @@ export class HistoryComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.apiService.getHistoryProducts().subscribe((response: any) => {
+    this.apiService.getHistoryProducts(localStorage.getItem('customerId')!).subscribe((response: any) => {
       this.cart = response.data;
     this.dataSource = new MatTableDataSource(this.cart);
     this.dataSource.paginator = this.paginator;

@@ -56,7 +56,7 @@ export class FavoriteProductComponent implements OnInit{
   }
 
   ngOnInit(): void {
-     this.apiService.getSavedProducts().subscribe((res: any) => {
+     this.apiService.getSavedProducts(localStorage.getItem('customerId')!).subscribe((res: any) => {
       this.products = res.data;
     this.dataSource = new MatTableDataSource(this.products);
     });

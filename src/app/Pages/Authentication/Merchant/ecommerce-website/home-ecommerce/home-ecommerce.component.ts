@@ -141,7 +141,7 @@ export class HomeEcommerceComponent implements OnInit {
     for (const likeditem of this.dataservice.like){
       productObj.products.push(likeditem.id)
     }
-    this.apiService.addToFavourite(productObj).subscribe((res)=>{
+    this.apiService.addToFavourite(productObj, localStorage.getItem('customerId')!).subscribe((res)=>{
         console.log(res);
       })
   }
@@ -157,7 +157,7 @@ export class HomeEcommerceComponent implements OnInit {
     for (const item of this.dataservice.cart){
       productObj.products.push(item.id)
     }
-    this.apiService.addTOViews(productObj).subscribe((res)=>{
+    this.apiService.addTOViews(productObj, localStorage.getItem('customerId')!).subscribe((res)=>{
         console.log(res);
       })
 

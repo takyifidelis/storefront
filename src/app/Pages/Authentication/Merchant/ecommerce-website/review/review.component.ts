@@ -105,7 +105,21 @@ export class ReviewComponent implements OnInit {
     localStorage.setItem('cart', addTobuyJson);
   }
 
-  onAddOneToBuy(product: any) {}
+  onAddOneToBuy(product: any) {
+    product.quant = 1;
+    this.dataService.cart.push(this.productItem);
+    let addTobuyJson = JSON.stringify(this.dataService.cart);
+    localStorage.setItem('cart', addTobuyJson);
+    let productObj: ProductObject = {
+      products: [],
+    };
+    for (const item of this.dataService.cart) {
+      productObj.products.push(item.id);
+    }
+    this.apiService.addTOViews(productObj, localStorage.getItem('customerId')!).subscribe((res) => {
+      console.log(res);
+    });
+  }
 
   onLikedProducts() {
     this.productItem.quant = this.quantity;
@@ -122,7 +136,7 @@ export class ReviewComponent implements OnInit {
     for (const likeditem of this.dataService.like) {
       productObj.products.push(likeditem.id);
     }
-    this.apiService.addToFavourite(productObj).subscribe((res) => {
+    this.apiService.addToFavourite(productObj, localStorage.getItem('customerId')!).subscribe((res) => {
       console.log(res);
     });
   }
@@ -140,7 +154,7 @@ export class ReviewComponent implements OnInit {
     for (const likeditem of this.dataService.like) {
       productObj.products.push(likeditem.id);
     }
-    this.apiService.addToFavourite(productObj).subscribe((res) => {
+    this.apiService.addToFavourite(productObj, localStorage.getItem('customerId')!).subscribe((res) => {
       console.log(res);
     });
   }

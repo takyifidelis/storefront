@@ -267,8 +267,8 @@ postProduct(formData: FormData, storeId: string) {
   }
 
 
-  addTOViews(products: any): Observable<Response>{
-    return this.http.post<Response>(`${environment.baseApiUrl}/customer/add-to-views/f739a921-7267-4e02-8222-ceb2b4c352cf`, products, {
+  addTOViews(products: any, customerId: string): Observable<Response>{
+    return this.http.post<Response>(`${environment.baseApiUrl}/customer/add-to-views/${customerId}`, products, {
       withCredentials: true,
     })
   }
@@ -285,9 +285,9 @@ postProduct(formData: FormData, storeId: string) {
     );
   }
 
-  addToFavourite(products: any): Observable<Response> {
+  addToFavourite(products: any, customerId: string): Observable<Response> {
     return this.http.post<Response>(
-      `${environment.baseApiUrl}/customer/add-to-views/f739a921-7267-4e02-8222-ceb2b4c352cf`,
+      `${environment.baseApiUrl}/customer/add-to-views/${customerId}`,
       products,
       {
         withCredentials: true,
@@ -295,18 +295,18 @@ postProduct(formData: FormData, storeId: string) {
     );
   }
 
-  getSavedProducts(): Observable<Response> {
+  getSavedProducts(customerId: string): Observable<Response> {
     return this.http.get<Response>(
-      `${environment.baseApiUrl}/customer/get-saved-products/f739a921-7267-4e02-8222-ceb2b4c352cf/?idOnly=true&likedOnly=true`,
+      `${environment.baseApiUrl}/customer/get-saved-products/${customerId}/?idOnly=true&likedOnly=true`,
       {
         withCredentials: true,
       }
     );
   }
 
-  getHistoryProducts(): Observable<Response> {
+  getHistoryProducts(customerId: string): Observable<Response> {
     return this.http.get<Response>(
-      `${environment.baseApiUrl}/customer/get-saved-products/f739a921-7267-4e02-8222-ceb2b4c352cf`,
+      `${environment.baseApiUrl}/customer/get-saved-products/${customerId}`,
       {
         withCredentials: true,
       }
