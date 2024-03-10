@@ -134,17 +134,28 @@ th {
 }
 
 .product-status {
-  color: #11a75c;
-  width: fit-content;
   font-family: Inter;
-  padding: 2px 4px;
+
   font-size: 12px;
   font-style: normal;
   font-weight: 500;
   line-height: 20px;
   letter-spacing: -0.2px;
-  border-radius: 6px;
-  background-color: rgba(29, 180, 105, 0.12);
+
+  .is-not-active {
+    color: #ff3838;
+    background: #fff5f4;
+    width: fit-content;
+    border-radius: 6px;
+    padding: 2px 4px;
+  }
+  .is-active {
+    color: #11a75c;
+    width: fit-content;
+    border-radius: 6px;
+    padding: 2px 4px;
+    background-color: rgba(29, 180, 105, 0.12);
+  }
 }
 .product-category {
   color: #5e718d;

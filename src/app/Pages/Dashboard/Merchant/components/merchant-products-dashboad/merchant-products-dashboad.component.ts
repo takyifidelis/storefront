@@ -81,6 +81,7 @@ export class MerchantProductsDashboadComponent {
   seaechICon = faSearch;
   checkIcon = faCheck;
   isLoading: boolean = false;
+  numberOfProducts!: number;
   displayedColumns: string[] = [
     'checkbox',
     'name',
@@ -157,6 +158,7 @@ export class MerchantProductsDashboadComponent {
       .subscribe((response: any) => {
         console.log(response.data);
         this.isLoading = false;
+        this.numberOfProducts = response.data.products.length;
         // console.log(response.data.products[0].images[0].url);
         // this.users = response.data
         this.dataSource = new MatTableDataSource(response.data.products);
