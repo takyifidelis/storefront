@@ -396,18 +396,35 @@ section.similar-products {
   .card {
     text-align: left;
     margin-top: 2rem;
+    height: 30rem;
 
-    .card-img-top {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
+    .card-image {
+      position: relative;
+      height: 50%;
+      text-align: center;
+
+      .card-img-top {
+        position: absolute;
+        width: 100%;
+        object-fit: cover;
+        height: 100%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
     }
+  }
+  .first-row {
+    display: grid;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
   }
   div.card {
     border: 0;
-    width: 22rem !important;
+
     .card-body {
-      padding: 0;
+      padding: 0.5rem;
     }
     .card-title {
       color: #1c222b;

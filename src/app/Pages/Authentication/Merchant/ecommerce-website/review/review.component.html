@@ -330,21 +330,11 @@
   </section>
   <section class="similar-products">
     <h1 style="text-align: center">Similar Products</h1>
-    <div
-      class="first-row"
-      style="
-        display: grid;
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 18px;
-      "
-    >
-      <div
-        class="card .card-container"
-        style="width: 18rem"
-        *ngFor="let product of similarProducts"
-      >
-        <img [src]="product?.images[0]?.url" class="card-img-top" alt="..." />
+    <div class="first-row">
+      <div class="card card-container" *ngFor="let product of similarProducts">
+        <div class="card-image">
+          <img [src]="product?.images[0]?.url" class="card-img-top" alt="..." />
+        </div>
         <div class="card-body">
           <div
             class="product-name d-flex justify-content-between align-items-center"
