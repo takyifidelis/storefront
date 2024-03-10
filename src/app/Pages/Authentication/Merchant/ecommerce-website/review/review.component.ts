@@ -49,6 +49,7 @@ export class ReviewComponent implements OnInit {
   initialPrice?: number;
   addToBuy: any = [];
   likedProducts: any = [];
+  myVariation!: { [key: string]: string[] };
   amount: number = this.quantity * 90;
   productItem: any;
   sizes: string[] | undefined;
@@ -161,7 +162,8 @@ export class ReviewComponent implements OnInit {
     this.apiService
       .getCustomerStoreProducts(this.storeId)
       .subscribe((res: any) => {
-        // console.log(res)
+        console.log(res.data);
+        this.myVariation = res.data.variations;
         res.data.filter((product: any) => {
           if (product.category === this.productItem.category) {
             this.similarProducts.push(product);

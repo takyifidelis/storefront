@@ -72,6 +72,7 @@ export class MerchantReviewsComponent {
   reviews$!: Observable<ReviewResponseData>;
   filterIcon = faFilter;
   seaechICon = faSearch;
+  numberOfReviews!: number;
   constructor(
     public dataService: DataService,
     public dialog: MatDialog,
@@ -153,7 +154,7 @@ export class MerchantReviewsComponent {
     this.authService.getReviews(localStorage.getItem('storeId')!).subscribe(
       (response: any) => {
         console.log(response);
-        // this.users = response.data
+        this.numberOfReviews = response.data.length;
         this.dataSource = new MatTableDataSource(response.data);
       },
       (errorMessage) => {

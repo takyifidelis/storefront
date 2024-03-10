@@ -71,7 +71,8 @@ export class MerchantProductsDashboadComponent {
   seaechICon = faSearch;
   checkIcon = faCheck;
   isLoading: boolean = false;
-  users=[]
+  numberOfProducts!: number;
+  users=[];
   displayedColumns: string[] = [
     'checkbox',
     'name',
@@ -146,6 +147,10 @@ export class MerchantProductsDashboadComponent {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
 
   ngOnInit() {
     this.isLoading = true;
@@ -154,6 +159,7 @@ export class MerchantProductsDashboadComponent {
       .subscribe((response: any) => {
         console.log(response.data);
         this.isLoading = false;
+        this.numberOfProducts = response.data.products.length;
         // console.log(response.data.products[0].images[0].url);
         this.users = response.data
         this.dataSource = new MatTableDataSource(response.data.products);
