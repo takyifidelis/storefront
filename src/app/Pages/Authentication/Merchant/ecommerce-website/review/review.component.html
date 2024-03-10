@@ -48,13 +48,15 @@
                   </div>
                 </div>
               </div>
+
               <div *ngFor="let variation of variations">
                 <div class="row">
                   <div class="col d-flex">
                     <div class="select-color">
-                      <p>SELECT {{ variation?.type }}</p>
+                      <p>SELECT</p>
                     </div>
                     <div class="color d-flex gap">
+                      <div>{{ variation?.type }}</div>
                       <div class="box" style="background-color: #1b4dff"></div>
                       <div class="box" style="background-color: #ffd027"></div>
                       <div class="box" style="background-color: #8f0ea2"></div>
@@ -72,15 +74,13 @@
                         class="d-flex align-items-center justify-content-start"
                       >
                         <button class="size one">
-                          {{ variation }}
+                          {{ variation.values }}
                         </button>
                       </div>
-                      <!-- <a href="#">size guide</a> -->
                     </div>
                   </div>
                 </div>
               </div>
-
               <div class="quantity-price d-flex align-items-center">
                 <div class="quantity">
                   <p class="quantity-name quantity-price-name">QUANTITY</p>

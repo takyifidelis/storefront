@@ -56,12 +56,9 @@ export class ReviewComponent implements OnInit {
   similarProducts: any = [];
 
   cart: any = [];
-  variations?: Varaiation[];
+  variations?: any = [];
+  productReview: any;
 
-  //   this.product = this.apiService.getProductTemp();
-  //   this.selectedImage = this.product.images[0].url;
-
-  // this.initialPrice = this.product.price;
 
   constructor(
     private route: ActivatedRoute,
@@ -83,7 +80,6 @@ export class ReviewComponent implements OnInit {
         this.productItem.price = this.quantity * this.initialPrice;
     }
   }
-  productReview: any;
   showForm(): void {
     this.isFormDisplayed = true;
   }
@@ -103,6 +99,15 @@ export class ReviewComponent implements OnInit {
     this.dataService.cart.push(this.productItem);
     let addTobuyJson = JSON.stringify(this.dataService.cart);
     localStorage.setItem('cart', addTobuyJson);
+    let productObj: ProductObject = {
+      products: [],
+    };
+    for (const item of this.dataService.cart) {
+      productObj.products.push(item.id);
+    }
+    this.apiService.addTOViews(productObj, localStorage.getItem('customerId')!).subscribe((res) => {
+      console.log(res);
+    });
   }
 
   onAddOneToBuy(product: any) {
@@ -166,14 +171,13 @@ export class ReviewComponent implements OnInit {
 
     this.selectedImage = this.productItem.images[0].url;
     this.initialPrice = this.productItem.price;
-    if (this.variations) {
-      this.variations = this.productItem.variations;
-    }
+    console.log(this.productItem.variations[0].type);
+this.variations = this.productItem.variations;
 
     // this.sizes = values[0].split(',');
 
     this.apiService
-      .getCustomerStoreProducts(this.storeId)
+      .getCustomerStoreProducts(localStorage.getItem('storeId')!)
       .subscribe((res: any) => {
         // console.log(res)
         res.data.filter((product: any) => {
