@@ -1,0 +1,85 @@
+<div class="container-fluid" style="padding: 20px 53px 0 37px">
+  <div class="row justify-content-between">
+    <div class="col">
+      <div class="row">
+        <div class="col header">Payment</div>
+      </div>
+      <div class="row">
+        <div class="col d-flex" style="gap: 20px">
+          <p class="text">Home</p>
+          <span class="arrow">
+            <img src="/assets/images/greater-than.svg" alt="" />
+          </span>
+          <p class="text">Payment</p>
+        </div>
+      </div>
+    </div>
+    <div class="col button" style="align-items: center; justify-content: end">
+      <button class="btn btn-primary cancel">Cancel</button>
+      <button class="btn btn-primary save">Save</button>
+    </div>
+  </div>
+</div>
+<section class="container">
+  @for (info of walletInfo; track info) {
+  <div
+    class="d-flex justify-content-center payment-card-selected"
+    style="gap: 20px; margin-bottom: 20px; cursor: pointer"
+  >
+    <div>
+      <!-- <fa-icon [icon]="visa" style="font-size: 40px"></fa-icon> -->
+    </div>
+    <div class="d-flex justify-content-between w-100">
+      <div>
+        <div>
+          <p>{{ info.name }}</p>
+          <p>{{ info.walletId }}</p>
+          <p>{{ info.method }}</p>
+        </div>
+        <!-- <div class="d-flex" style="gap: 12px">
+          <p>Set as Default</p>
+          <span>Edit</span>
+        </div> -->
+      </div>
+    </div>
+  </div>
+  }
+</section>
+<section class="container" style="padding: 20px">
+  <form [formGroup]="walletForm" (ngSubmit)="onSubmit()">
+    <div class="label">
+      <label for="name">Name of Account</label>
+    </div>
+    <div class="input">
+      <input
+        type="text"
+        id="name"
+        class="form-control"
+        formControlName="name"
+      />
+    </div>
+    <div class="label">
+      <label for="method">Method</label>
+    </div>
+    <div class="input">
+      <input
+        type="text"
+        id="method"
+        class="form-control"
+        formControlName="method"
+      />
+    </div>
+    <div class="label">
+      <label for="email">Email</label>
+    </div>
+    <div class="input">
+      <input
+        type="text"
+        id="email"
+        class="form-control"
+        formControlName="walletId"
+      />
+    </div>
+    <button class="btn btn-primary" type="submit">Submit</button>
+  </form>
+</section>
