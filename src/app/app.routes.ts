@@ -44,7 +44,7 @@ import { MerchantAddProductComponent } from './Pages/Dashboard/Merchant/componen
 import { CkeckoutPageComponent } from './Pages/Dashboard/Customer/components/ckeckout-page/ckeckout-page.component';
 import { AuthSuccessfulComponent } from './Pages/Authentication/CommonComponent/auth-successful/auth-successful.component';
 import { MerchantProductsDashboadComponent } from './Pages/Dashboard/Merchant/components/merchant-products-dashboad/merchant-products-dashboad.component';
-import { WalletComponent } from './Pages/Dashboard/Merchant/home/wallet/wallet.component';
+import { WalletComponent } from './Pages/Dashboard/Merchant/components/wallet/wallet.component';
 
 export const routes: Routes = [
   { path: '', component: LandingPageComponent },

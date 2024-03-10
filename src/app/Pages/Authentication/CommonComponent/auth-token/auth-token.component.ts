@@ -62,7 +62,7 @@ export class AuthTokenComponent {
     this.isLoading = true;
 
     this.authService.verifyAccount(authCode).subscribe(
-      (resData: Response) => {
+      (resData) => {
         console.log(resData);
         this.isLoading = false;
         this.toastr.success('Proceed to Login', 'Verification Successful');
