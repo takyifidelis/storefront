@@ -65,16 +65,17 @@
                   </div>
                 </div>
                 <div class="row">
-                  <div class="col d-flex">
+                  <div class="col">
                     <div class="select-size">
                       <p>SELECT SIZE</p>
                     </div>
                     <div class="size-guide txt-2">
                       <div
+                        *ngFor="let value of values"
                         class="d-flex align-items-center justify-content-start"
                       >
                         <button class="size one">
-                          {{ variation.values }}
+                          {{ value }}
                         </button>
                       </div>
                     </div>

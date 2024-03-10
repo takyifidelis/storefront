@@ -16,6 +16,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatTabsModule } from '@angular/material/tabs';
+import { UserInterface } from '../../../../../interfaces/all-interfaces';
 
 @Component({
   selector: 'app-merchant-analytics',
@@ -50,14 +51,13 @@ export class MerchantAnalyticsComponent {
     'recieved',
     'date',
   ];
-  dataSource: MatTableDataSource<dummyUserInterface>;
-  selection = new SelectionModel<dummyUserInterface>(true, []);
+  dataSource: MatTableDataSource<UserInterface>;
+  selection = new SelectionModel<UserInterface>(true, []);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   
 
-  users: dummyUserInterface[] = [
-  ];
+  users: UserInterface[] = [];
 
   formattedDate!: string | null;
    datepipe: DatePipe = new DatePipe('en-US');
@@ -73,16 +73,6 @@ this.dataSource = new MatTableDataSource(this.payout);
 
      })
   }
-
-  // moreVert(e: dummyUserInterface) {
-  //   this.dialog.open(MerchantOrderModalComponent, {
-  //     data: e,
-  //     width: '479px',
-  //     position: { right: '50px', top: '10%' },
-  //   }).afterClosed().subscribe(() => {
-  //     this.ngOnInit()
-  //   })
-  // }
 
   isAllSelected() {
     const numSelected = this.selection.selected.length;
@@ -106,7 +96,7 @@ this.dataSource = new MatTableDataSource(this.payout);
   }
 
   /** The label for the checkbox on the passed row */
-  checkboxLabel(row?: dummyUserInterface): string {
+  checkboxLabel(row?: UserInterface): string {
     if (!row) {
       return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
     }

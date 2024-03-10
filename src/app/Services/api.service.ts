@@ -253,6 +253,7 @@ getStoreProducts(storeId: string): Observable<Response>{
       withCredentials: true,
     })
   }
+
 postProduct(formData: FormData, storeId: string) {
 
     return this.http
@@ -272,9 +273,12 @@ postProduct(formData: FormData, storeId: string) {
       withCredentials: true,
     })
   }
-
-
   
+getShipping(customerId: string): Observable<Response> {
+  return this.http.get<Response>(`${environment.baseApiUrl}/customer/get-shipping-addresses/${customerId}`, {
+    withCredentials: true
+  })
+}
 
   getOrders(customerId: string): Observable<Response> {
     return this.http.get<Response>(

@@ -51,14 +51,12 @@ export class ReviewComponent implements OnInit {
   likedProducts: any = [];
   amount: number = this.quantity * 90;
   productItem: any;
-  sizes: string[] | undefined;
   storeId = 'f9586428-62e3-4455-bb1d-61262a407d1a';
   similarProducts: any = [];
-
   cart: any = [];
-  variations?: any = [];
+  variations?: Varaiation[] = [];
   productReview: any;
-
+values?: string[];
 
   constructor(
     private route: ActivatedRoute,
@@ -142,7 +140,6 @@ export class ReviewComponent implements OnInit {
       productObj.products.push(likeditem.id);
     }
     this.apiService.addToFavourite(productObj, localStorage.getItem('customerId')!).subscribe((res) => {
-      console.log(res);
     });
   }
 
@@ -174,7 +171,9 @@ export class ReviewComponent implements OnInit {
     console.log(this.productItem.variations[0].type);
 this.variations = this.productItem.variations;
 
-    // this.sizes = values[0].split(',');
+for(const value of this.variations!){
+  this.values = value.values;
+}
 
     this.apiService
       .getCustomerStoreProducts(localStorage.getItem('storeId')!)

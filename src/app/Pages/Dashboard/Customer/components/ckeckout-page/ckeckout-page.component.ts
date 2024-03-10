@@ -11,6 +11,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {
   FormControl,
   FormGroup,
+  FormsModule,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
@@ -18,12 +19,37 @@ import { SignupResponseData } from '../../../../Authentication/Auth/api.model';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
+import { UserInterface } from '../../../../../interfaces/all-interfaces';
+import { SelectionModel } from '@angular/cdk/collections';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatSort, MatSortModule } from '@angular/material/sort';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import e from 'express';
+import { dummyUserInterface } from '../../../Merchant/components/merchant-products-dashboad/merchant-products-dashboad.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatTabsModule } from '@angular/material/tabs';
 
 
 @Component({
   selector: 'app-ckeckout-page',
   standalone: true,
-  imports: [NgxPayPalModule, FontAwesomeModule, ReactiveFormsModule, CommonModule],
+  imports: [NgxPayPalModule, FontAwesomeModule, ReactiveFormsModule,  FormsModule,
+    MatIconModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
+    MatDialogModule,
+    MatTabsModule,
+    CommonModule],
   templateUrl: './ckeckout-page.component.html',
   styleUrl: './ckeckout-page.component.scss',
 })
@@ -39,24 +65,35 @@ export class CkeckoutPageComponent implements OnInit {
   payload: any;
   PAYPAL_CLIENT_ID: string =   `${environment.paypalClientID2}`;
   @ViewChild('paypalRef', { static: true }) private paypalRef: ElementRef | undefined;
-  items:any = []
-
+  items:any = [];
+  displayedColumns: string[] = [
+    'name',
+    'phone',
+    'streetAddress',
+    'countryCode',
+    'apartmentNo',
+    'city', 
+  ];
+  dataSource: MatTableDataSource<UserInterface>;
+  selection = new SelectionModel<UserInterface>(true, []);
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+  users: UserInterface[] = [];
+  addShipping: boolean = false;
 
   constructor(
     private apiService: APIService,
     public dataService: DataService,
     private snackBar: MatSnackBar,
     private router: Router,
-    public http: HttpClient
-  ) {}
+    public http: HttpClient,
+    public dialog: MatDialog
+  ) {
+    this.dataSource = new MatTableDataSource(this.users);
 
-  getdata(){
-    // console.log(this.cart)
-    
-// console.log(this.items);
-
-    // return this.items;
   }
+
+
   
   ngOnInit(): void {
     this.initConfig();
@@ -73,8 +110,9 @@ export class CkeckoutPageComponent implements OnInit {
       
 
     });
+
     this.cart = JSON.parse(localStorage.getItem('cart')!);
-    this.items = []
+    this.items = [];
     for (const item of this.cart) {
         this.items.push({product:item.id, quantity: item.quant, variations:[] })
     }
@@ -82,8 +120,12 @@ export class CkeckoutPageComponent implements OnInit {
     this.payload = {
       items: this.items,
       shipping: '38839ef8-8d01-47f3-bb50-91dbe5f2f6ce',
-      store: 'f9586428-62e3-4455-bb1d-61262a407d1a',
+      store: localStorage.getItem('storeId'),
     };
+
+    this.apiService.getShipping(localStorage.getItem('customerId')!).subscribe((res: any) => {
+      console.log(res)
+    })
   }
 
   createOrder() {
@@ -131,81 +173,6 @@ export class CkeckoutPageComponent implements OnInit {
 }
 
   }
-
-  // getOrderData(){
-  //   if (this.dataService.cart.length > 0) {
-  //     // this.cart = JSON.parse(localStorage.getItem('cart')!);
-  //     for (const item of this.dataService.cart) {
-  //         this.items.push({product:item.id ,quantity: 1, variations:[] })
-  //     }
-  //   console.log(this.items);
-    
-  //   }
-  // }
-  
-
-  // private initConfig(): void {
-  //   this.payPalConfig = {
-  //     clientId: environment.paypalClientID2,
-  //     createOrderOnServer: this.createOrder()!,
-  //     onApprove: (data: any, actions: any) => {
-  //        this.onApprove(data);
-  //     },
-  //     onClientAuthorization: (data: any) => {
-  //       console.log(
-  //         'onClientAuthorization - you should probably inform your server about completed transaction at this point',
-  //         data
-  //       );
-  //     },
-  //     onCancel: (data, actions) => {
-  //       console.log('OnCancel', data, actions);
-  //     },
-  //     onError: (err) => {
-  //       console.log('OnError', err);
-  //     },
-  //     onClick: (data, actions) => {
-  //       console.log('onClick', data, actions);
-  //     },
-  //   };
-  // }
-
-  // private initConfig(): void {
-    
-    // this.payPalConfig = {
-    //     clientId: `${environment.paypalClientID2}`,
-    //     // for creating orders (transactions) on server see
-    //     // https://developer.paypal.com/docs/checkout/reference/server-integration/set-up-transaction/
-    //     createOrderOnServer: (data) => fetch(`${environment.baseApiUrl}order/initialize/f739a921-7267-4e02-8222-ceb2b4c352cf`,{
-    //       method: "POST",
-    //       headers: {
-    //               "Content-Type": "application/json",
-    //             },
-    // body: JSON.stringify(this.payload),
-
-    //     }
-        
-    //     ).then((res) => res.json())
-    //         .then((order) => order.orderID),
-    //     onApprove: (data, actions) => {
-    //         console.log('onApprove - transaction was approved, but not authorized', data, actions);
-    //         actions.order.get().then((details: any) => {
-    //             console.log('onApprove - you can get full order details inside onApprove: ', details);
-    //         });
-
-    //     },
-    //     onClientAuthorization: (data) => {
-    //         console.log('onClientAuthorization - you should probably inform your server about completed transaction at this point', data);
-    //     },
-    //     onCancel: (data, actions) => {
-    //         console.log('OnCancel', data, actions);
-
-    //     },
-    //     onError: err => {
-    //         console.log('OnError', err);
-    //     },
-    //     onClick: (data, actions) => {
-    //         console.log('onClick', data, actions);
-    //     },
 
   private initConfig(): void {
     
@@ -296,6 +263,41 @@ export class CkeckoutPageComponent implements OnInit {
       .subscribe((res: any) => {
         console.log(res);
       });
+  }
+
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.dataSource.data.length;
+    return numSelected === numRows;
+  }
+  showSelection(e: any) {
+    e.stopPropagation();
+    console.log(this.selection.selected);
+  }
+  /** Selects all rows if they are not all selected; otherwise clear selection. */
+  toggleAllRows() {
+    if (this.isAllSelected()) {
+      this.selection.clear();
+      console.log(this.selection.selected);
+      return;
+    }
+
+    this.selection.select(...this.dataSource.data);
+    console.log(this.selection.selected);
+  }
+
+  /** The label for the checkbox on the passed row */
+  checkboxLabel(row?: UserInterface): string {
+    if (!row) {
+      return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
+    }
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${
+      row.checkbox + 1
+    }`;
+  }
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
 
