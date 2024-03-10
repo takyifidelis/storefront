@@ -19,7 +19,13 @@
               [icon]="seaechICon"
               style="font-size: 15px; color: #1b4dff"
             ></fa-icon>
-            <input type="text" placeholder="Search........" />
+            <input
+              matInput
+              type="text"
+              placeholder="Search........"
+              (keyup)="applyFilter($event)"
+              #input
+            />
           </div>
         </form>
         <button class="new-product" [routerLink]="['add-product']">

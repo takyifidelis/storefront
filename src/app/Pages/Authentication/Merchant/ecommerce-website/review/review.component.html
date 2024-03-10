@@ -97,7 +97,7 @@
                 <div class="price">
                   <p class="price-name quantity-price-name">PRICE</p>
                   <div class="price-amount amount">
-                    {{ "$" + productItem.price }}
+                    {{ "$" + productItem.price }}<span>.00</span>
                   </div>
                 </div>
               </div>
@@ -247,7 +247,15 @@
         >
           <div class="comment">
             <div class="feedback-image">
-              <img src="assets\images\feedback-image.svg" alt="" />
+              <!-- <img src="assets\images\feedback-image.svg" alt="" /> -->
+              <div class="fedback-profile">
+                <span class="first-initial"
+                  >{{ review.customerReview.firstName.charAt(0) }}
+                </span>
+                <span class="last-initial">{{
+                  review.customerReview.lastName.charAt(0)
+                }}</span>
+              </div>
             </div>
           </div>
 
