@@ -212,7 +212,7 @@ section.featured-items {
   div.card {
     border: 0;
     .card-body {
-      padding: 00.5rem;
+      padding: 0.5rem;
     }
     .card-img {
       height: 50%;
@@ -236,6 +236,7 @@ section.featured-items {
       font-weight: 400;
       line-height: 24px;
       letter-spacing: -0.2px;
+      text-transform: capitalize;
     }
 
     .product-price {

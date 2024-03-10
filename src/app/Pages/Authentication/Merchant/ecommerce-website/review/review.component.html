@@ -1,9 +1,9 @@
 <div class="container-fluid">
-  <section class="">
+  <section class="preview-section">
     <mat-drawer-container class="example-container">
       <mat-drawer mode="side" opened="true">
         @for(image of productItem.images; track image){
-        <div>
+        <div class="">
           <img
             [src]="image.url"
             class="side-shoe"
@@ -13,18 +13,13 @@
         </div>
         }
       </mat-drawer>
-      <mat-drawer-content>
-        <div class="row">
-          <div class="col img-item-preview">
-            <img [src]="selectedImage" alt="" />
+      <mat-drawer-content class="detail-content">
+        <div class="drawer-content d-flex justify-content-between">
+          <div class="img-item-preview">
+            <img [src]="selectedImage" alt="" class="preview-image" />
           </div>
-          <div class="col" style="margin-top: -15px">
+          <div class="product-info">
             <div class="container">
-              <div class="row top">
-                <div class="col">
-                  <p class="txt">{{ productItem.description }}</p>
-                </div>
-              </div>
               <div class="row">
                 <div class="col">
                   <h4 class="item-name">{{ productItem.name }}</h4>
@@ -33,26 +28,26 @@
               <div class="row">
                 <div class="col d-inline-flex">
                   <div class="item-rating d-flex">
-                    <div class="starIcon">
+                    <div class="starIcon d-flex align-items-center">
                       <app-star-rating
                         [readonly]="true"
                         [rating]="productItem.rating"
                       ></app-star-rating>
+                      <p class="txt-2">{{ productItem.rating }} Ratings</p>
                     </div>
-                    <p class="txt-2 m-0">{{ productItem.rating }} Ratings</p>
                   </div>
                   <div class="items-available d-flex align-items-center">
-                    <p class="txt-2 m-0">
+                    <p class="txt-2">
                       Available Stock: {{ productItem.quantity }}
                     </p>
                   </div>
                 </div>
               </div>
-              <div *ngFor="let variation of variations">
+              <div class="">
                 <div class="row">
                   <div class="col d-flex">
                     <div class="select-color">
-                      <p>SELECT {{ variation?.type }}</p>
+                      <p>SELECT COLOR</p>
                     </div>
                     <div class="color d-flex gap">
                       <div class="box" style="background-color: #1b4dff"></div>
@@ -62,21 +57,20 @@
                     </div>
                   </div>
                 </div>
-                <div class="row">
-                  <div class="col d-flex">
-                    <div class="select-size">
-                      <p>SELECT SIZE</p>
-                    </div>
-                    <div class="size-guide txt-2">
-                      <div
-                        class="d-flex align-items-center justify-content-start"
-                      >
-                        <button class="size one">
-                          {{ variation }}
-                        </button>
-                      </div>
-                      <!-- <a href="#">size guide</a> -->
-                    </div>
+                <div
+                  class="product-variation"
+                  *ngFor="let item of myVariation | keyvalue"
+                >
+                  <div class="variation-type select-size">
+                    Select {{ item.key }}
+                  </div>
+                  <div class="variation-value">
+                    <button
+                      class="values size"
+                      *ngFor="let value of item.value"
+                    >
+                      {{ value }}
+                    </button>
                   </div>
                 </div>
               </div>
@@ -339,7 +333,7 @@
           <div
             class="product-name d-flex justify-content-between align-items-center"
           >
-            <h5 class="card-title"></h5>
+            <h5 class="card-title">{{ product?.category }}</h5>
             <div class="product-btn">
               <button
                 (click)="onLikeOne(product)"
@@ -360,9 +354,7 @@
             </div>
           </div>
           <p class="blossom-bag-paragraph">{{ product?.name }}</p>
-          <div
-            class="ratings d-flex align-items-center justify-content-between"
-          >
+          <div class="ratings d-flex align-items-center">
             <app-star-rating
               [rating]="product.rating"
               [readonly]="true"
