@@ -117,13 +117,28 @@ export class MerchantAddProductComponent {
     this.data.append('description', this.productDetailss.description);
     this.data.append('isActive', 'true');
     this.data.append('category', this.productDetails.category);
-    console.log(this.data);
+    this.variationArray.forEach(variation =>{
+      this.data.append('variations', JSON.parse(this.variationArray.toString()));
+    })
+    // this.data.append('variations', JSON.stringify([{"type": "color", "value":"1"}]));
+    // this.data.append('variation', JSON.stringify(this.variationArray));
+    console.log(JSON.stringify(this.variationArray));
     this.isLoading = true;
 
     this.authService
       .postProduct(this.data, localStorage.getItem('storeId')!)
       .subscribe(
         (resData) => {
+          this.productDetails = {
+            name: '',
+            price: 0,
+            quantity: 0,
+            description: '',
+            isActive: true,
+            category: '',
+          };
+
+
           console.log(resData);
           this.router.navigate(['/merchant/product']);
           this.toastr.info(resData.message, 'Success');
@@ -140,14 +155,7 @@ export class MerchantAddProductComponent {
         }
       );
 
-    this.productDetails = {
-      name: '',
-      price: 0,
-      quantity: 0,
-      description: '',
-      isActive: true,
-      category: '',
-    };
+
   }
 
   onUpdate() {
