@@ -65,6 +65,14 @@ export class EcommerceWebsiteComponent implements OnInit{
     this.router.navigate(['/checkout-page']);
   }
 
+  goToFavouriteProducts(){
+    this.router.navigate(['/customer/fav-product'])
+  }
+
+  goToCustomerDashboard(){
+this.router.navigate(['/customer'])
+  }
+
   toggleBtnFunction() {
     this.dropDownMenu = document.querySelector('#dropdownMenu');
     if (this.dropDownMenu) {

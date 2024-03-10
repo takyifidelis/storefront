@@ -107,7 +107,7 @@
           class="heart nav-icons"
           color="primary"
           mat-icon-button
-          [routerLink]="['customer/fav-product']"
+          (click)="goToFavouriteProducts()"
         >
           <mat-icon
             [matBadge]="dataService.like.length"
@@ -116,7 +116,12 @@
             >favorite_border</mat-icon
           >
         </button>
-        <button class="person nav-icons" color="primary" mat-icon-button>
+        <button
+          class="person nav-icons"
+          color="primary"
+          mat-icon-button
+          (click)="goToCustomerDashboard()"
+        >
           <mat-icon>person</mat-icon>
         </button>
 
