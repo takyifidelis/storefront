@@ -19,6 +19,8 @@ import { APIService } from '../../../../../Services/api.service';
 // import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { DataService } from '../../../../../Services/data.service';
+import { merchantProduct } from '../../../../../interfaces/all-interfaces';
 
 @Component({
   selector: 'app-merchant-add-product',
@@ -44,7 +46,6 @@ export class MerchantAddProductComponent {
   productForm: FormGroup;
   inputText: string = '';
   inputSize: string = '';
-
   inputColor: string = '';
   // textArray: string[] = [];
   sizeArray: string[] = [];
@@ -52,7 +53,7 @@ export class MerchantAddProductComponent {
   variationKey: string = '';
   variationValue: string = '';
   variationArray: { key: string; values: string[] }[] = [];
-  selectedStatus: string = 'Active';
+  selectedStatus = {displayValue:'Active', value:true};
   displayedStatus: string = 'Active';
 
   files: any;
@@ -60,14 +61,15 @@ export class MerchantAddProductComponent {
   categories: string[] = [];
   productDetails = {
     name: '',
-    price: '',
-    quantity: '',
+    price: 0,
+    quantity: 0,
     description: this.productDetailss.description,
-    isActive: 'true',
+    isActive: true,
     category: '',
   };
   onFileSelected(event: any) {
     for (const file of event.target.files) {
+      console.log(file)
       this.data.append('images', file);
     }
     const files: FileList = event.target.files;
@@ -95,7 +97,8 @@ export class MerchantAddProductComponent {
     private authService: APIService,
     private router: Router,
     private apiService: APIService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    public dataService:DataService
   ) {
     this.productForm = new FormGroup({
       productName: new FormControl('', Validators.required),
@@ -109,8 +112,8 @@ export class MerchantAddProductComponent {
 
   onSubmit() {
     this.data.append('name', this.productDetails.name);
-    this.data.append('price', this.productDetails.price);
-    this.data.append('quantity', this.productDetails.quantity);
+    this.data.append('price', this.productDetails.price.toString());
+    this.data.append('quantity', this.productDetails.quantity.toString());
     this.data.append('description', this.productDetailss.description);
     this.data.append('isActive', 'true');
     this.data.append('category', this.productDetails.category);
@@ -139,21 +142,53 @@ export class MerchantAddProductComponent {
 
     this.productDetails = {
       name: '',
-      price: '',
-      quantity: '',
+      price: 0,
+      quantity: 0,
       description: '',
-      isActive: 'true',
+      isActive: true,
       category: '',
     };
   }
 
+  onUpdate() {
+    this.productDetails.description = this.productDetailss.description
+    console.log(this.productDetails)
+   this.data.forEach((item)=>{
+      console.log(item)
+    });
+    this.isLoading = true;
+    if (this.isMerchantProductInterface(this.dataService.updateProduct)) {
+      this.authService
+        .updateProduct(this.productDetails, this.dataService.updateProduct.id)
+        .subscribe(
+          (resData) => {
+            console.log(resData);
+            this.router.navigate(['/merchant/product']);
+            this.toastr.info(resData.message, 'Success');
+            this.isLoading = false;
+            this.resetProductForm()
+          },
+          (errorMessage) => {
+            console.log(errorMessage);
+            this.isLoading = false;
+  
+            this.toastr.error(
+              errorMessage.error.message,
+              errorMessage.error.type
+            );
+          }
+        );
+    }
+
+      
+  }
   resetProductForm() {
     this.productDetails = {
       name: '',
-      price: '',
-      quantity: '',
+      price: 0,
+      quantity: 0,
       description: '',
-      isActive: 'true',
+      isActive: true,
       category: '',
     };
   }
@@ -195,14 +230,32 @@ export class MerchantAddProductComponent {
 
   onStatusChange(event: Event) {
     const target = event.target as HTMLSelectElement;
-    this.selectedStatus = target.value;
+    this.selectedStatus.displayValue = target.value;
 
     this.displayedStatus =
-      this.selectedStatus === 'true' ? 'Active' : 'Not Active';
-    this.productDetails.isActive = this.selectedStatus;
+      this.selectedStatus.value === true ? 'Active' : 'Not Active';
+    this.productDetails.isActive = target.value === 'true' ? true : false;
   }
+isMerchantProductInterface(obj: any): obj is merchantProduct {
+    return obj && typeof obj.id === 'string' && typeof obj.name === 'string';
+}
   ngOnInit() {
-    this.apiService
+    if (this.isMerchantProductInterface(this.dataService.updateProduct)) {
+      this.dataService.isProductUpdateInstance = true;
+      this.productDetails.name = this.dataService.updateProduct.name;
+      this.productDetails.price = (this.dataService.updateProduct.price);
+      this.productDetails.quantity = this.dataService.updateProduct.quantity;
+      this.productDetailss.description = this.dataService.updateProduct.description;
+      this.selectedStatus.value = (this.dataService.updateProduct.isActive);
+      this.categories.push(this.dataService.updateProduct.category)
+      this.productDetails.category = this.dataService.updateProduct.category
+      this.variationArray = this.dataService.updateProduct.variations;
+      this.dataService.updateProduct.images.forEach((image) => {
+        this.images.push(image.url);
+      })
+    }else{
+      this.dataService.isProductUpdateInstance = false;
+      this.apiService
       .getStoreCategories(localStorage.getItem('storeId')!)
       .subscribe((catResData: { [key: string]: any }) => {
         console.log(catResData);
@@ -211,5 +264,10 @@ export class MerchantAddProductComponent {
         }
         console.log(this.categories);
       });
+    }
+  }
+  ngOnDestroy() {
+    this.dataService.isProductUpdateInstance = false;
+    this.dataService.updateProduct = ''
   }
 }

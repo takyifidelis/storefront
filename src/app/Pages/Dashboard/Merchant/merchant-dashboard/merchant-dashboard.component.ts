@@ -74,7 +74,7 @@ export class MerchantDashboardComponent implements OnInit {
       .getMerchantStores(localStorage.getItem('businessId')!)
       .subscribe((resData: { [key: string]: any }) => {
         this.stores = resData['data'];
-        console.log(this.stores);
+        // console.log(this.stores);
         if (
           this.dataService.selectedStore['id'] &&
           this.dataService.selectedStore['id'].length
@@ -83,7 +83,7 @@ export class MerchantDashboardComponent implements OnInit {
         } else {
           this.dataService.selectedStore = this.stores[0];
         }
-        console.log(this.dataService.selectedStore);
+        // console.log(this.dataService.selectedStore);
         localStorage.setItem('storeId', this.dataService.selectedStore['id']);
         localStorage.setItem(
           'template',

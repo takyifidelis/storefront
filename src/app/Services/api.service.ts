@@ -293,7 +293,7 @@ export class APIService {
   }
   postProduct(formData: FormData, storeId: string) {
     return this.http.post<Response>(
-      `https://storefront-backend-jan-dev-api.vercel.app/api/product/add/${storeId}`,
+      `${environment.baseApiUrl}/product/add/${storeId}`,
       formData,
       {
         withCredentials: true,
@@ -301,6 +301,15 @@ export class APIService {
     );
   }
 
+  updateProduct(formData: any, productId: string) {
+    return this.http.patch<Response>(
+      `${environment.baseApiUrl}/product/update-product/${productId}`,
+      formData,
+      {
+        withCredentials: true,
+      }
+    );
+  }
   // publishTemplate(storeId: string, template:any): Observable<Response>{
   //   return this.http.patch<Response>(`${environment.baseApiUrl}/store/publish-template/${storeId}`,
   //   template, {

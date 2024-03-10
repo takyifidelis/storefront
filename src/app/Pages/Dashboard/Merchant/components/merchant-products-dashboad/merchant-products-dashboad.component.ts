@@ -11,6 +11,8 @@ import {
 import {
   MAT_DIALOG_DATA,
   MatDialog,
+  MatDialogActions,
+  MatDialogClose,
   MatDialogContent,
   MatDialogModule,
   MatDialogTitle,
@@ -28,9 +30,11 @@ import { MatInputModule } from '@angular/material/input';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCheck, faFilter, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { HttpClientModule } from '@angular/common/http';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { APIService } from '../../../../../Services/api.service';
 import { MatTabsModule } from '@angular/material/tabs';
+import { DataService } from '../../../../../Services/data.service';
+import { merchantProduct } from '../../../../../interfaces/all-interfaces';
 
 export interface dummyUserInterface {
   checkbox: string;
@@ -41,19 +45,7 @@ export interface dummyUserInterface {
   status: string;
   images: { [key: string]: any }[];
 }
-export interface productDetailInterface {
-  id: string;
-  createdAt: string;
-  name: any;
-  discount: number;
-  category: string;
-  statement: string;
-  start: string;
-  end: string;
-  inventory: string;
-  status: string;
-  images: { [key: string]: any }[];
-}
+
 @Component({
   selector: 'app-merchant-products-dashboad',
   standalone: true,
@@ -69,6 +61,8 @@ export interface productDetailInterface {
     MatSortModule,
     MatPaginatorModule,
     MatDialogModule,
+    MatDialogActions,
+    MatDialogClose,
     HttpClientModule,
     CommonModule,
     RouterModule,
@@ -82,6 +76,7 @@ export class MerchantProductsDashboadComponent {
   checkIcon = faCheck;
   isLoading: boolean = false;
   numberOfProducts!: number;
+  users=[];
   displayedColumns: string[] = [
     'checkbox',
     'name',
@@ -146,15 +141,16 @@ export class MerchantProductsDashboadComponent {
       row.checkbox + 1
     }`;
   }
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  }
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
   ngOnInit() {
     this.isLoading = true;
     this.apiService
@@ -165,7 +161,7 @@ export class MerchantProductsDashboadComponent {
         this.numberOfProducts = response.data.products.length;
 
         // console.log(response.data.products[0].images[0].url);
-        // this.users = response.data
+        this.users = response.data
         this.dataSource = new MatTableDataSource(response.data.products);
       });
   }
@@ -177,6 +173,8 @@ export class MerchantProductsDashboadComponent {
   imports: [
     MatDialogTitle,
     MatDialogContent,
+    MatDialogActions, 
+    MatDialogClose,
     CommonModule,
     MatTabsModule,
     MatRadioModule,
@@ -198,9 +196,11 @@ export class MerchantProductDiscountComponent {
     categories: [],
   };
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: productDetailInterface,
+    @Inject(MAT_DIALOG_DATA) public data: merchantProduct,
     private apiService: APIService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private dataService: DataService,
+    private router: Router
   ) {
     this.addPromotion = new FormGroup({
       promo: new FormControl('', Validators.required),
@@ -218,7 +218,6 @@ export class MerchantProductDiscountComponent {
         }
       );
   }
-  ngOnInit() {}
 
   addPromotionToStore(form: FormGroupDirective) {
     this.pdata.products.push(this.data.id);
@@ -241,6 +240,11 @@ export class MerchantProductDiscountComponent {
       );
   }
 
+  onUpdateProduct(){
+    this.dataService.updateProduct = this.data
+    this.dataService.isProductUpdateInstance = true;
+    this.router.navigate(['/merchant/product/add-product']);
+  }
   onDeleteProduct() {
     let deleteIds: string[] = [];
     deleteIds.push(this.data.id);
