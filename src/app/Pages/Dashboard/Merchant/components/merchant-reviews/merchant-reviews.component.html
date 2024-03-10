@@ -37,7 +37,7 @@
 
 <section class="review-page">
   <div class="filter-block">
-    <div class="row justify-content-between" style="padding-left: 41px">
+    <div class="d-flex justify-content-between">
       <div class="d-flex align-items-center">
         <h4>Reviews</h4>
         <div class="number-of-reviews">
@@ -47,7 +47,7 @@
         </div>
       </div>
       <div
-        class="col d-flex justify-content-end align-items-center"
+        class="d-flex justify-content-end align-items-center"
         style="gap: 10px; padding-right: 31px"
       >
         <button class="d-flex justify-content-around button">
@@ -63,7 +63,13 @@
               [icon]="seaechICon"
               style="font-size: 15px; color: #1b4dff"
             ></fa-icon>
-            <input type="text" placeholder="Search........" />
+            <input
+              type="text"
+              placeholder="Search........"
+              matInput
+              (keyup)="applyFilter($event)"
+              #input
+            />
           </div>
         </form>
       </div>
@@ -191,6 +197,11 @@
           </div>
         </td>
       </ng-container>
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell no-result" colspan="4" *ngIf="numberOfReviews > 0">
+          No data matching "{{ input.value }}"
+        </td>
+      </tr>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <!-- <tr mat-row *matRowDef="let row; columns: displayedColumns;"
@@ -208,4 +219,14 @@
   <!-- <div *ngFor="let review of reviews$ | async">
     {{rating }}
   </div> -->
+  <div class="loading-spinner-small" *ngIf="isLoading">
+    <img
+      src="assets\icons\loading-btn-spinner.svg"
+      alt="Loading.."
+      class="spinner-image"
+    />
+  </div>
+  <div class="no-result-found" *ngIf="numberOfReviews === 0">
+    No Review Found
+  </div>
 </section>

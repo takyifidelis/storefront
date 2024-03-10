@@ -72,6 +72,7 @@ export class MerchantReviewsComponent {
   reviews$!: Observable<ReviewResponseData>;
   filterIcon = faFilter;
   seaechICon = faSearch;
+  isLoading: boolean = false;
   numberOfReviews!: number;
   constructor(
     public dataService: DataService,
@@ -149,16 +150,23 @@ export class MerchantReviewsComponent {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
 
   ngOnInit() {
+    this.isLoading = true;
     this.authService.getReviews(localStorage.getItem('storeId')!).subscribe(
       (response: any) => {
         console.log(response);
+        this.isLoading = false;
         this.numberOfReviews = response.data.length;
         this.dataSource = new MatTableDataSource(response.data);
       },
       (errorMessage) => {
         console.log(errorMessage);
+        this.isLoading = false;
       }
     );
   }

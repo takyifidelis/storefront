@@ -74,6 +74,7 @@ export class MerchantDiscountComponent {
   seaechICon = faSearch;
   checkIcon = faCheck;
   showForm: boolean = false;
+  isLoading: boolean = false;
   addDiscount: FormGroup;
   discountNumber!: any;
   storeCategories: string[] = [];
@@ -126,7 +127,7 @@ export class MerchantDiscountComponent {
   // the code below is all for the checkboxes in the table
   ngOnInit() {
     this.dataSource = new MatTableDataSource(this.users);
-
+    this.isLoading = true;
     // Get categories
     this.apiService
       .getStoreCategories(localStorage.getItem('storeId')!)
@@ -143,11 +144,13 @@ export class MerchantDiscountComponent {
         (promoData: { [key: string]: any }) => {
           console.log(promoData);
           this.discountNumber = promoData['data'].length;
+          this.isLoading = false;
 
           this.dataSource = new MatTableDataSource(promoData['data']);
         },
         (errorMessage) => {
           console.log(errorMessage);
+          this.isLoading = false;
         }
       );
   }
@@ -197,6 +200,10 @@ export class MerchantDiscountComponent {
       .subscribe(() => {
         this.ngOnInit();
       });
+  }
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
   // Posting the new Promotion
   onSubmit(form: FormGroupDirective) {
