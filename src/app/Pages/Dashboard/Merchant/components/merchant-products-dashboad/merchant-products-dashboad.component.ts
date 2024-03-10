@@ -11,6 +11,8 @@ import {
 import {
   MAT_DIALOG_DATA,
   MatDialog,
+  MatDialogActions,
+  MatDialogClose,
   MatDialogContent,
   MatDialogModule,
   MatDialogTitle,
@@ -59,6 +61,8 @@ export interface dummyUserInterface {
     MatSortModule,
     MatPaginatorModule,
     MatDialogModule,
+    MatDialogActions,
+    MatDialogClose,
     HttpClientModule,
     CommonModule,
     RouterModule,
@@ -147,7 +151,6 @@ export class MerchantProductsDashboadComponent {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
-
   ngOnInit() {
     this.isLoading = true;
     this.apiService
@@ -169,6 +172,8 @@ export class MerchantProductsDashboadComponent {
   imports: [
     MatDialogTitle,
     MatDialogContent,
+    MatDialogActions, 
+    MatDialogClose,
     CommonModule,
     MatTabsModule,
     MatRadioModule,

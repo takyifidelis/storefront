@@ -231,11 +231,10 @@ export class MerchantAddProductComponent {
   onStatusChange(event: Event) {
     const target = event.target as HTMLSelectElement;
     this.selectedStatus.displayValue = target.value;
-    this.selectedStatus.value = !this.selectedStatus.value;
 
     this.displayedStatus =
-      this.selectedStatus.displayValue === 'true' ? 'Active' : 'Not Active';
-    this.productDetails.isActive = this.selectedStatus.value;
+      this.selectedStatus.value === true ? 'Active' : 'Not Active';
+    this.productDetails.isActive = target.value === 'true' ? true : false;
   }
 isMerchantProductInterface(obj: any): obj is merchantProduct {
     return obj && typeof obj.id === 'string' && typeof obj.name === 'string';
@@ -247,7 +246,7 @@ isMerchantProductInterface(obj: any): obj is merchantProduct {
       this.productDetails.price = (this.dataService.updateProduct.price);
       this.productDetails.quantity = this.dataService.updateProduct.quantity;
       this.productDetailss.description = this.dataService.updateProduct.description;
-      this.productDetails.isActive = (this.dataService.updateProduct.isActive);
+      this.selectedStatus.value = (this.dataService.updateProduct.isActive);
       this.categories.push(this.dataService.updateProduct.category)
       this.productDetails.category = this.dataService.updateProduct.category
       this.variationArray = this.dataService.updateProduct.variations;
@@ -266,5 +265,9 @@ isMerchantProductInterface(obj: any): obj is merchantProduct {
         console.log(this.categories);
       });
     }
+  }
+  ngOnDestroy() {
+    this.dataService.isProductUpdateInstance = false;
+    this.dataService.updateProduct = ''
   }
 }

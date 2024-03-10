@@ -64,14 +64,12 @@
         </div>
       </form>
     </mat-tab>
-    <mat-tab label="Modify Product">
+    <mat-tab label="Modify Product" >
       <div class="delete-btn">
         <button (click)="onDeleteProduct()" class="btn btn-danger">
           Delete Product
         </button>
-      </div>
-      <div class="update-btn">
-        <button (click)="onUpdateProduct()" class="btn btn-danger">
+        <button (click)="onUpdateProduct()" mat-dialog-close class="btn btn-primary">
           Update Product
         </button>
       </div>
