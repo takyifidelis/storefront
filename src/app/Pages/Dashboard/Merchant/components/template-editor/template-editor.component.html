@@ -13,7 +13,7 @@
                 </div>
                 <span class="hire-professional">Hire a professional</span>
                 <div class="d-flex">
-                    <button mat-icon-button (click)="isMobile('false')" [ngStyle]="{'color': dataservice.isMobileBool ? '#AAAAAA' : ''}">
+                    <button id="tourStepTwo" mat-icon-button (click)="isMobile('false')" [ngStyle]="{'color': dataservice.isMobileBool ? '#AAAAAA' : ''}">
                         <mat-icon>desktop_windows</mat-icon>
                     </button>
                     <div class="vertical-line"></div>
@@ -25,7 +25,7 @@
                     <button (click)="saveTemplateDraft(dataservice.template)" class="btn btn-dark">Save</button>
                     <button (click)="publishTemplate(dataservice.template)" class="btn btn-dark ms-2">Publish</button>
                 </div>
-                <span routerLink="/" class="app-name">
+                <span id="tourStepOne" routerLink="/" class="app-name">
                     storefront
                 </span>
             </nav>

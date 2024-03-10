@@ -49,32 +49,75 @@ export class MerchantDashboardComponent implements OnInit {
     );
   }
   ngOnInit() {
+  if (!localStorage.getItem('tourCompleted')) {
     this.introJS = introJs();
     this.introJS.setOptions({
       steps: [
         {
-          element: '#tourStepOne',
-          intro: 'This is the first step',
-          position:'right',
-          introHTML: `
-            <div>
-              <h3>Step 1: Introduction</h3>
-              <p>This is the first step of the tour.</p>
-              <ul>
-                <li>Point 1</li>
-                <li>Point 2</li>
-                <li>Point 3</li>
-              </ul>
-            </div>
-          `
+          element: '#tourStepZero',
+          intro: `<div style="width:30rem; ">Welcome to your dashboard!</div>`,
         },
         {
-          element: '#step2',
-          intro: 'This is the second step'
-        }
+          element: '#tourStepOne',
+          intro: `<div style="">Over here you have access to your menu items!</div>`,
+        },
+        {
+          element: '#tourStepTwo',
+          intro: `<div style="">
+            This button will take you to the <strong style="color:blue">HOME</strong> page, where you can set up stores, payments, shipping and others
+            </div>`
+        },
+        {
+          element: '#tourStepThree',
+          intro: `<div style="">
+            Clicking here will take you to the <strong style="color:blue">PRODUCT</strong> page, where you  can add new products to your store
+            </div>`
+        },
+        {
+          element: '#tourStepFour',
+          intro: `<div style="">
+          This leads to a pages where you can add or modify <strong style="color:blue">DISCOUNT</strong> to products on your store
+            </div>`
+        },
+        {
+          element: '#tourStepFive',
+          intro: `<div style="">
+            Clicking here will take you to the <strong style="color:blue">REVIEW</strong> page, where you  can manage your customer reviews and reply to them
+            </div>`
+        },
+        {
+          element: '#tourStepSix',
+          intro: `<div style="">
+          Clicking here will take you to the <strong style="color:blue">STORE ORDER</strong> page, where you  can see all of your orders that customers have made on the selected store
+            </div>`
+        },
+        {
+          element: '#tourStepSeven',
+          intro: `<div style="">
+          Click here to go to the <strong style="color:blue">CUSTOMERS'</strong> page, where you  see and manage your customers' information
+            </div>`
+        },
+        {
+          element: '#tourStepEight',
+          intro: `<div style="">
+          Click here to see all <strong style="color:blue">PAYMENTS</strong> recieved from your customers
+            </div>`
+        },
+        {
+          element: '#tourStepNine',
+          intro: `<div style="">
+            To sign out, click on this dropdown menu and continue to logout
+            </div>`
+        },
       ]
-    });
-    this.introJS.start();
+    }).onbeforeexit(function () {
+      localStorage.setItem('tourCompleted', 'true');
+      return confirm("Are You sure you want to exit?");
+    }).start();
+    }
+
+
+
 
   }
 }

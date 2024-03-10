@@ -17,6 +17,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSliderModule} from '@angular/material/slider';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import introJs from 'intro.js';
 
 
 @Component({
@@ -154,27 +155,7 @@ export class TemplateEditorComponent  implements AfterViewInit,OnInit{
   logPages(){
     console.log(this.dataservice.template.pagesOrder)
   }
-  // changeFontSize(){
-  //   console.log(this.fontSize);
-  //   document.execCommand(`fontSize`,false, `${this.fontSize}`)
-  // }
-
-  // changeFontType(){
-  //   console.log(this.dataservice.template.fontFamily);
-  //   // document.execCommand(`fontName`,false, `${this.fontName}`)
-  // }
-
-  // changeFontColor(){
-  //   console.log(this.fontColor);
-  //   // console.log(this.dataservice.template.primaryColor.color);
-  //   document.execCommand(`foreColor`,false, `${this.fontColor}`)
-  // }
   saveTemplateDraft(template:any){
-    // template = JSON.stringify(template);
-    // template = JSON.stringify(template);
-    // localStorage.setItem('template',  JSON.stringify(template));
-    // console.log(this.dataservice.template.navbarBackgroundColor) 
-    // console.log(template);
     this.dataservice.isLoading =true
     JSON.stringify(template)
     this.apiService.saveTemplateDraft(localStorage.getItem('storeId')!,{options:JSON.stringify(template)}).subscribe((data:any)=>{
@@ -192,7 +173,6 @@ export class TemplateEditorComponent  implements AfterViewInit,OnInit{
   }
 
   publishTemplate(template:any){
-    // template = JSON.stringify(template);
     console.log(template);
     this.apiService.publishTemplate(localStorage.getItem('storeId')!,{options:JSON.stringify(template)}).subscribe((data:any)=>{
       this.apiService.getMerchantStores(localStorage.getItem('businessId')!).subscribe((templatesData:any) => {
@@ -205,5 +185,70 @@ export class TemplateEditorComponent  implements AfterViewInit,OnInit{
   }
   ngOnInit() {
     this.dataservice.isInEditMode = true
+    if (!localStorage.getItem('editorTourCompleted')) {
+      introJs().setOptions({
+        steps: [
+          {
+            element: '#tourStepZero',
+            intro: `<div style="display:flex">Great News! on this page, you can customize your store front</div>`,
+          },
+          {
+            element: '#tourStepOne',
+            intro: `<div style="">Click here at anytime to return to your <strong style="color:blue;">Dashboard</strong> <hr> Note:<small> <i style="color:red">save your work before you exit this page<i/></small></div>`,
+          },
+          {
+            element: '#tourStepTwo',
+            intro: `<div style="">
+              This button gives you a preview on how your<strong style="color:blue;">desktop view</strong> of the store 
+              </div>`
+          },
+          {
+            element: '#tourStepThree',
+            intro: `<div style="">
+              Clicking here will take you to the <strong style="color:blue">PRODUCT</strong> page, where you  can add new products to your store
+              </div>`
+          },
+          {
+            element: '#tourStepFour',
+            intro: `<div style="">
+            This leads to a pages where you can add or modify <strong style="color:blue">DISCOUNT</strong> to products on your store
+              </div>`
+          },
+          {
+            element: '#tourStepFive',
+            intro: `<div style="">
+              Clicking here will take you to the <strong style="color:blue">REVIEW</strong> page, where you  can manage your customer reviews and reply to them
+              </div>`
+          },
+          {
+            element: '#tourStepSix',
+            intro: `<div style="">
+            Clicking here will take you to the <strong style="color:blue">STORE ORDER</strong> page, where you  can see all of your orders that customers have made on the selected store
+              </div>`
+          },
+          {
+            element: '#tourStepSeven',
+            intro: `<div style="">
+            Click here to go to the <strong style="color:blue">CUSTOMERS'</strong> page, where you  see and manage your customers' information
+              </div>`
+          },
+          {
+            element: '#tourStepEight',
+            intro: `<div style="">
+            Click here to see all <strong style="color:blue">PAYMENTS</strong> recieved from your customers
+              </div>`
+          },
+          {
+            element: '#tourStepNine',
+            intro: `<div style="">
+              To sign out, click on this dropdown menu and continue to logout
+              </div>`
+          },
+        ]
+      }).onbeforeexit(function () {
+        localStorage.setItem('editorTourCompleted', 'true');
+        return confirm("Are You sure you want to exit?");
+      }).start();
+      }
   }
 }
