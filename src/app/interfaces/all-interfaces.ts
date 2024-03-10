@@ -20,3 +20,15 @@ export interface Varaiation {
 type: string,
 values: string[]
 }
+
+export interface UserInterface {
+    checkbox: string;
+    name: any;
+    store: string;
+    category: string;
+    price: number;
+    images: any;
+    quantity: number;
+    items: any
+    orderShipping: any
+  }

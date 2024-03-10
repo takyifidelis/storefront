@@ -87,6 +87,8 @@ sorted: any = [];
 
   constructor(public dialog: MatDialog, private apiService: APIService, private elementRef: ElementRef) {
     this.dataSource = new MatTableDataSource(this.users);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
     
   }
 
@@ -96,6 +98,8 @@ sorted: any = [];
       this.orders = res;
       this.unsorted = this.orders.data;
       this.dataSource = new MatTableDataSource(this.orders.data);
+      this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
     })
   this.isAllActive = true;
   }

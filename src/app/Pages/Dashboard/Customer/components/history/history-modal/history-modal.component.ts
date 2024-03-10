@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
-import { dummyUserInterface } from '../../favorite-product/favorite-product.component';
 import { MatDialogTitle, MatDialogContent, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { UserInterface } from '../../../../../../interfaces/all-interfaces';
 
 @Component({
   selector: 'app-history-modal',
@@ -10,8 +10,7 @@ import { MatDialogTitle, MatDialogContent, MAT_DIALOG_DATA } from '@angular/mate
   styleUrl: './history-modal.component.scss'
 })
 export class HistoryModalComponent {
-  constructor(@Inject(MAT_DIALOG_DATA) public data: dummyUserInterface) {
-    // console.log(this.data);
+  constructor(@Inject(MAT_DIALOG_DATA) public data: UserInterface) {
     
   }
 }
