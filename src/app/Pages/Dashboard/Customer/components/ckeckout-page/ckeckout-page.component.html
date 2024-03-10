@@ -41,17 +41,8 @@
                   >
                     Name
                   </th>
-                  <td
-                    class="content"
-                    mat-cell
-                    *matCellDef="let row"
-                    style="text-align: center; width: 179px"
-                  >
-                    <img
-                      src="/assets/icons/PayPal.svg"
-                      alt=""
-                      style="text-align: center"
-                    />
+                  <td class="content" mat-cell *matCellDef="let row">
+                    {{ row.name }}
                   </td>
                 </ng-container>
                 <ng-container matColumnDef="phone">
@@ -65,7 +56,7 @@
                     Contact
                   </th>
                   <td class="content" mat-cell *matCellDef="let row">
-                    {{ row?.wallet }}
+                    {{ row?.phone }}
                   </td>
                 </ng-container>
                 <ng-container matColumnDef="streetAddress">
@@ -79,7 +70,7 @@
                     Street Address
                   </th>
                   <td class="content" mat-cell *matCellDef="let row">
-                    {{ row.orderPayout?.orderId }}
+                    {{ row.streetAddress }}
                   </td>
                 </ng-container>
 
@@ -94,7 +85,7 @@
                     Country Code
                   </th>
                   <td class="content total" mat-cell *matCellDef="let row">
-                    {{ row.currency }} {{ row.orderPayout.amount }}
+                    {{ row.countryCode }}
                   </td>
                 </ng-container>
 
@@ -114,7 +105,7 @@
                         class="content commission"
                         style="margin-bottom: 0; color: red !important"
                       >
-                        {{ row.commission }}%
+                        {{ row.apartmentNo }}
                       </p>
                     </div>
                   </td>
@@ -131,7 +122,20 @@
                     City
                   </th>
                   <td class="content recieved" mat-cell *matCellDef="let row">
-                    {{ row.currency }} {{ row.amount }}
+                    {{ row.city }}
+                  </td>
+                </ng-container>
+                <ng-container matColumnDef="bubble">
+                  <th
+                    style="background-color: #f9fafb"
+                    mat-header-cell
+                    *matHeaderCellDef
+                    mat-sort-header
+                  ></th>
+                  <td mat-cell *matCellDef="let row">
+                    <span (click)="moreVert(row)" class="btn">
+                      <img src="/assets/icons/bubble.svg" alt="" />
+                    </span>
                   </td>
                 </ng-container>
 
@@ -146,7 +150,16 @@
                 aria-label="Select page of users"
               ></mat-paginator>
             </div>
-            <section class="shipping-details" style="padding-top: 20px">
+            <div>
+              <button class="btn btn-primary" (click)="newShipping()">
+                New Shipping Address
+              </button>
+            </div>
+            <section
+              class="shipping-details"
+              style="padding-top: 20px"
+              *ngIf="addShipping"
+            >
               <div>
                 <p class="text">SHIPPING DETAILS</p>
               </div>
@@ -282,29 +295,23 @@
             <div class="col"></div>
           </div>
         </div>
-        <!--         </div>
-        <div class="row" *ngFor="let item of cart">
-          <div class="col">
-            <p class="text-2">{{ item.name }}</p>
-          </div>
-          <div class="col">
-            <div class="row">
-              <div class="col">
-                <p class="text-2">{{ item.quant }}</p>
-              </div>
-              <div class="col">
-                <P class="text-2">{{ item.price }} EUR</P> -->
 
         <div class="">
-          @for (product of dataService.cart; track product) {
+          @for (product of cart; track product) {
           <div class="row">
             <div class="col">
               <p class="text-2">{{ product.name }}</p>
             </div>
             <div class="col">
               <div class="row">
-                <div class="col">
-                  <p class="text-2">{{ product.quant || 1 }}</p>
+                <div class="col d-flex" style="gap: 20px">
+                  <span (click)="increment()"
+                    ><fa-icon [icon]="plus" style="cursor: pointer"></fa-icon
+                  ></span>
+                  <p class="text-2">{{ quantity || 1 }}</p>
+                  <span
+                    ><fa-icon [icon]="minus" style="cursor: pointer"></fa-icon
+                  ></span>
                 </div>
                 <div class="col">
                   <P class="text-2">{{ product.price }}</P>

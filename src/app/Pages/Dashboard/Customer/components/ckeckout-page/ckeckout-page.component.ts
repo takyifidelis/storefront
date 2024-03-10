@@ -6,7 +6,7 @@ import { DataService } from '../../../../../Services/data.service';
 import { environment } from '../../../../../../environments/environment.development';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { faCircleInfo } from '@fortawesome/free-solid-svg-icons';
+import { faCircleInfo, faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {
   FormControl,
@@ -25,14 +25,13 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import e from 'express';
-import { dummyUserInterface } from '../../../Merchant/components/merchant-products-dashboad/merchant-products-dashboad.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatTabsModule } from '@angular/material/tabs';
+import { CheckoutModalComponent } from '../checkout-modal/checkout-modal.component';
 
 
 @Component({
@@ -53,6 +52,7 @@ import { MatTabsModule } from '@angular/material/tabs';
   templateUrl: './ckeckout-page.component.html',
   styleUrl: './ckeckout-page.component.scss',
 })
+
 export class CkeckoutPageComponent implements OnInit {
   public payPalConfig?: IPayPalConfig;
   orderId: string | undefined;
@@ -61,7 +61,6 @@ export class CkeckoutPageComponent implements OnInit {
   storeId: string | undefined;
   info = faCircleInfo;
   user!: FormGroup;
-  shippingId: string = '';
   payload: any;
   PAYPAL_CLIENT_ID: string =   `${environment.paypalClientID2}`;
   @ViewChild('paypalRef', { static: true }) private paypalRef: ElementRef | undefined;
@@ -73,6 +72,7 @@ export class CkeckoutPageComponent implements OnInit {
     'countryCode',
     'apartmentNo',
     'city', 
+    'bubble'
   ];
   dataSource: MatTableDataSource<UserInterface>;
   selection = new SelectionModel<UserInterface>(true, []);
@@ -80,6 +80,11 @@ export class CkeckoutPageComponent implements OnInit {
   @ViewChild(MatSort) sort!: MatSort;
   users: UserInterface[] = [];
   addShipping: boolean = false;
+  plus = faPlus;
+  minus = faMinus;
+  iniitialPrice?: number;
+  quantity: any;
+  price: any;
 
   constructor(
     private apiService: APIService,
@@ -93,8 +98,6 @@ export class CkeckoutPageComponent implements OnInit {
 
   }
 
-
-  
   ngOnInit(): void {
     this.initConfig();
     this.dataService.cart = JSON.parse(localStorage.getItem('cart')!);
@@ -114,17 +117,18 @@ export class CkeckoutPageComponent implements OnInit {
     this.cart = JSON.parse(localStorage.getItem('cart')!);
     this.items = [];
     for (const item of this.cart) {
+      this.iniitialPrice = item.price;
         this.items.push({product:item.id, quantity: item.quant, variations:[] })
     }
 
     this.payload = {
       items: this.items,
-      shipping: '38839ef8-8d01-47f3-bb50-91dbe5f2f6ce',
+      shipping: localStorage.getItem('shippingId'),
       store: localStorage.getItem('storeId'),
     };
 
     this.apiService.getShipping(localStorage.getItem('customerId')!).subscribe((res: any) => {
-      console.log(res)
+    this.dataSource = new MatTableDataSource(res.data);
     })
   }
 
@@ -136,10 +140,20 @@ export class CkeckoutPageComponent implements OnInit {
     });
   }
 
+increment(){
+  for (const item of this.cart) {
+    this.quantity = item.quant++;
+    item.price = this.quantity * this.iniitialPrice!;
+    this.price = item.price;
+    this.items.push({product:item.id, quantity: this.quantity, variations:[] })
+}
+}
 
   getTotalCost() {
-    return this.dataService.cart.map((t:any) => t.price).reduce((acc: any, value: any) => acc + value, 0);
+    return this.cart.map((t:any) => t.price).reduce((acc: any, value: any) => acc + value, 0);
   }
+
+  
 
 
   async onApprove(data: { orderID: string }) {
@@ -254,7 +268,7 @@ export class CkeckoutPageComponent implements OnInit {
     console.log(this.user);
     this.http
       .post<SignupResponseData>(
-        `${environment.baseApiUrl}/customer/add-shipping-address/f739a921-7267-4e02-8222-ceb2b4c352cf`,
+        `${environment.baseApiUrl}/customer/add-shipping-address/${localStorage.getItem('customerId')}`,
         this.user.value,
         {
           withCredentials: true,
@@ -263,6 +277,10 @@ export class CkeckoutPageComponent implements OnInit {
       .subscribe((res: any) => {
         console.log(res);
       });
+  }
+
+  newShipping() {
+    this.addShipping = !this.addShipping;
   }
 
   isAllSelected() {
@@ -300,10 +318,16 @@ export class CkeckoutPageComponent implements OnInit {
     this.dataSource.sort = this.sort;
   }
 
+  moreVert(e:UserInterface) {
+    this.dialog.open(CheckoutModalComponent, {
+      data: e,
+        width: '479px', 
+    });
+
 
 }
 
-
+}
 
 
 // function createOrder() {
