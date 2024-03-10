@@ -161,6 +161,21 @@ section.review-page {
     }
   }
 }
+.number-of-reviews {
+  margin-left: 1rem;
+  color: #5e718d;
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: -0.2px;
+  border-radius: 6px;
+  background: #f0f3f9;
+  .review {
+    margin-left: 0.3rem;
+  }
+}
 // td {
 //   width: max-content;
 // }
