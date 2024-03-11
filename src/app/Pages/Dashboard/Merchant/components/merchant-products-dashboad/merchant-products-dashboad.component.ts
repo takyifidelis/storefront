@@ -159,6 +159,7 @@ export class MerchantProductsDashboadComponent {
         console.log(response.data);
         this.isLoading = false;
         this.numberOfProducts = response.data.products.length;
+
         // console.log(response.data.products[0].images[0].url);
         this.users = response.data
         this.dataSource = new MatTableDataSource(response.data.products);

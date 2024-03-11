@@ -19,7 +19,13 @@
               [icon]="seaechICon"
               style="font-size: 15px; color: #1b4dff"
             ></fa-icon>
-            <input type="text" placeholder="Search........" />
+            <input
+              type="text"
+              placeholder="Search........"
+              (keyup)="applyFilter($event)"
+              #input
+              matInput
+            />
           </div>
         </form>
         <button class="new-product btn" (click)="toggleForm()">
@@ -210,6 +216,16 @@
         /></span>
       </td>
     </ng-container>
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell no-result" colspan="4" *ngIf="discountNumber > 0">
+        No data matching "{{ input.value }}"
+      </td>
+    </tr>
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell no-result" colspan="4" *ngIf="discountNumber === 0">
+        No Discount Found
+      </td>
+    </tr>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
@@ -218,5 +234,15 @@
     [pageSizeOptions]="[5, 10, 25, 100]"
     aria-label="Select page of users"
   ></mat-paginator>
+  <div class="loading-spinner-small" *ngIf="isLoading">
+    <img
+      src="assets\icons\loading-btn-spinner.svg"
+      alt="Loading.."
+      class="spinner-image"
+    />
+  </div>
+  <div class="no-result-found" *ngIf="discountNumber === 0">
+    No Discount Found
+  </div>
 </div>
 }

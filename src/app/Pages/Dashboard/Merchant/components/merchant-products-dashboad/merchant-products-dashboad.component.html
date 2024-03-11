@@ -202,10 +202,30 @@
           (click)="selection.toggle(row)">
       </tr> -->
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell no-result" colspan="4" *ngIf="numberOfProducts > 1">
+        No data matching "{{ input.value }}"
+      </td>
+    </tr>
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell no-result" colspan="4" *ngIf="numberOfProducts === 0">
+        No Products Found
+      </td>
+    </tr>
   </table>
 
   <mat-paginator
     [pageSizeOptions]="[1,2,10, 25, 100]"
     aria-label="Select page of users"
   ></mat-paginator>
+  <div class="loading-spinner-small" *ngIf="isLoading">
+    <img
+      src="assets\icons\loading-btn-spinner.svg"
+      alt="Loading.."
+      class="spinner-image"
+    />
+  </div>
+  <div class="no-result-found" *ngIf="numberOfProducts === 0">
+    No Discount Found
+  </div>
 </div>
