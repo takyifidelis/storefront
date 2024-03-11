@@ -5,7 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faHeart, faStar } from '@fortawesome/free-solid-svg-icons';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -19,6 +19,7 @@ import {
   Varaiation,
 } from '../../../../../interfaces/all-interfaces';
 import { AuthService } from '../../../Auth/auth.service';
+import { concatAll } from 'rxjs';
 
 @Component({
   selector: 'app-review',
@@ -57,11 +58,14 @@ export class ReviewComponent implements OnInit {
   variations?: Varaiation[] = [];
   productReview: any;
 values?: string[];
+swapProduct: boolean = false;
+newSelectedProduct: any;
 
   constructor(
     private route: ActivatedRoute,
     private dataService: DataService,
-    public apiService: APIService
+    public apiService: APIService,
+    private router: Router
   ) {}
 
   increaseQuantity(): void {
@@ -165,10 +169,11 @@ values?: string[];
     let productJson = localStorage.getItem('selectedProduct');
     let product = JSON.parse(productJson!);
     this.productItem = product;
+    console.log(this.productItem);
 
-    this.selectedImage = this.productItem.images[0].url;
+
+this.selectedImage = this.productItem.images[0].url;
     this.initialPrice = this.productItem.price;
-    console.log(this.productItem.variations[0].type);
 this.variations = this.productItem.variations;
 
 for(const value of this.variations!){
@@ -185,39 +190,16 @@ for(const value of this.variations!){
           }
         });
       });
-
-    // let arrayJson = JSON.stringify(array)
-    // let cartJson = localStorage.getItem('favouriteProducts');
-    // let cart = JSON.parse(cartJson!);
-    // console.log(cart);
-    // if(cart){
-    //   for (const item of cart){
-    //     obj.products.push(item.id)
-    //   }
-    // }
-    // console.log(obj)
-
-    // this.apiService.addToFavourite(obj).subscribe((res)=>{
-    //   console.log(res)
-    // })
   }
 
-  // ngOnInit() {
-  //     for (const product of this.dataService.products) {
-  //       if (product.id === this.route.snapshot.params['id']) {
-  //         this.productItem = product;
-  //         console.log(this.productItem);
-  //       }
-  //     }
+  previewProduct(id: string) {
+    this.apiService.getOneProducts(id).subscribe((res: any) => {
+      if(this.productItem){
+        this.productItem = res.data;
+        this.selectedImage = this.productItem.images[0].url;
+        this.router.navigate([`/ecommerce/shop/${id}`]);
+      }
+    });
+  }
 
-  //     this.apiService.getReviews().subscribe((response: any) => {
-  //       console.log(response);
-  //       // this.users = response.data
-  //       this.productReview = response.data;
-  //     });
-
-  //     // console.log(this.dataService.products.find((element:any) => console.log(element.id)));
-  //   }
-  // }
-  // }
 }

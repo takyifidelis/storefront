@@ -30,5 +30,6 @@ export interface UserInterface {
     images: any;
     quantity: number;
     items: any
-    orderShipping: any
+    orderShipping: any;
+    id: string;
   }
