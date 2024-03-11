@@ -6,7 +6,11 @@ import { DataService } from '../../../../../Services/data.service';
 import { environment } from '../../../../../../environments/environment.development';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { faCircleInfo, faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
+import {
+  faCircleInfo,
+  faMinus,
+  faPlus,
+} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {
   FormControl,
@@ -32,12 +36,16 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatTabsModule } from '@angular/material/tabs';
 import { CheckoutModalComponent } from '../checkout-modal/checkout-modal.component';
-
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-ckeckout-page',
   standalone: true,
-  imports: [NgxPayPalModule, FontAwesomeModule, ReactiveFormsModule,  FormsModule,
+  imports: [
+    NgxPayPalModule,
+    FontAwesomeModule,
+    ReactiveFormsModule,
+    FormsModule,
     MatIconModule,
     MatButtonModule,
     MatCheckboxModule,
@@ -48,11 +56,12 @@ import { CheckoutModalComponent } from '../checkout-modal/checkout-modal.compone
     MatPaginatorModule,
     MatDialogModule,
     MatTabsModule,
-    CommonModule],
+    CommonModule,
+    MatSelectModule,
+  ],
   templateUrl: './ckeckout-page.component.html',
   styleUrl: './ckeckout-page.component.scss',
 })
-
 export class CkeckoutPageComponent implements OnInit {
   public payPalConfig?: IPayPalConfig;
   orderId: string | undefined;
@@ -61,18 +70,24 @@ export class CkeckoutPageComponent implements OnInit {
   storeId: string | undefined;
   info = faCircleInfo;
   user!: FormGroup;
+  selectedAddressControl = new FormControl();
+  selectedAddress!: { [key: string]: string };
+
   payload: any;
-  PAYPAL_CLIENT_ID: string =   `${environment.paypalClientID2}`;
-  @ViewChild('paypalRef', { static: true }) private paypalRef: ElementRef | undefined;
-  items:any = [];
+  shippingSelect!: { [key: string]: string }[];
+  PAYPAL_CLIENT_ID: string = `${environment.paypalClientID2}`;
+  @ViewChild('paypalRef', { static: true }) private paypalRef:
+    | ElementRef
+    | undefined;
+  items: any = [];
   displayedColumns: string[] = [
     'name',
     'phone',
     'streetAddress',
     'countryCode',
     'apartmentNo',
-    'city', 
-    'bubble'
+    'city',
+    'bubble',
   ];
   dataSource: MatTableDataSource<UserInterface>;
   selection = new SelectionModel<UserInterface>(true, []);
@@ -95,14 +110,12 @@ export class CkeckoutPageComponent implements OnInit {
     public dialog: MatDialog
   ) {
     this.dataSource = new MatTableDataSource(this.users);
-
   }
 
   ngOnInit(): void {
     this.initConfig();
     this.dataService.cart = JSON.parse(localStorage.getItem('cart')!);
     this.user = new FormGroup({
-
       name: new FormControl(null, Validators.required),
       streetAddress: new FormControl(null, Validators.required),
       postalCode: new FormControl(null, Validators.required),
@@ -110,15 +123,17 @@ export class CkeckoutPageComponent implements OnInit {
       countryCode: new FormControl(null, Validators.required),
       city: new FormControl(null, Validators.required),
       apartmentNo: new FormControl(null, Validators.required),
-      
-
     });
 
     this.cart = JSON.parse(localStorage.getItem('cart')!);
     this.items = [];
     for (const item of this.cart) {
       this.iniitialPrice = item.price;
-        this.items.push({product:item.id, quantity: item.quant, variations:[] })
+      this.items.push({
+        product: item.id,
+        quantity: item.quant,
+        variations: [],
+      });
     }
 
     this.payload = {
@@ -127,38 +142,48 @@ export class CkeckoutPageComponent implements OnInit {
       store: localStorage.getItem('storeId'),
     };
 
-    this.apiService.getShipping(localStorage.getItem('customerId')!).subscribe((res: any) => {
-    this.dataSource = new MatTableDataSource(res.data);
-    })
+    this.apiService
+      .getShipping(localStorage.getItem('customerId')!)
+      .subscribe((res: any) => {
+        console.log(res.data);
+        this.shippingSelect = res.data;
+        this.selectedAddress = this.shippingSelect[0];
+        this.dataSource = new MatTableDataSource(res.data);
+      });
   }
 
   createOrder() {
-    this.apiService.initializePayment(localStorage.getItem('customerId')!,this.payload).subscribe((res: any) =>{
-      console.log(res);
-      this.orderId = res.data.orderId;
-      return  this.orderId;
-    });
+    this.apiService
+      .initializePayment(localStorage.getItem('customerId')!, this.payload)
+      .subscribe((res: any) => {
+        console.log(res);
+        this.orderId = res.data.orderId;
+        return this.orderId;
+      });
   }
 
-increment(){
-  for (const item of this.cart) {
-    this.quantity = item.quant++;
-    item.price = this.quantity * this.iniitialPrice!;
-    this.price = item.price;
-    this.items.push({product:item.id, quantity: this.quantity, variations:[] })
-}
-}
+  increment() {
+    for (const item of this.cart) {
+      this.quantity = item.quant++;
+      item.price = this.quantity * this.iniitialPrice!;
+      this.price = item.price;
+      this.items.push({
+        product: item.id,
+        quantity: this.quantity,
+        variations: [],
+      });
+    }
+  }
 
   getTotalCost() {
-    return this.cart.map((t:any) => t.price).reduce((acc: any, value: any) => acc + value, 0);
+    return this.cart
+      .map((t: any) => t.price)
+      .reduce((acc: any, value: any) => acc + value, 0);
   }
-
-  
-
 
   async onApprove(data: { orderID: string }) {
     console.log(data);
-    alert("paused");
+    alert('paused');
     const response = await fetch(
       `${environment.baseApiUrl}/order/approve-payment/` + data.orderID,
       {
@@ -172,78 +197,81 @@ increment(){
       }
     );
     console.log(response);
-    
+
     const orderData = await response.json();
     if (orderData.type === 'success') {
       localStorage.removeItem('cart');
-} else {
-
-  this.snackBar.open(
-    `Your cart is empty, please add products`,
-    'Close',
-    { duration: 3000 }
-  );
-  this.router.navigate(['/ecommerce']);
-}
-
+    } else {
+      this.snackBar.open(`Your cart is empty, please add products`, 'Close', {
+        duration: 3000,
+      });
+      this.router.navigate(['/ecommerce']);
+    }
   }
 
   private initConfig(): void {
-    
     this.payPalConfig = {
       clientId: environment.paypalClientID,
-      createOrderOnServer: (data:any) => {
-        console.log(data)
+      createOrderOnServer: (data: any) => {
+        console.log(data);
         return new Promise<string>((resolve, reject) => {
-                  // resolve("9JL371110H147321Y");
-                  
-                  let orderData={
-                    store: localStorage.getItem('storeId')!,
-                    shipping: "",
-                    destination: "",
-                    items:this.items
-                  }
-                  this.apiService.getAllShippingAddresses(localStorage.getItem('customerId')!).subscribe((shippingResponseData:{[key: string]: any;} )=> {
-                    console.log(shippingResponseData)
-                    console.log(shippingResponseData['type'])
-                    if (shippingResponseData['type']==="success") {
-                      orderData.shipping = shippingResponseData['data'][0].id
-                      console.log(orderData)
-                      this.apiService.initializePayment(localStorage.getItem('customerId')!,orderData).subscribe((orderResponseData:{[key: string]: any;}) => {
-                        resolve(orderResponseData['data'].orderId)
-                      }),(error:HttpErrorResponse) => {
-                        console.error('Error creating order:', error);
-                        reject(error);
-                      }
-                    }
+          // resolve("9JL371110H147321Y");
 
+          let orderData = {
+            store: localStorage.getItem('storeId')!,
+            shipping: '',
+            destination: '',
+            items: this.items,
+          };
+          this.apiService
+            .getAllShippingAddresses(localStorage.getItem('customerId')!)
+            .subscribe((shippingResponseData: { [key: string]: any }) => {
+              console.log(shippingResponseData);
+              console.log(shippingResponseData['type']);
+              if (shippingResponseData['type'] === 'success') {
+                orderData.shipping = shippingResponseData['data'][0].id;
+                console.log(orderData);
+                this.apiService
+                  .initializePayment(
+                    localStorage.getItem('customerId')!,
+                    orderData
+                  )
+                  .subscribe((orderResponseData: { [key: string]: any }) => {
+                    resolve(orderResponseData['data'].orderId);
                   }),
-                  (error:HttpErrorResponse) => {
+                  (error: HttpErrorResponse) => {
                     console.error('Error creating order:', error);
                     reject(error);
-                  }
-              });
+                  };
+              }
+            }),
+            (error: HttpErrorResponse) => {
+              console.error('Error creating order:', error);
+              reject(error);
+            };
+        });
       },
-      onApprove: (data:any, actions:any) => {
-        console.log(data)
+      onApprove: (data: any, actions: any) => {
+        console.log(data);
         return new Promise<string>((resolve, reject) => {
-          this.apiService.onApprovePayment(data.orderID).subscribe((response:{[key: string]: any;}) =>{
-            console.log(response)
-            if (response['type'] === 'success') {
-              this.snackBar.open(
-                `Transaction completed for order ${data.orderID}`,
-                'Close',
-                { duration: 3000 }
-              );
-            }
-            // dispatch(clearCart());
-            localStorage.removeItem('cart');
-            this.router.navigate(['/customer/orders']);
-            
-          })
-        })
+          this.apiService
+            .onApprovePayment(data.orderID)
+            .subscribe((response: { [key: string]: any }) => {
+              console.log(response);
+              if (response['type'] === 'success') {
+                this.snackBar.open(
+                  `Transaction completed for order ${data.orderID}`,
+                  'Close',
+                  { duration: 3000 }
+                );
+              }
+              // dispatch(clearCart());
+              localStorage.removeItem('cart');
+              this.router.navigate(['/customer/orders']);
+            });
+        });
       },
-      onClientAuthorization: (data:any) => {
+      onClientAuthorization: (data: any) => {
         console.log(
           'onClientAuthorization - you should probably inform your server about completed transaction at this point',
           data
@@ -258,17 +286,16 @@ increment(){
       onClick: (data, actions) => {
         console.log('onClick', data, actions);
       },
-
     };
-}
-
-
+  }
 
   onSubmit() {
     console.log(this.user);
     this.http
       .post<SignupResponseData>(
-        `${environment.baseApiUrl}/customer/add-shipping-address/${localStorage.getItem('customerId')}`,
+        `${
+          environment.baseApiUrl
+        }/customer/add-shipping-address/${localStorage.getItem('customerId')}`,
         this.user.value,
         {
           withCredentials: true,
@@ -318,17 +345,12 @@ increment(){
     this.dataSource.sort = this.sort;
   }
 
-  moreVert(e:UserInterface) {
+  moreVert() {
     this.dialog.open(CheckoutModalComponent, {
-      data: e,
-        width: '479px', 
+      width: '500px',
     });
-
-
+  }
 }
-
-}
-
 
 // function createOrder() {
 //   const payload = cart && {
@@ -381,4 +403,3 @@ increment(){
 //       navigate(`/customer/orders`);
 //     });
 // }
-
