@@ -15,7 +15,7 @@
                     <div class="paypal-image">
                       <img src="assets\images\visa.svg" alt="" />
                     </div>
-                    <div class="card-paragraph">Visa</div>
+                    <div class="card-paragraph">Visa Card</div>
                   </div>
                 </mat-radio-button>
               </div>
@@ -53,34 +53,59 @@
       </div>
     </mat-tab>
     <mat-tab label="Paypal">
-      <form class="paypal-form">
-        <div class="payment-card-paypal">
-          <mat-radio-button value="1" checked>
-            <div class="paypal-select d-flex align-items-center">
-              <div class="paypal-image">
-                <img src="assets\images\PayPal.svg" alt="" />
+      <form
+        class="paypal-form"
+        method="post"
+        #paypalForm="ngForm"
+        [formGroup]="addPaypal"
+        (ngSubmit)="AddPaypalMethod(paypalForm)"
+      >
+        <mat-radio-group aria-label="Select an option" formControlName="method">
+          <div class="payment-card-paypal">
+            <mat-radio-button value="Paypal" checked>
+              <div class="paypal-select d-flex align-items-center">
+                <div class="paypal-image">
+                  <img src="assets\images\PayPal.svg" alt="" />
+                </div>
+                <div class="paypal-paragraph">PayPal</div>
               </div>
-              <div class="paypal-paragraph">PayPal</div>
-            </div>
-          </mat-radio-button>
-        </div>
+            </mat-radio-button>
+          </div>
+        </mat-radio-group>
+
         <div>
           <label for="name">Name</label>
         </div>
         <div class="input-wrapper">
-          <input type="text" placeholder="Fidelis" id="name" />
+          <input
+            type="text"
+            placeholder="Fidelis"
+            id="name"
+            formControlName="name"
+          />
         </div>
         <div>
           <label for="card-number">Card Number</label>
         </div>
         <div class="input-wrapper">
-          <input type="text" placeholder="34563437859" id="card-number" />
+          <input
+            type="text"
+            placeholder="34563437859"
+            id="card-number"
+            formControlName="walletId"
+          />
         </div>
         <div>
           <label for="cvv">CVV</label>
         </div>
         <div class="input-wrapper">
-          <input type="text" placeholder="123" id="cvv" />
+          <input
+            type="text"
+            placeholder="123"
+            id="cvv"
+            formControlName="secret"
+            maxlength="3"
+          />
         </div>
       </form>
     </mat-tab>
