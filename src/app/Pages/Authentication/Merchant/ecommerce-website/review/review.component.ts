@@ -18,8 +18,6 @@ import {
   ProductObject,
   Varaiation,
 } from '../../../../../interfaces/all-interfaces';
-import { AuthService } from '../../../Auth/auth.service';
-import { concatAll } from 'rxjs';
 
 @Component({
   selector: 'app-review',
@@ -45,21 +43,18 @@ export class ReviewComponent implements OnInit {
   selectedImage: string | undefined;
   heartIcon = faHeart;
   starIcon = faStar;
-  product: any;
   quantity: number = 1;
   initialPrice?: number;
   addToBuy: any = [];
   likedProducts: any = [];
   amount: number = this.quantity * 90;
   productItem: any;
-  storeId = 'f9586428-62e3-4455-bb1d-61262a407d1a';
   similarProducts: any = [];
   cart: any = [];
   variations?: Varaiation[] = [];
   productReview: any;
-values?: string[];
-swapProduct: boolean = false;
-newSelectedProduct: any;
+  values?: string[];
+  newSelectedProduct: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -72,7 +67,6 @@ newSelectedProduct: any;
     this.quantity++;
     if (this.initialPrice)
       this.productItem.price = this.quantity * this.initialPrice;
-    console.log(this.productItem.price);
   }
 
   decreaseQuantity(): void {
@@ -82,12 +76,15 @@ newSelectedProduct: any;
         this.productItem.price = this.quantity * this.initialPrice;
     }
   }
+
   showForm(): void {
     this.isFormDisplayed = true;
   }
+
   hideForm(): void {
     this.isFormDisplayed = false;
   }
+  
   onSubmit(): void {
     this.hideForm();
   }
@@ -101,15 +98,20 @@ newSelectedProduct: any;
     this.dataService.cart.push(this.productItem);
     let addTobuyJson = JSON.stringify(this.dataService.cart);
     localStorage.setItem('cart', addTobuyJson);
+
     let productObj: ProductObject = {
       products: [],
     };
+
     for (const item of this.dataService.cart) {
       productObj.products.push(item.id);
     }
-    this.apiService.addTOViews(productObj, localStorage.getItem('customerId')!).subscribe((res) => {
-      console.log(res);
-    });
+
+    this.apiService
+      .addTOViews(productObj, localStorage.getItem('customerId')!)
+      .subscribe((res) => {
+        console.log(res);
+      });
   }
 
   onAddOneToBuy(product: any) {
@@ -117,15 +119,17 @@ newSelectedProduct: any;
     this.dataService.cart.push(this.productItem);
     let addTobuyJson = JSON.stringify(this.dataService.cart);
     localStorage.setItem('cart', addTobuyJson);
+
     let productObj: ProductObject = {
       products: [],
     };
+
     for (const item of this.dataService.cart) {
       productObj.products.push(item.id);
     }
-    this.apiService.addTOViews(productObj, localStorage.getItem('customerId')!).subscribe((res) => {
-      console.log(res);
-    });
+    this.apiService
+      .addTOViews(productObj, localStorage.getItem('customerId')!)
+      .subscribe((res) => {});
   }
 
   onLikedProducts() {
@@ -133,6 +137,7 @@ newSelectedProduct: any;
     this.dataService.like = JSON.parse(
       localStorage.getItem('favouriteProducts') || ''
     );
+
     this.dataService.like.push(this.productItem);
     let likedProductsJson = JSON.stringify(this.dataService.like);
     localStorage.setItem('favouriteProducts', likedProductsJson);
@@ -140,11 +145,14 @@ newSelectedProduct: any;
     let productObj: ProductObject = {
       products: [],
     };
+
     for (const likeditem of this.dataService.like) {
       productObj.products.push(likeditem.id);
     }
-    this.apiService.addToFavourite(productObj, localStorage.getItem('customerId')!).subscribe((res) => {
-    });
+
+    this.apiService
+      .addToFavourite(productObj, localStorage.getItem('customerId')!)
+      .subscribe((res) => {});
   }
 
   onLikeOne(product: any) {
@@ -160,25 +168,23 @@ newSelectedProduct: any;
     for (const likeditem of this.dataService.like) {
       productObj.products.push(likeditem.id);
     }
-    this.apiService.addToFavourite(productObj, localStorage.getItem('customerId')!).subscribe((res) => {
-      console.log(res);
-    });
+    this.apiService
+      .addToFavourite(productObj, localStorage.getItem('customerId')!)
+      .subscribe((res) => {});
   }
 
   ngOnInit() {
     let productJson = localStorage.getItem('selectedProduct');
     let product = JSON.parse(productJson!);
     this.productItem = product;
-    console.log(this.productItem);
 
-
-this.selectedImage = this.productItem.images[0].url;
+    this.selectedImage = this.productItem.images[0].url;
     this.initialPrice = this.productItem.price;
-this.variations = this.productItem.variations;
+    this.variations = this.productItem.variations;
 
-for(const value of this.variations!){
-  this.values = value.values;
-}
+    for (const value of this.variations!) {
+      this.values = value.values;
+    }
 
     this.apiService
       .getCustomerStoreProducts(localStorage.getItem('storeId')!)
@@ -194,12 +200,11 @@ for(const value of this.variations!){
 
   previewProduct(id: string) {
     this.apiService.getOneProducts(id).subscribe((res: any) => {
-      if(this.productItem){
+      if (this.productItem) {
         this.productItem = res.data;
         this.selectedImage = this.productItem.images[0].url;
         this.router.navigate([`/ecommerce/shop/${id}`]);
       }
     });
   }
-
 }
