@@ -199,49 +199,51 @@ export class TemplateEditorComponent  implements AfterViewInit,OnInit{
           {
             element: '#tourStepTwo',
             intro: `<div style="">
-              This button gives you a preview on how your<strong style="color:blue;">desktop view</strong> of the store 
+              This button gives you a preview on how your store looks on<strong style="color:blue;">desktop</strong>
               </div>`
           },
           {
             element: '#tourStepThree',
             intro: `<div style="">
-              Clicking here will take you to the <strong style="color:blue">PRODUCT</strong> page, where you  can add new products to your store
+            This button gives you a preview on how your store looks on<strong style="color:blue;">mobile</strong>  
               </div>`
           },
           {
             element: '#tourStepFour',
             intro: `<div style="">
-            This leads to a pages where you can add or modify <strong style="color:blue">DISCOUNT</strong> to products on your store
+            This menu gives you access to all the <strong style="color:blue">customization tools</strong> to design your store as you see fit 
               </div>`
           },
           {
             element: '#tourStepFive',
             intro: `<div style="">
-              Clicking here will take you to the <strong style="color:blue">REVIEW</strong> page, where you  can manage your customer reviews and reply to them
+              this menu gives you access to 
+              <p>
+                <ul>
+                  <li><strong style="color:blue">Change Fonts</strong>
+                  <li><strong style="color:blue">Change Colors</strong>
+                  <li><strong style="color:blue">Modify Text</strong>
+                  <li><strong style="color:blue">style buttons</strong>
+                </ul>
+              </p>
               </div>`
           },
           {
             element: '#tourStepSix',
             intro: `<div style="">
-            Clicking here will take you to the <strong style="color:blue">STORE ORDER</strong> page, where you  can see all of your orders that customers have made on the selected store
+            Clicking here will give you an option to add new pages such as <strong style="color:blue">About Us, and  Contact Us</strong> page, where you  can tell people about your business
               </div>`
           },
           {
             element: '#tourStepSeven',
             intro: `<div style="">
-            Click here to go to the <strong style="color:blue">CUSTOMERS'</strong> page, where you  see and manage your customers' information
+            Click here to <strong style="color:blue">Save</strong> your edited store front as draft when you are satisfied.
               </div>`
           },
           {
             element: '#tourStepEight',
             intro: `<div style="">
-            Click here to see all <strong style="color:blue">PAYMENTS</strong> recieved from your customers
-              </div>`
-          },
-          {
-            element: '#tourStepNine',
-            intro: `<div style="">
-              To sign out, click on this dropdown menu and continue to logout
+            Click here to <strong style="color:blue">Publish</strong> your edited store front for you customers to see.
               </div>`
           },
         ]
