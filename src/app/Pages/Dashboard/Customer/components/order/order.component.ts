@@ -65,40 +65,43 @@ export class OrderComponent implements OnInit {
 
   users = [
     {
-
       checkbox: '',
       orderNumber: '',
       store: '',
       status: '',
       date: '',
       price: '',
-    }
+    },
   ];
-unsorted: any = [];
-sorted: any = [];
+  unsorted: any = [];
+  sorted: any = [];
   formattedDate!: string | null;
-   datepipe: DatePipe = new DatePipe('en-US');
+  datepipe: DatePipe = new DatePipe('en-US');
+
 
 
   constructor(public dialog: MatDialog, private apiService: APIService, private elementRef: ElementRef) {
+
     this.dataSource = new MatTableDataSource(this.users);
-    
   }
 
   ngOnInit(): void {
-    
-    this.apiService.getOrders(localStorage.getItem('customerId')!).subscribe((res: any) =>{
-      this.orders = res;
-      this.unsorted = this.orders.data;
-      this.dataSource = new MatTableDataSource(this.orders.data);
-    })
-     
+
+    this.apiService
+      .getOrders(localStorage.getItem('customerId')!)
+      .subscribe((res: any) => {
+        this.orders = res;
+        this.unsorted = this.orders.data;
+        console.log(this.orders.data);
+        this.dataSource = new MatTableDataSource(this.orders.data);
+      });
+
   }
 
   moreVert(e: dummyUserInterface) {
     this.dialog.open(OrderModalComponent, {
       data: e,
-      width: '479px',
+      width: '500px',
       position: { right: '50px', top: '10%' },
     });
   }
@@ -135,11 +138,10 @@ sorted: any = [];
     this.dataSource.sort = this.sort;
   }
 
-
   onSort(status: string) {
     this.sorted = [];
-    this.unsorted.forEach((order: any) =>{
-      if(order.status === status) {
+    this.unsorted.forEach((order: any) => {
+      if (order.status === status) {
         this.sorted.push(order);
         // console.log(this.sorted)
     this.dataSource = new MatTableDataSource(this.sorted);
@@ -147,7 +149,17 @@ sorted: any = [];
       }else if (status === 'All'){
 this.dataSource = new MatTableDataSource(this.unsorted)
       }
-    })
+
+    });
+    this.dataSource = new MatTableDataSource(this.sorted);
   }
+  //   ngOnInit(): void {
+  //     this.apiService
+  //       .getSingleOrder('1233893')
+  //       .subscribe((res: { [key: string]: any }) => {
+  //         console.log(res);
+  //       });
+
+  //   }
 
 }

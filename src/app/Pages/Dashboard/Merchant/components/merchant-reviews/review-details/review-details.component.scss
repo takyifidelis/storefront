@@ -15,6 +15,7 @@
       line-height: 28px;
       letter-spacing: -0.3px;
       margin-bottom: 0;
+      text-transform: capitalize;
     }
     .customer-country {
       color: #5e718d;
@@ -24,6 +25,7 @@
       font-weight: 400;
       line-height: 20px;
       letter-spacing: -0.2px;
+      text-transform: capitalize;
     }
   }
   .amount-detail {
@@ -56,6 +58,7 @@
         line-height: 28px;
         letter-spacing: -0.3px;
         margin-bottom: 0;
+        text-transform: capitalize;
       }
       .product-date {
         color: #5e718d;
