@@ -19,9 +19,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import {
   MatDialog,
-  MAT_DIALOG_DATA,
-  MatDialogTitle,
-  MatDialogContent,
 } from '@angular/material/dialog';
 import { OrderModalComponent } from '../order-modal/order-modal.component';
 import { dummyUserInterface } from '../../../../../interface/dummy-user.model';
