@@ -23,7 +23,9 @@ section.preview-section {
     height: 100%;
   }
 }
-
+.highlighted {
+  border: 2px solid blue;
+}
 .mat-drawer-content {
   overflow: hidden;
   height: inherit;

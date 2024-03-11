@@ -58,16 +58,16 @@
                   </div>
                 </div>
                 <div
-                  class="product-variation"
-                  *ngFor="let item of myVariation | keyvalue"
+                  class="product-variation mb-5"
+                  *ngFor="let item of productItem.variations"
                 >
-                  <div class="variation-type select-size">
-                    Select {{ item.key }}
+                  <div class="variation-type select-size mb-2">
+                    Select {{ item.type }}
                   </div>
-                  <div class="variation-value">
+                  <div class="variation-value d-flex">
                     <button
                       class="values size"
-                      *ngFor="let value of item.value"
+                      *ngFor="let value of item.values; let i=index"
                     >
                       {{ value }}
                     </button>

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { MatRadioModule } from '@angular/material/radio';
 import { ToastrService } from 'ngx-toastr';
 import {
@@ -37,6 +37,8 @@ import { merchantProduct } from '../../../../../interfaces/all-interfaces';
   styleUrl: './merchant-add-product.component.scss',
 })
 export class MerchantAddProductComponent {
+  // @ViewChild('variationValue') variationValue!: ElementRef<HTMLInputElement> ;
+  // @ViewChild('variationValue') variationKey!: ElementRef<HTMLInputElement>;
   public Editor = ClassicEditor;
   isLoading: boolean = false;
   public productDetailss: any = {
@@ -47,12 +49,12 @@ export class MerchantAddProductComponent {
   inputText: string = '';
   inputSize: string = '';
   inputColor: string = '';
-  // textArray: string[] = [];
   sizeArray: string[] = [];
   colorArray: string[] = [];
   variationKey: string = '';
   variationValue: string = '';
-  variationArray: { key: string; values: string[] }[] = [];
+  variationArray: { type: string, value: string }[] = [];
+  DisplayedVariationArray: any= [];
   selectedStatus = {displayValue:'Active', value:true};
   displayedStatus: string = 'Active';
 
@@ -115,13 +117,16 @@ export class MerchantAddProductComponent {
     this.data.append('price', this.productDetails.price.toString());
     this.data.append('quantity', this.productDetails.quantity.toString());
     this.data.append('description', this.productDetailss.description);
-    this.data.append('isActive', 'true');
+    this.data.append('isActive', this.productDetails.isActive.toString());
     this.data.append('category', this.productDetails.category);
     this.variationArray.forEach(variation =>{
-      this.data.append('variations', JSON.parse(this.variationArray.toString()));
+      // this.data.append('variations', JSON.stringify(this.variationArray.toString()));
     })
-    // this.data.append('variations', JSON.stringify([{"type": "color", "value":"1"}]));
-    // this.data.append('variation', JSON.stringify(this.variationArray));
+    // this.data.append('variations', JSON.stringify([
+    //   {"type": "size", "value":"40"},
+    //   {"type": "size", "value":"41"},
+    //   {"type": "size", "value":"42"}]));
+    this.data.append('variations', JSON.stringify(this.variationArray));
     console.log(JSON.stringify(this.variationArray));
     this.isLoading = true;
 
@@ -213,28 +218,27 @@ export class MerchantAddProductComponent {
         this.toastr.info(data.message, data.type);
       });
   }
-  addSize() {
-    if (this.variationKey && this.variationValue) {
-      let existingVariation = this.variationArray.find(
-        (variation) => variation.key === this.variationKey
-      );
-      if (existingVariation) {
-        existingVariation.values.push(this.variationValue);
-      } else {
-        this.variationArray.push({
-          key: this.variationKey,
-          values: [this.variationValue],
-        });
-      }
-      this.variationKey = '';
-      this.variationValue = '';
-    }
+  addVariation(key:string, value:string) {
+    this.variationArray.push({
+      type: key,
+      value: value,
+    });
+    console.log(JSON.stringify(this.variationArray));
+    this.DisplayedVariationArray = Object.entries(
+      this.variationArray.reduce((acc:any, obj:any) => {
+        if (!acc[obj.type]) {
+          acc[obj.type] = [];
+        }
+        acc[obj.type].push(obj.value);
+        return acc;
+      }, {})
+    ).map(([type, values]) => ({
+      type,
+      values: values,
+    }))
+    this.variationValue =''
+    // this.variationKey =''
   }
-  addColor() {
-    this.colorArray.push(this.inputColor);
-    this.inputColor = '';
-  }
-  addVariation() {}
 
   onStatusChange(event: Event) {
     const target = event.target as HTMLSelectElement;
@@ -249,7 +253,9 @@ isMerchantProductInterface(obj: any): obj is merchantProduct {
 }
   ngOnInit() {
     if (this.isMerchantProductInterface(this.dataService.updateProduct)) {
+      console.log(this.dataService.updateProduct.variations)
       this.dataService.isProductUpdateInstance = true;
+      this.DisplayedVariationArray = this.dataService.updateProduct.variations
       this.productDetails.name = this.dataService.updateProduct.name;
       this.productDetails.price = (this.dataService.updateProduct.price);
       this.productDetails.quantity = this.dataService.updateProduct.quantity;

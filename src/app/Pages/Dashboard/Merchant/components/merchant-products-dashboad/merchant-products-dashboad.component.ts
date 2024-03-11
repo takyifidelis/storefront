@@ -153,6 +153,7 @@ export class MerchantProductsDashboadComponent {
   }
   ngOnInit() {
     this.isLoading = true;
+    console.log('dkj')
     this.apiService
       .getStoreProductsMerchant(localStorage.getItem('storeId')!)
       .subscribe((response: any) => {
