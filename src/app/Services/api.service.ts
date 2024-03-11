@@ -576,6 +576,28 @@ export class APIService {
     );
   }
 
+  getCustomerWallet(customerId: string) {
+    return this.http.get(
+      `${environment.baseApiUrl}/customer/add-wallet/${customerId}`,
+      {
+        withCredentials: true,
+      }
+    );
+  }
+  addWalletCustomer(
+    method: string,
+    walletId: string,
+    name: string,
+    secret: string,
+    customerId: string
+  ) {
+    return this.http.post<Response>(
+      `${environment.baseApiUrl}/customer/add-wallet/${customerId}`,
+      { method, walletId, name, secret },
+      { withCredentials: true }
+    );
+  }
+
   // Error Handling
   private handleError(errorRes: HttpErrorResponse) {
     console.error('Error Response:', errorRes);
