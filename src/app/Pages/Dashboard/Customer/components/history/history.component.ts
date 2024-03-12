@@ -13,22 +13,43 @@ import { APIService } from '../../../../../Services/api.service';
 import { HistoryModalComponent } from './history-modal/history-modal.component';
 import { MatDialog } from '@angular/material/dialog';
 import { UserInterface } from '../../../../../interfaces/all-interfaces';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-history',
   standalone: true,
-  imports: [FormsModule,MatIconModule,MatButtonModule,MatCheckboxModule, MatFormFieldModule, MatInputModule, MatTableModule, MatSortModule, MatPaginatorModule, HistoryModalComponent],
+  imports: [
+    FormsModule,
+    MatIconModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
+    HistoryModalComponent,
+    RouterModule,
+  ],
   templateUrl: './history.component.html',
-  styleUrl: './history.component.scss'
+  styleUrl: './history.component.scss',
 })
-export class HistoryComponent implements OnInit{
-  displayedColumns: string[] = ['checkbox', 'name', 'store', 'categories','price','bubble'];
+export class HistoryComponent implements OnInit {
+  displayedColumns: string[] = [
+    'checkbox',
+    'name',
+    'store',
+    'categories',
+    'price',
+    'bubble',
+  ];
   dataSource: MatTableDataSource<UserInterface>;
   selection = new SelectionModel<UserInterface>(true, []);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   cart: any = [];
-  users: UserInterface[] = []
+  favProducts!: number;
+  users: UserInterface[] = [];
 
   constructor(private apiService: APIService, public dialog: MatDialog) {
     this.dataSource = new MatTableDataSource(this.users);
@@ -37,34 +58,41 @@ export class HistoryComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.apiService.getHistoryProducts(localStorage.getItem('customerId')!).subscribe((response: any) => {
-      this.cart = response.data;
-    this.dataSource = new MatTableDataSource(this.cart);
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-    })
-    
-    
+    this.apiService
+      .getHistoryProducts(localStorage.getItem('customerId')!)
+      .subscribe((response: any) => {
+        this.cart = response.data;
+        this.favProducts = response.data.length;
+        this.dataSource = new MatTableDataSource(this.cart);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+        console.log(response);
+      });
   }
 
-  moreVert(e:UserInterface) {
-    this.dialog.open(HistoryModalComponent, {
-      data: e,
-        width: '479px', 
-        position: {right:'50px', top: '10%'} 
-    });
-
+  moreVert(e: UserInterface) {
+    this.dialog
+      .open(HistoryModalComponent, {
+        data: e,
+        width: '479px',
+        position: { right: '50px', top: '10%' },
+      })
+      .afterClosed()
+      .subscribe((resData) => {
+        console.log(resData);
+        this.ngOnInit();
+      });
   }
 
   // the code below is all for the checkboxes in the table
   isAllSelected() {
-    const numSelected = this.selection.selected.length;    
+    const numSelected = this.selection.selected.length;
     const numRows = this.dataSource.data.length;
     return numSelected === numRows;
   }
-showSelection(e:any) {
-  e.stopPropagation();
-}
+  showSelection(e: any) {
+    e.stopPropagation();
+  }
   /** Selects all rows if they are not all selected; otherwise clear selection. */
   toggleAllRows() {
     if (this.isAllSelected()) {
@@ -80,12 +108,13 @@ showSelection(e:any) {
     if (!row) {
       return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
     }
-    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.checkbox + 1}`;
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${
+      row.checkbox + 1
+    }`;
   }
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
-
 }
