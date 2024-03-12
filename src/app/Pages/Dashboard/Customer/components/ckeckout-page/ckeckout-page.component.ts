@@ -202,6 +202,24 @@ export class CkeckoutPageComponent implements OnInit {
     return sum;
   }
 
+  deleteItem(index: number): void {
+    this.cart.splice(index, 1);
+
+    let cartJson = localStorage.getItem('cart');
+    let remainingItems = JSON.parse(cartJson!) as Array<any>;
+    let adjustedIndex = remainingItems.findIndex(
+      (item) => item.id === this.cart[index].id
+    );
+    if (adjustedIndex !== -1) {
+      remainingItems.splice(adjustedIndex, 1);
+      localStorage.setItem('cart', JSON.stringify(remainingItems));
+      this.cartQuantity = remainingItems.length;
+      this.toastr.info('Product removed successfully', 'Success');
+    } else {
+      this.toastr.error('Error removing the product', 'Error');
+    }
+  }
+
   async onApprove(data: { orderID: string }) {
     console.log(data);
     alert('paused');
