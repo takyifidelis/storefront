@@ -513,7 +513,18 @@ export class APIService {
       }
     );
   }
+  removeProductFromFavorite(products: string[], customer_id: string) {
+    return this.http
+      .patch<Response>(
+        `${environment.baseApiUrl}/customer/remove-products-from-favorites/${customer_id}`,
 
+        { products },
+        {
+          withCredentials: true,
+        }
+      )
+      .pipe(catchError(this.handleError));
+  }
   // Error Handling
   private handleError(errorRes: HttpErrorResponse) {
     console.error('Error Response:', errorRes);

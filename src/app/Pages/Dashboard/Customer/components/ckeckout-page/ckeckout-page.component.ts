@@ -41,6 +41,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTabsModule } from '@angular/material/tabs';
 import { CheckoutModalComponent } from '../checkout-modal/checkout-modal.component';
 import { MatSelectModule } from '@angular/material/select';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-ckeckout-page',
@@ -70,10 +71,11 @@ export class CkeckoutPageComponent implements OnInit {
   public payPalConfig?: IPayPalConfig;
   orderId: string | undefined;
   customerId: string | undefined;
-  cart: any;
+  cart: any = [];
   storeId: string | undefined;
   info = faCircleInfo;
   user!: FormGroup;
+  isDeleting: boolean = false;
   selectedAddressControl = new FormControl();
   selectedAddress!: { [key: string]: string };
 
@@ -106,67 +108,63 @@ export class CkeckoutPageComponent implements OnInit {
   price: any;
   cartProduct!: SavedProducts;
   cartQuantity!: number;
+  sum: number = 0;
+
   constructor(
     private apiService: APIService,
     public dataService: DataService,
     private snackBar: MatSnackBar,
     private router: Router,
     public http: HttpClient,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private toastr: ToastrService
   ) {
     this.dataSource = new MatTableDataSource(this.users);
   }
 
   ngOnInit(): void {
     this.initConfig();
-    this.dataService.cart = JSON.parse(localStorage.getItem('cart')!);
-    this.user = new FormGroup({
-      name: new FormControl(null, Validators.required),
-      streetAddress: new FormControl(null, Validators.required),
-      postalCode: new FormControl(null, Validators.required),
-      phone: new FormControl(null, Validators.required),
-      countryCode: new FormControl(null, Validators.required),
-      city: new FormControl(null, Validators.required),
-      apartmentNo: new FormControl(null, Validators.required),
-    });
-
     this.cart = JSON.parse(localStorage.getItem('cart')!);
-    this.items = [];
-    for (const item of this.cart) {
-      this.iniitialPrice = item.price;
-      this.items.push({
-        product: item.id,
-        quantity: item.quant,
-        variations: [],
-      });
-    }
-
-    this.payload = {
-      items: this.items,
-      shipping: localStorage.getItem('shippingId'),
-      store: localStorage.getItem('storeId'),
-    };
-
+    console.log(this.cart);
+    this.cartQuantity = this.cart.length;
+    console.log(this.sum);
+    //this.cart = JSON.parse(localStorage.getItem('cart')!);
     this.apiService
       .getShipping(localStorage.getItem('customerId')!)
       .subscribe((res: any) => {
         console.log(res.data);
         this.shippingSelect = res.data;
+        console.log(this.shippingSelect);
         this.selectedAddress = this.shippingSelect[0];
-        this.dataSource = new MatTableDataSource(res.data);
       });
     this.apiService
       .getSavedProducts(localStorage.getItem('customerId')!)
       .subscribe(
         (productData) => {
-          console.log(productData.data);
+          console.log(productData.data[0].id);
+
           this.cartProduct = productData;
-          this.cartQuantity = productData.data.length;
+
+          this.items = [];
+          for (const item of this.cart) {
+            this.items.push({
+              product: item.id,
+              quantity: item.quant,
+              variations: [],
+            });
+          }
+          console.log(this.items);
         },
         (errorMessage) => {
           console.log(errorMessage);
         }
       );
+
+    this.payload = {
+      items: this.items,
+      shipping: this.selectedAddressControl.value.id,
+      store: localStorage.getItem('storeId'),
+    };
   }
 
   createOrder() {
@@ -179,23 +177,29 @@ export class CkeckoutPageComponent implements OnInit {
       });
   }
 
-  increment() {
-    for (const item of this.cart) {
-      this.quantity = item.quant++;
-      item.price = this.quantity * this.iniitialPrice!;
-      this.price = item.price;
-      this.items.push({
-        product: item.id,
-        quantity: this.quantity,
-        variations: [],
-      });
-    }
-  }
-
+  // increment() {
+  //   for (const item of this.cart) {
+  //     this.quantity = item.quant++;
+  //     item.price = this.quantity * this.iniitialPrice!;
+  //     this.price = item.price;
+  //     this.items.push({
+  //       product: item.id,
+  //       quantity: this.quantity,
+  //       variations: [],
+  //     });
+  // }
   getTotalCost() {
-    return this.cart
-      .map((t: any) => t.price)
-      .reduce((acc: any, value: any) => acc + value, 0);
+    let sum = 0;
+    this.cart.forEach((product: any) => {
+      const productCost =
+        (product.price / product.quant) *
+        ((100 - product.discount) / 100) *
+        product.quant;
+
+      sum += productCost;
+    });
+
+    return sum;
   }
 
   async onApprove(data: { orderID: string }) {
@@ -345,6 +349,30 @@ export class CkeckoutPageComponent implements OnInit {
     this.dialog.open(CheckoutModalComponent, {
       width: '500px',
     });
+  }
+  onDeleteProduct(productId: string, id: number) {
+    let deleteIds: string[] = [];
+    console.log(id);
+    deleteIds.push(productId);
+    console.log({ products: deleteIds });
+    this.isDeleting = true;
+    this.apiService
+      .removeProductFromFavorite(deleteIds, localStorage.getItem('customerId')!)
+      .subscribe(
+        (deleteResponse) => {
+          console.log(deleteResponse);
+          this.isDeleting = false;
+          this.toastr.info(deleteResponse.message, 'Success');
+        },
+        (errorMessage) => {
+          this.isDeleting = false;
+          console.log(errorMessage);
+          this.toastr.error(
+            errorMessage.error.message,
+            errorMessage.error.type
+          );
+        }
+      );
   }
 }
 

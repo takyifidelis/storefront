@@ -55,17 +55,23 @@
             <section class="shipping-details">
               <div class="cart-header">
                 Shopping Cart
-                <span class="cart-number">{{ cartQuantity }}</span>
+                <span class="cart-number">( {{ cartQuantity }} )</span>
+                <span class="loading" *ngIf="isDeleting"
+                  ><img
+                    src="assets\icons\loading-btn-spinner.svg"
+                    alt="Loading.."
+                /></span>
               </div>
 
-              <div class="cart-items" *ngFor="let product of cartProduct.data">
+              <div
+                class="cart-items"
+                *ngFor="let product of cart; let i = index"
+              >
                 <hr />
                 <div class="product-container">
                   <p class="store-name">
                     Store Name:
-                    <span class="store">{{
-                      product.storeProducts["storeName"]
-                    }}</span>
+                    <span class="store"></span>
                   </p>
                   <div class="product-delete d-flex justify-content-between">
                     <div class="product d-flex">
@@ -81,33 +87,54 @@
                         <div
                           class="amount-quantity d-flex justify-content-between"
                         >
-                          <div class="product-amount">
-                            <span class="amount">Amount: USD</span>
-                            {{ product.price }}
+                          <div class="product-amount product-price">
+                            Amount :
+                            <span class="discount-price">
+                              ${{
+                                (product.price / product.quant) *
+                                  ((100 - product.discount) / 100)
+                              }}
+                            </span>
+                            <span
+                              class="actual-price"
+                              *ngIf="product.discount > 0"
+                              >${{ product.price / product.quant }}</span
+                            >
+                            <span
+                              class="discount-percent"
+                              *ngIf="product.discount > 0"
+                            >
+                              {{ product.discount
+                              }}<span class="per-off">% OFF</span></span
+                            >
                           </div>
                         </div>
-                        <div class="discount-amount">
-                          <span class="discount-available">Discount: </span>
-                          <span class="discount">{{ product.discount }}</span>
-                        </div>
-                        <div class="quantity d-flex">
-                          <button class="quantity-btn">
-                            <mat-icon>add</mat-icon>
-                          </button>
-                          <span class="quntity-number">1</span>
-                          <button class="quantity-btn">
-                            <mat-icon>remove</mat-icon>
-                          </button>
+
+                        <div class="quantity header">
+                          Quantity:
+                          <span class="quant">
+                            {{ product.quant }}
+                          </span>
                         </div>
                       </div>
                     </div>
                     <div class="delete-div">
                       <div class="delete-total">
-                        <button class="delete-btn">
+                        <button
+                          class="delete-btn"
+                          (click)="onDeleteProduct(product.id, i)"
+                        >
                           <mat-icon>delete</mat-icon>
                         </button>
                         <div class="total">
-                          Total: <span class="total-amount">USD 50</span>
+                          Total:
+                          <span class="total-amount">
+                            ${{
+                              (product.price / product.quant) *
+                                ((100 - product.discount) / 100) *
+                                product.quant
+                            }}</span
+                          >
                         </div>
                       </div>
                     </div>
@@ -122,64 +149,15 @@
       <div class="col-5" style="margin-top: 30px; padding: 31px">
         <div>
           <p class="title">ORDER SUMMARY</p>
+          <div class="total-amount">
+            Total:
+            <span class="total-amount">
+              {{ getTotalCost() }}
+            </span>
+          </div>
         </div>
         <!-- @for(product of dataService.cart; track product){ -->
 
-        <div class="row">
-          <div class="col">
-            <p class="text">ITEM</p>
-          </div>
-          <div class="col">
-            <div class="row">
-              <div class="col">
-                <p class="text">QUANTITY</p>
-              </div>
-              <div class="col">
-                <P class="text">PRICE</P>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="col"></div>
-          </div>
-        </div>
-
-        <div class="">
-          @for (product of cart; track product) {
-          <div class="row">
-            <div class="col">
-              <p class="text-2">{{ product.name }}</p>
-            </div>
-            <div class="col">
-              <div class="row">
-                <div class="col d-flex" style="gap: 20px">
-                  <span (click)="increment()"
-                    ><fa-icon [icon]="plus" style="cursor: pointer"></fa-icon
-                  ></span>
-                  <p class="text-2">{{ quantity || 1 }}</p>
-                  <span
-                    ><fa-icon [icon]="minus" style="cursor: pointer"></fa-icon
-                  ></span>
-                </div>
-                <div class="col">
-                  <P class="text-2">{{ product.price }}</P>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="col"></div>
-            </div>
-          </div>
-          }
-        </div>
-        <div class="d-flex justify-content-between">
-          <div>
-            <p class="text">Total:</p>
-          </div>
-          <div class="title" style="margin-right: 64px">
-            ${{ getTotalCost() }}
-          </div>
-        </div>
         <div class="payment-method">
           <div>
             <p class="text">PAYMENT METHOD</p>

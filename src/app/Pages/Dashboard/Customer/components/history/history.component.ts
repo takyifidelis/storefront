@@ -48,6 +48,7 @@ export class HistoryComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   cart: any = [];
+  favProducts!: number;
   users: UserInterface[] = [];
 
   constructor(private apiService: APIService, public dialog: MatDialog) {
@@ -61,18 +62,26 @@ export class HistoryComponent implements OnInit {
       .getHistoryProducts(localStorage.getItem('customerId')!)
       .subscribe((response: any) => {
         this.cart = response.data;
+        this.favProducts = response.data.length;
         this.dataSource = new MatTableDataSource(this.cart);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
+        console.log(response);
       });
   }
 
   moreVert(e: UserInterface) {
-    this.dialog.open(HistoryModalComponent, {
-      data: e,
-      width: '479px',
-      position: { right: '50px', top: '10%' },
-    });
+    this.dialog
+      .open(HistoryModalComponent, {
+        data: e,
+        width: '479px',
+        position: { right: '50px', top: '10%' },
+      })
+      .afterClosed()
+      .subscribe((resData) => {
+        console.log(resData);
+        this.ngOnInit();
+      });
   }
 
   // the code below is all for the checkboxes in the table

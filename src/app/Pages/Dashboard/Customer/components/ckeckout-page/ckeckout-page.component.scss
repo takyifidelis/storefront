@@ -139,18 +139,19 @@ mat-select-trigger {
     .product-name {
       color: #455468;
       font-family: Inter;
-      font-size: 16px;
+      font-size: 18px;
       font-style: normal;
       font-weight: 500;
       line-height: 28px;
       letter-spacing: -0.3px;
+      text-transform: capitalize;
     }
   }
   .amount-quantity {
     .product-amount {
       color: #5e718d;
       font-family: Inter;
-      font-size: 12px;
+      font-size: 14px;
       font-style: normal;
       font-weight: 400;
       line-height: 20px;
@@ -160,7 +161,7 @@ mat-select-trigger {
   .discount-amount {
     color: #5e718d;
     font-family: Inter;
-    font-size: 12px;
+    font-size: 14px;
     font-style: normal;
     font-weight: 400;
     line-height: 20px;
@@ -204,19 +205,13 @@ mat-icon {
   border: 0;
 }
 .quantity {
-  margin-top: 1rem;
-  justify-content: space-between;
-}
-.quantity-btn {
-  text-align: center;
-  border: none;
-  background-color: transparent;
   color: #5e718d;
-  & :hover {
-    border: 1px solid#455468;
-    color: #455468;
-    border-radius: 50%;
-  }
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: -0.2px;
 }
 .cart-header {
   color: #3d4a5c;
@@ -227,7 +222,11 @@ mat-icon {
   line-height: 30px;
   letter-spacing: -0.3px;
 }
-.quntity-number {
+.title {
+  margin-right: 0.4;
+}
+
+.quantity-number {
   color: #8897ae;
   font-family: Inter;
   font-size: 14px;
@@ -248,6 +247,37 @@ mat-icon {
 .store-name {
   text-transform: capitalize;
 }
-.product-name {
-  text-transform: capitalize;
+.header {
+  color: #455468;
+}
+
+.product-price {
+  color: #1c222b;
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 28px;
+  letter-spacing: -0.3px;
+
+  .discount-price {
+    color: #1c222b;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 28px;
+    letter-spacing: -0.3px;
+  }
+  .actual-price {
+    color: #afbaca;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px; /* 142.857% */
+    text-decoration: line-through;
+  }
+  .discount-percent {
+    color: #d21a0e;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+  }
 }
