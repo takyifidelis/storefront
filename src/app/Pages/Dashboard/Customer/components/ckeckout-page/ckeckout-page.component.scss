@@ -281,3 +281,19 @@ mat-icon {
     line-height: 20px;
   }
 }
+.styling-number {
+  color: var(--Colors-Primary-Slate-600, #455468);
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 28px;
+  letter-spacing: -0.3px;
+}
+.position-payment {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.total-margin {
+  margin-bottom: 2rem;
+}

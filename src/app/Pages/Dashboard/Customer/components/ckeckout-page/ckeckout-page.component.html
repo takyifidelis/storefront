@@ -69,10 +69,6 @@
               >
                 <hr />
                 <div class="product-container">
-                  <p class="store-name">
-                    Store Name:
-                    <span class="store"></span>
-                  </p>
                   <div class="product-delete d-flex justify-content-between">
                     <div class="product d-flex">
                       <div class="product-images">
@@ -144,31 +140,46 @@
         </div>
       </div>
       <div class="col-5" style="margin-top: 30px; padding: 31px">
-        <div>
-          <p class="title">ORDER SUMMARY</p>
-          <div class="total-amount">
-            Total:
-            <span class="total-amount">
-              {{ getTotalCost() }}
-            </span>
-          </div>
-        </div>
-        <!-- @for(product of dataService.cart; track product){ -->
+        <div class="position-payment">
+          <div>
+            <p class="select-shipping">ORDER SUMMARY</p>
+            <div
+              class="order-items cart-header d-flex justify-content-between align-items-center"
+            >
+              <div>Number of Items:</div>
 
-        <div class="payment-method">
-          <div>
-            <p class="text">PAYMENT METHOD</p>
-          </div>
-          <div>
-            <ngx-paypal [config]="payPalConfig"></ngx-paypal>
-          </div>
-          <div class="text-2" style="display: flex; gap: 10px">
-            <div>
-              <fa-icon [icon]="info" style="color: green"></fa-icon>
+              <div class="order-number styling-number">
+                {{ cartQuantity }}
+              </div>
             </div>
-            <div>payments may take up to 72 hours to process.</div>
+            <div
+              class="cart-header total-margin d-flex justify-content-between align-items-center"
+            >
+              <div>Total:</div>
+
+              <span class="total-amount styling-number">
+                ${{ getTotalCost() }}
+              </span>
+            </div>
+          </div>
+          <!-- @for(product of dataService.cart; track product){ -->
+
+          <div class="payment-method">
+            <div>
+              <p class="text select-shipping">PAYMENT METHOD</p>
+            </div>
+            <div>
+              <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+            </div>
+            <div class="text-2" style="display: flex; gap: 10px">
+              <div>
+                <fa-icon [icon]="info" style="color: green"></fa-icon>
+              </div>
+              <div>payments may take up to 72 hours to process.</div>
+            </div>
           </div>
         </div>
+        <!--  -->
       </div>
     </div>
   </div>
