@@ -62,7 +62,7 @@ export class TokenAuthComponent {
     this.isLoading = true;
 
     this.authService.verifyPassword(authCode).subscribe(
-      (resData: Response) => {
+      (resData) => {
         console.log(resData);
         this.isLoading = false;
         this.toastr.info('Email is verified', 'Reset Password');

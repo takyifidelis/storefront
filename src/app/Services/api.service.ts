@@ -2,9 +2,9 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, map, throwError } from 'rxjs';
 import { environment } from '../../environments/environment.development';
-import { UserCredentials } from '../interfaces/all-interfaces';
+import { SavedProducts, UserCredentials } from '../interfaces/all-interfaces';
 import { DataService } from './data.service';
-
+import { Response } from '../interfaces/all-interfaces';
 @Injectable({
   providedIn: 'root',
 })
@@ -342,8 +342,8 @@ export class APIService {
     );
   }
 
-  getSavedProducts(customerId: string): Observable<Response> {
-    return this.http.get<Response>(
+  getSavedProducts(customerId: string): Observable<SavedProducts> {
+    return this.http.get<SavedProducts>(
       `${environment.baseApiUrl}/customer/get-saved-products/${customerId}/?idOnly=true&likedOnly=true`,
       {
         withCredentials: true,

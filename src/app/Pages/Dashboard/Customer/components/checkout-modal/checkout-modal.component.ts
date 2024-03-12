@@ -1,4 +1,5 @@
 import { Component, Inject } from '@angular/core';
+
 import {
   MAT_DIALOG_DATA,
   MatDialogContent,
@@ -54,7 +55,6 @@ export class CheckoutModalComponent {
   selectShipping() {
     localStorage.setItem('shippingId', this.data.id);
     this.dialogRef.close();
-    this.toastr.success('Hello world!', 'Toastr fun!');
   }
   AddShippingAddress(form: FormGroupDirective) {
     if (!form.valid) {
@@ -83,11 +83,19 @@ export class CheckoutModalComponent {
         localStorage.getItem('customerId')!
       )
       .subscribe(
-        (resData: Response) => {
+        (resData) => {
           console.log(resData);
+          this.toastr.info(
+            'Customer shipping created successfully.',
+            'Success'
+          );
         },
         (errorMessage) => {
           console.log(errorMessage);
+          this.toastr.error(
+            errorMessage.error.message,
+            errorMessage.error.type
+          );
         }
       );
     form.reset();

@@ -19,11 +19,15 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+
 import { SignupResponseData } from '../../../../Authentication/Auth/api.model';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
-import { UserInterface } from '../../../../../interfaces/all-interfaces';
+import {
+  SavedProducts,
+  UserInterface,
+} from '../../../../../interfaces/all-interfaces';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
@@ -100,7 +104,8 @@ export class CkeckoutPageComponent implements OnInit {
   iniitialPrice?: number;
   quantity: any;
   price: any;
-
+  cartProduct!: SavedProducts;
+  cartQuantity!: number;
   constructor(
     private apiService: APIService,
     public dataService: DataService,
@@ -150,6 +155,18 @@ export class CkeckoutPageComponent implements OnInit {
         this.selectedAddress = this.shippingSelect[0];
         this.dataSource = new MatTableDataSource(res.data);
       });
+    this.apiService
+      .getSavedProducts(localStorage.getItem('customerId')!)
+      .subscribe(
+        (productData) => {
+          console.log(productData.data);
+          this.cartProduct = productData;
+          this.cartQuantity = productData.data.length;
+        },
+        (errorMessage) => {
+          console.log(errorMessage);
+        }
+      );
   }
 
   createOrder() {
@@ -287,27 +304,6 @@ export class CkeckoutPageComponent implements OnInit {
         console.log('onClick', data, actions);
       },
     };
-  }
-
-  onSubmit() {
-    console.log(this.user);
-    this.http
-      .post<SignupResponseData>(
-        `${
-          environment.baseApiUrl
-        }/customer/add-shipping-address/${localStorage.getItem('customerId')}`,
-        this.user.value,
-        {
-          withCredentials: true,
-        }
-      )
-      .subscribe((res: any) => {
-        console.log(res);
-      });
-  }
-
-  newShipping() {
-    this.addShipping = !this.addShipping;
   }
 
   isAllSelected() {
