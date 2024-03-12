@@ -10,21 +10,7 @@
       click the button below to add a new product
     </p>
     <button>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="21"
-        height="21"
-        viewBox="0 0 21 21"
-        fill="none"
-      >
-        <path
-          d="M10.5 4.50586V16.1725M4.66669 10.3392H16.3334"
-          stroke="white"
-          stroke-width="1.66667"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        />
-      </svg>
+      <img src="/assets/icons/add.svg" alt="" />
       <span>create new</span>
     </button>
   </div>
@@ -39,28 +25,28 @@
       class="status"
       [ngClass]="isAllActive ? 'active' : ''"
       style="cursor: pointer"
-      (click)="onSort('All')"
+      (click)="onSort('All'); switchTab('All')"
       >All</span
     >
     <span
       class="status"
       [ngClass]="isProcessingActive ? 'active' : ''"
       style="cursor: pointer"
-      (click)="onSort('Processing')"
+      (click)="onSort('Processing'); switchTab('Processing')"
       >Processing</span
     >
     <span
       class="status"
       [ngClass]="isShippedActive ? 'active' : ''"
       style="cursor: pointer"
-      (click)="onSort('Shipped')"
+      (click)="onSort('Shipped'); switchTab('Shipped')"
       >Shipped</span
     >
     <span
       class="status"
       [ngClass]="isDeliveredActive ? 'active' : ''"
       style="cursor: pointer"
-      (click)="onSort('Delivered')"
+      (click)="onSort('Delivered'); switchTab('Delivered')"
       >Delivered</span
     >
   </div>

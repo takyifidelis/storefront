@@ -72,7 +72,7 @@ sorted: any = [];
 
  
   ngOnInit(): void {
-     this.apiService.getOrdersForMerchant('f9586428-62e3-4455-bb1d-61262a407d1a').subscribe((res: any) => {
+     this.apiService.getOrdersForMerchant(localStorage.getItem('storeId')!).subscribe((res: any) => {
       console.log(res);
       this.orders = res.data;
       this.unsorted = this.orders
@@ -129,34 +129,34 @@ sorted: any = [];
     this.dataSource.sort = this.sort;
   }
 
+  switchTab(tabName: string) {
+    // Reset all tab states
+    this.isAllActive = false;
+    this.isProcessingActive = false;
+    this.isShippedActive = false;
+    this.isDeliveredActive = false;
+
+    // Activate the selected tab
+    switch (tabName) {
+      case 'All':
+        this.isAllActive = true;
+        break;
+      case 'Processing':
+        this.isProcessingActive = true;
+        break;
+      case 'Shipped':
+        this.isShippedActive = true;
+        break;
+      case 'Delivered':
+        this.isDeliveredActive = true;
+        break;
+      default:
+        break;
+    }
+  }
+
 
   onSort(status: string) {
-    if(status === "All" ){
-      this.isAllActive = true;
-      this.isProcessingActive = false;
-      this.isShippedActive = false;
-      this.isDeliveredActive = false;
-    }
-    if(status === "Processing"){
-      this.isProcessingActive = true;
-      this.isAllActive = false;
-      this.isShippedActive = false;
-      this.isDeliveredActive = false;
-    }
-    if(status === "Shipped"){
-      this.isShippedActive = true;
-      this.isAllActive = false;
-      this.isProcessingActive = false;
-      this.isDeliveredActive = false;
-    }
-    if(status === "Delivered"){
-      this.isDeliveredActive = true;
-      this.isAllActive = false;
-      this.isProcessingActive = false;
-      this.isShippedActive = false;
-    }
-    
-
     this.sorted = [];
     this.unsorted.forEach((order: any) =>{
       if(order.status === status) {
