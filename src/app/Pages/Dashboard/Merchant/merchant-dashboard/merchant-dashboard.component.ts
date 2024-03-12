@@ -9,9 +9,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { DataService } from '../../../../Services/data.service';
 
 import { MerchantAddProductComponent } from '../components/merchant-add-product/merchant-add-product.component';
-import { AuthService } from '../../../Authentication/Auth/auth.service';
 import { APIService } from '../../../../Services/api.service';
-// import { MerchantAddProductComponent } from '../components/merchant-add-product';
 
 @Component({
   selector: 'app-merchant-dashboard',

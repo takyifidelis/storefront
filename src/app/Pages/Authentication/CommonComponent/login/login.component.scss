@@ -219,3 +219,50 @@
     background: #fff;
   }
 }
+
+@media only screen and (max-width: 400px) {
+ 
+
+  .bg-image{
+    display: none;
+  }
+  .mobile-view{
+    width: 100%;
+
+    .frame-2{
+      width: 100%;
+      padding: 16px;
+
+      .login100-form{
+width: 100%;
+        .welcome-title h1{
+          font-size: 2rem;
+        }
+
+        .button{
+          width: 100%;
+        margin-left: 11px;
+
+        button {
+          width: 338px;
+        }
+        }
+      }
+
+      .optional-input{
+        width: 100%;
+
+        .option-text{
+          width: 100%;
+          margin-left: 2px;
+        }
+      }
+
+      .social-icon{
+          width: 338px;
+          margin-left: 10px;
+      }
+    }
+  }
+  
+}
