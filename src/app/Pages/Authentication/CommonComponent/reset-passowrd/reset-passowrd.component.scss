@@ -333,6 +333,60 @@ form {
 }
 
 
-@media only screen and (max-width: 400px)  {
-  
+@media only screen and (max-width: 400px){
+  .frame-1{
+    display: none;
+  }
+
+  .frame-2{
+    width: 100% !important;
+    padding: 66px 10px 0 10px !important;
+
+    form{
+      width: 100% !important;
+      justify-content: center !important;
+
+.form-wrapper{
+  width: 100%;
+
+  .frame-2-sub-container{
+    width: 100% !important;
+
+    .text-heading {
+      width: 100% !important;
+      // margin-left: 33px !important;
+
+      .text{
+        width: 100% !important;
+      }
+    }
+
+    .password-wrapper{
+      width: 100% !important;
+
+      .password-input{
+        width: 100% !important;
+      }
+
+      .input-wrapper{
+        width: 100% !important;
+
+        input{
+          width: 100% !important;
+        }
+      }
+    }
+
+    .button{
+      width: 360px !important;
+
+      button{
+        width: 100% !important;
+      }
+    }
+  }
+}
+      
+    }
+  }
 }
