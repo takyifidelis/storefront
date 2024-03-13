@@ -49,14 +49,35 @@ export class MerchantDashboardComponent implements OnInit {
     private router: Router
   ) {}
   logout() {
+    let tourCompleted: boolean;
+    let editorTourCompleted: boolean;
+    if(localStorage.getItem('tourCompleted')){
+      tourCompleted = true;
+      if(localStorage.getItem('editorTourCompleted')) {
+        editorTourCompleted = true;
+      }
+    }
+     
     this.apiService.logout().subscribe(
       (resData) => {
-        console.log(resData);
+        console.log(tourCompleted);
+        console.log(editorTourCompleted);
         localStorage.clear();
+
+        if(tourCompleted){
+          localStorage.setItem('tourCompleted', tourCompleted.toString())
+          if(editorTourCompleted) {
+        localStorage.setItem('tourCompleted', editorTourCompleted.toString());
+          }
+        }
+        
         this.router.navigate(['login']);
       },
       (error) => {
         console.error('Logout error:', error);
+        if (error.message === 'You are not authorized to access this resource.'){
+          this.router.navigate(['login']);
+        }
       }
     );
   }
