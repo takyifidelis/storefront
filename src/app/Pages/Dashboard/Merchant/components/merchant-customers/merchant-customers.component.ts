@@ -68,6 +68,7 @@ export interface orderInterface {
   styleUrl: './merchant-customers.component.scss',
 })
 export class MerchantCustomersComponent implements OnInit {
+  merchantCustomersEmpty = false;
   filterIcon = faFilter;
   seaechICon = faSearch;
   checkIcon = faCheck;
@@ -140,12 +141,16 @@ export class MerchantCustomersComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.merchantCustomersEmpty = true;
     this.apiService
       .getAllCustomersForStore(localStorage.getItem('storeId')!)
       .subscribe(
         (res: any) => {
           console.log(res);
           this.numberOfCustomer = res.data.length;
+          if (this.numberOfCustomer > 0) {
+            this.merchantCustomersEmpty = false;
+          }
           this.dataSource = new MatTableDataSource(res.data);
         },
         (errorMessage) => {
