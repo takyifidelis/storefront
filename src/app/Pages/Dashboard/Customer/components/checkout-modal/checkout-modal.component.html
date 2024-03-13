@@ -1,0 +1,174 @@
+<div class="main-container">
+  <div mat-dialog-title>Add a new address</div>
+  <mat-dialog-content>
+    <mat-tab-group>
+      <mat-tab label="Shipping Address">
+        <form
+          action=""
+          method="post"
+          #shippingForm="ngForm"
+          [formGroup]="AddShipping"
+          (ngSubmit)="AddShippingAddress(shippingForm)"
+        >
+          <div class="form-group first-name">
+            <label for="firstname">Full Name</label>
+            <input
+              type="text"
+              id=""
+              name="firstname"
+              class="form-control"
+              placeholder="Fidelis"
+              formControlName="fullName"
+            />
+          </div>
+          <div class="form-group address">
+            <label for="address">Street Address</label>
+            <input
+              type="text"
+              id=""
+              name="address"
+              class="form-control"
+              placeholder="Paa Grant Ave"
+              formControlName="address"
+            />
+          </div>
+          <div class="form-group apartment">
+            <label for="apartment">Apartment Number</label>
+            <input
+              type="text"
+              id=""
+              name="apartment"
+              class="form-control"
+              placeholder="Accra"
+              formControlName="apartment"
+            />
+          </div>
+          <div class="counrty-code-phone d-flex justify-content-between">
+            <div class="form-group city">
+              <label for="ccode">Country Code</label>
+              <input
+                type="text"
+                id=""
+                name="ccode"
+                class="form-control"
+                placeholder="GHA"
+                formControlName="ccode"
+              />
+            </div>
+
+            <div class="form-group postal-code">
+              <label for="phone">Phone</label>
+              <input
+                type="text"
+                id=""
+                name="postal-code"
+                class="form-control"
+                placeholder="0242331122"
+                formControlName="phone"
+              />
+            </div>
+          </div>
+          <div class="city-state-zipcode d-flex justify-content-between">
+            <div class="form-group city">
+              <label for="city">City</label>
+              <input
+                type="text"
+                id=""
+                name="city"
+                class="form-control"
+                placeholder="Accra"
+                formControlName="city"
+              />
+            </div>
+
+            <div class="form-group postal-code">
+              <label for="postal-code">Postal code</label>
+              <input
+                type="text"
+                id=""
+                name="postal-code"
+                class="form-control"
+                placeholder="00233"
+                formControlName="postalCode"
+              />
+            </div>
+          </div>
+          <div class="submit-btn">
+            <button class="btn btn-primary" type="submit">Submit</button>
+          </div>
+        </form>
+      </mat-tab>
+      <mat-tab label="Billing Address">
+        <form action="">
+          <div class="first-last form-group d-flex justify-content-between">
+            <div class="form-group first-name">
+              <label for="firstname">First Name</label>
+              <input
+                type="text"
+                id=""
+                name="firstname"
+                class="form-control"
+                placeholder="Fidelis"
+              />
+            </div>
+            <div class="form-group last-name">
+              <label for="lastname">Last Name</label>
+              <input
+                type="text"
+                id=""
+                name="lastname"
+                class="form-control"
+                placeholder="Mensah"
+              />
+            </div>
+          </div>
+          <div class="form-group address">
+            <label for="address">Address</label>
+            <input
+              type="text"
+              id=""
+              name="address"
+              class="form-control"
+              placeholder="WS-5577-29"
+            />
+          </div>
+          <div class="city-state-zipcode">
+            <div class="form-group city">
+              <label for="city">City</label>
+              <input
+                type="text"
+                id=""
+                name="city"
+                class="form-control"
+                placeholder="Accra"
+              />
+            </div>
+            <div class="form-group state">
+              <label for="firstname">State</label>
+              <input
+                type="text"
+                id=""
+                name="lastname"
+                class="form-control"
+                placeholder="Western"
+              />
+            </div>
+            <div class="form-group zip-code">
+              <label for="zipcode">Zipcode</label>
+              <input
+                type="text"
+                id=""
+                name="zipcode"
+                class="form-control"
+                placeholder="00233"
+              />
+            </div>
+          </div>
+          <div class="submit-btn">
+            <button class="btn btn-primary">Submit</button>
+          </div>
+        </form></mat-tab
+      >
+    </mat-tab-group>
+  </mat-dialog-content>
+</div>

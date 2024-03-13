@@ -1,7 +1,6 @@
-
 .button {
-    border: none;
-    background: #fff;
+  border: none;
+  background: #fff;
 }
 .payment-card-selected {
   display: flex;
@@ -29,26 +28,18 @@
 
 .payment-card {
   display: flex;
-  padding: 11px;
+
+  align-items: flex-start;
+  gap: 4px;
+  align-self: stretch;
+  background: #fff;
+}
+.payment-card-paypal {
+  display: flex;
   align-items: flex-start;
   gap: 4px;
   align-self: stretch;
   border-radius: 8px;
-  border: 1px solid #eaecf0;
-  background: #fff;
-
-  .not-selected {
-    display: flex;
-    width: 16px;
-    height: 16px;
-    padding: 3px;
-    justify-content: center;
-    align-items: center;
-    border-radius: 8px;
-    border: 1px solid #d0d5dd;
-    background: #fff;
-    color: #f5f5ff;
-  }
 }
 
 label {
@@ -74,7 +65,7 @@ label {
     outline: none;
     border: none;
     font-size: 14px;
-    color: #8897ae;
+    color: #3d4a5c;
     font-family: Inter;
     font-style: normal;
     font-weight: 500;
@@ -135,4 +126,63 @@ label {
   font-weight: 400;
   line-height: 28px;
   letter-spacing: -0.3px;
+}
+.paypal-form {
+  margin-top: 1rem;
+  label {
+    margin-top: 0.5rem;
+  }
+  .paypal-select {
+    .paypal-image {
+      padding: 0.6rem;
+      border-radius: 4px;
+      border: 1px solid var(--Gray-100, #f2f4f7);
+    }
+    .paypal-paragraph {
+      color: #344054;
+      font-family: "Inter";
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 20px;
+      margin-left: 1rem;
+    }
+  }
+}
+.mat-mdc-radio-group {
+  display: flex;
+  flex-direction: column;
+}
+.cards-form {
+  margin-top: 1rem;
+  .payment-card {
+    margin-bottom: 1rem;
+    .card-paragraph {
+      color: #344054;
+      font-family: "Inter";
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 20px;
+      margin-left: 1rem;
+    }
+  }
+}
+.bottom-btns {
+  margin-bottom: 1rem;
+}
+
+.mat-mdc-radio-button {
+  border-radius: 6px;
+  border: 1px solid #afbaca;
+  background: #fff;
+  margin-bottom: 6px;
+  width: 100%;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  padding-left: 0.3rem;
+}
+.mat-mdc-radio-checked.mat-accent {
+  border: 1px solid #0408e7;
+  background-color: #f5f5ff;
 }

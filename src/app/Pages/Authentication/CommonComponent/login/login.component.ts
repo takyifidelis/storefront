@@ -24,7 +24,7 @@ import {
   Validators,
   ReactiveFormsModule,
   NgForm,
-} from '@angular/forms';
+} from '@angular/forms'
 import { Router, RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faFacebook, faGoogle } from '@fortawesome/free-brands-svg-icons';
@@ -155,7 +155,6 @@ export class LoginComponent implements OnInit {
       .authenticateUser(this.dataService.loginCredentials)
       .subscribe(
         (resData: any) => {
-
           console.log(resData);
 
           this.isLoading = false;
@@ -172,19 +171,17 @@ export class LoginComponent implements OnInit {
           } else {
             console.log(resData);
 
-
             // this.dataService.isLoading = false;
           }
         },
         (errorMessage: any) => {
-          this.isLoading = false; 
+          this.isLoading = false;
           console.log(errorMessage);
           this.error = errorMessage;
           this.toastr.error(this.error, 'Login Failed');
         }
       );
     this.dataService.loginCredentials = { email: '', password: '' };
-
   }
 
   handleGoogleResponse() {

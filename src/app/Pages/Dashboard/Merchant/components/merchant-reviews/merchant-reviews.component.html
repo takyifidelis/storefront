@@ -37,12 +37,17 @@
 
 <section class="review-page">
   <div class="filter-block">
-    <div class="row justify-content-between" style="padding-left: 41px">
-      <div class="col">
+    <div class="d-flex justify-content-between">
+      <div class="d-flex align-items-center">
         <h4>Reviews</h4>
+        <div class="number-of-reviews">
+          <span class="review-number">{{ numberOfReviews }}</span>
+          <span class="review">Review</span>
+          <span class="reviews" *ngIf="numberOfReviews !== 1">s</span>
+        </div>
       </div>
       <div
-        class="col d-flex justify-content-end align-items-center"
+        class="d-flex justify-content-end align-items-center"
         style="gap: 10px; padding-right: 31px"
       >
         <button class="d-flex justify-content-around button">
@@ -58,12 +63,15 @@
               [icon]="seaechICon"
               style="font-size: 15px; color: #1b4dff"
             ></fa-icon>
-            <input type="text" placeholder="Search........" />
+            <input
+              type="text"
+              placeholder="Search........"
+              matInput
+              (keyup)="applyFilter($event)"
+              #input
+            />
           </div>
         </form>
-        <button class="new-payment">
-          <p>New Product</p>
-        </button>
       </div>
     </div>
   </div>
@@ -127,16 +135,19 @@
           Name
         </th>
         <td mat-cell *matCellDef="let row" (click)="moreVert(row)">
-          <div class="product-info d-flex align-items-center">
-            <div class="product-image">
-              <img
-                src="assets\images\hat-review.svg"
-                alt=""
-                style="border-radius: 50%"
-              />
+          <div class="customer-info d-flex align-items-center">
+            <div
+              class="customer-image d-flex justify-content-center align-items-center"
+            >
+              <span class="first-initials">{{
+                row.customerReview.firstName.charAt(0)
+              }}</span>
+              <span class="last-initials">
+                {{ row.customerReview.lastName.charAt(0) }}
+              </span>
             </div>
             <div class="product-name-date">
-              <p class="product-name">
+              <p class="customer-name">
                 <span class="first-name">{{
                   row.customerReview.firstName
                 }}</span
@@ -144,7 +155,7 @@
                   {{ row.customerReview.lastName }}
                 </span>
               </p>
-              <p class="product-date">Ghana</p>
+              <p class="customer-date">Ghana</p>
             </div>
           </div>
         </td>
@@ -186,6 +197,11 @@
           </div>
         </td>
       </ng-container>
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell no-result" colspan="4" *ngIf="numberOfReviews > 0">
+          No data matching "{{ input.value }}"
+        </td>
+      </tr>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <!-- <tr mat-row *matRowDef="let row; columns: displayedColumns;"
@@ -203,4 +219,14 @@
   <!-- <div *ngFor="let review of reviews$ | async">
     {{rating }}
   </div> -->
+  <div class="loading-spinner-small" *ngIf="isLoading">
+    <img
+      src="assets\icons\loading-btn-spinner.svg"
+      alt="Loading.."
+      class="spinner-image"
+    />
+  </div>
+  <div class="no-result-found" *ngIf="numberOfReviews === 0">
+    No Review Found
+  </div>
 </section>

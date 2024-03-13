@@ -24,8 +24,15 @@
             Cancel
           </button>
 
-          <button type="submit" class="btn btn-primary" (click)="onSubmit()">
-            Save
+          <button type="submit" class="btn btn-primary">
+            <span (click)="onSubmit()" class="saving" *ngIf="!isLoading && !dataService.isProductUpdateInstance"> Save</span>
+            <span (click)="onUpdate()" class="saving" *ngIf="!isLoading && dataService.isProductUpdateInstance"> update</span>
+            <span class="loading" *ngIf="isLoading" style="padding: 0 0.45rem"
+              ><img
+                src="assets\icons\loading-btn-spinner.svg"
+                alt="Loading.."
+                style="width: 1.5rem"
+            /></span>
           </button>
         </div>
       </div>
@@ -57,17 +64,17 @@
               <label for="price" class="label-name">Price</label>
               <input
                 [(ngModel)]="productDetails.price"
-                type="text"
+                type="number"
                 id="price"
                 class="form-control"
-                placeholder="GH$"
+                placeholder="$"
               />
             </div>
             <div class="stock">
               <label for="stock" class="label-name">Stock</label>
               <input
                 [(ngModel)]="productDetails.quantity"
-                type="stock"
+                type="number"
                 id="stock"
                 class="form-control"
                 placeholder="1"
@@ -86,10 +93,10 @@
               class="form-control"
               placeholder="Enter a description..."
             ></textarea> -->
-            <!-- <ckeditor
+            <ckeditor
               [editor]="Editor"
               [(ngModel)]="productDetailss.description"
-            ></ckeditor> -->
+            ></ckeditor>
           </div>
           <div class="category">
             <div class="head d-flex align-items-center justify-content-between">
@@ -111,10 +118,7 @@
                 class="example-radio-group"
                 [(ngModel)]="productDetails.category"
               >
-
-
                 @for (cat of categories; track cat) {
-
 
                 <mat-radio-button class="example-radio-button" [value]="cat">{{
                   cat
@@ -136,8 +140,8 @@
               class="form-group form-control"
               (change)="onStatusChange($event)"
             >
-              <option value="true">Active</option>
-              <option value="false">Not Active</option>
+              <option value=true>Active</option>
+              <option value=false>Not Active</option>
             </select>
           </div>
         </div>
@@ -208,15 +212,15 @@
               variation
             </p>
           </div>
-          <div class="media-sizes" *ngFor="let variation of variationArray">
+          <div class="media-sizes" *ngFor="let variation of DisplayedVariationArray">
             <div class="head d-flex align-items-center justify-content-between">
-              <h4 class="size-header product-header">{{ variation.key }}</h4>
+              <h4 class="size-header product-header">{{ variation.type }}</h4>
             </div>
             <span class="media-size" *ngFor="let value of variation.values">{{
               value
             }}</span>
           </div>
-          <div class="media-colours">
+          <!-- <div class="media-colours">
             <div class="head d-flex align-items-center justify-content-between">
               <h4 class="colour-header product-header">Colour</h4>
               <p
@@ -234,7 +238,7 @@
               *ngFor="let color of colorArray"
               [ngStyle]="{ 'background-color': color }"
             ></span>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -301,8 +305,9 @@
                   type="text"
                   name="type"
                   placeholder="Ex: Size"
-                  id=""
+                  id="variationKey"
                   class="form-control"
+                  #key
                   [(ngModel)]="variationKey"
                 />
               </div>
@@ -312,14 +317,16 @@
                   type="text"
                   name="value"
                   placeholder="Ex: XL"
-                  id=""
-                  class="form-control"
+                  id="variationValue"
                   [(ngModel)]="variationValue"
+                  class="form-control"
+                  #variValue
+                  (keyup.enter)="addVariation(key.value, variValue.value)"
                 />
               </div>
             </div>
             <div class="variation-btn">
-              <button class="btn btn-primary add-cat-btn" (click)="addSize()">
+              <button class="btn btn-primary add-cat-btn" (click)="addVariation(key.value, variValue.value)">
                 Add
               </button>
             </div>
@@ -355,13 +362,6 @@
                 [(ngModel)]="inputColor"
                 style="width: 6rem"
               />
-              <button
-                class="btn btn-primary"
-                style="margin-left: 1rem"
-                (click)="addColor()"
-              >
-                Add
-              </button>
             </div>
           </div>
         </div>

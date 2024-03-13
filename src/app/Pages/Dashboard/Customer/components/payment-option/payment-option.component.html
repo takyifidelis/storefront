@@ -8,7 +8,7 @@
       style="gap: 10px; padding-right: 31px"
     >
       <button class="d-flex justify-content-around button">
-        <fa-icon [icon]="filterIcon" style="font-size: 15px"></fa-icon>
+        <fa-icon [icon]="filterIcon" class="filter"></fa-icon>
         <p>Filter</p>
       </button>
       <form>
@@ -25,64 +25,58 @@
       </button>
     </div>
   </div>
-  <section
-    class="container"
-    style="
-      width: 100%;
-      padding-top: 102px;
-      padding-right: 10rem;
-      padding-left: 10rem;
-    "
-  >
-    <div class="d-flex w-100 flex-column">
-      <div
-        class="d-flex justify-content-center payment-card-selected"
-        style="gap: 20px; margin-bottom: 20px"
-      >
-        <div>
-          <fa-icon [icon]="visa" style="font-size: 40px"></fa-icon>
-        </div>
-        <div class="d-flex justify-content-between w-100">
-          <div>
-            <div>
-              <p>Emmanuella Neizer</p>
-              <p>822873648717</p>
-              <p>Expiry 06/2024</p>
+  <section class="card-container d-flex justify-content-center">
+    <div class="card-blocks">
+      <mat-radio-group aria-label="Select an option" class="d-flex flex-column">
+        <mat-radio-button value="1">
+          <div class="card-div d-flex align-items-start justify-content-start">
+            <div class="card-image">
+              <img src="assets\images\visa.svg" alt="" />
             </div>
-            <div class="d-flex" style="gap: 12px">
-              <p>Set as Default</p>
-              <span>Edit</span>
+            <div class="card-content">
+              <div class="card-name">Fidelis Takyi Mensah</div>
+              <div class="card-number">123456789</div>
+              <div class="card-expiry">Expiry 06/2024</div>
+              <div class="set-as">
+                <span class="default">Set as default</span>
+                <span class="edit"> Edit</span>
+              </div>
             </div>
           </div>
-          <button class="check">
-            <fa-icon [icon]="checkIcon"></fa-icon>
-          </button>
-        </div>
-      </div>
-      <div
-        class="d-flex justify-content-center payment-card"
-        style="gap: 20px; margin-bottom: 20px"
-      >
-        <div>
-          <fa-icon [icon]="masterCard" style="font-size: 40px"></fa-icon>
-        </div>
-        <div class="d-flex justify-content-between w-100">
-          <div>
-            <div>
-              <p>Emmanuella Neizer</p>
-              <p>822873648717</p>
-              <p>Expiry 06/2024</p>
+        </mat-radio-button>
+        <mat-radio-button value="2">
+          <div class="card-div d-flex align-items-start justify-content-start">
+            <div class="card-image">
+              <img src="assets\images\mastercard.svg" alt="" />
             </div>
-            <div class="d-flex" style="gap: 12px">
-              <p>Set as Default</p>
-              <span>Edit</span>
+            <div class="card-content">
+              <div class="card-name">Emmanuel Adomako</div>
+              <div class="card-number">987654321</div>
+              <div class="card-expiry">Expiry 06/2027</div>
+              <div class="set-as">
+                <span class="default">Set as default</span>
+                <span class="edit"> Edit</span>
+              </div>
             </div>
-          </div>
-          <button class="selected">
-            <!-- <fa-icon [icon]="selected"></fa-icon> -->
-          </button>
-        </div>
-      </div>
+          </div></mat-radio-button
+        >
+        <mat-radio-button value="3">
+          <div class="card-div d-flex align-items-start justify-content-start">
+            <div class="card-image paypal-image">
+              <img src="assets\images\PayPal.svg" alt="" />
+            </div>
+            <div class="card-content">
+              <div class="card-name">Felix Hagan</div>
+              <div class="card-number">12341234</div>
+              <div class="card-expiry">Expiry 06/2025</div>
+              <div class="set-as">
+                <span class="default">Set as default</span>
+                <span class="edit"> Edit</span>
+              </div>
+            </div>
+          </div></mat-radio-button
+        >
+      </mat-radio-group>
     </div>
   </section>
 </div>

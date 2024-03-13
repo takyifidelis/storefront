@@ -11,6 +11,7 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { ToastrService } from 'ngx-toastr';
 import {
   MAT_DIALOG_DATA,
   MatDialog,
@@ -65,6 +66,7 @@ export interface productInterface {
     RouterModule,
     ReactiveFormsModule,
   ],
+
   templateUrl: './merchant-discount.component.html',
   styleUrl: './merchant-discount.component.scss',
 })
@@ -72,13 +74,17 @@ export class MerchantDiscountComponent {
   filterIcon = faFilter;
   seaechICon = faSearch;
   checkIcon = faCheck;
+
   showForm: boolean = false;
+  isLoading: boolean = false;
   addDiscount: FormGroup;
+  discountNumber!: any;
   storeCategories: string[] = [];
   constructor(
     private apiService: APIService,
     public dataService: DataService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private toastr: ToastrService
   ) {
     this.dataSource = new MatTableDataSource();
     this.addDiscount = new FormGroup({
@@ -123,7 +129,7 @@ export class MerchantDiscountComponent {
   // the code below is all for the checkboxes in the table
   ngOnInit() {
     this.dataSource = new MatTableDataSource(this.users);
-
+    this.isLoading = true;
     // Get categories
     this.apiService
       .getStoreCategories(localStorage.getItem('storeId')!)
@@ -139,10 +145,14 @@ export class MerchantDiscountComponent {
       .subscribe(
         (promoData: { [key: string]: any }) => {
           console.log(promoData);
+          this.discountNumber = promoData['data'].length;
+          this.isLoading = false;
+
           this.dataSource = new MatTableDataSource(promoData['data']);
         },
         (errorMessage) => {
           console.log(errorMessage);
+          this.isLoading = false;
         }
       );
   }
@@ -193,6 +203,10 @@ export class MerchantDiscountComponent {
         this.ngOnInit();
       });
   }
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
   // Posting the new Promotion
   onSubmit(form: FormGroupDirective) {
     if (!form.valid) {
@@ -214,13 +228,19 @@ export class MerchantDiscountComponent {
         localStorage.getItem('storeId')!
       )
       .subscribe(
-        (resData: { [key: string]: any }) => {
+        (resData) => {
           console.log(resData);
           this.ngOnInit();
+          this.toastr.info(resData.message, 'Success');
+
           // this.dataSource = new MatTableDataSource(resData['data']);
         },
         (errorMessage) => {
           console.log(errorMessage);
+          this.toastr.error(
+            errorMessage.error.message,
+            errorMessage.error.type
+          );
         }
       );
     form.reset();
@@ -247,7 +267,9 @@ export class MerchantDiscountCustomizeComponent {
   productDataSource!: MatTableDataSource<productInterface>;
   displayedColumns: string[] = ['name', 'price', 'category', 'inventory'];
   storeCategories: string[] = [];
+  numberOfProducts: any;
   discountUpdate: FormGroup;
+  isLoading: boolean = false;
   users = [
     {
       name: '1',
@@ -259,7 +281,8 @@ export class MerchantDiscountCustomizeComponent {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: productInterface,
-    private apiService: APIService
+    private apiService: APIService,
+    private toastr: ToastrService
   ) {
     console.log(data);
 
@@ -281,16 +304,21 @@ export class MerchantDiscountCustomizeComponent {
         for (const cat of catResData['data']) {
           this.storeCategories.push(cat.name);
         }
+        this.isLoading = true;
         this.apiService.getProductUnderPromotion(this.data.id).subscribe(
           (resData: Response) => {
             console.log(resData.data);
+            this.isLoading = false;
             let d: any = [];
             d = resData.data;
+            this.numberOfProducts = d.products.length;
             console.log(d);
+            console.log(this.numberOfProducts);
             this.productDataSource = new MatTableDataSource(d.products);
           },
           (errorMessage) => {
             console.log(errorMessage);
+            this.isLoading = false;
           }
         );
       });
@@ -323,9 +351,14 @@ export class MerchantDiscountCustomizeComponent {
           d = resData.data;
           console.log(d);
           this.productDataSource = new MatTableDataSource(d);
+          this.toastr.info(resData.message, 'Success');
         },
         (errorMessage) => {
           console.log(errorMessage);
+          this.toastr.error(
+            errorMessage.error.message,
+            errorMessage.error.type
+          );
         }
       );
     form.reset();
@@ -336,9 +369,14 @@ export class MerchantDiscountCustomizeComponent {
       .subscribe(
         (resData) => {
           console.log(resData);
+          this.toastr.info(resData.message, 'Success');
         },
         (errorMessage) => {
           console.log(errorMessage);
+          this.toastr.error(
+            errorMessage.error.message,
+            errorMessage.error.type
+          );
         }
       );
   }
@@ -357,4 +395,5 @@ export class MerchantDiscountCustomizeComponent {
     //   }
     // );
   }
+
 }

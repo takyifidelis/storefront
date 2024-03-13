@@ -1,0 +1,198 @@
+<div class="container">
+  <div class="d-flex justify-content-between align-items-end">
+    <div class="customer-info d-flex align-items-center">
+      <div
+        class="customer-image d-flex justify-content-center align-items-center"
+      >
+        <span class="first-intial">
+          {{ data.firstName.toString().charAt(0) }}
+        </span>
+
+        <span class="second-initial">
+          {{ data.lastName.toString().charAt(0) }}
+        </span>
+      </div>
+      <div class="customer-name-number">
+        <div class="customer-name">
+          <span classs="first-name">
+            {{ data.firstName }}
+          </span>
+          <span class="last-name">
+            {{ data.lastName }}
+          </span>
+        </div>
+        <div class="customer-email">{{ data.email }}</div>
+      </div>
+    </div>
+    <div class="number-orders">
+      <div class="orders">Number of Orders</div>
+      <div class="number text-right">
+        # <span class="order-nums">{{ data.orders }}</span>
+      </div>
+    </div>
+  </div>
+  <mat-tab-group>
+    <mat-tab label="Order History">
+      <table mat-table [dataSource]="dataSurce" class="mat-elevation-z8 table">
+        <!--- Note that these columns can be defined in any order.
+                The actual rendered columns are set as a property on the row definition" -->
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Products</th>
+          <td mat-cell *matCellDef="let element">
+            <div class="product-info d-flex align-items-center">
+              <div class="product-images">
+                <img
+                  [src]="element.items[0].image"
+                  alt=""
+                  class="product-image"
+                />
+              </div>
+              <div class="product-name">
+                <div class="product-name">
+                  {{ element.items[0].name }}
+                  <div>
+                    <span class="more-orders" *ngIf="element.items.length > 1">
+                      +{{ element.items.length }}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="price">
+          <th mat-header-cell *matHeaderCellDef>Amount</th>
+          <td mat-cell *matCellDef="let element">
+            <div class="amount-price">
+              <span class="amount"></span>{{ element.currency }}
+              <span class="amount-price">{{ element.amount }}</span>
+            </div>
+          </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="date">
+          <th mat-header-cell *matHeaderCellDef>Date</th>
+          <td mat-cell *matCellDef="let element">
+            <span class="date">{{
+              element.createdAt | date : "mediumDate"
+            }}</span>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="orders">
+          <th mat-header-cell *matHeaderCellDef>Order Id</th>
+          <td mat-cell *matCellDef="let element">
+            <div class="orderid">
+              <div class="order-div">
+                <span class="order-id">#{{ element.orderId }}</span>
+              </div>
+              <div class="payment-status-div">
+                <span
+                  class="payment-status"
+                  [ngStyle]="{
+                    color: element.paid ? '#11A75C' : '#FF3838',
+                    background: element.paid
+                      ? 'rgba(29, 180, 105, 0.12)'
+                      : '#FFF5F4'
+                  }"
+                >
+                  <span class="for-paid" *ngIf="element.paid == true"
+                    >Paid</span
+                  >
+                  <span class="forunpaid" *ngIf="element.paid !== true"
+                    >Unpaid</span
+                  >
+                </span>
+              </div>
+            </div>
+          </td>
+        </ng-container>
+
+        <tr
+          mat-header-row
+          *matHeaderRowDef="['name', 'price', 'date', 'orders']"
+        ></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </mat-tab>
+    <mat-tab label="Shipping Address">
+      <table
+        mat-table
+        [dataSource]="dataSurce"
+        class="mat-elevation-z8 table shipping-address"
+      >
+        <!--- Note that these columns can be defined in any order.
+                The actual rendered columns are set as a property on the row definition" -->
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Order Id</th>
+          <td mat-cell *matCellDef="let element">
+            <div class="orderid">
+              <div class="order-div">
+                <span class="order-id">#{{ element.orderId }}</span>
+              </div>
+              <div class="payment-status-div status-alignment">
+                <span
+                  class="payment-status"
+                  [ngStyle]="{
+                    color: element.paid ? '#11A75C' : '#FF3838',
+                    background: element.paid
+                      ? 'rgba(29, 180, 105, 0.12)'
+                      : '#FFF5F4'
+                  }"
+                >
+                  <span class="for-paid" *ngIf="element.paid == true"
+                    >Paid</span
+                  >
+                  <span class="forunpaid" *ngIf="element.paid !== true"
+                    >Unpaid</span
+                  >
+                </span>
+              </div>
+            </div>
+          </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="price">
+          <th mat-header-cell *matHeaderCellDef>Name</th>
+          <td mat-cell *matCellDef="let element">
+            <div class="shipping-name-number">
+              <div class="shipping-name">{{ element.orderShipping.name }}</div>
+              <div class="shipping-number">
+                {{ element.orderShipping.phone }}
+              </div>
+            </div>
+          </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="date">
+          <th mat-header-cell *matHeaderCellDef>City</th>
+          <td mat-cell *matCellDef="let element">
+            <div class="street-city">{{ element.orderShipping.city }}</div>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="orders">
+          <th mat-header-cell *matHeaderCellDef>Street Address</th>
+          <td mat-cell *matCellDef="let element">
+            <div class="street-address">
+              {{ element.orderShipping.streetAddress }}
+            </div>
+          </td>
+        </ng-container>
+
+        <tr
+          mat-header-row
+          *matHeaderRowDef="['name', 'price', 'date', 'orders']"
+        ></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </mat-tab>
+  </mat-tab-group>
+</div>

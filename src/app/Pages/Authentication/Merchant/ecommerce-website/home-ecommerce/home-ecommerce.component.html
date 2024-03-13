@@ -5,15 +5,12 @@
   [style.textAlign]="dataservice.template.textAlign"
   [style.fontWeight]="dataservice.template.body.fontWeight"
   [style.fontSize]="dataservice.template.body.fontSize"
-
   [style.color]="dataservice.template.primaryColor"
 >
   <section
     *ngIf="dataservice.productSearchString.length < 1"
     class="container-fluid d-flex level-up main-comp p-0"
   >
-
-
     <div [style]="dataservice.template.headings.heroHeading.bgImage">
       <img
         [src]="dataservice.template.templateImages.heroImage"
@@ -125,7 +122,6 @@
             <span>{{ category.name }}</span>
           </div>
         </div>
-
       </div>
 
       <!-- </div> -->
@@ -249,7 +245,6 @@
                   <mat-icon>shopping_cart</mat-icon>
                 </button> -->
 
-
       @for(product of dataservice.products |
       filterProduct:dataservice.productSearchString; track product){
       <div class="col-md-3">
@@ -282,7 +277,6 @@
                 >
                   <mat-icon>shopping_cart</mat-icon>
                 </button>
-
               </div>
             </div>
             <p class="blossom-bag-paragraph">{{ product.name }}</p>
@@ -297,7 +291,18 @@
                 <span class="number-rating">{{ product.rating }}</span> Ratings
               </span>
             </div>
-            <div class="product-price">${{ product.price }}</div>
+            <!-- <div class="product-price">${{ product.price }}</div> -->
+            <div class="product-price">
+              <span class="discount-price">
+                ${{ product.price * ((100 - product.discount) / 100) }}
+              </span>
+              <span class="actual-price" *ngIf="product.discount > 0"
+                >${{ product.price }}</span
+              >
+              <span class="discount-percent" *ngIf="product.discount > 0">
+                {{ product.discount }}<span class="per-off">% OFF</span></span
+              >
+            </div>
             <div class="product-color-div d-flex">
               <div class="blue product-color"></div>
               <div class="yellow product-color"></div>
@@ -325,7 +330,6 @@
               <div class="red product-color"></div>
             </div> -->
         </div>
-
       </div>
 
       <!-- </div> -->

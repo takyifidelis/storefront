@@ -1,0 +1,157 @@
+.container {
+  height: 500px;
+  // overflow: auto;
+}
+.mdc-data-table__content {
+  height: 300px;
+  overflow: auto;
+}
+.customer-info {
+  margin-top: 2rem;
+  gap: 1rem;
+  .customer-image {
+    width: 3.5rem;
+    height: 3.5rem;
+    color: #ffff;
+    background-color: #4a72ff;
+    border-radius: 50%;
+    font-size: 20px;
+    font-weight: 700;
+    font-family: "Poppins";
+    text-transform: capitalize;
+    .first-intial {
+      margin-right: 2px;
+    }
+  }
+  .customer-name-number {
+    font-family: Inter;
+    font-style: normal;
+    .customer-name {
+      color: #455468;
+      font-size: 17px;
+      font-weight: 500;
+      line-height: 28px;
+      letter-spacing: -0.3px;
+      text-transform: capitalize;
+    }
+    .customer-email {
+      color: #5e718d;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 20px;
+      letter-spacing: -0.2px;
+      text-transform: lowercase;
+    }
+  }
+}
+.number-orders {
+  font-style: normal;
+  font-family: Inter;
+  .orders {
+    color: #5e718d;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: -0.2px;
+  }
+  .number {
+    text-align: right;
+    .order-nums {
+      font-weight: 600;
+    }
+  }
+}
+
+table {
+  .product-image {
+    width: 56px;
+    height: 56px;
+    border-radius: 5px;
+  }
+  .product-name {
+    color: #455468;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 28px;
+    letter-spacing: -0.3px;
+    width: 70%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    text-wrap: nowrap;
+    margin-left: 0.3rem;
+    text-transform: capitalize;
+    .more-orders {
+      border-radius: 6px;
+      background-color: #f2f5ff;
+      color: var(--Colors-Primary-Primary-400, #4a72ff);
+      font-family: Inter;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 20px;
+      letter-spacing: -0.2px;
+      object-fit: contain;
+      padding: 0.2rem;
+    }
+  }
+  .amount-price,
+  .date {
+    color: #5e718d;
+    font-family: Inter;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: -0.2px;
+  }
+  .order-id {
+    color: #5e718d;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: -0.2px;
+  }
+  .payment-status-div {
+    text-align: right;
+    .payment-status {
+      font-family: Inter;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 20px;
+      letter-spacing: -0.2px;
+      border-radius: 6px;
+
+      object-fit: contain;
+      padding: 0.3rem;
+    }
+  }
+  .status-alignment {
+    text-align: left;
+  }
+}
+
+.shipping-name {
+  color: #5e718d;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: -0.2px;
+  font-family: Inter;
+  font-style: normal;
+}
+.shipping-number,
+.street-city,
+.street-address {
+  color: #5e718d;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: -0.2px;
+  font-family: Inter;
+  font-style: normal;
+}
