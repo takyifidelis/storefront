@@ -18,6 +18,7 @@ import {
   ProductObject,
   Varaiation,
 } from '../../../../../interfaces/all-interfaces';
+import { AuthService } from '../../../Auth/auth.service';
 
 @Component({
   selector: 'app-review',

@@ -149,17 +149,21 @@ export class LoginComponent implements OnInit {
 
   newLogin(ata: any) {
     this.isLoading = true;
+
     //     this.dataService.isLoading = true
     this.apiService
       .authenticateUser(this.dataService.loginCredentials)
       .subscribe(
         (resData: any) => {
+
+          console.log(resData);
+
           this.isLoading = false;
           this.toastr.success('Login Successful', 'Success');
           if (resData.data.type === 'Business') {
             // this.dataService.businessId=resData.data?.business
             localStorage.setItem('businessId', resData.data.business);
-            //this.dataService.isLoading =false
+
             this.router.navigate(['merchant']);
           } else if (resData.data.type === 'Customer') {
             localStorage.setItem('customerId', resData.data.customer);
@@ -168,17 +172,19 @@ export class LoginComponent implements OnInit {
           } else {
             console.log(resData);
 
+
             // this.dataService.isLoading = false;
           }
         },
         (errorMessage: any) => {
-          this.isLoading = false; //
+          this.isLoading = false; 
           console.log(errorMessage);
           this.error = errorMessage;
           this.toastr.error(this.error, 'Login Failed');
         }
       );
     this.dataService.loginCredentials = { email: '', password: '' };
+
   }
 
   handleGoogleResponse() {

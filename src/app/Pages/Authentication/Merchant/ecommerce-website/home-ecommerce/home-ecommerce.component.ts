@@ -11,11 +11,13 @@ import { CommonModule } from '@angular/common';
 import { DataService } from '../../../../../Services/data.service';
 import { APIService } from '../../../../../Services/api.service';
 import { Router, RouterModule } from '@angular/router';
-import { ProductObject, Response as resp } from '../../../../../interfaces/all-interfaces';
+import {
+  ProductObject,
+  Response as resp,
+} from '../../../../../interfaces/all-interfaces';
 import { StarRatingComponent } from '../../../../Dashboard/Customer/components/star-rating/star-rating.component';
 import { FilterOnePipe } from '../../../../../Pipes/filter-one.pipe';
 import { FilterProductPipe } from '../../../../../Pipes/filter-product.pipe';
-
 
 interface Item {
   name: string;
@@ -25,7 +27,15 @@ interface Item {
 @Component({
   selector: 'app-home-ecommerce',
   standalone: true,
-  imports: [MatIconModule, MatButtonModule, CommonModule,FilterOnePipe,FilterProductPipe,StarRatingComponent, RouterModule],
+  imports: [
+    MatIconModule,
+    MatButtonModule,
+    CommonModule,
+    FilterOnePipe,
+    FilterProductPipe,
+    StarRatingComponent,
+    RouterModule,
+  ],
   templateUrl: './home-ecommerce.component.html',
   styleUrl: './home-ecommerce.component.scss',
 })
@@ -34,9 +44,8 @@ export class HomeEcommerceComponent implements OnInit {
   @ViewChild('fileInput') fileInput!: ElementRef;
   isliked: boolean = false;
   like: any = [];
-// e: any;
- cart:any = []
-
+  // e: any;
+  cart: any = [];
 
   constructor(
     private cdr: ChangeDetectorRef,
@@ -111,22 +120,23 @@ export class HomeEcommerceComponent implements OnInit {
     });
 
     return uniqueItems;
-
   }
+
 
   ngOnInit(){
       this.apiService.getCustomerStoreProducts(localStorage.getItem('storeId')!).subscribe((productResData:any)=>{
         console.log(productResData);
         this.dataservice.products = productResData.data
-       
+
         if (JSON.parse(localStorage.getItem('cart')!)) {
           this.cart = JSON.parse(localStorage.getItem('cart')!);
-          this.dataservice.cart = this.cart
+          this.dataservice.cart = this.cart;
         }
         if(JSON.parse(localStorage.getItem('favouriteProducts')!)){
           this.dataservice.like = this.like;
         }
       })
+
   }
 
   liked(product: any) {
@@ -136,7 +146,10 @@ export class HomeEcommerceComponent implements OnInit {
     let likedProductsJson = JSON.stringify(this.dataservice.like);
     localStorage.setItem('favouriteProducts', likedProductsJson);
     let productObj: ProductObject = {
-      products: []
+      products: [],
+    };
+    for (const likeditem of this.like) {
+      productObj.products.push(likeditem.id);
     }
     for (const likeditem of this.dataservice.like){
       productObj.products.push(likeditem.id)
@@ -162,6 +175,5 @@ export class HomeEcommerceComponent implements OnInit {
       })
 
   }
-
 
 }

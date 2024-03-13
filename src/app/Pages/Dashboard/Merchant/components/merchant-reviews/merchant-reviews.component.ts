@@ -18,6 +18,8 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { StarRatingComponent } from '../../../Customer/components/star-rating/star-rating.component';
+import { dummyUserInterface } from '../../../Customer/components/favorite-product/favorite-product.component';
 import { SelectionModel } from '@angular/cdk/collections';
 import {
   MAT_DIALOG_DATA,
@@ -59,6 +61,7 @@ export interface CustomerInterface {
     MatDialogModule,
     ReactiveFormsModule,
     CommonModule,
+    StarRatingComponent,
   ],
   templateUrl: './merchant-reviews.component.html',
   styleUrl: './merchant-reviews.component.scss',
@@ -71,7 +74,7 @@ export class MerchantReviewsComponent {
   constructor(
     public dataService: DataService,
     public dialog: MatDialog,
-    private authService: APIService,
+    private authService: APIService
   ) {
     this.dataSource = new MatTableDataSource(this.users);
   }
@@ -129,6 +132,16 @@ export class MerchantReviewsComponent {
     this.authService.getReviews(localStorage.getItem('storeId')!).subscribe((response: any) => {
       this.dataSource = new MatTableDataSource(response.data);
     });
+    this.authService.getReviews(localStorage.getItem('storeId')!).subscribe(
+      (response: any) => {
+        console.log(response);
+        // this.users = response.data
+        this.dataSource = new MatTableDataSource(response.data);
+      },
+      (errorMessage) => {
+        console.log(errorMessage);
+      }
+    );
   }
 }
 
@@ -152,6 +165,7 @@ export class MerchantReviewsComponent {
     MatDialogModule,
     ReactiveFormsModule,
     CommonModule,
+    StarRatingComponent,
   ],
   templateUrl: 'review-details/review-details.component.html',
   styleUrl: 'review-details/review-details.component.scss',

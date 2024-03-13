@@ -70,10 +70,10 @@ export class OrderComponent implements OnInit {
       status: '',
       date: '',
       price: '',
-    }
+    },
   ];
-unsorted: any = [];
-sorted: any = [];
+  unsorted: any = [];
+  sorted: any = [];
   formattedDate!: string | null;
    datepipe: DatePipe = new DatePipe('en-US');
   isAllActive: boolean = false;
@@ -83,6 +83,7 @@ sorted: any = [];
 
 
   constructor(public dialog: MatDialog, private apiService: APIService, private elementRef: ElementRef) {
+
     this.dataSource = new MatTableDataSource(this.users);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
@@ -104,7 +105,7 @@ sorted: any = [];
   moreVert(e: dummyUserInterface) {
     this.dialog.open(OrderModalComponent, {
       data: e,
-      width: '479px',
+      width: '500px',
       position: { right: '50px', top: '10%' },
     });
   }
@@ -141,7 +142,6 @@ sorted: any = [];
     this.dataSource.sort = this.sort;
   }
 
-
   onSort(status: string) {
     if(status === "All" ){
       this.isAllActive = true;
@@ -168,8 +168,8 @@ sorted: any = [];
       this.isShippedActive = false;
     }
     this.sorted = [];
-    this.unsorted.forEach((order: any) =>{
-      if(order.status === status) {
+    this.unsorted.forEach((order: any) => {
+      if (order.status === status) {
         this.sorted.push(order);
         // console.log(this.sorted)
     this.dataSource = new MatTableDataSource(this.sorted);
@@ -177,7 +177,9 @@ sorted: any = [];
       }else if (status === 'All'){
 this.dataSource = new MatTableDataSource(this.unsorted)
       }
-    })
-  }
 
+    });
+    this.dataSource = new MatTableDataSource(this.sorted);
+  }
+ 
 }
