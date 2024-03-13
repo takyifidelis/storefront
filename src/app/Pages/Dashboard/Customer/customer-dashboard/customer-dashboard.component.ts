@@ -8,9 +8,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { Router, RouterModule } from '@angular/router';
 import { DataService } from '../../../../Services/data.service';
 import { MediaMatcher } from '@angular/cdk/layout';
-import { AuthService } from '../../../Authentication/Auth/auth.service';
 import { APIService } from '../../../../Services/api.service';
-
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-customer-dashboard',
   standalone: true,
@@ -32,7 +31,8 @@ export class CustomerDashboardComponent {
     public dataService: DataService,
     media: MediaMatcher,
     public router: Router,
-    private authService: APIService
+    private authService: APIService,
+    private toastr: ToastrService
   ) {
     this.screenWidth = window.innerWidth;
     window.onresize = () => {
@@ -42,7 +42,9 @@ export class CustomerDashboardComponent {
 
   logout() {
     this.authService.logout().subscribe(
-      () => {
+      (res) => {
+        console.log(res);
+        this.toastr.info(res.message, 'Success');
         this.router.navigate(['login']);
       },
       (error) => {

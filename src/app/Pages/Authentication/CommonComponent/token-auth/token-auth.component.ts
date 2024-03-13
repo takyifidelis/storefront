@@ -71,7 +71,6 @@ export class TokenAuthComponent {
       (errorMessage) => {
         console.log(errorMessage);
         this.isLoading = false;
-
         this.toastr.error(errorMessage.error.message, 'Failed');
       }
     );

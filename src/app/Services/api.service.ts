@@ -15,72 +15,68 @@ export class APIService {
   constructor(private http: HttpClient, public dataService: DataService) {}
 
   merchantSignup(user: UserCredentials): Observable<Response> {
-    return this.http
-      .post<Response>(
-        `${environment.baseApiUrl}/account/register/local`,
-        user,
-        {
-          withCredentials: true,
-        }
-      )
-      .pipe(catchError(this.handleError));
+    return this.http.post<Response>(
+      `${environment.baseApiUrl}/account/register/local`,
+      user,
+      {
+        withCredentials: true,
+      }
+    );
   }
   verifySignup(user: UserCredentials): Observable<Response> {
-    return this.http
-      .post<Response>(`${environment.baseApiUrl}/account/verify`, user, {
+    return this.http.post<Response>(
+      `${environment.baseApiUrl}/account/verify`,
+      user,
+      {
         withCredentials: true,
-      })
-      .pipe(catchError(this.handleError));
+      }
+    );
   }
   // Verify account
   verifyAccount(code: string) {
-    return this.http
-      .post<Response>(
-        'https://storefront-backend-jan-dev-api.vercel.app/api/account/verify',
-        {
-          code,
-        },
-        {
-          withCredentials: true,
-        }
-      )
-      .pipe(catchError(this.handleError));
+    return this.http.post<Response>(
+      'https://storefront-backend-jan-dev-api.vercel.app/api/account/verify',
+      {
+        code,
+      },
+      {
+        withCredentials: true,
+      }
+    );
   }
 
   // Password Verification
   verifyPassword(code: string) {
-    return this.http
-      .post<Response>(
-        'https://storefront-backend-jan-dev-api.vercel.app/api/account/password/resetCode/verify',
-        {
-          code,
-        },
-        {
-          withCredentials: true,
-        }
-      )
-      .pipe(catchError(this.handleError));
+    return this.http.post<Response>(
+      'https://storefront-backend-jan-dev-api.vercel.app/api/account/password/resetCode/verify',
+      {
+        code,
+      },
+      {
+        withCredentials: true,
+      }
+    );
   }
   newPasswordReset(password: string, confirmPassword: string) {
-    return this.http
-      .put<Response>(
-        'https://storefront-backend-jan-dev-api.vercel.app/api/account/password/reset',
-        {
-          password,
-          confirmPassword,
-        },
-        {
-          withCredentials: true,
-        }
-      )
-      .pipe(catchError(this.handleError));
+    return this.http.put<Response>(
+      'https://storefront-backend-jan-dev-api.vercel.app/api/account/password/reset',
+      {
+        password,
+        confirmPassword,
+      },
+      {
+        withCredentials: true,
+      }
+    );
   }
   authenticateUser(user: UserCredentials): Observable<Response> {
-    return this.http
-      .post<Response>(`${environment.baseApiUrl}/account/login/local`, user, {
+    return this.http.post<Response>(
+      `${environment.baseApiUrl}/account/login/local`,
+      user,
+      {
         withCredentials: true,
-      })
-      .pipe(catchError(this.handleError));
+      }
+    );
   }
 
   setBusinessType(businessId: string, data: {}): Observable<Response> {
@@ -93,12 +89,10 @@ export class APIService {
     );
   }
   logout() {
-    return this.http
-      .get<Response>(
-        'https://storefront-backend-jan-dev-api.vercel.app/api/account/logout',
-        { withCredentials: true }
-      )
-      .pipe(catchError(this.handleError));
+    return this.http.get<Response>(
+      'https://storefront-backend-jan-dev-api.vercel.app/api/account/logout',
+      { withCredentials: true }
+    );
   }
 
   createStore(
@@ -428,39 +422,33 @@ export class APIService {
 
   // Password Reset
   passwordReset(email: string) {
-    return this.http
-      .post<Response>(
-        'https://storefront-backend-jan-dev-api.vercel.app/api/account/request/password/reset',
-        {
-          email,
-        },
-        {
-          withCredentials: true,
-        }
-      )
-      .pipe(catchError(this.handleError));
+    return this.http.post<Response>(
+      'https://storefront-backend-jan-dev-api.vercel.app/api/account/request/password/reset',
+      {
+        email,
+      },
+      {
+        withCredentials: true,
+      }
+    );
   }
 
   //Resend Verification Code
   resendCode() {
-    return this.http
-      .get(
-        'https://storefront-backend-jan-dev-api.vercel.app/api/account/resend/code',
-        { withCredentials: true }
-      )
-      .pipe(catchError(this.handleError));
+    return this.http.get(
+      'https://storefront-backend-jan-dev-api.vercel.app/api/account/resend/code',
+      { withCredentials: true }
+    );
   }
 
   reviewProduct(review: { [key: string]: any }, order_id: string) {
-    return this.http
-      .post<Response>(
-        `${environment.baseApiUrl}/customer/review-product/${order_id}`,
-        review,
-        {
-          withCredentials: true,
-        }
-      )
-      .pipe(catchError(this.handleError));
+    return this.http.post<Response>(
+      `${environment.baseApiUrl}/customer/review-product/${order_id}`,
+      review,
+      {
+        withCredentials: true,
+      }
+    );
   }
 
   getSingleOrder(id: string) {
@@ -486,14 +474,11 @@ export class APIService {
   }
 
   getReviews(storeId: string): Observable<Response> {
-    return this.http
-      .get<Response>(
-        `https://storefront-backend-jan-dev-api.vercel.app/api/store/get-reviews/${storeId}`,
+    return this.http.get<Response>(
+      `https://storefront-backend-jan-dev-api.vercel.app/api/store/get-reviews/${storeId}`,
 
-        { withCredentials: true }
-      )
-
-      .pipe(catchError(this.handleError));
+      { withCredentials: true }
+    );
   }
 
   addPromotionToStore(
@@ -519,14 +504,12 @@ export class APIService {
     );
   }
   getPromotionForStore(storeId: string): Observable<Response> {
-    return this.http
-      .get<Response>(
-        `${environment.baseApiUrl}/store/get-promotions/${storeId}`,
-        {
-          withCredentials: true,
-        }
-      )
-      .pipe(catchError(this.handleError));
+    return this.http.get<Response>(
+      `${environment.baseApiUrl}/store/get-promotions/${storeId}`,
+      {
+        withCredentials: true,
+      }
+    );
   }
   updatePromotionForStore(
     end: Date,
@@ -536,21 +519,19 @@ export class APIService {
     start: Date,
     promoId: string
   ) {
-    return this.http
-      .patch<Response>(
-        `${environment.baseApiUrl}/store/update-promotion/${promoId}`,
-        {
-          name,
-          end,
-          discount,
-          statement,
-          start,
-        },
-        {
-          withCredentials: true,
-        }
-      )
-      .pipe(catchError(this.handleError));
+    return this.http.patch<Response>(
+      `${environment.baseApiUrl}/store/update-promotion/${promoId}`,
+      {
+        name,
+        end,
+        discount,
+        statement,
+        start,
+      },
+      {
+        withCredentials: true,
+      }
+    );
   }
   deletePromotionForStore(promoId: string) {
     return this.http.delete<Response>(
@@ -569,37 +550,31 @@ export class APIService {
     );
   }
   deleteProductFromStore(products: string[]) {
-    return this.http
-      .post<Response>(
-        `${environment.baseApiUrl}/product/delete`,
-        { products },
-        {
-          withCredentials: true,
-        }
-      )
-      .pipe(catchError(this.handleError));
+    return this.http.post<Response>(
+      `${environment.baseApiUrl}/product/delete`,
+      { products },
+      {
+        withCredentials: true,
+      }
+    );
   }
   getProductUnderPromotion(promoId: string): Observable<Response> {
-    return this.http
-      .get<Response>(
-        `${environment.baseApiUrl}/store/get-promotion-products/${promoId}`,
-        {
-          withCredentials: true,
-          // /api/store/get-promotion-products
-        }
-      )
-      .pipe(catchError(this.handleError));
+    return this.http.get<Response>(
+      `${environment.baseApiUrl}/store/get-promotion-products/${promoId}`,
+      {
+        withCredentials: true,
+        // /api/store/get-promotion-products
+      }
+    );
   }
 
   getOrdersForMerchant(storeId: string): Observable<Response> {
-    return this.http
-      .get<Response>(
-        `${environment.baseApiUrl}/store/get-all-orders/${storeId}`,
-        {
-          withCredentials: true,
-        }
-      )
-      .pipe(catchError(this.handleError));
+    return this.http.get<Response>(
+      `${environment.baseApiUrl}/store/get-all-orders/${storeId}`,
+      {
+        withCredentials: true,
+      }
+    );
   }
   getCustomerWallet(customerId: string) {
     return this.http.get(
@@ -623,38 +598,32 @@ export class APIService {
     );
   }
   getAllCustomersForStore(storeId: string): Observable<Response> {
-    return this.http
-      .get<Response>(
-        `${environment.baseApiUrl}/store/get-all-customers/${storeId}`,
-        {
-          withCredentials: true,
-        }
-      )
-      .pipe(catchError(this.handleError));
+    return this.http.get<Response>(
+      `${environment.baseApiUrl}/store/get-all-customers/${storeId}`,
+      {
+        withCredentials: true,
+      }
+    );
   }
 
   getOrderHistoryForCustomer(
     storeId: string,
     customerId: string
   ): Observable<Response> {
-    return this.http
-      .get<Response>(
-        `${environment.baseApiUrl}/store/${storeId}/get-customer/${customerId}`,
-        {
-          withCredentials: true,
-        }
-      )
-      .pipe(catchError(this.handleError));
+    return this.http.get<Response>(
+      `${environment.baseApiUrl}/store/${storeId}/get-customer/${customerId}`,
+      {
+        withCredentials: true,
+      }
+    );
   }
   getShippingAddressForCustomer(customerId: string): Observable<Response> {
-    return this.http
-      .get<Response>(
-        `${environment.baseApiUrl}/customer/get-shipping-addresses/${customerId}`,
-        {
-          withCredentials: true,
-        }
-      )
-      .pipe(catchError(this.handleError));
+    return this.http.get<Response>(
+      `${environment.baseApiUrl}/customer/get-shipping-addresses/${customerId}`,
+      {
+        withCredentials: true,
+      }
+    );
   }
 
   getPayouts(storeId: string): Observable<Response> {
@@ -693,16 +662,14 @@ export class APIService {
     );
   }
   removeProductFromFavorite(products: string[], customer_id: string) {
-    return this.http
-      .patch<Response>(
-        `${environment.baseApiUrl}/customer/remove-products-from-favorites/${customer_id}`,
+    return this.http.patch<Response>(
+      `${environment.baseApiUrl}/customer/remove-products-from-favorites/${customer_id}`,
 
-        { products },
-        {
-          withCredentials: true,
-        }
-      )
-      .pipe(catchError(this.handleError));
+      { products },
+      {
+        withCredentials: true,
+      }
+    );
   }
   checkAuthenticatedUser() {
     return this.http
