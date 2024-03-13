@@ -34,7 +34,38 @@
       </div>
     </div>
   </div>
-
+  @if(merchantProductsEmpty){
+  <div class="d-flex justify-content-center align-items-center h-100">
+    <div class="empty-dashboard">
+      <span>
+        <img src="assets\images\product-review-icon.svg" alt="" />
+      </span>
+      <h1>No projects found</h1>
+      <p>
+        It seems there are no products matching your criteria. To get started,
+        click the button below to add a new product
+      </p>
+      <button>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="21"
+          height="21"
+          viewBox="0 0 21 21"
+          fill="none"
+        >
+          <path
+            d="M10.5 4.50586V16.1725M4.66669 10.3392H16.3334"
+            stroke="white"
+            stroke-width="1.66667"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+        <span>create new</span>
+      </button>
+    </div>
+  </div>
+  } @if(!merchantProductsEmpty){
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
     <!-- Checkbox Column -->
     <ng-container matColumnDef="checkbox">
@@ -215,7 +246,7 @@
   </table>
 
   <mat-paginator
-    [pageSizeOptions]="[1,2,10, 25, 100]"
+    [pageSizeOptions]="[1, 2, 10, 25, 100]"
     aria-label="Select page of users"
   ></mat-paginator>
   <div class="loading-spinner-small" *ngIf="isLoading">
@@ -228,4 +259,5 @@
   <div class="no-result-found" *ngIf="numberOfProducts === 0">
     No Discount Found
   </div>
+  }
 </div>

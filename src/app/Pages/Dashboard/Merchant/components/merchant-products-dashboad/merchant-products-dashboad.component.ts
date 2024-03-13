@@ -43,13 +43,12 @@ export interface dummyUserInterface {
   categories: string;
   inventory: string;
   status: string;
-  images: {[key:string]:any}[];
+  images: { [key: string]: any }[];
   commission: string;
   currency: string;
   amount: string;
   wallet: string;
   orderPayout: any;
-
 }
 
 @Component({
@@ -77,12 +76,13 @@ export interface dummyUserInterface {
   styleUrl: './merchant-products-dashboad.component.scss',
 })
 export class MerchantProductsDashboadComponent {
+  merchantProductsEmpty = false;
   filterIcon = faFilter;
   seaechICon = faSearch;
   checkIcon = faCheck;
   isLoading: boolean = false;
   numberOfProducts!: number;
-  users=[];
+  users = [];
   displayedColumns: string[] = [
     'checkbox',
     'name',
@@ -159,17 +159,19 @@ export class MerchantProductsDashboadComponent {
   }
   ngOnInit() {
     this.isLoading = true;
-    console.log('dkj')
+    this.merchantProductsEmpty = true;
+    console.log('dkj');
     this.apiService
       .getStoreProductsMerchant(localStorage.getItem('storeId')!)
       .subscribe((response: any) => {
         console.log(response.data);
         this.isLoading = false;
         this.numberOfProducts = response.data.products.length;
-
-
+        if (this.numberOfProducts > 0) {
+          this.merchantProductsEmpty = false;
+        }
         // console.log(response.data.products[0].images[0].url);
-        this.users = response.data
+        this.users = response.data;
         this.dataSource = new MatTableDataSource(response.data.products);
       });
   }
@@ -181,7 +183,7 @@ export class MerchantProductsDashboadComponent {
   imports: [
     MatDialogTitle,
     MatDialogContent,
-    MatDialogActions, 
+    MatDialogActions,
     MatDialogClose,
     CommonModule,
     MatTabsModule,
@@ -248,8 +250,8 @@ export class MerchantProductDiscountComponent {
       );
   }
 
-  onUpdateProduct(){
-    this.dataService.updateProduct = this.data
+  onUpdateProduct() {
+    this.dataService.updateProduct = this.data;
     this.dataService.isProductUpdateInstance = true;
     this.router.navigate(['/merchant/product/add-product']);
   }
