@@ -18,7 +18,7 @@
     <div
       class="col template-container"
       (click)="goToStore(i)"
-      *ngFor="let store of stores; let i"
+      *ngFor="let store of filteredItems; let i"
       style="display: flex; flex-direction: column"
     >
       <img
