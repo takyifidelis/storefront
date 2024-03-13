@@ -1,31 +1,31 @@
-<div class="row">
-  <div class="col">
-    <h2 mat-dialog-title>Order Details</h2>
-  </div>
-  <!-- <div class="col"> -->
-  <!-- <p>X</p> -->
-  <!-- </div> -->
-</div>
+
+<h2 mat-dialog-title>Order Details</h2>
+
+
 <mat-dialog-content>
   <mat-tab-group>
     <mat-tab label=" Items">
       <div class="Items Purchased">
-        <div class="purchase-item" *ngFor="let item of data['items']">
-          <img [src]="item.image" style="width: 20%" alt="" />
-          <span class="d-flex flex-column">
-            <span class="d-flex" style="align-items: end">
-              <span class="item-name" style="width: 187px">{{
-                item.name
-              }}</span>
-              <span class="item-collection-type">${{ item.price }}</span>
-            </span>
-            <!-- <span class="item-collection-type">Hat</span> -->
-          </span>
+        <div
+          class="purchase-item d-flex justify-content-between align-items-center"
+          *ngFor="let item of data['items']"
+        >
+          <div class="pruduct-image-name d-flex align-items-center">
+            <div class="product-images">
+              <img [src]="item.image" alt="" class="product-image" />
+            </div>
+            <div class="product-name">
+              {{ item.name }}
+            </div>
+          </div>
+          <div class="product-amount">${{ item.price }}</div>
         </div>
         <hr />
-        <div class="total-price">
-          <span class="price-tag detail-type">Total Price</span>
-          <span class="price">${{ sum }}</span>
+        <div
+          class="total-price d-flex justify-content-between align-items-center"
+        >
+          <div class="price-tag detail-type">Total Price</div>
+          <div class="price">${{ sum }}</div>
         </div>
       </div>
     </mat-tab>

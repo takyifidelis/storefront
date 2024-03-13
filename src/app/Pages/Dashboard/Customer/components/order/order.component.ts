@@ -19,14 +19,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import {
   MatDialog,
-  MAT_DIALOG_DATA,
-  MatDialogTitle,
-  MatDialogContent,
 } from '@angular/material/dialog';
 import { OrderModalComponent } from '../order-modal/order-modal.component';
 import { dummyUserInterface } from '../../../../../interface/dummy-user.model';
 import { APIService } from '../../../../../Services/api.service';
-import { DatePipe } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { DataService } from '../../../../../Services/data.service';
 
 @Component({
@@ -43,10 +40,12 @@ import { DataService } from '../../../../../Services/data.service';
     MatSortModule,
     MatPaginatorModule,
     MatDialogModule,
+    CommonModule
   ],
   templateUrl: './order.component.html',
   styleUrl: './order.component.scss',
 })
+
 export class OrderComponent implements OnInit {
   displayedColumns: string[] = [
     'checkbox',
@@ -65,23 +64,29 @@ export class OrderComponent implements OnInit {
 
   users = [
     {
-
       checkbox: '',
       orderNumber: '',
       store: '',
       status: '',
       date: '',
       price: '',
-    }
+    },
   ];
-unsorted: any = [];
-sorted: any = [];
+  unsorted: any = [];
+  sorted: any = [];
   formattedDate!: string | null;
    datepipe: DatePipe = new DatePipe('en-US');
+  isAllActive: boolean = false;
+  isProcessingActive: boolean = false;
+  isShippedActive: boolean = false;
+  isDeliveredActive: boolean = false;
 
 
   constructor(public dialog: MatDialog, private apiService: APIService, private elementRef: ElementRef) {
+
     this.dataSource = new MatTableDataSource(this.users);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
     
   }
 
@@ -91,14 +96,16 @@ sorted: any = [];
       this.orders = res;
       this.unsorted = this.orders.data;
       this.dataSource = new MatTableDataSource(this.orders.data);
+      this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
     })
-     
+  this.isAllActive = true;
   }
 
   moreVert(e: dummyUserInterface) {
     this.dialog.open(OrderModalComponent, {
       data: e,
-      width: '479px',
+      width: '500px',
       position: { right: '50px', top: '10%' },
     });
   }
@@ -135,11 +142,34 @@ sorted: any = [];
     this.dataSource.sort = this.sort;
   }
 
-
   onSort(status: string) {
+    if(status === "All" ){
+      this.isAllActive = true;
+      this.isProcessingActive = false;
+      this.isShippedActive = false;
+      this.isDeliveredActive = false;
+    }
+    if(status === "Processing"){
+      this.isProcessingActive = true;
+      this.isAllActive = false;
+      this.isShippedActive = false;
+      this.isDeliveredActive = false;
+    }
+    if(status === "Shipped"){
+      this.isShippedActive = true;
+      this.isAllActive = false;
+      this.isProcessingActive = false;
+      this.isDeliveredActive = false;
+    }
+    if(status === "Delivered"){
+      this.isDeliveredActive = true;
+      this.isAllActive = false;
+      this.isProcessingActive = false;
+      this.isShippedActive = false;
+    }
     this.sorted = [];
-    this.unsorted.forEach((order: any) =>{
-      if(order.status === status) {
+    this.unsorted.forEach((order: any) => {
+      if (order.status === status) {
         this.sorted.push(order);
         // console.log(this.sorted)
     this.dataSource = new MatTableDataSource(this.sorted);
@@ -147,7 +177,9 @@ sorted: any = [];
       }else if (status === 'All'){
 this.dataSource = new MatTableDataSource(this.unsorted)
       }
-    })
-  }
 
+    });
+    this.dataSource = new MatTableDataSource(this.sorted);
+  }
+ 
 }

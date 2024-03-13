@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { DataService } from '../../../../../Services/data.service';
 import { SelectionModel } from '@angular/cdk/collections';
-import { DatePipe } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
@@ -31,7 +31,8 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatSortModule,
     MatPaginatorModule,
     MatDialogModule,
-    MatTabsModule
+    MatTabsModule,
+    CommonModule
   ],
   templateUrl: './merchant-orders.component.html',
   styleUrl: './merchant-orders.component.scss'
@@ -59,39 +60,27 @@ export class MerchantOrdersComponent {
 
   users: dummyUserInterface[] = [
   ];
-  orders: any = [
-    {
-      storeName: ''
-    }
-    
-  ]
+  orders: any = []
 unsorted: any = [];
 sorted: any = [];
   formattedDate!: string | null;
    datepipe: DatePipe = new DatePipe('en-US');
+   isAllActive = false;
+   isProcessingActive = false;
+   isShippedActive = false;
+   isDeliveredActive = false;
 
  
   ngOnInit(): void {
-     this.apiService.getOrdersForMerchant('f9586428-62e3-4455-bb1d-61262a407d1a').subscribe((res: any) => {
+     this.apiService.getOrdersForMerchant(localStorage.getItem('storeId')!).subscribe((res: any) => {
       console.log(res);
       this.orders = res.data;
       this.unsorted = this.orders
       console.log(this.orders)
       this.dataSource = new MatTableDataSource(this.orders);
-
-      this.apiService.getStoresForMerchant(localStorage.getItem('businessId')!).subscribe((res: any) => {
-        res.data.forEach((data: any) => {
-          if (data.id === 'f9586428-62e3-4455-bb1d-61262a407d1a'){
-            console.log(data.storeName);
-            this.orders.storeName = data.storeName;
-            console.log(this.orders.storeName);
-
-            
-          }
-        });
-        
-      })
      })
+
+     this.isAllActive = true;
 
   }
 
@@ -100,10 +89,9 @@ sorted: any = [];
       data: e,
       width: '479px',
       position: { right: '50px', top: '10%' },
-    }).afterClosed().subscribe(()=>{
+    }).afterClosed().subscribe(() => {
       this.ngOnInit()
     })
-    // console.log(e);
   }
 
   isAllSelected() {
@@ -139,6 +127,32 @@ sorted: any = [];
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+  }
+
+  switchTab(tabName: string) {
+    // Reset all tab states
+    this.isAllActive = false;
+    this.isProcessingActive = false;
+    this.isShippedActive = false;
+    this.isDeliveredActive = false;
+
+    // Activate the selected tab
+    switch (tabName) {
+      case 'All':
+        this.isAllActive = true;
+        break;
+      case 'Processing':
+        this.isProcessingActive = true;
+        break;
+      case 'Shipped':
+        this.isShippedActive = true;
+        break;
+      case 'Delivered':
+        this.isDeliveredActive = true;
+        break;
+      default:
+        break;
+    }
   }
 
 

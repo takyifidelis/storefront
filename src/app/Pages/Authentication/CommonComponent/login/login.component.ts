@@ -24,7 +24,7 @@ import {
   Validators,
   ReactiveFormsModule,
   NgForm,
-} from '@angular/forms';
+} from '@angular/forms'
 import { Router, RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faFacebook, faGoogle } from '@fortawesome/free-brands-svg-icons';
@@ -171,6 +171,7 @@ export class LoginComponent implements OnInit {
           } else {
             console.log(resData);
 
+
             // this.dataService.isLoading = false;
           }
         },
@@ -182,6 +183,7 @@ export class LoginComponent implements OnInit {
         }
       );
     this.dataService.loginCredentials = { email: '', password: '' };
+
   }
 
   handleGoogleResponse() {
