@@ -5,6 +5,8 @@
         type="text"
         matInput
         placeholder="Search for your business or website type"
+        [(ngModel)]="searchShop"
+        (input)="filterItems()"
       />
       <mat-icon matSuffix>search</mat-icon>
     </mat-form-field>
@@ -16,9 +18,7 @@
     <div
       class="col template-container"
       (click)="goToStore(i)"
-
       *ngFor="let store of stores; let i"
-
       style="display: flex; flex-direction: column"
     >
       <img

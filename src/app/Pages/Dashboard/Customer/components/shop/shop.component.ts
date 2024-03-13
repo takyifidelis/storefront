@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { APIService } from '../../../../../Services/api.service';
 import { DataService } from '../../../../../Services/data.service';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-shop',
@@ -12,7 +13,8 @@ import { CommonModule } from '@angular/common';
   imports: [
     MatIconModule,
     MatInputModule,
-    CommonModule
+    CommonModule,
+    FormsModule
 
   ],
   templateUrl: './shop.component.html',
@@ -20,6 +22,8 @@ import { CommonModule } from '@angular/common';
 })
 export class ShopComponent implements OnInit{
   stores: any;
+  searchShop?: string;
+  filteredItems: any;
 
   constructor(private apiService:APIService, private router:Router,private dataService:DataService){}
 
@@ -37,5 +41,22 @@ export class ShopComponent implements OnInit{
       console.log(response.data);
       this.stores = response.data;
     })
+    this.filterItems();
   }
+
+  filterItems(): void {
+    this.apiService.getStores().subscribe((response: any) => {
+      this.stores = response.data;
+
+      if(this.searchShop === ''){
+        this.filteredItems = this.stores;
+      }else {
+        this.filteredItems = this.stores.filter((shop: any) => {
+          return shop.storeName.toLowerCase().includes(this.searchShop?.toLowerCase())
+        });
+      }
+    })
+
+
+    }
 }
