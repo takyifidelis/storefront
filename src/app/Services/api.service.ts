@@ -144,7 +144,6 @@ export class APIService {
     });
   }
 
-
   getStoresForMerchant(businessId: string): Observable<Response> {
     return this.http.get<Response>(
       `${environment.baseApiUrl}/business/get-stores/${businessId}`,
@@ -161,7 +160,6 @@ export class APIService {
         withCredentials: true,
       }
     );
-
   }
 
   getGoogle(): Observable<Response> {
@@ -186,17 +184,15 @@ export class APIService {
     );
   }
 
+
   getStoreCategories(storeId: string): Observable<Response> {
     return this.http.get<Response>(
       `${environment.baseApiUrl}/store/get-categories/${storeId}`,
-
       {
         withCredentials: true,
       }
     );
   }
-
-
 
 
 
@@ -210,6 +206,14 @@ export class APIService {
     );
   }
 
+  getWallet(storeId: string): Observable<Response> {
+    return this.http.get<Response>(
+      `${environment.baseApiUrl}/store/get-wallets/${storeId}`,
+      {
+        withCredentials: true,
+      }
+    );
+  }
 
   initializePayment(customerId: string, cart: any): Observable<Response> {
     return this.http.post<Response>(
@@ -320,17 +324,31 @@ export class APIService {
     );
   }
   postProduct(formData: FormData, storeId: string) {
-    return this.http
-      .post<Response>(
-        `https://storefront-backend-jan-dev-api.vercel.app/api/product/add/${storeId}`,
-        formData,
-        {
-          withCredentials: true,
-        }
-      )
-      .pipe(catchError(this.handleError));
+    return this.http.post<Response>(
+      `${environment.baseApiUrl}/product/add/${storeId}`,
+      formData,
+      {
+        withCredentials: true,
+      }
+    );
   }
-  
+
+
+  updateProduct(formData: any, productId: string) {
+    return this.http.patch<Response>(
+      `${environment.baseApiUrl}/product/update-product/${productId}`,
+      formData,
+      {
+        withCredentials: true,
+      }
+    );
+  }
+  // publishTemplate(storeId: string, template:any): Observable<Response>{
+  //   return this.http.patch<Response>(`${environment.baseApiUrl}/store/publish-template/${storeId}`,
+  //   template, {
+  //     withCredentials: true,
+  //   })
+  // }
   addTOViews(products: any, customerId: string): Observable<Response> {
     return this.http.post<Response>(
       `${environment.baseApiUrl}/customer/add-to-views/${customerId}`,
@@ -342,6 +360,7 @@ export class APIService {
   }
 
 
+
   getShipping(customerId: string): Observable<Response> {
     return this.http.get<Response>(
       `${environment.baseApiUrl}/customer/get-shipping-addresses/${customerId}`,
@@ -350,6 +369,7 @@ export class APIService {
       }
     );
   }
+
 
 
   getOrders(customerId: string): Observable<Response> {
@@ -475,18 +495,16 @@ export class APIService {
   }
 
   replyReview(comment: string, review: string, storeId: string) {
-    return this.http
-      .post<Response>(
-        `https://storefront-backend-jan-dev-api.vercel.app/api/store/reply-customer/${storeId}`,
-        {
-          comment,
-          review,
-        },
-        {
-          withCredentials: true,
-        }
-      )
-      .pipe(catchError(this.handleError));
+    return this.http.post<Response>(
+      `https://storefront-backend-jan-dev-api.vercel.app/api/store/reply-customer/${storeId}`,
+      {
+        comment,
+        review,
+      },
+      {
+        withCredentials: true,
+      }
+    );
   }
 
 
@@ -495,14 +513,11 @@ export class APIService {
       .get<Response>(
         `https://storefront-backend-jan-dev-api.vercel.app/api/store/get-reviews/${storeId}`,
 
-
-  
         { withCredentials: true }
       )
 
       .pipe(catchError(this.handleError));
   }
-
 
   addPromotionToStore(
     end: Date,
@@ -512,21 +527,19 @@ export class APIService {
     start: Date,
     storeId: string
   ) {
-    return this.http
-      .post<Response>(
-        `${environment.baseApiUrl}/store/add-promotion/${storeId}`,
-        {
-          end,
-          name,
-          discount,
-          statement,
-          start,
-        },
-        {
-          withCredentials: true,
-        }
-      )
-      .pipe(catchError(this.handleError));
+    return this.http.post<Response>(
+      `${environment.baseApiUrl}/store/add-promotion/${storeId}`,
+      {
+        end,
+        name,
+        discount,
+        statement,
+        start,
+      },
+      {
+        withCredentials: true,
+      }
+    );
   }
   getPromotionForStore(storeId: string): Observable<Response> {
     return this.http
@@ -599,9 +612,10 @@ export class APIService {
         }
       )
       .pipe(catchError(this.handleError));
-}
+  }
 
   getOrdersForMerchant(storeId: string): Observable<Response> {
+
     return this.http
       .get<Response>(
         `${environment.baseApiUrl}/store/get-all-orders/${storeId}`,
@@ -728,6 +742,9 @@ export class APIService {
         break;
       case 'RESET_PASSWORD_FAILED':
         errorMessage = 'Password reset failed';
+        break;
+      case 'VALIDATION_ERROR':
+        errorMessage = 'Parameters failed validation';
         break;
     }
     return throwError(errorMessage);

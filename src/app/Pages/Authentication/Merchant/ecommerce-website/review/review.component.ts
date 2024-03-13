@@ -48,9 +48,12 @@ export class ReviewComponent implements OnInit {
   initialPrice?: number;
   addToBuy: any = [];
   likedProducts: any = [];
+  myVariation:any;
   amount: number = this.quantity * 90;
   productItem: any;
   similarProducts: any = [];
+
+
   cart: any = [];
   variations?: Varaiation[] = [];
   productReview: any;
@@ -173,30 +176,35 @@ export class ReviewComponent implements OnInit {
       .addToFavourite(productObj, localStorage.getItem('customerId')!)
       .subscribe((res) => {});
   }
-
   ngOnInit() {
     let productJson = localStorage.getItem('selectedProduct');
     let product = JSON.parse(productJson!);
     this.productItem = product;
-
     this.selectedImage = this.productItem.images[0].url;
     this.initialPrice = this.productItem.price;
-    this.variations = this.productItem.variations;
-
-    for (const value of this.variations!) {
-      this.values = value.values;
-    }
-
-    this.apiService
-      .getCustomerStoreProducts(localStorage.getItem('storeId')!)
+    this.apiService.getCustomerStoreProducts(localStorage.getItem('storeId')!)
       .subscribe((res: any) => {
-        // console.log(res)
+        console.log(res.data);
+        this.myVariation = res.data.variations;
         res.data.filter((product: any) => {
           if (product.category === this.productItem.category) {
             this.similarProducts.push(product);
           }
         });
       });
+
+
+    this.apiService.getReviews(localStorage.getItem('storeId')!).subscribe(
+      (response: any) => {
+        console.log(response);
+        // this.users = response.data
+        this.productReview = response.data;
+      },
+      (errorMessage) => {
+        console.log(errorMessage);
+      }
+    );
+
   }
 
   previewProduct(id: string) {

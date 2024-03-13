@@ -18,7 +18,7 @@ import { RouterModule } from '@angular/router';
 export class MerchantProductsComponent implements OnInit {
   constructor(public dataService: DataService) {}
   ngOnInit() {
-    this.dataService.merchantDashboardNoProjects = true;
-    console.log('this.dataService.merchantDashboardNoProjects');
+    // this.dataService.merchantDashboardNoProjects = true;
+    // console.log('this.dataService.merchantDashboardNoProjects');
   }
 }

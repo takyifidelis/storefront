@@ -1,9 +1,9 @@
 <div class="container-fluid">
-  <section class="">
+  <section class="preview-section">
     <mat-drawer-container class="example-container">
       <mat-drawer mode="side" opened="true">
         @for(image of productItem.images; track image){
-        <div>
+        <div class="">
           <img
             [src]="image.url"
             class="side-shoe"
@@ -13,18 +13,14 @@
         </div>
         }
       </mat-drawer>
-      <mat-drawer-content>
-        <div class="row">
-          <div class="col img-item-preview">
-            <img [src]="selectedImage" alt="" />
+      <mat-drawer-content class="detail-content">
+        <div class="drawer-content d-flex justify-content-between">
+          <div class="img-item-preview">
+            <img [src]="selectedImage" alt="" class="preview-image" />
           </div>
-          <div class="col" style="margin-top: -15px">
+          <div class="product-info">
             <div class="container">
-              <div class="row top">
-                <div class="col">
-                  <p class="txt">Home / Women’s Shoe / All Stars</p>
-                </div>
-              </div>
+
               <div class="row">
                 <div class="col">
                   <h4 class="item-name">{{ productItem.name }}</h4>
@@ -33,27 +29,28 @@
               <div class="row">
                 <div class="col d-inline-flex">
                   <div class="item-rating d-flex">
-                    <div class="starIcon">
+                    <div class="starIcon d-flex align-items-center">
                       <app-star-rating
                         [readonly]="true"
                         [rating]="productItem.rating"
                       ></app-star-rating>
+                      <p class="txt-2">{{ productItem.rating }} Ratings</p>
                     </div>
-                    <p class="txt-2 m-0">{{ productItem.rating }} Ratings</p>
                   </div>
                   <div class="items-available d-flex align-items-center">
-                    <p class="txt-2 m-0">
+                    <p class="txt-2">
                       Available Stock: {{ productItem.quantity }}
                     </p>
                   </div>
                 </div>
               </div>
 
-              <div *ngFor="let variation of variations">
+              <div class="">
                 <div class="row">
                   <div class="col d-flex">
                     <div class="select-color">
-                      <p>SELECT</p>
+                      <p>SELECT COLOR</p>
+
                     </div>
                     <div class="color d-flex gap">
                       <div>{{ variation?.type }}</div>
@@ -64,21 +61,21 @@
                     </div>
                   </div>
                 </div>
-                <div class="row">
-                  <div class="col">
-                    <div class="select-size">
-                      <p>SELECT SIZE</p>
-                    </div>
-                    <div class="size-guide txt-2">
-                      <div
-                        *ngFor="let value of values"
-                        class="d-flex align-items-center justify-content-start"
-                      >
-                        <button class="size one">
-                          {{ value }}
-                        </button>
-                      </div>
-                    </div>
+
+                <div
+                  class="product-variation mb-5"
+                  *ngFor="let item of productItem.variations"
+                >
+                  <div class="variation-type select-size mb-2">
+                    Select {{ item.type }}
+                  </div>
+                  <div class="variation-value d-flex">
+                    <button
+                      class="values size"
+                      *ngFor="let value of item.values; let i=index"
+                    >
+                      {{ value }}
+                    </button>
                   </div>
                 </div>
               </div>
@@ -104,7 +101,7 @@
                 <div class="price">
                   <p class="price-name quantity-price-name">PRICE</p>
                   <div class="price-amount amount">
-                    {{ "$" + productItem.price }}
+                    {{ "$" + productItem.price }}<span>.00</span>
                   </div>
                 </div>
               </div>
@@ -214,21 +211,7 @@
           <h4 class="review-header">3 Reviews</h4>
           <div class="review-ratings">
             <div class="ratings">
-              <span class="rating-stars"
-                ><img src="/assets/icons/star.svg" alt=""
-              /></span>
-              <span class="rating-stars"
-                ><img src="/assets/icons/star.svg" alt=""
-              /></span>
-              <span class="rating-stars"
-                ><img src="/assets/icons/star.svg" alt=""
-              /></span>
-              <span class="rating-stars"
-                ><img src="/assets/icons/star.svg" alt=""
-              /></span>
-              <span class="rating-stars"
-                ><img src="/assets/icons/star.svg" alt=""
-              /></span>
+              <app-star-rating [readonly]="true" [rating]="5"></app-star-rating>
               <span class="ratings-5">5 Ratings</span>
             </div>
             <p class="leave-a-review" (click)="showForm()">Leave my review</p>
@@ -241,11 +224,7 @@
             >
               <p class="how-will-you">How will you rate this product?</p>
               <div class="star-form-ratings">
-                <img src="assets\icons\green-star.svg" alt="" />
-                <img src="assets\icons\green-star.svg" alt="" />
-                <img src="assets\icons\green-star.svg" alt="" />
-                <img src="assets\icons\green-star.svg" alt="" />
-                <img src="assets\icons\green-star.svg" alt="" />
+                <app-star-rating></app-star-rating>
               </div>
             </div>
             <div class="form-group">
@@ -280,7 +259,15 @@
         >
           <div class="comment">
             <div class="feedback-image">
-              <img src="assets\images\feedback-image.svg" alt="" />
+              <!-- <img src="assets\images\feedback-image.svg" alt="" /> -->
+              <div class="fedback-profile">
+                <span class="first-initial"
+                  >{{ review.customerReview.firstName.charAt(0) }}
+                </span>
+                <span class="last-initial">{{
+                  review.customerReview.lastName.charAt(0)
+                }}</span>
+              </div>
             </div>
           </div>
 
@@ -293,14 +280,10 @@
               }}</span>
             </p>
             <div class="ratings">
-              <img src="assets\icons\green-star.svg" alt="" /><img
-                src="assets\icons\green-star.svg"
-                alt=""
-              /><img src="assets\icons\green-star.svg" alt="" /><img
-                src="assets\icons\green-star.svg"
-                alt=""
-              />
-              <img src="/assets/icons/star.svg" alt="" />
+              <app-star-rating
+                [readonly]="true"
+                [rating]="review.customerReview.rating"
+              ></app-star-rating>
             </div>
             <p class="feedback-date">
               {{ review.createdAt | date : "longDate" }}
@@ -321,14 +304,7 @@
           <div class="feedback-content">
             <p class="feedback-name">Leslie Alexander</p>
             <div class="ratings">
-              <img src="assets\icons\green-star.svg" alt="" /><img
-                src="assets\icons\green-star.svg"
-                alt=""
-              /><img src="assets\icons\green-star.svg" alt="" /><img
-                src="assets\icons\green-star.svg"
-                alt=""
-              />
-              <img src="/assets/icons/star.svg" alt="" />
+              <app-star-rating [readonly]="true" [rating]="4"></app-star-rating>
             </div>
             <p class="feedback-date">2nd September, 2023</p>
             <p class="feedback-messgae">
@@ -350,14 +326,7 @@
           <div class="feedback-content">
             <p class="feedback-name">Leslie Alexander</p>
             <div class="ratings">
-              <img src="assets\icons\green-star.svg" alt="" /><img
-                src="assets\icons\green-star.svg"
-                alt=""
-              /><img src="assets\icons\green-star.svg" alt="" /><img
-                src="assets\icons\green-star.svg"
-                alt=""
-              />
-              <img src="/assets/icons/star.svg" alt="" />
+              <app-star-rating [readonly]="true" [rating]="4"></app-star-rating>
             </div>
             <p class="feedback-date">2nd September, 2023</p>
             <p class="feedback-messgae">
@@ -368,67 +337,25 @@
             </p>
           </div>
         </div>
-        <hr />
-        <div class="feedbacks-block d-flex">
-          <div class="comment">
-            <div class="feedback-image">
-              <img src="assets\images\feedback-image.svg" alt="" />
-            </div>
-          </div>
 
-          <div class="feedback-content">
-            <p class="feedback-name">Leslie Alexander</p>
-            <div class="ratings">
-              <img src="assets\icons\green-star.svg" alt="" /><img
-                src="assets\icons\green-star.svg"
-                alt=""
-              /><img src="assets\icons\green-star.svg" alt="" /><img
-                src="assets\icons\green-star.svg"
-                alt=""
-              />
-              <img src="/assets/icons/star.svg" alt="" />
-            </div>
-            <p class="feedback-date">2nd September, 2023</p>
-            <p class="feedback-messgae">
-              I was looking for a bright light for the kitchen but wanted some
-              item more modern than a strip light. this one is perfect, very
-              bright and looks great. I can't comment on interlation as I had an
-              electrition instal it. Would recommend...
-            </p>
-          </div>
-        </div>
-        <hr />
         <hr />
       </mat-tab>
     </mat-tab-group>
   </section>
   <section class="similar-products">
     <h1 style="text-align: center">Similar Products</h1>
-    <div
-      class="first-row"
-      style="
-        display: grid;
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 18px;
-      "
-    >
-      <div
-        class="card .card-container"
-        style="width: 18rem"
-        *ngFor="let product of similarProducts"
-      >
-        <img
-          [src]="product?.images[0]?.url"
-          class="card-img-top"
-          alt="..."
-          (click)="previewProduct(product.id)"
-        />
+
+    <div class="first-row">
+      <div class="card card-container" *ngFor="let product of similarProducts">
+        <div class="card-image">
+          <img [src]="product?.images[0]?.url" class="card-img-top" alt="..." (click)="previewProduct(product.id)" />
+        </div>
+
         <div class="card-body">
           <div
             class="product-name d-flex justify-content-between align-items-center"
           >
-            <h5 class="card-title"></h5>
+            <h5 class="card-title">{{ product?.category }}</h5>
             <div class="product-btn">
               <button
                 (click)="onLikeOne(product)"
@@ -449,9 +376,7 @@
             </div>
           </div>
           <p class="blossom-bag-paragraph">{{ product?.name }}</p>
-          <div
-            class="ratings d-flex align-items-center justify-content-between"
-          >
+          <div class="ratings d-flex align-items-center">
             <app-star-rating
               [rating]="product.rating"
               [readonly]="true"
@@ -460,7 +385,18 @@
               ><span class="rating-number"> {{ product?.rating }} </span>ratings
             </span>
           </div>
-          <div class="product-price">{{ product?.price }}</div>
+          <div class="product-price">
+            <span class="discount-price">
+              ${{ product.price * ((100 - product.discount) / 100) }}
+            </span>
+            <span class="actual-price" *ngIf="product.discount > 0"
+              >${{ product.price }}</span
+            >
+            <span class="discount-percent" *ngIf="product.discount > 0">
+              {{ product.discount }}<span class="per-off">% OFF</span></span
+            >
+          </div>
+
           <div class="product-color-div d-flex">
             <div class="blue product-color"></div>
             <div class="yellow product-color"></div>

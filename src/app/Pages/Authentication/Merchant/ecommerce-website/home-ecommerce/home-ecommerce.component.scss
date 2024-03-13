@@ -17,13 +17,13 @@
 
 .main-comp {
   position: relative;
-  .hero-overlay{
+  .hero-overlay {
     position: absolute;
     z-index: 5;
     // height: 50rem;
     // width: 100%;
   }
-  .overlay-backdrop{
+  .overlay-backdrop {
     position: absolute;
     height: 50rem;
     width: 100%;
@@ -43,9 +43,9 @@
   height: 63px;
   justify-content: center;
   align-items: center;
-  background: rgba(255, 255, 255, 0.30);  
+  background: rgba(255, 255, 255, 0.3);
   backdrop-filter: blur(2px);
-  span{
+  span {
     display: flex;
     width: 175px;
     height: 56px;
@@ -58,7 +58,7 @@
     font-size: 18px;
     font-style: normal;
     font-weight: 700;
-    line-height: 30px; 
+    line-height: 30px;
     letter-spacing: -0.3px;
   }
 }
@@ -80,11 +80,10 @@
   }
 }
 section.level-up {
-
   button {
     font-style: normal;
     font-weight: 700;
-    line-height: 30px; 
+    line-height: 30px;
     letter-spacing: -0.3px;
 
     border: 2px solid #1c222b;
@@ -94,8 +93,7 @@ section.level-up {
         148deg,
         rgba(255, 255, 255, 0.5) 54.97%,
         rgba(255, 255, 255, 0) 109.02%
-      )
-      ,
+      ),
       url("/assets/images/shopping-image.jpeg"), lightgray 50% / cover no-repeat;
     background-size: cover;
     width: 100%;
@@ -146,14 +144,11 @@ section.categories {
     width: 100%;
     .percent-image-div {
       .two-ladies {
-
         object-fit: cover;
 
         width: 100%;
       }
     }
-
-    
   }
 }
 .percent-block {
@@ -217,9 +212,9 @@ section.featured-items {
   div.card {
     border: 0;
     .card-body {
-      padding: 00.5rem;
+      padding: 0.5rem;
     }
-    .card-img{
+    .card-img {
       height: 50%;
     }
     .card-title {
@@ -231,6 +226,7 @@ section.featured-items {
       line-height: 28px;
       letter-spacing: -0.3px;
       margin: 0;
+      text-transform: capitalize;
     }
     .blossom-bag-paragraph {
       // color: #1c222b;
@@ -240,6 +236,7 @@ section.featured-items {
       font-weight: 400;
       line-height: 24px;
       letter-spacing: -0.2px;
+      text-transform: capitalize;
     }
 
     .product-price {
@@ -251,6 +248,26 @@ section.featured-items {
       line-height: 28px;
       letter-spacing: -0.3px;
       margin-bottom: 1rem;
+      .discount-price {
+        color: #1c222b;
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 28px;
+        letter-spacing: -0.3px;
+      }
+      .actual-price {
+        color: #afbaca;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 20px; /* 142.857% */
+        text-decoration: line-through;
+      }
+      .discount-percent {
+        color: #d21a0e;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 20px;
+      }
     }
     div.ratings {
       margin-bottom: 1rem;
@@ -287,20 +304,20 @@ section.featured-items {
     }
   }
 }
-.categories{
+.categories {
   // width: 100%;
   // display: grid;
   // grid-template-columns: 1fr 1fr 1fr;
   // gap:20px;
-    
-  .cats{
+
+  .cats {
     background-color: lightblue;
     width: 100%;
-    height:50px;
+    height: 50px;
     margin-top: 20px;
   }
 }
-.categories-container{
+.categories-container {
   display: flex;
   flex-direction: column;
   // text-align: center;
@@ -344,14 +361,14 @@ section.featured-items {
     display: block;
     margin: 0 auto;
   }
-  .container-list-1{
+  .container-list-1 {
     display: none !important;
   }
-  .container-list-2{
+  .container-list-2 {
     flex-direction: column;
   }
 }
 
-.liked{
+.liked {
   color: red;
 }

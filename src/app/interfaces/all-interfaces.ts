@@ -34,9 +34,33 @@ export interface ProductObject {
 }
 
 export interface Varaiation {
-  type: string;
-  values: string[];
+
+type: string,
+values: string[]
 }
+
+export interface merchantProduct{
+    id: string,
+    name: string,
+    description: string,
+    isActive: boolean,
+    quantity: number,
+    reStockLevel: number,
+    category: string,
+    price: number,
+    discount: number,
+    promotion?: null,
+    deleted: boolean,
+    createdAt: string,
+    updatedAt: string,
+    store: string,
+    variations: any[],
+    images: {id:string, url:string}[],
+    reviews: string[],
+    promotionProduct: null,
+    rating: number
+}
+
 
 export interface UserInterface {
   checkbox: string;
@@ -50,3 +74,4 @@ export interface UserInterface {
   orderShipping: any;
   id: string;
 }
+

@@ -171,7 +171,6 @@ export class LoginComponent implements OnInit {
           } else {
             console.log(resData);
 
-
             // this.dataService.isLoading = false;
           }
         },
@@ -183,7 +182,6 @@ export class LoginComponent implements OnInit {
         }
       );
     this.dataService.loginCredentials = { email: '', password: '' };
-
   }
 
   handleGoogleResponse() {
