@@ -17,6 +17,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSliderModule} from '@angular/material/slider';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import introJs from 'intro.js';
 
 
 @Component({
@@ -154,27 +155,7 @@ export class TemplateEditorComponent  implements AfterViewInit,OnInit{
   logPages(){
     console.log(this.dataservice.template.pagesOrder)
   }
-  // changeFontSize(){
-  //   console.log(this.fontSize);
-  //   document.execCommand(`fontSize`,false, `${this.fontSize}`)
-  // }
-
-  // changeFontType(){
-  //   console.log(this.dataservice.template.fontFamily);
-  //   // document.execCommand(`fontName`,false, `${this.fontName}`)
-  // }
-
-  // changeFontColor(){
-  //   console.log(this.fontColor);
-  //   // console.log(this.dataservice.template.primaryColor.color);
-  //   document.execCommand(`foreColor`,false, `${this.fontColor}`)
-  // }
   saveTemplateDraft(template:any){
-    // template = JSON.stringify(template);
-    // template = JSON.stringify(template);
-    // localStorage.setItem('template',  JSON.stringify(template));
-    // console.log(this.dataservice.template.navbarBackgroundColor) 
-    // console.log(template);
     this.dataservice.isLoading =true
     JSON.stringify(template)
     this.apiService.saveTemplateDraft(localStorage.getItem('storeId')!,{options:JSON.stringify(template)}).subscribe((data:any)=>{
@@ -192,7 +173,6 @@ export class TemplateEditorComponent  implements AfterViewInit,OnInit{
   }
 
   publishTemplate(template:any){
-    // template = JSON.stringify(template);
     console.log(template);
     this.apiService.publishTemplate(localStorage.getItem('storeId')!,{options:JSON.stringify(template)}).subscribe((data:any)=>{
       this.apiService.getMerchantStores(localStorage.getItem('businessId')!).subscribe((templatesData:any) => {
@@ -205,5 +185,72 @@ export class TemplateEditorComponent  implements AfterViewInit,OnInit{
   }
   ngOnInit() {
     this.dataservice.isInEditMode = true
+    if (!localStorage.getItem('editorTourCompleted')) {
+      introJs().setOptions({
+        steps: [
+          {
+            element: '#tourStepZero',
+            intro: `<div style="display:flex">Great News! on this page, you can customize your store front</div>`,
+          },
+          {
+            element: '#tourStepOne',
+            intro: `<div style="">Click here at anytime to return to your <strong style="color:blue;">Dashboard</strong> <hr> Note:<small> <i style="color:red">save your work before you exit this page<i/></small></div>`,
+          },
+          {
+            element: '#tourStepTwo',
+            intro: `<div style="">
+              This button gives you a preview on how your store looks on<strong style="color:blue;">desktop</strong>
+              </div>`
+          },
+          {
+            element: '#tourStepThree',
+            intro: `<div style="">
+            This button gives you a preview on how your store looks on<strong style="color:blue;">mobile</strong>  
+              </div>`
+          },
+          {
+            element: '#tourStepFour',
+            intro: `<div style="">
+            This menu gives you access to all the <strong style="color:blue">customization tools</strong> to design your store as you see fit 
+              </div>`
+          },
+          {
+            element: '#tourStepFive',
+            intro: `<div style="">
+              this menu gives you access to 
+              <p>
+                <ul>
+                  <li><strong style="color:blue">Change Fonts</strong>
+                  <li><strong style="color:blue">Change Colors</strong>
+                  <li><strong style="color:blue">Modify Text</strong>
+                  <li><strong style="color:blue">style buttons</strong>
+                </ul>
+              </p>
+              </div>`
+          },
+          {
+            element: '#tourStepSix',
+            intro: `<div style="">
+            Clicking here will give you an option to add new pages such as <strong style="color:blue">About Us, and  Contact Us</strong> page, where you  can tell people about your business
+              </div>`
+          },
+          {
+            element: '#tourStepSeven',
+            intro: `<div style="">
+            Click here to <strong style="color:blue">Save</strong> your edited store front as draft when you are satisfied.
+              </div>`
+          },
+          {
+            element: '#tourStepEight',
+            intro: `<div style="">
+            Click here to <strong style="color:blue">Publish</strong> your edited store front for you customers to see.
+              </div>`
+          },
+        ]
+      }).onbeforeexit(function () {
+        localStorage.setItem('editorTourCompleted', 'true');
+        return confirm("Are You sure you want to exit?");
+      }).start();
+      }
   }
 }

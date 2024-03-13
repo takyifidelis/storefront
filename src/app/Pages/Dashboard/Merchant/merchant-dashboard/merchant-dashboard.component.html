@@ -1,4 +1,4 @@
-<div class="container-wrapper-div">
+<div  class="container-wrapper-div">
   <div class="p-0">
     <header class="container-fluid p-0">
       <div class="shop-header">
@@ -30,6 +30,7 @@
           </div>
 
           <button
+          id="tourStepNine"
             mat-icon-button
             [matMenuTriggerFor]="menu"
             aria-label="Example icon-button with a menu"
@@ -117,8 +118,8 @@
       [opened]="true"
       class="side-nav mat-elevated-z4"
     >
-      <ul>
-        <li [routerLink]="['home']" routerLinkActive="active-link">
+      <ul id="tourStepOne">
+        <li id="tourStepTwo" [routerLink]="['home']" routerLinkActive="active-link">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -133,7 +134,7 @@
           </svg>
           <span>Home</span>
         </li>
-        <li [routerLink]="['product']" routerLinkActive="active-link">
+        <li id="tourStepThree" [routerLink]="['product']" routerLinkActive="active-link">
           <svg
             width="24"
             height="24"
@@ -153,7 +154,7 @@
 
           <span>Product</span>
         </li>
-        <li [routerLink]="['discount']" routerLinkActive="active-link">
+        <li id="tourStepFour" [routerLink]="['discount']" routerLinkActive="active-link">
           <svg
             width="24"
             height="24"
@@ -168,7 +169,7 @@
           </svg>
           <span>Discount</span>
         </li>
-        <li [routerLink]="['reviews']" routerLinkActive="active-link">
+        <li id="tourStepFive" [routerLink]="['reviews']" routerLinkActive="active-link">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -183,7 +184,7 @@
           </svg>
           <span>Reviews</span>
         </li>
-        <li [routerLink]="['order']" routerLinkActive="active-link">
+        <li id="tourStepSix" [routerLink]="['order']" routerLinkActive="active-link">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -198,7 +199,7 @@
           </svg>
           <span>Orders</span>
         </li>
-        <li [routerLink]="['customers']" routerLinkActive="active-link">
+        <li id="tourStepSeven" [routerLink]="['customers']" routerLinkActive="active-link">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -217,7 +218,7 @@
           </svg>
           <span>Customers</span>
         </li>
-        <li [routerLink]="['analytics']" routerLinkActive="active-link">
+        <li id="tourStepEight" [routerLink]="['analytics']" routerLinkActive="active-link">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"

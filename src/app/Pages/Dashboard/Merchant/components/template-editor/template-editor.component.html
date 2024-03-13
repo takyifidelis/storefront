@@ -13,19 +13,19 @@
                 </div>
                 <span class="hire-professional">Hire a professional</span>
                 <div class="d-flex">
-                    <button mat-icon-button (click)="isMobile('false')" [ngStyle]="{'color': dataservice.isMobileBool ? '#AAAAAA' : ''}">
+                    <button id="tourStepTwo" mat-icon-button (click)="isMobile('false')" [ngStyle]="{'color': dataservice.isMobileBool ? '#AAAAAA' : ''}">
                         <mat-icon>desktop_windows</mat-icon>
                     </button>
                     <div class="vertical-line"></div>
-                    <button mat-icon-button  (click)="isMobile('true')" [ngStyle]="{'color': dataservice.isMobileBool ? '' : '#AAAAAA'}">
+                    <button id="tourStepThree" mat-icon-button  (click)="isMobile('true')" [ngStyle]="{'color': dataservice.isMobileBool ? '' : '#AAAAAA'}">
                         <mat-icon>smartphone</mat-icon>
                     </button>
                 </div>
                 <div class="action-buttons">
-                    <button (click)="saveTemplateDraft(dataservice.template)" class="btn btn-dark">Save</button>
-                    <button (click)="publishTemplate(dataservice.template)" class="btn btn-dark ms-2">Publish</button>
+                    <button id="tourStepSeven" (click)="saveTemplateDraft(dataservice.template)" class="btn btn-dark">Save</button>
+                    <button id="tourStepEight" (click)="publishTemplate(dataservice.template)" class="btn btn-dark ms-2">Publish</button>
                 </div>
-                <span routerLink="/" class="app-name">
+                <span id="tourStepOne" routerLink="/" class="app-name">
                     storefront
                 </span>
             </nav>
@@ -308,8 +308,8 @@
     <mat-drawer-container class="container-fluid p-0 test">
         
         <mat-drawer #drawer mode="side" [opened]="true" class="side-nav mat-elevated-z4">
-            <ul>
-                <li matTooltip="Add Templates" >
+            <ul id="tourStepFour">
+                <li id="tourStepFive" matTooltip="Add Templates" >
                     <button data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop" mat-fab style="background-color: white; color: #0085FF;"
                         aria-label="Example icon button with a bookmark icon">
                         <mat-icon>add</mat-icon>
@@ -326,7 +326,7 @@
                         <mat-icon>upload_2</mat-icon>
                     </button>
                 </li>
-                <li data-bs-toggle="collapse" data-bs-target="#pagesForm">
+                <li id="tourStepSix" data-bs-toggle="collapse" data-bs-target="#pagesForm">
                     <button matTooltip="Add Pages" mat-fab style="background-color: white;"
                         aria-label="Example icon button with a bookmark icon">
                         <img src="/assets/icons/add_files_btn.svg" alt="" srcset="">

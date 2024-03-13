@@ -78,6 +78,18 @@ sorted: any = [];
       this.unsorted = this.orders
       console.log(this.orders)
       this.dataSource = new MatTableDataSource(this.orders);
+      this.apiService.getMerchantStores(localStorage.getItem('businessId')!).subscribe((res: any) => {
+        res.data.forEach((data: any) => {
+          if (data.id === 'f9586428-62e3-4455-bb1d-61262a407d1a'){
+            console.log(data.storeName);
+            this.orders.storeName = data.storeName;
+            console.log(this.orders.storeName);
+
+            
+          }
+        });
+        
+      })
      })
 
      this.isAllActive = true;
