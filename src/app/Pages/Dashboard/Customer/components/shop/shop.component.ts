@@ -22,7 +22,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class ShopComponent implements OnInit{
   stores: any = [];
-  searchShop?: string;
+  searchShop: string = '';
   filteredItems: any = [];
 
   constructor(private apiService:APIService, private router:Router,private dataService:DataService){}
@@ -52,11 +52,9 @@ export class ShopComponent implements OnInit{
         this.filteredItems = this.stores;
       }else {
         this.filteredItems = this.stores.filter((shop: any) => {
-          return shop.storeName.toLowerCase().includes(this.searchShop?.toLowerCase())
+          return shop.storeName.toLowerCase().includes(this.searchShop.toLowerCase())
         });
       }
     })
-
-
     }
 }

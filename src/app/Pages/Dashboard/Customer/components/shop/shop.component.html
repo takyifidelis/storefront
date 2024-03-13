@@ -6,7 +6,7 @@
         matInput
         placeholder="Search for your business or website type"
         [(ngModel)]="searchShop"
-        (keyup)="filterItems()"
+        (input)="filterItems()"
       />
       <mat-icon matSuffix>search</mat-icon>
     </mat-form-field>
