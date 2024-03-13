@@ -21,7 +21,8 @@ import { UserInterface } from '../../../../../interfaces/all-interfaces';
 @Component({
   selector: 'app-merchant-analytics',
   standalone: true,
-  imports: [ FormsModule,
+  imports: [
+    FormsModule,
     MatIconModule,
     MatButtonModule,
     MatCheckboxModule,
@@ -32,16 +33,20 @@ import { UserInterface } from '../../../../../interfaces/all-interfaces';
     MatPaginatorModule,
     MatDialogModule,
     MatTabsModule,
-    CommonModule],
+    CommonModule,
+  ],
   templateUrl: './merchant-analytics.component.html',
-  styleUrl: './merchant-analytics.component.scss'
+  styleUrl: './merchant-analytics.component.scss',
 })
 export class MerchantAnalyticsComponent {
-  constructor(public dataService: DataService, public dialog: MatDialog, private apiService: APIService) {
+  constructor(
+    public dataService: DataService,
+    public dialog: MatDialog,
+    private apiService: APIService
+  ) {
     this.dataSource = new MatTableDataSource(this.users);
-
   }
-
+  merchantPaymentEmpty = false;
   displayedColumns: string[] = [
     'paymentMethod',
     'wallet',
@@ -55,23 +60,26 @@ export class MerchantAnalyticsComponent {
   selection = new SelectionModel<UserInterface>(true, []);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  
 
   users: UserInterface[] = [];
 
   formattedDate!: string | null;
-   datepipe: DatePipe = new DatePipe('en-US');
+  datepipe: DatePipe = new DatePipe('en-US');
   payout: any = [];
 
- 
   ngOnInit(): void {
-     this.apiService.getPayouts('f9586428-62e3-4455-bb1d-61262a407d1a').subscribe((res: any) => {
-console.log(res);
-this.payout = res.data;
-console.log(this.payout[0].orderPayout.orderId);
-this.dataSource = new MatTableDataSource(this.payout);
-
-     })
+    this.merchantPaymentEmpty = true;
+    this.apiService
+      .getPayouts(localStorage.getItem('storeId')!)
+      .subscribe((res: any) => {
+        console.log(res);
+        this.payout = res.data;
+        if (this.payout.length > 0) {
+          this.merchantPaymentEmpty = false;
+        }
+        console.log(this.payout[0].orderPayout.orderId);
+        this.dataSource = new MatTableDataSource(this.payout);
+      });
   }
 
   isAllSelected() {
@@ -108,7 +116,4 @@ this.dataSource = new MatTableDataSource(this.payout);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
-
-
-
 }
