@@ -22,7 +22,7 @@
             <div class="container">
               <div class="row top">
                 <div class="col">
-                  <p class="txt">{{ productItem.description }}</p>
+                  <p class="txt">Home / Women’s Shoe / All Stars</p>
                 </div>
               </div>
               <div class="row">
@@ -48,13 +48,15 @@
                   </div>
                 </div>
               </div>
+
               <div *ngFor="let variation of variations">
                 <div class="row">
                   <div class="col d-flex">
                     <div class="select-color">
-                      <p>SELECT {{ variation?.type }}</p>
+                      <p>SELECT</p>
                     </div>
                     <div class="color d-flex gap">
+                      <div>{{ variation?.type }}</div>
                       <div class="box" style="background-color: #1b4dff"></div>
                       <div class="box" style="background-color: #ffd027"></div>
                       <div class="box" style="background-color: #8f0ea2"></div>
@@ -63,24 +65,23 @@
                   </div>
                 </div>
                 <div class="row">
-                  <div class="col d-flex">
+                  <div class="col">
                     <div class="select-size">
                       <p>SELECT SIZE</p>
                     </div>
                     <div class="size-guide txt-2">
                       <div
+                        *ngFor="let value of values"
                         class="d-flex align-items-center justify-content-start"
                       >
                         <button class="size one">
-                          {{ variation }}
+                          {{ value }}
                         </button>
                       </div>
-                      <!-- <a href="#">size guide</a> -->
                     </div>
                   </div>
                 </div>
               </div>
-
               <div class="quantity-price d-flex align-items-center">
                 <div class="quantity">
                   <p class="quantity-name quantity-price-name">QUANTITY</p>
@@ -106,6 +107,14 @@
                     {{ "$" + productItem.price }}
                   </div>
                 </div>
+              </div>
+              <div class="add-to-save">
+                <span class="add-to-buy" (click)="onAddToBuy()"
+                  >ADD TO BUY</span
+                >
+                <span class="save" (click)="onLikedProducts()">
+                  <fa-icon [icon]="heartIcon"></fa-icon> SAVE
+                </span>
               </div>
             </div>
           </div>
@@ -409,7 +418,12 @@
         style="width: 18rem"
         *ngFor="let product of similarProducts"
       >
-        <img [src]="product?.images[0]?.url" class="card-img-top" alt="..." />
+        <img
+          [src]="product?.images[0]?.url"
+          class="card-img-top"
+          alt="..."
+          (click)="previewProduct(product.id)"
+        />
         <div class="card-body">
           <div
             class="product-name d-flex justify-content-between align-items-center"

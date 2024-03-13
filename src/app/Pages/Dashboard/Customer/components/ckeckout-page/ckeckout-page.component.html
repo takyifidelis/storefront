@@ -3,228 +3,183 @@
     <div class="row" style="height: 100vh">
       <div class="col-7" style="background-color: rgb(238, 234, 234)">
         <div class="m-4">
-          <div>
-            <p class="title">CarbonOffsets</p>
-          </div>
           <div class="p-4" style="background: #fff">
-            <section>
-              <div>
-                <p class="text">PAYMENT METHOD</p>
-              </div>
-              <div>
-                <ngx-paypal [config]="payPalConfig"></ngx-paypal>
-              </div>
-              <div class="text-2" style="display: flex; gap: 10px">
-                <div>
-                  <fa-icon [icon]="info" style="color: green"></fa-icon>
+            <section></section>
+            <div class="container">
+              <div class="">
+                <div
+                  class="shipping-heading d-flex justify-content-between align-items-center"
+                >
+                  <h4 class="select-shipping">Select Shipping Address</h4>
+                  <div class="add-shipping-div" (click)="moreVert()">
+                    <img src="assets\images\plus.svg" alt="" />
+                    <span>Add Address</span>
+                  </div>
                 </div>
-                <div>payments may take up to 72 hours to process.</div>
+                <!-- Hello -->
+                <mat-form-field>
+                  <mat-label>Choose one</mat-label>
+
+                  <mat-select
+                    [formControl]="selectedAddressControl"
+                    *ngIf="shippingSelect.length > 0"
+                  >
+                    <mat-select-trigger>
+                      {{ selectedAddressControl.value?.streetAddress }}
+                    </mat-select-trigger>
+                    <mat-option
+                      *ngFor="let ship of shippingSelect"
+                      [value]="ship"
+                    >
+                      <div class="shipping-div">
+                        <span class="ship-name">{{ ship["name"] }}</span>
+                        <span class="shipping-code">
+                          {{ ship["countryCode"] }}
+                        </span>
+                        <span class="shipping-street">
+                          {{ ship["streetAddress"] }}
+                        </span>
+                        <span class="shipping-city">
+                          {{ ship["city"] }}
+                        </span>
+                        <span class="shipping-number">
+                          {{ ship["phone"] }}
+                        </span>
+                      </div>
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
               </div>
-            </section>
-            <section class="shipping-details" style="padding-top: 20px">
-              <div>
-                <p class="text">SHIPPING DETAILS</p>
+            </div>
+
+            <section class="shipping-details">
+              <div class="cart-header">
+                Shopping Cart
+                <span class="cart-number">( {{ cartQuantity }} )</span>
+                <span class="loading" *ngIf="isDeleting"
+                  ><img
+                    src="assets\icons\loading-btn-spinner.svg"
+                    alt="Loading.."
+                /></span>
               </div>
 
-              <div class="row" style="margin-bottom: 10px">
-                <div class="col">
-                  <div class="label title">
-                    <label for="first-name"> First Name </label>
+              <div
+                class="cart-items"
+                *ngFor="let product of cart; let i = index"
+              >
+                <hr />
+                <div class="product-container">
+                  <div class="product-delete d-flex justify-content-between">
+                    <div class="product d-flex">
+                      <div class="product-images">
+                        <img
+                          [src]="product.images[0]['url']"
+                          class="product-image"
+                          alt=""
+                        />
+                      </div>
+                      <div class="product-info">
+                        <div class="product-name">{{ product.name }}</div>
+                        <div
+                          class="amount-quantity d-flex justify-content-between"
+                        >
+                          <div class="product-amount product-price">
+                            Amount :
+                            <span class="discount-price">
+                              ${{
+                                (product.price / product.quant) *
+                                  ((100 - product.discount) / 100)
+                              }}
+                            </span>
+                            <span
+                              class="actual-price"
+                              *ngIf="product.discount > 0"
+                              >${{ product.price / product.quant }}</span
+                            >
+                            <span
+                              class="discount-percent"
+                              *ngIf="product.discount > 0"
+                            >
+                              {{ product.discount
+                              }}<span class="per-off">% OFF</span></span
+                            >
+                          </div>
+                        </div>
+
+                        <div class="quantity header">
+                          Quantity:
+                          <span class="quant">
+                            {{ product.quant }}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="delete-div">
+                      <div class="delete-total">
+                        <button class="delete-btn" (click)="deleteItem(i)">
+                          <mat-icon>delete</mat-icon>
+                        </button>
+                        <div class="total">
+                          Total:
+                          <span class="total-amount">
+                            ${{
+                              (product.price / product.quant) *
+                                ((100 - product.discount) / 100) *
+                                product.quant
+                            }}</span
+                          >
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <div class="input-wrapper">
-                    <input
-                      type="text"
-                      id="first-name"
-                      class="form-control"
-                      formControlName="name"
-                    />
-                  </div>
                 </div>
-                <div class="col">
-                  <div class="label title">
-                    <label for="first-name"> Last Name </label>
-                  </div>
-                  <div class="input-wrapper">
-                    <input type="text" id="last-name" class="form-control" />
-                  </div>
-                </div>
-              </div>
-              <div class="address margin">
-                <div class="label title">
-                  <label for="address">Street Address</label>
-                </div>
-                <div class="input">
-                  <input
-                    type="text"
-                    id="address"
-                    class="form-control"
-                    formControlName="streetAddress"
-                  />
-                </div>
-              </div>
-              <div class="address margin">
-                <div class="label title">
-                  <label for="apartment-number">Apartment Number</label>
-                </div>
-                <div class="input">
-                  <input
-                    type="text"
-                    id="apartment-number"
-                    class="form-control"
-                    formControlName="apartmentNo"
-                  />
-                </div>
-              </div>
-              <div class="country margin">
-                <div class="country">
-                  <div class="label title">
-                    <label for="country-code">Country Code</label>
-                  </div>
-                  <div class="input">
-                    <input
-                      type="text"
-                      formControlName="countryCode"
-                      id="country-code"
-                      class="form-control"
-                    />
-                  </div>
-                </div>
-              </div>
-              <div class="address margin">
-                <div class="label title">
-                  <label for="telephone">Phone number</label>
-                </div>
-                <div class="input">
-                  <input
-                    type="text"
-                    formControlName="phone"
-                    id="telephone"
-                    class="form-control"
-                  />
-                </div>
-              </div>
-              <div class="address margin">
-                <div class="label title">
-                  <label for="city">City</label>
-                </div>
-                <div class="input">
-                  <input
-                    type="text"
-                    formControlName="city"
-                    id="city"
-                    class="form-control"
-                  />
-                </div>
-              </div>
-              <div class="address margin">
-                <div class="label title">
-                  <label for="postal-code">Postal Code</label>
-                </div>
-                <div class="input">
-                  <input
-                    type="text"
-                    formControlName="postalCode"
-                    id="postal-code"
-                    class="form-control"
-                  />
-                </div>
+                <hr />
               </div>
             </section>
           </div>
         </div>
       </div>
       <div class="col-5" style="margin-top: 30px; padding: 31px">
-        <div>
-          <p class="title">ORDER SUMMARY</p>
-        </div>
-        <!-- @for(product of dataService.cart; track product){ -->
-
-        <div class="row">
-          <div class="col">
-            <p class="text">ITEM</p>
-          </div>
-          <div class="col">
-            <div class="row">
-              <div class="col">
-                <p class="text">QUANTITY</p>
-              </div>
-              <div class="col">
-                <P class="text">PRICE</P>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="col"></div>
-          </div>
-        </div>
-        <!--         </div>
-        <div class="row" *ngFor="let item of cart">
-          <div class="col">
-            <p class="text-2">{{ item.name }}</p>
-          </div>
-          <div class="col">
-            <div class="row">
-              <div class="col">
-                <p class="text-2">{{ item.quant }}</p>
-              </div>
-              <div class="col">
-                <P class="text-2">{{ item.price }} EUR</P> -->
-
-        <div class="">
-          @for (product of dataService.cart; track product) {
-          <div class="row">
-            <div class="col">
-              <p class="text-2">{{ product.name }}</p>
-            </div>
-            <div class="col">
-              <div class="row">
-                <div class="col">
-                  <p class="text-2">{{ product.quant || 1 }}</p>
-                </div>
-                <div class="col">
-                  <P class="text-2">{{ product.price }}</P>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="col"></div>
-            </div>
-          </div>
-          }
-        </div>
-        <div class="d-flex justify-content-between">
+        <div class="position-payment">
           <div>
-            <p class="text">Total:</p>
+            <p class="select-shipping">ORDER SUMMARY</p>
+            <div
+              class="order-items cart-header d-flex justify-content-between align-items-center"
+            >
+              <div>Number of Items:</div>
+
+              <div class="order-number styling-number">
+                {{ cartQuantity }}
+              </div>
+            </div>
+            <div
+              class="cart-header total-margin d-flex justify-content-between align-items-center"
+            >
+              <div>Total:</div>
+
+              <span class="total-amount styling-number">
+                ${{ getTotalCost() }}
+              </span>
+            </div>
           </div>
-          <div class="title" style="margin-right: 64px">
-            ${{ getTotalCost() }}
+          <!-- @for(product of dataService.cart; track product){ -->
+
+          <div class="payment-method">
+            <div>
+              <p class="text select-shipping">PAYMENT METHOD</p>
+            </div>
+            <div>
+              <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+            </div>
+            <div class="text-2" style="display: flex; gap: 10px">
+              <div>
+                <fa-icon [icon]="info" style="color: green"></fa-icon>
+              </div>
+              <div>payments may take up to 72 hours to process.</div>
+            </div>
           </div>
         </div>
-        <div
-          style="
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 20px;
-          "
-          (click)="createOrder()"
-        >
-          <button
-            style="
-              background: rgb(233, 238, 233);
-              color: rgb(48, 77, 4);
-              border: 1px solid rgb(4, 54, 4);
-            "
-          >
-            PROMO CODE
-          </button>
-          <button
-            type="submit"
-            style="background: rgb(114, 176, 20); color: #fff"
-          >
-            CONFIRM YOUR ORDER
-          </button>
-        </div>
+        <!--  -->
       </div>
     </div>
   </div>

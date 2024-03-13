@@ -18,18 +18,9 @@ import {
 } from '@angular/material/dialog';
 import { APIService } from '../../../../../Services/api.service';
 import { CommonModule } from '@angular/common';
+import { UserInterface } from '../../../../../interfaces/all-interfaces';
 
-export interface dummyUserInterface {
-  checkbox: string;
-  name: any;
-  store: string;
-  category: string;
-  price: number;
-  images: any;
-  quantity: number;
-  items: any
-  orderShipping: any
-}
+
 
 @Component({
   selector: 'app-favorite-product',
@@ -52,51 +43,32 @@ export interface dummyUserInterface {
 })
 export class FavoriteProductComponent implements OnInit{
   displayedColumns: string[] = ['checkbox', 'name', 'store', 'categories','price','bubble'];
-  dataSource: MatTableDataSource<dummyUserInterface>;
-  selection = new SelectionModel<dummyUserInterface>(true, []);
+  dataSource: MatTableDataSource<UserInterface>;
+  selection = new SelectionModel<UserInterface>(true, []);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   likedProduct: any;
   products: any;
+  users: UserInterface[] = [];
 
-  // creatine a dummy user data source for the table
-  users: dummyUserInterface[] = [
-    
-]
   constructor(public dialog: MatDialog, private apiService: APIService) {
     this.dataSource = new MatTableDataSource(this.users);
   }
 
   ngOnInit(): void {
-    let cartJson = localStorage.getItem('favouriteProducts');
-    this.likedProduct =JSON.parse(cartJson!);
-    // console.log(this.likedProduct);
-
-     this.apiService.getSavedProducts().subscribe((res: any) => {
+     this.apiService.getSavedProducts(localStorage.getItem('customerId')!).subscribe((res: any) => {
       this.products = res.data;
     this.dataSource = new MatTableDataSource(this.products);
-    console.log(this.products)
     });
   }
 
-  moreVert(e:dummyUserInterface) {
+  moreVert(e: UserInterface) {
     this.dialog.open(PurchaseDetailComponent, {
       data: e,
         width: '479px', 
         position: {right:'50px', top: '10%'} 
     });
-    console.log(e);
   }
-  
-
-
-
-
-
-
-
-
-
 
   // the code below is all for the checkboxes in the table
   isAllSelected() {
@@ -105,23 +77,20 @@ export class FavoriteProductComponent implements OnInit{
     return numSelected === numRows;
   }
 showSelection(e:any) {
-  e.stopPropagation()
-  console.log(this.selection.selected);
+  e.stopPropagation();
 }
   /** Selects all rows if they are not all selected; otherwise clear selection. */
   toggleAllRows() {
     if (this.isAllSelected()) {
       this.selection.clear();
-      console.log(this.selection.selected);
       return;
     }
 
     this.selection.select(...this.dataSource.data);
-    console.log(this.selection.selected);
   }
 
   /** The label for the checkbox on the passed row */
-  checkboxLabel(row?: dummyUserInterface): string {
+  checkboxLabel(row?: UserInterface): string {
     if (!row) {
       return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
     }
@@ -142,7 +111,7 @@ showSelection(e:any) {
   imports: [MatDialogTitle, MatDialogContent],
 })
 export class PurchaseDetailComponent {
-  constructor(@Inject(MAT_DIALOG_DATA) public data: dummyUserInterface) {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: UserInterface) {
     // console.log(this.data);
     
   }

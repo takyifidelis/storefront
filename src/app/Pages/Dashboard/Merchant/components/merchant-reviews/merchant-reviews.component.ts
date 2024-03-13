@@ -66,6 +66,7 @@ export interface CustomerInterface {
   templateUrl: './merchant-reviews.component.html',
   styleUrl: './merchant-reviews.component.scss',
 })
+
 export class MerchantReviewsComponent {
   reviews$!: Observable<ReviewResponseData>;
   filterIcon = faFilter;
@@ -89,18 +90,6 @@ export class MerchantReviewsComponent {
   selection = new SelectionModel<ReviewResponseData>(true, []);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-
-  // creating a dummy user data source for the table
-  // users = [
-  //   {
-  //     checkbox: '1',
-  //     product: 'Asher A.',
-  //     name: '44',
-
-  //     customer: 'Add me',
-  //     rating: 'Rate me',
-  //   },
-  // ];
   users: any;
 
   moreVert(e: ReviewResponseData) {
@@ -133,21 +122,16 @@ export class MerchantReviewsComponent {
     console.log(this.selection.selected);
   }
 
-  /** The label for the checkbox on the passed row */
-  // checkboxLabel(row?: CustomerInterface): string {
-  //   if (!row) {
-  //     return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
-  //   }
-  //   return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${
-  //     row.checkbox + 1
-  //   }`;
-  // }
+  
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
 
   ngOnInit() {
+    this.authService.getReviews(localStorage.getItem('storeId')!).subscribe((response: any) => {
+      this.dataSource = new MatTableDataSource(response.data);
+    });
     this.authService.getReviews(localStorage.getItem('storeId')!).subscribe(
       (response: any) => {
         console.log(response);

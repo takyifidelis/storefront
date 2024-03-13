@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { TokenAuthComponent } from '../token-auth/token-auth.component';
-import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import {
   FormGroup,
@@ -10,9 +9,9 @@ import {
   ReactiveFormsModule,
   Validators,
   FormBuilder,
+  FormsModule
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { AuthService } from '../../Auth/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { APIService } from '../../../../Services/api.service';
 

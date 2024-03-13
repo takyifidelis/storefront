@@ -1,53 +1,61 @@
-.purchase-item{
-    display: flex;
-    gap: 1rem;
-    height: 86px;
-    align-items: center;
+.purchase-item {
+  display: flex;
+  gap: 1rem;
+  height: 86px;
+  align-items: center;
 }
-.detail-type{
-    color: var(--Colors-Primary-Slate-500, #5E718D);
-    font-family: Inter;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 24px;
-    letter-spacing: -0.2px;
-}
-
-.detail-shop-name,.item-collection-type{
-    color: var(--Colors-Primary-Slate-500, #5E718D);
-    font-family: Inter;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 22px;
-    letter-spacing: -0.2px;
+.detail-type {
+  color: var(--Colors-Primary-Slate-500, #5e718d);
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: -0.2px;
 }
 
-.item-name{
+.detail-shop-name,
+.item-collection-type {
+  color: var(--Colors-Primary-Slate-500, #5e718d);
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 22px;
+  letter-spacing: -0.2px;
+}
+
+.item-name {
+  color: var(--Colors-Primary-Slate-600, #455468);
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 28px;
+  letter-spacing: -0.3px;
+}
+
+.total-price {
+  display: flex;
+  .price-tag {
+    width: 16.1rem;
+  }
+  .price {
     color: var(--Colors-Primary-Slate-600, #455468);
+    text-overflow: ellipsis;
+    white-space: nowrap;
     font-family: Inter;
     font-size: 16px;
     font-style: normal;
     font-weight: 500;
     line-height: 28px;
     letter-spacing: -0.3px;
+  }
 }
-
-.total-price{
-    display: flex;
-    .price-tag{
-        width: 16.1rem;
-    }
-    .price{
-        color: var(--Colors-Primary-Slate-600, #455468);
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        font-family: Inter;
-        font-size: 16px;
-        font-style: normal;
-        font-weight: 500;
-        line-height: 28px;
-        letter-spacing: -0.3px;
-    }
+.btn-cart {
+  background-color: #0f3cd9 !important;
+  color: #0f3cd9 !important;
+}
+.btn-right {
+  text-align: right;
 }

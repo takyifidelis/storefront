@@ -16,29 +16,33 @@
         [innerText]="dataservice.template.text"
       ></a> -->
 
-
-
-    <!-- <div *ngIf="serverResponseReceived" -->
-    <div
-      [style.lineHeight]="dataService.template.lineHeight"
-      [style.color]="dataService.template.primaryColor"
-
-      [style.background]="dataService.template.primaryBackground">
-      <nav class="navbar navbar-expand-lg navbar-dark" 
-        [style.backgroundColor]="dataService.template.navbarBackgroundColor" 
-        [style.color]="dataService.template.navbarColor"
-        style="z-index: 20;">
+<!-- <div *ngIf="serverResponseReceived" -->
+<div
+  [style.lineHeight]="dataService.template.lineHeight"
+  [style.color]="dataService.template.primaryColor"
+  [style.background]="dataService.template.primaryBackground"
+>
+  <nav
+    class="navbar navbar-expand-lg navbar-dark"
+    [style.backgroundColor]="dataService.template.navbarBackgroundColor"
+    [style.color]="dataService.template.navbarColor"
+    style="z-index: 20"
+  >
     <div class="container-fluid">
-      <a [style.color]="dataService.template.navbarColor" class="navbar-brand" href="#" [innerText]="dataService.template.text"></a>
-        <button
-          class="menu-btn toggle-btn"
-          color="primary"
-          mat-icon-button
-          (click)="toggleBtnFunction()"
-        >
-          <mat-icon>menu</mat-icon>
-        </button>
-
+      <a
+        [style.color]="dataService.template.navbarColor"
+        class="navbar-brand"
+        href="#"
+        [innerText]="dataService.template.text"
+      ></a>
+      <button
+        class="menu-btn toggle-btn"
+        color="primary"
+        mat-icon-button
+        (click)="toggleBtnFunction()"
+      >
+        <mat-icon>menu</mat-icon>
+      </button>
 
       <div
         class="collapse navbar-collapse d-flex justify-content-center"
@@ -51,17 +55,23 @@
         <div class="navbar-nav nav-content" id="parent">
           @for (menuItem of dataService.template.pagesOrder; track menuItem) {
 
-            <a *ngIf="menuItem.includePage" [style.color]="dataService.template.navbarColor" cdkDrag
-              class="nav-link"
-              [routerLink]="[menuItem.name]"
-              routerLinkActive="router-link-active"
-            >
-              {{ menuItem.value }}
-            </a>
+          <a
+            *ngIf="menuItem.includePage"
+            [style.color]="dataService.template.navbarColor"
+            cdkDrag
+            class="nav-link"
+            [routerLink]="[menuItem.name]"
+            routerLinkActive="router-link-active"
+          >
+            {{ menuItem.value }}
+          </a>
           }
 
           <form class="d-flex justify-content-center align-items-center">
-            <fa-icon [icon]="searchIcon" [style.color]="dataService.template.navbarColor"></fa-icon>
+            <fa-icon
+              [icon]="searchIcon"
+              [style.color]="dataService.template.navbarColor"
+            ></fa-icon>
 
             <input
               [style.color]="dataService.template.navbarColor"
@@ -70,17 +80,16 @@
               placeholder="Search"
               aria-label="Search"
               class="search"
-              name="d"/>
+              name="d"
+            />
           </form>
         </div>
-
 
         <div
           [style.color]="dataService.template.navbarColor"
           class="navbar-nav dropdown-content"
           id="dropdownMenu"
         >
-
           <a class="nav-link" [routerLink]="['home']">Home</a>
           <a class="nav-link" [routerLink]="['about-us']">About Us</a>
           <a class="nav-link" [routerLink]="['contact-us']">Contact Us</a>
@@ -91,11 +100,28 @@
           </a>
         </div>
       </div>
-      <div class="navbar-icons d-flex justify-content-between align-items-center">
-        <button class="heart nav-icons" color="primary" mat-icon-button>
-          <mat-icon>favorite_border</mat-icon>
+      <div
+        class="navbar-icons d-flex justify-content-between align-items-center"
+      >
+        <button
+          class="heart nav-icons"
+          color="primary"
+          mat-icon-button
+          (click)="goToFavouriteProducts()"
+        >
+          <mat-icon
+            [matBadge]="dataService.like.length"
+            matBadgeColor="warn"
+            style="margin-top: 10px; cursor: pointer"
+            >favorite_border</mat-icon
+          >
         </button>
-        <button class="person nav-icons" color="primary" mat-icon-button>
+        <button
+          class="person nav-icons"
+          color="primary"
+          mat-icon-button
+          (click)="goToCustomerDashboard()"
+        >
           <mat-icon>person</mat-icon>
         </button>
 

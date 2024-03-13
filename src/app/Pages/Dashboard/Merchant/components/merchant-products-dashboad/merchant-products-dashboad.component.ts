@@ -38,7 +38,13 @@ export interface dummyUserInterface {
   categories: string;
   inventory: string;
   status: string;
-  images: { [key: string]: any }[];
+  images: {[key:string]:any}[];
+  commission: string;
+  currency: string;
+  amount: string;
+  wallet: string;
+  orderPayout: any;
+
 }
 export interface productDetailInterface {
   id: string;
