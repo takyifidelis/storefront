@@ -32,15 +32,18 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatPaginatorModule,
     MatDialogModule,
     MatTabsModule,
-    CommonModule
+    CommonModule,
   ],
   templateUrl: './merchant-orders.component.html',
-  styleUrl: './merchant-orders.component.scss'
+  styleUrl: './merchant-orders.component.scss',
 })
 export class MerchantOrdersComponent {
-  constructor(public dataService: DataService, public dialog: MatDialog, private apiService: APIService) {
+  constructor(
+    public dataService: DataService,
+    public dialog: MatDialog,
+    private apiService: APIService
+  ) {
     this.dataSource = new MatTableDataSource(this.users);
-
   }
 
   displayedColumns: string[] = [
@@ -56,54 +59,47 @@ export class MerchantOrdersComponent {
   selection = new SelectionModel<dummyUserInterface>(true, []);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  
-
-  users: dummyUserInterface[] = [
-  ];
-  orders: any = []
-unsorted: any = [];
-sorted: any = [];
+  merchantOrdersEmpty = false;
+  users: dummyUserInterface[] = [];
+  orders: any = [];
+  unsorted: any = [];
+  sorted: any = [];
   formattedDate!: string | null;
-   datepipe: DatePipe = new DatePipe('en-US');
-   isAllActive = false;
-   isProcessingActive = false;
-   isShippedActive = false;
-   isDeliveredActive = false;
+  datepipe: DatePipe = new DatePipe('en-US');
+  isAllActive = false;
+  isProcessingActive = false;
+  isShippedActive = false;
+  isDeliveredActive = false;
 
- 
   ngOnInit(): void {
-     this.apiService.getOrdersForMerchant(localStorage.getItem('storeId')!).subscribe((res: any) => {
-      console.log(res);
-      this.orders = res.data;
-      this.unsorted = this.orders
-      console.log(this.orders)
-      this.dataSource = new MatTableDataSource(this.orders);
-      this.apiService.getMerchantStores(localStorage.getItem('businessId')!).subscribe((res: any) => {
-        res.data.forEach((data: any) => {
-          if (data.id === 'f9586428-62e3-4455-bb1d-61262a407d1a'){
-            console.log(data.storeName);
-            this.orders.storeName = data.storeName;
-            console.log(this.orders.storeName);
+    this.merchantOrdersEmpty = true;
+    this.apiService
+      .getOrdersForMerchant(localStorage.getItem('storeId')!)
+      .subscribe((res: any) => {
+        console.log(res);
+        this.orders = res.data;
+        this.unsorted = this.orders;
+        if (res.data.length > 0) {
+          this.merchantOrdersEmpty = false;
+        }
+        console.log(this.orders);
+        this.dataSource = new MatTableDataSource(this.orders);
+      });
 
-            
-          }
-        });
-        
-      })
-     })
-
-     this.isAllActive = true;
-
+    this.isAllActive = true;
   }
 
   moreVert(e: dummyUserInterface) {
-    this.dialog.open(MerchantOrderModalComponent, {
-      data: e,
-      width: '479px',
-      position: { right: '50px', top: '10%' },
-    }).afterClosed().subscribe(() => {
-      this.ngOnInit()
-    })
+    this.dialog
+      .open(MerchantOrderModalComponent, {
+        data: e,
+        width: '479px',
+        position: { right: '50px', top: '10%' },
+      })
+      .afterClosed()
+      .subscribe(() => {
+        this.ngOnInit();
+      });
   }
 
   isAllSelected() {
@@ -167,19 +163,16 @@ sorted: any = [];
     }
   }
 
-
   onSort(status: string) {
     this.sorted = [];
-    this.unsorted.forEach((order: any) =>{
-      if(order.status === status) {
+    this.unsorted.forEach((order: any) => {
+      if (order.status === status) {
         this.sorted.push(order);
-    this.dataSource = new MatTableDataSource(this.sorted);
-      }else if(status === 'All'){
+        this.dataSource = new MatTableDataSource(this.sorted);
+      } else if (status === 'All') {
         this.dataSource = new MatTableDataSource(this.unsorted);
       }
-    })
+    });
   }
-//   ngOnInit():
+  //   ngOnInit():
 }
-
-
