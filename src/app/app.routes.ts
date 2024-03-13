@@ -26,7 +26,6 @@ import { OnboardingStepOneComponent } from './Pages/Authentication/CommonCompone
 import { OnboardingStepTwoComponent } from './Pages/Authentication/CommonComponent/onboarding-step-two/onboarding-step-two.component';
 import { OnboardingStepThreeComponent } from './Pages/Authentication/CommonComponent/onboarding-step-three/onboarding-step-three.component';
 import { ReviewComponent } from './Pages/Authentication/Merchant/ecommerce-website/review/review.component';
-
 import { EmailNotificationComponent } from './Pages/Authentication/CommonComponent/forgotten-password/email-notification/email-notification.component';
 import { AuthTokenComponent } from './Pages/Authentication/CommonComponent/auth-token/auth-token.component';
 import { ShopComponent } from './Pages/Dashboard/Customer/components/shop/shop.component';
@@ -34,18 +33,18 @@ import { FavoriteProductComponent } from './Pages/Dashboard/Customer/components/
 import { HistoryComponent } from './Pages/Dashboard/Customer/components/history/history.component';
 import { OrderComponent } from './Pages/Dashboard/Customer/components/order/order.component';
 import { SearchOrderComponent } from './Pages/Dashboard/Customer/components/search-order/search-order.component';
-
 import { PaymentOptionComponent } from './Pages/Dashboard/Customer/components/payment-option/payment-option.component';
 import { NewPaymentOptionComponent } from './Pages/Dashboard/Customer/components/new-payment-option/new-payment-option.component';
 import { contactUsGuard } from './gaurds/contact-us.guard';
 import { aboutUsGuard } from './gaurds/about-us.guard';
-
 import { MerchantAddProductComponent } from './Pages/Dashboard/Merchant/components/merchant-add-product/merchant-add-product.component';
 import { CkeckoutPageComponent } from './Pages/Dashboard/Customer/components/ckeckout-page/ckeckout-page.component';
 import { AuthSuccessfulComponent } from './Pages/Authentication/CommonComponent/auth-successful/auth-successful.component';
 import { MerchantProductsDashboadComponent } from './Pages/Dashboard/Merchant/components/merchant-products-dashboad/merchant-products-dashboad.component';
-import { WalletComponent } from './Pages/Dashboard/Merchant/components/wallet/wallet.component';
+import { authGuard } from './gaurds/auth.guard';
 
+import { commonGuard } from './gaurds/common.guard';
+import { merchantAuthGuard } from './gaurds/merchant.guard';
 export const routes: Routes = [
   { path: '', component: LandingPageComponent },
   { path: 'login', component: LoginComponent },
@@ -56,18 +55,30 @@ export const routes: Routes = [
   { path: 'Sign-up-customer', component: SignupCustomerComponent },
   { path: 'reset-password', component: ResetPassowrdComponent },
   { path: 'page-creator', component: PageCreatorComponent },
-  { path: 'merchant-onboarding-1', component: OnboardingStepOneComponent },
-  { path: 'merchant-onboarding-2', component: OnboardingStepTwoComponent },
-  { path: 'merchant-onboarding-3', component: OnboardingStepThreeComponent },
+  {
+    path: 'merchant-onboarding-1',
+    canActivate: [merchantAuthGuard],
+    component: OnboardingStepOneComponent,
+  },
+  {
+    path: 'merchant-onboarding-2',
+    canActivate: [merchantAuthGuard],
+    component: OnboardingStepTwoComponent,
+  },
+  {
+    path: 'merchant-onboarding-3',
+    canActivate: [merchantAuthGuard],
+    component: OnboardingStepThreeComponent,
+  },
   { path: 'Authentication', component: AuthTokenComponent },
   { path: 'Password-Authentication', component: TokenAuthComponent },
-
   { path: 'authSuccess', component: AuthSuccessfulComponent },
   { path: 'Email-notification', component: EmailNotificationComponent },
   { path: 'reset-password', component: ResetPassowrdComponent },
   {
     path: 'template-editor',
     component: TemplateEditorComponent,
+    canActivate: [merchantAuthGuard],
     children: [
       {
         path: '',
@@ -84,7 +95,6 @@ export const routes: Routes = [
             canActivate: [contactUsGuard],
             component: ContactUsComponent,
           },
-
           { path: '', redirectTo: 'home', pathMatch: 'full' },
         ],
       },
@@ -93,7 +103,7 @@ export const routes: Routes = [
   {
     path: 'customer',
     component: CustomerDashboardComponent,
-
+    canActivate: [authGuard],
     children: [
       { path: 'shop', component: ShopComponent },
       { path: 'fav-product', component: FavoriteProductComponent },
@@ -105,20 +115,15 @@ export const routes: Routes = [
   },
   { path: 'ecommerce/checkout-page', component: CkeckoutPageComponent },
   { path: 'search-order', component: SearchOrderComponent },
-
   { path: 'checkout-page', component: CkeckoutPageComponent },
   { path: 'search-order', component: SearchOrderComponent },
-
   {
     path: 'merchant',
     component: MerchantDashboardComponent,
+    canActivate: [merchantAuthGuard],
     children: [
       { path: '', component: HomeComponent },
-      { path: 'payment', component: WalletComponent },
-      {
-        path: 'home',
-        component: HomeComponent,
-      },
+      { path: 'home', component: HomeComponent },
       { path: 'discount', component: MerchantDiscountComponent },
       { path: 'reviews', component: MerchantReviewsComponent },
       { path: 'order', component: MerchantOrdersComponent },
@@ -138,6 +143,7 @@ export const routes: Routes = [
   {
     path: 'ecommerce',
     component: EcommerceWebsiteComponent,
+    canActivate: [commonGuard],
     children: [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: HomeEcommerceComponent },
@@ -146,6 +152,5 @@ export const routes: Routes = [
       { path: 'shop/:id', component: ReviewComponent },
     ],
   },
-
   // { path: '**', component: LandingPageComponent },
 ];
