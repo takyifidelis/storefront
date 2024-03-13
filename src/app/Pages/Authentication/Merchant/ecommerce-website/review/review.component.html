@@ -20,6 +20,7 @@
           </div>
           <div class="product-info">
             <div class="container">
+
               <div class="row">
                 <div class="col">
                   <h4 class="item-name">{{ productItem.name }}</h4>
@@ -43,13 +44,16 @@
                   </div>
                 </div>
               </div>
+
               <div class="">
                 <div class="row">
                   <div class="col d-flex">
                     <div class="select-color">
                       <p>SELECT COLOR</p>
+
                     </div>
                     <div class="color d-flex gap">
+                      <div>{{ variation?.type }}</div>
                       <div class="box" style="background-color: #1b4dff"></div>
                       <div class="box" style="background-color: #ffd027"></div>
                       <div class="box" style="background-color: #8f0ea2"></div>
@@ -57,6 +61,7 @@
                     </div>
                   </div>
                 </div>
+
                 <div
                   class="product-variation mb-5"
                   *ngFor="let item of productItem.variations"
@@ -74,7 +79,6 @@
                   </div>
                 </div>
               </div>
-
               <div class="quantity-price d-flex align-items-center">
                 <div class="quantity">
                   <p class="quantity-name quantity-price-name">QUANTITY</p>
@@ -100,6 +104,14 @@
                     {{ "$" + productItem.price }}<span>.00</span>
                   </div>
                 </div>
+              </div>
+              <div class="add-to-save">
+                <span class="add-to-buy" (click)="onAddToBuy()"
+                  >ADD TO BUY</span
+                >
+                <span class="save" (click)="onLikedProducts()">
+                  <fa-icon [icon]="heartIcon"></fa-icon> SAVE
+                </span>
               </div>
             </div>
           </div>
@@ -332,11 +344,13 @@
   </section>
   <section class="similar-products">
     <h1 style="text-align: center">Similar Products</h1>
+
     <div class="first-row">
       <div class="card card-container" *ngFor="let product of similarProducts">
         <div class="card-image">
-          <img [src]="product?.images[0]?.url" class="card-img-top" alt="..." />
+          <img [src]="product?.images[0]?.url" class="card-img-top" alt="..." (click)="previewProduct(product.id)" />
         </div>
+
         <div class="card-body">
           <div
             class="product-name d-flex justify-content-between align-items-center"

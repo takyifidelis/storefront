@@ -43,7 +43,13 @@ export interface dummyUserInterface {
   categories: string;
   inventory: string;
   status: string;
-  images: { [key: string]: any }[];
+  images: {[key:string]:any}[];
+  commission: string;
+  currency: string;
+  amount: string;
+  wallet: string;
+  orderPayout: any;
+
 }
 
 @Component({
@@ -160,6 +166,7 @@ export class MerchantProductsDashboadComponent {
         console.log(response.data);
         this.isLoading = false;
         this.numberOfProducts = response.data.products.length;
+
 
         // console.log(response.data.products[0].images[0].url);
         this.users = response.data

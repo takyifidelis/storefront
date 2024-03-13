@@ -4,7 +4,6 @@ import { faCcMastercard, faCcVisa } from '@fortawesome/free-brands-svg-icons';
 import { faCheck, faFilter, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { NewPaymentOptionComponent } from '../new-payment-option/new-payment-option.component';
 import { MatDialog } from '@angular/material/dialog';
-import { dummyUserInterface } from '../favorite-product/favorite-product.component';
 
 @Component({
   selector: 'app-payment-option',

@@ -21,12 +21,15 @@ import { UserCredentials, merchantProduct } from '../interfaces/all-interfaces';
 // showInputLink: boolean = false;
 // isLoading: boolean = false
 export class DataService {
+
+like: any =  [];
   cart: any = [];
   updateProduct:unknown 
   productCategories: any = [];
   productSearchString: string = '';
   selectedStore: { [key: string]: any } = {};
   merchantDashboardNoProjects: boolean = true;
+
   doesNotExist = { exist: false, term: '' };
 
   isProductUpdateInstance = false;
