@@ -1,11 +1,19 @@
 .first-block {
-  .image-detail {
+  .customer-image {
     width: 56px;
     height: 56px;
-    flex-shrink: 0;
+    border-radius: 50%;
+    background-color: #5e718d;
+    text-transform: uppercase;
+    font-size: 20px;
+    color: #f2f5ff;
+    font-weight: 600;
+    .first-initials {
+      margin-right: 0.2rem;
+    }
   }
   .customer-detail {
-    margin-left: 1.5rem;
+    margin-left: 1rem;
     .customer-name {
       color: #455468;
       font-family: Inter;
@@ -36,7 +44,7 @@
     font-weight: 400;
     line-height: 20px;
     letter-spacing: -0.2px;
-    margin-left: 1.5rem;
+    margin-left: 6.5rem;
   }
 }
 .second-block {

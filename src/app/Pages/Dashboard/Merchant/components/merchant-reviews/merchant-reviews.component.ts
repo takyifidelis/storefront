@@ -10,6 +10,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { ToastrService } from 'ngx-toastr';
+
 import {
   FormControl,
   FormGroup,
@@ -66,10 +68,13 @@ export interface CustomerInterface {
   templateUrl: './merchant-reviews.component.html',
   styleUrl: './merchant-reviews.component.scss',
 })
+
 export class MerchantReviewsComponent {
   reviews$!: Observable<ReviewResponseData>;
   filterIcon = faFilter;
   seaechICon = faSearch;
+  isLoading: boolean = false;
+  numberOfReviews!: number;
   constructor(
     public dataService: DataService,
     public dialog: MatDialog,
@@ -89,18 +94,6 @@ export class MerchantReviewsComponent {
   selection = new SelectionModel<ReviewResponseData>(true, []);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-
-  // creating a dummy user data source for the table
-  // users = [
-  //   {
-  //     checkbox: '1',
-  //     product: 'Asher A.',
-  //     name: '44',
-
-  //     customer: 'Add me',
-  //     rating: 'Rate me',
-  //   },
-  // ];
   users: any;
 
   moreVert(e: ReviewResponseData) {
@@ -133,29 +126,29 @@ export class MerchantReviewsComponent {
     console.log(this.selection.selected);
   }
 
-  /** The label for the checkbox on the passed row */
-  // checkboxLabel(row?: CustomerInterface): string {
-  //   if (!row) {
-  //     return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
-  //   }
-  //   return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${
-  //     row.checkbox + 1
-  //   }`;
-  // }
+  
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
 
   ngOnInit() {
+
+    this.isLoading = true;
     this.authService.getReviews(localStorage.getItem('storeId')!).subscribe(
       (response: any) => {
         console.log(response);
-        // this.users = response.data
+        this.isLoading = false;
+        this.numberOfReviews = response.data.length;
         this.dataSource = new MatTableDataSource(response.data);
       },
       (errorMessage) => {
         console.log(errorMessage);
+        this.isLoading = false;
       }
     );
   }
@@ -192,7 +185,8 @@ export class ReviewDetailsComponent {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: ReviewResponseData,
-    private authService: APIService
+    private authService: APIService,
+    private toastr: ToastrService
   ) {
     this.replyReview = new FormGroup({
       comment: new FormControl('', Validators.required),
@@ -211,10 +205,15 @@ export class ReviewDetailsComponent {
       .subscribe(
         (resData) => {
           console.log(resData);
+          this.toastr.info(resData.message, 'Success');
         },
         (errorMessage) => {
           console.log(errorMessage);
           this.error = errorMessage;
+          this.toastr.error(
+            errorMessage.error.message,
+            errorMessage.error.type
+          );
         }
       );
     form.reset();

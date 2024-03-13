@@ -11,6 +11,7 @@
       </div>
     </div>
   </div>
+  <hr />
   <mat-tab-group>
     <mat-tab label="Add Discount">
       <form
@@ -63,10 +64,13 @@
         </div>
       </form>
     </mat-tab>
-    <mat-tab label="Delete Product">
+    <mat-tab label="Modify Product" >
       <div class="delete-btn">
         <button (click)="onDeleteProduct()" class="btn btn-danger">
           Delete Product
+        </button>
+        <button (click)="onUpdateProduct()" mat-dialog-close class="btn btn-primary">
+          Update Product
         </button>
       </div>
     </mat-tab>

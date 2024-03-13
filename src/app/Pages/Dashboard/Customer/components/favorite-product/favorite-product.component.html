@@ -1,7 +1,9 @@
 <div class="container-fluid">
   <div class="d-flex mb-5 align-items-center gap-3">
     <h2 class="m-0">Product</h2>
-    <span class="product-members">100 members</span>
+    <span class="product-members" style="width: 8.12%"
+      >{{ products.length }} product(s)</span
+    >
   </div>
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
     <!-- Checkbox Column -->
@@ -76,7 +78,7 @@
       >
         Price
       </th>
-      <td mat-cell *matCellDef="let row">{{ row.price }}</td>
+      <td mat-cell *matCellDef="let row">USD {{ row.price }}</td>
     </ng-container>
 
     <ng-container matColumnDef="bubble">
@@ -88,42 +90,17 @@
       ></th>
       <td mat-cell *matCellDef="let row">
         <span (click)="moreVert(row)" class="btn">
-          <svg
-            width="30"
-            height="30"
-            viewBox="0 0 30 30"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <circle cx="15" cy="15" r="14.5" fill="#F9FAFB" stroke="#D7DFE9" />
-            <path
-              d="M20 16.5C20.8284 16.5 21.5 15.8284 21.5 15C21.5 14.1716 20.8284 13.5 20 13.5C19.1716 13.5 18.5 14.1716 18.5 15C18.5 15.8284 19.1716 16.5 20 16.5Z"
-              stroke="#5E718D"
-              stroke-miterlimit="10"
-            />
-            <path
-              d="M15 16.5C15.8284 16.5 16.5 15.8284 16.5 15C16.5 14.1716 15.8284 13.5 15 13.5C14.1716 13.5 13.5 14.1716 13.5 15C13.5 15.8284 14.1716 16.5 15 16.5Z"
-              stroke="#5E718D"
-              stroke-miterlimit="10"
-            />
-            <path
-              d="M10 16.5C10.8284 16.5 11.5 15.8284 11.5 15C11.5 14.1716 10.8284 13.5 10 13.5C9.17157 13.5 8.5 14.1716 8.5 15C8.5 15.8284 9.17157 16.5 10 16.5Z"
-              stroke="#5E718D"
-              stroke-miterlimit="10"
-            />
-          </svg>
+          <img src="/assets/icons/bubble.svg" alt="" />
         </span>
       </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <!-- <tr mat-row *matRowDef="let row; columns: displayedColumns;"
-          (click)="selection.toggle(row)">
-      </tr> -->
+
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
   <mat-paginator
-    [pageSizeOptions]="[5, 10, 25, 100]"
+    [pageSizeOptions]="[10, 25, 100]"
     aria-label="Select page of users"
   ></mat-paginator>
 </div>

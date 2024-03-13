@@ -132,15 +132,18 @@ export class HomeEcommerceComponent implements OnInit {
           this.cart = JSON.parse(localStorage.getItem('cart')!);
           this.dataservice.cart = this.cart;
         }
-
+        if(JSON.parse(localStorage.getItem('favouriteProducts')!)){
+          this.dataservice.like = this.like;
+        }
       })
 
   }
 
   liked(product: any) {
     product.isliked = !product.isliked;
-    this.like.push(product);
-    let likedProductsJson = JSON.stringify(this.like);
+    product.quant = 1;
+    this.dataservice.like.push(product);
+    let likedProductsJson = JSON.stringify(this.dataservice.like);
     localStorage.setItem('favouriteProducts', likedProductsJson);
     let productObj: ProductObject = {
       products: [],
@@ -148,24 +151,29 @@ export class HomeEcommerceComponent implements OnInit {
     for (const likeditem of this.like) {
       productObj.products.push(likeditem.id);
     }
-    this.apiService.addToFavourite(productObj).subscribe((res) => {
-      console.log(res);
-    });
+    for (const likeditem of this.dataservice.like){
+      productObj.products.push(likeditem.id)
+    }
+    this.apiService.addToFavourite(productObj, localStorage.getItem('customerId')!).subscribe((res)=>{
+        console.log(res);
+      })
   }
 
   addToCart(product: any) {
-    this.cart.push(product);
-    let addTobuyJson = JSON.stringify(this.cart);
+    product.quant = 1;
+    this.dataservice.cart.push(product);
+    let addTobuyJson = JSON.stringify(this.dataservice.cart);
     localStorage.setItem('cart', addTobuyJson);
     let productObj: ProductObject = {
-      products: [],
-    };
-    for (const likeditem of this.cart) {
-      productObj.products.push(likeditem.id);
+      products: []
     }
-    this.apiService.addTOViews(productObj).subscribe((res) => {
-      console.log(res);
-    });
+    for (const item of this.dataservice.cart){
+      productObj.products.push(item.id)
+    }
+    this.apiService.addTOViews(productObj, localStorage.getItem('customerId')!).subscribe((res)=>{
+        console.log(res);
+      })
+
   }
 
 }

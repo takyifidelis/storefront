@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { UserCredentials } from '../interfaces/all-interfaces';
+import { UserCredentials, merchantProduct } from '../interfaces/all-interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -21,15 +21,18 @@ import { UserCredentials } from '../interfaces/all-interfaces';
 // showInputLink: boolean = false;
 // isLoading: boolean = false
 export class DataService {
+
+like: any =  [];
   cart: any = [];
-  // products:any = []
+  updateProduct:unknown 
   productCategories: any = [];
   productSearchString: string = '';
-  // template:any
   selectedStore: { [key: string]: any } = {};
-  merchantDashboardNoProjects: boolean = false;
+  merchantDashboardNoProjects: boolean = true;
+
   doesNotExist = { exist: false, term: '' };
 
+  isProductUpdateInstance = false;
   isMobileBool: boolean = false;
   isLoading = false;
   isEditable: boolean = false;
@@ -45,7 +48,6 @@ export class DataService {
   loginCredentials: UserCredentials = { email: '', password: '' };
   ecommerceWebsite: string = '';
   businessId: string = '';
-  //   typesOfStore = ["online", "offline"]
   showInputLink: boolean = false;
   inputLinkVisibility: { [key: number]: boolean } = {
     1: false,
@@ -88,7 +90,6 @@ export class DataService {
     },
   ];
   productCategory: any = [];
-  //   template=JSON.parse(localStorage.getItem('template')!)
   template: any;
   template1 = {
     id: 'template-1',

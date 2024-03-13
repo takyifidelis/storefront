@@ -2,9 +2,12 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, map, throwError } from 'rxjs';
 import { environment } from '../../environments/environment.development';
-import { UserCredentials } from '../interfaces/all-interfaces';
+import { SavedProducts, UserCredentials } from '../interfaces/all-interfaces';
 import { DataService } from './data.service';
-import { Response } from './../interfaces/all-interfaces';
+// import { Response } from './../interfaces/all-interfaces';
+
+import { Response } from '../interfaces/all-interfaces';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -181,6 +184,7 @@ export class APIService {
     );
   }
 
+
   getStoreCategories(storeId: string): Observable<Response> {
     return this.http.get<Response>(
       `${environment.baseApiUrl}/store/get-categories/${storeId}`,
@@ -190,19 +194,20 @@ export class APIService {
     );
   }
 
-  orderDelivered(orderId: string): Observable<Response> {
-    return this.http.patch<Response>(
-      `${environment.baseApiUrl}/order/delivered/${orderId}`,
-      {},
+  getStoreCategories(storeId: string): Observable<Response> {
+    return this.http.get<Response>(
+      `${environment.baseApiUrl}/store/get-categories/${storeId}`,
       {
         withCredentials: true,
       }
     );
   }
 
-  orderShipped(orderId: string): Observable<Response> {
+
+
+  orderDelivered(orderId: string): Observable<Response> {
     return this.http.patch<Response>(
-      `${environment.baseApiUrl}/order/shipped/${orderId}`,
+      `${environment.baseApiUrl}/order/delivered/${orderId}`,
       {},
       {
         withCredentials: true,
@@ -223,6 +228,41 @@ export class APIService {
     return this.http.post<Response>(
       `${environment.baseApiUrl}/order/initialize/${customerId}`,
       cart,
+
+      {
+        withCredentials: true,
+      }
+    );
+  }
+
+
+  orderCancelled(order: any): Observable<Response> {
+    return this.http.patch<Response>(
+      `${environment.baseApiUrl}/order/cancel-orders`,
+      order,
+      {
+        withCredentials: true,
+      }
+    );
+  }
+
+
+  orderShipped(orderId: string): Observable<Response> {
+    return this.http.patch<Response>(
+      `${environment.baseApiUrl}/order/shipped/${orderId}`,
+      {},
+
+      {
+        withCredentials: true,
+      }
+    );
+  }
+
+
+  getWallet(storeId: string): Observable<Response> {
+    return this.http.get<Response>(
+      `${environment.baseApiUrl}/store/get-wallets/${storeId}`,
+
       {
         withCredentials: true,
       }
@@ -238,6 +278,7 @@ export class APIService {
       }
     );
   }
+
 
   getStoreProductsCustomer(storeId: string): Observable<Response> {
     return this.http.get<Response>(
@@ -292,33 +333,55 @@ export class APIService {
     );
   }
   postProduct(formData: FormData, storeId: string) {
-    return this.http
-      .post<Response>(
-        `https://storefront-backend-jan-dev-api.vercel.app/api/product/add/${storeId}`,
-        formData,
-        {
-          withCredentials: true,
-        }
-      )
-      .pipe(catchError(this.handleError));
+    return this.http.post<Response>(
+      `${environment.baseApiUrl}/product/add/${storeId}`,
+      formData,
+      {
+        withCredentials: true,
+      }
+    );
   }
 
+
+  updateProduct(formData: any, productId: string) {
+    return this.http.patch<Response>(
+      `${environment.baseApiUrl}/product/update-product/${productId}`,
+      formData,
+      {
+        withCredentials: true,
+      }
+    );
+  }
   // publishTemplate(storeId: string, template:any): Observable<Response>{
   //   return this.http.patch<Response>(`${environment.baseApiUrl}/store/publish-template/${storeId}`,
   //   template, {
   //     withCredentials: true,
   //   })
   // }
-
-  addTOViews(products: any): Observable<Response> {
+  addTOViews(products: any, customerId: string): Observable<Response> {
     return this.http.post<Response>(
-      `${environment.baseApiUrl}/customer/add-to-views/f739a921-7267-4e02-8222-ceb2b4c352cf`,
+      `${environment.baseApiUrl}/customer/add-to-views/${customerId}`,
       products,
       {
         withCredentials: true,
       }
     );
   }
+
+
+
+
+  getShipping(customerId: string): Observable<Response> {
+    return this.http.get<Response>(
+      `${environment.baseApiUrl}/customer/get-shipping-addresses/${customerId}`,
+      {
+        withCredentials: true,
+      }
+    );
+  }
+
+
+
 
   getOrders(customerId: string): Observable<Response> {
     return this.http.get<Response>(
@@ -329,9 +392,9 @@ export class APIService {
     );
   }
 
-  addToFavourite(products: any): Observable<Response> {
+  addToFavourite(products: any, customerId: string): Observable<Response> {
     return this.http.post<Response>(
-      `${environment.baseApiUrl}/customer/add-to-views/f739a921-7267-4e02-8222-ceb2b4c352cf`,
+      `${environment.baseApiUrl}/customer/add-to-views/${customerId}`,
       products,
 
       {
@@ -340,20 +403,18 @@ export class APIService {
     );
   }
 
-  getSavedProducts(): Observable<Response> {
-    return this.http.get<Response>(
-      `${environment.baseApiUrl}/customer/get-saved-products/f739a921-7267-4e02-8222-ceb2b4c352cf/?idOnly=true&likedOnly=true`,
-
+  getSavedProducts(customerId: string): Observable<SavedProducts> {
+    return this.http.get<SavedProducts>(
+      `${environment.baseApiUrl}/customer/get-saved-products/${customerId}/?idOnly=true&likedOnly=true`,
       {
         withCredentials: true,
       }
     );
   }
 
-  getHistoryProducts(): Observable<Response> {
+  getHistoryProducts(customerId: string): Observable<Response> {
     return this.http.get<Response>(
-      `${environment.baseApiUrl}/customer/get-saved-products/f739a921-7267-4e02-8222-ceb2b4c352cf`,
-
+      `${environment.baseApiUrl}/customer/get-saved-products/${customerId}`,
       {
         withCredentials: true,
       }
@@ -445,19 +506,18 @@ export class APIService {
   }
 
   replyReview(comment: string, review: string, storeId: string) {
-    return this.http
-      .post<Response>(
-        `https://storefront-backend-jan-dev-api.vercel.app/api/store/reply-customer/${storeId}`,
-        {
-          comment,
-          review,
-        },
-        {
-          withCredentials: true,
-        }
-      )
-      .pipe(catchError(this.handleError));
+    return this.http.post<Response>(
+      `https://storefront-backend-jan-dev-api.vercel.app/api/store/reply-customer/${storeId}`,
+      {
+        comment,
+        review,
+      },
+      {
+        withCredentials: true,
+      }
+    );
   }
+
 
   getReviews(storeId: string): Observable<Response> {
     return this.http
@@ -478,21 +538,19 @@ export class APIService {
     start: Date,
     storeId: string
   ) {
-    return this.http
-      .post<Response>(
-        `${environment.baseApiUrl}/store/add-promotion/${storeId}`,
-        {
-          end,
-          name,
-          discount,
-          statement,
-          start,
-        },
-        {
-          withCredentials: true,
-        }
-      )
-      .pipe(catchError(this.handleError));
+    return this.http.post<Response>(
+      `${environment.baseApiUrl}/store/add-promotion/${storeId}`,
+      {
+        end,
+        name,
+        discount,
+        statement,
+        start,
+      },
+      {
+        withCredentials: true,
+      }
+    );
   }
   getPromotionForStore(storeId: string): Observable<Response> {
     return this.http
@@ -568,15 +626,8 @@ export class APIService {
   }
 
   getOrdersForMerchant(storeId: string): Observable<Response> {
-    return this.http.get<Response>(
-      `${environment.baseApiUrl}/store/get-all-orders/${storeId}`,
-      {
-        withCredentials: true,
-      }
-    );
-  }
 
-  getCustomerWallet(customerId: string) {
+   getCustomerWallet(customerId: string) {
     return this.http.get(
       `${environment.baseApiUrl}/customer/add-wallet/${customerId}`,
       {
@@ -595,9 +646,100 @@ export class APIService {
       `${environment.baseApiUrl}/customer/add-wallet/${customerId}`,
       { method, walletId, name, secret },
       { withCredentials: true }
+    );}
+
+    return this.http
+      .get<Response>(
+        `${environment.baseApiUrl}/store/get-all-orders/${storeId}`,
+        {
+          withCredentials: true,
+        }
+      )
+      .pipe(catchError(this.handleError));
+  }
+  getAllCustomersForStore(storeId: string): Observable<Response> {
+    return this.http
+      .get<Response>(
+        `${environment.baseApiUrl}/store/get-all-customers/${storeId}`,
+        {
+          withCredentials: true,
+        }
+      )
+      .pipe(catchError(this.handleError));
+  }
+
+  getOrderHistoryForCustomer(
+    storeId: string,
+    customerId: string
+  ): Observable<Response> {
+    return this.http
+      .get<Response>(
+        `${environment.baseApiUrl}/store/${storeId}/get-customer/${customerId}`,
+        {
+          withCredentials: true,
+        }
+      )
+      .pipe(catchError(this.handleError));
+  }
+  getShippingAddressForCustomer(customerId: string): Observable<Response> {
+    return this.http
+      .get<Response>(
+        `${environment.baseApiUrl}/customer/get-shipping-addresses/${customerId}`,
+        {
+          withCredentials: true,
+        }
+      )
+      .pipe(catchError(this.handleError));}
+
+ 
+  getPayouts(storeId: string): Observable<Response> {
+    return this.http.get<Response>(
+      `${environment.baseApiUrl}/store/get-payouts/${storeId}`,
+      {
+        withCredentials: true,
+      }
     );
   }
 
+  addCustomerShippingAddress(
+    countryCode: string,
+    postalCode: string,
+    apartmentNo: string,
+    phone: string,
+    name: string,
+    streetAddress: string,
+    city: string,
+    customerId: string
+  ) {
+    return this.http.post<Response>(
+      `${environment.baseApiUrl}/customer/add-shipping-address/${customerId}`,
+      {
+        countryCode,
+        postalCode,
+        apartmentNo,
+        phone,
+        name,
+        streetAddress,
+        city,
+      },
+      {
+        withCredentials: true,
+      }
+    );
+
+  }
+  removeProductFromFavorite(products: string[], customer_id: string) {
+    return this.http
+      .patch<Response>(
+        `${environment.baseApiUrl}/customer/remove-products-from-favorites/${customer_id}`,
+
+        { products },
+        {
+          withCredentials: true,
+        }
+      )
+      .pipe(catchError(this.handleError));
+  }
   // Error Handling
   private handleError(errorRes: HttpErrorResponse) {
     console.error('Error Response:', errorRes);
@@ -632,6 +774,9 @@ export class APIService {
         break;
       case 'RESET_PASSWORD_FAILED':
         errorMessage = 'Password reset failed';
+        break;
+      case 'VALIDATION_ERROR':
+        errorMessage = 'Parameters failed validation';
         break;
     }
     return throwError(errorMessage);

@@ -24,7 +24,7 @@ import {
   Validators,
   ReactiveFormsModule,
   NgForm,
-} from '@angular/forms';
+} from '@angular/forms'
 import { Router, RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faFacebook, faGoogle } from '@fortawesome/free-brands-svg-icons';
