@@ -9,7 +9,7 @@ import {
   ReactiveFormsModule,
   Validators,
   FormBuilder,
-  FormsModule
+  FormsModule,
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
@@ -60,7 +60,7 @@ export class ForgottenPasswordComponent {
       (resData) => {
         console.log(resData);
         this.isLoading = false;
-        this.toastr.info('Check Email for token', 'Email Verification');
+        this.toastr.info('Check email for token', 'Email Verification');
         this.router.navigate(['Email-notification']);
         // Set a timeout to navigate to another component after 3 seconds
         setTimeout(() => {
@@ -70,8 +70,8 @@ export class ForgottenPasswordComponent {
       (errorMessage) => {
         console.log(errorMessage);
         this.isLoading = false;
-        this.error = errorMessage;
-        this.toastr.error(this.error, 'Failed');
+
+        this.toastr.error(errorMessage.error.message, 'Failed');
       }
     );
     form.reset();

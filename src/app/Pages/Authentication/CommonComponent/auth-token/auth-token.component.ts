@@ -64,16 +64,17 @@ export class AuthTokenComponent {
 
     this.authService.verifyAccount(authCode).subscribe(
       (resData) => {
-        console.log(resData);
         this.isLoading = false;
-        this.toastr.success('Proceed to Login', 'Verification Successful');
+        this.toastr.info(
+          'Your account has been created successfully.',
+          'Success'
+        );
         this.router.navigate(['authSuccess']);
       },
       (errorMessage) => {
-        console.log(errorMessage);
         this.isLoading = false;
-        this.error = errorMessage;
-        this.toastr.error(this.error, 'Error');
+        console.log(errorMessage.error.message);
+        this.toastr.error(errorMessage.error.message, 'Failed');
       }
     );
     //

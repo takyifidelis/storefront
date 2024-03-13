@@ -68,21 +68,19 @@ export class AuthService {
     password: string,
     confirmPassword: string
   ) {
-    return this.http
-      .post<SignupResponseData>(
-        'https://storefront-backend-jan-dev-api.vercel.app/api/account/register/local',
-        {
-          businessName,
-          email,
-          type,
-          password,
-          confirmPassword,
-        },
-        {
-          withCredentials: true,
-        }
-      )
-      .pipe(catchError(this.handleError));
+    return this.http.post<SignupResponseData>(
+      'https://storefront-backend-jan-dev-api.vercel.app/api/account/register/local',
+      {
+        businessName,
+        email,
+        type,
+        password,
+        confirmPassword,
+      },
+      {
+        withCredentials: true,
+      }
+    );
   }
   signupCustomer(credentials: { [key: string]: any }) {
     return this.http
@@ -115,12 +113,10 @@ export class AuthService {
   }
 
   logout() {
-    return this.http
-      .get<SignupResponseData>(
-        'https://storefront-backend-jan-dev-api.vercel.app/api/account/logout',
-        { withCredentials: true }
-      )
-      .pipe(catchError(this.handleError));
+    return this.http.get<SignupResponseData>(
+      'https://storefront-backend-jan-dev-api.vercel.app/api/account/logout',
+      { withCredentials: true }
+    );
   }
 
   resendCode() {

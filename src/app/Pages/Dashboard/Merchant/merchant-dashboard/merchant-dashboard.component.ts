@@ -16,6 +16,7 @@ import { MerchantAddProductComponent } from '../components/merchant-add-product/
 import { APIService } from '../../../../Services/api.service';
 
 import { CommonModule } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
 // import { MerchantAddProductComponent } from '../components/merchant-add-product';
 @Component({
   selector: 'app-merchant-dashboard',
@@ -46,7 +47,8 @@ export class MerchantDashboardComponent implements OnInit {
   constructor(
     public dataService: DataService,
     private apiService: APIService,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) {}
   logout() {
     let tourCompleted: boolean;
@@ -72,6 +74,7 @@ export class MerchantDashboardComponent implements OnInit {
         }
         
         this.router.navigate(['login']);
+        this.toastr.info(resData.message, 'Success');
       },
       (error) => {
         console.error('Logout error:', error);
