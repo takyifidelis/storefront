@@ -24,7 +24,7 @@ import {
   Validators,
   ReactiveFormsModule,
   NgForm,
-} from '@angular/forms'
+} from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faFacebook, faGoogle } from '@fortawesome/free-brands-svg-icons';
@@ -87,13 +87,29 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    // this.dataService.isLoading = false;
-    this.authService.authState.subscribe((user) => {
-      console.log(user);
-      this.user = user;
-      this.isLoggedIn = user != null;
-    });
+  ngOnInit() {
+    this.apiService.checkAuthenticatedUser().subscribe(
+      (res: { [key: string]: any }) => {
+        if (res['data'].type === 'Business') {
+          localStorage.setItem('businessId', res['data'].business);
+          console.log(res);
+          this.router.navigate(['merchant']);
+        } else if (res['data'].type === 'Customer') {
+          localStorage.setItem(
+            'customerId',
+            JSON.stringify(res['data'].customer)
+          );
+          console.log(res);
+          this.router.navigate(['customer']);
+        }
+      },
+      (err) => {
+        console.log('err');
+      },
+      () => {
+        console.log('com');
+      }
+    );
   }
 
   // onGoogle() {
