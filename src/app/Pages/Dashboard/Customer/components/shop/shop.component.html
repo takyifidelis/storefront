@@ -13,22 +13,26 @@
   </div>
 </div>
 
-<div class="template-options-container d-flex">
-  <div class="row row-cols-sm-2 row-cols-lg-3 w-100" style="flex-wrap: wrap">
+<div class="template-options-container">
+  <div class="template-div">
     <div
-      class="col template-container"
+      class="template-container"
       (click)="goToStore(i)"
       *ngFor="let store of filteredItems; let i"
-      style="display: flex; flex-direction: column"
     >
-      <img
-        class="mouse-pointer"
-        src="/assets/images/shop-image.png"
-        alt=""
-        srcset=""
-        style="width: 70%; padding: 20px"
-      />
-      <span class="text" style="margin-left: 27%">{{ store.storeName }}</span>
+      <div class="store-cards">
+        <div class="store-image">
+          <img
+            class="mouse-pointer"
+            src="/assets/images/shop-image.png"
+            alt=""
+            srcset=""
+          />
+        </div>
+        <div class="store-name">
+          <span class="text">{{ store.storeName }}</span>
+        </div>
+      </div>
     </div>
 
     <!-- <div class="col template-container">
