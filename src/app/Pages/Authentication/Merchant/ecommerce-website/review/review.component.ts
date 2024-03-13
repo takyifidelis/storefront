@@ -10,7 +10,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faHeart, faStar } from '@fortawesome/free-solid-svg-icons';
 import { MatTabsModule } from '@angular/material/tabs';
 import { CommonModule } from '@angular/common';
-
+import { ToastrService } from 'ngx-toastr';
 import { DataService } from '../../../../../Services/data.service';
 import { APIService } from '../../../../../Services/api.service';
 import { StarRatingComponent } from '../../../../Dashboard/Customer/components/star-rating/star-rating.component';
@@ -48,12 +48,11 @@ export class ReviewComponent implements OnInit {
   initialPrice?: number;
   addToBuy: any = [];
   likedProducts: any = [];
-  myVariation:any;
+  myVariation: any;
   amount: number = this.quantity * 90;
   productItem: any;
   similarProducts: any = [];
-
-
+  numberOfReviews!: number;
 
   cart: any = [];
   variations?: Varaiation[] = [];
@@ -65,7 +64,8 @@ export class ReviewComponent implements OnInit {
     private route: ActivatedRoute,
     private dataService: DataService,
     public apiService: APIService,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) {}
 
   increaseQuantity(): void {
@@ -89,7 +89,7 @@ export class ReviewComponent implements OnInit {
   hideForm(): void {
     this.isFormDisplayed = false;
   }
-  
+
   onSubmit(): void {
     this.hideForm();
   }
@@ -99,6 +99,7 @@ export class ReviewComponent implements OnInit {
   }
 
   onAddToBuy() {
+    this.toastr.info('Product has been added to cart', 'Success');
     this.productItem.quant = this.quantity;
     this.dataService.cart.push(this.productItem);
     let addTobuyJson = JSON.stringify(this.dataService.cart);
@@ -114,9 +115,13 @@ export class ReviewComponent implements OnInit {
 
     this.apiService
       .addTOViews(productObj, localStorage.getItem('customerId')!)
-      .subscribe((res) => {
-        console.log(res);
-      });
+      .subscribe(
+        (res) => {
+          console.log(res);
+          this.toastr.info('Product has been added to cart', 'Success');
+        },
+        (errorMessage) => {}
+      );
   }
 
   onAddOneToBuy(product: any) {
@@ -134,10 +139,13 @@ export class ReviewComponent implements OnInit {
     }
     this.apiService
       .addTOViews(productObj, localStorage.getItem('customerId')!)
-      .subscribe((res) => {});
+      .subscribe((res) => {
+        this.toastr.info('Product has been added to cart', 'Success');
+      });
   }
 
   onLikedProducts() {
+    this.toastr.info('Product has been added to favorites', 'Success');
     this.productItem.quant = this.quantity;
     this.dataService.like = JSON.parse(
       localStorage.getItem('favouriteProducts') || ''
@@ -181,20 +189,22 @@ export class ReviewComponent implements OnInit {
     let productJson = localStorage.getItem('selectedProduct');
     let product = JSON.parse(productJson!);
     this.productItem = product;
+
     this.selectedImage = this.productItem.images[0].url;
 
     this.initialPrice = this.productItem.price;
-    this.apiService.getCustomerStoreProducts(localStorage.getItem('storeId')!)
+    this.apiService
+      .getCustomerStoreProducts(localStorage.getItem('storeId')!)
       .subscribe((res: any) => {
         console.log(res.data);
         this.myVariation = res.data.variations;
+        this.numberOfReviews = this.productItem.reviews.length;
         res.data.filter((product: any) => {
           if (product.category === this.productItem.category) {
             this.similarProducts.push(product);
           }
         });
       });
-
 
     this.apiService.getReviews(localStorage.getItem('storeId')!).subscribe(
       (response: any) => {
@@ -206,7 +216,6 @@ export class ReviewComponent implements OnInit {
         console.log(errorMessage);
       }
     );
-
   }
 
   previewProduct(id: string) {
