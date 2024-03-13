@@ -1,4 +1,4 @@
-<!-- @if(!dataService.merchantDashboardNoProjects){
+@if(merchantReviewsEmpty){
 <div class="d-flex justify-content-center align-items-center h-100">
   <div class="empty-dashboard">
     <span>
@@ -29,11 +29,7 @@
     </button>
   </div>
 </div>
-}  -->
-<!-- @if(dataService.merchantDashboardNoProjects){
-
-
-} -->
+} @if(!merchantReviewsEmpty){
 
 <section class="review-page">
   <div class="filter-block">
@@ -205,8 +201,8 @@
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <!-- <tr mat-row *matRowDef="let row; columns: displayedColumns;"
-        (click)="selection.toggle(row)">
-    </tr> -->
+          (click)="selection.toggle(row)">
+      </tr> -->
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
   </div>
@@ -217,8 +213,8 @@
   ></mat-paginator>
 
   <!-- <div *ngFor="let review of reviews$ | async">
-    {{rating }}
-  </div> -->
+      {{rating }}
+    </div> -->
   <div class="loading-spinner-small" *ngIf="isLoading">
     <img
       src="assets\icons\loading-btn-spinner.svg"
@@ -230,3 +226,5 @@
     No Review Found
   </div>
 </section>
+
+}

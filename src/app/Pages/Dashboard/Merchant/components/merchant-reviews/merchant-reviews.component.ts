@@ -69,6 +69,7 @@ export interface CustomerInterface {
   styleUrl: './merchant-reviews.component.scss',
 })
 export class MerchantReviewsComponent {
+  merchantReviewsEmpty = false;
   reviews$!: Observable<ReviewResponseData>;
   filterIcon = faFilter;
   seaechICon = faSearch;
@@ -136,10 +137,14 @@ export class MerchantReviewsComponent {
 
   ngOnInit() {
     this.isLoading = true;
+    this.merchantReviewsEmpty = true;
     this.authService.getReviews(localStorage.getItem('storeId')!).subscribe(
       (response: any) => {
         console.log(response);
         this.isLoading = false;
+        if (response.data.length > 0) {
+          this.merchantReviewsEmpty = false;
+        }
         this.numberOfReviews = response.data.length;
         this.dataSource = new MatTableDataSource(response.data);
       },
