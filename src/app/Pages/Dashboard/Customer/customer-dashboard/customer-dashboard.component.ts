@@ -33,7 +33,8 @@ export class CustomerDashboardComponent implements OnInit {
     public dataService: DataService,
     media: MediaMatcher,
     public router: Router,
-    private apiService: APIService
+    private apiService: APIService,
+    private toastr: ToastrService
   ) {
     this.screenWidth = window.innerWidth;
     window.onresize = () => {
@@ -106,6 +107,7 @@ export class CustomerDashboardComponent implements OnInit {
 
     this.apiService.logout().subscribe(
       (resData) => {
+        this.toastr.info(resData.message, 'Success');
         console.log(tourCompleted);
         console.log(editorTourCompleted);
         localStorage.clear();
