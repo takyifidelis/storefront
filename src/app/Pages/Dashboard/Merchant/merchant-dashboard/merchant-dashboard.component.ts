@@ -61,29 +61,45 @@ export class MerchantDashboardComponent implements OnInit {
     );
   }
   ngOnInit() {
+    this.dataService.merchantDashboardNoProjects = true;
     this.apiService
       .getMerchantStores(localStorage.getItem('businessId')!)
       .subscribe((resData: { [key: string]: any }) => {
         this.stores = resData['data'];
-        // console.log(this.stores);
-        if (
-          this.dataService.selectedStore['id'] &&
-          this.dataService.selectedStore['id'].length
-        ) {
-          // this.dataService.selectedStore = this.dataService.selectedStore
+        if (this.dataService.selectedStore['id']?.length) {
+          console.log('not from login', this.dataService.selectedStore);
+          localStorage.setItem('storeId', this.dataService.selectedStore['id']);
+          localStorage.setItem(
+            'storeName',
+            this.dataService.selectedStore['storeName']
+          );
+          localStorage.setItem(
+            'template',
+            this.dataService.selectedStore['template'].options
+          );
+          localStorage.setItem(
+            'tempTemplate',
+            this.dataService.selectedStore['template'].temp.options
+          );
+        }
+        if (resData['data'].length === 0) {
         } else {
           this.dataService.selectedStore = this.stores[0];
+          console.log('from login', this.dataService.selectedStore);
+          localStorage.setItem('storeId', this.dataService.selectedStore['id']);
+          localStorage.setItem(
+            'storeName',
+            this.dataService.selectedStore['storeName']
+          );
+          localStorage.setItem(
+            'template',
+            this.dataService.selectedStore['template'].options
+          );
+          localStorage.setItem(
+            'tempTemplate',
+            this.dataService.selectedStore['template'].temp.options
+          );
         }
-        // console.log(this.dataService.selectedStore);
-        localStorage.setItem('storeId', this.dataService.selectedStore['id']);
-        localStorage.setItem(
-          'template',
-          this.dataService.selectedStore['template'].options
-        );
-        localStorage.setItem(
-          'tempTemplate',
-          this.dataService.selectedStore['template'].temp.options
-        );
       });
     if (!localStorage.getItem('tourCompleted')) {
       this.introJS = introJs();
@@ -156,13 +172,11 @@ export class MerchantDashboardComponent implements OnInit {
     }
   }
 
-  onSelectedStoreChange(val: MatSelectChange) {
+  onSelectedStoreChange(val: any) {
     console.log(val);
-    localStorage.setItem('storeId', this.dataService.selectedStore['id']);
-    localStorage.setItem(
-      'template',
-      this.dataService.selectedStore['template'].options
-    );
+    localStorage.setItem('storeId', val.id);
+    localStorage.setItem('template', val.template.options);
+    localStorage.setItem('tempTemplate', val.template.temp.options);
   }
   createNewStore() {
     // localStorage.setItem('temp',this.dataService.selectedStore)
