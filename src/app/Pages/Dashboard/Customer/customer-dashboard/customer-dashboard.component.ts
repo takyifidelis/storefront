@@ -9,9 +9,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { Router, RouterModule } from '@angular/router';
 import { DataService } from '../../../../Services/data.service';
 import { MediaMatcher } from '@angular/cdk/layout';
-import { AuthService } from '../../../Authentication/Auth/auth.service';
 import { APIService } from '../../../../Services/api.service';
-
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-customer-dashboard',
   standalone: true,
@@ -34,7 +33,8 @@ export class CustomerDashboardComponent implements OnInit {
     public dataService: DataService,
     media: MediaMatcher,
     public router: Router,
-    private apiService: APIService
+    private apiService: APIService,
+    private toastr: ToastrService
   ) {
     this.screenWidth = window.innerWidth;
     window.onresize = () => {
@@ -84,7 +84,7 @@ export class CustomerDashboardComponent implements OnInit {
               intro: `<div style="">
           Clicking here will take you to the <strong style="color:blue">ORDER</strong> page, where you  can see all of orders made and also send reviews and rating of products ordered.
             </div>`,
-            }
+            },
           ],
         })
         .onbeforeexit(function () {
@@ -93,41 +93,45 @@ export class CustomerDashboardComponent implements OnInit {
         })
         .start();
     }
-
   }
 
   logout() {
     let tourCompleted: boolean;
     let editorTourCompleted: boolean;
-    if(localStorage.getItem('tourCompleted')){
+    if (localStorage.getItem('tourCompleted')) {
       tourCompleted = true;
-      if(localStorage.getItem('editorTourCompleted')) {
+      if (localStorage.getItem('editorTourCompleted')) {
         editorTourCompleted = true;
       }
     }
-     
+
     this.apiService.logout().subscribe(
       (resData) => {
+        this.toastr.info(resData.message, 'Success');
         console.log(tourCompleted);
         console.log(editorTourCompleted);
         localStorage.clear();
 
-        if(tourCompleted){
-          localStorage.setItem('tourCompleted', tourCompleted.toString())
-          if(editorTourCompleted) {
-        localStorage.setItem('tourCompleted', editorTourCompleted.toString());
+        if (tourCompleted) {
+          localStorage.setItem('tourCompleted', tourCompleted.toString());
+          if (editorTourCompleted) {
+            localStorage.setItem(
+              'tourCompleted',
+              editorTourCompleted.toString()
+            );
           }
         }
-        
+
         this.router.navigate(['login']);
       },
       (error) => {
         console.error('Logout error:', error);
-        if (error.message === 'You are not authorized to access this resource.'){
+        if (
+          error.message === 'You are not authorized to access this resource.'
+        ) {
           this.router.navigate(['login']);
         }
       }
     );
   }
-  
 }

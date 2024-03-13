@@ -16,6 +16,7 @@ import { MerchantAddProductComponent } from '../components/merchant-add-product/
 import { APIService } from '../../../../Services/api.service';
 
 import { CommonModule } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
 // import { MerchantAddProductComponent } from '../components/merchant-add-product';
 @Component({
   selector: 'app-merchant-dashboard',
@@ -46,36 +47,43 @@ export class MerchantDashboardComponent implements OnInit {
   constructor(
     public dataService: DataService,
     private apiService: APIService,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) {}
   logout() {
     let tourCompleted: boolean;
     let editorTourCompleted: boolean;
-    if(localStorage.getItem('tourCompleted')){
+    if (localStorage.getItem('tourCompleted')) {
       tourCompleted = true;
-      if(localStorage.getItem('editorTourCompleted')) {
+      if (localStorage.getItem('editorTourCompleted')) {
         editorTourCompleted = true;
       }
     }
-     
+
     this.apiService.logout().subscribe(
       (resData) => {
         console.log(tourCompleted);
         console.log(editorTourCompleted);
         localStorage.clear();
 
-        if(tourCompleted){
-          localStorage.setItem('tourCompleted', tourCompleted.toString())
-          if(editorTourCompleted) {
-        localStorage.setItem('tourCompleted', editorTourCompleted.toString());
+        if (tourCompleted) {
+          localStorage.setItem('tourCompleted', tourCompleted.toString());
+          if (editorTourCompleted) {
+            localStorage.setItem(
+              'tourCompleted',
+              editorTourCompleted.toString()
+            );
           }
         }
-        
+
         this.router.navigate(['login']);
+        this.toastr.info(resData.message, 'Success');
       },
       (error) => {
         console.error('Logout error:', error);
-        if (error.message === 'You are not authorized to access this resource.'){
+        if (
+          error.message === 'You are not authorized to access this resource.'
+        ) {
           this.router.navigate(['login']);
         }
       }

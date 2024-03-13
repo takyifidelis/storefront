@@ -83,7 +83,6 @@ export class SignupMerchantComponent {
       .signupMerchant(businessName, email, type, password, confirmPassword)
       .subscribe(
         (resData) => {
-          console.log(resData);
           this.toastr.info('Check your Email for token', 'Email Verification');
           this.isLoading = false;
           this.router.navigate(['Authentication'], {
@@ -92,9 +91,8 @@ export class SignupMerchantComponent {
         },
         (errorMessage) => {
           this.isLoading = false;
-          console.log(errorMessage);
-          this.error = errorMessage;
-          this.toastr.error(this.error, 'Failed');
+
+          this.toastr.error(errorMessage.error.message, 'Failed');
         }
       );
     form.reset();
