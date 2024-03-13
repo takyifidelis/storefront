@@ -20,7 +20,6 @@
           </div>
           <div class="product-info">
             <div class="container">
-
               <div class="row">
                 <div class="col">
                   <h4 class="item-name">{{ productItem.name }}</h4>
@@ -50,10 +49,8 @@
                   <div class="col d-flex">
                     <div class="select-color">
                       <p>SELECT COLOR</p>
-
                     </div>
                     <div class="color d-flex gap">
-                      <div>{{ variation?.type }}</div>
                       <div class="box" style="background-color: #1b4dff"></div>
                       <div class="box" style="background-color: #ffd027"></div>
                       <div class="box" style="background-color: #8f0ea2"></div>
@@ -72,7 +69,7 @@
                   <div class="variation-value d-flex">
                     <button
                       class="values size"
-                      *ngFor="let value of item.values; let i=index"
+                      *ngFor="let value of item.values; let i = index"
                     >
                       {{ value }}
                     </button>
@@ -348,7 +345,12 @@
     <div class="first-row">
       <div class="card card-container" *ngFor="let product of similarProducts">
         <div class="card-image">
-          <img [src]="product?.images[0]?.url" class="card-img-top" alt="..." (click)="previewProduct(product.id)" />
+          <img
+            [src]="product?.images[0]?.url"
+            class="card-img-top"
+            alt="..."
+            (click)="previewProduct(product.id)"
+          />
         </div>
 
         <div class="card-body">

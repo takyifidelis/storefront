@@ -184,7 +184,6 @@ export class APIService {
     );
   }
 
-
   getStoreCategories(storeId: string): Observable<Response> {
     return this.http.get<Response>(
       `${environment.baseApiUrl}/store/get-categories/${storeId}`,
@@ -193,17 +192,6 @@ export class APIService {
       }
     );
   }
-
-  getStoreCategories(storeId: string): Observable<Response> {
-    return this.http.get<Response>(
-      `${environment.baseApiUrl}/store/get-categories/${storeId}`,
-      {
-        withCredentials: true,
-      }
-    );
-  }
-
-
 
   orderDelivered(orderId: string): Observable<Response> {
     return this.http.patch<Response>(
@@ -235,7 +223,6 @@ export class APIService {
     );
   }
 
-
   orderCancelled(order: any): Observable<Response> {
     return this.http.patch<Response>(
       `${environment.baseApiUrl}/order/cancel-orders`,
@@ -246,22 +233,10 @@ export class APIService {
     );
   }
 
-
   orderShipped(orderId: string): Observable<Response> {
     return this.http.patch<Response>(
       `${environment.baseApiUrl}/order/shipped/${orderId}`,
       {},
-
-      {
-        withCredentials: true,
-      }
-    );
-  }
-
-
-  getWallet(storeId: string): Observable<Response> {
-    return this.http.get<Response>(
-      `${environment.baseApiUrl}/store/get-wallets/${storeId}`,
 
       {
         withCredentials: true,
@@ -278,7 +253,6 @@ export class APIService {
       }
     );
   }
-
 
   getStoreProductsCustomer(storeId: string): Observable<Response> {
     return this.http.get<Response>(
@@ -342,7 +316,6 @@ export class APIService {
     );
   }
 
-
   updateProduct(formData: any, productId: string) {
     return this.http.patch<Response>(
       `${environment.baseApiUrl}/product/update-product/${productId}`,
@@ -368,9 +341,6 @@ export class APIService {
     );
   }
 
-
-
-
   getShipping(customerId: string): Observable<Response> {
     return this.http.get<Response>(
       `${environment.baseApiUrl}/customer/get-shipping-addresses/${customerId}`,
@@ -379,9 +349,6 @@ export class APIService {
       }
     );
   }
-
-
-
 
   getOrders(customerId: string): Observable<Response> {
     return this.http.get<Response>(
@@ -518,7 +485,6 @@ export class APIService {
     );
   }
 
-
   getReviews(storeId: string): Observable<Response> {
     return this.http
       .get<Response>(
@@ -626,8 +592,16 @@ export class APIService {
   }
 
   getOrdersForMerchant(storeId: string): Observable<Response> {
-
-   getCustomerWallet(customerId: string) {
+    return this.http
+      .get<Response>(
+        `${environment.baseApiUrl}/store/get-all-orders/${storeId}`,
+        {
+          withCredentials: true,
+        }
+      )
+      .pipe(catchError(this.handleError));
+  }
+  getCustomerWallet(customerId: string) {
     return this.http.get(
       `${environment.baseApiUrl}/customer/add-wallet/${customerId}`,
       {
@@ -646,16 +620,7 @@ export class APIService {
       `${environment.baseApiUrl}/customer/add-wallet/${customerId}`,
       { method, walletId, name, secret },
       { withCredentials: true }
-    );}
-
-    return this.http
-      .get<Response>(
-        `${environment.baseApiUrl}/store/get-all-orders/${storeId}`,
-        {
-          withCredentials: true,
-        }
-      )
-      .pipe(catchError(this.handleError));
+    );
   }
   getAllCustomersForStore(storeId: string): Observable<Response> {
     return this.http
@@ -689,9 +654,9 @@ export class APIService {
           withCredentials: true,
         }
       )
-      .pipe(catchError(this.handleError));}
+      .pipe(catchError(this.handleError));
+  }
 
- 
   getPayouts(storeId: string): Observable<Response> {
     return this.http.get<Response>(
       `${environment.baseApiUrl}/store/get-payouts/${storeId}`,
@@ -726,7 +691,6 @@ export class APIService {
         withCredentials: true,
       }
     );
-
   }
   removeProductFromFavorite(products: string[], customer_id: string) {
     return this.http

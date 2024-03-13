@@ -21,7 +21,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { StarRatingComponent } from '../../../Customer/components/star-rating/star-rating.component';
-import { dummyUserInterface } from '../../../Customer/components/favorite-product/favorite-product.component';
+// import { dummyUserInterface } from '../../../Customer/components/favorite-product/favorite-product.component';
 import { SelectionModel } from '@angular/cdk/collections';
 import {
   MAT_DIALOG_DATA,
@@ -68,7 +68,6 @@ export interface CustomerInterface {
   templateUrl: './merchant-reviews.component.html',
   styleUrl: './merchant-reviews.component.scss',
 })
-
 export class MerchantReviewsComponent {
   reviews$!: Observable<ReviewResponseData>;
   filterIcon = faFilter;
@@ -126,7 +125,6 @@ export class MerchantReviewsComponent {
     console.log(this.selection.selected);
   }
 
-  
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
@@ -137,7 +135,6 @@ export class MerchantReviewsComponent {
   }
 
   ngOnInit() {
-
     this.isLoading = true;
     this.authService.getReviews(localStorage.getItem('storeId')!).subscribe(
       (response: any) => {
