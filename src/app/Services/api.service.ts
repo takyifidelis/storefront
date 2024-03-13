@@ -704,6 +704,13 @@ export class APIService {
       )
       .pipe(catchError(this.handleError));
   }
+  checkAuthenticatedUser() {
+    return this.http
+      .get<Response>(`${environment.baseApiUrl}/account/auth/user`, {
+        withCredentials: true,
+      })
+      .pipe(catchError(this.handleError));
+  }
   // Error Handling
   private handleError(errorRes: HttpErrorResponse) {
     console.error('Error Response:', errorRes);
