@@ -111,6 +111,7 @@ export const routes: Routes = [
       { path: 'new-payment-opt', component: NewPaymentOptionComponent },
       { path: 'payment-opt', component: PaymentOptionComponent },
       { path: 'orders', component: OrderComponent },
+      { path: '', redirectTo:'shop', pathMatch:'full'}
     ],
   },
   { path: 'ecommerce/checkout-page', component: CkeckoutPageComponent },

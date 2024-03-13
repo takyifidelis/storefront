@@ -1,23 +1,6 @@
-<!-- <div
-  [style.lineHeight]="dataservice.template.lineHeight"
-  [style.background]="dataservice.template.primaryBackground"
->
-  <nav
-    class="navbar navbar-expand-lg navbar-dark"
-    [style.backgroundColor]="dataservice.template.navbarBackgroundColor"
-    [style.color]="dataservice.template.navbarColor"
-    style="z-index: 20"
-  >
-    <div class="container-fluid">
-      <a
-        [style.color]="dataservice.template.navbarColor"
-        class="navbar-brand"
-        href="#"
-        [innerText]="dataservice.template.text"
-      ></a> -->
 
-<!-- <div *ngIf="serverResponseReceived" -->
 <div
+*ngIf="!dataService.isLoading"
   [style.lineHeight]="dataService.template.lineHeight"
   [style.color]="dataService.template.primaryColor"
   [style.background]="dataService.template.primaryBackground"
@@ -32,7 +15,7 @@
       <a
         [style.color]="dataService.template.navbarColor"
         class="navbar-brand"
-        href="#"
+        [routerLink]="['/ecommerce']"
         [innerText]="dataService.template.text"
       ></a>
       <button
@@ -252,4 +235,7 @@
       </div>
     </div>
   </footer>
+</div>
+<div *ngIf="dataService.isLoading" class="spinner-container">
+  <img src="assets\icons\loading-btn-spinner.svg" alt="Loading.."/>
 </div>

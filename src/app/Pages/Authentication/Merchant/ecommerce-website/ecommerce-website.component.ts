@@ -90,35 +90,17 @@ this.router.navigate(['/customer'])
    }
   }
   ngOnInit(): void {   
+    this.dataService.isLoading = true
   if (!this.dataService.isInEditMode) {
-  //     this.apiService.getStore().subscribe((data:{[key: string]: any;} )=>{
-  //       this.dataService.isLoading =false
-  //       console.log(data)
-  //       if (data['data']) {
-  //         localStorage.setItem('storeId',data['data'][2].id)
-  //         localStorage.setItem('template',data['data'][2].template.options)
-  //         this.serverResponseReceived = true
-  //           this.dataService.template = JSON.parse(localStorage.getItem('template')!)
-  //       } else {
-  //         this.router.navigate(['']);
-  //       }
-  //     // })
-  //     })
-  // } else {
-  //   this.apiService.getMerchantStores(localStorage.getItem('businessId')!).subscribe((data:any) => {
-  //     console.log(data)
-  //     if (data.data) {
-  //       localStorage.setItem('storeId',data.data[0].id)
-  //       localStorage.setItem('tempTemplate',data.data[0].template.temp.options)
-  //       localStorage.setItem('template',data.data[0].template.options)
-  //       this.serverResponseReceived = true
-  //       this.dataService.template = JSON.parse(localStorage.getItem('tempTemplate')!)
-  //       this.dataService.isLoading =false
-  //     } else {
-  //       this.router.navigate(['']);
-  //       this.dataService.isLoading =false
-  //     }
-  //   })
+    this.apiService.getSingleStore(localStorage.getItem('storeId')!).subscribe((store:{[key:string]:any})=>{
+      this.dataService.template =JSON.parse(store['data'].template.options)
+      this.dataService.isLoading =false
+      // console.log(JSON.parse(store['data'].template.options))
+    })
+  }
+  if(this.dataService.isInEditMode) {
+    this.dataService.template =JSON.parse(localStorage.getItem('template')!)
+      this.dataService.isLoading =false
   }
 
    

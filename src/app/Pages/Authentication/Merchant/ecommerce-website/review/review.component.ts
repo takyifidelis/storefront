@@ -16,6 +16,7 @@ import { APIService } from '../../../../../Services/api.service';
 import { StarRatingComponent } from '../../../../Dashboard/Customer/components/star-rating/star-rating.component';
 import {
   ProductObject,
+  SingleProductResponseData,
   Varaiation,
 } from '../../../../../interfaces/all-interfaces';
 import { AuthService } from '../../../Auth/auth.service';
@@ -63,7 +64,7 @@ export class ReviewComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private dataService: DataService,
+    public dataService: DataService,
     public apiService: APIService,
     private router: Router
   ) {}
@@ -178,12 +179,22 @@ export class ReviewComponent implements OnInit {
       .subscribe((res) => {});
   }
   ngOnInit() {
-    let productJson = localStorage.getItem('selectedProduct');
-    let product = JSON.parse(productJson!);
-    this.productItem = product;
-    this.selectedImage = this.productItem.images[0].url;
+    this.dataService.isLoading = true
+    // let productJson = localStorage.getItem('selectedProduct');
+    // let product = JSON.parse(productJson!);
+    // this.productItem = product;
 
-    this.initialPrice = this.productItem.price;
+
+    this.apiService.getOneProducts(localStorage.getItem('productId')!).subscribe((productRes:SingleProductResponseData) => {
+      console.log(productRes.data)
+      this.initialPrice = productRes.data.price;
+      this.productItem = productRes.data
+      this.selectedImage = this.productItem.images[0].url;
+      this.dataService.isLoading = false
+      localStorage.setItem('selectedProduct', JSON.stringify(productRes.data));
+    });
+
+
     this.apiService.getCustomerStoreProducts(localStorage.getItem('storeId')!)
       .subscribe((res: any) => {
         console.log(res.data);

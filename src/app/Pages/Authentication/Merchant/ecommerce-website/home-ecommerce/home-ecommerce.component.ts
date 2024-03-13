@@ -94,15 +94,9 @@ export class HomeEcommerceComponent implements OnInit {
     }
   }
   goToProduct(id: string) {
-    this.apiService.getOneProducts(id).subscribe((res: any) => {
-      if (res.data) {
-        let resJson = JSON.stringify(res.data);
-        localStorage.setItem('selectedProduct', resJson);
-        this.dataservice.product = res.data;
-        console.log(this.dataservice.product);
-        this.router.navigate([`/ecommerce/shop/${id}`]);
-      }
-    });
+    localStorage.setItem('productId', id)
+    this.router.navigate([`/ecommerce/shop/${id}`]);
+    
   }
 
 

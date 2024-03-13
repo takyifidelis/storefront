@@ -2,7 +2,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, map, throwError } from 'rxjs';
 import { environment } from '../../environments/environment.development';
-import { SavedProducts, UserCredentials } from '../interfaces/all-interfaces';
+import { SavedProducts, SingleProductResponseData, UserCredentials } from '../interfaces/all-interfaces';
 import { DataService } from './data.service';
 // import { Response } from './../interfaces/all-interfaces';
 
@@ -132,6 +132,12 @@ export class APIService {
     );
   }
 
+  getSingleStore(storeId:string): Observable<Response> {
+    return this.http.get<Response>(`${environment.baseApiUrl}/store/get-store/${storeId}`, {
+      withCredentials: true,
+    });
+  }
+  
   getStores(): Observable<Response> {
     return this.http.get<Response>(`${environment.baseApiUrl}/store/get-all`, {
       withCredentials: true,
@@ -391,8 +397,8 @@ export class APIService {
     );
   }
 
-  getOneProducts(productId: string): Observable<Response> {
-    return this.http.get<Response>(
+  getOneProducts(productId: string): Observable<SingleProductResponseData> {
+    return this.http.get<SingleProductResponseData>(
       `${environment.baseApiUrl}/product/${productId}`,
       {
         withCredentials: true,

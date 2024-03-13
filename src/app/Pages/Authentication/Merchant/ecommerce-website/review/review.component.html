@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div *ngIf="!dataService.isLoading" class="container-fluid">
   <section class="preview-section">
     <mat-drawer-container class="example-container">
       <mat-drawer mode="side" opened="true">
@@ -446,4 +446,7 @@
     </div> -->
     <hr />
   </section>
+</div>
+<div *ngIf="dataService.isLoading" class="d-flex justify-content-center align-items-center w-100">
+  <img src="assets\icons\loading-btn-spinner.svg" alt="Loading.."/>
 </div>
