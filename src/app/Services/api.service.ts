@@ -194,6 +194,15 @@ export class APIService {
     );
   }
 
+  getStoreCategories(storeId: string): Observable<Response> {
+    return this.http.get<Response>(
+      `${environment.baseApiUrl}/store/get-categories/${storeId}`,
+      {
+        withCredentials: true,
+      }
+    );
+  }
+
 
 
   orderDelivered(orderId: string): Observable<Response> {
@@ -361,6 +370,7 @@ export class APIService {
 
 
 
+
   getShipping(customerId: string): Observable<Response> {
     return this.http.get<Response>(
       `${environment.baseApiUrl}/customer/get-shipping-addresses/${customerId}`,
@@ -369,6 +379,7 @@ export class APIService {
       }
     );
   }
+
 
 
 
@@ -615,6 +626,27 @@ export class APIService {
   }
 
   getOrdersForMerchant(storeId: string): Observable<Response> {
+
+   getCustomerWallet(customerId: string) {
+    return this.http.get(
+      `${environment.baseApiUrl}/customer/add-wallet/${customerId}`,
+      {
+        withCredentials: true,
+      }
+    );
+  }
+  addWalletCustomer(
+    method: string,
+    walletId: string,
+    name: string,
+    secret: string,
+    customerId: string
+  ) {
+    return this.http.post<Response>(
+      `${environment.baseApiUrl}/customer/add-wallet/${customerId}`,
+      { method, walletId, name, secret },
+      { withCredentials: true }
+    );}
 
     return this.http
       .get<Response>(

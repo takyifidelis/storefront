@@ -54,6 +54,7 @@ export class ReviewComponent implements OnInit {
   similarProducts: any = [];
 
 
+
   cart: any = [];
   variations?: Varaiation[] = [];
   productReview: any;
@@ -181,6 +182,7 @@ export class ReviewComponent implements OnInit {
     let product = JSON.parse(productJson!);
     this.productItem = product;
     this.selectedImage = this.productItem.images[0].url;
+
     this.initialPrice = this.productItem.price;
     this.apiService.getCustomerStoreProducts(localStorage.getItem('storeId')!)
       .subscribe((res: any) => {
