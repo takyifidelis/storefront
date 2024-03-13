@@ -1,189 +1,296 @@
-<div class="container-wrapper-div" style="position: relative;">
-    <div class="p-0">
-        <header class="container-fluid p-0 ">
-            <nav class="navbar navbar-white bg-white d-flex">
-                <div class="business-name-cont">
-                    <span class="bn-logo">
-                        BN
-                    </span>
-                    <!-- <span class="bn-name">Business Name</span> -->
-                    <select class="bn-name" name="" id="">
-                        <option value="">Business Name</option>
-                    </select>
-                </div>
-                <span class="hire-professional">Hire a professional</span>
-                <div class="d-flex">
-                    <button id="tourStepTwo" mat-icon-button (click)="isMobile('false')" [ngStyle]="{'color': dataservice.isMobileBool ? '#AAAAAA' : ''}">
-                        <mat-icon>desktop_windows</mat-icon>
-                    </button>
-                    <div class="vertical-line"></div>
-                    <button id="tourStepThree" mat-icon-button  (click)="isMobile('true')" [ngStyle]="{'color': dataservice.isMobileBool ? '' : '#AAAAAA'}">
-                        <mat-icon>smartphone</mat-icon>
-                    </button>
-                </div>
-                <div class="action-buttons">
-                    <button id="tourStepSeven" (click)="saveTemplateDraft(dataservice.template)" class="btn btn-dark">Save</button>
-                    <button id="tourStepEight" (click)="publishTemplate(dataservice.template)" class="btn btn-dark ms-2">Publish</button>
-                </div>
-                <span id="tourStepOne" routerLink="/" class="app-name">
-                    storefront
-                </span>
-            </nav>
-        </header>
-        <div *ngIf="dataservice.isInEditMode" class="offcanvas offcanvas-top" style="height: max-content;" data-bs-backdrop="false" data-bs-scroll="true" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
-            <div style="padding: 2rem; 
-            overflow-y: scroll;
-            overflow-x: hidden;">
-                <div class="editor-heading"><h3>Typography</h3></div>
-                <hr class="editor-hr">
-                <div class="typo-heading">Justify Styling</div>
-                <hr class="editor-hr">
-                <div class="typo-heading">
-                    <div class="d-flex">
-                       
-                        <button (click)="dataservice.template.textAlign = 'left'" mat-icon-button>
-                            <mat-icon>format_align_left</mat-icon>
-                        </button>
-                        <button (click)="dataservice.template.textAlign = 'center'" mat-icon-button>
-                            <mat-icon>format_align_center</mat-icon>
-                        </button>
-                        <button (click)="dataservice.template.textAlign = 'right'" mat-icon-button>
-                            <mat-icon>format_align_right</mat-icon>
-                        </button>
-                        <button (click)="dataservice.template.textAlign = 'justify'" mat-icon-button>
-                            <mat-icon>format_align_justify</mat-icon>
-                        </button>
-                    </div>
-                </div>
-                <div class="typo-heading">Font Styling</div>
-                <hr class="editor-hr">
-                <div class="global-fonts-styles">
-                    <div class="first">
-                        <span class="name-element-group">
-                            <span>Font Weight</span>
-                            <select [(ngModel)]="dataservice.template.body.fontWeight" data-element="fontSize" name="cars" id="cars">
-                                @for(weight of dataservice.template.fontWeightList; track weight){
-                                    <option [value]="weight">{{weight}}</option>
-                                }
-                            </select>
-                        </span>
-                        <span class="name-element-group">
-                            <span>Font Style</span>
-                            <select [(ngModel)]="dataservice.template.fontFamily" data-element="fontSize" name="cars" id="cars">
-                                @for (font of dataservice.template.fontArray; track font) {
-                                    <option [value]="font">{{font}}</option>
-                                  }
-                            </select>
-                        </span>
-                        
-                        <span class="name-element-group">
-                            <span>Body Font Size</span>
-                            <select [(ngModel)]="dataservice.template.body.fontSize" data-element="fontSize" name="cars" id="cars">
-                                @for(size of dataservice.template.bodyFontSizeArray; track size){
-                                    <option [value]="size">{{size}}</option>
-                                }
-                            </select>
-                        </span>
-                    </div>
+<div class="container-wrapper-div" style="position: relative">
+  <div class="p-0">
+    <header class="container-fluid p-0">
+      <nav class="navbar navbar-white bg-white d-flex">
+        <div class="business-name-cont">
+          <span class="bn-logo"> BN </span>
+          <!-- <span class="bn-name">Business Name</span> -->
+          <select class="bn-name" name="" id="">
+            <option value="">Business Name</option>
+          </select>
+        </div>
+        <span class="hire-professional">Hire a professional</span>
+        <div class="d-flex">
+          <button
+            id="tourStepTwo"
+            mat-icon-button
+            (click)="isMobile('false')"
+            [ngStyle]="{ color: dataservice.isMobileBool ? '#AAAAAA' : '' }"
+          >
+            <mat-icon>desktop_windows</mat-icon>
+          </button>
+          <div class="vertical-line"></div>
+          <button
+            id="tourStepThree"
+            mat-icon-button
+            (click)="isMobile('true')"
+            [ngStyle]="{ color: dataservice.isMobileBool ? '' : '#AAAAAA' }"
+          >
+            <mat-icon>smartphone</mat-icon>
+          </button>
+        </div>
+        <div class="action-buttons">
+          <button
+            id="tourStepSeven"
+            (click)="saveTemplateDraft(dataservice.template)"
+            class="btn btn-dark"
+          >
+            Save
+          </button>
+          <button
+            id="tourStepEight"
+            (click)="publishTemplate(dataservice.template)"
+            class="btn btn-dark ms-2"
+          >
+            Publish
+          </button>
+        </div>
+        <span id="tourStepOne" routerLink="/merchant" class="app-name">
+          storefront
+        </span>
+      </nav>
+    </header>
+    <div
+      *ngIf="dataservice.isInEditMode"
+      class="offcanvas offcanvas-top"
+      style="height: max-content"
+      data-bs-backdrop="false"
+      data-bs-scroll="true"
+      tabindex="-1"
+      id="offcanvasTop"
+      aria-labelledby="offcanvasTopLabel"
+    >
+      <div style="padding: 2rem; overflow-y: scroll; overflow-x: hidden">
+        <div class="editor-heading"><h3>Typography</h3></div>
+        <hr class="editor-hr" />
+        <div class="typo-heading">Justify Styling</div>
+        <hr class="editor-hr" />
+        <div class="typo-heading">
+          <div class="d-flex">
+            <button
+              (click)="dataservice.template.textAlign = 'left'"
+              mat-icon-button
+            >
+              <mat-icon>format_align_left</mat-icon>
+            </button>
+            <button
+              (click)="dataservice.template.textAlign = 'center'"
+              mat-icon-button
+            >
+              <mat-icon>format_align_center</mat-icon>
+            </button>
+            <button
+              (click)="dataservice.template.textAlign = 'right'"
+              mat-icon-button
+            >
+              <mat-icon>format_align_right</mat-icon>
+            </button>
+            <button
+              (click)="dataservice.template.textAlign = 'justify'"
+              mat-icon-button
+            >
+              <mat-icon>format_align_justify</mat-icon>
+            </button>
+          </div>
+        </div>
+        <div class="typo-heading">Font Styling</div>
+        <hr class="editor-hr" />
+        <div class="global-fonts-styles">
+          <div class="first">
+            <span class="name-element-group">
+              <span>Font Weight</span>
+              <select
+                [(ngModel)]="dataservice.template.body.fontWeight"
+                data-element="fontSize"
+                name="cars"
+                id="cars"
+              >
+                @for(weight of dataservice.template.fontWeightList; track
+                weight){
+                <option [value]="weight">{{ weight }}</option>
+                }
+              </select>
+            </span>
+            <span class="name-element-group">
+              <span>Font Style</span>
+              <select
+                [(ngModel)]="dataservice.template.fontFamily"
+                data-element="fontSize"
+                name="cars"
+                id="cars"
+              >
+                @for (font of dataservice.template.fontArray; track font) {
+                <option [value]="font">{{ font }}</option>
+                }
+              </select>
+            </span>
 
-                    <div class="second">
-                        <span class="name-element-group">
-                            <span>Line Height</span>
-                            <select [(ngModel)]="dataservice.template.lineHeight" data-element="fontSize" name="cars" id="cars">
-                                @for(lineH of dataservice.template.lineHeightList; track lineH){
-                                    <option [value]="lineH">{{lineH}}</option>
-                                }
-                            </select>
-                        </span>
-                        <span class="name-element-group">
-                            <span>Headers Font Size</span>
-                            <select [(ngModel)]="dataservice.template.headers.fontSize" data-element="fontSize" name="cars" id="cars">
-                                @for(size of dataservice.template.headerFontSizeArray; track size){
-                                    <option [value]="size">{{size}}</option>
-                                }
-                            </select>
-                        </span>
-                        <span class="name-element-group">
-                            <span>Headers Font Weight</span>
-                            <select [(ngModel)]="dataservice.template.headers.fontWeight" data-element="fontSize" name="cars" id="cars">
-                                @for(weight of dataservice.template.headerfontWeightList; track weight){
-                                    <option [value]="weight">{{weight}}</option>
-                                }
-                            </select>
-                        </span>
-                        <span class="name-element-group">
-                            <span>Hero Font Size</span>
-                            <select [(ngModel)]="dataservice.template.headings.heroHeading.fontSize" data-element="fontSize" name="cars" id="cars">
-                                @for(size of dataservice.template.headerFontSizeArray; track size){
-                                    <option [value]="size">{{size}}</option>
-                                }
-                            </select>
-                        </span>
-                    </div>
-                </div>
+            <span class="name-element-group">
+              <span>Body Font Size</span>
+              <select
+                [(ngModel)]="dataservice.template.body.fontSize"
+                data-element="fontSize"
+                name="cars"
+                id="cars"
+              >
+                @for(size of dataservice.template.bodyFontSizeArray; track
+                size){
+                <option [value]="size">{{ size }}</option>
+                }
+              </select>
+            </span>
+          </div>
 
-                <div class="typo-heading">Color Styling</div>
-                <hr class="editor-hr">
-                <div class="global-fonts-styles">
-                    <div class="first">
-                        <span class="name-element-group">
-                            <span>NavBar Background</span>
-                            <input [(ngModel)]="dataservice.template.navbarBackgroundColor" type="color" />
-                        </span>
-                        <span class="name-element-group">
-                            <span>NavBar Color</span>
-                            <input [(ngModel)]="dataservice.template.navbarColor" type="color" />
-                        </span>
-                        <span class="name-element-group">
-                            <span>Hero Color</span>
-                            <input [(ngModel)]="dataservice.template.headings.heroHeading.color" type="color" />
-                        </span>
-                    </div>
+          <div class="second">
+            <span class="name-element-group">
+              <span>Line Height</span>
+              <select
+                [(ngModel)]="dataservice.template.lineHeight"
+                data-element="fontSize"
+                name="cars"
+                id="cars"
+              >
+                @for(lineH of dataservice.template.lineHeightList; track lineH){
+                <option [value]="lineH">{{ lineH }}</option>
+                }
+              </select>
+            </span>
+            <span class="name-element-group">
+              <span>Headers Font Size</span>
+              <select
+                [(ngModel)]="dataservice.template.headers.fontSize"
+                data-element="fontSize"
+                name="cars"
+                id="cars"
+              >
+                @for(size of dataservice.template.headerFontSizeArray; track
+                size){
+                <option [value]="size">{{ size }}</option>
+                }
+              </select>
+            </span>
+            <span class="name-element-group">
+              <span>Headers Font Weight</span>
+              <select
+                [(ngModel)]="dataservice.template.headers.fontWeight"
+                data-element="fontSize"
+                name="cars"
+                id="cars"
+              >
+                @for(weight of dataservice.template.headerfontWeightList; track
+                weight){
+                <option [value]="weight">{{ weight }}</option>
+                }
+              </select>
+            </span>
+            <span class="name-element-group">
+              <span>Hero Font Size</span>
+              <select
+                [(ngModel)]="dataservice.template.headings.heroHeading.fontSize"
+                data-element="fontSize"
+                name="cars"
+                id="cars"
+              >
+                @for(size of dataservice.template.headerFontSizeArray; track
+                size){
+                <option [value]="size">{{ size }}</option>
+                }
+              </select>
+            </span>
+          </div>
+        </div>
 
-                    <div class="second">
-                        <span class="name-element-group">
-                            <span>Store Color</span>
-                            <input [(ngModel)]="dataservice.template.primaryColor" type="color" />
-                        </span>
-                        <span class="name-element-group">
-                            <span>Store Background</span>
-                            <input [(ngModel)]="dataservice.template.primaryBackground" type="color" />
-                        </span>
-                    </div>
-                </div>
+        <div class="typo-heading">Color Styling</div>
+        <hr class="editor-hr" />
+        <div class="global-fonts-styles">
+          <div class="first">
+            <span class="name-element-group">
+              <span>NavBar Background</span>
+              <input
+                [(ngModel)]="dataservice.template.navbarBackgroundColor"
+                type="color"
+              />
+            </span>
+            <span class="name-element-group">
+              <span>NavBar Color</span>
+              <input
+                [(ngModel)]="dataservice.template.navbarColor"
+                type="color"
+              />
+            </span>
+            <span class="name-element-group">
+              <span>Hero Color</span>
+              <input
+                [(ngModel)]="dataservice.template.headings.heroHeading.color"
+                type="color"
+              />
+            </span>
+          </div>
 
-                <div class="typo-heading">Button Styling</div>
-                <hr class="editor-hr">
-                <div class="global-fonts-styles">
-                    <div class="first">
-                        <span class="name-element-group">
-                            <span>Background Color</span>
-                            <input [(ngModel)]="dataservice.template.buttons.backgroundColor" type="color" />
-                        </span>
-                        <span class="name-element-group">
-                            <span>Text Color</span>
-                            <input [(ngModel)]="dataservice.template.buttons.color" type="color" />
-                        </span>
-                    </div>
+          <div class="second">
+            <span class="name-element-group">
+              <span>Store Color</span>
+              <input
+                [(ngModel)]="dataservice.template.primaryColor"
+                type="color"
+              />
+            </span>
+            <span class="name-element-group">
+              <span>Store Background</span>
+              <input
+                [(ngModel)]="dataservice.template.primaryBackground"
+                type="color"
+              />
+            </span>
+          </div>
+        </div>
 
-                    <div class="second">
-                        <span class="name-element-group">
-                            <span>Border Color</span>
-                            <input [(ngModel)]="dataservice.template.buttons.borderColor" type="color" />
-                        </span>
-                        <span class="name-element-group">
-                            <span>Border Radius</span>
-                            <select [(ngModel)]="dataservice.template.buttons.borderRadius" data-element="fontSize" name="cars" id="cars">
-                                @for(radius of dataservice.template.buttonBorderRadiusList; track radius){
-                                    <option [value]="radius">{{radius}}</option>
-                                }
-                            </select>
-                        </span>
-                    </div>
-                </div>
+        <div class="typo-heading">Button Styling</div>
+        <hr class="editor-hr" />
+        <div class="global-fonts-styles">
+          <div class="first">
+            <span class="name-element-group">
+              <span>Background Color</span>
+              <input
+                [(ngModel)]="dataservice.template.buttons.backgroundColor"
+                type="color"
+              />
+            </span>
+            <span class="name-element-group">
+              <span>Text Color</span>
+              <input
+                [(ngModel)]="dataservice.template.buttons.color"
+                type="color"
+              />
+            </span>
+          </div>
 
+          <div class="second">
+            <span class="name-element-group">
+              <span>Border Color</span>
+              <input
+                [(ngModel)]="dataservice.template.buttons.borderColor"
+                type="color"
+              />
+            </span>
+            <span class="name-element-group">
+              <span>Border Radius</span>
+              <select
+                [(ngModel)]="dataservice.template.buttons.borderRadius"
+                data-element="fontSize"
+                name="cars"
+                id="cars"
+              >
+                @for(radius of dataservice.template.buttonBorderRadiusList;
+                track radius){
+                <option [value]="radius">{{ radius }}</option>
+                }
+              </select>
+            </span>
+          </div>
+        </div>
 
-                <!-- <input [(ngModel)]="dataservice.template.primaryBackground" type="color" />
+        <!-- <input [(ngModel)]="dataservice.template.primaryBackground" type="color" />
                 <input [(ngModel)]="dataservice.template.primaryColor" type="color" />
                 <input [(ngModel)]="dataservice.template.navbarBackgroundColor" type="color" />
                 <input [(ngModel)]="dataservice.template.navbarColor" type="color" />
@@ -222,9 +329,9 @@
                 <button mat-icon-button (click)="dataservice.isEditable = !dataservice.isEditable">
                     <mat-icon>link</mat-icon>
                 </button> -->
-            </div>
-        </div>
-        <!-- <div class="shapes collapse" id="shapes">
+      </div>
+    </div>
+    <!-- <div class="shapes collapse" id="shapes">
             <section style="display: flex;">
                 <button mat-icon-button>
                     <mat-icon>circle</mat-icon>
@@ -237,153 +344,350 @@
                 </button>
             </section>
         </div> -->
-        <div class="pages collapse" id="pagesForm">
-            <button data-bs-toggle="modal" data-bs-target="#pagesModal" style="display: flex; border: none;background-color: transparent; justify-content: center;align-items: center;"><img src="/assets/icons/plus.svg" alt="" srcset=""> <h3 style="margin: 0;">Add Pages</h3></button>
-            <hr>
-            <div>
-                
-            <button routerLink="home" style="display: flex; border: none;background-color: transparent; justify-content: center;align-items: center; margin-bottom: 1.6rem;"><img src="/assets/icons/black_sqr.svg" style="margin: 0 24px 0 0;">Landing page</button>
-            <button *ngIf="dataservice.template.pagesOrder[2].includePage" routerLink="contact" style="display: flex; border: none;background-color: transparent; align-items: center; margin-bottom: 1.6rem;"><img src="/assets/icons/black_sqr.svg" style="margin: 0 24px 0 0;">About us</button>
-            <button *ngIf="dataservice.template.pagesOrder[1].includePage" routerLink="about" style="display: flex; border: none;background-color: transparent; align-items: center;"><img src="/assets/icons/black_sqr.svg" style="margin: 0 24px 0 0;">Contact us</button>
-            </div>
-        </div>
-        
-        <div id="layers" class="collapse row"> 
-            <span class="btn" data-bs-toggle="collapse" data-bs-target="#section1">
-                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="0.5" y="0.5" width="11" height="11" stroke="#00284C"/>
-                    </svg>
-                    header 
-                <svg xmlns="http://www.w3.org/2000/svg" width="6" height="10" viewBox="0 0 6 10" fill="none">
-                    <path d="M5.5 5L0.5 10L0.5 0L5.5 5Z" fill="#00284C"/>
-                </svg>
-                <div id="section1" class="collapse row ms-2">
-                    <span>
-                        <svg width="12" height="5" viewBox="0 0 12 5" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect width="12" height="5" fill="#00284C"/>
-                            </svg>
-                            Rectangle</span>
-                    <span>
-                        <svg width="10" height="12" viewBox="0 0 10 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M4.256 12V1.216H5.76V12H4.256ZM0.48 2.272V0.896H9.52V2.272H0.48Z" fill="#222222"/>
-                            </svg>
-                            Search</span>
-                </div>
-            </span>
-            <span class="btn" ><svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="0.5" y="0.5" width="11" height="11" stroke="#00284C"/>
-                </svg>
-                Splash image</span>
-            <span class="btn" >
-                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="0.5" y="0.5" width="11" height="11" stroke="#00284C"/>
-                    </svg>
-                    Section 1 
-                <svg xmlns="http://www.w3.org/2000/svg" width="6" height="10" viewBox="0 0 6 10" fill="none">
-                    <path d="M5.5 5L0.5 10L0.5 0L5.5 5Z" fill="#00284C"/>
-                </svg>
-            </span>
-            <span class="btn" >
-                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="0.5" y="0.5" width="11" height="11" stroke="#00284C"/>
-                    </svg>
-                    Section 2</span>
-            <span class="btn" >
-                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="0.5" y="0.5" width="11" height="11" stroke="#00284C"/>
-                    </svg>
-                    Section 3</span>
-            <span class="btn" >
-                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="0.5" y="0.5" width="11" height="11" stroke="#00284C"/>
-                    </svg>
-                    Footer 
-                <svg xmlns="http://www.w3.org/2000/svg" width="6" height="10" viewBox="0 0 6 10" fill="none">
-                    <path d="M5.5 5L0.5 10L0.5 0L5.5 5Z" fill="#00284C"/>
-                </svg>
-            </span>
-        </div>
+    <div class="pages collapse" id="pagesForm">
+      <button
+        data-bs-toggle="modal"
+        data-bs-target="#pagesModal"
+        style="
+          display: flex;
+          border: none;
+          background-color: transparent;
+          justify-content: center;
+          align-items: center;
+        "
+      >
+        <img src="/assets/icons/plus.svg" alt="" srcset="" />
+        <h3 style="margin: 0">Add Pages</h3>
+      </button>
+      <hr />
+      <div>
+        <button
+          routerLink="home"
+          style="
+            display: flex;
+            border: none;
+            background-color: transparent;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 1.6rem;
+          "
+        >
+          <img
+            src="/assets/icons/black_sqr.svg"
+            style="margin: 0 24px 0 0"
+          />Landing page
+        </button>
+        <button
+          *ngIf="dataservice.template.pagesOrder[2].includePage"
+          routerLink="contact"
+          style="
+            display: flex;
+            border: none;
+            background-color: transparent;
+            align-items: center;
+            margin-bottom: 1.6rem;
+          "
+        >
+          <img
+            src="/assets/icons/black_sqr.svg"
+            style="margin: 0 24px 0 0"
+          />About us
+        </button>
+        <button
+          *ngIf="dataservice.template.pagesOrder[1].includePage"
+          routerLink="about"
+          style="
+            display: flex;
+            border: none;
+            background-color: transparent;
+            align-items: center;
+          "
+        >
+          <img
+            src="/assets/icons/black_sqr.svg"
+            style="margin: 0 24px 0 0"
+          />Contact us
+        </button>
+      </div>
     </div>
 
-    <mat-drawer-container class="container-fluid p-0 test">
-        
-        <mat-drawer #drawer mode="side" [opened]="true" class="side-nav mat-elevated-z4">
-            <ul id="tourStepFour">
-                <li id="tourStepFive" matTooltip="Add Templates" >
-                    <button data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop" mat-fab style="background-color: white; color: #0085FF;"
-                        aria-label="Example icon button with a bookmark icon">
-                        <mat-icon>add</mat-icon>
-                    </button>
-                </li>
-                <!-- <li matTooltip="Add Shapes" data-bs-toggle="collapse" data-bs-target="#shapes">
+    <div id="layers" class="collapse row">
+      <span class="btn" data-bs-toggle="collapse" data-bs-target="#section1">
+        <svg
+          width="12"
+          height="12"
+          viewBox="0 0 12 12"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <rect x="0.5" y="0.5" width="11" height="11" stroke="#00284C" />
+        </svg>
+        header
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="6"
+          height="10"
+          viewBox="0 0 6 10"
+          fill="none"
+        >
+          <path d="M5.5 5L0.5 10L0.5 0L5.5 5Z" fill="#00284C" />
+        </svg>
+        <div id="section1" class="collapse row ms-2">
+          <span>
+            <svg
+              width="12"
+              height="5"
+              viewBox="0 0 12 5"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect width="12" height="5" fill="#00284C" />
+            </svg>
+            Rectangle</span
+          >
+          <span>
+            <svg
+              width="10"
+              height="12"
+              viewBox="0 0 10 12"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M4.256 12V1.216H5.76V12H4.256ZM0.48 2.272V0.896H9.52V2.272H0.48Z"
+                fill="#222222"
+              />
+            </svg>
+            Search</span
+          >
+        </div>
+      </span>
+      <span class="btn"
+        ><svg
+          width="12"
+          height="12"
+          viewBox="0 0 12 12"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <rect x="0.5" y="0.5" width="11" height="11" stroke="#00284C" />
+        </svg>
+        Splash image</span
+      >
+      <span class="btn">
+        <svg
+          width="12"
+          height="12"
+          viewBox="0 0 12 12"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <rect x="0.5" y="0.5" width="11" height="11" stroke="#00284C" />
+        </svg>
+        Section 1
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="6"
+          height="10"
+          viewBox="0 0 6 10"
+          fill="none"
+        >
+          <path d="M5.5 5L0.5 10L0.5 0L5.5 5Z" fill="#00284C" />
+        </svg>
+      </span>
+      <span class="btn">
+        <svg
+          width="12"
+          height="12"
+          viewBox="0 0 12 12"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <rect x="0.5" y="0.5" width="11" height="11" stroke="#00284C" />
+        </svg>
+        Section 2</span
+      >
+      <span class="btn">
+        <svg
+          width="12"
+          height="12"
+          viewBox="0 0 12 12"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <rect x="0.5" y="0.5" width="11" height="11" stroke="#00284C" />
+        </svg>
+        Section 3</span
+      >
+      <span class="btn">
+        <svg
+          width="12"
+          height="12"
+          viewBox="0 0 12 12"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <rect x="0.5" y="0.5" width="11" height="11" stroke="#00284C" />
+        </svg>
+        Footer
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="6"
+          height="10"
+          viewBox="0 0 6 10"
+          fill="none"
+        >
+          <path d="M5.5 5L0.5 10L0.5 0L5.5 5Z" fill="#00284C" />
+        </svg>
+      </span>
+    </div>
+  </div>
+
+  <mat-drawer-container class="container-fluid p-0 test">
+    <mat-drawer
+      #drawer
+      mode="side"
+      [opened]="true"
+      class="side-nav mat-elevated-z4"
+    >
+      <ul id="tourStepFour">
+        <li id="tourStepFive" matTooltip="Add Templates">
+          <button
+            data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasTop"
+            aria-controls="offcanvasTop"
+            mat-fab
+            style="background-color: white; color: #0085ff"
+            aria-label="Example icon button with a bookmark icon"
+          >
+            <mat-icon>add</mat-icon>
+          </button>
+        </li>
+        <!-- <li matTooltip="Add Shapes" data-bs-toggle="collapse" data-bs-target="#shapes">
                     <button mat-fab style="background-color: white; color: black;">
                         <mat-icon style="background-color: black;" fontIcon="crop_square"></mat-icon>
                     </button>
                 </li> -->
-                
-                <li>
-                    <button matTooltip="Upload file" data-bs-toggle="modal" data-bs-target="#exampleModal"  style="background-color: white; color: #0085FF;" mat-fab color="accent" aria-label="Example icon button with a bookmark icon">
-                        <mat-icon>upload_2</mat-icon>
-                    </button>
-                </li>
-                <li id="tourStepSix" data-bs-toggle="collapse" data-bs-target="#pagesForm">
-                    <button matTooltip="Add Pages" mat-fab style="background-color: white;"
-                        aria-label="Example icon button with a bookmark icon">
-                        <img src="/assets/icons/add_files_btn.svg" alt="" srcset="">
-                    </button>
-                </li>
-                <li data-bs-toggle="collapse" data-bs-target="#layers">
-                    <button matTooltip="Add Layers" mat-fab style="background-color: white; color:#FF8A00;"
-                        aria-label="Example icon button with a bookmark icon">
-                        <mat-icon style="font-size: 28px;">layers</mat-icon>
-                    </button>
-                </li>
-            </ul>
-        </mat-drawer>
-        <mat-drawer-content class="conatainer" >
-            <div *ngIf="dataservice.isMobileBool" style="display: flex; width: 100%; height: 100%;justify-content: center; ">
-                <iframe title="mobile checker" [ngClass]="dataservice.isMobileBool ? 'mobile1' : 'desktop1'" src="/ecommerce/home"></iframe> 
-            </div>
-            <!-- <div  style="display: flex; width: 100%;"></div> -->
-            <router-outlet *ngIf="!dataservice.isMobileBool"/>
-        </mat-drawer-content>
-    </mat-drawer-container>
+
+        <li>
+          <button
+            matTooltip="Upload file"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal"
+            style="background-color: white; color: #0085ff"
+            mat-fab
+            color="accent"
+            aria-label="Example icon button with a bookmark icon"
+          >
+            <mat-icon>upload_2</mat-icon>
+          </button>
+        </li>
+        <li
+          id="tourStepSix"
+          data-bs-toggle="collapse"
+          data-bs-target="#pagesForm"
+        >
+          <button
+            matTooltip="Add Pages"
+            mat-fab
+            style="background-color: white"
+            aria-label="Example icon button with a bookmark icon"
+          >
+            <img src="/assets/icons/add_files_btn.svg" alt="" srcset="" />
+          </button>
+        </li>
+        <li data-bs-toggle="collapse" data-bs-target="#layers">
+          <button
+            matTooltip="Add Layers"
+            mat-fab
+            style="background-color: white; color: #ff8a00"
+            aria-label="Example icon button with a bookmark icon"
+          >
+            <mat-icon style="font-size: 28px">layers</mat-icon>
+          </button>
+        </li>
+      </ul>
+    </mat-drawer>
+    <mat-drawer-content class="conatainer">
+      <div
+        *ngIf="dataservice.isMobileBool"
+        style="
+          display: flex;
+          width: 100%;
+          height: 100%;
+          justify-content: center;
+        "
+      >
+        <iframe
+          title="mobile checker"
+          [ngClass]="dataservice.isMobileBool ? 'mobile1' : 'desktop1'"
+          src="/ecommerce/home"
+        ></iframe>
+      </div>
+      <!-- <div  style="display: flex; width: 100%;"></div> -->
+      <router-outlet *ngIf="!dataservice.isMobileBool" />
+    </mat-drawer-content>
+  </mat-drawer-container>
 </div>
-<div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        
-        <div class="modal-body upload-modal"style="margin:43px">
-            <div class="input-group mb-3">
-                <input type="text" class="form-control" >
-                <button class="btn mybtn btn-outline-secondary" type="button" id="button-addon2">Browse</button>
-              </div>
-              <div class="d-flex justify-content-end" style="margin-top:54px">
-                <button class="mybtn save" style="border: none;">save</button>
-              </div>
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body upload-modal" style="margin: 43px">
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" />
+          <button
+            class="btn mybtn btn-outline-secondary"
+            type="button"
+            id="button-addon2"
+          >
+            Browse
+          </button>
         </div>
-        
+        <div class="d-flex justify-content-end" style="margin-top: 54px">
+          <button class="mybtn save" style="border: none">save</button>
+        </div>
       </div>
     </div>
   </div>
-<div class="modal fade" tabindex="-1" id="pagesModal" data-bs-backdrop="static">
-<div class="modal-dialog  modal-dialog-centered">
-    <div class="modal-content">
-    <div class="modal-header">
-        <h5 class="modal-title">Select A Page To Add</h5>
-        <button type="button" (click)="logPages()" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-    </div>
-    <div class="modal-body d-flex" style="flex-direction: column;">
-        <mat-checkbox color="primary" class="example-margin" [(ngModel)]="dataservice.template.pagesOrder[2].includePage">Add Contact Us Page</mat-checkbox>
-        <mat-checkbox color="primary" class="example-margin" [(ngModel)]="dataservice.template.pagesOrder[1].includePage">Add About Us Page</mat-checkbox>
-    </div>
-    </div>
 </div>
+<div class="modal fade" tabindex="-1" id="pagesModal" data-bs-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Select A Page To Add</h5>
+        <button
+          type="button"
+          (click)="logPages()"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body d-flex" style="flex-direction: column">
+        <mat-checkbox
+          color="primary"
+          class="example-margin"
+          [(ngModel)]="dataservice.template.pagesOrder[2].includePage"
+          >Add Contact Us Page</mat-checkbox
+        >
+        <mat-checkbox
+          color="primary"
+          class="example-margin"
+          [(ngModel)]="dataservice.template.pagesOrder[1].includePage"
+          >Add About Us Page</mat-checkbox
+        >
+      </div>
+    </div>
+  </div>
 </div>
 
-<div style="z-index: 99; position: relative;">
-  
-</div> 
+<div style="z-index: 99; position: relative"></div>
 <div *ngIf="dataservice.isLoading" class="loading-spinner">
-    <mat-spinner></mat-spinner>
-  </div>
+  <mat-spinner></mat-spinner>
+</div>
