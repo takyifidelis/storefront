@@ -99,9 +99,10 @@ export class SignupCustomerComponent {
       },
       (errorMessage) => {
         console.log(errorMessage);
-        this.error = errorMessage;
+
         this.isLoading = false;
-        this.toastr.error(this.error, 'Failed');
+
+        this.toastr.error(errorMessage.error.message, 'Failed');
       }
     );
     form.reset();

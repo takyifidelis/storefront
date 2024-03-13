@@ -71,15 +71,14 @@ export class ResetPassowrdComponent {
     this.authService.newPasswordReset(password, confirmPassword).subscribe(
       (resData) => {
         console.log(resData);
-        this.toastr.success('Proceed to Login', 'Password Reset Successful!');
+        this.toastr.info(resData.message, 'Success');
         this.isLoading = false;
         this.router.navigate(['login']);
       },
       (errorMessage) => {
-        console.log(errorMessage);
         this.isLoading = false;
-        this.error = errorMessage;
-        this.toastr.error(this.error, 'Error');
+
+        this.toastr.error(errorMessage.error.message, 'Failed');
       }
     );
     form.reset();

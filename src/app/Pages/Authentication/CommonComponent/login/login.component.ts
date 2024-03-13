@@ -174,7 +174,7 @@ export class LoginComponent implements OnInit {
           console.log(resData);
 
           this.isLoading = false;
-          this.toastr.success('Login Successful', 'Success');
+          this.toastr.info(resData.message, 'Success');
           if (resData.data.type === 'Business') {
             // this.dataService.businessId=resData.data?.business
             localStorage.setItem('businessId', resData.data.business);

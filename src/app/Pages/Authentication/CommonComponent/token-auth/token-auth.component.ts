@@ -65,14 +65,14 @@ export class TokenAuthComponent {
       (resData) => {
         console.log(resData);
         this.isLoading = false;
-        this.toastr.info('Email is verified', 'Reset Password');
+        this.toastr.info(resData.message, 'Success');
         this.router.navigate(['reset-password']);
       },
       (errorMessage) => {
         console.log(errorMessage);
         this.isLoading = false;
-        this.error = errorMessage;
-        this.toastr.error(this.error, 'Error');
+
+        this.toastr.error(errorMessage.error.message, 'Failed');
       }
     );
     //
