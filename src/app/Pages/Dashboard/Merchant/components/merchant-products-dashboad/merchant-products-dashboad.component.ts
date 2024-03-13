@@ -158,7 +158,8 @@ export class MerchantProductsDashboadComponent {
     this.apiService
       .getStoreProductsMerchant(localStorage.getItem('storeId')!)
       .subscribe((response: any) => {
-        console.log(response.data);
+        console.log(response.data.products);
+
         // console.log(response.data.products[0].images[0].url);
         // this.users = response.data
         this.dataSource = new MatTableDataSource(response.data.products);

@@ -65,6 +65,7 @@ export interface productInterface {
     RouterModule,
     ReactiveFormsModule,
   ],
+
   templateUrl: './merchant-discount.component.html',
   styleUrl: './merchant-discount.component.scss',
 })
@@ -72,6 +73,7 @@ export class MerchantDiscountComponent {
   filterIcon = faFilter;
   seaechICon = faSearch;
   checkIcon = faCheck;
+
   showForm: boolean = false;
   addDiscount: FormGroup;
   storeCategories: string[] = [];
@@ -357,4 +359,5 @@ export class MerchantDiscountCustomizeComponent {
     //   }
     // );
   }
+
 }

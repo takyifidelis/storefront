@@ -155,7 +155,6 @@ export class LoginComponent implements OnInit {
       .authenticateUser(this.dataService.loginCredentials)
       .subscribe(
         (resData: any) => {
-
           console.log(resData);
 
           this.isLoading = false;
@@ -177,7 +176,7 @@ export class LoginComponent implements OnInit {
           }
         },
         (errorMessage: any) => {
-          this.isLoading = false; 
+          this.isLoading = false;
           console.log(errorMessage);
           this.error = errorMessage;
           this.toastr.error(this.error, 'Login Failed');
