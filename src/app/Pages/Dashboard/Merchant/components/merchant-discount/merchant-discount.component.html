@@ -132,7 +132,7 @@
   </form>
 </div>
 
-@if(!dataService.merchantDashboardNoProjects){
+@if(merchantDiscountEmpty){
 <div class="d-flex justify-content-center align-items-center">
   <div class="empty-dashboard">
     <span>
@@ -145,7 +145,7 @@
     </p>
   </div>
 </div>
-} @if(dataService.merchantDashboardNoProjects){
+} @if(!merchantDiscountEmpty){
 
 <div class="table-div">
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
@@ -246,4 +246,3 @@
   </div>
 </div>
 }
-
