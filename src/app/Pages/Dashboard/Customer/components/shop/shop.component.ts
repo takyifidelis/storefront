@@ -21,9 +21,9 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './shop.component.scss'
 })
 export class ShopComponent implements OnInit{
-  stores: any;
+  stores: any = [];
   searchShop?: string;
-  filteredItems: any;
+  filteredItems: any = [];
 
   constructor(private apiService:APIService, private router:Router,private dataService:DataService){}
 
