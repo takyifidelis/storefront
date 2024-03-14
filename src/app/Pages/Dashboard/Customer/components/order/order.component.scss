@@ -5,12 +5,7 @@
 .more-vert-btn {
   cursor: pointer;
 }
-
 .product-members {
-  padding: 2px 8px;
-
-  width: 87px;
-  height: 24px;
   background: #f0f3f9;
   border-radius: 6px;
   font-family: "Inter";
@@ -20,6 +15,8 @@
   line-height: 20px;
   letter-spacing: -0.2px;
   color: #5e718d;
+  padding: 2px 7px;
+  margin-left: 1rem;
 }
 
 .pending-payment {
@@ -75,16 +72,16 @@
 }
 
 .active {
-  background:  #F5F5FF;
+  background: #f5f5ff;
   color: #4a72ff;
   gap: 10px;
   display: flex;
-padding: 8px 12px;
-justify-content: center;
-align-items: center;
-gap: 8px;
-border-radius: 6px;
-  transform: translateY(-5px); 
+  padding: 8px 12px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border-radius: 6px;
+  transform: translateY(-5px);
 }
 
 .status {
@@ -94,8 +91,8 @@ border-radius: 6px;
   font-weight: 400;
   line-height: 24px;
   letter-spacing: -0.2px;
- cursor: pointer;
- transition: background-color 0.3s ease
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
 }
 
 .status:hover {
@@ -118,22 +115,111 @@ border-radius: 6px;
   letter-spacing: -0.2px;
 }
 
-.orderId{
-  color:  #455468;
-font-family: 'Inter';
-font-size: 16px;
-font-style: normal;
-font-weight: 500;
-line-height: 28px; /* 175% */
-letter-spacing: -0.3px;
+.orderId {
+  color: #455468;
+  font-family: "Inter";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 28px; /* 175% */
+  letter-spacing: -0.3px;
 }
 
-.data{
-  color:  #5E718D;
-font-family: Inter;
-font-size: 14px;
-font-style: normal;
-font-weight: 400;
-line-height: 24px; /* 171.429% */
-letter-spacing: -0.2px;
+.data {
+  color: #5e718d;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px; /* 171.429% */
+  letter-spacing: -0.2px;
+}
+.search-filter {
+  form {
+    margin: 0 0.6rem;
+  }
+  .button {
+    border-radius: 6px;
+    border: 1px solid #4a72ff;
+    background: #fff;
+    padding: 6px 12px;
+    align-items: center;
+    gap: 10px;
+
+    fa-icon {
+      color: blue;
+    }
+
+    p {
+      color: #1b4dff;
+
+      font-family: Inter;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 24px;
+      letter-spacing: -0.2px;
+      margin: 0;
+    }
+  }
+  .search {
+    width: 253px;
+    padding: 6px 12px;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+    border-radius: 6px;
+    background: #f2f5ff;
+
+    input {
+      outline: none;
+      border: none;
+      background: #f2f5ff;
+      color: #1b4dff;
+      font-family: Inter;
+      font-size: 14px;
+
+      font-style: normal;
+      font-weight: 500;
+      line-height: 24px;
+      letter-spacing: -0.2px;
+
+      &::placeholder {
+        color: #1b4dff;
+        font-family: Inter;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 24px;
+        letter-spacing: -0.2px;
+      }
+    }
+  }
+  .new-product {
+    padding: 6px 12px;
+    border-radius: 6px;
+    background: #0f3cd9;
+    border: none;
+    color: #fff;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: -0.2px;
+    margin: 0;
+  }
+}
+.header {
+  margin-bottom: 3rem;
+}
+
+.order.header {
+  color: var(--Colors-Primary-Slate-600, #455468);
+  font-family: Inter;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 35px; /* 159.091% */
+  letter-spacing: -0.3px;
 }

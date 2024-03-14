@@ -60,11 +60,11 @@
                 </div>
 
                 <div
-                  class="product-variation mb-5"
+                  class="product-variation"
                   *ngFor="let item of productItem.variations"
                 >
                   <div class="variation-type select-size mb-2">
-                    Select {{ item.type }}
+                    SELECT {{ item.type }}
                   </div>
                   <div class="variation-value d-flex">
                     <button
@@ -121,6 +121,9 @@
   <section class="decription-review">
     <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
       <mat-tab label="DESCRIPTION">
+        <div class="product-des-from-merchant">
+          {{ productItem.description }}
+        </div>
         <div class="product-benefit details">
           <h3 class="product-header">Product Description</h3>
           <p class="product-paragraph w-80">
@@ -205,7 +208,10 @@
         <div
           class="reviews-head d-flex justify-content-between align-items-center"
         >
-          <h4 class="review-header">3 Reviews</h4>
+          <h4 class="review-header">
+            <span class="review-number">{{ numberOfReviews }} </span>
+            Review<span *ngIf="numberOfReviews !== 1">s</span>
+          </h4>
           <div class="review-ratings">
             <div class="ratings">
               <app-star-rating [readonly]="true" [rating]="5"></app-star-rating>
@@ -214,7 +220,7 @@
             <p class="leave-a-review" (click)="showForm()">Leave my review</p>
           </div>
         </div>
-        <div *ngIf="isFormDisplayed">
+        <!-- <div *ngIf="isFormDisplayed">
           <form action="#" method="post" (ngSubmit)="(onSubmit)">
             <div
               class="how-will-you-div d-flex justify-content-between align-items-center"
@@ -247,93 +253,51 @@
               Submit Feedback
             </button>
           </form>
-        </div>
+        </div> -->
 
         <!-- Feedback Block -->
-        <div
-          class="feedbacks-block d-flex"
-          *ngFor="let review of productReview"
-        >
-          <div class="comment">
-            <div class="feedback-image">
-              <!-- <img src="assets\images\feedback-image.svg" alt="" /> -->
-              <div class="fedback-profile">
-                <span class="first-initial"
-                  >{{ review.customerReview.firstName.charAt(0) }}
-                </span>
-                <span class="last-initial">{{
-                  review.customerReview.lastName.charAt(0)
-                }}</span>
+        <div class="adding-hr" *ngFor="let review of productItem.reviews">
+          <hr />
+          <div class="feedbacks-block d-flex">
+            <div class="comment">
+              <div class="feedback-image">
+                <!-- <img src="assets\images\feedback-image.svg" alt="" /> -->
+                <div class="fedback-profile">
+                  <span class="first-initial"
+                    >{{ review.customerReview.firstName.charAt(0) }}
+                  </span>
+                  <span class="last-initial">{{
+                    review.customerReview.lastName.charAt(0)
+                  }}</span>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div class="feedback-content">
-            <p class="feedback-name">
-              <span class="first-name"
-                >{{ review.customerReview.firstName }} </span
-              ><span class="last-name">{{
-                review.customerReview.lastName
-              }}</span>
-            </p>
-            <div class="ratings">
-              <app-star-rating
-                [readonly]="true"
-                [rating]="review.customerReview.rating"
-              ></app-star-rating>
+            <div class="feedback-content">
+              <p class="feedback-name">
+                <span class="first-name"
+                  >{{ review.customerReview.firstName }} </span
+                ><span class="last-name">{{
+                  review.customerReview.lastName
+                }}</span>
+              </p>
+              <div class="ratings">
+                <app-star-rating
+                  [readonly]="true"
+                  [rating]="review.rating"
+                ></app-star-rating>
+              </div>
+              <p class="feedback-date">
+                {{ review.createdAt | date : "longDate" }}
+              </p>
+              <p class="feedback-messgae">
+                {{ review.comment }}
+              </p>
             </div>
-            <p class="feedback-date">
-              {{ review.createdAt | date : "longDate" }}
-            </p>
-            <p class="feedback-messgae">
-              {{ review.comment }}
-            </p>
           </div>
         </div>
+
         <!-- Feedback Block -->
-        <div class="feedbacks-block d-flex">
-          <div class="comment">
-            <div class="feedback-image">
-              <img src="assets\images\feedback-image.svg" alt="" />
-            </div>
-          </div>
-
-          <div class="feedback-content">
-            <p class="feedback-name">Leslie Alexander</p>
-            <div class="ratings">
-              <app-star-rating [readonly]="true" [rating]="4"></app-star-rating>
-            </div>
-            <p class="feedback-date">2nd September, 2023</p>
-            <p class="feedback-messgae">
-              I was looking for a bright light for the kitchen but wanted some
-              item more modern than a strip light. this one is perfect, very
-              bright and looks great. I can't comment on interlation as I had an
-              electrition instal it. Would recommend...
-            </p>
-          </div>
-        </div>
-        <hr />
-        <div class="feedbacks-block d-flex">
-          <div class="comment">
-            <div class="feedback-image">
-              <img src="assets\images\feedback-image.svg" alt="" />
-            </div>
-          </div>
-
-          <div class="feedback-content">
-            <p class="feedback-name">Leslie Alexander</p>
-            <div class="ratings">
-              <app-star-rating [readonly]="true" [rating]="4"></app-star-rating>
-            </div>
-            <p class="feedback-date">2nd September, 2023</p>
-            <p class="feedback-messgae">
-              I was looking for a bright light for the kitchen but wanted some
-              item more modern than a strip light. this one is perfect, very
-              bright and looks great. I can't comment on interlation as I had an
-              electrition instal it. Would recommend...
-            </p>
-          </div>
-        </div>
 
         <hr />
       </mat-tab>

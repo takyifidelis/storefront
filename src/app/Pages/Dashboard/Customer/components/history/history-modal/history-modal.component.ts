@@ -8,11 +8,13 @@ import {
 import { UserInterface } from '../../../../../../interfaces/all-interfaces';
 import { APIService } from '../../../../../../Services/api.service';
 import { ToastrService } from 'ngx-toastr';
+import { MatIconModule } from '@angular/material/icon';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-history-modal',
   standalone: true,
-  imports: [MatDialogTitle, MatDialogContent],
+  imports: [MatDialogTitle, MatDialogContent, MatIconModule, CommonModule],
   templateUrl: './history-modal.component.html',
   styleUrl: './history-modal.component.scss',
 })

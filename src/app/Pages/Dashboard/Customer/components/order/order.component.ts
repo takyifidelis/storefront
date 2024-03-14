@@ -17,14 +17,14 @@ import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
-import {
-  MatDialog,
-} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { OrderModalComponent } from '../order-modal/order-modal.component';
 import { dummyUserInterface } from '../../../../../interface/dummy-user.model';
 import { APIService } from '../../../../../Services/api.service';
 import { CommonModule, DatePipe } from '@angular/common';
 import { DataService } from '../../../../../Services/data.service';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faCheck, faFilter, faSearch } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-order',
@@ -40,12 +40,12 @@ import { DataService } from '../../../../../Services/data.service';
     MatSortModule,
     MatPaginatorModule,
     MatDialogModule,
-    CommonModule
+    CommonModule,
+    FontAwesomeModule,
   ],
   templateUrl: './order.component.html',
   styleUrl: './order.component.scss',
 })
-
 export class OrderComponent implements OnInit {
   displayedColumns: string[] = [
     'checkbox',
@@ -61,6 +61,10 @@ export class OrderComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   orders: any;
+  filterIcon = faFilter;
+  seaechICon = faSearch;
+  checkIcon = faCheck;
+  numOfOrders!: number;
 
   users = [
     {
@@ -75,31 +79,34 @@ export class OrderComponent implements OnInit {
   unsorted: any = [];
   sorted: any = [];
   formattedDate!: string | null;
-   datepipe: DatePipe = new DatePipe('en-US');
+  datepipe: DatePipe = new DatePipe('en-US');
   isAllActive: boolean = false;
   isProcessingActive: boolean = false;
   isShippedActive: boolean = false;
   isDeliveredActive: boolean = false;
 
-
-  constructor(public dialog: MatDialog, private apiService: APIService, private elementRef: ElementRef) {
-
+  constructor(
+    public dialog: MatDialog,
+    private apiService: APIService,
+    private elementRef: ElementRef
+  ) {
     this.dataSource = new MatTableDataSource(this.users);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-    
   }
 
   ngOnInit(): void {
-    
-    this.apiService.getOrders(localStorage.getItem('customerId')!).subscribe((res: any) =>{
-      this.orders = res;
-      this.unsorted = this.orders.data;
-      this.dataSource = new MatTableDataSource(this.orders.data);
-      this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-    })
-  this.isAllActive = true;
+    this.apiService
+      .getOrders(localStorage.getItem('customerId')!)
+      .subscribe((res: any) => {
+        this.orders = res;
+        this.unsorted = this.orders.data;
+        this.numOfOrders = this.orders.data.length;
+        this.dataSource = new MatTableDataSource(this.orders.data);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      });
+    this.isAllActive = true;
   }
 
   moreVert(e: dummyUserInterface) {
@@ -109,7 +116,10 @@ export class OrderComponent implements OnInit {
       position: { right: '50px', top: '10%' },
     });
   }
-
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
   isAllSelected() {
     const numSelected = this.selection.selected.length;
     const numRows = this.dataSource.data.length;
@@ -143,25 +153,25 @@ export class OrderComponent implements OnInit {
   }
 
   onSort(status: string) {
-    if(status === "All" ){
+    if (status === 'All') {
       this.isAllActive = true;
       this.isProcessingActive = false;
       this.isShippedActive = false;
       this.isDeliveredActive = false;
     }
-    if(status === "Processing"){
+    if (status === 'Processing') {
       this.isProcessingActive = true;
       this.isAllActive = false;
       this.isShippedActive = false;
       this.isDeliveredActive = false;
     }
-    if(status === "Shipped"){
+    if (status === 'Shipped') {
       this.isShippedActive = true;
       this.isAllActive = false;
       this.isProcessingActive = false;
       this.isDeliveredActive = false;
     }
-    if(status === "Delivered"){
+    if (status === 'Delivered') {
       this.isDeliveredActive = true;
       this.isAllActive = false;
       this.isProcessingActive = false;
@@ -172,14 +182,11 @@ export class OrderComponent implements OnInit {
       if (order.status === status) {
         this.sorted.push(order);
         // console.log(this.sorted)
-    this.dataSource = new MatTableDataSource(this.sorted);
-
-      }else if (status === 'All'){
-this.dataSource = new MatTableDataSource(this.unsorted)
+        this.dataSource = new MatTableDataSource(this.sorted);
+      } else if (status === 'All') {
+        this.dataSource = new MatTableDataSource(this.unsorted);
       }
-
     });
     this.dataSource = new MatTableDataSource(this.sorted);
   }
- 
 }

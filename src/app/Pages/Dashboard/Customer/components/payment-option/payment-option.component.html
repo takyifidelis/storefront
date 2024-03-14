@@ -1,14 +1,15 @@
 <div class="container-fluid" style="padding-left: 32px; padding-right: 32px">
-  <div class="row justify-content-between" style="padding-left: 41px">
-    <div class="col">
+  <div class="d-flex justify-content-between">
+    <div class="header-title">
       <h4>Payment Option</h4>
     </div>
-    <div
-      class="col d-flex justify-content-end align-items-center"
-      style="gap: 10px; padding-right: 31px"
-    >
+    <div class="d-flex justify-content-end align-items-center searching-filter">
       <button class="d-flex justify-content-around button">
-        <fa-icon [icon]="filterIcon" class="filter"></fa-icon>
+        <fa-icon
+          [icon]="filterIcon"
+          class="filter"
+          style="color: #1b4dff"
+        ></fa-icon>
         <p>Filter</p>
       </button>
       <form>
@@ -28,7 +29,7 @@
   <section class="card-container d-flex justify-content-center">
     <div class="card-blocks">
       <mat-radio-group aria-label="Select an option" class="d-flex flex-column">
-        <mat-radio-button value="1">
+        <mat-radio-button value="1" checked>
           <div class="card-div d-flex align-items-start justify-content-start">
             <div class="card-image">
               <img src="assets\images\visa.svg" alt="" />

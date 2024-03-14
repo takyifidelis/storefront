@@ -120,3 +120,95 @@
     color: #fff;
   }
 }
+.mat-mdc-radio-button {
+  border: 1px solid #eaecf0;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  padding-left: 1rem;
+  padding-right: 40rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  background-color: #fff;
+}
+.mat-accent.mat-mdc-radio-checked {
+  border: 1px solid #0408e7;
+  background-color: #f5f5ff;
+  color: var(--Primary-800, #0306ba);
+  .card-name,
+  .card-number,
+  .card-expiry,
+  .default {
+    color: var(--Primary-800, #0306ba);
+  }
+}
+.card-blocks {
+  margin-top: 5rem;
+}
+.card-image {
+  margin-right: 1rem;
+}
+.card-name {
+  color: #344054;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px;
+  letter-spacing: -0.2px;
+}
+.card-number {
+  color: var(--Gray-700, #344054);
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: -0.2px;
+}
+.card-expiry {
+  color: var(--Gray-500, #667085);
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: -0.2px;
+}
+.default {
+  color: var(--Gray-500, #667085);
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: -0.2px;
+}
+.edit {
+  color: var(--Primary-700, #0408e7);
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: -0.2px;
+}
+.paypal-image {
+  padding: 6.64px 16.21px 5.807px 15.397px;
+  border-radius: 4px;
+  border: 1px solid var(--Gray-100, #f2f4f7);
+  background: var(--Base-White, #fff);
+}
+.header-title {
+  color: var(--Colors-Primary-Slate-600, #455468);
+  font-family: Inter;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 35px;
+  letter-spacing: -0.3px;
+}
+.new-payment,
+.search,
+.button {
+  margin-left: 0.5rem;
+}
