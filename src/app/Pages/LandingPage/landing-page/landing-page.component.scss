@@ -114,9 +114,14 @@ nav {
   }
 }
 #about {
-  padding: 5rem;
+  padding: 10rem;
   padding-left: 0;
-  margin-left: 7%;
+  margin-left: 2rem;
+  position: relative;
+  .second-image {
+    position: absolute;
+    left: 5rem;
+  }
   article {
     margin: auto;
     padding: 4rem;
