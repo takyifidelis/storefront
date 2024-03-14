@@ -2,7 +2,7 @@
   <div class="header d-flex align-items-center justify-content-between">
     <div class="d-flex align-items-center">
       <h2 class="m-0 header-title">Product</h2>
-      <span class="product-members"
+      <span class="product-members" *ngIf="!isLoading"
         >{{ numOfFavoriteProducts }} Product<span *ngIf="isOneProduct"
           >s</span
         ></span
@@ -136,6 +136,15 @@
         </span>
       </td>
     </ng-container>
+    <tr class="mat-row" *matNoDataRow>
+      <td
+        class="mat-cell no-result"
+        colspan="4"
+        *ngIf="numOfFavoriteProducts > 0"
+      >
+        No data matching "{{ input.value }}"
+      </td>
+    </tr>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
 
@@ -145,4 +154,14 @@
     [pageSizeOptions]="[10, 25, 100]"
     aria-label="Select page of users"
   ></mat-paginator>
+  <div class="loading-spinner-small" *ngIf="isLoading">
+    <img
+      src="assets\icons\loading-btn-spinner.svg"
+      alt="Loading.."
+      class="spinner-image"
+    />
+  </div>
+  <div class="no-result-found" *ngIf="numOfFavoriteProducts === 0">
+    No Product Found
+  </div>
 </div>

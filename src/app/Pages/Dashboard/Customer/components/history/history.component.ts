@@ -16,6 +16,7 @@ import { UserInterface } from '../../../../../interfaces/all-interfaces';
 import { RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faFilter, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { CommonModule, DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-history',
@@ -33,6 +34,7 @@ import { faFilter, faSearch } from '@fortawesome/free-solid-svg-icons';
     HistoryModalComponent,
     RouterModule,
     FontAwesomeModule,
+    CommonModule,
   ],
   templateUrl: './history.component.html',
   styleUrl: './history.component.scss',
@@ -55,6 +57,7 @@ export class HistoryComponent implements OnInit {
   users: UserInterface[] = [];
   filterIcon = faFilter;
   seaechICon = faSearch;
+  isLoading: boolean = false;
 
   constructor(private apiService: APIService, public dialog: MatDialog) {
     this.dataSource = new MatTableDataSource(this.users);
@@ -63,9 +66,11 @@ export class HistoryComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.isLoading = true;
     this.apiService
       .getHistoryProducts(localStorage.getItem('customerId')!)
       .subscribe((response: any) => {
+        this.isLoading = false;
         this.cart = response.data;
         this.favProducts = response.data.length;
         this.dataSource = new MatTableDataSource(this.cart);

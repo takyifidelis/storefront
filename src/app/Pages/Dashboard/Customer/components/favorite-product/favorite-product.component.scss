@@ -168,3 +168,35 @@
   line-height: 35px;
   letter-spacing: -0.3px;
 }
+.no-result {
+  text-align: center;
+  color: #455468;
+  font-family: Inter;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 28px;
+  letter-spacing: -0.3px;
+  max-width: 8rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-wrap: nowrap;
+  overflow: hidden;
+}
+.no-result-found {
+  text-align: center;
+  color: #455468;
+  font-family: Inter;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 28px;
+  letter-spacing: -0.3px;
+}
+
+.loading-spinner-small {
+  text-align: center;
+  .spinner-image {
+    width: 10rem;
+  }
+}

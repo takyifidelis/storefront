@@ -1,6 +1,4 @@
-
 <h2 mat-dialog-title>Order Details</h2>
-
 
 <mat-dialog-content>
   <mat-tab-group>
@@ -18,7 +16,22 @@
               {{ item.name }}
             </div>
           </div>
-          <div class="product-amount">${{ item.price }}</div>
+          <div class="product-amount">
+            <div class="amount-quantity d-flex justify-content-between">
+              <div class="product-amount product-price">
+                Amount :
+                <span class="discount-price">
+                  ${{ item.price * ((100 - item.discount) / 100) }}
+                </span>
+                <span class="actual-price" *ngIf="item.discount > 0"
+                  >${{ item.price }}</span
+                >
+                <span class="discount-percent" *ngIf="item.discount > 0">
+                  {{ item.discount }}<span class="per-off">% OFF</span></span
+                >
+              </div>
+            </div>
+          </div>
         </div>
         <hr />
         <div
