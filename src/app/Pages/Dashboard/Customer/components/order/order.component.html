@@ -34,27 +34,31 @@
   </div>
   <div class="sub-header d-flex" style="align-items: center; gap: 8px">
     <span
+      class="status"
       [ngClass]="isAllActive ? 'active' : ''"
       style="cursor: pointer"
-      (click)="onSort('All')"
+      (click)="onSort('All'); switchTab('All')"
       >All</span
     >
     <span
+      class="status"
       [ngClass]="isProcessingActive ? 'active' : ''"
       style="cursor: pointer"
-      (click)="onSort('Processing')"
+      (click)="onSort('Processing'); switchTab('Processing')"
       >Processing</span
     >
     <span
+      class="status"
       [ngClass]="isShippedActive ? 'active' : ''"
       style="cursor: pointer"
-      (click)="onSort('Shipped')"
+      (click)="onSort('Shipped'); switchTab('Shipped')"
       >Shipped</span
     >
     <span
+      class="status"
       [ngClass]="isDeliveredActive ? 'active' : ''"
       style="cursor: pointer"
-      (click)="onSort('Delivered')"
+      (click)="onSort('Delivered'); switchTab('Delivered')"
       >Delivered</span
     >
   </div>

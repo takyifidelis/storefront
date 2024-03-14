@@ -155,41 +155,40 @@ export class OrderComponent implements OnInit {
     this.dataSource.sort = this.sort;
   }
 
+  switchTab(tabName: string) {
+    this.isAllActive = false;
+    this.isProcessingActive = false;
+    this.isShippedActive = false;
+    this.isDeliveredActive = false;
+
+    // Activate the selected tab
+    switch (tabName) {
+      case 'All':
+        this.isAllActive = true;
+        break;
+      case 'Processing':
+        this.isProcessingActive = true;
+        break;
+      case 'Shipped':
+        this.isShippedActive = true;
+        break;
+      case 'Delivered':
+        this.isDeliveredActive = true;
+        break;
+      default:
+        break;
+    }
+  }
+
   onSort(status: string) {
-    if (status === 'All') {
-      this.isAllActive = true;
-      this.isProcessingActive = false;
-      this.isShippedActive = false;
-      this.isDeliveredActive = false;
-    }
-    if (status === 'Processing') {
-      this.isProcessingActive = true;
-      this.isAllActive = false;
-      this.isShippedActive = false;
-      this.isDeliveredActive = false;
-    }
-    if (status === 'Shipped') {
-      this.isShippedActive = true;
-      this.isAllActive = false;
-      this.isProcessingActive = false;
-      this.isDeliveredActive = false;
-    }
-    if (status === 'Delivered') {
-      this.isDeliveredActive = true;
-      this.isAllActive = false;
-      this.isProcessingActive = false;
-      this.isShippedActive = false;
-    }
     this.sorted = [];
     this.unsorted.forEach((order: any) => {
       if (order.status === status) {
         this.sorted.push(order);
-        // console.log(this.sorted)
         this.dataSource = new MatTableDataSource(this.sorted);
       } else if (status === 'All') {
         this.dataSource = new MatTableDataSource(this.unsorted);
       }
     });
-    this.dataSource = new MatTableDataSource(this.sorted);
   }
 }

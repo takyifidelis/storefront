@@ -138,7 +138,6 @@ export class MerchantOrdersComponent {
   }
 
   switchTab(tabName: string) {
-    // Reset all tab states
     this.isAllActive = false;
     this.isProcessingActive = false;
     this.isShippedActive = false;
@@ -174,5 +173,4 @@ export class MerchantOrdersComponent {
       }
     });
   }
-  //   ngOnInit():
 }
