@@ -60,24 +60,27 @@ export class MerchantAnalyticsComponent {
   selection = new SelectionModel<UserInterface>(true, []);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-
   users: UserInterface[] = [];
-
   formattedDate!: string | null;
   datepipe: DatePipe = new DatePipe('en-US');
   payout: any = [];
+payoutAvailable?: string;
 
   ngOnInit(): void {
     this.merchantPaymentEmpty = true;
     this.apiService
       .getPayouts(localStorage.getItem('storeId')!)
       .subscribe((res: any) => {
-        console.log(res);
         this.payout = res.data;
         if (this.payout.length > 0) {
           this.merchantPaymentEmpty = false;
         }
-        console.log(this.payout[0].orderPayout.orderId);
+
+        if(this.payout.length > 0){
+          this.payoutAvailable = `${this.payout.length} Payout Available`;
+        }else {
+          this.payoutAvailable = 'Payout Available';
+        }
         this.dataSource = new MatTableDataSource(this.payout);
       });
   }
@@ -89,18 +92,15 @@ export class MerchantAnalyticsComponent {
   }
   showSelection(e: any) {
     e.stopPropagation();
-    console.log(this.selection.selected);
   }
   /** Selects all rows if they are not all selected; otherwise clear selection. */
   toggleAllRows() {
     if (this.isAllSelected()) {
       this.selection.clear();
-      console.log(this.selection.selected);
       return;
     }
 
     this.selection.select(...this.dataSource.data);
-    console.log(this.selection.selected);
   }
 
   /** The label for the checkbox on the passed row */

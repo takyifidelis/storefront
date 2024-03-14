@@ -17,8 +17,9 @@
 </div>
 } @if(!merchantPaymentEmpty){
 <div class="container-fluid">
-  <div class="d-flex mb-5 align-items-center gap-3">
-    <h2 class="m-0">Orders</h2>
+  <div class="d-flex mb-5 align-items-center gap-3 mt-4">
+    <h2>Payout</h2>
+    <span class="payout-availabity">{{ payoutAvailable }}</span>
   </div>
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
     <ng-container matColumnDef="paymentMethod">
@@ -77,8 +78,8 @@
       >
         Total Cost
       </th>
-      <td class="content total" mat-cell *matCellDef="let row">
-        {{ row.currency }} {{ row.orderPayout.amount }}
+      <td class="total" mat-cell *matCellDef="let row">
+        ${{ row.orderPayout.amount }}
       </td>
     </ng-container>
 
@@ -115,7 +116,7 @@
         Recieved
       </th>
       <td class="content recieved" mat-cell *matCellDef="let row">
-        {{ row.currency }} {{ row.amount }}
+        ${{ row.amount }}
       </td>
     </ng-container>
 
