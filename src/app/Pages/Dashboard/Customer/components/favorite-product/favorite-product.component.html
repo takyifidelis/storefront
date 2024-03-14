@@ -136,6 +136,15 @@
         </span>
       </td>
     </ng-container>
+    <tr class="mat-row" *matNoDataRow>
+      <td
+        class="mat-cell no-result"
+        colspan="4"
+        *ngIf="numOfFavoriteProducts > 0"
+      >
+        No data matching "{{ input.value }}"
+      </td>
+    </tr>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
 

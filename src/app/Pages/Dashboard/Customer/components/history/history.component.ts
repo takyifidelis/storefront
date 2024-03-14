@@ -16,6 +16,7 @@ import { UserInterface } from '../../../../../interfaces/all-interfaces';
 import { RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faFilter, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { CommonModule, DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-history',
@@ -33,6 +34,7 @@ import { faFilter, faSearch } from '@fortawesome/free-solid-svg-icons';
     HistoryModalComponent,
     RouterModule,
     FontAwesomeModule,
+    CommonModule,
   ],
   templateUrl: './history.component.html',
   styleUrl: './history.component.scss',

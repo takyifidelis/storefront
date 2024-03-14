@@ -18,6 +18,7 @@
     overflow: hidden;
     width: 70%;
     text-wrap: nowrap;
+    white-space: nowrap;
     text-transform: capitalize;
   }
   .product-amount {
@@ -134,5 +135,36 @@ form {
     font-weight: 500;
     line-height: 14px;
     border-radius: 0;
+  }
+}
+
+.product-price {
+  color: #1c222b;
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 28px;
+  letter-spacing: -0.3px;
+
+  .discount-price {
+    color: #1c222b;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 28px;
+    letter-spacing: -0.3px;
+  }
+  .actual-price {
+    color: #afbaca;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 20px; /* 142.857% */
+    text-decoration: line-through;
+  }
+  .discount-percent {
+    color: #d21a0e;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 20px;
   }
 }
