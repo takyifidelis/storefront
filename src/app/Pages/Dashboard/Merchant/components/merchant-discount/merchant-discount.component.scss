@@ -107,7 +107,7 @@
   width: 556px;
   justify-content: center;
   align-items: center;
-  margin-top: 10rem;
+
   span {
     display: flex;
     justify-content: center;
@@ -151,7 +151,6 @@
     font-style: normal;
     font-weight: 400;
     line-height: 24px;
-    margin-top: 32px;
   }
 }
 .discount-form {
@@ -291,4 +290,9 @@
   font-weight: 500;
   line-height: 28px;
   letter-spacing: -0.3px;
+}
+::ng-deep .mat-drawer-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

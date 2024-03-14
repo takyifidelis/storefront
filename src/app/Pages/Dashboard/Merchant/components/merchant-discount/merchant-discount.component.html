@@ -1,3 +1,130 @@
+<form
+  action="#"
+  method="post"
+  class="discount-form"
+  #postDiscount="ngForm"
+  [formGroup]="addDiscount"
+  (ngSubmit)="onSubmit(postDiscount)"
+  *ngIf="showInitialForm && merchantDiscountEmpty"
+>
+  <div class="discount-head d-flex justify-content-between align-items-center">
+    <h4 class="discount-heading">Discount</h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="productFormDisplay()"
+    ></button>
+  </div>
+  <div class="form-group discount-name">
+    <label for="discount">Discount Name</label>
+    <input
+      type="text"
+      id="discount"
+      name="discount"
+      class="form-control"
+      placeholder="eg. Black Friday"
+      formControlName="discountName"
+    />
+  </div>
+  <div class="form-group d-flex align-items-center orders-quantity">
+    <div class="applies-to">
+      <label for="the-orders">Applies to</label>
+      <select
+        class="form-select"
+        id="the-orders"
+        formControlName="storeCategory"
+      >
+        <option selected>Selected Product</option>
+        <option *ngFor="let cat of storeCategories">
+          {{ cat }}
+        </option>
+      </select>
+    </div>
+    <div class="discount-quantity">
+      <label for="quantity"></label>
+      <input
+        type="number"
+        id="quantity"
+        name="quantity"
+        class="form-control"
+        placeholder="Discount %"
+        formControlName="quantity"
+        min="1"
+        max="100"
+      />
+    </div>
+  </div>
+  <div class="discount-date d-flex align-items-center">
+    <div class="form-group start-date">
+      <label for="startDate">Start Date</label>
+      <input
+        type="date"
+        id="startDate"
+        name="startDate"
+        class="form-control"
+        placeholder="Start date"
+        formControlName="startDate"
+      />
+    </div>
+    <div class="form-group end-date">
+      <label for="endDate">End</label>
+      <input
+        type="date"
+        id="endDate"
+        name="endDate"
+        class="form-control"
+        placeholder="End date"
+        formControlName="endDate"
+      />
+    </div>
+  </div>
+  <div class="discount-btns">
+    <button class="btn cancel-btn" type="button" (click)="productFormDisplay()">
+      Cancel
+    </button>
+    <button
+      class="btn btn-primary"
+      type="submit"
+      [disabled]="!postDiscount.valid"
+    >
+      Send
+    </button>
+  </div>
+</form>
+
+@if(merchantDiscountEmpty){
+<div class="d-flex justify-content-center align-items-center">
+  <div class="empty-dashboard">
+    <span>
+      <img src="/assets/icons/merchant_discount_empty.svg" alt="" srcset="" />
+    </span>
+    <h1>No discounts found</h1>
+    <p>
+      It seems there are no discounts available at the moment. Start by adding a
+      new discount below.
+    </p>
+    <button class="btn btn-primary" (click)="showInitialForm = true">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="21"
+        height="21"
+        viewBox="0 0 21 21"
+        fill="none"
+      >
+        <path
+          d="M10.5 4.50586V16.1725M4.66669 10.3392H16.3334"
+          stroke="white"
+          stroke-width="1.66667"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+      <span>New Discount</span>
+    </button>
+  </div>
+</div>
+} @if(!merchantDiscountEmpty){
 <div class="main-container">
   <div class="product-header d-flex align-items-center justify-content-between">
     <div class="product-title d-flex align-items-center">
@@ -131,21 +258,6 @@
     </div>
   </form>
 </div>
-
-@if(merchantDiscountEmpty){
-<div class="d-flex justify-content-center align-items-center">
-  <div class="empty-dashboard">
-    <span>
-      <img src="/assets/icons/merchant_discount_empty.svg" alt="" srcset="" />
-    </span>
-    <h1>No discounts found</h1>
-    <p>
-      It seems there are no discounts available at the moment. Start by adding a
-      new discount below.
-    </p>
-  </div>
-</div>
-} @if(!merchantDiscountEmpty){
 
 <div class="table-div">
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">

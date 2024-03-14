@@ -79,6 +79,7 @@ export class MerchantDiscountComponent {
   isLoading: boolean = false;
   addDiscount: FormGroup;
   discountNumber!: any;
+  showInitialForm!: boolean;
   storeCategories: string[] = [];
   constructor(
     private apiService: APIService,
@@ -122,6 +123,9 @@ export class MerchantDiscountComponent {
 
   toggleForm() {
     this.showForm = !this.showForm;
+  }
+  productFormDisplay() {
+    this.showInitialForm = !this.showInitialForm;
   }
 
   // console.log(e);

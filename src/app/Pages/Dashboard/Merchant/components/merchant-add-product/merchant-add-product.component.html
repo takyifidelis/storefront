@@ -6,14 +6,6 @@
       >
         <div class="product-name">
           <h4 class="product-header">Product</h4>
-          <div class="product-name-paragraph">
-            <span class="product-name light">
-              Page name
-              <img src="assets\icons\product-name-arrow.svg" alt="" /> Page name
-              <img src="assets\icons\product-name-arrow.svg" alt="" />
-            </span>
-            <span class="product-name bold"> Page name </span>
-          </div>
         </div>
         <div class="save-cancel">
           <button
@@ -25,8 +17,20 @@
           </button>
 
           <button type="submit" class="btn btn-primary">
-            <span (click)="onSubmit()" class="saving" *ngIf="!isLoading && !dataService.isProductUpdateInstance"> Save</span>
-            <span (click)="onUpdate()" class="saving" *ngIf="!isLoading && dataService.isProductUpdateInstance"> update</span>
+            <span
+              (click)="onSubmit()"
+              class="saving"
+              *ngIf="!isLoading && !dataService.isProductUpdateInstance"
+            >
+              Save</span
+            >
+            <span
+              (click)="onUpdate()"
+              class="saving"
+              *ngIf="!isLoading && dataService.isProductUpdateInstance"
+            >
+              update</span
+            >
             <span class="loading" *ngIf="isLoading" style="padding: 0 0.45rem"
               ><img
                 src="assets\icons\loading-btn-spinner.svg"
@@ -140,8 +144,8 @@
               class="form-group form-control"
               (change)="onStatusChange($event)"
             >
-              <option value=true>Active</option>
-              <option value=false>Not Active</option>
+              <option value="true">Active</option>
+              <option value="false">Not Active</option>
             </select>
           </div>
         </div>
@@ -212,7 +216,10 @@
               variation
             </p>
           </div>
-          <div class="media-sizes" *ngFor="let variation of DisplayedVariationArray">
+          <div
+            class="media-sizes"
+            *ngFor="let variation of DisplayedVariationArray"
+          >
             <div class="head d-flex align-items-center justify-content-between">
               <h4 class="size-header product-header">{{ variation.type }}</h4>
             </div>
@@ -326,7 +333,10 @@
               </div>
             </div>
             <div class="variation-btn">
-              <button class="btn btn-primary add-cat-btn" (click)="addVariation(key.value, variValue.value)">
+              <button
+                class="btn btn-primary add-cat-btn"
+                (click)="addVariation(key.value, variValue.value)"
+              >
                 Add
               </button>
             </div>
