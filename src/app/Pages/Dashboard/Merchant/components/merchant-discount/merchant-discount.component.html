@@ -24,7 +24,7 @@
       name="discount"
       class="form-control"
       placeholder="eg. Black Friday"
-      formControlName="discountName"
+      formControlName="discountNameInit"
     />
   </div>
   <div class="form-group d-flex align-items-center orders-quantity">
@@ -33,7 +33,7 @@
       <select
         class="form-select"
         id="the-orders"
-        formControlName="storeCategory"
+        formControlName="storeCategoryInit"
       >
         <option selected>Selected Product</option>
         <option *ngFor="let cat of storeCategories">
@@ -49,7 +49,7 @@
         name="quantity"
         class="form-control"
         placeholder="Discount %"
-        formControlName="quantity"
+        formControlName="quantityInit"
         min="1"
         max="100"
       />
@@ -64,7 +64,7 @@
         name="startDate"
         class="form-control"
         placeholder="Start date"
-        formControlName="startDate"
+        formControlName="startDateInit"
       />
     </div>
     <div class="form-group end-date">
@@ -75,7 +75,7 @@
         name="endDate"
         class="form-control"
         placeholder="End date"
-        formControlName="endDate"
+        formControlName="endDateInit"
       />
     </div>
   </div>

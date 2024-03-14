@@ -78,6 +78,7 @@ export class MerchantDiscountComponent {
   showForm: boolean = false;
   isLoading: boolean = false;
   addDiscount: FormGroup;
+  addDiscountInit: FormGroup;
   discountNumber!: any;
   showInitialForm!: boolean;
   storeCategories: string[] = [];
@@ -94,6 +95,13 @@ export class MerchantDiscountComponent {
       quantity: new FormControl('', Validators.required),
       startDate: new FormControl('', Validators.required),
       endDate: new FormControl('', Validators.required),
+    });
+    this.addDiscountInit = new FormGroup({
+      discountNameInit: new FormControl('', Validators.required),
+      storeCategoryInit: new FormControl('', Validators.required),
+      quantityInit: new FormControl('', Validators.required),
+      startDateInit: new FormControl('', Validators.required),
+      endDateInit: new FormControl('', Validators.required),
     });
   }
 
@@ -224,6 +232,43 @@ export class MerchantDiscountComponent {
     const discount = Number(form.value.quantity);
     const end = new Date(form.value.endDate);
     const start = new Date(form.value.startDate);
+    console.log(form.value.quantity);
+    this.apiService
+      .addPromotionToStore(
+        end,
+        name,
+        discount,
+        statement,
+        start,
+        localStorage.getItem('storeId')!
+      )
+      .subscribe(
+        (resData) => {
+          console.log(resData);
+          this.ngOnInit();
+          this.toastr.info(resData.message, 'Success');
+
+          // this.dataSource = new MatTableDataSource(resData['data']);
+        },
+        (errorMessage) => {
+          console.log(errorMessage);
+          this.toastr.error(
+            errorMessage.error.message,
+            errorMessage.error.type
+          );
+        }
+      );
+    form.reset();
+  }
+  onSubmitInitial(form: FormGroupDirective) {
+    if (!form.valid) {
+      return;
+    }
+    const name = form.value.discountNameInit;
+    const statement = form.value.storeCategoryInit;
+    const discount = Number(form.value.quantityInit);
+    const end = new Date(form.value.endDateInit);
+    const start = new Date(form.value.startDateInit);
     console.log(form.value.quantity);
     this.apiService
       .addPromotionToStore(
