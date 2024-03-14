@@ -112,18 +112,15 @@ export class MerchantReviewsComponent {
   }
   showSelection(e: any) {
     e.stopPropagation();
-    console.log(this.selection.selected);
   }
   /** Selects all rows if they are not all selected; otherwise clear selection. */
   toggleAllRows() {
     if (this.isAllSelected()) {
       this.selection.clear();
-      console.log(this.selection.selected);
       return;
     }
 
     this.selection.select(...this.dataSource.data);
-    console.log(this.selection.selected);
   }
 
   ngAfterViewInit() {
