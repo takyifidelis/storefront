@@ -1,6 +1,36 @@
 <div class="container-fluid">
-  <div class="d-flex mb-5 align-items-center gap-3">
-    <h2 class="m-0">Orders</h2>
+  <div class="header d-flex align-items-center justify-content-between">
+    <div class="d-flex align-items-center">
+      <h2 class="order-header">Orders</h2>
+      <span class="product-members"
+        >{{ numOfOrders }} Order<span *ngIf="numOfOrders !== 1">s</span></span
+      >
+    </div>
+    <div class="search-filter">
+      <div class="search-filter">
+        <div class="col d-flex justify-content-end align-items-center">
+          <button class="d-flex justify-content-around button">
+            <fa-icon [icon]="filterIcon" style="font-size: 15px"></fa-icon>
+            <p>Filter</p>
+          </button>
+          <form>
+            <div class="search d-flex">
+              <fa-icon
+                [icon]="seaechICon"
+                style="font-size: 15px; color: #1b4dff"
+              ></fa-icon>
+              <input
+                type="text"
+                placeholder="Search........"
+                (keyup)="applyFilter($event)"
+                #input
+                matInput
+              />
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="sub-header d-flex" style="align-items: center; gap: 8px">
     <span

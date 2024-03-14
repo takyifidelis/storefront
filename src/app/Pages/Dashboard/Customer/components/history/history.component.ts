@@ -14,6 +14,8 @@ import { HistoryModalComponent } from './history-modal/history-modal.component';
 import { MatDialog } from '@angular/material/dialog';
 import { UserInterface } from '../../../../../interfaces/all-interfaces';
 import { RouterModule } from '@angular/router';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faFilter, faSearch } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-history',
@@ -30,6 +32,7 @@ import { RouterModule } from '@angular/router';
     MatPaginatorModule,
     HistoryModalComponent,
     RouterModule,
+    FontAwesomeModule,
   ],
   templateUrl: './history.component.html',
   styleUrl: './history.component.scss',
@@ -50,6 +53,8 @@ export class HistoryComponent implements OnInit {
   cart: any = [];
   favProducts!: number;
   users: UserInterface[] = [];
+  filterIcon = faFilter;
+  seaechICon = faSearch;
 
   constructor(private apiService: APIService, public dialog: MatDialog) {
     this.dataSource = new MatTableDataSource(this.users);
@@ -82,6 +87,10 @@ export class HistoryComponent implements OnInit {
         console.log(resData);
         this.ngOnInit();
       });
+  }
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
   // the code below is all for the checkboxes in the table
