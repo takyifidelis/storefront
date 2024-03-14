@@ -1,3 +1,20 @@
+@if(customerOrdersEmpty){
+<div class="d-flex justify-content-center align-items-center h-100 main-empty">
+  <div class="empty-dashboard">
+    <span>
+      <img src="/assets/images/Empty_Cart_merchant.svg" alt="" srcset="" />
+    </span>
+    <h1>
+      Your cart is currently <br />
+      empty
+    </h1>
+    <p>
+      Looks like you haven't received any orders yet. <br />
+      Start by adding a new order to get things going.
+    </p>
+  </div>
+</div>
+} @if(!customerOrdersEmpty){
 <div class="container-fluid">
   <div class="header d-flex align-items-center justify-content-between">
     <div class="d-flex align-items-center">
@@ -214,3 +231,4 @@
   </div>
   <div class="no-result-found" *ngIf="numOfOrders === 0">No Order Found</div>
 </div>
+}

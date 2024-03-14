@@ -1,3 +1,19 @@
+@if(customerFavoriteEmpty){
+<div class="empty-main">
+  <div class="empty-dashboard">
+    <div>
+      <img src="assets\images\product-review-icon.svg" alt="" />
+    </div>
+    <h1 class="empty-header">No products found</h1>
+    <p class="empty-paragraph">
+      It seems there are no products matching your <br />
+      criteria. To get started, click the button below to <br />
+      add a new product
+    </p>
+  </div>
+</div>
+
+} @if(!customerFavoriteEmpty){
 <div class="container-fluid">
   <div class="header d-flex align-items-center justify-content-between">
     <div class="d-flex align-items-center">
@@ -165,3 +181,4 @@
     No Product Found
   </div>
 </div>
+}

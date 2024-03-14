@@ -71,6 +71,7 @@ export class FavoriteProductComponent implements OnInit {
   seaechICon = faSearch;
   checkIcon = faCheck;
   isLoading: boolean = false;
+  customerFavoriteEmpty: boolean = false;
 
   constructor(
     public dialog: MatDialog,
@@ -82,6 +83,7 @@ export class FavoriteProductComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoading = true;
+    this.customerFavoriteEmpty = true;
     this.apiService
       .getSavedProducts(localStorage.getItem('customerId')!)
       .subscribe((res: any) => {
@@ -93,6 +95,9 @@ export class FavoriteProductComponent implements OnInit {
           this.isOneProduct = true;
         } else {
           this.isOneProduct = true;
+        }
+        if (this.numOfFavoriteProducts > 0) {
+          this.customerFavoriteEmpty = false;
         }
         this.isOneProduct;
         this.dataSource = new MatTableDataSource(this.products);
