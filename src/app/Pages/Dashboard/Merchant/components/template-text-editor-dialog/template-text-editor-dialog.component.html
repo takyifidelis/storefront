@@ -1,0 +1,6 @@
+<h2 mat-dialog-title>Editing Template text</h2>
+<ckeditor [editor]="Editor" [(ngModel)]="textContent"></ckeditor>
+<mat-dialog-actions>
+    <button mat-button (click)="saveEditedText(true)" class="danger">Cancel</button>
+    <button mat-button (click)="saveEditedText()">Save</button>
+  </mat-dialog-actions>
