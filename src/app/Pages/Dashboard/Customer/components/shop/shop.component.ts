@@ -10,34 +10,39 @@ import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-shop',
   standalone: true,
-  imports: [
-    MatIconModule,
-    MatInputModule,
-    CommonModule,
-    FormsModule
-
-  ],
+  imports: [MatIconModule, MatInputModule, CommonModule, FormsModule],
   templateUrl: './shop.component.html',
-  styleUrl: './shop.component.scss'
+  styleUrl: './shop.component.scss',
 })
-export class ShopComponent implements OnInit{
+export class ShopComponent implements OnInit {
   stores: any = [];
   searchShop: string = '';
   filteredItems: any = [];
+  isLoading: boolean = false;
+  numberOfStores!: number;
 
-  constructor(private apiService:APIService, private router:Router,private dataService:DataService){}
+  constructor(
+    private apiService: APIService,
+    private router: Router,
+    private dataService: DataService
+  ) {}
 
-  goToStore(store:any){
+  goToStore(store: any) {
     // console.log(store)
     // this.dataService.template = JSON.parse(store.template.options)
-    localStorage.setItem('storeId',store.id)
+    localStorage.setItem('storeId', store.id);
     // console.log(this.dataService.template)
     this.router.navigate(['/ecommerce']);
   }
 
   ngOnInit(): void {
+    this.isLoading = true;
     this.apiService.getStores().subscribe((response: any) => {
       this.stores = response.data;
+
+      this.numberOfStores = response.data.length;
+
+      this.isLoading = false;
     });
 
     this.filterItems();
@@ -47,13 +52,15 @@ export class ShopComponent implements OnInit{
     this.apiService.getStores().subscribe((response: any) => {
       this.stores = response.data;
 
-      if(this.searchShop === ''){
+      if (this.searchShop === '') {
         this.filteredItems = this.stores;
-      }else {
+      } else {
         this.filteredItems = this.stores.filter((shop: any) => {
-          return shop.storeName.toLowerCase().includes(this.searchShop.toLowerCase())
+          return shop.storeName
+            .toLowerCase()
+            .includes(this.searchShop.toLowerCase());
         });
       }
-    })
-    }
+    });
+  }
 }

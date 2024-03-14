@@ -2,7 +2,7 @@
   <div class="header d-flex align-items-center justify-content-between">
     <div class="d-flex align-items-center">
       <h2 class="m-0 header-title">Product</h2>
-      <span class="product-members"
+      <span class="product-members" *ngIf="!isLoading"
         >{{ numOfFavoriteProducts }} Product<span *ngIf="isOneProduct"
           >s</span
         ></span
@@ -154,4 +154,14 @@
     [pageSizeOptions]="[10, 25, 100]"
     aria-label="Select page of users"
   ></mat-paginator>
+  <div class="loading-spinner-small" *ngIf="isLoading">
+    <img
+      src="assets\icons\loading-btn-spinner.svg"
+      alt="Loading.."
+      class="spinner-image"
+    />
+  </div>
+  <div class="no-result-found" *ngIf="numOfFavoriteProducts === 0">
+    No Product Found
+  </div>
 </div>

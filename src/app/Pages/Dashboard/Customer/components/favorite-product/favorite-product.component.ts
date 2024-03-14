@@ -70,6 +70,7 @@ export class FavoriteProductComponent implements OnInit {
   filterIcon = faFilter;
   seaechICon = faSearch;
   checkIcon = faCheck;
+  isLoading: boolean = false;
 
   constructor(
     public dialog: MatDialog,
@@ -80,11 +81,13 @@ export class FavoriteProductComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.isLoading = true;
     this.apiService
       .getSavedProducts(localStorage.getItem('customerId')!)
       .subscribe((res: any) => {
         this.products = res.data;
         console.log(res.data);
+        this.isLoading = false;
         this.numOfFavoriteProducts = res.data.length;
         if (this.numOfFavoriteProducts === 1) {
           this.isOneProduct = true;

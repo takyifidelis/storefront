@@ -47,3 +47,12 @@
     </div> -->
   </div>
 </div>
+
+<div class="loading-spinner-small" *ngIf="isLoading">
+  <img
+    src="assets\icons\loading-btn-spinner.svg"
+    alt="Loading.."
+    class="spinner-image"
+  />
+</div>
+<div class="no-result-found" *ngIf="numberOfStores === 0">No Store Found</div>

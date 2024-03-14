@@ -65,6 +65,7 @@ export class OrderComponent implements OnInit {
   seaechICon = faSearch;
   checkIcon = faCheck;
   numOfOrders!: number;
+  isLoading: boolean = false;
 
   users = [
     {
@@ -96,9 +97,11 @@ export class OrderComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.isLoading = true;
     this.apiService
       .getOrders(localStorage.getItem('customerId')!)
       .subscribe((res: any) => {
+        this.isLoading = false;
         this.orders = res;
         this.unsorted = this.orders.data;
         this.numOfOrders = this.orders.data.length;

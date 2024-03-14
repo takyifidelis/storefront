@@ -266,3 +266,30 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+.no-result-found {
+  text-align: center;
+  color: #455468;
+  font-family: Inter;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 28px;
+  letter-spacing: -0.3px;
+}
+
+.loading-spinner-small {
+  text-align: center;
+  .spinner-image {
+    width: 10rem;
+  }
+}
+.td-amount {
+  color: var(--Colors-Primary-Slate-500, #5e718d);
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: -0.2px;
+}

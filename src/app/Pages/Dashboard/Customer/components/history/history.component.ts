@@ -57,6 +57,7 @@ export class HistoryComponent implements OnInit {
   users: UserInterface[] = [];
   filterIcon = faFilter;
   seaechICon = faSearch;
+  isLoading: boolean = false;
 
   constructor(private apiService: APIService, public dialog: MatDialog) {
     this.dataSource = new MatTableDataSource(this.users);
@@ -65,9 +66,11 @@ export class HistoryComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.isLoading = true;
     this.apiService
       .getHistoryProducts(localStorage.getItem('customerId')!)
       .subscribe((response: any) => {
+        this.isLoading = false;
         this.cart = response.data;
         this.favProducts = response.data.length;
         this.dataSource = new MatTableDataSource(this.cart);
