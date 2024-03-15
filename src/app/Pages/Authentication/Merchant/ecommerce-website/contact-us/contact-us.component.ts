@@ -1,20 +1,67 @@
 import { Component } from '@angular/core';
 import { DataService } from '../../../../../Services/data.service';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { MatDialog } from '@angular/material/dialog';
+import { TemplateTextEditorDialogComponent } from '../../../../Dashboard/Merchant/components/template-text-editor-dialog/template-text-editor-dialog.component';
 
 @Component({
   selector: 'app-contact-us',
   standalone: true,
-  imports: [],
+  imports: [MatIconModule,MatButtonModule, FormsModule,CommonModule],
   templateUrl: './contact-us.component.html',
   styleUrl: './contact-us.component.scss'
 })
 export class ContactUsComponent {
-  constructor(public dataService: DataService){}
-
-  // inline editor function to capture inputs
-  
-  // onInput(event: Event): void {
-  //   const editorContent = (event.target as HTMLElement).innerText;
-  //   console.log('Editor Content:', editorContent);
-  // }
+  constructor(public dataService: DataService,public dialog: MatDialog){}
+  editText(...args: string[]) {
+    // console.log(text,args )
+    if(this.dataService.isEditingTemp){
+      this.dialog.open(TemplateTextEditorDialogComponent, {
+        data: args,
+        hasBackdrop: false
+      }).afterClosed().subscribe((editedtText) => {
+        args.shift()
+        this.dataService.updateText(editedtText, ...args);
+        console.log({editedTex:editedtText}, ...args);
+      });
+    }
+}
+  onSelectFile(event: any, target: string) {
+    const file: File = event.target.files[0]; // Get the selected file
+    //     if (file) {
+    //  }
+    if (event.target.files && event.target.files.length > 0) {
+      const reader = new FileReader();
+      reader.readAsDataURL(event.target.files[0]);
+      reader.onload = (e: any) => {
+        switch (target) {
+          case 'hero':
+            this.dataService.template.templateImages.heroImage =
+              e.target.result;
+            break;
+          case 'tSection':
+            this.dataService.template.sectionTwo.twoSection.image =
+              e.target.result;
+            break;
+          case 'twoSection':
+            console.log(e.target.result);
+            this.dataService.template.sectionTwo.twoSection.image =
+              e.target.result;
+            break;
+          default:
+            break;
+        }
+      };
+    }
+  }
+  openFileInput(fileInput: HTMLInputElement) {
+    fileInput.click();
+    // this.dataservice.inputLinkVisibility[index] = true;
+  }
+  showLink() {
+    this.dataService.showInputLink = !this.dataService.showInputLink;
+  }
 }
