@@ -2,9 +2,8 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, map, throwError } from 'rxjs';
 import { environment } from '../../environments/environment.development';
-import { SavedProducts, SingleProductResponseData, UserCredentials } from '../interfaces/all-interfaces';
+import { Order, SavedProducts, Shop, SingleProductResponseData, UserCredentials } from '../interfaces/all-interfaces';
 import { DataService } from './data.service';
-// import { Response } from './../interfaces/all-interfaces';
 
 import { Response } from '../interfaces/all-interfaces';
 
@@ -138,8 +137,8 @@ export class APIService {
     });
   }
   
-  getStores(): Observable<Response> {
-    return this.http.get<Response>(`${environment.baseApiUrl}/store/get-all`, {
+  getStores(): Observable<Shop> {
+    return this.http.get<Shop>(`${environment.baseApiUrl}/store/get-all`, {
       withCredentials: true,
     });
   }
@@ -350,8 +349,8 @@ export class APIService {
     );
   }
 
-  getOrders(customerId: string): Observable<Response> {
-    return this.http.get<Response>(
+  getOrders(customerId: string): Observable<Order> {
+    return this.http.get<Order>(
       `${environment.baseApiUrl}/customer/get-orders/${customerId}`,
       {
         withCredentials: true,
@@ -379,8 +378,8 @@ export class APIService {
     );
   }
 
-  getHistoryProducts(customerId: string): Observable<Response> {
-    return this.http.get<Response>(
+  getHistoryProducts(customerId: string): Observable<SavedProducts> {
+    return this.http.get<SavedProducts>(
       `${environment.baseApiUrl}/customer/get-saved-products/${customerId}`,
       {
         withCredentials: true,
@@ -574,8 +573,8 @@ export class APIService {
     );
   }
 
-  getOrdersForMerchant(storeId: string): Observable<Response> {
-    return this.http.get<Response>(
+  getOrdersForMerchant(storeId: string): Observable<Order> {
+    return this.http.get<Order>(
       `${environment.baseApiUrl}/store/get-all-orders/${storeId}`,
       {
         withCredentials: true,

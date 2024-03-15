@@ -25,7 +25,7 @@ import {
 } from '@angular/material/dialog';
 import { APIService } from '../../../../../Services/api.service';
 import { CommonModule } from '@angular/common';
-import { UserInterface } from '../../../../../interfaces/all-interfaces';
+import { SavedProducts, UserInterface } from '../../../../../interfaces/all-interfaces';
 import { faCheck, faFilter, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { ToastrService } from 'ngx-toastr';
 
@@ -84,7 +84,7 @@ export class FavoriteProductComponent implements OnInit {
     this.isLoading = true;
     this.apiService
       .getSavedProducts(localStorage.getItem('customerId')!)
-      .subscribe((res: any) => {
+      .subscribe((res: SavedProducts) => {
         this.products = res.data;
         console.log(res.data);
         this.isLoading = false;

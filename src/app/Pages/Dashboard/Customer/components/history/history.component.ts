@@ -12,7 +12,7 @@ import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { APIService } from '../../../../../Services/api.service';
 import { HistoryModalComponent } from './history-modal/history-modal.component';
 import { MatDialog } from '@angular/material/dialog';
-import { UserInterface } from '../../../../../interfaces/all-interfaces';
+import { SavedProducts, UserInterface } from '../../../../../interfaces/all-interfaces';
 import { RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faFilter, faSearch } from '@fortawesome/free-solid-svg-icons';
@@ -69,14 +69,13 @@ export class HistoryComponent implements OnInit {
     this.isLoading = true;
     this.apiService
       .getHistoryProducts(localStorage.getItem('customerId')!)
-      .subscribe((response: any) => {
+      .subscribe((response: SavedProducts) => {
         this.isLoading = false;
         this.cart = response.data;
         this.favProducts = response.data.length;
         this.dataSource = new MatTableDataSource(this.cart);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
-        console.log(response);
       });
   }
 
