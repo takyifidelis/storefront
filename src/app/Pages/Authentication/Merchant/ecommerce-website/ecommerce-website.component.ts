@@ -85,21 +85,41 @@ this.router.navigate(['/customer'])
   }
 
   drop(event: CdkDragDrop<string[]>) {
-   if (this.dataService.isEditable) {
+   if (this.dataService.isEditingTemp) {
     moveItemInArray(this.dataService.template.pagesOrder, event.previousIndex, event.currentIndex);
    }
   }
+  // ngOnInit(): void {   
+  //   this.dataService.isLoading = true
+  //   console.log('loaded wrongly first')
+  // if (localStorage.getItem('isEditorLoading')=== 'false') {
+  //   console.log('loaded wrongly')
+  //   this.apiService.getSingleStore(localStorage.getItem('storeId')!).subscribe((store:{[key:string]:any})=>{
+  //     this.dataService.template =JSON.parse(store['data'].template.options)
+  //     this.dataService.isLoading =false
+  //   })
+  // }
+  // else if(localStorage.getItem('isEditorLoading')=== 'true') {
+  //   console.log('coming from merchant')
+  //   this.dataService.template =JSON.parse(localStorage.getItem('template')!)
+  //     this.dataService.isLoading =false
+  // }
+
+   
+  // }
   ngOnInit(): void {   
     this.dataService.isLoading = true
-  if (!this.dataService.isInEditMode) {
+  if (localStorage.getItem('isInEditMode') === 'false') {
     this.apiService.getSingleStore(localStorage.getItem('storeId')!).subscribe((store:{[key:string]:any})=>{
       this.dataService.template =JSON.parse(store['data'].template.options)
       this.dataService.isLoading =false
       // console.log(JSON.parse(store['data'].template.options))
     })
   }
-  if(this.dataService.isInEditMode) {
-    this.dataService.template =JSON.parse(localStorage.getItem('template')!)
+  if(localStorage.getItem('isInEditMode') === 'true') {
+    console.log('loading here')
+    this.dataService.template =JSON.parse(localStorage.getItem('tempTemplate')!)
+    this.dataService.template.text = localStorage.getItem('storeName')
       this.dataService.isLoading =false
   }
 

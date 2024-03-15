@@ -16,8 +16,7 @@
         [style.color]="dataService.template.navbarColor"
         class="navbar-brand"
         [routerLink]="['/ecommerce']"
-        [innerText]="dataService.template.text"
-      ></a>
+      >{{dataService.selectedStore['storeName']}}</a>
       <button
         class="menu-btn toggle-btn"
         color="primary"
