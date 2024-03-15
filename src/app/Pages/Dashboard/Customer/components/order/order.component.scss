@@ -5,6 +5,9 @@
 .more-vert-btn {
   cursor: pointer;
 }
+.main-div {
+  margin-top: 2rem;
+}
 .product-members {
   background: #f0f3f9;
   border-radius: 6px;
@@ -281,7 +284,7 @@
 .loading-spinner-small {
   text-align: center;
   .spinner-image {
-    width: 10rem;
+    width: 5rem;
   }
 }
 .td-amount {
@@ -324,11 +327,22 @@
   }
 }
 
-::ng-deep .mat-drawer-content {
+.main-empty {
+  text-align: center;
+}
+.empty-div {
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100vh;
 }
-.main-empty {
+.loading-spinner-medium {
   text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  .spinner-image {
+    width: 10rem;
+  }
 }

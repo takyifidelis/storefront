@@ -64,21 +64,27 @@ export class MerchantAnalyticsComponent {
   formattedDate!: string | null;
   datepipe: DatePipe = new DatePipe('en-US');
   payout: any = [];
-payoutAvailable?: string;
+  payoutAvailable?: string;
+  isLoading: boolean = false;
+  numOfPayload!: number;
 
   ngOnInit(): void {
     this.merchantPaymentEmpty = true;
+    this.isLoading = true;
     this.apiService
       .getPayouts(localStorage.getItem('storeId')!)
       .subscribe((res: any) => {
         this.payout = res.data;
+        this.numOfPayload = res.data.length;
+
+        this.isLoading = false;
         if (this.payout.length > 0) {
           this.merchantPaymentEmpty = false;
         }
 
-        if(this.payout.length > 0){
+        if (this.payout.length > 0) {
           this.payoutAvailable = `${this.payout.length} Payout Available`;
-        }else {
+        } else {
           this.payoutAvailable = 'Payout Available';
         }
         this.dataSource = new MatTableDataSource(this.payout);

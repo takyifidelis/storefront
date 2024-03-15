@@ -1,5 +1,13 @@
-<div class="container-fluid">
-  @if(merchantProductsEmpty){
+@if(isLoading){
+<div class="loading-spinner-medium">
+  <img
+    src="assets\icons\loading-btn-spinner.svg"
+    alt="Loading.."
+    class="spinner-image"
+  />
+</div>
+} @if(!isLoading && numberOfProducts === 0){
+<div class="empty-div">
   <div class="empty-main">
     <div class="empty-dashboard">
       <div>
@@ -27,12 +35,15 @@
               stroke-linejoin="round"
             />
           </svg>
-          <span>New product</span>
+          <span>New Product</span>
         </button>
       </div>
     </div>
   </div>
-  } @if(!merchantProductsEmpty){
+</div>
+
+} @if(!isLoading && numberOfProducts > 0){
+<div class="container-fluid">
   <div class="product-header d-flex align-items-center justify-content-between">
     <div class="product-title d-flex align-items-center">
       <h2 class="product-head">Product</h2>
@@ -251,15 +262,9 @@
     [pageSizeOptions]="[1, 2, 10, 25, 100]"
     aria-label="Select page of users"
   ></mat-paginator>
-  <div class="loading-spinner-small" *ngIf="isLoading">
-    <img
-      src="assets\icons\loading-btn-spinner.svg"
-      alt="Loading.."
-      class="spinner-image"
-    />
-  </div>
+
   <div class="no-result-found" *ngIf="numberOfProducts === 0">
     No Discount Found
   </div>
-  }
 </div>
+}

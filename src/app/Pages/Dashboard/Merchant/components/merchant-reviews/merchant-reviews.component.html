@@ -1,17 +1,30 @@
-@if(merchantReviewsEmpty){
-<div class="d-flex justify-content-center align-items-center h-100">
-  <div class="empty-dashboard">
-    <span>
-      <img src="/assets/icons/merchant_review_empty.svg" alt="" srcset="" />
-    </span>
-    <h1>No review found</h1>
-    <p>
-      Be the first to share your thoughts! Your <br />
-      feedback is important to us and other users.
-    </p>
+@if(isLoading){
+<div class="loading-spinner-medium">
+  <img
+    src="assets\icons\loading-btn-spinner.svg"
+    alt="Loading.."
+    class="spinner-image"
+  />
+</div>
+} @if(!isLoading && numberOfReviews === 0){
+<div class="empty-div">
+  <div class="empty-block">
+    <div class="d-flex justify-content-center align-items-center h-100">
+      <div class="empty-dashboard">
+        <span>
+          <img src="/assets/icons/merchant_review_empty.svg" alt="" srcset="" />
+        </span>
+        <h1>No review found</h1>
+        <p>
+          Be the first to share your thoughts! Your <br />
+          feedback is important to us and other users.
+        </p>
+      </div>
+    </div>
   </div>
 </div>
-} @if(!merchantReviewsEmpty){
+
+} @if(!isLoading && numberOfReviews > 0){
 
 <section class="review-page">
   <div class="filter-block">
@@ -197,13 +210,7 @@
   <!-- <div *ngFor="let review of reviews$ | async">
       {{rating }}
     </div> -->
-  <div class="loading-spinner-small" *ngIf="isLoading">
-    <img
-      src="assets\icons\loading-btn-spinner.svg"
-      alt="Loading.."
-      class="spinner-image"
-    />
-  </div>
+
   <div class="no-result-found" *ngIf="numberOfReviews === 0">
     No Review Found
   </div>

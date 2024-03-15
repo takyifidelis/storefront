@@ -1,5 +1,13 @@
-@if(merchantPaymentEmpty){
-<div class="d-flex justify-content-center align-items-center h-100">
+@if(isLoading){
+<div class="loading-spinner-medium">
+  <img
+    src="assets\icons\loading-btn-spinner.svg"
+    alt="Loading.."
+    class="spinner-image"
+  />
+</div>
+} @if(!isLoading && numOfPayload === 0){
+<div class="empty-div">
   <div class="empty-dashboard">
     <span>
       <img src="assets\images\Analitics_empty.svg" alt="" />
@@ -14,8 +22,16 @@
       insights.
     </p>
   </div>
+  <div class="loading-spinner-small">
+    <img
+      src="assets\icons\loading-btn-spinner.svg"
+      alt="Loading.."
+      class="spinner-image"
+      *ngIf="isLoading"
+    />
+  </div>
 </div>
-} @if(!merchantPaymentEmpty){
+} @if(!isLoading && numOfPayload > 0){
 <div class="container-fluid">
   <div class="d-flex mb-5 align-items-center gap-3 mt-4">
     <h2>Payout</h2>

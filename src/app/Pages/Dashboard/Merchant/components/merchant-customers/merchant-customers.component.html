@@ -1,18 +1,36 @@
-@if(merchantCustomersEmpty){
-<div class="d-flex justify-content-center align-items-center h-100">
-  <div class="empty-dashboard">
-    <span>
-      <img src="/assets/images/customer_empty.svg" alt="" srcset="" />
-    </span>
-    <h1>No customer found</h1>
-    <p>
-      It seems like there are no customers in your list. <br />
-      You can start by adding a new customer to <br />
-      get things rolling
-    </p>
+@if(isLoading){
+<div class="loading-spinner-medium">
+  <img
+    src="assets\icons\loading-btn-spinner.svg"
+    alt="Loading.."
+    class="spinner-image"
+  />
+</div>
+} @if(!isLoading && numberOfCustomer === 0){
+<div class="empty-div">
+  <div class="">
+    <div class="empty-dashboard">
+      <span>
+        <img src="/assets/images/customer_empty.svg" alt="" srcset="" />
+      </span>
+      <h1>No customer found</h1>
+      <p>
+        It seems like there are no customers in your list. <br />
+        You can start by adding a new customer to <br />
+        get things rolling
+      </p>
+    </div>
+  </div>
+  <div class="loading-spinner-small" *ngIf="isLoading">
+    <img
+      src="assets\icons\loading-btn-spinner.svg"
+      alt="Loading.."
+      class="spinner-image"
+    />
   </div>
 </div>
-} @if(!merchantCustomersEmpty){
+
+} @if(!isLoading && numberOfCustomer > 0){
 <div class="container-fluid">
   <div class="product-header d-flex align-items-center justify-content-between">
     <div class="product-title d-flex align-items-center">

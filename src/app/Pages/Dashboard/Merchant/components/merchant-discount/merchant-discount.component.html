@@ -2,9 +2,9 @@
   action="#"
   method="post"
   class="discount-form"
-  #postDiscount="ngForm"
+  #addDiscountInit="ngForm"
   [formGroup]="addDiscount"
-  (ngSubmit)="onSubmit(postDiscount)"
+  (ngSubmit)="onSubmit(addDiscountInit)"
   *ngIf="showInitialForm && merchantDiscountEmpty"
 >
   <div class="discount-head d-flex justify-content-between align-items-center">
@@ -86,45 +86,63 @@
     <button
       class="btn btn-primary"
       type="submit"
-      [disabled]="!postDiscount.valid"
+      [disabled]="!addDiscountInit.valid"
     >
       Send
     </button>
   </div>
 </form>
+@if(isLoading){
+<div class="loading-spinner-medium">
+  <img
+    src="assets\icons\loading-btn-spinner.svg"
+    alt="Loading.."
+    class="spinner-image"
+  />
+</div>
+} @if(!isLoading && discountNumber === 0){
+<div class="empty-div">
+  <div class="d-flex justify-content-center align-items-center">
+    <div class="empty-dashboard">
+      <span>
+        <img src="/assets/icons/merchant_discount_empty.svg" alt="" srcset="" />
+      </span>
+      <h1>No discounts found</h1>
+      <p>
+        It seems there are no discounts available at the moment. Start by adding
+        a new discount below.
+      </p>
+      <button class="btn btn-primary" (click)="showInitialForm = true">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="21"
+          height="21"
+          viewBox="0 0 21 21"
+          fill="none"
+        >
+          <path
+            d="M10.5 4.50586V16.1725M4.66669 10.3392H16.3334"
+            stroke="white"
+            stroke-width="1.66667"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+        <span>New Discount</span>
+      </button>
+    </div>
+  </div>
 
-@if(merchantDiscountEmpty){
-<div class="d-flex justify-content-center align-items-center">
-  <div class="empty-dashboard">
-    <span>
-      <img src="/assets/icons/merchant_discount_empty.svg" alt="" srcset="" />
-    </span>
-    <h1>No discounts found</h1>
-    <p>
-      It seems there are no discounts available at the moment. Start by adding a
-      new discount below.
-    </p>
-    <button class="btn btn-primary" (click)="showInitialForm = true">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="21"
-        height="21"
-        viewBox="0 0 21 21"
-        fill="none"
-      >
-        <path
-          d="M10.5 4.50586V16.1725M4.66669 10.3392H16.3334"
-          stroke="white"
-          stroke-width="1.66667"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        />
-      </svg>
-      <span>New Discount</span>
-    </button>
+  <div class="loading-spinner-small" *ngIf="isLoading">
+    <img
+      src="assets\icons\loading-btn-spinner.svg"
+      alt="Loading.."
+      class="spinner-image"
+    />
   </div>
 </div>
-} @if(!merchantDiscountEmpty){
+
+} @if(!isLoading && discountNumber === 0){
 <div class="main-container">
   <div class="product-header d-flex align-items-center justify-content-between">
     <div class="product-title d-flex align-items-center">
@@ -346,13 +364,7 @@
     [pageSizeOptions]="[5, 10, 25, 100]"
     aria-label="Select page of users"
   ></mat-paginator>
-  <div class="loading-spinner-small" *ngIf="isLoading">
-    <img
-      src="assets\icons\loading-btn-spinner.svg"
-      alt="Loading.."
-      class="spinner-image"
-    />
-  </div>
+
   <div class="no-result-found" *ngIf="discountNumber === 0">
     No Discount Found
   </div>

@@ -203,8 +203,12 @@ th {
   text-wrap: nowrap;
   overflow: hidden;
 }
-.loading-spinner-small {
+.loading-spinner-medium {
   text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
   .spinner-image {
     width: 10rem;
   }
@@ -218,6 +222,13 @@ th {
   font-weight: 500;
   line-height: 28px;
   letter-spacing: -0.3px;
+}
+.empty-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
 }
 .empty-main {
   display: flex;
@@ -250,11 +261,6 @@ th {
   }
 }
 
-::ng-deep .mat-drawer-content {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 .add-pro {
   display: flex;
   padding: 10px 18px;
@@ -275,4 +281,10 @@ th {
 .btn-div {
   display: flex;
   justify-content: center;
+}
+.loading-spinner-small {
+  text-align: center;
+  .spinner-image {
+    width: 5rem;
+  }
 }

@@ -278,6 +278,15 @@
 .loading-spinner-small {
   text-align: center;
   .spinner-image {
+    width: 5rem;
+  }
+}
+.loading-spinner-medium {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  .spinner-image {
     width: 10rem;
   }
 }
@@ -291,8 +300,10 @@
   line-height: 28px;
   letter-spacing: -0.3px;
 }
-::ng-deep .mat-drawer-content {
+.empty-div {
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100vh;
+  flex-direction: column;
 }

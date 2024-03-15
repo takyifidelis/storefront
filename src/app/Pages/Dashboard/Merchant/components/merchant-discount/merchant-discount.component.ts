@@ -167,7 +167,6 @@ export class MerchantDiscountComponent {
         },
         (errorMessage) => {
           console.log(errorMessage);
-          this.isLoading = false;
         }
       );
   }

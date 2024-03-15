@@ -1,6 +1,9 @@
 :host {
   width: 100%;
 }
+.main-div {
+  margin-top: 2rem;
+}
 
 .more-vert-btn {
   cursor: pointer;
@@ -196,13 +199,15 @@
 .loading-spinner-small {
   text-align: center;
   .spinner-image {
-    width: 10rem;
+    width: 5rem;
   }
 }
 .empty-main {
   display: flex;
   justify-content: center;
   align-items: center;
+
+  height: 100vh;
   .empty-dashboard {
     width: 40%;
     text-align: center;
@@ -229,9 +234,13 @@
     }
   }
 }
-
-::ng-deep .mat-drawer-content {
+.loading-spinner-medium {
+  text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100vh;
+  .spinner-image {
+    width: 10rem;
+  }
 }

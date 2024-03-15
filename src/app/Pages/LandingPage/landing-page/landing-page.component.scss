@@ -390,3 +390,23 @@ footer {
   padding-right: 0;
   overflow: hidden;
 }
+
+@media (max-width: 1440px) {
+  .home-btns {
+    margin-bottom: 1rem;
+  }
+  article.about-article {
+    margin-left: 1rem;
+  }
+  #about {
+    margin-left: 0;
+    padding: 6rem;
+    .about-article {
+      margin-left: 3rem;
+    }
+    .first-image {
+      position: absolute;
+      left: 1rem;
+    }
+  }
+}
