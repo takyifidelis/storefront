@@ -83,7 +83,6 @@ export class HistoryComponent implements OnInit {
         if (this.favProducts > 0) {
           this.customerHistoryEmpty = false;
         }
-        console.log(response);
       });
   }
 
