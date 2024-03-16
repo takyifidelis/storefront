@@ -80,7 +80,7 @@ export class MerchantProductsDashboadComponent {
   filterIcon = faFilter;
   seaechICon = faSearch;
   checkIcon = faCheck;
-  isLoading: boolean = false;
+  isLoading: boolean = true;
   numberOfProducts!: number;
   users = [];
   displayedColumns: string[] = [

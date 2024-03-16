@@ -63,11 +63,16 @@
           website and take control of your finances, all form one place
         </p>
         <div class="home-btns">
-          <button class="btn start-your-store">Start your new store</button>
+          <button
+            class="btn start-your-store"
+            [routerLink]="['/Sign-up-merchant']"
+          >
+            Start your new store
+          </button>
           <button class="btn customize-and-extend">
             Customize and Extend
             <img
-              src="../../../../assets/icons/extend-arrow.svg"
+              src="assets/icons/extend-arrow.svg"
               alt=""
               class="customize-arrow"
             />
@@ -77,7 +82,7 @@
     </article>
     <div class="home-image-div col-6">
       <img
-        src="../../../../assets/images/hero-image.png"
+        src="assets/images/hero-image-1.svg"
         alt="home-image"
         class="home-image"
       />
@@ -85,14 +90,13 @@
   </section>
   <section id="about" class="row">
     <div class="about-container d-flex justify-content-between">
-      <div class="about-images col-6">
-        <!-- <img
-          src="../../../../assets/images/plus-signs-about-image.svg"
-          alt=""
-        
-        /> -->
-
-        <img src="assets/images/about-image.svg" alt="" />
+      <div class="about-images col-6 d-flex align-items-center">
+        <div class="first-image">
+          <img src="assets/images/plus-icons-about-us.svg" alt="" />
+        </div>
+        <div class="second-image">
+          <img src="assets/images/about-image.svg" alt="" />
+        </div>
       </div>
       <article class="about-article col-6">
         <h3 class="article-header">

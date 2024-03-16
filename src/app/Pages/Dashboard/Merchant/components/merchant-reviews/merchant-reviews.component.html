@@ -1,35 +1,30 @@
-@if(merchantReviewsEmpty){
-<div class="d-flex justify-content-center align-items-center h-100">
-  <div class="empty-dashboard">
-    <span>
-      <img src="/assets/icons/merchant_review_empty.svg" alt="" srcset="" />
-    </span>
-    <h1>No projects found</h1>
-    <p>
-      It seems there are no products matching your criteria. To get started,
-      click the button below to add a new product
-    </p>
-    <button>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="21"
-        height="21"
-        viewBox="0 0 21 21"
-        fill="none"
-      >
-        <path
-          d="M10.5 4.50586V16.1725M4.66669 10.3392H16.3334"
-          stroke="white"
-          stroke-width="1.66667"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        />
-      </svg>
-      <span>create new</span>
-    </button>
+@if(isLoading){
+<div class="loading-spinner-medium">
+  <img
+    src="assets\icons\loading-btn-spinner.svg"
+    alt="Loading.."
+    class="spinner-image"
+  />
+</div>
+} @if(!isLoading && numberOfReviews === 0){
+<div class="empty-div">
+  <div class="empty-block">
+    <div class="d-flex justify-content-center align-items-center h-100">
+      <div class="empty-dashboard">
+        <span>
+          <img src="/assets/icons/merchant_review_empty.svg" alt="" srcset="" />
+        </span>
+        <h1>No review found</h1>
+        <p>
+          Be the first to share your thoughts! Your <br />
+          feedback is important to us and other users.
+        </p>
+      </div>
+    </div>
   </div>
 </div>
-} @if(!merchantReviewsEmpty){
+
+} @if(!isLoading && numberOfReviews > 0){
 
 <section class="review-page">
   <div class="filter-block">
@@ -215,13 +210,7 @@
   <!-- <div *ngFor="let review of reviews$ | async">
       {{rating }}
     </div> -->
-  <div class="loading-spinner-small" *ngIf="isLoading">
-    <img
-      src="assets\icons\loading-btn-spinner.svg"
-      alt="Loading.."
-      class="spinner-image"
-    />
-  </div>
+
   <div class="no-result-found" *ngIf="numberOfReviews === 0">
     No Review Found
   </div>

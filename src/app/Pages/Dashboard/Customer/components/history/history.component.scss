@@ -1,6 +1,9 @@
 :host {
   width: 100%;
 }
+.main-div {
+  margin-top: 2rem;
+}
 
 .more-vert-btn {
   cursor: pointer;
@@ -195,6 +198,48 @@
 
 .loading-spinner-small {
   text-align: center;
+  .spinner-image {
+    width: 5rem;
+  }
+}
+.empty-main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 100vh;
+  .empty-dashboard {
+    width: 40%;
+    text-align: center;
+    .empty-header {
+      color: var(--Gray-900, #101828);
+      text-align: center;
+      font-family: Inter;
+      font-size: 32px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 44px;
+      letter-spacing: -0.5px;
+    }
+    .empty-paragraph {
+      color: var(--Colors-Primary-Slate-700, #3d4a5c);
+      text-align: center;
+
+      font-family: Inter;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 28px;
+      letter-spacing: -0.3px;
+    }
+  }
+}
+.loading-spinner-medium {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
   .spinner-image {
     width: 10rem;
   }

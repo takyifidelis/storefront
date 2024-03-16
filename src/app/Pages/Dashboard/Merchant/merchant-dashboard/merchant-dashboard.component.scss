@@ -86,8 +86,12 @@
       }
       .active-link {
         background: #f2f5ff;
+        color: #0f3cd9;
         path {
           fill: #0f3cd9;
+        }
+        span {
+          color: #0f3cd9;
         }
       }
     }

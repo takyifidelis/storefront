@@ -21,10 +21,9 @@ import { UserCredentials, merchantProduct } from '../interfaces/all-interfaces';
 // showInputLink: boolean = false;
 // isLoading: boolean = false
 export class DataService {
-
-like: any =  [];
+  like: any = [];
   cart: any = [];
-  updateProduct:unknown 
+  updateProduct: unknown;
   productCategories: any = [];
   productSearchString: string = '';
   selectedStore: { [key: string]: any } = {};

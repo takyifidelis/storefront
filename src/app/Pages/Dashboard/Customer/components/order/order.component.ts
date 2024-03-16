@@ -85,6 +85,7 @@ export class OrderComponent implements OnInit {
   isProcessingActive: boolean = false;
   isShippedActive: boolean = false;
   isDeliveredActive: boolean = false;
+  customerOrdersEmpty: boolean = false;
 
   constructor(
     public dialog: MatDialog,
@@ -97,6 +98,7 @@ export class OrderComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.customerOrdersEmpty = true;
     this.isLoading = true;
     this.apiService
       .getOrders(localStorage.getItem('customerId')!)
@@ -108,6 +110,9 @@ export class OrderComponent implements OnInit {
         this.dataSource = new MatTableDataSource(this.orders.data);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
+        if (this.numOfOrders > 0) {
+          this.customerOrdersEmpty = false;
+        }
       });
     this.isAllActive = true;
   }

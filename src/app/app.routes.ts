@@ -45,8 +45,12 @@ import { authGuard } from './gaurds/auth.guard';
 
 import { commonGuard } from './gaurds/common.guard';
 import { merchantAuthGuard } from './gaurds/merchant.guard';
+import { OnboardingStepOneCustomerComponent } from './Pages/Dashboard/Customer/components/onboarding/onboarding-step-one-customer/onboarding-step-one-customer.component';
+import { OnboardingStepTwoCustomerComponent } from './Pages/Dashboard/Customer/components/onboarding/onboarding-step-two-customer/onboarding-step-two-customer.component';
 export const routes: Routes = [
   { path: '', component: LandingPageComponent },
+  // { path: 'customer-onboarding-1', component: OnboardingStepOneCustomerComponent },
+  // { path: 'customer-onboarding-2', component: OnboardingStepTwoCustomerComponent },
   { path: 'login', component: LoginComponent },
   { path: 'forget-password', component: ForgottenPasswordComponent },
   { path: 'email-notification', component: EmailNotificationComponent },
@@ -111,7 +115,7 @@ export const routes: Routes = [
       { path: 'new-payment-opt', component: NewPaymentOptionComponent },
       { path: 'payment-opt', component: PaymentOptionComponent },
       { path: 'orders', component: OrderComponent },
-      { path: '', redirectTo:'shop', pathMatch:'full'}
+      { path: '', redirectTo: 'shop', pathMatch: 'full' },
     ],
   },
   { path: 'ecommerce/checkout-page', component: CkeckoutPageComponent },

@@ -64,21 +64,26 @@ export class MerchantOrdersComponent {
   orders: any = [];
   unsorted: any = [];
   sorted: any = [];
+  isLoading: boolean = false;
   formattedDate!: string | null;
   datepipe: DatePipe = new DatePipe('en-US');
   isAllActive = false;
   isProcessingActive = false;
   isShippedActive = false;
   isDeliveredActive = false;
+  numOfOrders!: number;
 
   ngOnInit(): void {
     this.merchantOrdersEmpty = true;
+    this.isLoading = true;
     this.apiService
       .getOrdersForMerchant(localStorage.getItem('storeId')!)
       .subscribe((res: any) => {
         console.log(res);
         this.orders = res.data;
         this.unsorted = this.orders;
+        this.isLoading = false;
+        this.numOfOrders = res.data.length;
         if (res.data.length > 0) {
           this.merchantOrdersEmpty = false;
         }

@@ -72,6 +72,7 @@ export class MerchantCustomersComponent implements OnInit {
   filterIcon = faFilter;
   seaechICon = faSearch;
   checkIcon = faCheck;
+  isLoading: boolean = false;
   displayedColumns: string[] = [
     'checkbox',
     'name',
@@ -142,11 +143,13 @@ export class MerchantCustomersComponent implements OnInit {
 
   ngOnInit() {
     this.merchantCustomersEmpty = true;
+    this.isLoading = true;
     this.apiService
       .getAllCustomersForStore(localStorage.getItem('storeId')!)
       .subscribe(
         (res: any) => {
           console.log(res);
+          this.isLoading = false;
           this.numberOfCustomer = res.data.length;
           if (this.numberOfCustomer > 0) {
             this.merchantCustomersEmpty = false;

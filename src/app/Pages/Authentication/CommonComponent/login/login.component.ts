@@ -163,9 +163,11 @@ export class LoginComponent implements OnInit {
     this.eyeIcon = this.showPassword ? faEye : faEyeSlash;
   }
 
-  newLogin(ata: any) {
+  newLogin(form: FormGroupDirective) {
     this.isLoading = true;
-
+    if (!form.valid) {
+      return;
+    }
     //     this.dataService.isLoading = true
     this.apiService
       .authenticateUser(this.dataService.loginCredentials)
@@ -197,7 +199,7 @@ export class LoginComponent implements OnInit {
           this.toastr.error(this.error, 'Login Failed');
         }
       );
-    this.dataService.loginCredentials = { email: '', password: '' };
+    form.reset();
   }
 
   handleGoogleResponse() {

@@ -147,7 +147,6 @@ export class MerchantReviewsComponent {
       },
       (errorMessage) => {
         console.log(errorMessage);
-        this.isLoading = false;
       }
     );
   }
