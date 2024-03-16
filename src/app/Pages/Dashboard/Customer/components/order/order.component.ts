@@ -25,7 +25,7 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { DataService } from '../../../../../Services/data.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCheck, faFilter, faSearch } from '@fortawesome/free-solid-svg-icons';
-import { Order } from '../../../../../interfaces/all-interfaces';
+import { Order, SingleCustomerOrder } from '../../../../../interfaces/all-interfaces';
 
 @Component({
   selector: 'app-order',
@@ -184,7 +184,7 @@ export class OrderComponent implements OnInit {
 
   onSort(status: string) {
     this.sorted = [];
-    this.unsorted.forEach((order: any) => {
+    this.unsorted.forEach((order: SingleCustomerOrder) => {
       if (order.status === status) {
         this.sorted.push(order);
         this.dataSource = new MatTableDataSource(this.sorted);

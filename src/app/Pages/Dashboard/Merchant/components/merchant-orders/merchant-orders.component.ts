@@ -16,6 +16,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MerchantOrderModalComponent } from '../merchant-order-modal/merchant-order-modal.component';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MerchantOrder, SingleOrder } from '../../../../../interfaces/all-interfaces';
 
 @Component({
   selector: 'app-merchant-orders',
@@ -75,8 +76,7 @@ export class MerchantOrdersComponent {
     this.merchantOrdersEmpty = true;
     this.apiService
       .getOrdersForMerchant(localStorage.getItem('storeId')!)
-      .subscribe((res: any) => {
-        console.log(res);
+      .subscribe((res: MerchantOrder) => {
         this.orders = res.data;
         this.unsorted = this.orders;
         if (res.data.length > 0) {
@@ -109,13 +109,11 @@ export class MerchantOrdersComponent {
   }
   showSelection(e: any) {
     e.stopPropagation();
-    console.log(this.selection.selected);
   }
   /** Selects all rows if they are not all selected; otherwise clear selection. */
   toggleAllRows() {
     if (this.isAllSelected()) {
       this.selection.clear();
-      console.log(this.selection.selected);
       return;
     }
 
@@ -164,7 +162,7 @@ export class MerchantOrdersComponent {
 
   onSort(status: string) {
     this.sorted = [];
-    this.unsorted.forEach((order: any) => {
+    this.unsorted.forEach((order: SingleOrder) => {
       if (order.status === status) {
         this.sorted.push(order);
         this.dataSource = new MatTableDataSource(this.sorted);

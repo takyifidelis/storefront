@@ -16,7 +16,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatTabsModule } from '@angular/material/tabs';
-import { UserInterface } from '../../../../../interfaces/all-interfaces';
+import { Payout, UserInterface } from '../../../../../interfaces/all-interfaces';
 
 @Component({
   selector: 'app-merchant-analytics',
@@ -70,7 +70,7 @@ payoutAvailable?: string;
     this.merchantPaymentEmpty = true;
     this.apiService
       .getPayouts(localStorage.getItem('storeId')!)
-      .subscribe((res: any) => {
+      .subscribe((res: Payout) => {
         this.payout = res.data;
         if (this.payout.length > 0) {
           this.merchantPaymentEmpty = false;

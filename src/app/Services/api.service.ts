@@ -2,7 +2,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, map, throwError } from 'rxjs';
 import { environment } from '../../environments/environment.development';
-import { Order, SavedProducts, Shop, SingleProductResponseData, UserCredentials } from '../interfaces/all-interfaces';
+import { MerchantOrder, Order, Payout, SavedProducts, Shop, SingleProductResponseData, UserCredentials } from '../interfaces/all-interfaces';
 import { DataService } from './data.service';
 
 import { Response } from '../interfaces/all-interfaces';
@@ -573,8 +573,8 @@ export class APIService {
     );
   }
 
-  getOrdersForMerchant(storeId: string): Observable<Order> {
-    return this.http.get<Order>(
+  getOrdersForMerchant(storeId: string): Observable<MerchantOrder> {
+    return this.http.get<MerchantOrder>(
       `${environment.baseApiUrl}/store/get-all-orders/${storeId}`,
       {
         withCredentials: true,
@@ -631,8 +631,8 @@ export class APIService {
     );
   }
 
-  getPayouts(storeId: string): Observable<Response> {
-    return this.http.get<Response>(
+  getPayouts(storeId: string): Observable<Payout> {
+    return this.http.get<Payout>(
       `${environment.baseApiUrl}/store/get-payouts/${storeId}`,
       {
         withCredentials: true,

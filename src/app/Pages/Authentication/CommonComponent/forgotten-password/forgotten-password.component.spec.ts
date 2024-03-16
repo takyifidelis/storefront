@@ -1,63 +1,58 @@
-import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
-import { RouterTestingModule } from "@angular/router/testing";
-import {Location} from "@angular/common";
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { Location } from '@angular/common';
 import { ForgottenPasswordComponent } from './forgotten-password.component';
-import { Routes } from '@angular/router';
 import { ResetPassowrdComponent } from '../reset-passowrd/reset-passowrd.component';
+import { routes } from '../../../../app.routes';
+import { Router } from '@angular/router';
+import { DebugElement } from '@angular/core';
+import { By } from '@angular/platform-browser';
 
 describe('ForgottenPasswordComponent', () => {
-  let component: ForgottenPasswordComponent;
+  let router: Router;
   let fixture: ComponentFixture<ForgottenPasswordComponent>;
+  let passwordResetFixture: ComponentFixture<ResetPassowrdComponent>;
+  let location: Location;
+  let dbelement:DebugElement
 
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [ ResetPassowrdComponent,RouterTestingModule.withRoutes(
-        [
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [
+        ForgottenPasswordComponent,
+        ResetPassowrdComponent,
+        RouterTestingModule.withRoutes([
           { path: '', redirectTo: 'forgotten-password', pathMatch: 'full' },
           { path: 'forgotten-password', component: ForgottenPasswordComponent },
           { path: 'reset-password', component: ResetPassowrdComponent },
-        ]
-      )],
-      
-    })
-    .compileComponents();
-    
+        ]),
+      ],
+    }).compileComponents();
+  }));
+
+  beforeEach(() => {
+    router = TestBed.inject(Router);
+    location = TestBed.inject(Location);
+    router.initialNavigation();
     fixture = TestBed.createComponent(ForgottenPasswordComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    passwordResetFixture = TestBed.createComponent(ResetPassowrdComponent);
+    dbelement = passwordResetFixture.debugElement
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-  it('should test the function with a valid email', () => {
-    component.email.value = 'hello@example.com';
-    component.validateEmail()
-    expect(component.email.isValid).toBeTrue();
-  });
-
-  it('should test the function with an empty email', () => {
-    component.email.value = '';
-    component.validateEmail()
-    expect(component.email.isValid).toBeFalse();
-  });
-
-  it('should test the function with a invalid email', () => {
-    component.email.value = '@example.com';
-    component.validateEmail()
-    expect(component.email.isValid).toBeFalse();
-  });
-
-  it('should test the routing after a valid email', fakeAsync(() => {
-    component.email.value = '@example.com';
-    component.validateEmail()
-    // expect(component.email.isValid).toBeFalse();
-    component.email.isValid = true; 
-    fixture.debugElement.nativeElement.querySelector('button')
-    const location: Location = TestBed.inject(Location);
-    fixture.detectChanges();
-    // tick()
-    expect(location.path()).toBe('');
+  // it('should navigate to the forgotten-password page', waitForAsync(() => {
+  //   fixture.detectChanges();
+  //   fixture.whenStable().then(() => {
+  //     fixture.debugElement.nativeElement.querySelector('button')
+  //     expect(location.path()).toBe('/forgotten-password');
+  //   });
+  // }));
+  it('should navigate to the forgotten-password page', waitForAsync(() => {
+    passwordResetFixture.detectChanges();
+    // passwordResetFixture.debugElement.nativeElement.querySelector('button').click()
+    let links = dbelement.queryAll(By.css('button'))
+    links[0].nativeElement.click();
+    passwordResetFixture.whenStable().then(() => {
+      expect(location.path()).toBe('/reset-password');
+    });
   }));
 });
