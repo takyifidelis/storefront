@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { WalletComponent } from './wallet.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { HttpClient } from '@angular/common/http';
 
 describe('WalletComponent', () => {
   let component: WalletComponent;
@@ -8,7 +10,8 @@ describe('WalletComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [WalletComponent]
+      imports: [WalletComponent, HttpClientTestingModule],
+      providers: [HttpClient]
     })
     .compileComponents();
     

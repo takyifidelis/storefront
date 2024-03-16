@@ -25,6 +25,7 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { DataService } from '../../../../../Services/data.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCheck, faFilter, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { Order, SingleCustomerOrder } from '../../../../../interfaces/all-interfaces';
 
 @Component({
   selector: 'app-order',
@@ -102,9 +103,10 @@ export class OrderComponent implements OnInit {
     this.isLoading = true;
     this.apiService
       .getOrders(localStorage.getItem('customerId')!)
-      .subscribe((res: any) => {
+      .subscribe((res: Order) => {
         this.isLoading = false;
         this.orders = res;
+        console.log(this.orders);
         this.unsorted = this.orders.data;
         this.numOfOrders = this.orders.data.length;
         this.dataSource = new MatTableDataSource(this.orders.data);
@@ -187,7 +189,7 @@ export class OrderComponent implements OnInit {
 
   onSort(status: string) {
     this.sorted = [];
-    this.unsorted.forEach((order: any) => {
+    this.unsorted.forEach((order: SingleCustomerOrder) => {
       if (order.status === status) {
         this.sorted.push(order);
         this.dataSource = new MatTableDataSource(this.sorted);
