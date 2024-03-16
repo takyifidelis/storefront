@@ -182,6 +182,8 @@ export class CustomerDetailsComponent implements OnInit {
   productDataSource!: MatTableDataSource<orderInterface>;
   displayedColumns: string[] = ['name', 'price', 'date', 'orders'];
   users: any;
+  numOfCustomers!: number;
+  isLoading: boolean = false;
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: orderInterface,
     private apiService: APIService
@@ -190,6 +192,7 @@ export class CustomerDetailsComponent implements OnInit {
   }
   ngOnInit() {
     console.log('this.users');
+    this.isLoading = true;
     this.apiService
       .getOrderHistoryForCustomer(
         localStorage.getItem('storeId') ||
@@ -199,6 +202,8 @@ export class CustomerDetailsComponent implements OnInit {
       .subscribe((res: Response) => {
         this.users = res['data'];
         console.log(this.users.orders);
+        this.isLoading = false;
+        this.numOfCustomers = this.users.length;
         this.dataSurce = new MatTableDataSource(this.users.orders);
       });
   }

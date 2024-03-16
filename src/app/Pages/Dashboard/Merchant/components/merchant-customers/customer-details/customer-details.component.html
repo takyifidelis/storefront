@@ -118,6 +118,12 @@
         ></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
       </table>
+      <div class="loading-spin">
+        <img src="assets\icons\loading-btn-spinner.svg" alt="Loading.." />
+      </div>
+      <div class="no-products" *ngIf="numOfCustomers == 0">
+        No Order Available
+      </div>
     </mat-tab>
     <mat-tab label="Shipping Address">
       <table
@@ -193,6 +199,12 @@
         ></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
       </table>
+      <div class="loading-spin">
+        <img src="assets\icons\loading-btn-spinner.svg" alt="Loading.." />
+      </div>
+      <div class="no-products" *ngIf="numOfCustomers == 0">
+        No Order Available
+      </div>
     </mat-tab>
   </mat-tab-group>
 </div>
