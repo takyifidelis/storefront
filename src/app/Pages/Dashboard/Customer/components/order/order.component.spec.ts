@@ -14,9 +14,7 @@ describe('OrderComponent', () => {
      class MockAPIService {
       constructor() {}
       getOrders(): Observable<Order[]> {
-        // Return a mock set of orders
         const orders: Order[] = [
-          // Sample order data
           {
             code: 'message',
             type: 'customer',
@@ -67,7 +65,6 @@ describe('OrderComponent', () => {
           }
         ];
     
-        // Return the orders as an Observable
         return of(orders);
       }
     }
@@ -75,7 +72,6 @@ describe('OrderComponent', () => {
      TestBed.configureTestingModule({
       imports: [OrderComponent ,HttpClientTestingModule],
       providers: [
-        // Provide the MockAPIService directly
         { provide: APIService, useClass: MockAPIService }
       ],
     }).compileComponents();
