@@ -8,7 +8,7 @@
   align-items: center;
   height: 68px;
   background-color: #00114a;
-  span {
+  .app-name {
     font-family: "Poppins";
     font-style: normal;
     font-weight: 900;
@@ -98,4 +98,49 @@
   // mat-drawer-content {
   //   padding-top: 40px;
   // }
+}
+
+.customer-name {
+  text-transform: capitalize;
+}
+.customer-picture {
+  font-family: inter;
+  font-style: normal;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 10px;
+  padding: 0.5rem;
+  font-weight: 900;
+}
+.customer-picture {
+  text-transform: uppercase;
+  background-color: burlywood;
+  color: var(--Colors-Primary-Slate-600, #455468);
+  .first-name {
+    text-transform: uppercase;
+  }
+  .last-name {
+    text-transform: uppercase;
+  }
+}
+.username {
+  text-transform: capitalize;
+}
+
+.dp-info {
+  text-align: center;
+  text-transform: uppercase;
+  background-color: burlywood;
+  border-radius: 50%;
+  color: #455468;
+  padding: 0.5rem;
+  color: var(--Colors-Primary-Slate-600, #455468);
+  font-family: Inter;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 900;
+}
+.user-menu {
+  margin-bottom: 0.5rem;
 }

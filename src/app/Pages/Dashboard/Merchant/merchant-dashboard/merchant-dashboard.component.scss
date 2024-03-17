@@ -8,7 +8,7 @@
   align-items: center;
   height: 68px;
   background-color: #00114a;
-  span {
+  .app-name {
     font-family: "Poppins";
     font-style: normal;
     font-weight: 900;
@@ -128,4 +128,41 @@ mat-form-field {
   /* padding: 34px; */
   padding-bottom: 6px;
   padding-top: 29px;
+}
+
+.merchant-dp {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 0px 4rem 0px 1.2rem;
+}
+
+.dp-image {
+  border-radius: 50%;
+  margin-right: 10px;
+  padding: 0.4rem;
+  background-color: cadetblue;
+
+  color: var(--Colors-Primary-Slate-900, #1c222b);
+  text-align: center;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 36px;
+  letter-spacing: -0.5px;
+}
+
+.nav-dp {
+  border-radius: 50%;
+  margin-right: 10px;
+  padding: 0.4rem;
+  background-color: cadetblue;
+  color: var(--Colors-Primary-Slate-900, #1c222b);
+  text-align: center;
+  font-family: Inter;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 36px;
+  letter-spacing: -0.5px;
 }

@@ -10,12 +10,9 @@
         <span class="app-name"> storefront </span>
         <div class="user-info">
           <div class="profile-image-container">
-            <img
-              class="profile-image"
-              src="https://material.angular.io/assets/img/examples/shiba1.jpg"
-              alt=""
-              srcset=""
-            />
+            <span class="dp-info">
+              {{ user.firstName.charAt(0) }}{{ user.lastName.charAt(0) }}
+            </span>
             <svg
               width="12"
               height="12"
@@ -42,18 +39,15 @@
             <mat-icon>expand_more</mat-icon>
           </button>
           <mat-menu #menu="matMenu" class="pt-0">
-            <div style="padding: 0px 4rem 0px 1.2rem">
-              <img
-                style="
-                  width: 35px;
-                  height: 35px;
-                  border-radius: 50%;
-                  margin-right: 10px;
-                "
-                src="https://material.angular.io/assets/img/examples/shiba2.jpg"
-                alt="Photo of a Shiba Inu"
-              />
-              <span>Emmanuella Neizer</span>
+            <div class="user-menu" style="padding: 0px 4rem 0px 1.2rem">
+              <span class="customer-picture">
+                <span class="first-name">{{ firstInitial }}</span>
+                <span class="last-name">{{ lastinitial }}</span>
+              </span>
+              <span class="customer-name">
+                <span class="username">{{ user.firstName }} </span>
+                <span class="username">{{ user.lastName }}</span>
+              </span>
             </div>
             <hr class="m-1" />
             <button mat-menu-item>

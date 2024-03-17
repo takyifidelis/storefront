@@ -17,6 +17,7 @@ import { APIService } from '../../../../Services/api.service';
 
 import { CommonModule } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
+import { MerchantInfo } from '../../../../interfaces/all-interfaces';
 // import { MerchantAddProductComponent } from '../components/merchant-add-product';
 @Component({
   selector: 'app-merchant-dashboard',
@@ -44,6 +45,8 @@ export class MerchantDashboardComponent implements OnInit {
   stores: {
     [key: string]: any;
   }[] = [];
+  nameInitial!: string;
+  userName!: string;
   constructor(
     public dataService: DataService,
     private apiService: APIService,
@@ -199,6 +202,16 @@ export class MerchantDashboardComponent implements OnInit {
         })
         .start();
     }
+
+    this.apiService
+      .getMerchant(localStorage.getItem('businessId')!)
+      .subscribe((resData: MerchantInfo) => {
+        this.userName = resData.data.businessName;
+        this.nameInitial = resData.data.businessName.charAt(0);
+
+        console.log(resData);
+        console.log(resData.data);
+      });
   }
 
   onSelectedStoreChange(val: any) {
