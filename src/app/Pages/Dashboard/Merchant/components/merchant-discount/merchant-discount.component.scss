@@ -158,6 +158,7 @@
   z-index: 1;
   right: 0;
   width: 30%;
+  top: 3rem;
   margin-top: 1rem;
   margin-right: 2rem;
   font-family: Inter;
@@ -306,4 +307,7 @@
   align-items: center;
   height: 100vh;
   flex-direction: column;
+}
+.posting-spin {
+  width: 1.4rem;
 }

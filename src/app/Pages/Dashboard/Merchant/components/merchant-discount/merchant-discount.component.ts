@@ -77,8 +77,9 @@ export class MerchantDiscountComponent {
   merchantDiscountEmpty = false;
   showForm: boolean = false;
   isLoading: boolean = false;
+  isPosting: boolean = false;
+  addDiscountInit!: FormGroup;
   addDiscount: FormGroup;
-  addDiscountInit: FormGroup;
   discountNumber!: any;
   showInitialForm!: boolean;
   storeCategories: string[] = [];
@@ -232,6 +233,7 @@ export class MerchantDiscountComponent {
     const end = new Date(form.value.endDate);
     const start = new Date(form.value.startDate);
     console.log(form.value.quantity);
+    this.isPosting = true;
     this.apiService
       .addPromotionToStore(
         end,
@@ -244,6 +246,7 @@ export class MerchantDiscountComponent {
       .subscribe(
         (resData) => {
           console.log(resData);
+          this.isPosting = false;
           this.ngOnInit();
           this.toastr.info(resData.message, 'Success');
 
@@ -251,6 +254,7 @@ export class MerchantDiscountComponent {
         },
         (errorMessage) => {
           console.log(errorMessage);
+          this.isPosting = false;
           this.toastr.error(
             errorMessage.error.message,
             errorMessage.error.type
@@ -259,16 +263,17 @@ export class MerchantDiscountComponent {
       );
     form.reset();
   }
-  onSubmitInitial(form: FormGroupDirective) {
-    if (!form.valid) {
+  onSubmitInitial(form2: FormGroupDirective) {
+    if (!form2.valid) {
       return;
     }
-    const name = form.value.discountNameInit;
-    const statement = form.value.storeCategoryInit;
-    const discount = Number(form.value.quantityInit);
-    const end = new Date(form.value.endDateInit);
-    const start = new Date(form.value.startDateInit);
-    console.log(form.value.quantity);
+    const name = form2.value.discountNameInit;
+    const statement = form2.value.storeCategoryInit;
+    const discount = Number(form2.value.quantityInit);
+    const end = new Date(form2.value.endDateInit);
+    const start = new Date(form2.value.startDateInit);
+    this.isPosting = true;
+    console.log(form2.value.quantity);
     this.apiService
       .addPromotionToStore(
         end,
@@ -280,6 +285,7 @@ export class MerchantDiscountComponent {
       )
       .subscribe(
         (resData) => {
+          this.isPosting = false;
           console.log(resData);
           this.ngOnInit();
           this.toastr.info(resData.message, 'Success');
@@ -288,13 +294,14 @@ export class MerchantDiscountComponent {
         },
         (errorMessage) => {
           console.log(errorMessage);
+          this.isPosting = false;
           this.toastr.error(
             errorMessage.error.message,
             errorMessage.error.type
           );
         }
       );
-    form.reset();
+    form2.reset();
   }
 }
 
@@ -321,6 +328,7 @@ export class MerchantDiscountCustomizeComponent {
   numberOfProducts: any;
   discountUpdate: FormGroup;
   isLoading: boolean = false;
+  deleteIsLoading: boolean = false;
   users = [
     {
       name: '1',
@@ -387,6 +395,7 @@ export class MerchantDiscountCustomizeComponent {
     const end = new Date(form.value.endDate);
     const start = new Date(form.value.startDate);
     console.log(form.value.quantity);
+    this.isLoading = true;
     this.apiService
       .updatePromotionForStore(
         end,
@@ -401,11 +410,13 @@ export class MerchantDiscountCustomizeComponent {
           let d: any = [];
           d = resData.data;
           console.log(d);
+
           this.productDataSource = new MatTableDataSource(d);
+          this.isLoading = false;
           this.toastr.info(resData.message, 'Success');
         },
         (errorMessage) => {
-          console.log(errorMessage);
+          this.isLoading = false;
           this.toastr.error(
             errorMessage.error.message,
             errorMessage.error.type
@@ -415,15 +426,16 @@ export class MerchantDiscountCustomizeComponent {
     form.reset();
   }
   onDelete() {
+    this.deleteIsLoading = true;
     this.apiService
       .deletePromotionForStore(localStorage.getItem('promoId')!)
       .subscribe(
         (resData) => {
-          console.log(resData);
+          this.deleteIsLoading = false;
           this.toastr.info(resData.message, 'Success');
         },
         (errorMessage) => {
-          console.log(errorMessage);
+          this.deleteIsLoading = false;
           this.toastr.error(
             errorMessage.error.message,
             errorMessage.error.type
