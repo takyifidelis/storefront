@@ -6,6 +6,7 @@ import { APIService } from '../../../../../Services/api.service';
 import { DataService } from '../../../../../Services/data.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Shop } from '../../../../../interfaces/all-interfaces';
 
 @Component({
   selector: 'app-shop',
@@ -37,7 +38,7 @@ export class ShopComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoading = true;
-    this.apiService.getStores().subscribe((response: any) => {
+    this.apiService.getStores().subscribe((response: Shop) => {
       this.stores = response.data;
 
       this.numberOfStores = response.data.length;
@@ -49,7 +50,7 @@ export class ShopComponent implements OnInit {
   }
 
   filterItems(): void {
-    this.apiService.getStores().subscribe((response: any) => {
+    this.apiService.getStores().subscribe((response: Shop) => {
       this.stores = response.data;
 
       if (this.searchShop === '') {

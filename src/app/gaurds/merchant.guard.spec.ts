@@ -1,11 +1,11 @@
 import { TestBed } from '@angular/core/testing';
 import { CanActivateFn } from '@angular/router';
 
-import { merchantGuard } from './merchant.guard';
+import { merchantAuthGuard } from './merchant.guard';
 
 describe('merchantGuard', () => {
   const executeGuard: CanActivateFn = (...guardParameters) => 
-      TestBed.runInInjectionContext(() => merchantGuard(...guardParameters));
+      TestBed.runInInjectionContext(() => merchantAuthGuard(...guardParameters));
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
