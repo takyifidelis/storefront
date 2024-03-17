@@ -53,35 +53,6 @@ export interface SingleProductResponseData {
   };
 }
 
-export interface SingleProductResponseData {
-  code: string;
-  message: string;
-  type: string;
-  data: {
-    id: string;
-    name: string;
-    deleted: boolean;
-    description: string;
-    promotion?: any;
-    promotionProduct?: any;
-    images: { id: string; url: string }[];
-    deleted: boolean;
-    description: string;
-    promotion?: any;
-    promotionProduct?: any;
-    images: { id: string; url: string }[];
-    price: number;
-    discount: number;
-    variations: { type: string; values: string[] }[];
-    isActive: boolean;
-    category: string;
-    quantity: number;
-    store: string;
-    reStockLevel: number;
-    rating: number;
-  };
-}
-
 export interface SavedProducts {
   code: string;
   data: {
