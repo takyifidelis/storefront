@@ -201,6 +201,7 @@ export class MerchantProductDiscountComponent {
   product = '';
   categories = '';
   selectedPromo: any;
+  isLoading: boolean = false;
   pdata: { products: string[]; categories: string[] } = {
     products: [],
     categories: [],
@@ -230,6 +231,7 @@ export class MerchantProductDiscountComponent {
   }
 
   addPromotionToStore(form: FormGroupDirective) {
+    this.isLoading = true;
     this.pdata.products.push(this.data.id);
     this.pdata.categories.push(this.data.category);
     console.log(this.pdata);
@@ -238,6 +240,7 @@ export class MerchantProductDiscountComponent {
       .subscribe(
         (promoData) => {
           console.log(promoData);
+          this.isLoading = false;
           this.toastr.info(promoData.message, 'Success');
         },
         (errorMessage) => {
@@ -259,13 +262,16 @@ export class MerchantProductDiscountComponent {
     let deleteIds: string[] = [];
     deleteIds.push(this.data.id);
     console.log({ products: deleteIds });
+    this.isLoading = true;
     this.apiService.deleteProductFromStore(deleteIds).subscribe(
       (deleteResponse) => {
         console.log(deleteResponse);
+        this.isLoading = false;
         this.toastr.info(deleteResponse.message, 'Success');
       },
       (errorMessage) => {
         console.log(errorMessage);
+        this.isLoading = false;
         this.toastr.error(errorMessage.error.message, errorMessage.error.type);
       }
     );
