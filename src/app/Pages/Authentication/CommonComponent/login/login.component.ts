@@ -1,4 +1,3 @@
-declare var google: any;
 import { ToastrService } from 'ngx-toastr';
 import {
   GoogleSigninButtonModule,
