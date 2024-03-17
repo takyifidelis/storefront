@@ -7,7 +7,7 @@ import {
   ElementRef,
 } from '@angular/core';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
-import { MatSort, MatSortModule } from '@angular/material/sort';
+import { MatSort, MatSortModule, SortDirection } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -108,8 +108,10 @@ export class OrderComponent implements OnInit {
         this.unsorted = this.orders.data;
         this.numOfOrders = this.orders.data.length;
         this.dataSource = new MatTableDataSource(this.orders.data);
+
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
+        console.log(this.dataSource);
         if (this.numOfOrders > 0) {
           this.customerOrdersEmpty = false;
         }

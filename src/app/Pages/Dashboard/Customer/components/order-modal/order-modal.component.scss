@@ -168,3 +168,63 @@ form {
     line-height: 20px;
   }
 }
+.mat-mdc-radio-group {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  width: 100%;
+}
+
+.product-review-name {
+  color: #455468;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 28px;
+  letter-spacing: -0.3px;
+  text-transform: capitalize;
+}
+.product-review-price {
+  color: #5e718d;
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: -0.2px;
+  position: absolute;
+  right: 1rem;
+}
+.mat-mdc-radio-button {
+  border: 1px solid #eaecf0;
+  border-radius: 4px;
+  margin-bottom: 0.2rem;
+  background-color: #fff;
+  position: relative;
+}
+.mat-accent.mat-mdc-radio-checked {
+  border: 1px solid #0408e7;
+  background-color: #f5f5ff;
+  color: var(--Primary-800, #0306ba);
+}
+.product-amount.review {
+  position: absolute;
+  right: 1rem;
+}
+.loading-spinner-small {
+  text-align: center;
+  .spinner-image {
+    width: 5rem;
+  }
+}
+.product-to-review {
+  text-align: left;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px; /* 166.667% */
+  letter-spacing: -0.2px;
+  color: #5e718d;
+}

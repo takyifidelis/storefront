@@ -78,6 +78,42 @@
         [formGroup]="postReview"
         (ngSubmit)="onSubmit(reviewForm)"
       >
+        <div class="products-to-review">
+          <div class="product-to-review">
+            Select product you wish to review:
+          </div>
+          <mat-radio-group
+            aria-label="Select an option"
+            formControlName="product"
+          >
+            <mat-radio-button
+              [value]="item.product"
+              *ngFor="let item of data['items']"
+            >
+              <div
+                class="product-review-details d-flex justify-content-between align-items-center"
+              >
+                <div class="product-review-name">{{ item.name }}</div>
+                <div class="product-amount review">
+                  <div class="amount-quantity d-flex justify-content-between">
+                    <div class="product-amount product-price">
+                      <span class="discount-price">
+                        ${{ item.price * ((100 - item.discount) / 100) }}
+                      </span>
+                      <span class="actual-price" *ngIf="item.discount > 0"
+                        >${{ item.price }}</span
+                      >
+                      <span class="discount-percent" *ngIf="item.discount > 0">
+                        {{ item.discount
+                        }}<span class="per-off">% OFF</span></span
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </mat-radio-button>
+          </mat-radio-group>
+        </div>
         <div
           class="how-will-you-div d-flex justify-content-between align-items-center"
         >
@@ -114,7 +150,16 @@
           ></textarea>
         </div>
 
-        <button class="btn btn" type="submit">Submit Feedback</button>
+        <button class="btn btn" type="submit" *ngIf="!isLoading">
+          <span>Submit Feedback</span>
+        </button>
+        <span class="loading-spinner-small" *ngIf="isLoading">
+          <img
+            src="assets\icons\loading-btn-spinner.svg"
+            alt="Loading.."
+            class="spinner-image"
+          />
+        </span>
       </form>
     </mat-tab>
   </mat-tab-group>
