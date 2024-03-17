@@ -30,17 +30,17 @@ export interface SavedProducts {
 }
 
 export interface SingleProductResponseData {
-  code:string;
-  message:string;
-  type:string;
-  data:{
+  code: string;
+  message: string;
+  type: string;
+  data: {
     id: string;
     name: string;
-    deleted:boolean;
-    description:string;
-    promotion?:any
-    promotionProduct?:any
-    images: { id:string, url:string}[];
+    deleted: boolean;
+    description: string;
+    promotion?: any;
+    promotionProduct?: any;
+    images: { id: string; url: string }[];
     price: number;
     discount: number;
     variations: { [key: string]: string }[];
@@ -48,9 +48,9 @@ export interface SingleProductResponseData {
     category: string;
     quantity: number;
     store: string;
-    reStockLevel:number
-    rating:number
-  }
+    reStockLevel: number;
+    rating: number;
+  };
 }
 export interface ProductObject {
   products: string[];
@@ -96,4 +96,33 @@ export interface UserInterface {
   id: string;
   discount: number;
   storeProducts: { [key: string]: string };
+}
+export interface CustomerInfo {
+  code: string;
+  message: string;
+  type: string;
+  data: {
+    id: string;
+    firstName: string;
+    lastName: string;
+    phone: string | number;
+    account: string;
+  };
+}
+export interface MerchantInfo {
+  code: string;
+  message: string;
+  type: string;
+  data: {
+    id: string;
+    businessName: string;
+    businessType: string;
+    account: string;
+    stores?: { [key: string]: string }[];
+  };
+}
+export interface MerchantInfo {
+  id: string;
+  businessName: string;
+  businessType: string;
 }
