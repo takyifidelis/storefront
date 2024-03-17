@@ -1,11 +1,4 @@
-declare var google: any;
 import { ToastrService } from 'ngx-toastr';
-import {
-  GoogleSigninButtonModule,
-  SocialAuthService,
-  SocialLoginModule,
-  SocialUser,
-} from '@abacritt/angularx-social-login';
 import { CommonModule, DOCUMENT } from '@angular/common';
 import {
   Component,
@@ -49,8 +42,6 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     FontAwesomeModule,
     RouterModule,
     CommonModule,
-    GoogleSigninButtonModule,
-    SocialLoginModule,
     FormsModule,
     ReactiveFormsModule,
     MatProgressSpinnerModule,
@@ -60,7 +51,6 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 })
 export class LoginComponent implements OnInit {
   @Output() loginWithGoogle: EventEmitter<any> = new EventEmitter<any>();
-  user: SocialUser | undefined;
   isLoggedIn: boolean | undefined;
   passwordLock = faLock;
   mailIcon = faEnvelope;
@@ -73,7 +63,6 @@ export class LoginComponent implements OnInit {
   @ViewChild('search') search!: ElementRef;
 
   constructor(
-    private authService: SocialAuthService,
     @Inject(DOCUMENT) private document: Document,
     private loginService: AuthService,
     private apiService: APIService,
@@ -111,11 +100,6 @@ export class LoginComponent implements OnInit {
       }
     );
   }
-
-  // onGoogle() {
-  // this.document.getElementsByName('asl-google-signin-button')
-  // console.log(  this.document.getElementsByTagName('asl-google-signin-button')
-  // )
 
   //Login using Email and Password implementation
   loginForm: FormGroup;

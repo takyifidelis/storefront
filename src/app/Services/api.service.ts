@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Observable, catchError, map, throwError } from 'rxjs';
 import { environment } from '../../environments/environment.development';
 import { MerchantOrder, Order, Payout, SavedProducts, Shop, SingleProductResponseData, UserCredentials } from '../interfaces/all-interfaces';
-import { DataService } from './data.service';
 
 import { Response } from '../interfaces/all-interfaces';
 
@@ -11,7 +10,7 @@ import { Response } from '../interfaces/all-interfaces';
   providedIn: 'root',
 })
 export class APIService {
-  constructor(private http: HttpClient, public dataService: DataService) {}
+  constructor(private http: HttpClient) {}
 
   merchantSignup(user: UserCredentials): Observable<Response> {
     return this.http.post<Response>(
