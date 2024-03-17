@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NewPaymentOptionComponent } from './new-payment-option.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('NewPaymentOptionComponent', () => {
   let component: NewPaymentOptionComponent;
@@ -8,7 +9,7 @@ describe('NewPaymentOptionComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [NewPaymentOptionComponent]
+      imports: [NewPaymentOptionComponent, BrowserAnimationsModule]
     })
     .compileComponents();
     
