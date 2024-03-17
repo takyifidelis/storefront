@@ -16,7 +16,6 @@ import {
   FormsModule,
   Validators,
   ReactiveFormsModule,
-  NgForm,
 } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -81,14 +80,12 @@ export class LoginComponent implements OnInit {
       (res: { [key: string]: any }) => {
         if (res['data'].type === 'Business') {
           localStorage.setItem('businessId', res['data'].business);
-          console.log(res);
           this.router.navigate(['merchant']);
         } else if (res['data'].type === 'Customer') {
           localStorage.setItem(
             'customerId',
             JSON.stringify(res['data'].customer)
           );
-          console.log(res);
           this.router.navigate(['customer']);
         }
       },
@@ -96,7 +93,6 @@ export class LoginComponent implements OnInit {
         console.log('err');
       },
       () => {
-        console.log('com');
       }
     );
   }

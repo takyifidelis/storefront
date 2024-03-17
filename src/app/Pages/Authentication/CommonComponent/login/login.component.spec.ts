@@ -4,12 +4,17 @@ import { LoginComponent } from './login.component';
 import { AuthService } from '../../Auth/auth.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { RouterTestingModule } from '@angular/router/testing';
+import { routes } from '../../../../app.routes';
+import { Router } from '@angular/router';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
   let authService: AuthService;
   let toastrService: ToastrModule;
+  let router: Router;
+  let location: Location;
 
   beforeEach( () => {
 
@@ -36,7 +41,7 @@ describe('LoginComponent', () => {
     };
 
      TestBed.configureTestingModule({
-      imports: [LoginComponent, HttpClientTestingModule],
+      imports: [LoginComponent, HttpClientTestingModule, RouterTestingModule.withRoutes(routes)],
       providers: [{provide: AuthService, useValue: mockLoginService}, {provide: ToastrService, useClass: MockToastrService}]
     })
     .compileComponents(); 
@@ -45,6 +50,8 @@ describe('LoginComponent', () => {
   beforeEach(() => {
     authService = TestBed.inject(AuthService);
     toastrService = TestBed.inject(ToastrService);
+    router = TestBed.inject(Router);
+    router.initialNavigation();
     fixture = TestBed.createComponent(LoginComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
