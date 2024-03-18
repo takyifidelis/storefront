@@ -68,7 +68,7 @@ constructor(public http: HttpClient, private apiService: APIService, public dial
       'walletId': new FormControl(null, Validators.required),
     })
 
-    this.apiService.getWallet('f9586428-62e3-4455-bb1d-61262a407d1a').subscribe((res: any)=> {
+    this.apiService.getWallet(localStorage.getItem('storeId')!).subscribe((res: any)=> {
       console.log(res)
       this.walletInfo = res.data;
     this.dataSource = new MatTableDataSource(this.walletInfo);
@@ -85,6 +85,8 @@ this.router.navigate(['/merchant/home']);
     }
     
   }
+
+  
 
   onSubmit(){
     console.log(this.walletForm);

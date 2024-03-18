@@ -149,10 +149,6 @@ export class ReviewComponent implements OnInit {
   onLikedProducts() {
     this.toastr.info('Product has been added to favorites', 'Success');
     this.productItem.quant = this.quantity;
-    this.dataService.like = JSON.parse(
-      localStorage.getItem('favouriteProducts') || ''
-    );
-
     this.dataService.like.push(this.productItem);
     let likedProductsJson = JSON.stringify(this.dataService.like);
     localStorage.setItem('favouriteProducts', likedProductsJson);
