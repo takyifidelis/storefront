@@ -119,7 +119,10 @@ this.router.navigate(['/customer'])
   if(localStorage.getItem('isInEditMode') === 'true') {
     console.log('loading here')
     this.dataService.template =JSON.parse(localStorage.getItem('tempTemplate')!)
-    this.dataService.template.text = localStorage.getItem('storeName')
+    if (localStorage.getItem('storeName')){
+      this.dataService.template.text = localStorage.getItem('storeName')
+    }
+    
       this.dataService.isLoading =false
   }
 

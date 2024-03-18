@@ -80,7 +80,7 @@ like: any =  [];
   ];
   productCategory: any = [];
   // template: any;
-  template = {
+  template: any = {
     id: 'template-1',
     screenshot: '/assets/images/Text.svg',
     text: 'ShopNest',
