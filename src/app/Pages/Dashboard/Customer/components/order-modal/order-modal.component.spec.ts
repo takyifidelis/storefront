@@ -4,6 +4,7 @@ import { OrderModalComponent } from './order-modal.component';
 import { APIService } from '../../../../../Services/api.service';
 import { Observable, of } from 'rxjs';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 describe('OrderModalComponent', () => {
   let component: OrderModalComponent;
@@ -18,7 +19,7 @@ class MockService{
       amount: 45,
   createdAt: '07-mar-23',
   id: 'string',
-  items: [{
+  items: {
     createdAt: '07-mar-23',
     id: 'string',
     image: 'string',
@@ -29,7 +30,7 @@ class MockService{
     quantity: 4,
     total: 100,
     updatedAt: '07-mar-23',
-  }],
+  },
   orderId: 'string',
   orderShipping: {
     apartmentNo: 'string',
@@ -60,7 +61,8 @@ class MockService{
 
      TestBed.configureTestingModule({
       imports: [OrderModalComponent, HttpClientTestingModule],
-      providers: [{provide: APIService, useClass: MockService}]
+      providers: [{provide: APIService, useClass: MockService}, { provide: MAT_DIALOG_DATA, useValue: {}},
+        { provide: MatDialogRef, useValue: {} }]
     })
     .compileComponents();
     
