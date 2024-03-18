@@ -21,7 +21,7 @@ import { Response } from '../interfaces/all-interfaces';
   providedIn: 'root',
 })
 export class APIService {
-  constructor(private http: HttpClient, public dataService: DataService) {}
+  constructor(private http: HttpClient) {}
 
   merchantSignup(user: UserCredentials): Observable<Response> {
     return this.http.post<Response>(

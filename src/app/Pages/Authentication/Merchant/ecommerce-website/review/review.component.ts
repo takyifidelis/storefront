@@ -197,7 +197,6 @@ export class ReviewComponent implements OnInit {
     this.apiService
       .getCustomerStoreProducts(localStorage.getItem('storeId')!)
       .subscribe((res: any) => {
-        console.log(res.data);
         this.myVariation = res.data.variations;
         this.numberOfReviews = this.productItem.reviews.length;
         res.data.filter((product: any) => {
@@ -207,16 +206,16 @@ export class ReviewComponent implements OnInit {
         });
       });
 
-    this.apiService.getReviews(localStorage.getItem('storeId')!).subscribe(
-      (response: any) => {
-        console.log(response);
-        // this.users = response.data
-        this.productReview = response.data;
-      },
-      (errorMessage) => {
-        console.log(errorMessage);
-      }
-    );
+    // this.apiService.getReviews(localStorage.getItem('storeId')!).subscribe(
+    //   (response: any) => {
+    //     console.log(response);
+    //     // this.users = response.data
+    //     this.productReview = response.data;
+    //   },
+    //   (errorMessage) => {
+    //     console.log(errorMessage);
+    //   }
+    // );
   }
 
   previewProduct(id: string) {

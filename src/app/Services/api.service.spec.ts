@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 
 import { APIService } from './api.service';
-import {HttpClientTestingModule} from '@angular/common/http/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('APIService', () => {
   let service: APIService;
@@ -12,7 +12,6 @@ describe('APIService', () => {
     });
     service = TestBed.inject(APIService);
   });
-
 
   it('should be created', () => {
     expect(service).toBeTruthy();

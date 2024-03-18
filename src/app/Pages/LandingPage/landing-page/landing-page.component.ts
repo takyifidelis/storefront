@@ -12,7 +12,6 @@ import { MatButtonModule } from '@angular/material/button';
   styleUrl: './landing-page.component.scss',
 })
 export class LandingPageComponent implements OnInit {
-  constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
     

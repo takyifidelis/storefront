@@ -109,7 +109,6 @@ export class OrderComponent implements OnInit {
       .subscribe((res: Order) => {
         this.isLoading = false;
         this.orders = res;
-        console.log(this.orders);
         this.unsorted = this.orders.data;
         this.numOfOrders = this.orders.data.length;
         this.dataSource = new MatTableDataSource(this.orders.data);

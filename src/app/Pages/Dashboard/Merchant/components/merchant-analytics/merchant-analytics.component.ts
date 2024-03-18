@@ -65,7 +65,6 @@ export class MerchantAnalyticsComponent {
   @ViewChild(MatSort) sort!: MatSort;
   users: UserInterface[] = [];
   formattedDate!: string | null;
-  datepipe: DatePipe = new DatePipe('en-US');
   payout: any = [];
   payoutAvailable?: string;
   isLoading: boolean = false;

@@ -75,6 +75,7 @@ export class MerchantReviewsComponent {
   seaechICon = faSearch;
   isLoading: boolean = false;
   numberOfReviews!: number;
+  
   constructor(
     public dataService: DataService,
     public dialog: MatDialog,
