@@ -16,7 +16,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatTabsModule } from '@angular/material/tabs';
-import { Payout, UserInterface } from '../../../../../interfaces/all-interfaces';
+import {
+  Payout,
+  UserInterface,
+} from '../../../../../interfaces/all-interfaces';
 
 @Component({
   selector: 'app-merchant-analytics',
@@ -78,15 +81,6 @@ export class MerchantAnalyticsComponent {
         this.numOfPayload = res.data.length;
 
         this.isLoading = false;
-        if (this.payout.length > 0) {
-          this.merchantPaymentEmpty = false;
-        }
-
-        if (this.payout.length > 0) {
-          this.payoutAvailable = `${this.payout.length} Payout Available`;
-        } else {
-          this.payoutAvailable = 'Payout Available';
-        }
         this.dataSource = new MatTableDataSource(this.payout);
       });
   }

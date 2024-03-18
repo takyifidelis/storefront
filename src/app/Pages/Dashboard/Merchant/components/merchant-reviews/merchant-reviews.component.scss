@@ -172,6 +172,7 @@ section.review-page {
   letter-spacing: -0.2px;
   border-radius: 6px;
   background: #f0f3f9;
+  padding: 0.05rem 0.7rem;
   .review {
     margin-left: 0.3rem;
   }
@@ -339,4 +340,14 @@ section.review-page {
   justify-content: center;
   align-items: center;
   height: 100vh;
+}
+.review-head {
+  color: var(--Colors-Primary-Slate-600, #455468);
+  font-family: Inter;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 35px;
+  letter-spacing: -0.3px;
+  margin-bottom: 0;
 }

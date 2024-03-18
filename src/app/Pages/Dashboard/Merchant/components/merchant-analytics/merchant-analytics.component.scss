@@ -146,3 +146,13 @@
   height: 100vh;
   flex-direction: column;
 }
+.payout-head {
+  color: var(--Colors-Primary-Slate-600, #455468);
+  font-family: Inter;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 35px;
+  letter-spacing: -0.3px;
+  margin-bottom: 0;
+}

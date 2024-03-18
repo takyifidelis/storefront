@@ -102,6 +102,7 @@ export class CustomerDashboardComponent implements OnInit {
       .getCustomer(localStorage.getItem('customerId')!)
       .subscribe((resData: CustomerInfo) => {
         this.user = resData.data;
+
         this.firstInitial = resData.data.firstName.charAt(0);
         this.lastinitial = resData.data.lastName.charAt(0);
         console.log(resData);
