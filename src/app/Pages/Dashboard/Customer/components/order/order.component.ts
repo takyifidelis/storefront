@@ -25,7 +25,10 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { DataService } from '../../../../../Services/data.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCheck, faFilter, faSearch } from '@fortawesome/free-solid-svg-icons';
-import { Order, SingleCustomerOrder } from '../../../../../interfaces/all-interfaces';
+import {
+  Order,
+  SingleCustomerOrder,
+} from '../../../../../interfaces/all-interfaces';
 
 @Component({
   selector: 'app-order',
@@ -124,7 +127,7 @@ export class OrderComponent implements OnInit {
   moreVert(e: dummyUserInterface) {
     this.dialog.open(OrderModalComponent, {
       data: e,
-      width: '500px',
+      width: '600px',
       position: { right: '50px', top: '10%' },
     });
   }

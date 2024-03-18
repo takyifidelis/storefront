@@ -92,9 +92,9 @@
           <mat-menu #menu="matMenu" class="pt-0">
             <div class="merchant-dp">
               <span class="dp-image">
-                {{ nameInitial }}
+                {{ nameInitial || "E" }}
               </span>
-              <span>{{ userName }}</span>
+              <span>{{ userName || "Emmanuella" }}</span>
             </div>
             <hr class="m-1" />
             <button mat-menu-item>

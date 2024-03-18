@@ -11,7 +11,7 @@
         <div class="user-info">
           <div class="profile-image-container">
             <span class="dp-info">
-              {{ user.firstName.charAt(0) }}{{ user.lastName.charAt(0) }}
+              {{ firstInitial || "E" }}{{ lastinitial || "N" }}
             </span>
             <svg
               width="12"
@@ -41,12 +41,14 @@
           <mat-menu #menu="matMenu" class="pt-0">
             <div class="user-menu" style="padding: 0px 4rem 0px 1.2rem">
               <span class="customer-picture">
-                <span class="first-name">{{ firstInitial }}</span>
-                <span class="last-name">{{ lastinitial }}</span>
+                <span class="first-name">{{ firstInitial || "E" }}</span>
+                <span class="last-name">{{ lastinitial || "N" }}</span>
               </span>
               <span class="customer-name">
-                <span class="username">{{ user.firstName }} </span>
-                <span class="username">{{ user.lastName }}</span>
+                <span class="username"
+                  >{{ user.firstName || "Emmanuella" }}
+                </span>
+                <span class="username">{{ user.lastName || "Neizer" }}</span>
               </span>
             </div>
             <hr class="m-1" />
