@@ -18,6 +18,8 @@ import {
 import { StarRatingComponent } from '../../../../Dashboard/Customer/components/star-rating/star-rating.component';
 import { FilterOnePipe } from '../../../../../Pipes/filter-one.pipe';
 import { FilterProductPipe } from '../../../../../Pipes/filter-product.pipe';
+import { MatDialog } from '@angular/material/dialog';
+import { TemplateTextEditorDialogComponent } from '../../../../Dashboard/Merchant/components/template-text-editor-dialog/template-text-editor-dialog.component';
 
 interface Item {
   name: string;
@@ -51,7 +53,8 @@ export class HomeEcommerceComponent implements OnInit {
     private cdr: ChangeDetectorRef,
     public dataservice: DataService,
     private apiService: APIService,
-    private router: Router
+    private router: Router,
+    public dialog: MatDialog
   ) {}
 
   openFileInput(fileInput: HTMLInputElement) {
@@ -98,7 +101,18 @@ export class HomeEcommerceComponent implements OnInit {
     this.router.navigate([`/ecommerce/shop/${id}`]);
     
   }
-
+  editText(...args: string[]) {
+    if(this.dataservice.isEditingTemp){
+      this.dialog.open(TemplateTextEditorDialogComponent, {
+        data: args,
+        hasBackdrop: false
+      }).afterClosed().subscribe((editedtText) => {
+        args.shift()
+        this.dataservice.updateText(editedtText, ...args);
+        console.log({editedTex:editedtText}, ...args);
+      });
+    }
+  }
 
   removeDuplicates(items: Item[]): Item[] {
     // Create a Map to store unique names as keys
@@ -118,7 +132,7 @@ export class HomeEcommerceComponent implements OnInit {
 
 
   ngOnInit(){
-      this.apiService.getCustomerStoreProducts(localStorage.getItem('storeId')!).subscribe((productResData:any)=>{
+      this.apiService.getCustomerStoreProducts(localStorage.getItem('storeId')!).subscribe((productResData)=>{
         console.log(productResData);
         this.dataservice.products = productResData.data
 
