@@ -237,13 +237,15 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
-    <mat-paginator
-      [pageSizeOptions]="[10, 25, 100]"
-      aria-label="Select page of users"
-    ></mat-paginator>
+    
 
     <div class="no-result-found" *ngIf="numOfOrders === 0">No Order Found</div>
   </div>
 </div>
 
 }
+
+<mat-paginator
+[pageSizeOptions]="[8, 10, 25, 100]"
+aria-label="Select page of users"
+></mat-paginator>

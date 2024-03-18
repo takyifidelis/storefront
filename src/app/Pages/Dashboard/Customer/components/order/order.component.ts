@@ -65,6 +65,10 @@ export class OrderComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   orders: any;
+  length = 50;
+  pageSize = 10;
+  pageIndex = 0;
+  pageSizeOptions = [5, 10, 25];
   filterIcon = faFilter;
   seaechICon = faSearch;
   checkIcon = faCheck;

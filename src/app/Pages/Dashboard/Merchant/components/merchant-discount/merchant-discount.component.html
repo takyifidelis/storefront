@@ -170,16 +170,13 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
-  <mat-paginator
-    [pageSizeOptions]="[5, 10, 25, 100]"
-    aria-label="Select page of users"
-  ></mat-paginator>
 
   <div class="no-result-found" *ngIf="discountNumber === 0">
     No Discount Found
   </div>
 </div>
 }
+
 <form
   action="#"
   method="post"
@@ -280,3 +277,8 @@
     </button>
   </div>
 </form>
+
+<mat-paginator
+[pageSizeOptions]="[8, 10, 25, 100]"
+aria-label="Select page of users"
+></mat-paginator>

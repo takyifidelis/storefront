@@ -145,6 +145,7 @@ export class MerchantReviewsComponent {
         }
         this.numberOfReviews = response.data.length;
         this.dataSource = new MatTableDataSource(response.data);
+        this.dataSource.paginator = this.paginator
       },
       (errorMessage) => {
         console.log(errorMessage);

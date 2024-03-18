@@ -201,15 +201,6 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
   </div>
-  <mat-paginator
-    style="margin-top: 30px"
-    [pageSizeOptions]="[5, 10, 25, 100]"
-    aria-label="Select page of users"
-  ></mat-paginator>
-
-  <!-- <div *ngFor="let review of reviews$ | async">
-      {{rating }}
-    </div> -->
 
   <div class="no-result-found" *ngIf="numberOfReviews === 0">
     No Review Found
@@ -217,3 +208,8 @@
 </section>
 
 }
+<mat-paginator
+style="margin-top: 30px"
+[pageSizeOptions]="[8, 10, 25, 100]"
+aria-label="Select page of users"
+></mat-paginator>

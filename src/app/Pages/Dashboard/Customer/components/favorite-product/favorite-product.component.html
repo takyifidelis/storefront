@@ -175,10 +175,6 @@
 
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
-    <mat-paginator
-      [pageSizeOptions]="[10, 25, 100]"
-      aria-label="Select page of users"
-    ></mat-paginator>
 
     <div class="no-result-found" *ngIf="numOfFavoriteProducts === 0">
       No Product Found
@@ -187,3 +183,8 @@
 </div>
 
 }
+
+<mat-paginator
+[pageSizeOptions]="[8, 10, 25, 100]"
+aria-label="Select page of users"
+></mat-paginator>

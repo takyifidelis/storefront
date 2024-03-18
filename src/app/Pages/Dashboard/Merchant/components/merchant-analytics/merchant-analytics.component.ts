@@ -81,6 +81,7 @@ export class MerchantAnalyticsComponent {
 
         this.isLoading = false;
         this.dataSource = new MatTableDataSource(this.payout);
+        this.dataSource.paginator = this.paginator;
       });
   }
 

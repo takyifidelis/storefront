@@ -89,6 +89,8 @@ export class MerchantOrdersComponent {
         }
         console.log(this.orders);
         this.dataSource = new MatTableDataSource(this.orders);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
       });
 
     this.isAllActive = true;

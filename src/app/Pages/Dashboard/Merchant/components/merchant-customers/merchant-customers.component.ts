@@ -155,6 +155,7 @@ export class MerchantCustomersComponent implements OnInit {
             this.merchantCustomersEmpty = false;
           }
           this.dataSource = new MatTableDataSource(res.data);
+          this.dataSource.paginator = this.paginator
         },
         (errorMessage) => {
           console.log(errorMessage);
