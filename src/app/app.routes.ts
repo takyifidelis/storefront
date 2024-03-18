@@ -47,6 +47,7 @@ import { commonGuard } from './gaurds/common.guard';
 import { merchantAuthGuard } from './gaurds/merchant.guard';
 import { OnboardingStepOneCustomerComponent } from './Pages/Dashboard/Customer/components/onboarding/onboarding-step-one-customer/onboarding-step-one-customer.component';
 import { OnboardingStepTwoCustomerComponent } from './Pages/Dashboard/Customer/components/onboarding/onboarding-step-two-customer/onboarding-step-two-customer.component';
+import { WalletComponent } from './Pages/Dashboard/Merchant/home/wallet/wallet.component';
 export const routes: Routes = [
   { path: '', component: LandingPageComponent },
   // { path: 'customer-onboarding-1', component: OnboardingStepOneCustomerComponent },
@@ -127,6 +128,7 @@ export const routes: Routes = [
     children: [
       { path: '', component: HomeComponent },
       { path: 'home', component: HomeComponent },
+      { path: 'wallet', component: WalletComponent },
       { path: 'discount', component: MerchantDiscountComponent },
       { path: 'reviews', component: MerchantReviewsComponent },
       { path: 'order', component: MerchantOrdersComponent },

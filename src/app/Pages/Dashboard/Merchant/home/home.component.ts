@@ -108,6 +108,6 @@ export class HomeComponent implements OnInit {
   }
 
   goToWallet(): void {
-    this.router.navigate(['/wallet']);
+    this.router.navigate(['/merchant/wallet']);
   }
 }
