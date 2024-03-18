@@ -63,7 +63,7 @@
         <div class="user-info">
           <div class="profile-image-container">
             <span class="nav-dp">
-              {{ nameInitial }}
+              {{ nameInitial || "E" }}
             </span>
             <svg
               width="12"
@@ -82,7 +82,8 @@
               />
             </svg>
           </div>
-          <button  id="tourStepNine"
+          <button
+            id="tourStepNine"
             mat-icon-button
             [matMenuTriggerFor]="menu"
             aria-label="Example icon-button with a menu"
@@ -163,7 +164,11 @@
       class="side-nav mat-elevated-z4"
     >
       <ul id="tourStepOne">
-        <li id="tourStepTwo" [routerLink]="['home']" routerLinkActive="active-link">
+        <li
+          id="tourStepTwo"
+          [routerLink]="['home']"
+          routerLinkActive="active-link"
+        >
           <img
             src="/assets/icons/home_icon.svg"
             alt=""
@@ -172,7 +177,11 @@
           />
           <span>Home</span>
         </li>
-        <li id="tourStepThree" [routerLink]="['product']" routerLinkActive="active-link">
+        <li
+          id="tourStepThree"
+          [routerLink]="['product']"
+          routerLinkActive="active-link"
+        >
           <img
             src="/assets/icons/favourite_icon.svg"
             alt=""
@@ -181,7 +190,11 @@
           />
           <span>Product</span>
         </li>
-        <li id="tourStepFour" [routerLink]="['discount']" routerLinkActive="active-link">
+        <li
+          id="tourStepFour"
+          [routerLink]="['discount']"
+          routerLinkActive="active-link"
+        >
           <img
             src="/assets/icons/discount_icon.svg"
             alt=""
@@ -190,7 +203,11 @@
           />
           <span>Discount</span>
         </li>
-        <li id="tourStepFive" [routerLink]="['reviews']" routerLinkActive="active-link">
+        <li
+          id="tourStepFive"
+          [routerLink]="['reviews']"
+          routerLinkActive="active-link"
+        >
           <img
             src="/assets/icons/payment_opt.svg"
             alt=""
@@ -199,7 +216,11 @@
           />
           <span>Reviews</span>
         </li>
-        <li id="tourStepSix" [routerLink]="['order']" routerLinkActive="active-link">
+        <li
+          id="tourStepSix"
+          [routerLink]="['order']"
+          routerLinkActive="active-link"
+        >
           <img
             src="/assets/icons/order_icon.svg"
             alt=""
@@ -208,7 +229,11 @@
           />
           <span>Orders</span>
         </li>
-        <li id="tourStepSeven" [routerLink]="['customers']" routerLinkActive="active-link">
+        <li
+          id="tourStepSeven"
+          [routerLink]="['customers']"
+          routerLinkActive="active-link"
+        >
           <img
             src="/assets/icons/customer_icon.svg"
             alt=""
@@ -217,7 +242,11 @@
           />
           <span>Customers</span>
         </li>
-        <li id="tourStepEight" [routerLink]="['analytics']" routerLinkActive="active-link">
+        <li
+          id="tourStepEight"
+          [routerLink]="['analytics']"
+          routerLinkActive="active-link"
+        >
           <img
             src="/assets/icons/payout_icon.svg"
             alt=""
