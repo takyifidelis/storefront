@@ -13,6 +13,7 @@ import { APIService } from '../../../../../Services/api.service';
 import { Router, RouterModule } from '@angular/router';
 import {
   ProductObject,
+  oneProduct,
   Response as resp,
 } from '../../../../../interfaces/all-interfaces';
 import { StarRatingComponent } from '../../../../Dashboard/Customer/components/star-rating/star-rating.component';
@@ -20,6 +21,7 @@ import { FilterOnePipe } from '../../../../../Pipes/filter-one.pipe';
 import { FilterProductPipe } from '../../../../../Pipes/filter-product.pipe';
 import { MatDialog } from '@angular/material/dialog';
 import { TemplateTextEditorDialogComponent } from '../../../../Dashboard/Merchant/components/template-text-editor-dialog/template-text-editor-dialog.component';
+import { productInterface } from '../../../../Dashboard/Merchant/components/merchant-discount/merchant-discount.component';
 
 interface Item {
   name: string;
@@ -96,9 +98,10 @@ export class HomeEcommerceComponent implements OnInit {
       };
     }
   }
-  goToProduct(id: string) {
-    localStorage.setItem('productId', id)
-    this.router.navigate([`/ecommerce/shop/${id}`]);
+  goToProduct(product:oneProduct){
+    localStorage.setItem('productId', product.id)
+    localStorage.setItem('selectedProduct', JSON.stringify(product))
+    this.router.navigate([`/ecommerce/shop/${product.id}`]);
     
   }
   editText(...args: string[]) {
@@ -115,10 +118,7 @@ export class HomeEcommerceComponent implements OnInit {
   }
 
   removeDuplicates(items: Item[]): Item[] {
-    // Create a Map to store unique names as keys
     const uniqueNames = new Map<string, boolean>();
-
-    // Filter out duplicate items based on the 'name' property
     const uniqueItems = items.filter((item) => {
       if (!uniqueNames.has(item.name)) {
         uniqueNames.set(item.name, true);
@@ -135,7 +135,12 @@ export class HomeEcommerceComponent implements OnInit {
       this.apiService.getCustomerStoreProducts(localStorage.getItem('storeId')!).subscribe((productResData)=>{
         console.log(productResData);
         this.dataservice.products = productResData.data
-
+        let categories:string[] = []
+        this.dataservice.products.forEach((product:oneProduct)=>{
+          categories.push(product.category)
+        })
+        categories = [...new Set(categories)]
+        this.dataservice.productCategories = categories
         if (JSON.parse(localStorage.getItem('cart')!)) {
           this.cart = JSON.parse(localStorage.getItem('cart')!);
           this.dataservice.cart = this.cart;

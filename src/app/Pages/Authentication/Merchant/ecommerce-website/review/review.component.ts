@@ -18,6 +18,7 @@ import {
   ProductObject,
   SingleProductResponseData,
   Varaiation,
+  oneProduct,
 } from '../../../../../interfaces/all-interfaces';
 import { AuthService } from '../../../Auth/auth.service';
 
@@ -188,7 +189,7 @@ export class ReviewComponent implements OnInit {
   }
   ngOnInit() {
     let productJson = localStorage.getItem('selectedProduct');
-    let product = JSON.parse(productJson!);
+    let product:oneProduct = JSON.parse(productJson!);
     this.productItem = product;
     this.dataService.isLoading = true;
     this.selectedImage = this.productItem.images[0].url;
@@ -205,18 +206,8 @@ export class ReviewComponent implements OnInit {
             this.similarProducts.push(product);
           }
         });
+        this.dataService.isLoading = false;
       });
-
-    this.apiService.getReviews(localStorage.getItem('storeId')!).subscribe(
-      (response: any) => {
-        console.log(response);
-        // this.users = response.data
-        this.productReview = response.data;
-      },
-      (errorMessage) => {
-        console.log(errorMessage);
-      }
-    );
   }
 
   previewProduct(id: string) {

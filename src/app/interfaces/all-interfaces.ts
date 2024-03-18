@@ -28,12 +28,7 @@ export interface Response {
 //     storeProducts: { [key: string]: string };
 //   }[];
 // }
-
-export interface SingleProductResponseData {
-  code: string;
-  message: string;
-  type: string;
-  data: {
+export interface oneProduct {
     id: string;
     name: string;
     deleted: boolean;
@@ -50,7 +45,13 @@ export interface SingleProductResponseData {
     store: string;
     reStockLevel: number;
     rating: number;
-  };
+}
+
+export interface SingleProductResponseData {
+  code: string;
+  message: string;
+  type: string;
+  data: oneProduct;
 }
 
 export interface SavedProducts {

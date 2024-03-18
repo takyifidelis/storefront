@@ -29,10 +29,8 @@ export class ShopComponent implements OnInit {
   ) {}
 
   goToStore(store: any) {
-    // console.log(store)
-    // this.dataService.template = JSON.parse(store.template.options)
+    localStorage.setItem('isInEditMode', 'false')
     localStorage.setItem('storeId', store.id);
-    // console.log(this.dataService.template)
     this.router.navigate(['/ecommerce']);
   }
 
