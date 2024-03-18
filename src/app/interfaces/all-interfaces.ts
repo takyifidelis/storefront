@@ -1,3 +1,5 @@
+import { Observable } from "rxjs";
+
 export interface UserCredentials {
   email: string;
   password: string;
@@ -300,3 +302,24 @@ export interface MerchantInfo {
   businessName: string;
   businessType: string;
 }
+
+export interface PasswordResetData {
+  code: string;
+  data: {
+      business: null;
+      canResetPassword: boolean;
+      createdAt: string;
+      customer: string;
+      email: string;
+      id: string;
+      isActive: boolean;
+      mustChangePassword: boolean;
+      type: string;
+      updatedAt: string;
+      verified: boolean;
+  };
+  message: string;
+      type: string;
+}
+
+
