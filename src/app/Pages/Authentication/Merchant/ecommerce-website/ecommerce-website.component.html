@@ -16,8 +16,7 @@
         [style.color]="dataService.template.navbarColor"
         class="navbar-brand"
         [routerLink]="['/ecommerce']"
-        [innerText]="dataService.template.text"
-      ></a>
+      >{{dataService.selectedStore['storeName']}}</a>
       <button
         class="menu-btn toggle-btn"
         color="primary"
@@ -74,8 +73,8 @@
           id="dropdownMenu"
         >
           <a class="nav-link" [routerLink]="['home']">Home</a>
-          <a class="nav-link" [routerLink]="['about-us']">About Us</a>
-          <a class="nav-link" [routerLink]="['contact-us']">Contact Us</a>
+          <a class="nav-link" [routerLink]="['about']">About Us</a>
+          <a class="nav-link" [routerLink]="['contact']">Contact Us</a>
           <a class="nav-link" [routerLink]="['shop']">Shop</a>
           <a class="nav-link">
             <fa-icon [icon]="searchIcon" style="color: #fff"></fa-icon>

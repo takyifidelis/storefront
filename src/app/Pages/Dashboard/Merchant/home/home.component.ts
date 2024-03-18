@@ -90,23 +90,34 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  // editStore(){
+  //   this.dataService.isLoading =true
+  //   localStorage.setItem('isEditorLoading', 'false') 
+  //   this.apiService.getMerchantStores(localStorage.getItem('businessId')!).subscribe((data:any) => {
+  //     console.log(data)
+  //     if (data.data.length>0) {
+  //       this.dataService.isInEditMode = true
+  //       localStorage.setItem('isEditorLoading', 'true') 
+  //       localStorage.setItem('storeId',data.data[0].id)
+  //       localStorage.setItem('template',data.data[0].template.temp.options)
+  //       this.router.navigate(['/template-editor']);
+  //       this.dataService.isLoading =false
+  //     } else {
+  //       this.router.navigate(['/merchant-onboarding-1']);
+  //       this.dataService.isLoading =false
+  //     }
+  //   })
+  // }
   editStore(){
     this.dataService.isLoading =true
-    this.apiService.getMerchantStores(localStorage.getItem('businessId')!).subscribe((data:any) => {
-      console.log(data)
-      this.dataService.isInEditMode = true 
-      if (data.data.length>0) {
-        localStorage.setItem('storeId',data.data[0].id)
-        localStorage.setItem('tempTemplate',data.data[0].template.temp.options)
-        localStorage.setItem('template',data.data[0].template.options)
-        this.dataService.template = JSON.parse(localStorage.getItem('tempTemplate')!)
-        this.router.navigate(['/template-editor']);
-        this.dataService.isLoading =false
-      } else {
-        this.router.navigate(['/merchant-onboarding-1']);
-        this.dataService.isLoading =false
-      }
-    })
+    if (this.dataService.selectedStore['id']?.length) {
+      this.dataService.template = JSON.parse(localStorage.getItem('tempTemplate')!)
+      this.dataService.isLoading =false
+      this.router.navigate(['/template-editor']);
+    } else {
+      this.router.navigate(['/merchant-onboarding-1']);
+      this.dataService.isLoading =false
+    }
   }
   ngOnInit() {
     this.dataService.merchantDashboardNoProjects = false

@@ -1,23 +1,48 @@
-<section class="about-us container-fluid">
-  <h1 [innerText]="dataService.template.contactUs.contactMessage" class="contact-us-header"></h1>
+<section
+[style.fontFamily]="dataService.template.fontFamily"
+[style.textAlign]="dataService.template.textAlign"
+[style.fontWeight]="dataService.template.body.fontWeight"
+[style.fontSize]="dataService.template.body.fontSize"
+[style.color]="dataService.template.primaryColor"
+style="position: relative; background-color: transparent;"
+class="about-us container-fluid">
+<img src="/assets/images/about-us-backgroud.svg" style="width: 100%;" alt="" srcset="">
+<div class="d-flex w-100 justify-content-center" style="position: absolute; z-index: 10; top: 0;">
+  <h1
+  [style.fontSize]="dataService.template.headings.heroHeading.fontSize"
+  [style.lineHeight]="dataService.template.headings.heroHeading.lineHeight"
+  [style.fontWeight]="dataService.template.headings.heroHeading.fontWeight"
+  (click)="editText(dataService.template.contactUs.contactMessage,'contactUs','contactMessage')"
+  [innerHTML]="dataService.template.contactUs.contactMessage" class="contact-us-header"></h1>
+</div>
   <!-- <div contenteditable="true" class="editor" (input)="onInput($event)"></div> -->
-  <div class="d-flex align-items-center justify-content-between contact-blocks">
+  <div style="position: absolute; z-index: 10; top: 4rem;" class="d-flex justify-content-between contact-blocks">
     <div class="get-in-touch-div">
-      <h1 class="get-in-touch-header" [innerText]="dataService.template.contactUs.leftPanelInfo.heading"></h1>
-      <p class="get-in-touch-paragraph about-us-paragraph" [innerText]="dataService.template.contactUs.leftPanelInfo.pTag"></p>
+      <h1 class="get-in-touch-header" [innerText]="dataService.template.contactUs.leftPanelInfo.heading"
+      [style.fontSize]="dataService.template.headers.fontSize"
+      [style.fontWeight]="dataService.template.headers.fontWeight"
+      (click)="editText(dataService.template.contactUs.leftPanelInfo.heading,'contactUs','leftPanelInfo','heading')"
+      ></h1>
+      <p class="get-in-touch-paragraph about-us-paragraph"
+      (click)="editText(dataService.template.contactUs.leftPanelInfo.pTag,'contactUs','leftPanelInfo','pTag')"
+      [innerText]="dataService.template.contactUs.leftPanelInfo.pTag"></p>
       <p class="telephone about-us-paragraph">
         <img
           src="assets\icons\contact-us-telephone.svg"
           alt=""
           class="contact-us-icon"
-        /><a href="" [innerText]="dataService.template.contactUs.leftPanelInfo.phone"></a>
+        /><a
+        (click)="editText(dataService.template.contactUs.leftPanelInfo.phone,'contactUs','leftPanelInfo','phone')"
+        [innerHTML]="dataService.template.contactUs.leftPanelInfo.phone"></a>
       </p>
       <p class="email about-us-paragraph">
         <img
           src="assets\icons\contact-us-message.svg"
           alt=""
           class="contact-us-icon"
-        /><a href="mailto:demo@gmail.com" [innerText]="dataService.template.contactUs.leftPanelInfo.email"></a>
+        /><a
+        (click)="editText(dataService.template.contactUs.leftPanelInfo.email,'contactUs','leftPanelInfo','email')"
+        [innerHTML]="dataService.template.contactUs.leftPanelInfo.email"></a>
       </p>
       <div class="location d-flex justify-content-center align-items-normal">
         <div class="location-image me-2">
@@ -27,7 +52,9 @@
             class="contact-us-icon"
           />
         </div>
-        <p class="location about-us-paragraph"[innerText]="dataService.template.contactUs.leftPanelInfo.location"></p>
+        <p class="location about-us-paragraph"
+        (click)="editText(dataService.template.contactUs.leftPanelInfo.location,'contactUs','leftPanelInfo','location')"
+        [innerHTML]="dataService.template.contactUs.leftPanelInfo.location"></p>
       </div>
     </div>
     <div class="contact-us-form-div">
@@ -63,9 +90,44 @@
             class="form-control"
           ></textarea>
         </div>
-
-        <button class="btn btn" type="submit">Submit</button>
+        <button
+          [style.padding]="dataService.template.buttons.padding"
+          [style.backgroundColor]="dataService.template.buttons.backgroundColor"
+          [style.borderRadius]="dataService.template.buttons.borderRadius"
+          [style.color]="dataService.template.buttons.color"
+          [style.borderColor]="dataService.template.buttons.borderColor"
+        class="btn btn" type="submit">Submit</button>
       </form>
+    </div>
+  </div>
+  <div [ngClass]="!dataService.isEditingTemp ? 'd-none' : 'overlay edit-btn-block'">
+    <button class="edit-btn" mat-icon-button (click)="openFileInput(fileInput1)">
+      <mat-icon>edit</mat-icon>
+    </button>
+    <input
+      type="file"
+      name=""
+      #fileInput1
+      style="display: none"
+      (change)="onSelectFile($event, 'twoSection')"
+    />
+    <button class="edit-btn" mat-icon-button (click)="showLink()">
+      <mat-icon>link</mat-icon>
+    </button>
+    <button class="edit-btn" mat-icon-button>
+      <mat-icon>delete</mat-icon>
+    </button>
+    <div
+      class="input-link-div"
+      *ngIf="dataService.inputLinkVisibility[2]"
+    >
+      <input
+        type="text"
+        class="input-link"
+        name="inputlink"
+        id="input-link"
+        placeholder="Input Link here"
+      />
     </div>
   </div>
 </section>

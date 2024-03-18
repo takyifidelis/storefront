@@ -43,69 +43,7 @@ export class TemplateEditorComponent  implements AfterViewInit,OnInit{
   constructor(private elementRef: ElementRef<HTMLElement>, public dataservice: DataService, private apiService: APIService){ }
   @HostListener ('window:keydown.control.b', ['$event']) makeEditableUi(){
     this.dataservice.isEditable  = !this.dataservice.isEditable
-    if (this.dataservice.isEditable) {
-      document.querySelectorAll('button').forEach((btn)=>{
-        btn.addEventListener('click', ()=>{
-          // btn.dataset['element']
-          console.log(btn.dataset['element'])
-          document.execCommand(`${btn.dataset['element']}`,false, 'null')
-        })
-      });
-      this.elementRef.nativeElement.addEventListener("click", (event) =>{
-        let target = event.target as HTMLElement
-        if (target.hasAttribute('contenteditable')) {
-            target.querySelector('.editor_controls')?.setAttribute('style','display:block')
-        } else {
-            
-            target.querySelector('.editor_controls')?.setAttribute('style','display:block')
-        }
-        });
-      this.elementRef.nativeElement.addEventListener("mouseover", (event) =>{
-        let target = event.target as HTMLElement
-        // console.log(this.elementRef.nativeElement.getElementsByTagName('app-ecommerce-website'));
-        if (target.childNodes.length > 0 && this.containsTextNodes(target)) {
-          target.contentEditable = 'true';
-          // console.log("Contenteditable attribute added to:", target);
-        }
-        if (target.getElementsByTagName("img").length) {
-          let images = target.getElementsByTagName("img");
-          Array.from(images).forEach((image: HTMLElement) => {
-            // console.log("Image found:", image);
-          });
-        }
-      })
-  
-      this.elementRef.nativeElement.addEventListener("mouseover", (event) =>{
-      
-        this.elementRef.nativeElement.getElementsByTagName('app-ecommerce-website')[0].addEventListener("mouseover",(element)=>{
-          let el = element.target as HTMLElement
-      
-          if (el.getElementsByTagName("img").length) {
-            let images = el.getElementsByTagName("img");
-            Array.from(images).forEach((image: HTMLElement) => {
-              // console.log("Image found:", image);
-            });
-          }
-  
-          if (el.childNodes.length > 0 && this.containsTextNodes(el)) {
-            el.contentEditable = 'true';
-            // console.log("Contenteditable attribute added to:", el);
-          }
-        })
-        
-  
-      })
-    } else{
-      this.elementRef.nativeElement.addEventListener("mouseover", (event) =>{
-        let target = event.target as HTMLElement
-        // console.log(this.elementRef.nativeElement.getElementsByTagName('app-ecommerce-website'));
-        if (target.childNodes.length > 0 && this.containsTextNodes(target)) {
-          target.contentEditable = 'false';
-          console.log("Contenteditable attribute added to:", target);
-        }
-        
-      })
-    }
+    this.dataservice.isEditingTemp  = !this.dataservice.isEditingTemp
   }
 
   isMobile(val:string){
@@ -226,13 +164,15 @@ export class TemplateEditorComponent  implements AfterViewInit,OnInit{
                   <li><strong style="color:blue">style buttons</strong>
                 </ul>
               </p>
-              </div>`
+              </div>`,
+              position:'right'
           },
           {
             element: '#tourStepSix',
             intro: `<div style="">
             Clicking here will give you an option to add new pages such as <strong style="color:blue">About Us, and  Contact Us</strong> page, where you  can tell people about your business
-              </div>`
+              </div>`,
+              position:'right'
           },
           {
             element: '#tourStepSeven',

@@ -1,42 +1,94 @@
-<div class="about-us container-fluid">
-  <section class="level-up">
-    <div class="header-and-paragraph">
-      <h1 class="level-up-header">
-        LEVEL UP YOUR STYLE WITH OUR SUMMER COLLECTIONS
-      </h1>
-      <p class="keep-it-paragraph">
-        Keep It Simple One of the most essential website design principles to
-        follow is to keep everything simple. It must be easy to scroll through
-        the page, and the content must be easy to read.Learn more
-      </p>
+<div class="about-us container-fluid"
+[style.lineHeight]="dataService.template.lineHeight"
+[style.color]="dataService.template.primaryColor"
+[style.background]="dataService.template.primaryBackground">
+  <section class="container-fluid d-flex level-up main-comp p-0">
+    <div [style]="dataService.template.headings.heroHeading.bgImage">
+      <img
+        [src]="dataService.template.templateImages.aboutHeroImage"
+        class="rounded-top-mobile"
+        style="width: 100%; height: 50rem; object-fit: cover;"
+        alt=""
+        srcset=""
+      />
+      <div class="hero-overlay">
+        <h1
+          [innerHTML]="dataService.template.headings.heroHeading.text"
+          [style.fontSize]="dataService.template.headings.heroHeading.fontSize"
+          [style.lineHeight]="
+            dataService.template.headings.heroHeading.lineHeight
+          "
+          [style.fontWeight]="
+            dataService.template.headings.heroHeading.fontWeight
+          "
+          (click)="editText(dataService.template.headings.heroHeading.text,'headings','heroHeading', 'text')"
+        ></h1>
+        <button
+          [style.padding]="dataService.template.buttons.padding"
+          [style.backgroundColor]="dataService.template.buttons.backgroundColor"
+          [style.borderRadius]="dataService.template.buttons.borderRadius"
+          [style.color]="dataService.template.buttons.color"
+          [innerHTML]="dataService.template.headings.heroHeading.btnText"
+          [style.borderColor]="dataService.template.buttons.borderColor"
+          (click)="editText(dataService.template.headings.heroHeading.btnText,'headings','heroHeading', 'btnText')"
+        >
+          {{ dataService.template.headings.heroHeading.btnText }}
+        </button>
+      </div>
+      <div class="overlay-backdrop"></div>
+    </div>
+
+    <div [ngClass]="!dataService.isEditingTemp ? 'd-none' : 'overlay edit-btn-block'">
+      <button
+       [style.color]="dataService.template.primaryColor"
+       [style.background]="dataService.template.primaryBackground"
+        mat-mini-fab (click)="openFileInput(aboutHeroImage)">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <input type="file" name="" #aboutHeroImage style="display: none" (change)="onSelectFile($event, 'hero')"/>
+      <button
+       [style.color]="dataService.template.primaryColor"
+       [style.background]="dataService.template.primaryBackground"
+        mat-mini-fab (click)="dataService.changeImageByLink('templateImages.aboutHeroImage')">
+        <mat-icon>link</mat-icon>
+      </button>
+      <button
+       [style.color]="dataService.template.primaryColor"
+       [style.background]="dataService.template.primaryBackground"
+        mat-mini-fab>
+        <mat-icon>delete</mat-icon>
+      </button>
     </div>
   </section>
+
+
+
   <section class="our-story">
     <div class="our-story-div">
-      <div class="our-story-header">OUR STORY</div>
-      <p class="our-story-paragraph">
-        ShopNest was born from a vision to redefine the way you shop online.
-        With years of experience in the eCommerce industry, we set out to create
-        a one-stop destination where you can discover high-quality products,
-        connect with trusted sellers, and enjoy seamless shopping from the
-        comfort of your own nest.
-      </p>
+      <div class="our-story-header"
+      (click)="editText(dataService.template.aboutUs.ourStory.title,'aboutUs','ourStory','title')"
+      [innerText]="dataService.template.aboutUs.ourStory.title"></div>
+      <p (click)="editText(dataService.template.aboutUs.ourStory.message,'aboutUs','ourStory','message')"
+      [innerText]="dataService.template.aboutUs.ourStory.message"></p>
     </div>
     <div class="why-shop-div">
-      <h4 class="why-shop-header">WHY SHOP WITH US</h4>
+      <h4 class="why-shop-header"
+      (click)="editText(dataService.template.aboutUs.whyShopWithUs.title1,'aboutUs','whyShopWithUs','title1')"
+      [innerText]="dataService.template.aboutUs.whyShopWithUs.title1"></h4>
       <div
-        class="why-shop-content d-flex justify-content-between align-items-center"
+        class="why-shop-content d-flex justify-content-between align-items-center space-why-shop"
       >
         <div class="convenience d-flex check-content">
           <div class="check">
             <img src="assets\icons\why-shop-check.svg" alt="" />
           </div>
           <div class="convenience-content">
-            <h5 class="why-header">Convenience and Ease</h5>
-            <p class="convenience-paragraph why-shop-paragraph">
-              Shopping should be a breeze, and we've designed our platform with
-              your convenience in mind. Browse, compare, and order products
-              effortlessly, all with just a few clicks.
+            <h5 class="why-header" (click)="editText(dataService.template.aboutUs.whyShopWithUs.title2,'aboutUs','whyShopWithUs','title2')"
+            [innerText]="dataService.template.aboutUs.whyShopWithUs.title2"></h5>
+            <p 
+            (click)="editText(dataService.template.aboutUs.whyShopWithUs.reason2,'aboutUs','whyShopWithUs','reason2')"
+            [innerText]="dataService.template.aboutUs.whyShopWithUs.reason2"
+            class="convenience-paragraph why-shop-paragraph">
             </p>
           </div>
         </div>
@@ -45,12 +97,12 @@
             <img src="assets\icons\why-shop-check.svg" alt="" />
           </div>
           <div class="affordable-content">
-            <h5 class="why-header">Affordable, reliable shipping</h5>
-            <p class="why-shop-paragraph">
-              Our shipping services offer reliability, convenience, and
-              cost-effectiveness. We guarantee on-time delivery, secure
-              tracking, and efficient customer service.
-            </p>
+            <h5 class="why-header"
+            (click)="editText(dataService.template.aboutUs.whyShopWithUs.title3,'aboutUs','whyShopWithUs','title3')"
+            [innerText]="dataService.template.aboutUs.whyShopWithUs.title3"></h5>
+            <p class="why-shop-paragraph"
+            (click)="editText(dataService.template.aboutUs.whyShopWithUs.reason3,'aboutUs','whyShopWithUs','reason3')"
+            [innerText]="dataService.template.aboutUs.whyShopWithUs.reason3"></p>
           </div>
         </div>
         <div class="reliable d-flex check-content">
@@ -58,12 +110,12 @@
             <img src="assets\icons\why-shop-check.svg" alt="" />
           </div>
           <div class="reliable-content">
-            <h5 class="why-header">Reliable shipping</h5>
-            <p class="why-shop-paragraph">
-              Shopping should be a breeze, and we've designed our platform with
-              your convenience in mind. Browse, compare, and order products
-              effortlessly, all with just a few clicks.
-            </p>
+            <h5 class="why-header"
+            (click)="editText(dataService.template.aboutUs.whyShopWithUs.title4,'aboutUs','whyShopWithUs','title4')"
+            [innerText]="dataService.template.aboutUs.whyShopWithUs.title4"></h5>
+            <p class="why-shop-paragraph"
+            (click)="editText(dataService.template.aboutUs.whyShopWithUs.reason4,'aboutUs','whyShopWithUs','reason4')"
+            [innerText]="dataService.template.aboutUs.whyShopWithUs.reason4"></p>
           </div>
         </div>
       </div>
@@ -71,81 +123,274 @@
   </section>
   <section class="meet-team">
     <h3 class="team-header">MEET OUR TEAM</h3>
-    <div class="team-content d-flex justify-content-between align-items-center">
-      <div class="team-card">
+    <div class="my-teams">
+      <div class="team-img-editor">
         <img
-          src="assets\images\ecommerce-team-1.svg"
-          class="rounded-top"
+          [src]="dataService.template.aboutUs.team.picture1"
+          class="rounded-top w-100"
           alt=""
         />
-        <h5 class="team-name">Abigail Bell</h5>
-        <p class="team-company">IBM</p>
+        <div [ngClass]="!dataService.isEditingTemp ? 'd-none' : 'team-overlay edit-btn-block'">
+          <button
+           [style.color]="dataService.template.primaryColor"
+           [style.background]="dataService.template.primaryBackground"
+            mat-mini-fab (click)="openFileInput(team1)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <input type="file" name="" #team1 style="display: none" (change)="onSelectFile($event, 'team1')"/>
+          <button
+           [style.color]="dataService.template.primaryColor"
+           [style.background]="dataService.template.primaryBackground"
+            mat-mini-fab (click)="dataService.changeImageByLink('aboutUs.team.picture1')">
+            <mat-icon>link</mat-icon>
+          </button>
+          <button
+           [style.color]="dataService.template.primaryColor"
+           [style.background]="dataService.template.primaryBackground"
+            mat-mini-fab>
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+        <span>
+          <h5 class="team-name"
+          (click)="editText(dataService.template.aboutUs.team.name1,'aboutUs','team','name1')"
+          [innerText]="dataService.template.aboutUs.team.name1"></h5>
+          <p class="team-company"
+          (click)="editText(dataService.template.aboutUs.team.role1,'aboutUs','team','role1')"
+          [innerText]="dataService.template.aboutUs.team.role1"></p>
+        </span>
       </div>
-      <div class="team-card">
+      <div class="team-img-editor">
         <img
-          src="assets\images\ecommerce-team-2.svg"
-          class="rounded-top"
+          [src]="dataService.template.aboutUs.team.picture2"
+          class="rounded-top w-100"
           alt=""
         />
-        <h5 class="team-name">Alex King</h5>
-        <p class="team-company">eBay</p>
+        <div [ngClass]="!dataService.isEditingTemp ? 'd-none' : 'team-overlay edit-btn-block'">
+          <button
+           [style.color]="dataService.template.primaryColor"
+           [style.background]="dataService.template.primaryBackground"
+            mat-mini-fab (click)="openFileInput(team2)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <input type="file" name="" #team2 style="display: none" (change)="onSelectFile($event, 'team2')"/>
+          <button
+           [style.color]="dataService.template.primaryColor"
+           [style.background]="dataService.template.primaryBackground"
+            mat-mini-fab (click)="dataService.changeImageByLink('aboutUs.team.picture2')">
+            <mat-icon>link</mat-icon>
+          </button>
+          <button
+           [style.color]="dataService.template.primaryColor"
+           [style.background]="dataService.template.primaryBackground"
+            mat-mini-fab>
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+        <span>
+          <h5 class="team-name"
+          (click)="editText(dataService.template.aboutUs.team.name2,'aboutUs','team','name2')"
+          [innerText]="dataService.template.aboutUs.team.name2"></h5>
+          <p class="team-company"
+          (click)="editText(dataService.template.aboutUs.team.role2,'aboutUs','team','role2')"
+          [innerText]="dataService.template.aboutUs.team.role2"></p>
+        </span>
       </div>
-      <div class="team-card">
+      <div class="team-img-editor">
         <img
-          src="assets\images\ecommerce-team-3.svg"
-          class="rounded-top"
+          [src]="dataService.template.aboutUs.team.picture3"
+          class="rounded-top w-100"
           alt=""
         />
-        <h5 class="team-name">Adams King</h5>
-        <p class="team-company">eBay</p>
+        <div [ngClass]="!dataService.isEditingTemp ? 'd-none' : 'team-overlay edit-btn-block'">
+          <button
+           [style.color]="dataService.template.primaryColor"
+           [style.background]="dataService.template.primaryBackground"
+            mat-mini-fab (click)="openFileInput(team3)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <input type="file" name="" #team3 style="display: none" (change)="onSelectFile($event, 'team3')"/>
+          <button
+           [style.color]="dataService.template.primaryColor"
+           [style.background]="dataService.template.primaryBackground"
+            mat-mini-fab (click)="dataService.changeImageByLink('aboutUs.team.picture3')">
+            <mat-icon>link</mat-icon>
+          </button>
+          <button
+           [style.color]="dataService.template.primaryColor"
+           [style.background]="dataService.template.primaryBackground"
+            mat-mini-fab>
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+        <span>
+          <h5 class="team-name"
+          (click)="editText(dataService.template.aboutUs.team.name3,'aboutUs','team','name3')"
+          [innerText]="dataService.template.aboutUs.team.name3"></h5>
+          <p class="team-company"
+          (click)="editText(dataService.template.aboutUs.team.role3,'aboutUs','team','role3')"
+          [innerText]="dataService.template.aboutUs.team.role3"></p>
+        </span>
       </div>
-      <div class="team-card">
+      <div class="team-img-editor">
         <img
-          src="assets\images\ecommerce-team-4.svg"
-          class="rounded-top"
+          [src]="dataService.template.aboutUs.team.picture4"
+          class="rounded-top w-100"
           alt=""
         />
-        <h5 class="team-name">Mercy Richards</h5>
-        <p class="team-company">Starbucks</p>
+        <div [ngClass]="!dataService.isEditingTemp ? 'd-none' : 'team-overlay edit-btn-block'">
+          <button
+           [style.color]="dataService.template.primaryColor"
+           [style.background]="dataService.template.primaryBackground"
+            mat-mini-fab (click)="openFileInput(team4)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <input type="file" name="" #team4 style="display: none" (change)="onSelectFile($event, 'team4')"/>
+          <button
+           [style.color]="dataService.template.primaryColor"
+           [style.background]="dataService.template.primaryBackground"
+            mat-mini-fab (click)="dataService.changeImageByLink('aboutUs.team.picture4')">
+            <mat-icon>link</mat-icon>
+          </button>
+          <button
+           [style.color]="dataService.template.primaryColor"
+           [style.background]="dataService.template.primaryBackground"
+            mat-mini-fab>
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+        <span>
+          <h5 class="team-name"
+          (click)="editText(dataService.template.aboutUs.team.name4,'aboutUs','team','name4')"
+          [innerText]="dataService.template.aboutUs.team.name4"></h5>
+          <p class="team-company"
+          (click)="editText(dataService.template.aboutUs.team.role4,'aboutUs','team','role4')"
+          [innerText]="dataService.template.aboutUs.team.role4"></p>
+        </span>
       </div>
-      <div class="team-card">
+      <div class="team-img-editor">
         <img
-          src="assets\images\ecommerce-team-5.svg"
-          class="rounded-top"
+          [src]="dataService.template.aboutUs.team.picture5"
+          class="rounded-top w-100"
           alt=""
         />
-        <h5 class="team-name">Raymond Moses</h5>
-        <p class="team-company">Starbucks</p>
+        <div [ngClass]="!dataService.isEditingTemp ? 'd-none' : 'team-overlay edit-btn-block'">
+          <button
+           [style.color]="dataService.template.primaryColor"
+           [style.background]="dataService.template.primaryBackground"
+            mat-mini-fab (click)="openFileInput(team5)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <input type="file" name="" #team5 style="display: none" (change)="onSelectFile($event, 'team5')"/>
+          <button
+           [style.color]="dataService.template.primaryColor"
+           [style.background]="dataService.template.primaryBackground"
+            mat-mini-fab (click)="dataService.changeImageByLink('aboutUs.team.picture5')">
+            <mat-icon>link</mat-icon>
+          </button>
+          <button
+           [style.color]="dataService.template.primaryColor"
+           [style.background]="dataService.template.primaryBackground"
+            mat-mini-fab>
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+        <span>
+          <h5 class="team-name"
+          (click)="editText(dataService.template.aboutUs.team.name5,'aboutUs','team','name5')"
+          [innerText]="dataService.template.aboutUs.team.name5"></h5>
+          <p class="team-company"
+          (click)="editText(dataService.template.aboutUs.team.role5,'aboutUs','team','role5')"
+          [innerText]="dataService.template.aboutUs.team.role5"></p>
+        </span>
       </div>
-      <div class="team-card">
+      <div class="team-img-editor">
         <img
-          src="assets\images\ecommerce-team-6.svg"
-          class="rounded-top"
+          [src]="dataService.template.aboutUs.team.picture6"
+          class="rounded-top w-100"
           alt=""
         />
-        <h5 class="team-name">Jane Miles</h5>
-        <p class="team-company">Facebook</p>
+        <div [ngClass]="!dataService.isEditingTemp ? 'd-none' : 'team-overlay edit-btn-block'">
+          <button
+           [style.color]="dataService.template.primaryColor"
+           [style.background]="dataService.template.primaryBackground"
+            mat-mini-fab (click)="openFileInput(team6)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <input type="file" name="" #team6 style="display: none" (change)="onSelectFile($event, 'team6')"/>
+          <button
+           [style.color]="dataService.template.primaryColor"
+           [style.background]="dataService.template.primaryBackground"
+            mat-mini-fab (click)="dataService.changeImageByLink('aboutUs.team.picture6')">
+            <mat-icon>link</mat-icon>
+          </button>
+          <button
+           [style.color]="dataService.template.primaryColor"
+           [style.background]="dataService.template.primaryBackground"
+            mat-mini-fab>
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+        <span>
+          <h5 class="team-name"
+          (click)="editText(dataService.template.aboutUs.team.name6,'aboutUs','team','name6')"
+          [innerText]="dataService.template.aboutUs.team.name6"></h5>
+          <p class="team-company" 
+          (click)="editText(dataService.template.aboutUs.team.role6,'aboutUs','team','role6')"
+          [innerText]="dataService.template.aboutUs.team.role6">Facebook</p>
+        </span>
       </div>
     </div>
   </section>
-  <section class="customer-reviews">
-    <h4 class="customer-review-header">CUSTOMER REVIEWS</h4>
-    <img src="assets\images\ecommerce-customer-review-dp.svg" alt="" />
-    <div class="customer-review-stars">
-      <img src="assets\icons\ecommerce-customer-review-star.svg" alt="" />
-      <img src="assets\icons\ecommerce-customer-review-star.svg" alt="" />
-      <img src="assets\icons\ecommerce-customer-review-star.svg" alt="" />
-      <img src="assets\icons\ecommerce-customer-review-star.svg" alt="" />
+  <section class="container-fluid d-flex main-comp main-comp1 justify-content-center align-items-center p-0">
+    <div class="img about-last-img-container">
       <img
-        src="assets\icons\ecommerce-customer-review-star-unfilled.svg"
+        [src]="dataService.template.templateImages.aboutFooterImage"
+        class="w-100 about-last-img"
         alt=""
+        srcset=""
       />
+      <div [ngClass]="!dataService.isEditingTemp ? 'd-none' : 'overlay edit-btn-block'">
+        <button
+         [style.color]="dataService.template.primaryColor"
+         [style.background]="dataService.template.primaryBackground"
+          mat-mini-fab (click)="openFileInput(aboutLastImg)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <input type="file" name="" #aboutLastImg style="display: none" (change)="onSelectFile($event, 'lastAboutImage')"/>
+        <button 
+         [style.color]="dataService.template.primaryColor"
+         [style.background]="dataService.template.primaryBackground"
+          mat-mini-fab (click)="dataService.changeImageByLink('templateImages.aboutFooterImage')">
+          <mat-icon>link</mat-icon>
+        </button>
+        <button
+         [style.color]="dataService.template.primaryColor"
+         [style.background]="dataService.template.primaryBackground"
+          mat-mini-fab>
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
     </div>
-    <p class="customer-review-paragraph">
-      Slate helps you see how many more days you need to work to <br />
-      reach your financial goal.
-    </p>
-    <p class="customer-review-paragraph">Regina Miles</p>
-    <p class="customer-review-paragraph">Designer</p>
+    <div class="hero-overlay">
+      <h4 class="customer-review-header">CUSTOMER REVIEWS</h4>
+      <img src="assets\images\ecommerce-customer-review-dp.svg" alt="" />
+      <div class="customer-review-stars">
+        <img src="assets\icons\ecommerce-customer-review-star.svg" alt="" />
+        <img src="assets\icons\ecommerce-customer-review-star.svg" alt="" />
+        <img src="assets\icons\ecommerce-customer-review-star.svg" alt="" />
+        <img src="assets\icons\ecommerce-customer-review-star.svg" alt="" />
+        <img
+          src="assets\icons\ecommerce-customer-review-star-unfilled.svg"
+          alt=""
+        />
+      </div>
+      <p class="customer-review-paragraph">
+        Slate helps you see how many more days you need to work to <br />
+        reach your financial goal.
+      </p>
+      <p class="customer-review-paragraph">Regina Miles</p>
+      <p class="customer-review-paragraph">Designer</p>
+    </div>
   </section>
 </div>

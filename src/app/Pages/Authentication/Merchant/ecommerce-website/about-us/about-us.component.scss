@@ -1,7 +1,67 @@
+.edit-btn-block {
+  width: 25%;
+  gap: 1rem;
+  .edit-btn {
+    border-radius: 50%;
+    background-color: #fff;
+    margin-right: 0.5rem;
+    width: 1.9rem;
+    height: 1.7rem;
+    padding: 0;
+    box-shadow: 0px 2px 8px -2px rgba(0, 0, 0, 0.25);
+  }
+}
+
+.my-teams{
+    display: grid;
+    grid-gap: 1rem;
+    grid-template-columns:  repeat(auto-fit, minmax(17rem, 1fr));
+}
+.team-img-editor{
+  position: relative;
+  display: grid;
+  grid-template-rows: auto 16%;
+}
+.team-overlay{
+  position: absolute;
+  z-index: 21;
+  bottom: 23%;
+  right: 31px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.overlay{
+  position: absolute;
+  z-index: 21;
+  bottom: 10%;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.main-comp {
+  position: relative;
+  .hero-overlay {
+    position: absolute;
+    z-index: 5;
+    // height: 50rem;
+    // width: 100%;
+  }
+  .overlay-backdrop {
+    position: absolute;
+    height: 50rem;
+    width: 100%;
+    z-index: 3;
+    opacity: 20%;
+    background-color: lightgray;
+    opacity: 50%;
+  }
+}
 div.about-us {
   text-align: center;
   section.level-up {
-    background-image: url("../../../../../../assets/images/ecommerce-about-us-header-image.svg");
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
@@ -10,7 +70,7 @@ div.about-us {
     }
 
     h1.level-up-header {
-      color: #1c222b;
+      // color: #1c222b;
       text-align: center;
       font-family: Inter;
       font-size: 72px;
@@ -20,7 +80,7 @@ div.about-us {
       letter-spacing: -2.3px;
     }
     p.keep-it-paragraph {
-      color: #1c222b;
+      // color: #1c222b;
       text-align: center;
       font-family: Inter;
       font-size: 20px;
@@ -34,7 +94,7 @@ div.about-us {
     .our-story-div {
       margin: 6rem 8rem;
       .our-story-header {
-        color: #1c222b;
+        // color: #1c222b;
         font-family: Inter;
         font-size: 24px;
         font-style: normal;
@@ -43,7 +103,7 @@ div.about-us {
         letter-spacing: -0.4px;
       }
       .our-story-paragraph {
-        color: #1c222b;
+        // color: #1c222b;
         text-align: center;
         font-family: Inter;
         font-size: 20px;
@@ -58,7 +118,7 @@ div.about-us {
       background-color: #f2f2f2;
       padding: 3rem 5rem;
       .why-shop-header {
-        color: #1c222b;
+        // color: #1c222b;
         font-family: Inter;
         font-size: 24px;
         font-style: normal;
@@ -67,7 +127,7 @@ div.about-us {
         letter-spacing: -0.5px;
       }
       .why-header {
-        color: #1d2026;
+        // color: #1d2026;
         font-family: Inter;
         font-size: 20px;
         font-style: normal;
@@ -76,7 +136,7 @@ div.about-us {
         letter-spacing: -0.3px;
       }
       .why-shop-paragraph {
-        color: #1c222b;
+        // color: #1c222b;
         text-align: center;
         font-family: Inter;
         font-size: 14px;
@@ -87,7 +147,7 @@ div.about-us {
       }
 
       .why-shop-header {
-        color: #1c222b;
+        // color: #1c222b;
         font-family: Inter;
         font-size: 24px;
         font-style: normal;
@@ -96,7 +156,7 @@ div.about-us {
         letter-spacing: -0.5px;
       }
       .why-header {
-        color: #1d2026;
+        // color: #1d2026;
         font-family: Inter;
         font-size: 20px;
         font-style: normal;
@@ -105,7 +165,7 @@ div.about-us {
         letter-spacing: -0.3px;
       }
       .why-shop-paragraph {
-        color: #1c222b;
+        // color: #1c222b;
         text-align: center;
         font-family: Inter;
         font-size: 14px;
@@ -119,7 +179,7 @@ div.about-us {
   section.meet-team {
     margin: 7rem 1rem;
     h3.team-header {
-      color: #1c222b;
+      // color: #1c222b;
       font-family: Inter;
       font-size: 24px;
       font-style: normal;
@@ -129,7 +189,7 @@ div.about-us {
       margin-bottom: 3rem;
     }
     .team-name {
-      color: #1c222b;
+      // color: #1c222b;
       font-family: Inter;
       font-size: 20px;
       font-style: normal;
@@ -138,7 +198,7 @@ div.about-us {
       letter-spacing: -0.3px;
     }
     .team-company {
-      color: #1c222b;
+      // color: #1c222b;
       font-family: Inter;
       font-size: 14px;
       font-style: normal;
@@ -176,7 +236,43 @@ div.about-us {
     --bs-gutter-x: 0;
   }
 }
-@media (max-width: 992px) {
+.about-last-img-container{
+  width: 100%;
+  height: 30rem;
+  display: flex;
+}
+.about-last-img{
+  object-fit: cover;
+}
+@media (max-width: 1024px) {
+  .main-comp1{
+    height: 25rem;
+  }
+  .my-teams{
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+  }
+}
+@media (max-width: 475px) {
+
+  .about-last-img-container{
+    width: 100%; height: 100%
+  }
+  .about-last-img{
+    object-fit: cover;
+    height: 100%;
+  }
+  .my-teams{
+    display: grid;
+    grid-template-columns: auto;
+    padding: 1rem 5rem;
+  }
+// }
+// @media (max-width: 992px) {
+//   .my-teams{
+//     display: grid;
+//     grid-template-columns: auto auto auto;
+// }
   div.about-us.container-fluid {
     --bs-gutter-x: 0;
     section.level-up {
@@ -215,6 +311,7 @@ div.about-us {
       }
     }
   }
+  
   section.meet-team {
     margin: 7rem 1rem;
     .team-content {
@@ -227,4 +324,9 @@ div.about-us {
       }
     }
   }
+}
+
+
+.space-why-shop {
+  gap: 5%;
 }
