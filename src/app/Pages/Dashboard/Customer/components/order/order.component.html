@@ -69,26 +69,30 @@
     <div class="sub-header d-flex" style="align-items: center; gap: 8px">
       <span
         [ngClass]="isAllActive ? 'active' : ''"
+        class="status"
         style="cursor: pointer"
-        (click)="onSort('All')"
+        (click)="onSort('All'); switchTab('All')"
         >All</span
       >
       <span
         [ngClass]="isProcessingActive ? 'active' : ''"
+        class="status"
         style="cursor: pointer"
-        (click)="onSort('Processing')"
+        (click)="onSort('Processing'); switchTab('Processing')"
         >Processing</span
       >
       <span
         [ngClass]="isShippedActive ? 'active' : ''"
+        class="status"
         style="cursor: pointer"
-        (click)="onSort('Shipped')"
+        (click)="onSort('Shipped'); switchTab('Shipped')"
         >Shipped</span
       >
       <span
         [ngClass]="isDeliveredActive ? 'active' : ''"
+        class="status"
         style="cursor: pointer"
-        (click)="onSort('Delivered')"
+        (click)="onSort('Delivered'); switchTab('Delivered')"
         >Delivered</span
       >
     </div>
@@ -237,7 +241,6 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
-    
 
     <div class="no-result-found" *ngIf="numOfOrders === 0">No Order Found</div>
   </div>
@@ -246,6 +249,6 @@
 }
 
 <mat-paginator
-[pageSizeOptions]="[8, 10, 25, 100]"
-aria-label="Select page of users"
+  [pageSizeOptions]="[8, 10, 25, 100]"
+  aria-label="Select page of users"
 ></mat-paginator>
