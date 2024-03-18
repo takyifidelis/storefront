@@ -119,10 +119,6 @@ export class MerchantDashboardComponent implements OnInit {
               );
             }
           });
-          // localStorage.setItem('storeId', this.dataService.selectedStore['id']);
-          // localStorage.setItem('storeName',this.dataService.selectedStore['storeName']);
-          // localStorage.setItem('template',this.dataService.selectedStore['template'].options);
-          // localStorage.setItem('tempTemplate',this.dataService.selectedStore['template'].temp.options);
         }
         if (resData['data'].length === 0) {
         } else {
@@ -223,7 +219,7 @@ export class MerchantDashboardComponent implements OnInit {
       });
 
     this.apiService
-      .getMerchant(localStorage.getItem('customerId')!)
+      .getMerchant(localStorage.getItem('businessId')!)
       .subscribe((resData: MerchantInfo) => {
         this.user = resData.data;
         this.firstInitial = resData.data.businessName.charAt(0);

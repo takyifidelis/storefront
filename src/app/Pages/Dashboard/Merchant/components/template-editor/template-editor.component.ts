@@ -120,8 +120,6 @@ export class TemplateEditorComponent  implements AfterViewInit,OnInit{
     })
   }
   ngAfterViewInit() {
-  }
-  ngOnInit() {
     this.dataservice.isInEditMode = true
     if (!localStorage.getItem('editorTourCompleted')) {
       introJs().setOptions({
@@ -186,11 +184,19 @@ export class TemplateEditorComponent  implements AfterViewInit,OnInit{
             Click here to <strong style="color:blue">Publish</strong> your edited store front for you customers to see.
               </div>`
           },
+          {
+            element: '#tourStepNine',
+            intro: `<div style="">
+            Enter <strong style="color:blue">'CTRL' + 'b'</strong> to start customizing your store layout.
+              </div>`
+          },
         ]
       }).onbeforeexit(function () {
         localStorage.setItem('editorTourCompleted', 'true');
         return confirm("Are You sure you want to exit?");
       }).start();
       }
+  }
+  ngOnInit() {
   }
 }
