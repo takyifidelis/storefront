@@ -81,7 +81,6 @@ export class CkeckoutPageComponent implements OnInit {
 
   payload: any;
   shippingSelect!: { [key: string]: string }[];
-  PAYPAL_CLIENT_ID: string = `${environment.paypalClientID2}`;
   @ViewChild('paypalRef', { static: true }) private paypalRef:
     | ElementRef
     | undefined;
@@ -177,17 +176,7 @@ export class CkeckoutPageComponent implements OnInit {
       });
   }
 
-  // increment() {
-  //   for (const item of this.cart) {
-  //     this.quantity = item.quant++;
-  //     item.price = this.quantity * this.iniitialPrice!;
-  //     this.price = item.price;
-  //     this.items.push({
-  //       product: item.id,
-  //       quantity: this.quantity,
-  //       variations: [],
-  //     });
-  // }
+ 
   getTotalCost() {
     let sum = 0;
     this.cart.forEach((product: any) => {
