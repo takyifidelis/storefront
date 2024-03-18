@@ -35,19 +35,6 @@ export class AboutUsComponent {
 }
 
 
-
-// changeImageByLink(pathToProperty:string){
-//   this.dialog.open(ImageLinkComponent, {
-//     hasBackdrop: false
-//   }).afterClosed().subscribe((imageLink) => {
-//     const keys = 'templateImages.heroImage'.split('.');
-//     const lastKey:any = keys.pop();
-//     const targetObj = keys.reduce((acc, key) => {
-//     return acc[key];
-//   }, this.dataService.template);
-//     console.log(imageLink, targetObj[lastKey]);
-//   });
-// }
 onSelectFile(event: any, target: string) {
   const file: File = event.target.files[0]; // Get the selected file
  
