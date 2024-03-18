@@ -19,7 +19,7 @@ class MockService{
       amount: 45,
   createdAt: '07-mar-23',
   id: 'string',
-  items: {
+  items: [{
     createdAt: '07-mar-23',
     id: 'string',
     image: 'string',
@@ -30,7 +30,7 @@ class MockService{
     quantity: 4,
     total: 100,
     updatedAt: '07-mar-23',
-  },
+  }],
   orderId: 'string',
   orderShipping: {
     apartmentNo: 'string',
