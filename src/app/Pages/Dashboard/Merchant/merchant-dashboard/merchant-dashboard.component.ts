@@ -17,6 +17,7 @@ import { APIService } from '../../../../Services/api.service';
 
 import { CommonModule } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
+import { merchantProduct } from '../../../../interfaces/all-interfaces';
 // import { MerchantAddProductComponent } from '../components/merchant-add-product';
 @Component({
   selector: 'app-merchant-dashboard',
@@ -91,114 +92,117 @@ export class MerchantDashboardComponent implements OnInit {
   }
   ngOnInit() {
     this.dataService.merchantDashboardNoProjects = true;
+    this.dataService.isLoading =true
+    localStorage.setItem('isInEditMode', 'true') 
     this.apiService
       .getMerchantStores(localStorage.getItem('businessId')!)
       .subscribe((resData: { [key: string]: any }) => {
         this.stores = resData['data'];
+        this.dataService.isLoading =false
         if (this.dataService.selectedStore['id']?.length) {
           console.log('not from login', this.dataService.selectedStore);
-          localStorage.setItem('storeId', this.dataService.selectedStore['id']);
-          localStorage.setItem(
-            'storeName',
-            this.dataService.selectedStore['storeName']
-          );
-          localStorage.setItem(
-            'template',
-            this.dataService.selectedStore['template'].options
-          );
-          localStorage.setItem(
-            'tempTemplate',
-            this.dataService.selectedStore['template'].temp.options
-          );
+          resData['data'].array.forEach((element:{[key:string]:any}) => {
+            if (element['id'] === this.dataService.selectedStore['id']) {
+              localStorage.setItem('storeId', element['id']);
+              localStorage.setItem('storeName',element['storeName']);
+              localStorage.setItem('template',element['template'].options);
+              localStorage.setItem('tempTemplate',element['template'].temp.options);
+            }
+          });
+          // localStorage.setItem('storeId', this.dataService.selectedStore['id']);
+          // localStorage.setItem('storeName',this.dataService.selectedStore['storeName']);
+          // localStorage.setItem('template',this.dataService.selectedStore['template'].options);
+          // localStorage.setItem('tempTemplate',this.dataService.selectedStore['template'].temp.options);
         }
         if (resData['data'].length === 0) {
         } else {
+          this.dataService.isLoading =false
           this.dataService.selectedStore = this.stores[0];
           console.log('from login', this.dataService.selectedStore);
           localStorage.setItem('storeId', this.dataService.selectedStore['id']);
-          localStorage.setItem(
-            'storeName',
-            this.dataService.selectedStore['storeName']
-          );
-          localStorage.setItem(
-            'template',
-            this.dataService.selectedStore['template'].options
-          );
-          localStorage.setItem(
-            'tempTemplate',
-            this.dataService.selectedStore['template'].temp.options
-          );
+          localStorage.setItem('storeName',this.dataService.selectedStore['storeName']);
+          localStorage.setItem('template', this.dataService.selectedStore['template'].options);
+          localStorage.setItem('tempTemplate',this.dataService.selectedStore['template'].temp.options);
+        }
+        if (!localStorage.getItem('tourCompleted')) {
+          this.introJS = introJs();
+          this.introJS
+            .setOptions({
+              steps: [
+                {
+                  element: '#tourStepZero',
+                  intro: `<div style="width:30rem; ">Welcome to your dashboard!</div>`,
+                },
+                {
+                  element: '#tourStepOne',
+                  intro: `<div style="">Over here you have access to your menu items!</div>`,
+                  position:'right'
+                },
+                {
+                  element: '#tourStepTwo',
+                  intro: `<div style="">
+                This button will take you to the <strong style="color:blue">HOME</strong> page, where you can set up stores, payments, shipping and others
+                </div>`,
+                position:'right'
+                },
+                {
+                  element: '#tourStepThree',
+                  intro: `<div style="">
+                Clicking here will take you to the <strong style="color:blue">PRODUCT</strong> page, where you  can add new products to your store
+                </div>`,
+                position:'right'
+                },
+                {
+                  element: '#tourStepFour',
+                  intro: `<div style="">
+              This leads to a pages where you can add or modify <strong style="color:blue">DISCOUNT</strong> to products on your store
+                </div>`,
+                position:'right'
+                },
+                {
+                  element: '#tourStepFive',
+                  intro: `<div style="">
+                Clicking here will take you to the <strong style="color:blue">REVIEW</strong> page, where you  can manage your customer reviews and reply to them
+                </div>`,
+                position:'right'
+                },
+                {
+                  element: '#tourStepSix',
+                  intro: `<div style="">
+              Clicking here will take you to the <strong style="color:blue">STORE ORDER</strong> page, where you  can see all of your orders that customers have made on the selected store
+                </div>`,
+                position:'right'
+                },
+                {
+                  element: '#tourStepSeven',
+                  intro: `<div style="">
+              Click here to go to the <strong style="color:blue">CUSTOMERS'</strong> page, where you  see and manage your customers' information
+                </div>`,
+                position:'right'
+                },
+                {
+                  element: '#tourStepEight',
+                  intro: `<div style="">
+              Click here to see all <strong style="color:blue">PAYMENTS</strong> recieved from your customers
+                </div>`,
+                position:'right'
+                },
+                {
+                  element: '#tourStepNine',
+                  intro: `<div style="">
+                To sign out, click on this dropdown menu and continue to logout
+                </div>`,
+                },
+              ],
+            })
+            .onbeforeexit(function () {
+              localStorage.setItem('tourCompleted', 'true');
+              return confirm('Are You sure you want to exit?');
+            })
+            .start();
         }
       });
-    if (!localStorage.getItem('tourCompleted')) {
-      this.introJS = introJs();
-      this.introJS
-        .setOptions({
-          steps: [
-            {
-              element: '#tourStepZero',
-              intro: `<div style="width:30rem; ">Welcome to your dashboard!</div>`,
-            },
-            {
-              element: '#tourStepOne',
-              intro: `<div style="">Over here you have access to your menu items!</div>`,
-            },
-            {
-              element: '#tourStepTwo',
-              intro: `<div style="">
-            This button will take you to the <strong style="color:blue">HOME</strong> page, where you can set up stores, payments, shipping and others
-            </div>`,
-            },
-            {
-              element: '#tourStepThree',
-              intro: `<div style="">
-            Clicking here will take you to the <strong style="color:blue">PRODUCT</strong> page, where you  can add new products to your store
-            </div>`,
-            },
-            {
-              element: '#tourStepFour',
-              intro: `<div style="">
-          This leads to a pages where you can add or modify <strong style="color:blue">DISCOUNT</strong> to products on your store
-            </div>`,
-            },
-            {
-              element: '#tourStepFive',
-              intro: `<div style="">
-            Clicking here will take you to the <strong style="color:blue">REVIEW</strong> page, where you  can manage your customer reviews and reply to them
-            </div>`,
-            },
-            {
-              element: '#tourStepSix',
-              intro: `<div style="">
-          Clicking here will take you to the <strong style="color:blue">STORE ORDER</strong> page, where you  can see all of your orders that customers have made on the selected store
-            </div>`,
-            },
-            {
-              element: '#tourStepSeven',
-              intro: `<div style="">
-          Click here to go to the <strong style="color:blue">CUSTOMERS'</strong> page, where you  see and manage your customers' information
-            </div>`,
-            },
-            {
-              element: '#tourStepEight',
-              intro: `<div style="">
-          Click here to see all <strong style="color:blue">PAYMENTS</strong> recieved from your customers
-            </div>`,
-            },
-            {
-              element: '#tourStepNine',
-              intro: `<div style="">
-            To sign out, click on this dropdown menu and continue to logout
-            </div>`,
-            },
-          ],
-        })
-        .onbeforeexit(function () {
-          localStorage.setItem('tourCompleted', 'true');
-          return confirm('Are You sure you want to exit?');
-        })
-        .start();
-    }
+    
   }
 
   onSelectedStoreChange(val: any) {

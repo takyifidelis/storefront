@@ -110,3 +110,12 @@
 ::-webkit-scrollbar {
     display: none;
   }
+  .spinner-container{
+    display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      img{
+        transform: scale(3);
+      }
+  }
