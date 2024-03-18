@@ -227,14 +227,13 @@ export class MerchantDashboardComponent implements OnInit {
       .subscribe((resData: MerchantInfo) => {
         this.user = resData.data;
         this.firstInitial = resData.data.businessName.charAt(0);
+        this.userName = resData.data.businessName;
 
-        console.log(resData);
-        console.log(resData.data);
+        console.log(this.userName);
       });
   }
 
   onSelectedStoreChange(val: any) {
-    console.log(val);
     localStorage.setItem('storeId', val.id);
     localStorage.setItem('template', val.template.options);
     localStorage.setItem('tempTemplate', val.template.temp.options);
