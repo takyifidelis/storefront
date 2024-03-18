@@ -93,9 +93,9 @@ this.router.navigate(['/customer'])
     this.dataService.isLoading = true
   if (!this.dataService.isInEditMode) {
     this.apiService.getSingleStore(localStorage.getItem('storeId')!).subscribe((store:{[key:string]:any})=>{
-      this.dataService.template =JSON.parse(store['data'].template.options)
-      this.dataService.isLoading =false
-      // console.log(JSON.parse(store['data'].template.options))
+      this.dataService.template = JSON.parse(store['data'].template.options)
+      this.dataService.isLoading = false
+      console.log(JSON.parse(store['data'].template.options))
     })
   }
   if(this.dataService.isInEditMode) {
