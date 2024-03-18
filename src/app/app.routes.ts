@@ -32,7 +32,7 @@ import { ShopComponent } from './Pages/Dashboard/Customer/components/shop/shop.c
 import { FavoriteProductComponent } from './Pages/Dashboard/Customer/components/favorite-product/favorite-product.component';
 import { HistoryComponent } from './Pages/Dashboard/Customer/components/history/history.component';
 import { OrderComponent } from './Pages/Dashboard/Customer/components/order/order.component';
-import { SearchOrderComponent } from './Pages/Dashboard/Customer/components/search-order/search-order.component';
+
 import { PaymentOptionComponent } from './Pages/Dashboard/Customer/components/payment-option/payment-option.component';
 import { NewPaymentOptionComponent } from './Pages/Dashboard/Customer/components/new-payment-option/new-payment-option.component';
 import { contactUsGuard } from './gaurds/contact-us.guard';
@@ -119,9 +119,7 @@ export const routes: Routes = [
     ],
   },
   { path: 'ecommerce/checkout-page', component: CkeckoutPageComponent },
-  { path: 'search-order', component: SearchOrderComponent },
   { path: 'checkout-page', component: CkeckoutPageComponent },
-  { path: 'search-order', component: SearchOrderComponent },
   {
     path: 'merchant',
     component: MerchantDashboardComponent,

@@ -1,10 +1,4 @@
 import { ToastrService } from 'ngx-toastr';
-import {
-  GoogleSigninButtonModule,
-  SocialAuthService,
-  SocialLoginModule,
-  SocialUser,
-} from '@abacritt/angularx-social-login';
 import { CommonModule, DOCUMENT } from '@angular/common';
 import {
   Component,
@@ -22,7 +16,6 @@ import {
   FormsModule,
   Validators,
   ReactiveFormsModule,
-  NgForm,
 } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -48,8 +41,6 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     FontAwesomeModule,
     RouterModule,
     CommonModule,
-    GoogleSigninButtonModule,
-    SocialLoginModule,
     FormsModule,
     ReactiveFormsModule,
     MatProgressSpinnerModule,
@@ -59,7 +50,6 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 })
 export class LoginComponent implements OnInit {
   @Output() loginWithGoogle: EventEmitter<any> = new EventEmitter<any>();
-  user: SocialUser | undefined;
   isLoggedIn: boolean | undefined;
   passwordLock = faLock;
   mailIcon = faEnvelope;
@@ -72,7 +62,6 @@ export class LoginComponent implements OnInit {
   @ViewChild('search') search!: ElementRef;
 
   constructor(
-    private authService: SocialAuthService,
     @Inject(DOCUMENT) private document: Document,
     private loginService: AuthService,
     private apiService: APIService,
@@ -91,14 +80,12 @@ export class LoginComponent implements OnInit {
       (res: { [key: string]: any }) => {
         if (res['data'].type === 'Business') {
           localStorage.setItem('businessId', res['data'].business);
-          console.log(res);
           this.router.navigate(['merchant']);
         } else if (res['data'].type === 'Customer') {
           localStorage.setItem(
             'customerId',
             JSON.stringify(res['data'].customer)
           );
-          console.log(res);
           this.router.navigate(['customer']);
         }
       },
@@ -106,15 +93,9 @@ export class LoginComponent implements OnInit {
         console.log('err');
       },
       () => {
-        console.log('com');
       }
     );
   }
-
-  // onGoogle() {
-  // this.document.getElementsByName('asl-google-signin-button')
-  // console.log(  this.document.getElementsByTagName('asl-google-signin-button')
-  // )
 
   //Login using Email and Password implementation
   loginForm: FormGroup;

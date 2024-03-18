@@ -77,8 +77,8 @@
         <div style="margin-bottom: 20px;" class="cat col-md-3">
           <div style="position: relative;;">
             <img class="w-100" src="assets/images/ecommerce-home-dresses.svg" alt="" />
-          <div class="overlay">
-            <span >{{category.name}}</span>
+          <div class="cat-overlay">
+            <span >{{category}}</span>
           </div>
           </div>
         </div>
@@ -190,7 +190,7 @@
         <div class="col-md-3">
           <div class="card card-structure">
             <img
-              (click)="goToProduct(product.id)"
+              (click)="goToProduct(product)"
               [src]="product.images[0].url"
               class="card-img-top card-img"
               alt="..."
