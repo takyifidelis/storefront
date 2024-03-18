@@ -62,12 +62,9 @@
         </mat-form-field>
         <div class="user-info">
           <div class="profile-image-container">
-            <img
-              class="profile-image"
-              src="https://material.angular.io/assets/img/examples/shiba1.jpg"
-              alt=""
-              srcset=""
-            />
+            <span class="nav-dp">
+              {{ nameInitial }}
+            </span>
             <svg
               width="12"
               height="12"
@@ -93,18 +90,11 @@
             <mat-icon>expand_more</mat-icon>
           </button>
           <mat-menu #menu="matMenu" class="pt-0">
-            <div style="padding: 0px 4rem 0px 1.2rem">
-              <img
-                style="
-                  width: 35px;
-                  height: 35px;
-                  border-radius: 50%;
-                  margin-right: 10px;
-                "
-                src="https://material.angular.io/assets/img/examples/shiba2.jpg"
-                alt="Photo of a Shiba Inu"
-              />
-              <span>Emmanuella Neizer</span>
+            <div class="merchant-dp">
+              <span class="dp-image">
+                {{ nameInitial }}
+              </span>
+              <span>{{ userName }}</span>
             </div>
             <hr class="m-1" />
             <button mat-menu-item>

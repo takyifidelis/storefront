@@ -38,6 +38,6 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     provideAnimationsAsync(),
     provideNativeDateAdapter(),
-    provideToastr(),
+    provideToastr(), provideAnimationsAsync(),
   ],
 };

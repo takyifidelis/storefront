@@ -1,4 +1,3 @@
-declare var google: any;
 import { ToastrService } from 'ngx-toastr';
 import {
   GoogleSigninButtonModule,
@@ -163,9 +162,11 @@ export class LoginComponent implements OnInit {
     this.eyeIcon = this.showPassword ? faEye : faEyeSlash;
   }
 
-  newLogin(ata: any) {
+  newLogin(form: FormGroupDirective) {
     this.isLoading = true;
-
+    if (!form.valid) {
+      return;
+    }
     //     this.dataService.isLoading = true
     this.apiService
       .authenticateUser(this.dataService.loginCredentials)
@@ -193,11 +194,11 @@ export class LoginComponent implements OnInit {
         (errorMessage: any) => {
           this.isLoading = false;
           console.log(errorMessage);
-          this.error = errorMessage;
-          this.toastr.error(this.error, 'Login Failed');
+
+          this.toastr.error(errorMessage.error.message, 'Failed');
         }
       );
-    this.dataService.loginCredentials = { email: '', password: '' };
+    form.reset();
   }
 
   handleGoogleResponse() {

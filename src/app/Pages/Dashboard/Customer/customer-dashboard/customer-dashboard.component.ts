@@ -11,6 +11,7 @@ import { DataService } from '../../../../Services/data.service';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { APIService } from '../../../../Services/api.service';
 import { ToastrService } from 'ngx-toastr';
+import { CustomerInfo } from '../../../../interfaces/all-interfaces';
 @Component({
   selector: 'app-customer-dashboard',
   standalone: true,
@@ -29,6 +30,9 @@ import { ToastrService } from 'ngx-toastr';
 export class CustomerDashboardComponent implements OnInit {
   screenWidth: number;
   introJS: any;
+  firstInitial!: string;
+  lastinitial!: string;
+  user: any = [];
   constructor(
     public dataService: DataService,
     media: MediaMatcher,
@@ -93,6 +97,16 @@ export class CustomerDashboardComponent implements OnInit {
         })
         .start();
     }
+
+    this.apiService
+      .getCustomer(localStorage.getItem('customerId')!)
+      .subscribe((resData: CustomerInfo) => {
+        this.user = resData.data;
+        this.firstInitial = resData.data.firstName.charAt(0);
+        this.lastinitial = resData.data.lastName.charAt(0);
+        console.log(resData);
+        console.log(resData.data);
+      });
   }
 
   logout() {

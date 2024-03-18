@@ -12,8 +12,11 @@ import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { APIService } from '../../../../../Services/api.service';
 import { HistoryModalComponent } from './history-modal/history-modal.component';
 import { MatDialog } from '@angular/material/dialog';
-import { UserInterface } from '../../../../../interfaces/all-interfaces';
+import { SavedProducts, UserInterface } from '../../../../../interfaces/all-interfaces';
 import { RouterModule } from '@angular/router';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faFilter, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { CommonModule, DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-history',
@@ -30,6 +33,8 @@ import { RouterModule } from '@angular/router';
     MatPaginatorModule,
     HistoryModalComponent,
     RouterModule,
+    FontAwesomeModule,
+    CommonModule,
   ],
   templateUrl: './history.component.html',
   styleUrl: './history.component.scss',
@@ -50,6 +55,10 @@ export class HistoryComponent implements OnInit {
   cart: any = [];
   favProducts!: number;
   users: UserInterface[] = [];
+  filterIcon = faFilter;
+  seaechICon = faSearch;
+  isLoading: boolean = false;
+  customerHistoryEmpty: boolean = false;
 
   constructor(private apiService: APIService, public dialog: MatDialog) {
     this.dataSource = new MatTableDataSource(this.users);
@@ -58,15 +67,22 @@ export class HistoryComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.isLoading = true;
+    this.customerHistoryEmpty = true;
+
     this.apiService
       .getHistoryProducts(localStorage.getItem('customerId')!)
-      .subscribe((response: any) => {
+      .subscribe((response: SavedProducts) => {
+        this.isLoading = false;
         this.cart = response.data;
         this.favProducts = response.data.length;
+
         this.dataSource = new MatTableDataSource(this.cart);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
-        console.log(response);
+        if (this.favProducts > 0) {
+          this.customerHistoryEmpty = false;
+        }
       });
   }
 
@@ -82,6 +98,10 @@ export class HistoryComponent implements OnInit {
         console.log(resData);
         this.ngOnInit();
       });
+  }
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
   // the code below is all for the checkboxes in the table

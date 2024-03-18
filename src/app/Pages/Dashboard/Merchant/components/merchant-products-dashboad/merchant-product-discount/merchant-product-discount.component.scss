@@ -67,7 +67,13 @@ form {
   }
 }
 .delete-btn {
-  display: flex; 
+  display: flex;
   justify-content: space-around;
   margin: 3rem 0;
+}
+.loading-spin {
+  text-align: center;
+  .spinner {
+    width: 5rem;
+  }
 }

@@ -72,6 +72,7 @@ export class MerchantCustomersComponent implements OnInit {
   filterIcon = faFilter;
   seaechICon = faSearch;
   checkIcon = faCheck;
+  isLoading: boolean = false;
   displayedColumns: string[] = [
     'checkbox',
     'name',
@@ -142,11 +143,13 @@ export class MerchantCustomersComponent implements OnInit {
 
   ngOnInit() {
     this.merchantCustomersEmpty = true;
+    this.isLoading = true;
     this.apiService
       .getAllCustomersForStore(localStorage.getItem('storeId')!)
       .subscribe(
         (res: any) => {
           console.log(res);
+          this.isLoading = false;
           this.numberOfCustomer = res.data.length;
           if (this.numberOfCustomer > 0) {
             this.merchantCustomersEmpty = false;
@@ -179,6 +182,8 @@ export class CustomerDetailsComponent implements OnInit {
   productDataSource!: MatTableDataSource<orderInterface>;
   displayedColumns: string[] = ['name', 'price', 'date', 'orders'];
   users: any;
+  numOfCustomers!: number;
+  isLoading: boolean = false;
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: orderInterface,
     private apiService: APIService
@@ -187,6 +192,7 @@ export class CustomerDetailsComponent implements OnInit {
   }
   ngOnInit() {
     console.log('this.users');
+    this.isLoading = true;
     this.apiService
       .getOrderHistoryForCustomer(
         localStorage.getItem('storeId') ||
@@ -196,6 +202,8 @@ export class CustomerDetailsComponent implements OnInit {
       .subscribe((res: Response) => {
         this.users = res['data'];
         console.log(this.users.orders);
+        this.isLoading = false;
+        this.numOfCustomers = this.users.length;
         this.dataSurce = new MatTableDataSource(this.users.orders);
       });
   }

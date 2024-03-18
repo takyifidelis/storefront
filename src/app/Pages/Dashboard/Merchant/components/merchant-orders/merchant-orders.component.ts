@@ -16,6 +16,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MerchantOrderModalComponent } from '../merchant-order-modal/merchant-order-modal.component';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MerchantOrder, SingleOrder } from '../../../../../interfaces/all-interfaces';
 
 @Component({
   selector: 'app-merchant-orders',
@@ -64,21 +65,25 @@ export class MerchantOrdersComponent {
   orders: any = [];
   unsorted: any = [];
   sorted: any = [];
+  isLoading: boolean = false;
   formattedDate!: string | null;
   datepipe: DatePipe = new DatePipe('en-US');
   isAllActive = false;
   isProcessingActive = false;
   isShippedActive = false;
   isDeliveredActive = false;
+  numOfOrders!: number;
 
   ngOnInit(): void {
     this.merchantOrdersEmpty = true;
+    this.isLoading = true;
     this.apiService
       .getOrdersForMerchant(localStorage.getItem('storeId')!)
-      .subscribe((res: any) => {
-        console.log(res);
+      .subscribe((res: MerchantOrder) => {
         this.orders = res.data;
         this.unsorted = this.orders;
+        this.isLoading = false;
+        this.numOfOrders = res.data.length;
         if (res.data.length > 0) {
           this.merchantOrdersEmpty = false;
         }
@@ -109,13 +114,11 @@ export class MerchantOrdersComponent {
   }
   showSelection(e: any) {
     e.stopPropagation();
-    console.log(this.selection.selected);
   }
   /** Selects all rows if they are not all selected; otherwise clear selection. */
   toggleAllRows() {
     if (this.isAllSelected()) {
       this.selection.clear();
-      console.log(this.selection.selected);
       return;
     }
 
@@ -138,7 +141,6 @@ export class MerchantOrdersComponent {
   }
 
   switchTab(tabName: string) {
-    // Reset all tab states
     this.isAllActive = false;
     this.isProcessingActive = false;
     this.isShippedActive = false;
@@ -165,7 +167,7 @@ export class MerchantOrdersComponent {
 
   onSort(status: string) {
     this.sorted = [];
-    this.unsorted.forEach((order: any) => {
+    this.unsorted.forEach((order: SingleOrder) => {
       if (order.status === status) {
         this.sorted.push(order);
         this.dataSource = new MatTableDataSource(this.sorted);
@@ -174,5 +176,4 @@ export class MerchantOrdersComponent {
       }
     });
   }
-  //   ngOnInit():
 }

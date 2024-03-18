@@ -1,0 +1,81 @@
+<div class="container-fluid main-container">
+  <header class="d-flex" style="flex-wrap: wrap">
+    <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
+    <div class="d-flex w-100" style="margin-top: 25px">
+      <span class="d-flex">
+        <span class="animate_animated animate__rubberBand app-name"
+          >StoreFront</span
+        >
+      </span>
+      <button
+        [routerLink]="['/customer-onboarding-2']"
+        class="header-btn btn btn-light"
+        style="margin-left: auto"
+      >
+        skip this step
+      </button>
+    </div>
+  </header>
+  <main class="animate__animated animate__pulse">
+    <span class="body-txt-header"
+      >Which type of website do you want <br />
+      to explore</span
+    >
+    <p class="body-txt-p">
+      Let us have an idea of the website you want to create so that we can
+      tailor your storefront experience for you
+    </p>
+    <div class="body-options-container">
+      <div class="search-box">
+        <!-- <input type="text" class="d-flex w-100" (keyup)="filterList($event)" placeholder="Search for your business or website type"> -->
+        <input
+          type="text"
+          class="d-flex w-100"
+          [(ngModel)]="searchString"
+          placeholder="Search for your business or website type"
+        />
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="15"
+          height="15"
+          viewBox="0 0 17 17"
+          fill="none"
+        >
+          <path
+            d="M12.2026 12.2032L15.9995 16.0001M14.125 7.5625C14.125 11.1869 11.1869 14.125 7.5625 14.125C3.93813 14.125 1 11.1869 1 7.5625C1 3.93813 3.93813 1 7.5625 1C11.1869 1 14.125 3.93813 14.125 7.5625Z"
+            stroke="#5E718D"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </div>
+      <!-- <mat-form-field class="d-flex">
+                <mat-label>Search for your business or website type</mat-label>
+                <input matInput placeholder="" #input>
+            </mat-form-field> -->
+
+      <div class="type-selector-container">
+        <p>EXAMPLES</p>
+        <div class="website-type-container">
+          @for (type of dataService.typesOfStore | filterOne:searchString; track
+          type){
+          <span (click)="onSelect($event.target)" class="website-type">{{
+            type
+          }}</span>
+          }
+        </div>
+      </div>
+    </div>
+    <button
+      (click)="continueToStep3()"
+      class="body-btn"
+      style="font-size: 18px; padding: 13px 20px"
+    >
+      Continue
+    </button>
+  </main>
+</div>
+<div *ngIf="dataService.isLoading" class="loading-spinner">
+  <mat-spinner></mat-spinner>
+</div>

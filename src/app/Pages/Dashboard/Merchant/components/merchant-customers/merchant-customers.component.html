@@ -1,42 +1,43 @@
-@if(merchantCustomersEmpty){
-<div class="d-flex justify-content-center align-items-center h-100">
-  <div class="empty-dashboard">
-    <span>
-      <img src="/assets/images/merchant_customers_empty.svg" alt="" srcset="" />
-    </span>
-    <h1>No customer found</h1>
-    <p>
-      It seems there are no products matching your criteria. To get started,
-      click the button below to add a new product
-    </p>
-    <button>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="21"
-        height="21"
-        viewBox="0 0 21 21"
-        fill="none"
-      >
-        <path
-          d="M10.5 4.50586V16.1725M4.66669 10.3392H16.3334"
-          stroke="white"
-          stroke-width="1.66667"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        />
-      </svg>
-      <span>create new</span>
-    </button>
+@if(isLoading){
+<div class="loading-spinner-medium">
+  <img
+    src="assets\icons\loading-btn-spinner.svg"
+    alt="Loading.."
+    class="spinner-image"
+  />
+</div>
+} @if(!isLoading && numberOfCustomer === 0){
+<div class="empty-div">
+  <div class="">
+    <div class="empty-dashboard">
+      <span>
+        <img src="/assets/images/customer_empty.svg" alt="" srcset="" />
+      </span>
+      <h1>No customer found</h1>
+      <p>
+        It seems like there are no customers in your list. <br />
+        You can start by adding a new customer to <br />
+        get things rolling
+      </p>
+    </div>
+  </div>
+  <div class="loading-spinner-small" *ngIf="isLoading">
+    <img
+      src="assets\icons\loading-btn-spinner.svg"
+      alt="Loading.."
+      class="spinner-image"
+    />
   </div>
 </div>
-} @if(!merchantCustomersEmpty){
+
+} @if(!isLoading && numberOfCustomer > 0){
 <div class="container-fluid">
   <div class="product-header d-flex align-items-center justify-content-between">
     <div class="product-title d-flex align-items-center">
       <h2 class="product-head">Customers</h2>
       <span class="product-members"
-        ><span class="number-customers">{{ this.numberOfCustomer }}</span>
-        members
+        ><span class="number-customers">{{ numberOfCustomer }}</span>
+        member<span *ngIf="numberOfCustomer !== 1">s</span>
       </span>
     </div>
     <div class="search-filter">

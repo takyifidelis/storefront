@@ -140,6 +140,7 @@ section.preview-section {
     font-weight: 700;
     line-height: 24px;
     letter-spacing: -0.2px;
+    text-transform: uppercase;
 
     p {
       margin-bottom: 0;
@@ -395,6 +396,14 @@ section.decription-review {
         line-height: 28px;
         letter-spacing: -0.3px;
         background-color: #eca5f7;
+        border-radius: 50%;
+        padding: 0.3rem;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-transform: uppercase;
       }
     }
     .feedback-name {
@@ -405,6 +414,7 @@ section.decription-review {
       font-weight: 500;
       line-height: 28px;
       letter-spacing: -0.3px;
+      text-transform: capitalize;
     }
     .ratings {
       margin-bottom: 0.4rem;

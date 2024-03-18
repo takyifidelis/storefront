@@ -156,7 +156,7 @@
               />
             </div>
           </div>
-          <div class="discount-btns">
+          <div class="discount-btns" *ngIf="!isLoading">
             <button
               class="btn btn-primary"
               type="submit"
@@ -165,13 +165,21 @@
               Update Promotion
             </button>
           </div>
+          <div class="loading-spin" *ngIf="isLoading">
+            <img src="assets\icons\loading-btn-spinner.svg" alt="Loading.." />
+          </div>
         </form>
       </mat-tab>
     </mat-tab-group>
   </mat-dialog-content>
   <hr />
 
-  <button class="btn btn-danger" (click)="onDelete()">Delete Promotion</button>
+  <button class="btn btn-danger" (click)="onDelete()" *ngIf="!deleteIsLoading">
+    Delete Promotion
+  </button>
+  <div class="loading-spin" *ngIf="deleteIsLoading">
+    <img src="assets\icons\loading-btn-spinner.svg" alt="Loading.." />
+  </div>
 
   <hr />
 </div>

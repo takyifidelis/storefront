@@ -58,20 +58,44 @@
           }
         </mat-radio-group>
         <div class="btn-div d-flex justify-content-center">
-          <button class="btn btn-primary" [disabled]="!addPromo.valid">
+          <button
+            class="btn btn-primary"
+            [disabled]="!addPromo.valid"
+            *ngIf="!isLoading"
+          >
             Add Discount
           </button>
+          <div class="loading-spin" *ngIf="isLoading">
+            <img
+              src="assets\icons\loading-btn-spinner.svg"
+              alt="Loading.."
+              class="spinner"
+            />
+          </div>
         </div>
       </form>
     </mat-tab>
-    <mat-tab label="Modify Product" >
-      <div class="delete-btn">
-        <button (click)="onDeleteProduct()" class="btn btn-danger">
-          Delete Product
-        </button>
-        <button (click)="onUpdateProduct()" mat-dialog-close class="btn btn-primary">
-          Update Product
-        </button>
+    <mat-tab label="Modify Product">
+      <div class="">
+        <div class="update-btns delete-btn" *ngIf="!isLoading">
+          <button (click)="onDeleteProduct()" class="btn btn-danger">
+            Delete Product
+          </button>
+          <button
+            (click)="onUpdateProduct()"
+            mat-dialog-close
+            class="btn btn-primary"
+          >
+            Update Product
+          </button>
+        </div>
+        <div class="loading-spin" *ngIf="isLoading">
+          <img
+            src="assets\icons\loading-btn-spinner.svg"
+            alt="Loading.."
+            class="spinner"
+          />
+        </div>
       </div>
     </mat-tab>
   </mat-tab-group>

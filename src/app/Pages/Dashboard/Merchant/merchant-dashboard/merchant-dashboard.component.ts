@@ -45,6 +45,8 @@ export class MerchantDashboardComponent implements OnInit {
   stores: {
     [key: string]: any;
   }[] = [];
+  nameInitial!: string;
+  userName!: string;
   constructor(
     public dataService: DataService,
     private apiService: APIService,

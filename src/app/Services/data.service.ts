@@ -12,7 +12,7 @@ export class DataService {
   storeProducts:any = []
 like: any =  [];
   cart: any = [];
-  updateProduct:unknown 
+  updateProduct: unknown;
   productCategories: any = [];
   productSearchString: string = '';
   selectedStore: { [key: string]: any } = {};

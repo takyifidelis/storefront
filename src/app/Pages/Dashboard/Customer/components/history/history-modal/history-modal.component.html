@@ -1,32 +1,48 @@
 <h2 mat-dialog-title>Purchase Details</h2>
 <mat-dialog-content>
   <div class="container-fluid">
-    <span class="d-flex flex-column">
-      <span class="detail-type">Store</span>
-      <span class="detail-shop-name mt-2">ShopNest</span>
+    <span class="d-flex align-items-center store-info">
+      <span class="detail-type">Store: </span>
+      <span class="detail-shop-name">
+        {{ data["storeProducts"]["storeName"] }}</span
+      >
     </span>
     <hr />
     <div class="purchase-item">
-      <img [src]="data.images[0].url" style="width: 19%" alt="" />
-      <span class="d-flex flex-column">
-        <span class="d-flex" style="align-items: end">
-          <span class="item-name" style="width: 187px">{{ data.name }}</span>
-          <span class="item-collection-type">{{ data.price }} EUR</span>
-        </span>
-        <span class="item-collection-type">{{ data.category }}</span>
-      </span>
+      <div>
+        <img [src]="data.images[0].url" alt="" class="product-image" />
+      </div>
+      <div class="">
+        <div class="">
+          <div class="item-name">{{ data.name }}</div>
+        </div>
+        <div class="item-collection-type">{{ data.category }}</div>
+        <!-- <div class="item-collection-type">${{ data.price }}</div> -->
+        <div class="product-amount product-price">
+          Amount :
+          <span class="discount-price">
+            ${{ data.price * ((100 - data.discount) / 100) }}
+          </span>
+          <span class="actual-price" *ngIf="data.discount > 0"
+            >${{ data.price }}</span
+          >
+          <span class="discount-percent" *ngIf="data.discount > 0">
+            {{ data.discount }}<span class="per-off">% OFF</span></span
+          >
+        </div>
+      </div>
     </div>
     <hr />
     <div class="total-price">
       <span class="price-tag detail-type">Total Price</span>
-      <span class="price">{{ data.quantity * data.price }} EUR</span>
+      <span class="price"
+        >${{ data.price * ((100 - data.discount) / 100) }}</span
+      >
     </div>
   </div>
-</mat-dialog-content>
-<mat-dialog-content>
   <div class="btn-right">
-    <button class="btn btn-danger" (click)="onDeleteProduct()">
-      Remove from Cart
+    <button class="delete-btn" (click)="onDeleteProduct()">
+      <mat-icon>delete</mat-icon>
     </button>
   </div>
 </mat-dialog-content>

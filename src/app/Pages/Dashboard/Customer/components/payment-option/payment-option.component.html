@@ -1,82 +1,96 @@
-<div class="container-fluid" style="padding-left: 32px; padding-right: 32px">
-  <div class="row justify-content-between" style="padding-left: 41px">
-    <div class="col">
-      <h4>Payment Option</h4>
-    </div>
-    <div
-      class="col d-flex justify-content-end align-items-center"
-      style="gap: 10px; padding-right: 31px"
-    >
-      <button class="d-flex justify-content-around button">
-        <fa-icon [icon]="filterIcon" class="filter"></fa-icon>
-        <p>Filter</p>
-      </button>
-      <form>
-        <div class="search d-flex">
+<div class="main-div">
+  <div class="container-fluid" style="padding-left: 32px; padding-right: 32px">
+    <div class="d-flex justify-content-between">
+      <div class="header-title">
+        <h4>Payment Option</h4>
+      </div>
+      <div
+        class="d-flex justify-content-end align-items-center searching-filter"
+      >
+        <button class="d-flex justify-content-around button">
           <fa-icon
-            [icon]="seaechICon"
-            style="font-size: 15px; color: #1b4dff"
+            [icon]="filterIcon"
+            class="filter"
+            style="color: #1b4dff"
           ></fa-icon>
-          <input type="text" placeholder="Search........" />
-        </div>
-      </form>
-      <button class="new-payment" (click)="moreVert()">
-        <p>New Payment</p>
-      </button>
-    </div>
-  </div>
-  <section class="card-container d-flex justify-content-center">
-    <div class="card-blocks">
-      <mat-radio-group aria-label="Select an option" class="d-flex flex-column">
-        <mat-radio-button value="1">
-          <div class="card-div d-flex align-items-start justify-content-start">
-            <div class="card-image">
-              <img src="assets\images\visa.svg" alt="" />
-            </div>
-            <div class="card-content">
-              <div class="card-name">Fidelis Takyi Mensah</div>
-              <div class="card-number">123456789</div>
-              <div class="card-expiry">Expiry 06/2024</div>
-              <div class="set-as">
-                <span class="default">Set as default</span>
-                <span class="edit"> Edit</span>
-              </div>
-            </div>
+          <p>Filter</p>
+        </button>
+        <form>
+          <div class="search d-flex">
+            <fa-icon
+              [icon]="seaechICon"
+              style="font-size: 15px; color: #1b4dff"
+            ></fa-icon>
+            <input type="text" placeholder="Search........" />
           </div>
-        </mat-radio-button>
-        <mat-radio-button value="2">
-          <div class="card-div d-flex align-items-start justify-content-start">
-            <div class="card-image">
-              <img src="assets\images\mastercard.svg" alt="" />
-            </div>
-            <div class="card-content">
-              <div class="card-name">Emmanuel Adomako</div>
-              <div class="card-number">987654321</div>
-              <div class="card-expiry">Expiry 06/2027</div>
-              <div class="set-as">
-                <span class="default">Set as default</span>
-                <span class="edit"> Edit</span>
-              </div>
-            </div>
-          </div></mat-radio-button
-        >
-        <mat-radio-button value="3">
-          <div class="card-div d-flex align-items-start justify-content-start">
-            <div class="card-image paypal-image">
-              <img src="assets\images\PayPal.svg" alt="" />
-            </div>
-            <div class="card-content">
-              <div class="card-name">Felix Hagan</div>
-              <div class="card-number">12341234</div>
-              <div class="card-expiry">Expiry 06/2025</div>
-              <div class="set-as">
-                <span class="default">Set as default</span>
-                <span class="edit"> Edit</span>
-              </div>
-            </div>
-          </div></mat-radio-button
-        >
-      </mat-radio-group>
+        </form>
+        <button class="new-payment" (click)="moreVert()">
+          <p>New Payment</p>
+        </button>
+      </div>
     </div>
-  </section>
+    <section class="card-container d-flex justify-content-center">
+      <div class="card-blocks">
+        <mat-radio-group
+          aria-label="Select an option"
+          class="d-flex flex-column"
+        >
+          <mat-radio-button value="1" checked>
+            <div
+              class="card-div d-flex align-items-start justify-content-start"
+            >
+              <div class="card-image">
+                <img src="assets\images\visa.svg" alt="" />
+              </div>
+              <div class="card-content">
+                <div class="card-name">Fidelis Takyi Mensah</div>
+                <div class="card-number">123456789</div>
+                <div class="card-expiry">Expiry 06/2024</div>
+                <div class="set-as">
+                  <span class="default">Set as default</span>
+                  <span class="edit"> Edit</span>
+                </div>
+              </div>
+            </div>
+          </mat-radio-button>
+          <mat-radio-button value="2">
+            <div
+              class="card-div d-flex align-items-start justify-content-start"
+            >
+              <div class="card-image">
+                <img src="assets\images\mastercard.svg" alt="" />
+              </div>
+              <div class="card-content">
+                <div class="card-name">Emmanuel Adomako</div>
+                <div class="card-number">987654321</div>
+                <div class="card-expiry">Expiry 06/2027</div>
+                <div class="set-as">
+                  <span class="default">Set as default</span>
+                  <span class="edit"> Edit</span>
+                </div>
+              </div>
+            </div></mat-radio-button
+          >
+          <mat-radio-button value="3">
+            <div
+              class="card-div d-flex align-items-start justify-content-start"
+            >
+              <div class="card-image paypal-image">
+                <img src="assets\images\PayPal.svg" alt="" />
+              </div>
+              <div class="card-content">
+                <div class="card-name">Felix Hagan</div>
+                <div class="card-number">12341234</div>
+                <div class="card-expiry">Expiry 06/2025</div>
+                <div class="set-as">
+                  <span class="default">Set as default</span>
+                  <span class="edit"> Edit</span>
+                </div>
+              </div>
+            </div></mat-radio-button
+          >
+        </mat-radio-group>
+      </div>
+    </section>
+  </div>
 </div>

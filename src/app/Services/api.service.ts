@@ -2,9 +2,18 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, map, throwError } from 'rxjs';
 import { environment } from '../../environments/environment.development';
-import { SavedProducts, SingleProductResponseData, UserCredentials } from '../interfaces/all-interfaces';
+import {
+  CustomerInfo,
+  MerchantInfo,
+  MerchantOrder,
+  Order,
+  Payout,
+  SavedProducts,
+  Shop,
+  SingleProductResponseData,
+  UserCredentials,
+} from '../interfaces/all-interfaces';
 import { DataService } from './data.service';
-// import { Response } from './../interfaces/all-interfaces';
 
 import { Response } from '../interfaces/all-interfaces';
 
@@ -132,14 +141,17 @@ export class APIService {
     );
   }
 
-  getSingleStore(storeId:string): Observable<Response> {
-    return this.http.get<Response>(`${environment.baseApiUrl}/store/get-store/${storeId}`, {
-      withCredentials: true,
-    });
+  getSingleStore(storeId: string): Observable<Response> {
+    return this.http.get<Response>(
+      `${environment.baseApiUrl}/store/get-store/${storeId}`,
+      {
+        withCredentials: true,
+      }
+    );
   }
-  
-  getStores(): Observable<Response> {
-    return this.http.get<Response>(`${environment.baseApiUrl}/store/get-all`, {
+
+  getStores(): Observable<Shop> {
+    return this.http.get<Shop>(`${environment.baseApiUrl}/store/get-all`, {
       withCredentials: true,
     });
   }
@@ -350,8 +362,8 @@ export class APIService {
     );
   }
 
-  getOrders(customerId: string): Observable<Response> {
-    return this.http.get<Response>(
+  getOrders(customerId: string): Observable<Order> {
+    return this.http.get<Order>(
       `${environment.baseApiUrl}/customer/get-orders/${customerId}`,
       {
         withCredentials: true,
@@ -379,8 +391,8 @@ export class APIService {
     );
   }
 
-  getHistoryProducts(customerId: string): Observable<Response> {
-    return this.http.get<Response>(
+  getHistoryProducts(customerId: string): Observable<SavedProducts> {
+    return this.http.get<SavedProducts>(
       `${environment.baseApiUrl}/customer/get-saved-products/${customerId}`,
       {
         withCredentials: true,
@@ -574,8 +586,8 @@ export class APIService {
     );
   }
 
-  getOrdersForMerchant(storeId: string): Observable<Response> {
-    return this.http.get<Response>(
+  getOrdersForMerchant(storeId: string): Observable<MerchantOrder> {
+    return this.http.get<MerchantOrder>(
       `${environment.baseApiUrl}/store/get-all-orders/${storeId}`,
       {
         withCredentials: true,
@@ -632,8 +644,8 @@ export class APIService {
     );
   }
 
-  getPayouts(storeId: string): Observable<Response> {
-    return this.http.get<Response>(
+  getPayouts(storeId: string): Observable<Payout> {
+    return this.http.get<Payout>(
       `${environment.baseApiUrl}/store/get-payouts/${storeId}`,
       {
         withCredentials: true,
@@ -667,9 +679,9 @@ export class APIService {
       }
     );
   }
-  removeProductFromFavorite(products: string[], customer_id: string) {
+  removeProductFromFavorite(products: string[], customerId: string) {
     return this.http.patch<Response>(
-      `${environment.baseApiUrl}/customer/remove-products-from-favorites/${customer_id}`,
+      `${environment.baseApiUrl}/customer/remove-products-from-favorites/${customerId}`,
 
       { products },
       {
@@ -684,6 +696,24 @@ export class APIService {
       })
       .pipe(catchError(this.handleError));
   }
+
+  getCustomer(customerId: string): Observable<CustomerInfo> {
+    return this.http.get<CustomerInfo>(
+      `${environment.baseApiUrl}/customer/${customerId}`,
+      {
+        withCredentials: true,
+      }
+    );
+  }
+  getMerchant(businessId: string): Observable<MerchantInfo> {
+    return this.http.get<MerchantInfo>(
+      `${environment.baseApiUrl}/business/${businessId}`,
+      {
+        withCredentials: true,
+      }
+    );
+  }
+
   // Error Handling
   private handleError(errorRes: HttpErrorResponse) {
     console.error('Error Response:', errorRes);

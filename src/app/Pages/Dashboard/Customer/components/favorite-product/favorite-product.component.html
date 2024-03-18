@@ -1,106 +1,189 @@
-<div class="container-fluid">
-  <div class="d-flex mb-5 align-items-center gap-3">
-    <h2 class="m-0">Product</h2>
-    <span class="product-members" style="width: 8.12%"
-      >{{ products.length }} product(s)</span
-    >
-  </div>
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
-    <!-- Checkbox Column -->
-    <ng-container matColumnDef="checkbox">
-      <th style="background-color: #f9fafb" mat-header-cell *matHeaderCellDef>
-        <mat-checkbox
-          (change)="$event ? toggleAllRows() : null"
-          [checked]="selection.hasValue() && isAllSelected()"
-          [indeterminate]="selection.hasValue() && !isAllSelected()"
-          [aria-label]="checkboxLabel()"
-        >
-        </mat-checkbox>
-      </th>
-      <td mat-cell *matCellDef="let row">
-        <mat-checkbox
-          (click)="showSelection($event)"
-          (change)="$event ? selection.toggle(row) : null"
-          [checked]="selection.isSelected(row)"
-          [aria-label]="checkboxLabel(row)"
-        >
-        </mat-checkbox>
-      </td>
-    </ng-container>
-
-    <ng-container matColumnDef="name">
-      <th
-        style="background-color: #f9fafb"
-        mat-header-cell
-        *matHeaderCellDef
-        mat-sort-header
-      >
-        Name
-      </th>
-      <td mat-cell class="table" *matCellDef="let row">
-        <div class="product-details" style="display: flex; gap: 20px">
-          <img [src]="row.images[0].url" style="width: 20%" />
-          <div class="product-name">{{ row.name }}</div>
-        </div>
-      </td>
-    </ng-container>
-
-    <ng-container matColumnDef="store">
-      <th
-        style="background-color: #f9fafb"
-        mat-header-cell
-        *matHeaderCellDef
-        mat-sort-header
-      >
-        Store
-      </th>
-      <td mat-cell *matCellDef="let row">{{ row.storeProducts?.storeName }}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="categories">
-      <th
-        style="background-color: #f9fafb"
-        mat-header-cell
-        *matHeaderCellDef
-        mat-sort-header
-      >
-        Categories
-      </th>
-      <td mat-cell *matCellDef="let row">{{ row.category }}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="price">
-      <th
-        style="background-color: #f9fafb"
-        mat-header-cell
-        *matHeaderCellDef
-        mat-sort-header
-      >
-        Price
-      </th>
-      <td mat-cell *matCellDef="let row">USD {{ row.price }}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="bubble">
-      <th
-        style="background-color: #f9fafb"
-        mat-header-cell
-        *matHeaderCellDef
-        mat-sort-header
-      ></th>
-      <td mat-cell *matCellDef="let row">
-        <span (click)="moreVert(row)" class="btn">
-          <img src="/assets/icons/bubble.svg" alt="" />
-        </span>
-      </td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-
-    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-  </table>
-  <mat-paginator
-    [pageSizeOptions]="[10, 25, 100]"
-    aria-label="Select page of users"
-  ></mat-paginator>
+@if(isLoading){
+<div class="loading-spinner-medium">
+  <img
+    src="assets\icons\loading-btn-spinner.svg"
+    alt="Loading.."
+    class="spinner-image"
+  />
 </div>
+} @if(!isLoading && numOfFavoriteProducts === 0){
+<div class="empty-div">
+  <div class="empty-dashboard">
+    <div>
+      <img src="assets\images\product-review-icon.svg" alt="" />
+    </div>
+    <h1 class="empty-header">No products found</h1>
+    <p class="empty-paragraph">
+      It seems there are no products matching your <br />
+      criteria. To get started, click the button below to <br />
+      add a new product
+    </p>
+  </div>
+</div>
+
+} @if(!isLoading && numOfFavoriteProducts > 0){
+<div class="main-div">
+  <div class="container-fluid">
+    <div class="header d-flex align-items-center justify-content-between">
+      <div class="d-flex align-items-center">
+        <h2 class="m-0 header-title">Product</h2>
+        <span class="product-members" *ngIf="!isLoading"
+          >{{ numOfFavoriteProducts }} Product<span *ngIf="isOneProduct"
+            >s</span
+          ></span
+        >
+      </div>
+      <div class="search-filter">
+        <div class="search-filter">
+          <div class="col d-flex justify-content-end align-items-center">
+            <button class="d-flex justify-content-around button">
+              <fa-icon [icon]="filterIcon" style="font-size: 15px"></fa-icon>
+              <p>Filter</p>
+            </button>
+            <form>
+              <div class="search d-flex">
+                <fa-icon
+                  [icon]="seaechICon"
+                  style="font-size: 15px; color: #1b4dff"
+                ></fa-icon>
+                <input
+                  type="text"
+                  placeholder="Search........"
+                  (keyup)="applyFilter($event)"
+                  #input
+                  matInput
+                />
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+      <!-- Checkbox Column -->
+      <ng-container matColumnDef="checkbox">
+        <th style="background-color: #f9fafb" mat-header-cell *matHeaderCellDef>
+          <mat-checkbox
+            (change)="$event ? toggleAllRows() : null"
+            [checked]="selection.hasValue() && isAllSelected()"
+            [indeterminate]="selection.hasValue() && !isAllSelected()"
+            [aria-label]="checkboxLabel()"
+          >
+          </mat-checkbox>
+        </th>
+        <td mat-cell *matCellDef="let row">
+          <mat-checkbox
+            (click)="showSelection($event)"
+            (change)="$event ? selection.toggle(row) : null"
+            [checked]="selection.isSelected(row)"
+            [aria-label]="checkboxLabel(row)"
+          >
+          </mat-checkbox>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <th
+          style="background-color: #f9fafb"
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+        >
+          Name
+        </th>
+        <td mat-cell class="table" *matCellDef="let row">
+          <div class="product-details d-flex align-items-center">
+            <div>
+              <img [src]="row.images[0].url" class="product-image" />
+            </div>
+            <div class="product-name">{{ row.name }}</div>
+          </div>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="store">
+        <th
+          style="background-color: #f9fafb"
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+        >
+          Store
+        </th>
+        <td mat-cell *matCellDef="let row">
+          <span class="store-name">
+            {{ row.storeProducts?.storeName }}
+          </span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="categories">
+        <th
+          style="background-color: #f9fafb"
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+        >
+          Categories
+        </th>
+        <td mat-cell *matCellDef="let row">
+          <span class="store-category">
+            {{ row.category }}
+          </span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="price">
+        <th
+          style="background-color: #f9fafb"
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+        >
+          Price
+        </th>
+        <td mat-cell *matCellDef="let row">
+          <span class="product-price"> $ {{ row.price }} </span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="bubble">
+        <th
+          style="background-color: #f9fafb"
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+        ></th>
+        <td mat-cell *matCellDef="let row">
+          <span (click)="moreVert(row)" class="btn">
+            <img src="/assets/icons/bubble.svg" alt="" />
+          </span>
+        </td>
+      </ng-container>
+      <tr class="mat-row" *matNoDataRow>
+        <td
+          class="mat-cell no-result"
+          colspan="4"
+          *ngIf="numOfFavoriteProducts > 0"
+        >
+          No data matching "{{ input.value }}"
+        </td>
+      </tr>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+    <mat-paginator
+      [pageSizeOptions]="[10, 25, 100]"
+      aria-label="Select page of users"
+    ></mat-paginator>
+
+    <div class="no-result-found" *ngIf="numOfFavoriteProducts === 0">
+      No Product Found
+    </div>
+  </div>
+</div>
+
+}

@@ -107,7 +107,7 @@
   width: 556px;
   justify-content: center;
   align-items: center;
-  margin-top: 10rem;
+
   span {
     display: flex;
     justify-content: center;
@@ -151,7 +151,6 @@
     font-style: normal;
     font-weight: 400;
     line-height: 24px;
-    margin-top: 32px;
   }
 }
 .discount-form {
@@ -159,6 +158,7 @@
   z-index: 1;
   right: 0;
   width: 30%;
+  top: 3rem;
   margin-top: 1rem;
   margin-right: 2rem;
   font-family: Inter;
@@ -279,6 +279,15 @@
 .loading-spinner-small {
   text-align: center;
   .spinner-image {
+    width: 5rem;
+  }
+}
+.loading-spinner-medium {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  .spinner-image {
     width: 10rem;
   }
 }
@@ -291,4 +300,14 @@
   font-weight: 500;
   line-height: 28px;
   letter-spacing: -0.3px;
+}
+.empty-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+}
+.posting-spin {
+  width: 1.4rem;
 }

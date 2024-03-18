@@ -1,172 +1,160 @@
-<script src="https://accounts.google.com/gsi/client" async></script>
-<div class="overflow-x-hidden" style="height: 100vh !important">
-  <div
-    class="overflow-x-hidden"
-    style="height: 100vh !important; position: relative"
-  >
-    <!-- <div class="container-login"> -->
+<div class="d-flex main-div">
+  <div class="bg-image left-div">
+    <div class="article-img">
+      <img src="/assets/images/frameOriginal.jpg" alt="" class="login-img" />
+    </div>
+    <p class="ariticle-paragraph">
+      Welcome to our Storefront App! Get ready to <br />showcase, sell, and
+      succeed. Customize, manage, <br />engage. We're here for you. Let's thrive
+      together!
+    </p>
+  </div>
 
-    <div class="row h-100">
-      <div class="col-6">
-        <div class="w-100 h-100 bg-image">
-          <p>
-            Welcome to our Storefront App! Get ready to <br />showcase, sell,
-            and succeed. Customize, manage, <br />engage. We're here for you.
-            Let's thrive together!
-          </p>
-        </div>
-        <div class="text"></div>
-      </div>
-
-      <div class="col-6 mobile-view">
-        <div class="frame-2">
-          <form
-            class="login100-form"
-            #loginUserForm="ngForm"
-            [formGroup]="loginForm"
-            (ngSubmit)="newLogin(loginUserForm)"
-          >
-            <div class="login-form">
-              <div class="title">Storefront</div>
-              <div class="welcome">
-                <div class="welcome-title">
-                  <h1>
-                    Hi, Welcome back to <br />
-                    Storefront
-                  </h1>
-                </div>
-                <div class="welcome-text">
-                  <p>
-                    Log in to your existing storefront dashboard by entering
-                    the<br />
-                    details associated with your account below.
-                  </p>
-                </div>
+  <div class="right-div">
+    <div class="col-6 mobile-view">
+      <div class="frame-2">
+        <form
+          class="login100-form"
+          #loginUserForm="ngForm"
+          [formGroup]="loginForm"
+          (ngSubmit)="newLogin(loginUserForm)"
+        >
+          <div class="login-form">
+            <div class="title">Storefront</div>
+            <div class="welcome">
+              <div class="welcome-title">
+                <h1>
+                  Hi, Welcome back to <br />
+                  Storefront
+                </h1>
               </div>
-              <div class="login-input">
-                <div class="email-wrapper">
-                  <div class="email">
-                    <label for="email">Email</label>
-                  </div>
-                  <div class="email-input">
-                    <img src="/assets/icons/envelope.svg" alt="" />
-                    <input
-                      type="text"
-                      id="email"
-                      placeholder="felix.hagan@amalitech.com"
-                      formControlName="email"
-                      name="email"
-                      [(ngModel)]="dataService.loginCredentials.email"
-                    />
-                  </div>
+              <div class="welcome-text">
+                <p>
+                  Log in to your existing storefront dashboard by entering
+                  the<br />
+                  details associated with your account below.
+                </p>
+              </div>
+            </div>
+            <div class="login-input">
+              <div class="email-wrapper">
+                <div class="email">
+                  <label for="email">Email</label>
                 </div>
-                <span
-                  class="help-block"
-                  *ngIf="
-                    !loginForm.get('email')?.valid &&
-                    loginForm.get('email')?.touched
-                  "
-                >
-                  *This field is required
-                </span>
-                <div class="password-wrapper">
-                  <div class="password">
-                    <label for="password">Password</label>
-                  </div>
-
-                  <div class="password-input">
-                    <div class="d-flex" style="gap: 5px">
-                      <img src="/assets/icons/password.svg" alt="" />
-                      <input
-                        [type]="!showPassword ? 'password' : 'text'"
-                        id="password"
-                        formControlName="password"
-                        name="password"
-                        placeholder="●●●●●●●●●●"
-                        [(ngModel)]="dataService.loginCredentials.password"
-                      />
-                    </div>
-                    <div>
-                      <button
-                        type="button"
-                        (click)="onShowPassword()"
-                        class="eye-icon"
-                      >
-                        <fa-icon class="icon" [icon]="eyeIcon"></fa-icon>
-                      </button>
-                    </div>
-                  </div>
+                <div class="email-input">
+                  <img src="/assets/icons/envelope.svg" alt="" />
+                  <input
+                    type="text"
+                    id="email"
+                    placeholder="felix.hagan@amalitech.com"
+                    formControlName="email"
+                    name="email"
+                    [(ngModel)]="dataService.loginCredentials.email"
+                  />
                 </div>
               </div>
               <span
                 class="help-block"
                 *ngIf="
-                  !loginForm.get('password')?.valid &&
-                  loginForm.get('password')?.touched
+                  !loginForm.get('email')?.valid &&
+                  loginForm.get('email')?.touched
                 "
               >
                 *This field is required
               </span>
+              <div class="password-wrapper">
+                <div class="password">
+                  <label for="password">Password</label>
+                </div>
 
-              <div class="forgotten-password">
-                <p>
-                  <a href="#" [routerLink]="['/forget-password']"
-                    >Forgotten Password?</a
-                  >
-                </p>
+                <div class="password-input">
+                  <div class="d-flex" style="gap: 5px">
+                    <img src="/assets/icons/password.svg" alt="" />
+                    <input
+                      [type]="!showPassword ? 'password' : 'text'"
+                      id="password"
+                      formControlName="password"
+                      name="password"
+                      placeholder="●●●●●●●●●●"
+                      [(ngModel)]="dataService.loginCredentials.password"
+                    />
+                  </div>
+                  <div>
+                    <button
+                      type="button"
+                      (click)="onShowPassword()"
+                      class="eye-icon"
+                    >
+                      <fa-icon class="icon" [icon]="eyeIcon"></fa-icon>
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
-
-            <div class="button">
-              <!-- <span class="help-block" *ngIf="error">{{ error }}</span> -->
-
-              <button
-                class="btn btn-primary"
-                type="submit"
-                [disabled]="!loginUserForm.valid"
-              >
-                <span class="continue-btn" *ngIf="!isLoading">Continue</span>
-                <span class="loading" *ngIf="isLoading"
-                  ><img
-                    src="assets\icons\loading-btn-spinner.svg"
-                    alt="Loading.."
-                  />
-                  Loading...</span
-                >
-              </button>
-            </div>
-          </form>
-          <div class="optional-input">
-            <div class="row option-text">
-              <div class="col-5 horizontal-line"><hr /></div>
-              <div class="col-2 text-center"><p>OR</p></div>
-              <div class="col-5 horizontal-line"><hr /></div>
-            </div>
-
-            <div class="optional-login text-center mb-2">Log In</div>
-
-            <span (click)="handleGoogleResponse()" class="social-icon">
-              <img src="/assets/icons/google-icon.svg" alt="" />
-              <p class="mb-0">Google</p>
+            <span
+              class="help-block"
+              *ngIf="
+                !loginForm.get('password')?.valid &&
+                loginForm.get('password')?.touched
+              "
+            >
+              *This field is required
             </span>
 
-            <div class="social-icon mt-2">
-              <img src="/assets/icons/facebook-icon.svg" alt="" />
-              <div>Facebook</div>
-            </div>
-            <div class="text-center mt-3">
+            <div class="forgotten-password">
               <p>
-                Don't have an account?
-                <a href="#" [routerLink]="['/Sign-up-merchant']">Sign up</a>
+                <a href="#" [routerLink]="['/forget-password']"
+                  >Forgotten Password?</a
+                >
               </p>
             </div>
+          </div>
+
+          <div class="button">
+            <!-- <span class="help-block" *ngIf="error">{{ error }}</span> -->
+
+            <button
+              class="btn btn-primary"
+              type="submit"
+              [disabled]="!loginUserForm.valid"
+            >
+              <span class="continue-btn" *ngIf="!isLoading">Continue</span>
+              <span class="loading" *ngIf="isLoading"
+                ><img
+                  src="assets\icons\loading-btn-spinner.svg"
+                  alt="Loading.."
+                />
+                Loading...</span
+              >
+            </button>
+          </div>
+        </form>
+        <div class="optional-input">
+          <div class="row option-text">
+            <div class="col-5 horizontal-line"><hr /></div>
+            <div class="col-2 text-center"><p>OR</p></div>
+            <div class="col-5 horizontal-line"><hr /></div>
+          </div>
+
+          <div class="optional-login text-center mb-2">Log In</div>
+
+          <span (click)="handleGoogleResponse()" class="social-icon">
+            <img src="/assets/icons/google-icon.svg" alt="" />
+            <p class="mb-0">Google</p>
+          </span>
+
+          <div class="social-icon mt-2">
+            <img src="/assets/icons/facebook-icon.svg" alt="" />
+            <div>Facebook</div>
+          </div>
+          <div class="text-center mt-3">
+            <p>
+              Don't have an account?
+              <a href="#" [routerLink]="['/Sign-up-merchant']">Sign up</a>
+            </p>
           </div>
         </div>
       </div>
     </div>
   </div>
-
-  <!-- <div *ngIf="dataService.isLoading" class="loading-spinner">
-  <mat-spinner></mat-spinner>
-</div> -->
 </div>

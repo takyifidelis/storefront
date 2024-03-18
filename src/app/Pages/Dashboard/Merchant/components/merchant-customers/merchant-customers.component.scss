@@ -234,3 +234,26 @@ th {
   line-height: 24px;
   letter-spacing: -0.2px;
 }
+.empty-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+}
+.loading-spinner-medium {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  .spinner-image {
+    width: 10rem;
+  }
+}
+.loading-spinner-small {
+  text-align: center;
+  .spinner-image {
+    width: 5rem;
+  }
+}

@@ -282,15 +282,19 @@ export class CkeckoutPageComponent implements OnInit {
                   )
                   .subscribe((orderResponseData: { [key: string]: any }) => {
                     resolve(orderResponseData['data'].orderId);
+                    console.log(orderResponseData);
                   }),
                   (error: HttpErrorResponse) => {
                     console.error('Error creating order:', error);
+                    this.toastr.error(error.error.message, 'Failed');
+
                     reject(error);
                   };
               }
             }),
             (error: HttpErrorResponse) => {
               console.error('Error creating order:', error);
+              this.toastr.error(error.error.message, 'Failed');
               reject(error);
             };
         });
@@ -310,6 +314,7 @@ export class CkeckoutPageComponent implements OnInit {
                 );
               }
               // dispatch(clearCart());
+              this.toastr.info(response['message'], 'Success');
               localStorage.removeItem('cart');
               this.router.navigate(['/customer/orders']);
             });

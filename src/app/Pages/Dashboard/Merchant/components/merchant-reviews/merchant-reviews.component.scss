@@ -307,10 +307,20 @@ section.review-page {
   text-wrap: nowrap;
   overflow: hidden;
 }
+.loading-spinner-medium {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  .spinner-image {
+    width: 10rem;
+  }
+}
 .loading-spinner-small {
   text-align: center;
   .spinner-image {
-    width: 10rem;
+    width: 5rem;
   }
 }
 .no-result-found {
@@ -322,4 +332,11 @@ section.review-page {
   font-weight: 500;
   line-height: 28px;
   letter-spacing: -0.3px;
+}
+.empty-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
