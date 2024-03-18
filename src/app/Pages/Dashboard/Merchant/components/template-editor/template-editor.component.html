@@ -289,61 +289,8 @@
             </span>
           </div>
         </div>
-
-        <!-- <input [(ngModel)]="dataservice.template.primaryBackground" type="color" />
-                <input [(ngModel)]="dataservice.template.primaryColor" type="color" />
-                <input [(ngModel)]="dataservice.template.navbarBackgroundColor" type="color" />
-                <input [(ngModel)]="dataservice.template.navbarColor" type="color" />
-                <select [(ngModel)]="dataservice.template.fontFamily" data-element="fontSize" name="cars" id="cars">
-                    @for (font of dataservice.template.fontArray; track font) {
-                        <option [value]="font">{{font}}</option>
-                      }
-                </select>
-                <select [(ngModel)]="dataservice.template.headings.headFontSize" data-element="fontSize" (click)="changeFontSize()" name="cars" id="cars">
-                    @for(size of dataservice.template.headerFontSize; track size){
-                        <option [value]="size">{{size}}</option>
-                    }
-                </select>
-                <select [(ngModel)]="dataservice.template.fontWeight" data-element="fontSize" (click)="changeFontSize()" name="cars" id="cars">
-                    @for(weight of dataservice.template.fontWeightList; track weight){
-                        <option [value]="weight">{{weight}}</option>
-                    }
-                </select>
-                <select [(ngModel)]="dataservice.template.lineHeight" data-element="fontSize" (click)="changeFontSize()" name="cars" id="cars">
-                    @for(lineH of dataservice.template.lineHeightList; track lineH){
-                        <option [value]="lineH">{{lineH}}</option>
-                    }
-                </select>
-                <button (click)="dataservice.template.textAlign = 'left'" mat-icon-button>
-                    <mat-icon>format_align_left</mat-icon>
-                </button>
-                <button (click)="dataservice.template.textAlign = 'center'" mat-icon-button>
-                    <mat-icon>format_align_center</mat-icon>
-                </button>
-                <button (click)="dataservice.template.textAlign = 'right'" mat-icon-button>
-                    <mat-icon>format_align_right</mat-icon>
-                </button>
-                <button (click)="dataservice.template.textAlign = 'justify'" mat-icon-button>
-                    <mat-icon>format_align_justify</mat-icon>
-                </button>
-                <button mat-icon-button (click)="dataservice.isEditable = !dataservice.isEditable">
-                    <mat-icon>link</mat-icon>
-                </button> -->
       </div>
     </div>
-    <!-- <div class="shapes collapse" id="shapes">
-            <section style="display: flex;">
-                <button mat-icon-button>
-                    <mat-icon>circle</mat-icon>
-                </button>
-                <button mat-icon-button>
-                    <mat-icon style="align-items: center; display: flex;"><img src="/assets/images/triangle.svg" alt="" srcset=""></mat-icon>
-                </button>
-                <button mat-icon-button style="padding-bottom: 15px;">
-                    <span style="align-items: center;justify-content: center; display: flex; font-weight:900; text-align: center;">|</span>
-                </button>
-            </section>
-        </div> -->
     <div class="pages collapse" id="pagesForm">
       <button
         data-bs-toggle="modal"
@@ -563,12 +510,6 @@
             <mat-icon>add</mat-icon>
           </button>
         </li>
-        <!-- <li matTooltip="Add Shapes" data-bs-toggle="collapse" data-bs-target="#shapes">
-                    <button mat-fab style="background-color: white; color: black;">
-                        <mat-icon style="background-color: black;" fontIcon="crop_square"></mat-icon>
-                    </button>
-                </li> -->
-
         <li>
           <button
             matTooltip="Upload file"
@@ -596,16 +537,6 @@
             <img src="/assets/icons/add_files_btn.svg" alt="" srcset="" />
           </button>
         </li>
-        <li data-bs-toggle="collapse" data-bs-target="#layers">
-          <button
-            matTooltip="Add Layers"
-            mat-fab
-            style="background-color: white; color: #ff8a00"
-            aria-label="Example icon button with a bookmark icon"
-          >
-            <mat-icon style="font-size: 28px">layers</mat-icon>
-          </button>
-        </li>
       </ul>
     </mat-drawer>
     <mat-drawer-content class="conatainer">
@@ -624,7 +555,6 @@
           src="/ecommerce/home"
         ></iframe>
       </div>
-      <!-- <div  style="display: flex; width: 100%;"></div> -->
       <router-outlet *ngIf="!dataservice.isMobileBool" />
     </mat-drawer-content>
   </mat-drawer-container>
