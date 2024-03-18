@@ -198,7 +198,6 @@ export class ReviewComponent implements OnInit {
     this.apiService
       .getCustomerStoreProducts(localStorage.getItem('storeId')!)
       .subscribe((res: any) => {
-        console.log(res.data);
         this.myVariation = res.data.variations;
         this.numberOfReviews = this.productItem.reviews.length;
         res.data.filter((product: any) => {

@@ -17,7 +17,10 @@ import {
   faCcVisa,
 } from '@fortawesome/free-brands-svg-icons';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
-import { APIService } from '../../../../../Services/api.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+// or
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserModule } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-new-payment-option',
@@ -25,7 +28,6 @@ import { APIService } from '../../../../../Services/api.service';
   imports: [
     MatDialogModule,
     FontAwesomeModule,
-    CommonModule,
     MatTabsModule,
     MatRadioModule,
     ReactiveFormsModule,
@@ -41,7 +43,7 @@ export class NewPaymentOptionComponent {
   active: boolean | undefined;
   addPaypal: FormGroup;
 
-  constructor(private apiService: APIService) {
+  constructor() {
     this.addPaypal = new FormGroup({
       method: new FormControl('Paypal'),
       walletId: new FormControl('', Validators.required),
@@ -58,21 +60,6 @@ export class NewPaymentOptionComponent {
     const walletId = form.value.walletId;
     const name = form.value.name;
     const secret = form.value.secret;
-    this.apiService
-      .addWalletCustomer(
-        method,
-        walletId,
-        name,
-        secret,
-        localStorage.getItem('customerId')!
-      )
-      .subscribe(
-        (resData) => {
-          console.log(resData);
-        },
-        (errorMessage) => {
-          console.log(errorMessage);
-        }
-      );
+    
   }
 }
