@@ -113,10 +113,8 @@ export class MerchantDashboardComponent implements OnInit {
               localStorage.setItem('storeId', element['id']);
               localStorage.setItem('storeName', element['storeName']);
               localStorage.setItem('template', element['template'].options);
-              localStorage.setItem(
-                'tempTemplate',
-                element['template'].temp.options
-              );
+              localStorage.setItem('tempTemplate', element['template'].temp.options);
+              // this.dataService.selectedStore = 
             }
           });
         }
@@ -223,8 +221,10 @@ export class MerchantDashboardComponent implements OnInit {
       .subscribe((resData: MerchantInfo) => {
         this.user = resData.data;
         this.firstInitial = resData.data.businessName.charAt(0);
+        this.nameInitial=resData.data.businessName.match(/\b\w/g)?.join('')|| 'E'
+        this.dataService.merchantUserNameInitials = this.nameInitial;
         this.userName = resData.data.businessName;
-
+        this.dataService.merchantUserName = this.userName;
         console.log(this.userName);
       });
   }
@@ -233,9 +233,12 @@ export class MerchantDashboardComponent implements OnInit {
     localStorage.setItem('storeId', val.id);
     localStorage.setItem('template', val.template.options);
     localStorage.setItem('tempTemplate', val.template.temp.options);
+    let currentRoute = this.router.url
+    this.router.navigateByUrl('/merchant', {skipLocationChange:true}).then(() =>{
+      this.router.navigate([currentRoute]);
+    })
   }
   createNewStore() {
-    // localStorage.setItem('temp',this.dataService.selectedStore)
     this.router.navigate(['/merchant-onboarding-1']);
   }
 }
