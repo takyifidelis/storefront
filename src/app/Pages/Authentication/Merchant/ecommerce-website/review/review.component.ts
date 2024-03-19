@@ -188,7 +188,7 @@ export class ReviewComponent implements OnInit {
     let product:oneProduct = JSON.parse(productJson!);
     this.productItem = product;
     this.dataService.isLoading = true;
-    this.selectedImage = this.productItem.images[0].url;
+    this.selectedImage = this.productItem?.images[0].url;
 
     this.initialPrice = this.productItem.price;
     this.apiService
