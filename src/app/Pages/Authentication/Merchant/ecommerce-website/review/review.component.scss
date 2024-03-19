@@ -26,6 +26,16 @@ section.preview-section {
 .highlighted {
   border: 2px solid blue;
 }
+::ng-deep .mat-drawer-container {
+  position: relative;
+  z-index: 1;
+  /* color: var(--mat-sidenav-content-text-color); */
+  background-color: var(--mat-sidenav-content-background-color);
+  box-sizing: border-box;
+  -webkit-overflow-scrolling: touch;
+  display: block;
+  overflow: hidden;
+}
 .mat-drawer-content {
   overflow: hidden;
   height: inherit;
@@ -55,19 +65,19 @@ section.preview-section {
   gap: 33px;
 
   .txt {
-    color: #8897ae;
-    font-family: Roboto;
+    // color: #8897ae;
+    // font-family: Roboto;
     font-size: 14px;
-    font-style: normal;
+    // font-style: normal;
     font-weight: 400;
     line-height: 68px;
   }
 
   .item-name {
-    color: #1c222b;
-    font-family: Inter;
+    // color: #1c222b;
+    // font-family: Inter;
     font-size: 48px;
-    font-style: normal;
+    // font-style: normal;
     font-weight: 500;
     line-height: 60px;
     letter-spacing: -1.75px;
@@ -78,10 +88,10 @@ section.preview-section {
     gap: 24px;
 
     .txt-2 {
-      color: #1c222b;
-      font-family: Inter;
+      // color: #1c222b;
+      // font-family: Inter;
       font-size: 14px;
-      font-style: normal;
+      // font-style: normal;
       font-weight: 500;
       line-height: 24px; /* 171.429% */
       letter-spacing: -0.2px;
@@ -92,10 +102,10 @@ section.preview-section {
   .items-available {
     margin-left: 200px;
     .txt-2 {
-      color: #1c222b;
-      font-family: Inter;
+      // color: #1c222b;
+      // font-family: Inter;
       font-size: 14px;
-      font-style: normal;
+      // font-style: normal;
       font-weight: 500;
       line-height: 24px; /* 171.429% */
       letter-spacing: -0.2px;
@@ -105,10 +115,10 @@ section.preview-section {
     gap: 1rem;
   }
   .select-color {
-    color: #1c222b;
-    font-family: Inter;
+    // color: #1c222b;
+    // font-family: Inter;
     font-size: 14px;
-    font-style: normal;
+    // font-style: normal;
     font-weight: 700;
     line-height: 24px;
     letter-spacing: -0.2px;
@@ -133,10 +143,10 @@ section.preview-section {
   }
 
   .select-size {
-    color: #1c222b;
-    font-family: Inter;
+    // color: #1c222b;
+    // font-family: Inter;
     font-size: 14px;
-    font-style: normal;
+    // font-style: normal;
     font-weight: 700;
     line-height: 24px;
     letter-spacing: -0.2px;
@@ -149,10 +159,10 @@ section.preview-section {
   .size-guide {
     margin-left: 190px;
     .txt-2 {
-      color: #1c222b;
-      font-family: Inter;
+      // color: #1c222b;
+      // font-family: Inter;
       font-size: 14px;
-      font-style: normal;
+      // font-style: normal;
       font-weight: 500;
       line-height: 24px; /* 171.429% */
       letter-spacing: -0.2px;
@@ -225,19 +235,19 @@ section.preview-section {
     margin-right: 1.2rem;
   }
   .quantity-price-name {
-    color: #1c222b;
-    font-family: Inter;
+    // color: #1c222b;
+    // font-family: Inter;
     font-size: 14px;
-    font-style: normal;
+    // font-style: normal;
     font-weight: 700;
     line-height: 24px;
     letter-spacing: -0.2px;
   }
   .price-amount {
-    color: #1c222b;
-    font-family: Inter;
+    // color: #1c222b;
+    // font-family: Inter;
     font-size: 26px;
-    font-style: normal;
+    // font-style: normal;
     font-weight: 500;
     line-height: 40px;
     letter-spacing: -0.5px;
@@ -247,9 +257,9 @@ section.preview-section {
     .add-to-buy {
       background: #1c222b;
       color: #fff;
-      font-family: Inter;
+      // font-family: Inter;
       font-size: 14px;
-      font-style: normal;
+      // font-style: normal;
       font-weight: 500;
       line-height: 24px;
       letter-spacing: -0.2px;
@@ -259,11 +269,11 @@ section.preview-section {
     }
     .save {
       background: transparent;
-      color: #1c222b;
+      // color: #1c222b;
       text-align: center;
-      font-family: Inter;
+      // font-family: Inter;
       font-size: 14px;
-      font-style: normal;
+      // font-style: normal;
       font-weight: 500;
       line-height: 24px;
       letter-spacing: -0.2px;
@@ -286,27 +296,27 @@ section.decription-review {
     margin-top: 1.5rem;
   }
   h3.product-header {
-    color: #1c222b;
-    font-family: Inter;
+    // color: #1c222b;
+    // font-family: Inter;
     font-size: 24px;
-    font-style: normal;
+    // font-style: normal;
     font-weight: 700;
     line-height: 36px;
     letter-spacing: -0.4px;
   }
   p.product-paragraph,
   li.paragraph {
-    color: #1c222b;
-    font-family: Inter;
+    // color: #1c222b;
+    // font-family: Inter;
     font-size: 16px;
-    font-style: normal;
+    // font-style: normal;
     font-weight: 400;
     line-height: 28px;
     letter-spacing: -0.3px;
     margin-left: 0rem;
   }
   ul {
-    list-style-image: url("../../../../../../assets/icons/product-check.svg");
+    list-style-image: url("/assets/icons/product-check.svg");
 
     li {
       padding-left: 1.5rem;
@@ -315,10 +325,10 @@ section.decription-review {
   }
   .reviews-head {
     h4.review-header {
-      color: #1c222b;
-      font-family: Inter;
+      // color: #1c222b;
+      // font-family: Inter;
       font-size: 24px;
-      font-style: normal;
+      // font-style: normal;
       font-weight: 600;
       line-height: 36px;
       letter-spacing: -0.5px;
@@ -327,19 +337,19 @@ section.decription-review {
       margin-left: 1rem;
     }
     div.ratings span.ratings-5 {
-      color: #1b4b66;
-      font-family: inter;
+      // color: #1b4b66;
+      // font-family: inter;
       font-size: 14px;
-      font-style: normal;
+      // font-style: normal;
       font-weight: 500;
       line-height: 18px;
       margin-left: 1rem;
     }
     p.leave-a-review {
       color: #5ece7b;
-      font-family: Inter;
+      // font-family: Inter;
       font-size: 14px;
-      font-style: normal;
+      // font-style: normal;
       font-weight: 400;
       line-height: 24px;
       letter-spacing: -0.2px;
@@ -357,10 +367,10 @@ section.decription-review {
       border-radius: 5px;
       margin-bottom: 2rem;
       .how-will-you {
-        color: #4b5563;
-        font-family: Inter;
+        // color: #4b5563;
+        // font-family: Inter;
         font-size: 14px;
-        font-style: normal;
+        // font-style: normal;
         font-weight: 500;
         line-height: 135%;
         margin-bottom: 0;
@@ -371,9 +381,9 @@ section.decription-review {
     }
     button.btn {
       padding: 16px 24px;
-      background-color: #000;
+      // background-color: #000;
       color: #fff;
-      font-family: Inter;
+      // font-family: Inter;
       font-size: 14px;
       font-style: normal;
       font-weight: 500;
@@ -388,10 +398,10 @@ section.decription-review {
       margin-right: 1rem;
       margin-top: 1rem;
       .fedback-profile {
-        color: #455468;
-        font-family: Inter;
-        font-size: 16px;
-        font-style: normal;
+        // color: #455468;
+        // font-family: Inter;
+        // font-size: 16px;
+        // font-style: normal;
         font-weight: 500;
         line-height: 28px;
         letter-spacing: -0.3px;
@@ -407,10 +417,10 @@ section.decription-review {
       }
     }
     .feedback-name {
-      color: #455468;
-      font-family: Inter;
-      font-size: 16px;
-      font-style: normal;
+      // color: #455468;
+      // font-family: Inter;
+      // font-size: 16px;
+      // font-style: normal;
       font-weight: 500;
       line-height: 28px;
       letter-spacing: -0.3px;
@@ -420,19 +430,19 @@ section.decription-review {
       margin-bottom: 0.4rem;
     }
     .feedback-date {
-      color: #455468;
-      font-family: Inter;
+      // color: #455468;
+      // font-family: Inter;
       font-size: 12px;
-      font-style: normal;
+      // font-style: normal;
       font-weight: 400;
       line-height: 20px;
       letter-spacing: -0.2px;
     }
     .feeback-message {
-      color: #1d1f22;
-      font-family: Inter;
-      font-size: 16px;
-      font-style: normal;
+      // color: #1d1f22;
+      // font-family: Inter;
+      // font-size: 16px;
+      // font-style: normal;
       font-weight: 400;
       line-height: 28px;
       letter-spacing: -0.3px;
@@ -480,10 +490,10 @@ section.similar-products {
       padding: 0.5rem;
     }
     .card-title {
-      color: #1c222b;
-      font-family: Inter;
-      font-size: 16px;
-      font-style: normal;
+      // color: #1c222b;
+      // font-family: Inter;
+      // font-size: 16px;
+      // font-style: normal;
       font-weight: 700;
       line-height: 28px;
       letter-spacing: -0.3px;
@@ -491,10 +501,10 @@ section.similar-products {
       text-transform: capitalize;
     }
     .blossom-bag-paragraph {
-      color: #1c222b;
-      font-family: Inter;
+      // color: #1c222b;
+      // font-family: Inter;
       font-size: 14px;
-      font-style: normal;
+      // font-style: normal;
       font-weight: 400;
       line-height: 24px;
       letter-spacing: -0.2px;
@@ -502,17 +512,17 @@ section.similar-products {
     }
 
     .product-price {
-      color: #1c222b;
-      font-family: Inter;
-      font-size: 16px;
-      font-style: normal;
+      // color: #1c222b;
+      // font-family: Inter;
+      // font-size: 16px;
+      // font-style: normal;
       font-weight: 700;
       line-height: 28px;
       letter-spacing: -0.3px;
       margin-bottom: 1rem;
       .discount-price {
-        color: #1c222b;
-        font-size: 16px;
+        // color: #1c222b;
+        // font-size: 16px;
         font-weight: 700;
         line-height: 28px;
         letter-spacing: -0.3px;
@@ -535,10 +545,10 @@ section.similar-products {
       margin-bottom: 1rem;
 
       .ratings-43 {
-        color: #1c222b;
-        font-family: Inter;
+        // color: #1c222b;
+        // font-family: Inter;
         font-size: 14px;
-        font-style: normal;
+        // font-style: normal;
         font-weight: 500;
         line-height: 24px;
         letter-spacing: -0.2px;

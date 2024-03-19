@@ -1,6 +1,13 @@
-<div *ngIf="!dataService.isLoading" class="container-fluid">
+<div
+[style.color]="dataService.template.primaryColor"
+[style.fontFamily]="dataService.template.fontFamily"
+[style.fontSize]="dataService.template.fontSize"
+*ngIf="!dataService.isLoading" class="container-fluid">
   <section class="preview-section">
-    <mat-drawer-container class="example-container">
+    <mat-drawer-container class="example-container" 
+    [style.color]="dataService.template.primaryColor"
+    [style.fontFamily]="dataService.template.fontFamily"
+    [style.fontSize]="dataService.template.fontSize">
       <mat-drawer mode="side" opened="true">
         @for(image of productItem.images; track image){
         <div class="">
@@ -121,10 +128,10 @@
   <section class="decription-review">
     <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
       <mat-tab label="DESCRIPTION">
-        <div class="product-des-from-merchant">
-          {{ productItem.description }}
+        <div *ngIf="productItem.description.length > 5" [innerHTML]="productItem.description" class="product-des-from-merchant">
+          
         </div>
-        <div class="product-benefit details">
+        <div *ngIf="productItem.description.length < 5" class="product-benefit details">
           <h3 class="product-header">Product Description</h3>
           <p class="product-paragraph w-80">
             When it's colder than the far side of the moon and spitting rain
@@ -135,7 +142,7 @@
             star-studded toe design gives your look the edge
           </p>
         </div>
-        <div class="product-benefit details">
+        <div *ngIf="productItem.description.length < 5" class="product-benefit details">
           <h3 class="product-header">Benefits</h3>
           <div class="product-paragraph">
             <ul>
@@ -172,7 +179,7 @@
             </ul>
           </div>
         </div>
-        <div class="product-details details">
+        <div *ngIf="productItem.description.length < 5" class="product-details details">
           <h3 class="product-header">Product Details</h3>
           <div class="product-paragraph">
             <ul>
@@ -186,7 +193,7 @@
             </ul>
           </div>
         </div>
-        <div class="product-more-details details">
+        <div *ngIf="productItem.description.length < 5" class="product-more-details details">
           <h3 class="product-header">More Details</h3>
           <div class="product-paragraph">
             <ul>
