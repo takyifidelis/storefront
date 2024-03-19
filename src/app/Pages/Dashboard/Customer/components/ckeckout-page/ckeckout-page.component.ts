@@ -365,7 +365,7 @@ export class CkeckoutPageComponent implements OnInit {
   moreVert() {
     this.dialog.open(CheckoutModalComponent, {
       width: '500px',
-    });
+    }).afterClosed().subscribe(()=>{this.ngOnInit()});
   }
   onDeleteProduct(productId: string, id: number) {
     let deleteIds: string[] = [];

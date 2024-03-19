@@ -20,10 +20,7 @@
                 <mat-form-field>
                   <mat-label>Choose one</mat-label>
 
-                  <mat-select
-                    [formControl]="selectedAddressControl"
-                    *ngIf="shippingSelect.length > 0"
-                  >
+                  <mat-select [formControl]="selectedAddressControl">
                     <mat-select-trigger>
                       {{ selectedAddressControl.value?.streetAddress }}
                     </mat-select-trigger>
