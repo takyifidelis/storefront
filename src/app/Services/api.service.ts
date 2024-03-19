@@ -44,7 +44,7 @@ export class APIService {
   // Verify account
   verifyAccount(code: string) {
     return this.http.post<Response>(
-      'https://storefront-backend-jan-dev-api.vercel.app/api/account/verify',
+      `${environment.baseApiUrl}/account/verify`,
       {
         code,
       },
@@ -57,7 +57,7 @@ export class APIService {
   // Password Verification
   verifyPassword(code: string) {
     return this.http.post<Response>(
-      'https://storefront-backend-jan-dev-api.vercel.app/api/account/password/resetCode/verify',
+      `${environment.baseApiUrl}/account/password/resetCode/verify`,
       {
         code,
       },
@@ -68,7 +68,7 @@ export class APIService {
   }
   newPasswordReset(password: string, confirmPassword: string) {
     return this.http.put<Response>(
-      'https://storefront-backend-jan-dev-api.vercel.app/api/account/password/reset',
+      `${environment.baseApiUrl}/account/password/reset`,
       {
         password,
         confirmPassword,
@@ -98,10 +98,9 @@ export class APIService {
     );
   }
   logout() {
-    return this.http.get<Response>(
-      'https://storefront-backend-jan-dev-api.vercel.app/api/account/logout',
-      { withCredentials: true }
-    );
+    return this.http.get<Response>(`${environment.baseApiUrl}/account/logout`, {
+      withCredentials: true,
+    });
   }
 
   createStore(
@@ -134,7 +133,7 @@ export class APIService {
   }
   getStore(storeId: string): Observable<Response> {
     return this.http.get<Response>(
-      `${environment.baseApiUrl}/api/store/get-store/${storeId}`,
+      `${environment.baseApiUrl}/store/get-store/${storeId}`,
       {
         withCredentials: true,
       }
@@ -441,7 +440,7 @@ export class APIService {
   // Password Reset
   passwordReset(email: string) {
     return this.http.post<Response>(
-      'https://storefront-backend-jan-dev-api.vercel.app/api/account/request/password/reset',
+      `${environment.baseApiUrl}/account/request/password/reset`,
       {
         email,
       },
@@ -453,10 +452,9 @@ export class APIService {
 
   //Resend Verification Code
   resendCode() {
-    return this.http.get(
-      'https://storefront-backend-jan-dev-api.vercel.app/api/account/resend/code',
-      { withCredentials: true }
-    );
+    return this.http.get(`${environment.baseApiUrl}/account/resend/code`, {
+      withCredentials: true,
+    });
   }
 
   reviewProduct(review: { [key: string]: any }, order_id: string) {
@@ -480,7 +478,7 @@ export class APIService {
 
   replyReview(comment: string, review: string, storeId: string) {
     return this.http.post<Response>(
-      `https://storefront-backend-jan-dev-api.vercel.app/api/store/reply-customer/${storeId}`,
+      `${environment.baseApiUrl}/store/reply-customer/${storeId}`,
       {
         comment,
         review,
@@ -493,7 +491,7 @@ export class APIService {
 
   getReviews(storeId: string): Observable<Response> {
     return this.http.get<Response>(
-      `https://storefront-backend-jan-dev-api.vercel.app/api/store/get-reviews/${storeId}`,
+      `${environment.baseApiUrl}/store/get-reviews/${storeId}`,
 
       { withCredentials: true }
     );
