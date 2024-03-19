@@ -118,7 +118,7 @@
         ></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
       </table>
-      <div class="loading-spin">
+      <div class="loading-spin" *ngIf="isLoading">
         <img src="assets\icons\loading-btn-spinner.svg" alt="Loading.." />
       </div>
       <div class="no-products" *ngIf="numOfCustomers == 0">
@@ -199,7 +199,7 @@
         ></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
       </table>
-      <div class="loading-spin">
+      <div class="loading-spin" *ngIf="isLoading">
         <img src="assets\icons\loading-btn-spinner.svg" alt="Loading.." />
       </div>
       <div class="no-products" *ngIf="numOfCustomers == 0">
