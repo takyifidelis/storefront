@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { environment } from '../../../../../../environments/environment.development';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { APIService } from '../../../../../Services/api.service';
 import { CommonModule, DatePipe } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
@@ -33,6 +33,7 @@ import { Router } from '@angular/router';
     MatPaginatorModule,
     MatDialogModule,
     MatTabsModule,
+    HttpClientModule,
     CommonModule],
   templateUrl: './wallet.component.html',
   styleUrl: './wallet.component.scss'
@@ -92,7 +93,7 @@ this.router.navigate(['/merchant/home']);
     console.log(this.walletForm);
     this.http
       .post<Response>(
-        `${environment.baseApiUrl}/store/add-wallet/f9586428-62e3-4455-bb1d-61262a407d1a`,
+        `${environment.baseApiUrl}/store/add-wallet/${localStorage.getItem('storeId')}`,
         this.walletForm.value,
         {
           withCredentials: true,
