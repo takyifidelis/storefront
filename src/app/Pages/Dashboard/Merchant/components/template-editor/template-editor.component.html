@@ -3,10 +3,10 @@
     <header class="container-fluid p-0">
       <nav class="navbar navbar-white bg-white d-flex">
         <div class="business-name-cont">
-          <span class="bn-logo"> BN </span>
+          <span class="bn-logo"> {{dataservice.merchantUserNameInitials || "BN"}} </span>
           <!-- <span class="bn-name">Business Name</span> -->
           <select class="bn-name" name="" id="">
-            <option value="">Business Name</option>
+            <option value="">{{dataservice.merchantUserName || "Business Name"}}</option>
           </select>
         </div>
         <span class="hire-professional">Hire a professional</span>
