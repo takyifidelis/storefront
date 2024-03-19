@@ -24,7 +24,7 @@ constructor(public http: HttpClient, private apiService: APIService){}
       'walletId': new FormControl(null, Validators.required),
     })
 
-    this.apiService.getWallet('f9586428-62e3-4455-bb1d-61262a407d1a').subscribe((res: any)=> {
+    this.apiService.getWallet(localStorage.getItem('storeId')!).subscribe((res: any)=> {
       console.log(res)
       this.walletInfo = res.data;
     })
@@ -34,7 +34,7 @@ constructor(public http: HttpClient, private apiService: APIService){}
     console.log(this.walletForm);
     this.http
       .post<Response>(
-        `${environment.baseApiUrl}/store/add-wallet/f9586428-62e3-4455-bb1d-61262a407d1a`,
+        `${environment.baseApiUrl}/store/add-wallet/${localStorage.getItem('storeId')}`,
         this.walletForm.value,
         {
           withCredentials: true,
