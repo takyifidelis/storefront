@@ -12,6 +12,8 @@ export class DataService {
   storeProducts:any = []
 like: any =  [];
   cart: any = [];
+  merchantUserName = ''
+  merchantUserNameInitials = ''
   updateProduct: unknown;
   productCategories: any = [];
   productSearchString: string = '';
