@@ -35,7 +35,7 @@
     class="container justify-content-center d-flex justify-content-center mt-5"
   >
     <div class="store-setup-container">
-      <h1>Welcome back, Emmanuella</h1>
+      <h1>Welcome back, {{ dataService.merchantUserName||"Emmanuella"}}</h1>
       <div class="setup-steps-counter">
         <h2>Let's set up your store</h2>
         <span>1 out of 5 completed</span>
