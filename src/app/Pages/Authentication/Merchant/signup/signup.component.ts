@@ -20,6 +20,7 @@ import {
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../Auth/auth.service';
+import { APIService } from '../../../../Services/api.service';
 
 @Component({
   selector: 'app-signup-merchant',
@@ -44,7 +45,7 @@ export class SignupMerchantComponent {
   error: string | any = null;
 
   constructor(
-    private authService: AuthService,
+    private authService: APIService,
     private router: Router,
     private toastr: ToastrService
   ) {

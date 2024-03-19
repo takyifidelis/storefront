@@ -16,6 +16,7 @@ import {
 import { DataService } from './data.service';
 
 import { Response } from '../interfaces/all-interfaces';
+import { SignupResponseData } from '../Pages/Authentication/Auth/api.model';
 
 @Injectable({
   providedIn: 'root',
@@ -23,6 +24,27 @@ import { Response } from '../interfaces/all-interfaces';
 export class APIService {
   constructor(private http: HttpClient) {}
 
+  signupMerchant(
+    businessName: string,
+    email: string,
+    type: string,
+    password: string,
+    confirmPassword: string
+  ) {
+    return this.http.post<SignupResponseData>(
+      `${environment.baseApiUrl}/account/register/local`,
+      {
+        businessName,
+        email,
+        type,
+        password,
+        confirmPassword,
+      },
+      {
+        withCredentials: true,
+      }
+    );
+  }
   merchantSignup(user: UserCredentials): Observable<Response> {
     return this.http.post<Response>(
       `${environment.baseApiUrl}/account/register/local`,

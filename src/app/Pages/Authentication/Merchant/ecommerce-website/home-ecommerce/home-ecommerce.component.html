@@ -231,7 +231,17 @@
                   <span class="number-rating">{{ product.rating }}</span> Ratings
                 </span>
               </div>
-              <div class="product-price">${{ product.price }}</div>
+              <div class="product-price">
+                <span class="discount-price">
+                  ${{ product.price * ((100 - product.discount) / 100) }}
+                </span>
+                <span class="actual-price" *ngIf="product.discount > 0"
+                  >${{ product.price }}</span
+                >
+                <span class="discount-percent" *ngIf="product.discount > 0">
+                  {{ product.discount }}<span class="per-off">% OFF</span></span
+                >
+              </div>
               <div class="product-color-div d-flex">
                 <div class="blue product-color"></div>
                 <div class="yellow product-color"></div>

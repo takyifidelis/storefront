@@ -22,8 +22,7 @@ export class OnboardingStepOneComponent {
     
   }
   setBusinessType(type:any){
-    console.log(type.value)
-    localStorage.setItem('storeType', this.dataService.merchantBusinessType1);
+    localStorage.setItem('storeType', type.value);
   }
   ngOnDestroy(){
     this.dataService.isLoading = false;

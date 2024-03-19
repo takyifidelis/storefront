@@ -18,6 +18,7 @@ import {MatSliderModule} from '@angular/material/slider';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import introJs from 'intro.js';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -40,7 +41,7 @@ export class TemplateEditorComponent  implements AfterViewInit,OnInit{
   isColorVisible: boolean = false;
   isShapesVisible: boolean = false;
   isPagesVisible:boolean = false;
-  constructor(private elementRef: ElementRef<HTMLElement>, public dataservice: DataService, private apiService: APIService){ }
+  constructor(private toastr: ToastrService, private elementRef: ElementRef<HTMLElement>, public dataservice: DataService, private apiService: APIService){ }
   @HostListener ('window:keydown.control.b', ['$event']) makeEditableUi(){
     this.dataservice.isEditable  = !this.dataservice.isEditable
     this.dataservice.isEditingTemp  = !this.dataservice.isEditingTemp
@@ -99,12 +100,16 @@ export class TemplateEditorComponent  implements AfterViewInit,OnInit{
     this.apiService.saveTemplateDraft(localStorage.getItem('storeId')!,{options:JSON.stringify(template)}).subscribe((data:any)=>{
       console.log(data);
       if(data.data){
-        this.apiService.getMerchantStores(localStorage.getItem('businessId')!).subscribe((storeData:any) => {
+        this.apiService.getMerchantStores(localStorage.getItem('businessId')!).subscribe(
+          (storeData:any) => {
+          this.toastr.info('Template saved successfully', 'Success');
           localStorage.setItem('storeId',storeData.data[0].id)
           localStorage.setItem('tempTemplate',storeData.data[0].template.temp.options)
           localStorage.setItem('template',storeData.data[0].template.options)
           this.dataservice.template = JSON.parse(localStorage.getItem('tempTemplate')!)
           this.dataservice.isLoading =false
+        },(error)=>{
+          this.toastr.error('Error saving the template', 'Error');
         })
       }
     })
@@ -115,8 +120,11 @@ export class TemplateEditorComponent  implements AfterViewInit,OnInit{
     this.apiService.publishTemplate(localStorage.getItem('storeId')!,{options:JSON.stringify(template)}).subscribe((data:any)=>{
       this.apiService.getMerchantStores(localStorage.getItem('businessId')!).subscribe((templatesData:any) => {
         console.log(templatesData.data)
+        this.toastr.info('Template published successfully', 'Success');
       })
       console.log(data);
+    },(error)=>{
+      this.toastr.error('Error publishing the template', 'Error');
     })
   }
   ngAfterViewInit() {

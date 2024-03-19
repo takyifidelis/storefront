@@ -43,7 +43,36 @@ section.preview-section {
 .detail-content {
   height: 40rem;
 }
-
+.product-price {
+  // color: #1c222b;
+  // font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 28px;
+  letter-spacing: -0.3px;
+  margin-bottom: 1rem;
+  .discount-price {
+    color: #1c222b;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 28px;
+    letter-spacing: -0.3px;
+  }
+  .actual-price {
+    color: #afbaca;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px; /* 142.857% */
+    text-decoration: line-through;
+  }
+  .discount-percent {
+    color: #d21a0e;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+  }
+}
 .side-shoe {
   height: 100px;
   width: 100px;
