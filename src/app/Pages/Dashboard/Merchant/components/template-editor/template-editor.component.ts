@@ -92,13 +92,11 @@ export class TemplateEditorComponent  implements AfterViewInit,OnInit{
   }
 
   logPages(){
-    console.log(this.dataservice.template.pagesOrder)
   }
   saveTemplateDraft(template:any){
     this.dataservice.isLoading =true
     JSON.stringify(template)
     this.apiService.saveTemplateDraft(localStorage.getItem('storeId')!,{options:JSON.stringify(template)}).subscribe((data:any)=>{
-      console.log(data);
       if(data.data){
         this.apiService.getMerchantStores(localStorage.getItem('businessId')!).subscribe(
           (storeData:any) => {
@@ -116,13 +114,10 @@ export class TemplateEditorComponent  implements AfterViewInit,OnInit{
   }
 
   publishTemplate(template:any){
-    console.log(template);
     this.apiService.publishTemplate(localStorage.getItem('storeId')!,{options:JSON.stringify(template)}).subscribe((data:any)=>{
       this.apiService.getMerchantStores(localStorage.getItem('businessId')!).subscribe((templatesData:any) => {
-        console.log(templatesData.data)
         this.toastr.info('Template published successfully', 'Success');
       })
-      console.log(data);
     },(error)=>{
       this.toastr.error('Error publishing the template', 'Error');
     })

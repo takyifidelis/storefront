@@ -59,7 +59,6 @@ export class AuthTokenComponent {
       formValue.keyFive,
       formValue.keySix,
     ].join('');
-    console.log({ code: authCode });
     this.isLoading = true;
 
     this.authService.verifyAccount(authCode).subscribe(
@@ -73,17 +72,14 @@ export class AuthTokenComponent {
       },
       (errorMessage) => {
         this.isLoading = false;
-        console.log(errorMessage.error.message);
         this.toastr.error(errorMessage.error.message, 'Failed');
       }
     );
-    //
     form.reset();
   }
   resendVerificationCode() {
     this.authService.resendCode().subscribe((resData) => {
       this.router.navigate(['Email-notification']);
-      // Set a timeout to navigate to another component after 3 seconds
       setTimeout(() => {
         this.router.navigate(['Authentication']);
       }, 3000);

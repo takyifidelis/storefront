@@ -13,23 +13,7 @@ export interface Response {
     [key: string]: any;
   };
 }
-// export interface SavedProducts {
-//   code: string;
-//   message: string;
-//   type: string;
-//   data: {
-//     id: string;
-//     name: string;
-//     images: { [key: string]: string }[];
-//     price: number;
-//     discount: number;
-//     variations: { [key: string]: string }[];
-//     isActive: boolean;
-//     category: string;
-//     quantity: number;
-//     storeProducts: { [key: string]: string };
-//   }[];
-// }
+
 export interface oneProduct {
     id: string;
     name: string;

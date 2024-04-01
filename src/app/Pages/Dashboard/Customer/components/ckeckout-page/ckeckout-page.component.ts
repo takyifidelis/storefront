@@ -124,23 +124,17 @@ export class CkeckoutPageComponent implements OnInit {
   ngOnInit(): void {
     this.initConfig();
     this.cart = JSON.parse(localStorage.getItem('cart')!);
-    console.log(this.cart);
     this.cartQuantity = this.cart.length;
-    console.log(this.sum);
-    //this.cart = JSON.parse(localStorage.getItem('cart')!);
     this.apiService
       .getShipping(localStorage.getItem('customerId')!)
       .subscribe((res: any) => {
-        console.log(res.data);
         this.shippingSelect = res.data;
-        console.log(this.shippingSelect);
         this.selectedAddress = this.shippingSelect[0];
       });
     this.apiService
       .getSavedProducts(localStorage.getItem('customerId')!)
       .subscribe(
         (productData) => {
-          console.log(productData.data[0].id);
 
           this.cartProduct = productData;
 
@@ -152,10 +146,8 @@ export class CkeckoutPageComponent implements OnInit {
               variations: [],
             });
           }
-          console.log(this.items);
         },
         (errorMessage) => {
-          console.log(errorMessage);
         }
       );
 
@@ -170,7 +162,6 @@ export class CkeckoutPageComponent implements OnInit {
     this.apiService
       .initializePayment(localStorage.getItem('customerId')!, this.payload)
       .subscribe((res: any) => {
-        console.log(res);
         this.orderId = res.data.orderId;
         return this.orderId;
       });
@@ -215,7 +206,6 @@ export class CkeckoutPageComponent implements OnInit {
   }
 
   async onApprove(data: { orderID: string }) {
-    console.log(data);
     alert('paused');
     const response = await fetch(
       `${environment.baseApiUrl}/order/approve-payment/` + data.orderID,
@@ -229,7 +219,6 @@ export class CkeckoutPageComponent implements OnInit {
         }),
       }
     );
-    console.log(response);
 
     const orderData = await response.json();
     if (orderData.type === 'success') {
@@ -246,10 +235,7 @@ export class CkeckoutPageComponent implements OnInit {
     this.payPalConfig = {
       clientId: environment.paypalClientID,
       createOrderOnServer: (data: any) => {
-        console.log(data);
         return new Promise<string>((resolve, reject) => {
-          // resolve("9JL371110H147321Y");
-
           let orderData = {
             store: localStorage.getItem('storeId')!,
             shipping: '',
@@ -259,11 +245,8 @@ export class CkeckoutPageComponent implements OnInit {
           this.apiService
             .getAllShippingAddresses(localStorage.getItem('customerId')!)
             .subscribe((shippingResponseData: { [key: string]: any }) => {
-              console.log(shippingResponseData);
-              console.log(shippingResponseData['type']);
               if (shippingResponseData['type'] === 'success') {
                 orderData.shipping = shippingResponseData['data'][0].id;
-                console.log(orderData);
                 this.apiService
                   .initializePayment(
                     localStorage.getItem('customerId')!,
@@ -271,7 +254,6 @@ export class CkeckoutPageComponent implements OnInit {
                   )
                   .subscribe((orderResponseData: { [key: string]: any }) => {
                     resolve(orderResponseData['data'].orderId);
-                    console.log(orderResponseData);
                   }),
                   (error: HttpErrorResponse) => {
                     console.error('Error creating order:', error);
@@ -289,12 +271,10 @@ export class CkeckoutPageComponent implements OnInit {
         });
       },
       onApprove: (data: any, actions: any) => {
-        console.log(data);
         return new Promise<string>((resolve, reject) => {
           this.apiService
             .onApprovePayment(data.orderID)
             .subscribe((response: { [key: string]: any }) => {
-              console.log(response);
               if (response['type'] === 'success') {
                 this.snackBar.open(
                   `Transaction completed for order ${data.orderID}`,
@@ -302,7 +282,6 @@ export class CkeckoutPageComponent implements OnInit {
                   { duration: 3000 }
                 );
               }
-              // dispatch(clearCart());
               this.toastr.info(response['message'], 'Success');
               localStorage.removeItem('cart');
               this.router.navigate(['/customer/orders']);
@@ -310,19 +289,12 @@ export class CkeckoutPageComponent implements OnInit {
         });
       },
       onClientAuthorization: (data: any) => {
-        console.log(
-          'onClientAuthorization - you should probably inform your server about completed transaction at this point',
-          data
-        );
       },
       onCancel: (data, actions) => {
-        console.log('OnCancel', data, actions);
       },
       onError: (err) => {
-        console.log('OnError', err);
       },
       onClick: (data, actions) => {
-        console.log('onClick', data, actions);
       },
     };
   }
@@ -334,18 +306,15 @@ export class CkeckoutPageComponent implements OnInit {
   }
   showSelection(e: any) {
     e.stopPropagation();
-    console.log(this.selection.selected);
   }
   /** Selects all rows if they are not all selected; otherwise clear selection. */
   toggleAllRows() {
     if (this.isAllSelected()) {
       this.selection.clear();
-      console.log(this.selection.selected);
       return;
     }
 
     this.selection.select(...this.dataSource.data);
-    console.log(this.selection.selected);
   }
 
   /** The label for the checkbox on the passed row */
@@ -369,21 +338,17 @@ export class CkeckoutPageComponent implements OnInit {
   }
   onDeleteProduct(productId: string, id: number) {
     let deleteIds: string[] = [];
-    console.log(id);
     deleteIds.push(productId);
-    console.log({ products: deleteIds });
     this.isDeleting = true;
     this.apiService
       .removeProductFromFavorite(deleteIds, localStorage.getItem('customerId')!)
       .subscribe(
         (deleteResponse) => {
-          console.log(deleteResponse);
           this.isDeleting = false;
           this.toastr.info(deleteResponse.message, 'Success');
         },
         (errorMessage) => {
           this.isDeleting = false;
-          console.log(errorMessage);
           this.toastr.error(
             errorMessage.error.message,
             errorMessage.error.type
@@ -392,55 +357,3 @@ export class CkeckoutPageComponent implements OnInit {
       );
   }
 }
-
-// function createOrder() {
-//   const payload = cart && {
-//     items: cart.items.map((item) => ({
-//       product: item.id,
-//       quantity: item.quantity,
-//       variations: item.variations,
-//     })),
-//     shipping: cart.shipping,
-//     store: activeSite?.id,
-//     destination: "BO",
-//   };
-//   return fetch(`${apiBaseUrl}/api/order/initialize/${customerData?.id}`, {
-//     method: "POST",
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//     body: JSON.stringify(payload),
-//   })
-//     .then(async (response) => {
-//       alert("Paused");
-//       const res = await response.json();
-//       res.type === "error"
-//         ? toast.error(res.error[0].reason)
-//         : toast.success(res.message);
-//       return res.data.orderId;
-//     })
-//     .then((order) => {
-//       return order;
-//     });
-// }
-
-// function onApprove(data: { orderID: string }) {
-//   return fetch(`${apiBaseUrl}/api/order/approve-payment/` + data.orderID, {
-//     method: "POST",
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//     body: JSON.stringify({
-//       orderID: data.orderID,
-//     }),
-//   })
-//     .then((response) => response.json())
-//     .then((orderData) => {
-//       orderData.type === "success" &&
-//         toast.success(
-//           `Transaction completed for order ${orderData.data.orderId}`
-//         );
-//       dispatch(clearCart());
-//       navigate(`/customer/orders`);
-//     });
-// }

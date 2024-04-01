@@ -95,7 +95,6 @@ export class HistoryComponent implements OnInit {
       })
       .afterClosed()
       .subscribe((resData) => {
-        console.log(resData);
         this.ngOnInit();
       });
   }
@@ -104,7 +103,6 @@ export class HistoryComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  // the code below is all for the checkboxes in the table
   isAllSelected() {
     const numSelected = this.selection.selected.length;
     const numRows = this.dataSource.data.length;
@@ -113,7 +111,6 @@ export class HistoryComponent implements OnInit {
   showSelection(e: any) {
     e.stopPropagation();
   }
-  /** Selects all rows if they are not all selected; otherwise clear selection. */
   toggleAllRows() {
     if (this.isAllSelected()) {
       this.selection.clear();
@@ -123,7 +120,6 @@ export class HistoryComponent implements OnInit {
     this.selection.select(...this.dataSource.data);
   }
 
-  /** The label for the checkbox on the passed row */
   checkboxLabel(row?: UserInterface): string {
     if (!row) {
       return `${this.isAllSelected() ? 'deselect' : 'select'} all`;

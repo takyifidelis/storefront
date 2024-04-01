@@ -50,8 +50,8 @@ import { OnboardingStepTwoCustomerComponent } from './Pages/Dashboard/Customer/c
 import { WalletComponent } from './Pages/Dashboard/Merchant/home/wallet/wallet.component';
 export const routes: Routes = [
   { path: '', component: LandingPageComponent },
-  // { path: 'customer-onboarding-1', component: OnboardingStepOneCustomerComponent },
-  // { path: 'customer-onboarding-2', component: OnboardingStepTwoCustomerComponent },
+  { path: 'customer-onboarding-1', component: OnboardingStepOneCustomerComponent },
+  { path: 'customer-onboarding-2', component: OnboardingStepTwoCustomerComponent },
   { path: 'login', component: LoginComponent },
   { path: 'forget-password', component: ForgottenPasswordComponent },
   { path: 'email-notification', component: EmailNotificationComponent },
@@ -138,7 +138,6 @@ export const routes: Routes = [
         path: 'product',
         component: MerchantProductsComponent,
         children: [
-          // { path: '', component: MerchantProductsComponent },
           { path: 'add-product', component: MerchantAddProductComponent },
           { path: '', component: MerchantProductsDashboadComponent },
         ],
@@ -157,5 +156,4 @@ export const routes: Routes = [
       { path: 'shop/:id', component: ReviewComponent },
     ],
   },
-  // { path: '**', component: LandingPageComponent },
 ];

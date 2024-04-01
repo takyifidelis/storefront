@@ -27,13 +27,10 @@ describe('LoginComponent', () => {
       login: (email: any, password: any) => ({
         subscribe: (callback: any) => {
           if (email === 'business@example.com' && password === 'businesspassword') {
-            // Simulate response for successful business login
             callback({ data: { type: 'Business', business: '123456' } });
           } else if (email === 'customer@example.com' && password === 'customerpassword') {
-            // Simulate response for successful customer login
             callback({ data: { type: 'Customer', customer: { id: '789', name: 'John Doe' } } });
           } else {
-            // Simulate error response
             callback('Invalid credentials');
           }
         }

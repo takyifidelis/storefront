@@ -16,7 +16,6 @@ import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../../../Authentication/Auth/auth.service';
 
 import { APIService } from '../../../../../Services/api.service';
-// import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { DataService } from '../../../../../Services/data.service';
@@ -37,14 +36,12 @@ import { merchantProduct } from '../../../../../interfaces/all-interfaces';
   styleUrl: './merchant-add-product.component.scss',
 })
 export class MerchantAddProductComponent {
-  // @ViewChild('variationValue') variationValue!: ElementRef<HTMLInputElement> ;
-  // @ViewChild('variationValue') variationKey!: ElementRef<HTMLInputElement>;
   public Editor = ClassicEditor;
   isLoading: boolean = false;
   public productDetailss: any = {
-    description: '', // Initial value for the description
+    description: '', 
   };
-  images: string[] = []; // Assuming we don't need topImages and bottomImages arrays separately anymore
+  images: string[] = [];
   productForm: FormGroup;
   inputText: string = '';
   inputSize: string = '';
@@ -71,7 +68,6 @@ export class MerchantAddProductComponent {
   };
   onFileSelected(event: any) {
     for (const file of event.target.files) {
-      console.log(file)
       this.data.append('images', file);
     }
     const files: FileList = event.target.files;
@@ -119,15 +115,7 @@ export class MerchantAddProductComponent {
     this.data.append('description', this.productDetailss.description);
     this.data.append('isActive', this.productDetails.isActive.toString());
     this.data.append('category', this.productDetails.category);
-    this.variationArray.forEach(variation =>{
-      // this.data.append('variations', JSON.stringify(this.variationArray.toString()));
-    })
-    // this.data.append('variations', JSON.stringify([
-    //   {"type": "size", "value":"40"},
-    //   {"type": "size", "value":"41"},
-    //   {"type": "size", "value":"42"}]));
     this.data.append('variations', JSON.stringify(this.variationArray));
-    console.log(JSON.stringify(this.variationArray));
     this.isLoading = true;
 
     this.authService
@@ -143,14 +131,11 @@ export class MerchantAddProductComponent {
             category: '',
           };
 
-
-          console.log(resData);
           this.router.navigate(['/merchant/product']);
           this.toastr.info(resData.message, 'Success');
           this.isLoading = false;
         },
         (errorMessage) => {
-          console.log(errorMessage);
           this.isLoading = false;
 
           this.toastr.error(
@@ -165,9 +150,7 @@ export class MerchantAddProductComponent {
 
   onUpdate() {
     this.productDetails.description = this.productDetailss.description
-    console.log(this.productDetails)
    this.data.forEach((item)=>{
-      console.log(item)
     });
     this.isLoading = true;
     if (this.isMerchantProductInterface(this.dataService.updateProduct)) {
@@ -175,14 +158,12 @@ export class MerchantAddProductComponent {
         .updateProduct(this.productDetails, this.dataService.updateProduct.id)
         .subscribe(
           (resData) => {
-            console.log(resData);
             this.router.navigate(['/merchant/product']);
             this.toastr.info(resData.message, 'Success');
             this.isLoading = false;
             this.resetProductForm()
           },
           (errorMessage) => {
-            console.log(errorMessage);
             this.isLoading = false;
   
             this.toastr.error(
@@ -213,8 +194,6 @@ export class MerchantAddProductComponent {
       .subscribe((data) => {
         this.categories.push(this.inputText);
         this.inputText = '';
-
-        console.log(data);
         this.toastr.info(data.message, data.type);
       });
   }
@@ -223,7 +202,6 @@ export class MerchantAddProductComponent {
       type: key,
       value: value,
     });
-    console.log(JSON.stringify(this.variationArray));
     this.DisplayedVariationArray = Object.entries(
       this.variationArray.reduce((acc:any, obj:any) => {
         if (!acc[obj.type]) {
@@ -253,7 +231,6 @@ isMerchantProductInterface(obj: any): obj is merchantProduct {
 }
   ngOnInit() {
     if (this.isMerchantProductInterface(this.dataService.updateProduct)) {
-      console.log(this.dataService.updateProduct.variations)
       this.dataService.isProductUpdateInstance = true;
       this.DisplayedVariationArray = this.dataService.updateProduct.variations
       this.productDetails.name = this.dataService.updateProduct.name;
@@ -272,11 +249,9 @@ isMerchantProductInterface(obj: any): obj is merchantProduct {
       this.apiService
       .getStoreCategories(localStorage.getItem('storeId')!)
       .subscribe((catResData: { [key: string]: any }) => {
-        console.log(catResData);
         for (const cat of catResData['data']) {
           this.categories.push(cat.name);
         }
-        console.log(this.categories);
       });
     }
   }

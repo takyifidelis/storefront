@@ -6,7 +6,6 @@ export const commonGuard: CanActivateFn = (route, state) => {
   if (isAuthenticated || isMerchant) {
     return true;
   } else {
-    console.log('You are not authorized to access this route');
     inject(Router).navigate(['/']);
     return false;
   }

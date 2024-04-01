@@ -173,7 +173,7 @@ like: any =  [];
       borderColor: '#1C222B',
       borderRadius: '0px',
       color: '#1C222B',
-      backgroundColor: 'pink',
+      backgroundColor: 'transparent',
       padding: '1rem 3rem',
     },
     templateImages: {

@@ -48,7 +48,6 @@ export class HomeEcommerceComponent implements OnInit {
   @ViewChild('fileInput') fileInput!: ElementRef;
   isliked: boolean = false;
   like: any = [];
-  // e: any;
   cart: any = [];
 
   constructor(
@@ -68,7 +67,7 @@ export class HomeEcommerceComponent implements OnInit {
   }
 
   onSelectFile(event: any, target: string) {
-    const file: File = event.target.files[0]; // Get the selected file
+    const file: File = event.target.files[0]; 
    
 
     if (event.target.files && event.target.files.length > 0) {
@@ -87,7 +86,6 @@ export class HomeEcommerceComponent implements OnInit {
             break;
 
           case 'twoSection':
-            console.log(e.target.result);
             this.dataservice.template.sectionTwo.twoSection.image =
               e.target.result;
             break;
@@ -112,7 +110,6 @@ export class HomeEcommerceComponent implements OnInit {
       }).afterClosed().subscribe((editedtText) => {
         args.shift()
         this.dataservice.updateText(editedtText, ...args);
-        console.log({editedTex:editedtText}, ...args);
       });
     }
   }
@@ -133,7 +130,6 @@ export class HomeEcommerceComponent implements OnInit {
 
   ngOnInit(){
       this.apiService.getCustomerStoreProducts(localStorage.getItem('storeId')!).subscribe((productResData)=>{
-        console.log(productResData);
         this.dataservice.products = productResData.data
         let categories:string[] = []
         this.dataservice.products.forEach((product:oneProduct)=>{
@@ -168,7 +164,6 @@ export class HomeEcommerceComponent implements OnInit {
       productObj.products.push(likeditem.id)
     }
     this.apiService.addToFavourite(productObj, localStorage.getItem('customerId')!).subscribe((res)=>{
-        console.log(res);
       })
   }
 
@@ -184,7 +179,6 @@ export class HomeEcommerceComponent implements OnInit {
       productObj.products.push(item.id)
     }
     this.apiService.addTOViews(productObj, localStorage.getItem('customerId')!).subscribe((res)=>{
-        console.log(res);
       })
 
   }

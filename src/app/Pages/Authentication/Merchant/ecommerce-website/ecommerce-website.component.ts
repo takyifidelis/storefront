@@ -55,10 +55,7 @@ export class EcommerceWebsiteComponent implements OnInit{
   dropDownMenu: HTMLElement | null = null;
   @ViewChild('fileInput') fileInput!: ElementRef;
   constructor(public dataService: DataService, private apiService:APIService, private router:Router) {
-    if(dataService.isInEditMode) {
-      
-      // console.log(dataService.template)
-    }
+    
   }
 
   goToCheckout(){
@@ -89,35 +86,16 @@ this.router.navigate(['/customer'])
     moveItemInArray(this.dataService.template.pagesOrder, event.previousIndex, event.currentIndex);
    }
   }
-  // ngOnInit(): void {   
-  //   this.dataService.isLoading = true
-  //   console.log('loaded wrongly first')
-  // if (localStorage.getItem('isEditorLoading')=== 'false') {
-  //   console.log('loaded wrongly')
-  //   this.apiService.getSingleStore(localStorage.getItem('storeId')!).subscribe((store:{[key:string]:any})=>{
-  //     this.dataService.template =JSON.parse(store['data'].template.options)
-  //     this.dataService.isLoading =false
-  //   })
-  // }
-  // else if(localStorage.getItem('isEditorLoading')=== 'true') {
-  //   console.log('coming from merchant')
-  //   this.dataService.template =JSON.parse(localStorage.getItem('template')!)
-  //     this.dataService.isLoading =false
-  // }
 
-   
-  // }
   ngOnInit(): void {   
     this.dataService.isLoading = true
   if (localStorage.getItem('isInEditMode') === 'false') {
     this.apiService.getSingleStore(localStorage.getItem('storeId')!).subscribe((store:{[key:string]:any})=>{
       this.dataService.template = JSON.parse(store['data'].template.options)
       this.dataService.isLoading = false
-      console.log(JSON.parse(store['data'].template.options))
     })
   }
   if(localStorage.getItem('isInEditMode') === 'true') {
-    console.log('loading here')
     this.dataService.template =JSON.parse(localStorage.getItem('tempTemplate')!)
     if (localStorage.getItem('storeName')){
       this.dataService.template.text = localStorage.getItem('storeName')
@@ -126,7 +104,5 @@ this.router.navigate(['/customer'])
       this.dataService.isLoading =false
   }
 
-   
-    // console.log(this.dataService.template)
   }
 }

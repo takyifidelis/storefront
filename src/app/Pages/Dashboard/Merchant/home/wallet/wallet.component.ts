@@ -70,9 +70,8 @@ constructor(public http: HttpClient, private apiService: APIService, public dial
     })
 
     this.apiService.getWallet(localStorage.getItem('storeId')!).subscribe((res: any)=> {
-      console.log(res)
       this.walletInfo = res.data;
-    this.dataSource = new MatTableDataSource(this.walletInfo);
+      this.dataSource = new MatTableDataSource(this.walletInfo);
     })
 
     this.isHomeActive = true;
@@ -90,7 +89,6 @@ this.router.navigate(['/merchant/home']);
   
 
   onSubmit(){
-    console.log(this.walletForm);
     this.http
       .post<Response>(
         `${environment.baseApiUrl}/store/add-wallet/${localStorage.getItem('storeId')}`,
@@ -100,7 +98,6 @@ this.router.navigate(['/merchant/home']);
         }
       )
       .subscribe((res: any) => {
-        console.log(res);
       });
   }
 
@@ -111,21 +108,17 @@ this.router.navigate(['/merchant/home']);
   }
   showSelection(e: any) {
     e.stopPropagation();
-    console.log(this.selection.selected);
   }
-  /** Selects all rows if they are not all selected; otherwise clear selection. */
+
   toggleAllRows() {
     if (this.isAllSelected()) {
       this.selection.clear();
-      console.log(this.selection.selected);
       return;
     }
 
     this.selection.select(...this.dataSource.data);
-    console.log(this.selection.selected);
   }
 
-  /** The label for the checkbox on the passed row */
   checkboxLabel(row?: dummyUserInterface): string {
     if (!row) {
       return `${this.isAllSelected() ? 'deselect' : 'select'} all`;

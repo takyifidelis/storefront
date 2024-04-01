@@ -21,7 +21,6 @@ import {
   Validators,
 } from '@angular/forms';
 import { StarRatingComponent } from '../../../Customer/components/star-rating/star-rating.component';
-// import { dummyUserInterface } from '../../../Customer/components/favorite-product/favorite-product.component';
 import { SelectionModel } from '@angular/cdk/collections';
 import {
   MAT_DIALOG_DATA,
@@ -103,9 +102,7 @@ export class MerchantReviewsComponent {
       width: '479px',
       position: { right: '50px', top: '10%' },
     });
-    // console.log(e);
   }
-  // the code below is all for the checkboxes in the table
   isAllSelected() {
     const numSelected = this.selection.selected.length;
     const numRows = this.dataSource.data.length;
@@ -114,7 +111,7 @@ export class MerchantReviewsComponent {
   showSelection(e: any) {
     e.stopPropagation();
   }
-  /** Selects all rows if they are not all selected; otherwise clear selection. */
+
   toggleAllRows() {
     if (this.isAllSelected()) {
       this.selection.clear();
@@ -138,7 +135,6 @@ export class MerchantReviewsComponent {
     this.merchantReviewsEmpty = true;
     this.authService.getReviews(localStorage.getItem('storeId')!).subscribe(
       (response: any) => {
-        console.log(response);
         this.isLoading = false;
         if (response.data.length > 0) {
           this.merchantReviewsEmpty = false;
@@ -148,13 +144,11 @@ export class MerchantReviewsComponent {
         this.dataSource.paginator = this.paginator
       },
       (errorMessage) => {
-        console.log(errorMessage);
       }
     );
   }
 }
 
-// Detail Component
 @Component({
   selector: 'app-review-details',
   standalone: true,
@@ -204,11 +198,9 @@ export class ReviewDetailsComponent {
       .replyReview(comment, review, localStorage.getItem('storeId')!)
       .subscribe(
         (resData) => {
-          console.log(resData);
           this.toastr.info(resData.message, 'Success');
         },
         (errorMessage) => {
-          console.log(errorMessage);
           this.error = errorMessage;
           this.toastr.error(
             errorMessage.error.message,

@@ -44,10 +44,6 @@ export class OrderModalComponent implements OnInit {
   error: string | any = null;
   sum = 0;
   isLoading: boolean = false;
-
-  //   constructor(
-  //     private authService: AuthService,
-  //     @Inject(MAT_DIALOG_DATA) public data: dummyUserInterface
   starRating!: number;
 
   constructor(
@@ -61,7 +57,6 @@ export class OrderModalComponent implements OnInit {
       comment: new FormControl('', Validators.required),
       starRating: new FormControl('', Validators.required),
     });
-    console.log(data);
   }
   ngOnInit(): void {
     for (const itemPrice of this.data['items']) {
@@ -77,8 +72,6 @@ export class OrderModalComponent implements OnInit {
       comment: form.value.comment,
     };
     console.log(reviewData);
-
-    // console.log(comment, remarks);
     this.isLoading = true;
     this.authService.reviewProduct(reviewData, this.data['id']).subscribe(
       (resData: any) => {
@@ -95,7 +88,6 @@ export class OrderModalComponent implements OnInit {
 
     form.reset();
   }
-  // onSetStar($event){}
   onSetStar(value: number) {
     this.starRating = value;
   }

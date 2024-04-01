@@ -32,7 +32,6 @@ export class ShopComponent implements OnInit {
     localStorage.setItem('isInEditMode', 'false')
     localStorage.setItem('storeId', store.id);
     this.dataService.selectedStore = store
-    console.log(store)
     this.router.navigate(['/ecommerce']);
   }
 

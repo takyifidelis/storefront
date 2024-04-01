@@ -29,7 +29,6 @@ export class TemplateTextEditorDialogComponent {
     }
   }
   ngOnInit(){
-    console.log(this.data)
     this.textContent= this.data[0]
   }
 }

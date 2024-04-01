@@ -31,18 +31,13 @@ export class OnboardingStepThreeComponent implements OnDestroy {
       }
     }
     
-    console.log(payload);
     this.apiService.setBusinessType(localStorage.getItem('businessId')!,{businessType:localStorage.getItem('storeType')}).subscribe(data =>{
-      console.log(data);
       this.apiService.createStore(localStorage.getItem('businessId')!,payload).subscribe(data =>{
-        console.log(data);
         this.dataService.isLoading =false
         this.router.navigate(['/merchant'])
       }),(errorMessage: any) => {
-        console.log(errorMessage);
       }
     }),(errorMessage: any) => {
-      console.log(errorMessage);
     }
     
   }

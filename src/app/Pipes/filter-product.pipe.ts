@@ -15,21 +15,13 @@ export class FilterProductPipe implements PipeTransform {
     }
     if(searchTerm.length){
       searchTerm = searchTerm.toLowerCase()
-          for (const item of values) {
-            if (item.name.toLowerCase().includes(searchTerm)) {
-              resultArray.push(item)
-            }
-          }
-        } 
-        return resultArray;
-      //   else {
-      //     this.dataService.doesNotExist.term = searchTerm
-      //     for (const item of values) {
-      //       if (item.name.toLowerCase().includes(searchTerm)) {
-      //         resultArray.push(item)
-      //       }
-      //     }
-      // } 
+      for (const item of values) {
+        if (item.name.toLowerCase().includes(searchTerm)) {
+          resultArray.push(item)
+        }
+      }
+    } 
+    return resultArray;
   }
 
 }

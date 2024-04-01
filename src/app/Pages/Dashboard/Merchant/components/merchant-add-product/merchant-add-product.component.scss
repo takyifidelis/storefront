@@ -172,8 +172,8 @@ section.add-product {
           grid-template-columns: repeat(
             2,
             1fr
-          ); /* Two columns of equal width */
-          grid-gap: 10px; /* Adjust the space between images if needed */
+          );
+          grid-gap: 10px;
 
           .uploaded-image {
             width: 10rem;
@@ -255,7 +255,6 @@ section.add-product {
         }
         span.media-colour {
           padding: 0.4rem 1rem;
-          // border-radius: 50%;
           border: 1px solid #afbaca;
           margin-right: 0.5rem;
 

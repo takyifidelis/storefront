@@ -21,7 +21,6 @@ import {
   MerchantInfo,
   merchantProduct,
 } from '../../../../interfaces/all-interfaces';
-// import { MerchantAddProductComponent } from '../components/merchant-add-product';
 @Component({
   selector: 'app-merchant-dashboard',
   standalone: true,
@@ -70,8 +69,6 @@ export class MerchantDashboardComponent implements OnInit {
 
     this.apiService.logout().subscribe(
       (resData) => {
-        console.log(tourCompleted);
-        console.log(editorTourCompleted);
         localStorage.clear();
 
         if (tourCompleted) {
@@ -107,14 +104,12 @@ export class MerchantDashboardComponent implements OnInit {
         this.stores = resData['data'];
         this.dataService.isLoading = false;
         if (this.dataService.selectedStore['id']?.length) {
-          console.log('not from login', this.dataService.selectedStore);
           resData['data'].array.forEach((element: { [key: string]: any }) => {
             if (element['id'] === this.dataService.selectedStore['id']) {
               localStorage.setItem('storeId', element['id']);
               localStorage.setItem('storeName', element['storeName']);
               localStorage.setItem('template', element['template'].options);
               localStorage.setItem('tempTemplate', element['template'].temp.options);
-              // this.dataService.selectedStore = 
             }
           });
         }
@@ -122,7 +117,6 @@ export class MerchantDashboardComponent implements OnInit {
         } else {
           this.dataService.isLoading = false;
           this.dataService.selectedStore = this.stores[0];
-          console.log('from login', this.dataService.selectedStore);
           localStorage.setItem('storeId', this.dataService.selectedStore['id']);
           localStorage.setItem(
             'storeName',
@@ -225,7 +219,6 @@ export class MerchantDashboardComponent implements OnInit {
         this.dataService.merchantUserNameInitials = this.nameInitial;
         this.userName = resData.data.businessName;
         this.dataService.merchantUserName = this.userName;
-        console.log(this.userName);
       });
   }
 

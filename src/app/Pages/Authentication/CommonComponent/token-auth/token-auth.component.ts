@@ -58,33 +58,26 @@ export class TokenAuthComponent {
       formValue.keyFive,
       formValue.keySix,
     ].join('');
-    console.log({ code: authCode });
     this.isLoading = true;
 
     this.authService.verifyPassword(authCode).subscribe(
       (resData) => {
-        console.log(resData);
         this.isLoading = false;
         this.toastr.info(resData.message, 'Success');
         this.router.navigate(['reset-password']);
       },
       (errorMessage) => {
-        console.log(errorMessage);
         this.isLoading = false;
         this.toastr.error(errorMessage.error.message, 'Failed');
       }
     );
-    //
     form.reset();
   }
   resendVerificationCode() {
     this.authService.resendCode().subscribe((resData) => {
-      console.log(resData);
-
       this.toastr.info('Check Email for verification code', 'Token Sent');
 
       this.router.navigate(['Email-notification']);
-      // Set a timeout to navigate to another component after 3 seconds
       setTimeout(() => {
         this.router.navigate(['Password-Authentication']);
       }, 3000);

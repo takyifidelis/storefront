@@ -77,17 +77,8 @@ describe('ForgottenPasswordComponent', () => {
     passwordResetFixture = TestBed.createComponent(ResetPassowrdComponent);
     dbelement = passwordResetFixture.debugElement
   });
-
-  // it('should navigate to the forgotten-password page', waitForAsync(() => {
-  //   fixture.detectChanges();
-  //   fixture.whenStable().then(() => {
-  //     fixture.debugElement.nativeElement.querySelector('button')
-  //     expect(location.path()).toBe('/forgotten-password');
-  //   });
-  // }));
   it('should navigate to the forgotten-password page', waitForAsync(() => {
     passwordResetFixture.detectChanges();
-    // passwordResetFixture.debugElement.nativeElement.querySelector('button').click()
     let links = dbelement.queryAll(By.css('button'))
     links[0].nativeElement.click();
     passwordResetFixture.whenStable().then(() => {

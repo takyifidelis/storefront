@@ -18,7 +18,6 @@ import {
 } from '@fortawesome/free-brands-svg-icons';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-// or
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -52,7 +51,6 @@ export class NewPaymentOptionComponent {
     });
   }
   AddPaypalMethod(form: FormGroupDirective) {
-    console.log(form.value);
     if (!form.valid) {
       return;
     }

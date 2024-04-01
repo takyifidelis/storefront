@@ -70,8 +70,6 @@ export class CheckoutModalComponent {
     const city = form.value.city;
     const postalCode = form.value.postalCode;
 
-    console.log(form.value);
-
     this.apiService
       .addCustomerShippingAddress(
         countryCode,
@@ -85,14 +83,12 @@ export class CheckoutModalComponent {
       )
       .subscribe(
         (resData) => {
-          console.log(resData);
           this.toastr.info(
             'Customer shipping created successfully.',
             'Success'
           );
         },
         (errorMessage) => {
-          console.log(errorMessage);
           this.toastr.error(
             errorMessage.error.message,
             errorMessage.error.type

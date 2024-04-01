@@ -58,17 +58,14 @@ export class ForgottenPasswordComponent {
     const email = form.value.email;
     this.authService.passwordReset(email).subscribe(
       (resData) => {
-        console.log(resData);
         this.isLoading = false;
         this.toastr.info('Check email for token', 'Email Verification');
         this.router.navigate(['Email-notification']);
-        // Set a timeout to navigate to another component after 3 seconds
         setTimeout(() => {
           this.router.navigate(['Password-Authentication']);
         }, 3000);
       },
       (errorMessage) => {
-        console.log(errorMessage);
         this.isLoading = false;
 
         this.toastr.error(errorMessage.error.message, 'Failed');

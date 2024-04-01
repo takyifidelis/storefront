@@ -68,7 +68,6 @@
   </div>
   <div class="table-form">
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
-      <!-- Checkbox Column -->
       <ng-container matColumnDef="checkbox">
         <th style="background-color: #f9fafb" mat-header-cell *matHeaderCellDef>
           <mat-checkbox
@@ -195,9 +194,6 @@
       </tr>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <!-- <tr mat-row *matRowDef="let row; columns: displayedColumns;"
-          (click)="selection.toggle(row)">
-      </tr> -->
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
   </div>

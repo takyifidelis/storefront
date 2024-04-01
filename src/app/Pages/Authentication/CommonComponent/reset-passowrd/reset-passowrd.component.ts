@@ -59,7 +59,6 @@ export class ResetPassowrdComponent {
       { validators: this.confirmPasswordValidator }
     );
   }
-  //
   onSubmit(form: FormGroupDirective) {
     if (!form.valid) {
       return;
@@ -70,7 +69,6 @@ export class ResetPassowrdComponent {
     this.isLoading = true;
     this.authService.newPasswordReset(password, confirmPassword).subscribe(
       (resData) => {
-        console.log(resData);
         this.toastr.info(resData.message, 'Success');
         this.isLoading = false;
         this.router.navigate(['login']);
@@ -84,12 +82,10 @@ export class ResetPassowrdComponent {
     form.reset();
   }
 
-  //
-  // Custom validator function for password strength and matching
   passwordValidator(control: AbstractControl): ValidationErrors | null {
     const value: string = control.value || '';
     if (!value) {
-      return null; // Don't validate empty value
+      return null; 
     }
     const hasUpperCase = /[A-Z]+/.test(value);
     const hasLowerCase = /[a-z]+/.test(value);
@@ -98,7 +94,6 @@ export class ResetPassowrdComponent {
     const valid = hasUpperCase && hasLowerCase && hasNumeric && hasMinLength;
     return !valid ? { passwordStrength: true } : null;
   }
-  // Custom validator function for matching passwords
   confirmPasswordValidator(control: AbstractControl): ValidationErrors | null {
     const password = control.get('password')?.value;
     const confirmPassword = control.get('confirmPassword')?.value;
@@ -108,7 +103,6 @@ export class ResetPassowrdComponent {
     return null;
   }
 
-  // Function to check various conditions of password
   checkPasswordCondition(condition: RegExp): boolean {
     const passwordControl = this.ResetPassword.get('password');
     if (!passwordControl) {
@@ -118,7 +112,6 @@ export class ResetPassowrdComponent {
     return condition.test(password);
   }
 
-  // Usage
   containsLowerCase(): boolean {
     return this.checkPasswordCondition(/[a-z]+/);
   }
@@ -134,7 +127,6 @@ export class ResetPassowrdComponent {
   containsMinTenChar(): boolean {
     return this.checkPasswordCondition(/^.{10,}$/);
   }
-  //
 
   onShowPassword() {
     this.showPassword = !this.showPassword;

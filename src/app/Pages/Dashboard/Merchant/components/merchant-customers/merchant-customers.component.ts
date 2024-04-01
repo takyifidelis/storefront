@@ -102,10 +102,8 @@ export class MerchantCustomersComponent implements OnInit {
       width: '800px',
       position: { right: '50px', top: '10%' },
     });
-    // console.log(e);
   }
 
-  // the code below is all for the checkboxes in the table
   isAllSelected() {
     const numSelected = this.selection.selected.length;
     const numRows = this.dataSource.data.length;
@@ -113,21 +111,17 @@ export class MerchantCustomersComponent implements OnInit {
   }
   showSelection(e: any) {
     e.stopPropagation();
-    console.log(this.selection.selected);
   }
-  /** Selects all rows if they are not all selected; otherwise clear selection. */
+
   toggleAllRows() {
     if (this.isAllSelected()) {
       this.selection.clear();
-      console.log(this.selection.selected);
       return;
     }
 
     this.selection.select(...this.dataSource.data);
-    console.log(this.selection.selected);
   }
 
-  /** The label for the checkbox on the passed row */
   checkboxLabel(row?: dummyUserInterface1): string {
     if (!row) {
       return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
@@ -148,7 +142,6 @@ export class MerchantCustomersComponent implements OnInit {
       .getAllCustomersForStore(localStorage.getItem('storeId')!)
       .subscribe(
         (res: any) => {
-          console.log(res);
           this.isLoading = false;
           this.numberOfCustomer = res.data.length;
           if (this.numberOfCustomer > 0) {
@@ -158,7 +151,6 @@ export class MerchantCustomersComponent implements OnInit {
           this.dataSource.paginator = this.paginator
         },
         (errorMessage) => {
-          console.log(errorMessage);
         }
       );
   }
@@ -189,10 +181,8 @@ export class CustomerDetailsComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: orderInterface,
     private apiService: APIService
   ) {
-    console.log(data);
   }
   ngOnInit() {
-    console.log('this.users');
     this.isLoading = true;
     this.apiService
       .getOrderHistoryForCustomer(
@@ -202,7 +192,6 @@ export class CustomerDetailsComponent implements OnInit {
       )
       .subscribe((res: Response) => {
         this.users = res['data'];
-        console.log(this.users.orders);
         this.isLoading = false;
         this.numOfCustomers = this.users.length;
         this.dataSurce = new MatTableDataSource(this.users.orders);

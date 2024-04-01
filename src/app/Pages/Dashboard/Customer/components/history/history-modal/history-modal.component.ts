@@ -29,17 +29,14 @@ export class HistoryModalComponent {
   onDeleteProduct() {
     let deleteIds: string[] = [];
     deleteIds.push(this.data.id);
-    console.log({ products: deleteIds });
     this.apiService
       .removeProductFromFavorite(deleteIds, localStorage.getItem('customerId')!)
       .subscribe(
         (deleteResponse) => {
-          console.log(deleteResponse);
           this.toastr.info(deleteResponse.message, 'Success');
           this.dialogRef.close('Success');
         },
         (errorMessage) => {
-          console.log(errorMessage);
           this.toastr.error(
             errorMessage.error.message,
             errorMessage.error.type

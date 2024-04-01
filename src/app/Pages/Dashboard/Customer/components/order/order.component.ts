@@ -119,7 +119,6 @@ export class OrderComponent implements OnInit {
 
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
-        console.log(this.dataSource);
         if (this.numOfOrders > 0) {
           this.customerOrdersEmpty = false;
         }
@@ -146,7 +145,6 @@ export class OrderComponent implements OnInit {
   showSelection(e: any) {
     e.stopPropagation();
   }
-  /** Selects all rows if they are not all selected; otherwise clear selection. */
   toggleAllRows() {
     if (this.isAllSelected()) {
       this.selection.clear();
@@ -156,7 +154,6 @@ export class OrderComponent implements OnInit {
     this.selection.select(...this.dataSource.data);
   }
 
-  /** The label for the checkbox on the passed row */
   checkboxLabel(row?: dummyUserInterface): string {
     if (!row) {
       return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
@@ -176,7 +173,6 @@ export class OrderComponent implements OnInit {
     this.isShippedActive = false;
     this.isDeliveredActive = false;
 
-    // Activate the selected tab
     switch (tabName) {
       case 'All':
         this.isAllActive = true;

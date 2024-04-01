@@ -17,7 +17,6 @@ import { TemplateTextEditorDialogComponent } from '../../../../Dashboard/Merchan
 export class ContactUsComponent {
   constructor(public dataService: DataService,public dialog: MatDialog){}
   editText(...args: string[]) {
-    // console.log(text,args )
     if(this.dataService.isEditingTemp){
       this.dialog.open(TemplateTextEditorDialogComponent, {
         data: args,
@@ -25,14 +24,11 @@ export class ContactUsComponent {
       }).afterClosed().subscribe((editedtText) => {
         args.shift()
         this.dataService.updateText(editedtText, ...args);
-        console.log({editedTex:editedtText}, ...args);
       });
     }
 }
   onSelectFile(event: any, target: string) {
-    const file: File = event.target.files[0]; // Get the selected file
-    //     if (file) {
-    //  }
+    const file: File = event.target.files[0];
     if (event.target.files && event.target.files.length > 0) {
       const reader = new FileReader();
       reader.readAsDataURL(event.target.files[0]);
@@ -47,7 +43,6 @@ export class ContactUsComponent {
               e.target.result;
             break;
           case 'twoSection':
-            console.log(e.target.result);
             this.dataService.template.sectionTwo.twoSection.image =
               e.target.result;
             break;
@@ -59,7 +54,6 @@ export class ContactUsComponent {
   }
   openFileInput(fileInput: HTMLInputElement) {
     fileInput.click();
-    // this.dataservice.inputLinkVisibility[index] = true;
   }
   showLink() {
     this.dataService.showInputLink = !this.dataService.showInputLink;

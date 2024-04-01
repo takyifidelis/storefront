@@ -102,8 +102,6 @@ export class MerchantProductsDashboadComponent {
     this.dataSource = new MatTableDataSource();
   }
   moreVert(e: dummyUserInterface) {
-    console.log(e);
-
     this.dialog
       .open(MerchantProductDiscountComponent, {
         data: e,
@@ -116,7 +114,6 @@ export class MerchantProductsDashboadComponent {
       });
   }
 
-  // the code below is all for the checkboxes in the table
   isAllSelected() {
     const numSelected = this.selection.selected.length;
     const numRows = this.dataSource.data.length;
@@ -124,21 +121,16 @@ export class MerchantProductsDashboadComponent {
   }
   showSelection(e: any) {
     e.stopPropagation();
-    console.log(this.selection.selected);
   }
-  /** Selects all rows if they are not all selected; otherwise clear selection. */
   toggleAllRows() {
     if (this.isAllSelected()) {
       this.selection.clear();
-      console.log(this.selection.selected);
       return;
     }
 
     this.selection.select(...this.dataSource.data);
-    console.log(this.selection.selected);
   }
 
-  /** The label for the checkbox on the passed row */
   checkboxLabel(row?: dummyUserInterface): string {
     if (!row) {
       return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
@@ -160,17 +152,14 @@ export class MerchantProductsDashboadComponent {
   ngOnInit() {
     this.isLoading = true;
     this.merchantProductsEmpty = true;
-    console.log('dkj');
     this.apiService
       .getStoreProductsMerchant(localStorage.getItem('storeId')!)
       .subscribe((response: any) => {
-        console.log(response.data);
         this.isLoading = false;
         this.numberOfProducts = response.data.products.length;
         if (this.numberOfProducts > 0) {
           this.merchantProductsEmpty = false;
         }
-        // console.log(response.data.products[0].images[0].url);
         this.users = response.data;
         this.dataSource = new MatTableDataSource(response.data.products);
         this.dataSource.paginator = this.paginator
@@ -223,10 +212,8 @@ export class MerchantProductDiscountComponent {
       .subscribe(
         (promoData: { [key: string]: any }) => {
           this.promoData = promoData['data'];
-          console.log(promoData);
         },
         (errorMessage) => {
-          console.log(errorMessage);
         }
       );
   }
@@ -235,17 +222,14 @@ export class MerchantProductDiscountComponent {
     this.isLoading = true;
     this.pdata.products.push(this.data.id);
     this.pdata.categories.push(this.data.category);
-    console.log(this.pdata);
     this.apiService
       .addProductsToPromotion(form.value.promo.id, this.pdata)
       .subscribe(
         (promoData) => {
-          console.log(promoData);
           this.isLoading = false;
           this.toastr.info(promoData.message, 'Success');
         },
         (errorMessage) => {
-          console.log(errorMessage);
           this.toastr.error(
             errorMessage.error.message,
             errorMessage.error.type
@@ -262,16 +246,13 @@ export class MerchantProductDiscountComponent {
   onDeleteProduct() {
     let deleteIds: string[] = [];
     deleteIds.push(this.data.id);
-    console.log({ products: deleteIds });
     this.isLoading = true;
     this.apiService.deleteProductFromStore(deleteIds).subscribe(
       (deleteResponse) => {
-        console.log(deleteResponse);
         this.isLoading = false;
         this.toastr.info(deleteResponse.message, 'Success');
       },
       (errorMessage) => {
-        console.log(errorMessage);
         this.isLoading = false;
         this.toastr.error(errorMessage.error.message, errorMessage.error.type);
       }

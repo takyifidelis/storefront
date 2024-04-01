@@ -119,7 +119,6 @@ export class ReviewComponent implements OnInit {
       .addTOViews(productObj, localStorage.getItem('customerId')!)
       .subscribe(
         (res) => {
-          console.log(res);
           this.toastr.info('Product has been added to cart', 'Success');
         },
         (errorMessage) => {}

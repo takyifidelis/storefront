@@ -1,5 +1,4 @@
 section.about-us {
-  // background-image: url("../../../../../../assets/images/about-us-backgroud.svg");
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -22,10 +21,7 @@ section.about-us {
       letter-spacing: -0.5px;
     }
     p {
-      // color: #1C222B;
       font-family: Inter;
-      // font-size: 16px;
-      // font-style: normal;
       font-weight: 400;
       line-height: 28px;
       letter-spacing: -0.3px;
@@ -41,7 +37,6 @@ section.about-us {
     border-radius: 6px;
     padding: 2rem;
     .enter-details-header {
-      // font-size: 20px;
       font-weight: 700;
       line-height: 32px;
       letter-spacing: -0.3px;
@@ -54,16 +49,11 @@ section.about-us {
       letter-spacing: -0.3px;
     }
     .btn {
-      // background-color: #000;
       padding: 12px 32px;
-      // color: #ffff;
-      // font-family: Inter;
-      // font-size: 16px;
       font-style: normal;
       font-weight: 500;
       line-height: 28px;
       letter-spacing: -0.3px;
-      // border-radius: 0;
     }
   }
 }
@@ -88,8 +78,3 @@ section.about-us {
     width: 100%;
   }
 }
-// .editor {
-//   border: 1px solid #ccc;
-//   min-height: 200px;
-//   padding: 10px;
-// }

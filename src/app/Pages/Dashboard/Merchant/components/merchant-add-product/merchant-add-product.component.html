@@ -87,16 +87,7 @@
           </div>
 
           <div class="form-group description-div">
-            <label for="Description" class="label-name">Description</label>
-
-            <!-- <textarea
-
-              [(ngModel)]="productDetails.description"
-              id=""
-              rows="4"
-              class="form-control"
-              placeholder="Enter a description..."
-            ></textarea> -->
+            <label for="Description" class="label-name">Description</label> 
             <ckeditor
               [editor]="Editor"
               [(ngModel)]="productDetailss.description"
@@ -159,7 +150,6 @@
           <div class="media-input-div">
             <div>
               <div class="image-container">
-                <!-- Use ngFor to iterate over images and use ngIf to check the index for top/bottom row -->
                 <ng-container
                   *ngFor="let image of images; let i = index"
                   class="d-flex"
@@ -227,25 +217,6 @@
               value
             }}</span>
           </div>
-          <!-- <div class="media-colours">
-            <div class="head d-flex align-items-center justify-content-between">
-              <h4 class="colour-header product-header">Colour</h4>
-              <p
-                class="add-colour"
-                data-bs-toggle="modal"
-                data-bs-target="#addColor"
-              >
-                <img src="assets\icons\product-plus-sign.svg" alt="" /> Add
-                Colour
-              </p>
-            </div>
-
-            <span
-              class="media-colour"
-              *ngFor="let color of colorArray"
-              [ngStyle]="{ 'background-color': color }"
-            ></span>
-          </div> -->
         </div>
       </div>
     </div>

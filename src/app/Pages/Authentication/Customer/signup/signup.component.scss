@@ -41,10 +41,6 @@ form::-webkit-scrollbar {
   overflow-y: scroll;
   height: 100vh;
 
-  // .form{
-  //   overflow-y: scroll;
-  // }
-
   .frame-2-container {
     width: 32.5625rem;
     display: flex;
@@ -364,7 +360,6 @@ form::-webkit-scrollbar {
         .social-icon {
           display: flex;
           width: 448px;
-          // height: 76px;
           padding: 10px 20px;
           justify-content: center;
           align-items: center;

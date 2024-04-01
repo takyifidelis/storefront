@@ -25,13 +25,11 @@ constructor(public http: HttpClient, private apiService: APIService){}
     })
 
     this.apiService.getWallet(localStorage.getItem('storeId')!).subscribe((res: any)=> {
-      console.log(res)
       this.walletInfo = res.data;
     })
   }
 
   onSubmit(){
-    console.log(this.walletForm);
     this.http
       .post<Response>(
         `${environment.baseApiUrl}/store/add-wallet/${localStorage.getItem('storeId')}`,
@@ -41,7 +39,6 @@ constructor(public http: HttpClient, private apiService: APIService){}
         }
       )
       .subscribe((res: any) => {
-        console.log(res);
       });
   }
 }

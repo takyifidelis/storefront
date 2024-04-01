@@ -21,6 +21,5 @@ export class StarRatingComponent {
     if (this.readonly) return;
     this.rating = value;
     this.ratingChange.emit(this.rating);
-    // console.log(value);
   }
 }

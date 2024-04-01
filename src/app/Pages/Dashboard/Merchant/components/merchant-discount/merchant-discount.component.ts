@@ -137,28 +137,22 @@ export class MerchantDiscountComponent {
     this.showInitialForm = !this.showInitialForm;
   }
 
-  // console.log(e);
-
-  // the code below is all for the checkboxes in the table
   ngOnInit() {
     this.merchantDiscountEmpty = true;
     this.dataSource = new MatTableDataSource(this.users);
     this.isLoading = true;
-    // Get categories
     this.apiService
       .getStoreCategories(localStorage.getItem('storeId')!)
       .subscribe((catResData: { [key: string]: any }) => {
-        // this.storeCategories = catResData['data']
         for (const cat of catResData['data']) {
           this.storeCategories.push(cat.name);
         }
       });
-    // Get Store Promotions
+      
     this.apiService
       .getPromotionForStore(localStorage.getItem('storeId')!)
       .subscribe(
         (promoData: { [key: string]: any }) => {
-          console.log(promoData);
           this.discountNumber = promoData['data'].length;
           this.isLoading = false;
           if (this.discountNumber > 0) {
@@ -167,7 +161,6 @@ export class MerchantDiscountComponent {
           this.dataSource = new MatTableDataSource(promoData['data']);
         },
         (errorMessage) => {
-          console.log(errorMessage);
         }
       );
   }
@@ -178,21 +171,17 @@ export class MerchantDiscountComponent {
   }
   showSelection(e: any) {
     e.stopPropagation();
-    console.log(this.selection.selected);
   }
-  /** Selects all rows if they are not all selected; otherwise clear selection. */
+  
   toggleAllRows() {
     if (this.isAllSelected()) {
       this.selection.clear();
-      console.log(this.selection.selected);
       return;
     }
 
     this.selection.select(...this.dataSource.data);
-    console.log(this.selection.selected);
   }
 
-  /** The label for the checkbox on the passed row */
   checkboxLabel(row?: dummyUserInterface): string {
     if (!row) {
       return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
@@ -222,7 +211,7 @@ export class MerchantDiscountComponent {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
-  // Posting the new Promotion
+  
   onSubmit(form: FormGroupDirective) {
     if (!form.valid) {
       return;
@@ -232,7 +221,6 @@ export class MerchantDiscountComponent {
     const discount = Number(form.value.quantity);
     const end = new Date(form.value.endDate);
     const start = new Date(form.value.startDate);
-    console.log(form.value.quantity);
     this.isPosting = true;
     this.apiService
       .addPromotionToStore(
@@ -245,15 +233,11 @@ export class MerchantDiscountComponent {
       )
       .subscribe(
         (resData) => {
-          console.log(resData);
           this.isPosting = false;
           this.ngOnInit();
           this.toastr.info(resData.message, 'Success');
-
-          // this.dataSource = new MatTableDataSource(resData['data']);
         },
         (errorMessage) => {
-          console.log(errorMessage);
           this.isPosting = false;
           this.toastr.error(
             errorMessage.error.message,
@@ -273,7 +257,6 @@ export class MerchantDiscountComponent {
     const end = new Date(form2.value.endDateInit);
     const start = new Date(form2.value.startDateInit);
     this.isPosting = true;
-    console.log(form2.value.quantity);
     this.apiService
       .addPromotionToStore(
         end,
@@ -286,14 +269,10 @@ export class MerchantDiscountComponent {
       .subscribe(
         (resData) => {
           this.isPosting = false;
-          console.log(resData);
           this.ngOnInit();
           this.toastr.info(resData.message, 'Success');
-
-          // this.dataSource = new MatTableDataSource(resData['data']);
         },
         (errorMessage) => {
-          console.log(errorMessage);
           this.isPosting = false;
           this.toastr.error(
             errorMessage.error.message,
@@ -343,8 +322,6 @@ export class MerchantDiscountCustomizeComponent {
     private apiService: APIService,
     private toastr: ToastrService
   ) {
-    console.log(data);
-
     this.discountUpdate = new FormGroup({
       discountName: new FormControl('', Validators.required),
       storeCategory: new FormControl(''),
@@ -355,35 +332,26 @@ export class MerchantDiscountCustomizeComponent {
   }
 
   ngOnInit() {
-    // Get categories
     this.apiService
       .getStoreCategories(localStorage.getItem('storeId')!)
       .subscribe((catResData: { [key: string]: any }) => {
-        // this.storeCategories = catResData['data']
         for (const cat of catResData['data']) {
           this.storeCategories.push(cat.name);
         }
         this.isLoading = true;
         this.apiService.getProductUnderPromotion(this.data.id).subscribe(
           (resData: Response) => {
-            console.log(resData.data);
             this.isLoading = false;
             let d: any = [];
             d = resData.data;
             this.numberOfProducts = d.products.length;
-            console.log(d);
-            console.log(this.numberOfProducts);
             this.productDataSource = new MatTableDataSource(d.products);
           },
           (errorMessage) => {
-            console.log(errorMessage);
             this.isLoading = false;
           }
         );
       });
-
-    // Get Products under a promotion
-    // this.getPromotionProducts(this.data.id);
   }
   onSubmit(form: FormGroupDirective) {
     if (!form.valid) {
@@ -394,7 +362,6 @@ export class MerchantDiscountCustomizeComponent {
     const discount = Number(form.value.quantity);
     const end = new Date(form.value.endDate);
     const start = new Date(form.value.startDate);
-    console.log(form.value.quantity);
     this.isLoading = true;
     this.apiService
       .updatePromotionForStore(
@@ -409,8 +376,6 @@ export class MerchantDiscountCustomizeComponent {
         (resData: Response) => {
           let d: any = [];
           d = resData.data;
-          console.log(d);
-
           this.productDataSource = new MatTableDataSource(d);
           this.isLoading = false;
           this.toastr.info(resData.message, 'Success');
@@ -444,18 +409,5 @@ export class MerchantDiscountCustomizeComponent {
       );
   }
   getPromotionProducts(promoId: string) {
-    // Get Products under a promotion
-    // this.apiService.getProductUnderPromotion(promoId).subscribe(
-    //   (resData: Response) => {
-    //     console.log(resData.data);
-    //     let d: any = [];
-    //     d = resData.data;
-    //     console.log(d);
-    //     this.productDataSource = new MatTableDataSource(d.products);
-    //   },
-    //   (errorMessage) => {
-    //     console.log(errorMessage);
-    //   }
-    // );
   }
 }

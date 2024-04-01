@@ -93,7 +93,7 @@ export class MerchantAnalyticsComponent {
   showSelection(e: any) {
     e.stopPropagation();
   }
-  /** Selects all rows if they are not all selected; otherwise clear selection. */
+
   toggleAllRows() {
     if (this.isAllSelected()) {
       this.selection.clear();
@@ -103,7 +103,6 @@ export class MerchantAnalyticsComponent {
     this.selection.select(...this.dataSource.data);
   }
 
-  /** The label for the checkbox on the passed row */
   checkboxLabel(row?: UserInterface): string {
     if (!row) {
       return `${this.isAllSelected() ? 'deselect' : 'select'} all`;

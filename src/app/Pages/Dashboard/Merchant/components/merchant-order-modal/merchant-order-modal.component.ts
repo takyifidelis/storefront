@@ -58,7 +58,6 @@ export class MerchantOrderModalComponent {
 
   cancelled(){
     this.apiService.orderCancelled(this.data).subscribe((response: any) => {
-      console.log(response);
     })
   }
 

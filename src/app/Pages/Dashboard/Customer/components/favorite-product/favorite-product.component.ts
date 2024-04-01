@@ -88,7 +88,6 @@ export class FavoriteProductComponent implements OnInit {
       .getSavedProducts(localStorage.getItem('customerId')!)
       .subscribe((res: SavedProducts) => {
         this.products = res.data;
-        console.log(res.data);
         this.isLoading = false;
         this.numOfFavoriteProducts = res.data.length;
         if (this.numOfFavoriteProducts === 1) {
@@ -118,7 +117,6 @@ export class FavoriteProductComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  // the code below is all for the checkboxes in the table
   isAllSelected() {
     const numSelected = this.selection.selected.length;
     const numRows = this.dataSource.data.length;
@@ -127,7 +125,6 @@ export class FavoriteProductComponent implements OnInit {
   showSelection(e: any) {
     e.stopPropagation();
   }
-  /** Selects all rows if they are not all selected; otherwise clear selection. */
   toggleAllRows() {
     if (this.isAllSelected()) {
       this.selection.clear();
@@ -137,7 +134,6 @@ export class FavoriteProductComponent implements OnInit {
     this.selection.select(...this.dataSource.data);
   }
 
-  /** The label for the checkbox on the passed row */
   checkboxLabel(row?: UserInterface): string {
     if (!row) {
       return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
@@ -166,22 +162,18 @@ export class PurchaseDetailComponent {
     private apiService: APIService,
     private toastr: ToastrService
   ) {
-    // console.log(this.data);
   }
 
   onDeleteProduct() {
     let deleteIds: string[] = [];
     deleteIds.push(this.data.id);
-    console.log({ products: deleteIds });
     this.apiService
       .removeProductFromFavorite(deleteIds, localStorage.getItem('customerId')!)
       .subscribe(
         (deleteResponse) => {
-          console.log(deleteResponse);
           this.toastr.info(deleteResponse.message, 'Success');
         },
         (errorMessage) => {
-          console.log(errorMessage);
           this.toastr.error(
             errorMessage.error.message,
             errorMessage.error.type

@@ -63,7 +63,7 @@ export class APIService {
       }
     );
   }
-  // Verify account
+  
   verifyAccount(code: string) {
     return this.http.post<Response>(
       `${environment.baseApiUrl}/account/verify`,
@@ -76,7 +76,7 @@ export class APIService {
     );
   }
 
-  // Password Verification
+  
   verifyPassword(code: string) {
     return this.http.post<Response>(
       `${environment.baseApiUrl}/account/password/resetCode/verify`,
@@ -358,12 +358,7 @@ export class APIService {
       }
     );
   }
-  // publishTemplate(storeId: string, template:any): Observable<Response>{
-  //   return this.http.patch<Response>(`${environment.baseApiUrl}/store/publish-template/${storeId}`,
-  //   template, {
-  //     withCredentials: true,
-  //   })
-  // }
+
   addTOViews(products: any, customerId: string): Observable<Response> {
     return this.http.post<Response>(
       `${environment.baseApiUrl}/customer/add-to-views/${customerId}`,
@@ -459,7 +454,7 @@ export class APIService {
     );
   }
 
-  // Password Reset
+  
   passwordReset(email: string) {
     return this.http.post<Response>(
       `${environment.baseApiUrl}/account/request/password/reset`,
@@ -472,7 +467,6 @@ export class APIService {
     );
   }
 
-  //Resend Verification Code
   resendCode() {
     return this.http.get(`${environment.baseApiUrl}/account/resend/code`, {
       withCredentials: true,
@@ -601,7 +595,6 @@ export class APIService {
       `${environment.baseApiUrl}/store/get-promotion-products/${promoId}`,
       {
         withCredentials: true,
-        // /api/store/get-promotion-products
       }
     );
   }

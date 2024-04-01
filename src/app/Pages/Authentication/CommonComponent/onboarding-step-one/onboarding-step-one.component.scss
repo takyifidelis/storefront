@@ -10,12 +10,11 @@
 
 .header-btn{
     color: var(--Colors-Primary-Primary-200, #94ABFF);
-/* Paragraph: 5/Medium */
     font-family: Inter;
     font-size: 14px;
     font-style: normal;
     font-weight: 500;
-    line-height: 24px; /* 171.429% */
+    line-height: 24px; 
     letter-spacing: -0.2px;
 }
 
@@ -35,24 +34,22 @@
 .body-txt-header{
     color: var(--Colors-Primary-Slate-900, #1C222B);
     text-align: center;
-    /* Headline: 3/Bold */
     font-family: Inter;
     font-size: 48px;
     font-style: normal;
     font-weight: 600;
-    line-height: 60px; /* 125% */
+    line-height: 60px; 
     letter-spacing: -1.75px;
 }
 
 .body-txt-p{
     color: var(--Colors-Primary-Slate-700, #3D4A5C);
     text-align: center;
-    /* Paragraph: 4/Regular */
     font-family: Inter;
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
-    line-height: 28px; /* 175% */
+    line-height: 28px;
     letter-spacing: -0.3px;
 }
 .bdt{
@@ -85,7 +82,7 @@
     font-size: 20px;
     font-style: normal;
     font-weight: 400;
-    line-height: 32px; /* 160% */
+    line-height: 32px; 
     letter-spacing: -0.3px;
 }
 

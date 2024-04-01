@@ -46,8 +46,6 @@
   .hero-overlay {
     position: absolute;
     z-index: 5;
-    // height: 50rem;
-    // width: 100%;
   }
   .overlay-backdrop {
     position: absolute;
@@ -70,7 +68,6 @@ div.about-us {
     }
 
     h1.level-up-header {
-      // color: #1c222b;
       text-align: center;
       font-family: Inter;
       font-size: 72px;
@@ -80,7 +77,6 @@ div.about-us {
       letter-spacing: -2.3px;
     }
     p.keep-it-paragraph {
-      // color: #1c222b;
       text-align: center;
       font-family: Inter;
       font-size: 20px;
@@ -94,16 +90,14 @@ div.about-us {
     .our-story-div {
       margin: 6rem 8rem;
       .our-story-header {
-        // color: #1c222b;
         font-family: Inter;
         font-size: 24px;
         font-style: normal;
         font-weight: 700;
-        line-height: 36px; /* 150% */
+        line-height: 36px; 
         letter-spacing: -0.4px;
       }
       .our-story-paragraph {
-        // color: #1c222b;
         text-align: center;
         font-family: Inter;
         font-size: 20px;
@@ -118,7 +112,6 @@ div.about-us {
       background-color: #f2f2f2;
       padding: 3rem 5rem;
       .why-shop-header {
-        // color: #1c222b;
         font-family: Inter;
         font-size: 24px;
         font-style: normal;
@@ -127,7 +120,6 @@ div.about-us {
         letter-spacing: -0.5px;
       }
       .why-header {
-        // color: #1d2026;
         font-family: Inter;
         font-size: 20px;
         font-style: normal;
@@ -136,7 +128,6 @@ div.about-us {
         letter-spacing: -0.3px;
       }
       .why-shop-paragraph {
-        // color: #1c222b;
         text-align: center;
         font-family: Inter;
         font-size: 14px;
@@ -147,7 +138,6 @@ div.about-us {
       }
 
       .why-shop-header {
-        // color: #1c222b;
         font-family: Inter;
         font-size: 24px;
         font-style: normal;
@@ -156,7 +146,6 @@ div.about-us {
         letter-spacing: -0.5px;
       }
       .why-header {
-        // color: #1d2026;
         font-family: Inter;
         font-size: 20px;
         font-style: normal;
@@ -165,7 +154,6 @@ div.about-us {
         letter-spacing: -0.3px;
       }
       .why-shop-paragraph {
-        // color: #1c222b;
         text-align: center;
         font-family: Inter;
         font-size: 14px;
@@ -179,7 +167,6 @@ div.about-us {
   section.meet-team {
     margin: 7rem 1rem;
     h3.team-header {
-      // color: #1c222b;
       font-family: Inter;
       font-size: 24px;
       font-style: normal;
@@ -189,7 +176,6 @@ div.about-us {
       margin-bottom: 3rem;
     }
     .team-name {
-      // color: #1c222b;
       font-family: Inter;
       font-size: 20px;
       font-style: normal;
@@ -198,7 +184,6 @@ div.about-us {
       letter-spacing: -0.3px;
     }
     .team-company {
-      // color: #1c222b;
       font-family: Inter;
       font-size: 14px;
       font-style: normal;
@@ -267,12 +252,6 @@ div.about-us {
     grid-template-columns: auto;
     padding: 1rem 5rem;
   }
-// }
-// @media (max-width: 992px) {
-//   .my-teams{
-//     display: grid;
-//     grid-template-columns: auto auto auto;
-// }
   div.about-us.container-fluid {
     --bs-gutter-x: 0;
     section.level-up {
@@ -292,8 +271,6 @@ div.about-us {
           letter-spacing: -0.3px;
         }
       }
-
-      // Why shop
     }
     section.our-story {
       div.our-story-div {

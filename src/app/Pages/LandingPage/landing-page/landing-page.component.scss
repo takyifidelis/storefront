@@ -2,8 +2,6 @@ nav {
   background: #fff;
   margin-left: 3rem;
   margin-right: 3rem;
-
-  /* Shadow / md */
   box-shadow: 0px 2px 4px -2px rgba(45, 54, 67, 0.06),
     0px 4px 8px -2px rgba(45, 54, 67, 0.08);
 
@@ -14,7 +12,7 @@ nav {
     font-size: 16px;
     font-style: normal;
     font-weight: 500;
-    line-height: 28px; /* 175% */
+    line-height: 28px;
     letter-spacing: -0.3px;
   }
   .log-in-btn {
@@ -34,12 +32,11 @@ nav {
   }
   .nav-text {
     color: #455468;
-    /* Paragraph: 4/Medium */
     font-family: Inter;
     font-size: 16px;
     font-style: normal;
     font-weight: 500;
-    line-height: 28px; /* 175% */
+    line-height: 28px;
     letter-spacing: -0.3px;
   }
 }
@@ -64,7 +61,7 @@ nav {
       font-size: 72px;
       font-style: normal;
       font-weight: 700;
-      line-height: 90px; /* 125% */
+      line-height: 90px; 
       letter-spacing: -2.3px;
       margin-bottom: 1rem;
     }
@@ -73,7 +70,7 @@ nav {
       font-size: 20px;
       font-style: normal;
       font-weight: 400;
-      line-height: 32px; /* 160% */
+      line-height: 32px;
       letter-spacing: -0.3px;
       margin-bottom: 2.5rem;
     }
@@ -85,18 +82,17 @@ nav {
       font-size: 16px;
       font-style: normal;
       font-weight: 500;
-      line-height: 28px; /* 175% */
+      line-height: 28px; 
       letter-spacing: -0.3px;
       margin-right: 18px;
     }
     .customer-and-extend {
       color: #455468;
-      /* Paragraph: 4/Medium */
       font-family: Inter;
       font-size: 16px;
       font-style: normal;
       font-weight: 500;
-      line-height: 28px; /* 175% */
+      line-height: 28px; 
       letter-spacing: -0.3px;
     }
   }
@@ -154,13 +150,11 @@ nav {
 
   .testimonials-header {
     color: #101828;
-
-    /* Headline: 3/Bold */
     font-family: Inter;
     font-size: 48px;
     font-style: normal;
     font-weight: 600;
-    line-height: 60px; /* 125% */
+    line-height: 60px;
     letter-spacing: -1.75px;
     margin-bottom: 3rem;
   }
@@ -237,8 +231,6 @@ nav {
   background-size: 100%;
   background-position: center;
   background-repeat: no-repeat;
-  // background-color: red;
-
   .team-container {
     padding: 7% 0;
   }
@@ -249,7 +241,7 @@ nav {
     font-size: 48px;
     font-style: normal;
     font-weight: 600;
-    line-height: 60px; /* 125% */
+    line-height: 60px;
     letter-spacing: -1.75px;
   }
   .teams-div {
@@ -260,13 +252,11 @@ nav {
   }
   .team-name {
     color: #1c222b;
-
-    /* Short Description: 2/Bold */
     font-family: Inter;
     font-size: 28px;
     font-style: normal;
     font-weight: 700;
-    line-height: 43px; /* 153.571% */
+    line-height: 43px; 
     letter-spacing: -0.5px;
   }
   .team-role {
@@ -275,12 +265,11 @@ nav {
     font-size: 18px;
     font-style: normal;
     font-weight: 400;
-    line-height: 30px; /* 166.667% */
+    line-height: 30px;
     letter-spacing: -0.3px;
   }
   .team-image {
     margin-bottom: 20px;
-    // margin-left: 2%;
   }
 }
 footer {
@@ -301,12 +290,11 @@ footer {
 
       a {
         color: #1c222b;
-        /* Paragraph: 5/Regular */
         font-family: Inter;
         font-size: 14px;
         font-style: normal;
         font-weight: 400;
-        line-height: 24px; /* 171.429% */
+        line-height: 24px; 
         letter-spacing: -0.2px;
         text-decoration: none;
       }
@@ -322,11 +310,6 @@ footer {
   background-size: 100%;
   background-position: center;
   background-repeat: no-repeat;
-
-  // width: 100%;
-  // height: 100vh;
-  // overflow: hidden;
-  // position: relative;
   .agencies-header {
     color: #1c222b;
     font-size: 48px;

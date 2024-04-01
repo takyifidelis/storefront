@@ -48,7 +48,6 @@ export class SignupCustomerComponent {
   eyeIcon2 = faEyeSlash;
   isLoading: boolean = false;
 
-  // Email and Password Validation Below
   signupForm: FormGroup;
   error: string | any = null;
 
@@ -93,13 +92,10 @@ export class SignupCustomerComponent {
     this.authService.merchantSignup(userCredentials).subscribe(
       (resData) => {
         this.toastr.info('Check your Email for token', 'Email Verification');
-        console.log(resData);
         this.isLoading = false;
         this.router.navigate(['Authentication']);
       },
       (errorMessage) => {
-        console.log(errorMessage);
-
         this.isLoading = false;
 
         this.toastr.error(errorMessage.error.message, 'Failed');
@@ -107,11 +103,10 @@ export class SignupCustomerComponent {
     );
     form.reset();
   }
-  // Custom validator function for password strength and matching
   passwordValidator(control: AbstractControl): ValidationErrors | null {
     const value: string = control.value || '';
     if (!value) {
-      return null; // Don't validate empty value
+      return null; 
     }
     const hasUpperCase = /[A-Z]+/.test(value);
     const hasLowerCase = /[a-z]+/.test(value);
@@ -120,7 +115,6 @@ export class SignupCustomerComponent {
     const valid = hasUpperCase && hasLowerCase && hasNumeric && hasMinLength;
     return !valid ? { passwordStrength: true } : null;
   }
-  // Custom validator function for matching passwords
   confirmPasswordValidator(control: AbstractControl): ValidationErrors | null {
     const password = control.get('password')?.value;
     const confirmPassword = control.get('confirmPassword')?.value;
@@ -130,7 +124,6 @@ export class SignupCustomerComponent {
     return null;
   }
 
-  // Function to check various conditions of password
   checkPasswordCondition(condition: RegExp): boolean {
     const passwordControl = this.signupForm.get('password');
     if (!passwordControl) {
@@ -139,7 +132,7 @@ export class SignupCustomerComponent {
     const password = passwordControl.value || '';
     return condition.test(password);
   }
-  // Usage
+  
   containsLowerCase(): boolean {
     return this.checkPasswordCondition(/[a-z]+/);
   }

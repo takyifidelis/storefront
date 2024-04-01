@@ -87,7 +87,6 @@ export class MerchantOrdersComponent {
         if (res.data.length > 0) {
           this.merchantOrdersEmpty = false;
         }
-        console.log(this.orders);
         this.dataSource = new MatTableDataSource(this.orders);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
@@ -117,7 +116,7 @@ export class MerchantOrdersComponent {
   showSelection(e: any) {
     e.stopPropagation();
   }
-  /** Selects all rows if they are not all selected; otherwise clear selection. */
+  
   toggleAllRows() {
     if (this.isAllSelected()) {
       this.selection.clear();
@@ -125,10 +124,8 @@ export class MerchantOrdersComponent {
     }
 
     this.selection.select(...this.dataSource.data);
-    console.log(this.selection.selected);
   }
 
-  /** The label for the checkbox on the passed row */
   checkboxLabel(row?: dummyUserInterface): string {
     if (!row) {
       return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
@@ -148,7 +145,6 @@ export class MerchantOrdersComponent {
     this.isShippedActive = false;
     this.isDeliveredActive = false;
 
-    // Activate the selected tab
     switch (tabName) {
       case 'All':
         this.isAllActive = true;

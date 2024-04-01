@@ -82,7 +82,7 @@ section.review-page {
       font-size: 22px;
       font-style: normal;
       font-weight: 600;
-      line-height: 35px; /* 159.091% */
+      line-height: 35px; 
       letter-spacing: -0.3px;
     }
 
@@ -177,12 +177,6 @@ section.review-page {
     margin-left: 0.3rem;
   }
 }
-// td {
-//   width: max-content;
-// }
-// th {
-//   padding: 0;
-// }
 .table-form {
   margin-top: 2rem;
   td {
@@ -226,8 +220,6 @@ section.review-page {
       letter-spacing: -0.2px;
     }
   }
-  //
-
   .customer-info {
     display: flex;
     gap: 0.5rem;
@@ -266,8 +258,6 @@ section.review-page {
       letter-spacing: -0.2px;
     }
   }
-  //
-
   .customer-review {
     .review-title {
       color: #5e718d;

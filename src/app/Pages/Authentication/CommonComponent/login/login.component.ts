@@ -90,14 +90,12 @@ export class LoginComponent implements OnInit {
         }
       },
       (err) => {
-        console.log('err');
       },
       () => {
       }
     );
   }
 
-  //Login using Email and Password implementation
   loginForm: FormGroup;
   error: string | any = null;
   onSubmit(form: FormGroupDirective) {
@@ -109,9 +107,7 @@ export class LoginComponent implements OnInit {
     this.isLoading = true;
     this.loginService.login(email, password).subscribe(
       (resData) => {
-        // this.toastr.success('Success', 'Login Account!');
         this.isLoading = false;
-        console.log(resData);
         if (resData.data?.type == 'Business') {
           if (resData.type == 'Business') {
             localStorage.setItem('businessId', resData.data.business);
@@ -128,7 +124,6 @@ export class LoginComponent implements OnInit {
       },
 
       (errorMessage) => {
-        console.log(errorMessage);
         this.error = errorMessage;
         this.toastr.error('Failed', this.error);
         this.isLoading = false;
@@ -148,34 +143,24 @@ export class LoginComponent implements OnInit {
     if (!form.valid) {
       return;
     }
-    //     this.dataService.isLoading = true
     this.apiService
       .authenticateUser(this.dataService.loginCredentials)
       .subscribe(
         (resData: any) => {
-          console.log(resData);
-
           this.isLoading = false;
           this.toastr.info(resData.message, 'Success');
           if (resData.data.type === 'Business') {
-            // this.dataService.businessId=resData.data?.business
             localStorage.setItem('businessId', resData.data.business);
 
             this.router.navigate(['merchant']);
           } else if (resData.data.type === 'Customer') {
             localStorage.setItem('customerId', resData.data.customer);
-            //           this.dataService.isLoading =false
             this.router.navigate(['customer']);
           } else {
-            console.log(resData);
-
-            // this.dataService.isLoading = false;
           }
         },
         (errorMessage: any) => {
           this.isLoading = false;
-          console.log(errorMessage);
-
           this.toastr.error(errorMessage.error.message, 'Failed');
         }
       );
@@ -183,9 +168,6 @@ export class LoginComponent implements OnInit {
   }
 
   handleGoogleResponse() {
-    // this.apiService.getGoogle().subscribe((res: any)=> {
-    //   console.log(res)
-    // })
     window.open(`${environment.baseApiUrl}/account/google/auth`, '_self');
   }
 }

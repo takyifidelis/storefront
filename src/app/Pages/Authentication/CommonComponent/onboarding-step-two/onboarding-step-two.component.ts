@@ -30,34 +30,14 @@ searchString = ''
 selectedValue: any= 'Filter by Region'
 
 onSelect(val: any) {
-
-//   this.selectedValue = val.value
-//   console.log(val.innerText)
-//   this.dataService.merchantData.store.name = val.innerText
-
   this.selectedValue = val.innerText
   this.searchString = val.innerText
-  console.log(val.innerText)
   localStorage.setItem('storeName',this.selectedValue)
-  // this.dataService.merchantData.store.name = val.innerText
 }
 
 continueToStep3(){
-//   this.apiService.setBusinessType(this.dataService.businessId,{businessType:this.dataService.merchantData.store.name}).subscribe(data =>{
-//     console.log(data);
     localStorage.setItem('storeName',this.searchString)
     this.router.navigate(['/merchant-onboarding-3'])
-//   })
-// }
-
-  // this.dataService.isLoading =true
-  // this.apiService.setBusinessType(localStorage.getItem('businessId')!,{businessType:localStorage.getItem('storeType')}).subscribe(data =>{
-  //   console.log(data);
-  //   this.dataService.isLoading =false
-  //   this.router.navigate(['/merchant-onboarding-3'])
-  // }),(errorMessage: any) => {
-  //   console.log(errorMessage);
-  // }
 }
 ngOnDestroy(){
   this.dataService.isLoading = false;

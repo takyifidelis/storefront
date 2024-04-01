@@ -21,7 +21,6 @@ import { ImageLinkComponent } from '../../../../Dashboard/Merchant/components/im
 export class AboutUsComponent {
   constructor(public dataService: DataService, public dialog: MatDialog){}
   editText(...args: string[]) {
-    // console.log(text,args )
     if(this.dataService.isEditingTemp){
       this.dialog.open(TemplateTextEditorDialogComponent, {
         data: args,
@@ -29,14 +28,13 @@ export class AboutUsComponent {
       }).afterClosed().subscribe((editedtText) => {
         args.shift()
         this.dataService.updateText(editedtText, ...args);
-        console.log({editedTex:editedtText}, ...args);
       });
     }
 }
 
 
 onSelectFile(event: any, target: string) {
-  const file: File = event.target.files[0]; // Get the selected file
+  const file: File = event.target.files[0]; 
  
 
   if (event.target.files && event.target.files.length > 0) {
@@ -77,7 +75,6 @@ onSelectFile(event: any, target: string) {
             e.target.result;
           break;
         case 'lastAboutImage':
-          console.log(e.target.result);
           this.dataService.template1.templateImages.aboutFooterImage =
             e.target.result;
           break;

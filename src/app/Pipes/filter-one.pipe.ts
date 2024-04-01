@@ -6,13 +6,8 @@ import { DataService } from '../Services/data.service';
   standalone: true
 })
 export class FilterOnePipe implements PipeTransform {
-
-  // transform(value: unknown, ...args: unknown[]): unknown {
-  //   return null;
-  // }
   constructor(private dataService:DataService){}
   transform(values: any, searchTerm:string) {
-    console.log(searchTerm);
     const resultArray:any =[]
     if(searchTerm === ''){
       values = [...new Set(values)]

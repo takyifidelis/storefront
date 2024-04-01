@@ -104,8 +104,6 @@ export class CustomerDashboardComponent implements OnInit {
         this.user = resData.data;
         this.firstInitial = resData.data.firstName.charAt(0);
         this.lastinitial = resData.data.lastName.charAt(0);
-        console.log(resData);
-        console.log(resData.data);
       });
   }
 
@@ -122,8 +120,6 @@ export class CustomerDashboardComponent implements OnInit {
     this.apiService.logout().subscribe(
       (resData) => {
         this.toastr.info(resData.message, 'Success');
-        console.log(tourCompleted);
-        console.log(editorTourCompleted);
         localStorage.clear();
 
         if (tourCompleted) {

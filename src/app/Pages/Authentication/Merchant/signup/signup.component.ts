@@ -98,11 +98,10 @@ export class SignupMerchantComponent {
       );
     form.reset();
   }
-  // Custom validator function for password strength and matching
   passwordValidator(control: AbstractControl): ValidationErrors | null {
     const value: string = control.value || '';
     if (!value) {
-      return null; // Don't validate empty value
+      return null; 
     }
     const hasUpperCase = /[A-Z]+/.test(value);
     const hasLowerCase = /[a-z]+/.test(value);
@@ -111,7 +110,7 @@ export class SignupMerchantComponent {
     const valid = hasUpperCase && hasLowerCase && hasNumeric && hasMinLength;
     return !valid ? { passwordStrength: true } : null;
   }
-  // Custom validator function for matching passwords
+  
   confirmPasswordValidator(control: AbstractControl): ValidationErrors | null {
     const password = control.get('password')?.value;
     const confirmPassword = control.get('confirmPassword')?.value;
@@ -121,7 +120,7 @@ export class SignupMerchantComponent {
     return null;
   }
 
-  // Function to check various conditions of password
+  
   checkPasswordCondition(condition: RegExp): boolean {
     const passwordControl = this.signupForm.get('password');
     if (!passwordControl) {
@@ -131,7 +130,7 @@ export class SignupMerchantComponent {
     return condition.test(password);
   }
 
-  // Usage
+
   containsLowerCase(): boolean {
     return this.checkPasswordCondition(/[a-z]+/);
   }

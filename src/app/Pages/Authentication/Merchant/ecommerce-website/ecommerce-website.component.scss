@@ -19,7 +19,7 @@ nav {
     font-size: 14px;
     font-style: normal;
     font-weight: 700;
-    line-height: 24px; /* 171.429% */
+    line-height: 24px;
     letter-spacing: -0.2px;
     margin: 0 0.5rem;
   }
@@ -74,7 +74,7 @@ section.subscribe-to-newsletters {
     font-size: 48px;
     font-style: normal;
     font-weight: 600;
-    line-height: 60px; /* 125% */
+    line-height: 60px;
     letter-spacing: -1.75px;
   }
   p.subscribe-paragraph {
@@ -83,7 +83,7 @@ section.subscribe-to-newsletters {
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
-    line-height: 28px; /* 175% */
+    line-height: 28px; 
     letter-spacing: -0.3px;
   }
   .subscribe-btn-div {
@@ -181,7 +181,8 @@ section.duties-taxes {
 .mat-mdc-icon-button.mat-primary ::ng-deep {
   --mdc-icon-button-icon-color: #fff;
 }
-// RESPONSIVE DESIGN
+
+
 @media (max-width: 992px) {
   nav {
     .nav-content {
