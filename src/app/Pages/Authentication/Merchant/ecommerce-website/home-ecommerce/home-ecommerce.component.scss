@@ -15,6 +15,13 @@
   margin-top: 3rem;
 }
 
+::ng-deep .mat-mdc-mini-fab {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  flex-shrink: 0;
+  color: inherit; 
+  box-shadow: var(--mdc-fab-container-elevation-shadow);
+}
+
 .overlay{
   position: absolute;
   z-index: 21;
