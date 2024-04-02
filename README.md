@@ -18,7 +18,7 @@ It is developed using Angular 17, bootstrap and Saas.
 
 ## Overview
 
-[![Landingpage for the StoreFront](src\assets\images\landing-page-image.jpg)](https://storefront.amalitech-dev.net/)
+[![Landingpage for the StoreFront](.\src\assets\images\landing-page-image.jpg)](https://storefront.amalitech-dev.net/)
 
 ### Links
 
