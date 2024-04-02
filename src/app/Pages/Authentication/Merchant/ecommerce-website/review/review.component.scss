@@ -7,7 +7,6 @@ section.preview-section {
     .preview-image {
       position: absolute;
       width: 100%;
-      object-fit: cover;
       height: 100%;
       top: 50%;
       left: 50%;
@@ -426,7 +425,6 @@ section.similar-products {
       .card-img-top {
         position: absolute;
         width: 100%;
-        object-fit: cover;
         height: 100%;
         top: 50%;
         left: 50%;
@@ -453,6 +451,10 @@ section.similar-products {
       letter-spacing: -0.3px;
       margin: 0;
       text-transform: capitalize;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      width: 60%;
     }
     .blossom-bag-paragraph {
       font-size: 14px;

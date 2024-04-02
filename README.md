@@ -18,7 +18,7 @@ It is developed using Angular 17, bootstrap and Saas.
 
 ## Overview
 
-[![Landingpage for the StoreFront](.\src\assets\images\landing-page-image.jpg)](https://storefront.amalitech-dev.net/)
+[![Landingpage for the StoreFront](src\assets\images\landing-page-image.jpg)](https://storefront.amalitech-dev.net/)
 
 ### Links
 
@@ -70,15 +70,15 @@ It is developed using Angular 17, bootstrap and Saas.
 
 ## Authors
 
-| Name                                                                       | Role                |
-| -------------------------------------------------------------------------- | ------------------- |
-| [Fidelis Takyi Mensah](https://github.com/amt-fidelis-mensah)              | Front-end Developer |
-| [Emmanuel Adomako](https://github.com/amt-emmanuel-adomako)                | Front-end Developer |
-| [Felix Hagan](https://github.com/amt-felix-hagan)                          | Front-end Developer |
-| [Richard Bouaro](https://amalitechtraining.slack.com/archives/D06LBA9NT7S) | Back-end Developer  |
-| [Emmanuella Neizer](https://www.your-site.com)                             | UI/UX Desginer      |
-| [Niyonizeye Faustin](https://github.com/niyonizeyefaustin)                 | DevOps Engineer     |
-| [Caleb Osam](https://github.com/Calebosam)                                 | DevOps Engineer     |
+| Name                                                                           | Role                |
+| ------------------------------------------------------------------------------ | ------------------- |
+| [Fidelis Takyi Mensah](https://github.com/amt-fidelis-mensah)                  | Front-end Developer |
+| [Emmanuel Adomako](https://github.com/amt-emmanuel-adomako)                    | Front-end Developer |
+| [Felix Hagan](https://github.com/amt-felix-hagan)                              | Front-end Developer |
+| [Richard Bouaro](https://amalitechtraining.slack.com/archives/D06LBA9NT7S)     | Back-end Developer  |
+| [Emmanuella Neizer](hhttps://amalitechtraining.slack.com/archives/D06GFH6A1AB) | UI/UX Desginer      |
+| [Niyonizeye Faustin](https://github.com/niyonizeyefaustin)                     | DevOps Engineer     |
+| [Caleb Osam](https://github.com/Calebosam)                                     | DevOps Engineer     |
 
 ---
 

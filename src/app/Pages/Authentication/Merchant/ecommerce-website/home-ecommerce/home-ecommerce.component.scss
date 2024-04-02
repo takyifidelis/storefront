@@ -209,6 +209,10 @@ section.featured-items {
       letter-spacing: -0.3px;
       margin: 0;
       text-transform: capitalize;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      width: 60%;
     }
     .blossom-bag-paragraph {
       font-size: 14px;
