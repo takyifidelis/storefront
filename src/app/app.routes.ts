@@ -62,7 +62,7 @@ export const routes: Routes = [
   { path: 'page-creator', component: PageCreatorComponent },
   {
     path: 'merchant-onboarding-1',
-    canActivate: [merchantAuthGuard],
+    // canActivate: [merchantAuthGuard],
     component: OnboardingStepOneComponent,
   },
   {
@@ -72,7 +72,7 @@ export const routes: Routes = [
   },
   {
     path: 'merchant-onboarding-3',
-    canActivate: [merchantAuthGuard],
+    // canActivate: [merchantAuthGuard],
     component: OnboardingStepThreeComponent,
   },
   { path: 'Authentication', component: AuthTokenComponent },
@@ -108,7 +108,7 @@ export const routes: Routes = [
   {
     path: 'customer',
     component: CustomerDashboardComponent,
-    canActivate: [authGuard],
+    // canActivate: [authGuard],
     children: [
       { path: 'shop', component: ShopComponent },
       { path: 'fav-product', component: FavoriteProductComponent },
@@ -124,7 +124,7 @@ export const routes: Routes = [
   {
     path: 'merchant',
     component: MerchantDashboardComponent,
-    canActivate: [merchantAuthGuard],
+    // canActivate: [merchantAuthGuard],
     children: [
       { path: '', component: HomeComponent },
       { path: 'home', component: HomeComponent },
@@ -147,7 +147,7 @@ export const routes: Routes = [
   {
     path: 'ecommerce',
     component: EcommerceWebsiteComponent,
-    canActivate: [commonGuard],
+    // canActivate: [commonGuard],
     children: [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: HomeEcommerceComponent },

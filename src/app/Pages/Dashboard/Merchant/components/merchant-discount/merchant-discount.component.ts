@@ -148,7 +148,7 @@ export class MerchantDiscountComponent {
           this.storeCategories.push(cat.name);
         }
       });
-      
+
     this.apiService
       .getPromotionForStore(localStorage.getItem('storeId')!)
       .subscribe(
@@ -160,8 +160,7 @@ export class MerchantDiscountComponent {
           }
           this.dataSource = new MatTableDataSource(promoData['data']);
         },
-        (errorMessage) => {
-        }
+        (errorMessage) => {}
       );
   }
   isAllSelected() {
@@ -172,7 +171,7 @@ export class MerchantDiscountComponent {
   showSelection(e: any) {
     e.stopPropagation();
   }
-  
+
   toggleAllRows() {
     if (this.isAllSelected()) {
       this.selection.clear();
@@ -211,7 +210,7 @@ export class MerchantDiscountComponent {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
-  
+
   onSubmit(form: FormGroupDirective) {
     if (!form.valid) {
       return;
@@ -222,6 +221,7 @@ export class MerchantDiscountComponent {
     const end = new Date(form.value.endDate);
     const start = new Date(form.value.startDate);
     this.isPosting = true;
+    console.log(end);
     this.apiService
       .addPromotionToStore(
         end,
@@ -408,6 +408,5 @@ export class MerchantDiscountCustomizeComponent {
         }
       );
   }
-  getPromotionProducts(promoId: string) {
-  }
+  getPromotionProducts(promoId: string) {}
 }
